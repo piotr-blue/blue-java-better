@@ -45,11 +45,6 @@ final class DocumentDispatchV1 {
     return type;
   }
 
-  public static String install(ContractProcessor processor) {
-    require(processor.bindings.dispatchEnabled(), "UNSUPPORTED_DISPATCH_BINDING");
-    return installPublished(processor);
-  }
-
   static boolean admit(
       ContractRun run,
       String member,

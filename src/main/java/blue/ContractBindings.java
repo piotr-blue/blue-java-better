@@ -50,16 +50,8 @@ final class ContractBindings {
     return new ContractBindings(selected, false);
   }
 
-  public String id() {
-    return dispatchEnabled() ? "dispatch" : "core";
-  }
-
   public boolean dispatchEnabled() {
     return packages.contains(id("blue-dispatch", "package"));
-  }
-
-  public ContractBindings withCanonicalWireMeasurementV1() {
-    return new ContractBindings(packages, true, gasSchedule);
   }
 
   public boolean canonicalWireMeasurementV1() {
@@ -80,10 +72,6 @@ final class ContractBindings {
 
   public ContractsEdition contractsEdition() {
     return ContractsEdition.DETERMINISTIC;
-  }
-
-  public Set<String> supportedPackages() {
-    return packages;
   }
 
   public Set<String> protocolBindings() {
@@ -161,26 +149,6 @@ final class ContractBindings {
               + String.join(" → ", path));
       this.required = required;
       this.path = List.copyOf(path);
-    }
-
-    public String requiredBlueId() {
-      return required;
-    }
-
-    public List<String> dependencyPath() {
-      return path;
-    }
-
-    public Map<String, Object> diagnostic() {
-      return Map.of(
-          "outcome",
-          "Unsupported",
-          "category",
-          "UnsupportedRuntimeBindings",
-          "required",
-          required,
-          "path",
-          path);
     }
   }
 }

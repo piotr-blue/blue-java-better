@@ -36,12 +36,6 @@ final class ContractRegistry {
   // Trust is granted to the exact definition/rules pair, never to arbitrary subtypes.
   final Map<String, String> interpretedTypes = new HashMap<>();
 
-  Map<String, Object> idleUnit(Document document, Map<String, Object> view) {
-    // The document already owns this immutable proof. A second bounded LRU would repeatedly
-    // hash and weigh unchanged views when the live graph exceeds its capacity.
-    return document.idleUnit(view, bindings.contractsEdition().finalGas());
-  }
-
   // Parsed immutable metadata only: body verification is performed separately on every restore.
   final ContractCache<Map<String, Object>, Document> restoredDocuments =
       new ContractCache<>("contracts.restoredMetadata", 2L * 1024 * 1024, 512, 64 * 1024);

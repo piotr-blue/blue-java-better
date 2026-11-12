@@ -1,15 +1,12 @@
 package blue;
 
 import static blue.ContractLanguage.ABSENT;
-import static blue.ContractLanguage.exactText;
 import static blue.ContractLanguage.finalId;
 import static blue.ContractLanguage.identity;
 import static blue.ContractModel.DEFAULT_LIMIT;
 import static blue.ContractModel.HOST_LIMIT;
 import static blue.ContractModel.closed;
-import static blue.ContractModel.digest;
 import static blue.ContractModel.integer;
-import static blue.ContractModel.m;
 import static blue.ContractModel.obj;
 import static blue.ContractModel.require;
 import static blue.ContractModel.str;
@@ -20,8 +17,6 @@ import blue.ContractModel.Outcome;
 import blue.ContractModel.Snapshot;
 import blue.ExactNode.Ref;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -179,16 +174,8 @@ final class ContractProcessor {
     this.localLimits = Map.copyOf(localLimits);
   }
 
-  public static long hostGasLimit() {
-    return HOST_LIMIT;
-  }
-
   public GasPolicy gasPolicy() {
     return new GasPolicy(gasLimit, localLimits);
-  }
-
-  public ContractBindings bindings() {
-    return bindings;
   }
 
   /** An immutable execution budget. Limits belong to the invocation, never to a worker thread. */
@@ -216,18 +203,6 @@ final class ContractProcessor {
       this.event = event;
       this.timestamp = timestamp;
       this.policy = policy;
-    }
-
-    public Document document() {
-      return document;
-    }
-
-    public String eventBlueId() {
-      return identity(event);
-    }
-
-    public long timestamp() {
-      return timestamp;
     }
 
     public GasPolicy gasPolicy() {
@@ -265,17 +240,6 @@ final class ContractProcessor {
     return new ContractAttempt(run);
   }
 
-  public ContractAttempt beginReceiving(Document document, List<SourceCompletion> sources) {
-    return new ContractAttempt(
-        ContractCompletions.run(this, document.state, sources, false, Map.of()));
-  }
-
-  public ContractAttempt beginLive(
-      Document document, List<SourceCompletion> sources, Map<String, Object> evidence) {
-    return new ContractAttempt(
-        ContractCompletions.run(this, document.state, sources, true, evidence));
-  }
-
   public ContractAttempt.ChunkResult executeChunk(ContractAttempt.ChunkToken token) {
     return ContractAttempt.execute(this, token);
   }
@@ -286,21 +250,6 @@ final class ContractProcessor {
 
   public Map<String, Object> exportInvocation(Document document, Object event, long timestamp) {
     return ContractPortable.exportInvocation(this, document, event, timestamp);
-  }
-
-  /**
-   * Export an invocation with retained provider evidence for BlueIds constructed at runtime from
-   * text. The capsule commits that inventory; imported records are still verified when opened.
-   */
-  public Map<String, Object> exportReplayInvocation(
-      Document document, Object event, long timestamp) {
-    var capsule = exportInvocation(document, event, timestamp);
-    var invocation = obj(capsule.get("invocation"));
-    var content = new TreeMap<>(blue.context.evidence());
-    content.putAll(obj(invocation.get("content")));
-    invocation.put("content", content);
-    capsule.put("identity", digest("contracts.capsule/completion-1", invocation));
-    return capsule;
   }
 
   public Invocation importInvocation(Map<String, Object> capsule, String expectedIdentity) {
@@ -317,22 +266,6 @@ final class ContractProcessor {
         .finishLocal();
   }
 
-  public static Map<String, Object> compareReplay(Map<String, Object> saved, Result actual) {
-    closed(saved, Set.of("observations", "receipt"), Set.of());
-    require(
-        digest("contracts.result/completion-1", saved.get("observations"))
-            .equals(saved.get("receipt")),
-        "INVALID_RECEIPT");
-    return m(
-        "verified",
-        ContractWire.write(saved.get("observations"))
-            .equals(ContractWire.write(actual.observations())),
-        "expected",
-        saved.get("receipt"),
-        "actual",
-        actual.receipt());
-  }
-
   void requireComputeDefinition(Object operand) {
     var specification = blue.open(blue.exact(operand)).get("specification");
     if (specification != null
@@ -341,14 +274,6 @@ final class ContractProcessor {
           identity((ExactNode) specification),
           List.of("Compute/definition", identity(blue.exact(operand)), "specification"));
     }
-  }
-
-  public Map<String, String> types() {
-    return Map.copyOf(registry.types);
-  }
-
-  public String specification() {
-    return registry.specification;
   }
 
   public void installRuntime(
@@ -390,10 +315,6 @@ final class ContractProcessor {
     public String blueId() {
       return state.documents.get(state.root).blueId;
     }
-
-    public Map<String, Object> metadata() {
-      return obj(ContractWire.json(ContractWire.write(state.wire())));
-    }
   }
 
   public static final class Result {
@@ -424,11 +345,6 @@ final class ContractProcessor {
       return outcome.receipt();
     }
 
-    /** Exact input identity used by a storage adapter's conditional publication. */
-    public String inputIdentity() {
-      return outcome.inputIdentity;
-    }
-
     /** Immutable public event occurrences for an atomic durable outbox. */
     public List<Map<String, Object>> publicEvents() {
       return outcome.publicEvents.stream().map(e -> obj(ContractWire.immutable(e))).toList();
@@ -439,31 +355,11 @@ final class ContractProcessor {
     }
   }
 
-  /** Alias metadata for editors; these names never select native runtime semantics. */
-  public Map<String, String> displayAliases() {
-    var aliases = new LinkedHashMap<String, String>();
-    registry.types.forEach((k, v) -> aliases.put(v, "Contracts/" + k));
-    ContractLanguage.CORE.forEach((k, v) -> aliases.put(v, k));
-    blue.context.aliases().forEach((k, v) -> aliases.putIfAbsent(v, k));
-    return Collections.unmodifiableMap(aliases);
-  }
-
   /** Prepare graph structure without executing initialization handlers. */
   public Document prepare(Map<String, Object> members, String root) {
     var state = ContractGraph.prepare(registry, members, root, Map.of(), archive);
     ContractChannels.refresh(new ContractGraph(state, registry, archive));
     return new Document(state);
-  }
-
-  public Result initialize(Document document, GasPolicy policy) {
-    return new Result(
-        new ContractRun(
-                this, document.state, null, null, true, policy.sharedLimit(), policy.localLimits())
-            .attempt());
-  }
-
-  public void validate(Document document) {
-    validate(document.state, true);
   }
 
   public Result initialize(Object source) {
@@ -488,21 +384,6 @@ final class ContractProcessor {
 
   public Document createYaml(String source) {
     return create(ContractWire.data(ContractWire.parse(source, "yaml")));
-  }
-
-  public Document createJson(String source) {
-    return create(ContractWire.data(ContractWire.parse(source, "json")));
-  }
-
-  /** Exact root document JSON; exportSnapshot also retains graph history and runtime bindings. */
-  public String toJson(Document document) {
-    // A restored or rolled-back snapshot can retain its root as a Ref. Resolve
-    // that physical representation so the public root export is cache-neutral.
-    return exactText(blue.open(document.state.documents.get(document.state.root).body));
-  }
-
-  public String toYaml(Document document) {
-    return ContractWire.yamlText(ContractWire.json(toJson(document)));
   }
 
   public Result process(
@@ -556,16 +437,6 @@ final class ContractProcessor {
     integer(timestamp);
     ExactNode original = event instanceof ExactNode n ? blue.node(n) : blue.source(event);
     return new Result(new ContractRun(this, document.state, original, timestamp, false).attempt());
-  }
-
-  public Result process(Object source, Object event, long timestamp) {
-    if (source instanceof Document d) {
-      return process(d, event, timestamp);
-    }
-    Snapshot s = ContractGraph.prepare(registry, Map.of("root", source), "root", Map.of(), archive);
-    ContractChannels.refresh(new ContractGraph(s, registry, archive));
-    ExactNode original = event instanceof ExactNode n ? blue.node(n) : blue.source(event);
-    return new Result(new ContractRun(this, s, original, timestamp, false).attempt());
   }
 
   public Object read(Document document, String path) {

@@ -56,10 +56,7 @@ final class ContractLanguage {
   }
 
   static final Map<String, String> CORE = LanguageCore.CORE, CORE_NAME = LanguageCore.CORE_NAME;
-  static final Set<String> TYPES = LanguageCore.TYPES,
-      RESERVED = LanguageCore.RESERVED,
-      LITERALS = LanguageCore.LITERALS,
-      LABELS = LanguageCore.LABELS;
+  static final Set<String> TYPES = LanguageCore.TYPES, LITERALS = LanguageCore.LITERALS;
   static final Object ABSENT = LanguageCore.ABSENT;
 
   EvidenceScope evidenceScope() {
@@ -321,14 +318,6 @@ final class ContractLanguage {
     return context.aliases.get(name);
   }
 
-  Map<String, String> aliases() {
-    return LanguageMap.immutable(context.aliases);
-  }
-
-  Set<String> demands() {
-    return Set.copyOf(context.demands);
-  }
-
   void install(BluePackage publication) {
     install(publication.document());
   }
@@ -474,14 +463,6 @@ final class ContractLanguage {
     context.provider.putAll(records);
     context.bodies.reset(verification.bodies);
     context.proofs.putAll(verification.proofs);
-  }
-
-  void mergeEvidence(Map<String, Object> records) {
-    addEvidence(records);
-  }
-
-  void importEvidence(ContractLanguage source) {
-    addEvidence(source.evidence());
   }
 
   void verifyEvidence(String id, Object response) {
@@ -666,10 +647,6 @@ final class ContractLanguage {
     return LanguageOperations.records(node, context, supplied);
   }
 
-  Map<String, Object> records(ExactNode node, java.util.function.Predicate<String> supplied) {
-    return LanguageOperations.records(node, context, supplied);
-  }
-
   Map<String, Object> records(
       Collection<ExactNode> nodes, java.util.function.Predicate<String> supplied) {
     return LanguageOperations.records(nodes, context, supplied);
@@ -811,10 +788,6 @@ final class ContractLanguage {
       values.put(node, id);
     }
 
-    int size() {
-      return values.size();
-    }
-
     int trim(int maximum) {
       int removed = values.trim(maximum);
       if (removed != 0) {
@@ -866,52 +839,12 @@ final class ContractLanguage {
     return LanguageCore.finalId(id);
   }
 
-  public static String hash(Object value) {
-    return LanguageCore.hash(value);
-  }
-
-  public static String appendId(String prefix, String element) {
-    return LanguageCore.appendId(prefix, element);
-  }
-
-  public static String listId(List<ExactNode> items, IntFunction<String> token) {
-    return LanguageCore.listId(items, token);
-  }
-
-  public static Object helper(Value value, IntFunction<String> token) {
-    return LanguageCore.helper(value, token);
-  }
-
   public static Map<String, Object> map(Object value) {
     return LanguageCore.map(value);
   }
 
-  public static List<Object> list(Object value) {
-    return LanguageCore.list(value);
-  }
-
-  public static List<String> path(String path) {
-    return LanguageCore.path(path);
-  }
-
-  public static int index(String part) {
-    return LanguageCore.index(part);
-  }
-
-  public static Set<Integer> locals(ExactNode value) {
-    return LanguageCore.locals(value);
-  }
-
-  public static ExactNode localMap(ExactNode value, IntFunction<ExactNode> replace) {
-    return LanguageCore.localMap(value, replace);
-  }
-
   public static Recipe recipe(Object... parts) {
     return LanguageSemantics.recipe(parts);
-  }
-
-  public static Recipe recipeWith(List<String> requirements, Object... parts) {
-    return LanguageSemantics.recipeWith(requirements, parts);
   }
 
   public static Head head(Recipe recipe, ContractLanguage runtime) {

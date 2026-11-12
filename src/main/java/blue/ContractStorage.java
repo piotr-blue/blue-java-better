@@ -110,10 +110,6 @@ final class ContractStorage {
     return selected;
   }
 
-  static Snapshot restore(ContractProcessor engine, Map<String, Object> wire) {
-    return restore(engine, wire, false);
-  }
-
   static Snapshot restore(ContractProcessor engine, Map<String, Object> wire, boolean prepared) {
     closed(
         wire,

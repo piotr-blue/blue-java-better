@@ -627,21 +627,6 @@ final class LanguageOperations {
     return new LanguageAdmission(n, before, omitted.removed);
   }
 
-  static List<Object> requirements(ExactNode n, LanguageContext c) {
-    var result = new ArrayList<Object>();
-    var seen = new HashSet<String>();
-    while (n != null) {
-      String id = identity(n);
-      require(seen.add(id), "TypeCycle", id);
-      Value body = open(n, c);
-      if (body.get("specification") instanceof Ref r) {
-        result.add(Map.of("definedOn", id, "specification", r.id()));
-      }
-      n = body.get("type") instanceof Ref r && !CORE_NAME.containsKey(r.id()) ? r : null;
-    }
-    return result;
-  }
-
   static Object sourceForExact(ExactNode n, LanguageContext c, Supplier<Recipe> lazy) {
     if (n instanceof Ref) {
       return export(n);

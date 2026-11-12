@@ -238,17 +238,6 @@ final class ContractAttempt {
     return acceptVerified(result);
   }
 
-  public ContractAttempt accept(Map<String, Object> selected, Map<String, Object> result) {
-    require(!finished && outcome == null, "ATTEMPT_FINISHED");
-    closed(selected, Set.of("format", "token", "input", "history"), Set.of());
-    require(
-        token != null
-            && ContractWire.write(selected.get("token"))
-                .equals(ContractWire.write(token.descriptor)),
-        "STALE_CHUNK_TOKEN");
-    return acceptVerified(result);
-  }
-
   private ContractAttempt acceptVerified(Map<String, Object> result) {
     var fields =
         new HashSet<>(

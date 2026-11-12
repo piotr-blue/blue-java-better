@@ -10,10 +10,6 @@ import java.util.Set;
 final class SemanticGas {
   private SemanticGas() {}
 
-  static BexFailure unsupported(String binding) {
-    return new BexFailure("HOST_INCOMPLETE", "Physical execution unavailable for " + binding);
-  }
-
   static void unit(BexGas gas, String action) {
     units(gas, action, 1);
   }

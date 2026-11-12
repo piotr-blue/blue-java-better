@@ -23,10 +23,6 @@ final class BexKernel {
     engine = new BexEngine(this.intrinsics);
   }
 
-  public BexEdition profile() {
-    return profile;
-  }
-
   public static final class Compiled {
     private final BexPlanCompiler.Program program;
     private final BexKernel owner;
@@ -44,14 +40,6 @@ final class BexKernel {
 
     public List<String> warnings() {
       return warnings;
-    }
-
-    public Map<String, Object> effectiveSource() {
-      return program.source();
-    }
-
-    public BexEdition profile() {
-      return owner.profile;
     }
   }
 
@@ -110,9 +98,5 @@ final class BexKernel {
       error.initCause(cause);
       throw error;
     }
-  }
-
-  public BexEngine.Result execute(Compiled program, BexContext context, long gasLimit) {
-    return execute(program, context, new BexGas(gasLimit));
   }
 }

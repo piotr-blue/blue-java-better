@@ -101,11 +101,6 @@ class BexGas {
     return rejected == null ? null : Map.copyOf(rejected);
   }
 
-  public long attempted() {
-    long amount = rejected == null ? 0 : ((Number) rejected.get("amount")).longValue();
-    return amount > Long.MAX_VALUE - used ? Long.MAX_VALUE : used + amount;
-  }
-
   public void charge(String counter) {
     charge(counter, 1);
   }

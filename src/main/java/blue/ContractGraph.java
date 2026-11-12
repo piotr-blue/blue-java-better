@@ -240,14 +240,6 @@ final class ContractGraph {
     return ContractTopology.of(state);
   }
 
-  static Map<String, List<String>> outgoing(Snapshot snapshot) {
-    var outgoing = new HashMap<String, List<String>>();
-    for (Edge edge : snapshot.edges.values()) {
-      outgoing.computeIfAbsent(edge.source(), k -> new ArrayList<>()).add(edge.target());
-    }
-    return outgoing;
-  }
-
   static Set<String> reachable(
       String root,
       Map<String, List<String>> outgoing,
@@ -325,14 +317,6 @@ final class ContractGraph {
 
   List<String> paths(Document document) {
     return declaredPaths(document.body, registry.contracts(document).get("embedded"));
-  }
-
-  List<String> paths(ExactNode body) {
-    return declaredPaths(body);
-  }
-
-  List<String> declaredPaths(ExactNode body) {
-    return declaredPaths(body, registry.contracts(body).get("embedded"));
   }
 
   private List<String> declaredPaths(ExactNode body, Map<String, Object> e) {
@@ -888,16 +872,6 @@ final class ContractGraph {
       }
       registry.facts.established(fact);
     }
-  }
-
-  boolean routeLive(List<Edge> route) {
-    var active = reachable(true, Set.of());
-    return route.stream()
-        .allMatch(
-            e ->
-                e.equals(state.edges.get(e.key()))
-                    && active.contains(e.source())
-                    && active.contains(e.target()));
   }
 
   static Snapshot prepare(

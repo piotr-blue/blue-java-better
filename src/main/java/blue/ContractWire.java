@@ -8,10 +8,6 @@ final class ContractWire {
     return LanguageCodec.wire(value);
   }
 
-  public static Object decode(String json) {
-    return LanguageCodec.json(json);
-  }
-
   public static Object copy(Object value) {
     return ContractData.wireCopy(value);
   }
@@ -20,30 +16,9 @@ final class ContractWire {
     return ContractData.freeze(value);
   }
 
-  /**
-   * True only for containers whose recursive immutable ownership was established by this library.
-   */
-  public static boolean isImmutableContainer(Object value) {
-    return ContractData.isImmutableContainer(value);
-  }
-
-  public static Object detached(Object value) {
-    return ContractData.detached(value);
-  }
-
   /** Exact JSON rendering, preserving the selected numeric categories. */
   public static String write(Object value) {
     return LanguageCodec.write(value);
-  }
-
-  /**
-   * Writes precisely the UTF-8 bytes of write(value), without building the whole string. Flushes
-   * but does not close the caller's stream.
-   */
-  public static void writeUtf8(Object value, java.io.OutputStream output)
-      throws java.io.IOException {
-    output.write(LanguageCodec.write(value).getBytes(java.nio.charset.StandardCharsets.UTF_8));
-    output.flush();
   }
 
   /** An immutable key layout for compact records containing immutable scalar values. */
@@ -83,10 +58,6 @@ final class ContractWire {
     return new RecordShape(keys);
   }
 
-  public static String wire(Object value) {
-    return LanguageCodec.wire(value);
-  }
-
   public static Object json(String value) {
     ContractMetrics.count("wire.jsonDecodeCalls");
     ContractMetrics.add("wire.jsonDecodedCharacters", value.length());
@@ -99,13 +70,5 @@ final class ContractWire {
 
   public static Object data(Object value) {
     return PackageIntegrity.data(value);
-  }
-
-  public static String yamlText(Object value) {
-    return LanguageCodec.yamlText(value);
-  }
-
-  public static String sha256(byte[] bytes) {
-    return PackageIntegrity.sha(bytes);
   }
 }

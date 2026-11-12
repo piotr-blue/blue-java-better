@@ -5,12 +5,9 @@ import static blue.ContractLanguage.identity;
 import static blue.ContractLanguage.map;
 import static blue.ContractLanguage.normalize;
 import static blue.ContractLanguage.recipe;
-import static blue.ContractModel.arr;
-import static blue.ContractModel.integer;
 import static blue.ContractModel.obj;
 import static blue.ContractModel.require;
 import static blue.ContractModel.segments;
-import static blue.ContractModel.str;
 
 import blue.ContractModel.Document;
 import blue.ContractModel.Meter;
@@ -24,7 +21,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -245,44 +241,6 @@ final class ContractWork {
       rows = out;
     }
     return rows;
-  }
-
-  void headers(ExactNode body, ContractPreparations preparations) {
-    var prepared = preparations == null ? null : preparations.get(body);
-    if (prepared == null || prepared.headers() == null) {
-      headers(body);
-      return;
-    }
-    for (Object raw : prepared.headers()) {
-      var row = arr(raw);
-      if (manifests.add(str(row.getFirst()))) {
-        meter.contracts("nodeManifestOpened");
-      }
-      if (row.get(1) != null) {
-        if (manifests.add(str(row.get(1)))) {
-          meter.contracts("nodeManifestOpened");
-        }
-        meter.contracts("objectMemberRead", integer(row.get(2)));
-      }
-      if (Boolean.TRUE.equals(row.get(3))) {
-        meter.contracts("typeEdgeFollowed");
-      }
-    }
-  }
-
-  void headers(ExactNode body) {
-    var seen = new HashSet<String>();
-    ExactNode n = body;
-    while (n != null && seen.add(identity(n))) {
-      Value b = open(n);
-      if (b.has("contracts")) {
-        meter.contracts("objectMemberRead", open((ExactNode) b.get("contracts")).fields().size());
-      }
-      n = (ExactNode) b.get("type");
-      if (n != null) {
-        meter.contracts("typeEdgeFollowed");
-      }
-    }
   }
 
   Object read(ExactNode n, String path) {

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -29,7 +28,6 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.SequenceNode;
-import org.yaml.snakeyaml.nodes.Tag;
 
 /** Strict scalar parsing and canonical helper encoding (Language A02–A03). */
 final class LanguageCodec {
@@ -393,28 +391,6 @@ final class LanguageCodec {
     out.append(']');
   }
 
-  /** YAML emitter preserves scalar categories, including quoted numeric-looking Text. */
-  static String yamlText(Object value) {
-    var options = new org.yaml.snakeyaml.DumperOptions();
-    options.setDefaultFlowStyle(org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK);
-    options.setIndent(2);
-    options.setIndicatorIndent(0);
-    options.setSplitLines(false);
-    options.setWidth(120);
-    var representer =
-        new org.yaml.snakeyaml.representer.Representer(options) {
-          {
-            representers.put(
-                ExactNode.NumberToken.class,
-                data -> {
-                  var token = (ExactNode.NumberToken) data;
-                  return representScalar(token.decimal() ? Tag.FLOAT : Tag.INT, token.text());
-                });
-          }
-        };
-    return new Yaml(representer, options).dump(value);
-  }
-
   private static String render(Object x, boolean wire) {
     var out = new StringBuilder();
     try {
@@ -432,12 +408,6 @@ final class LanguageCodec {
     } catch (IOException impossible) {
       throw new AssertionError(impossible);
     }
-  }
-
-  static void writeUtf8(Object value, OutputStream output) throws IOException {
-    var writer = new CanonicalOutput(output);
-    appendRendered(value, false, writer);
-    writer.flush();
   }
 
   private static void appendRendered(Object x, boolean wire, Appendable out) throws IOException {

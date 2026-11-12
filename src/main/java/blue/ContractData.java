@@ -120,10 +120,6 @@ final class ContractData {
     }
   }
 
-  static Object evidence(Object value) {
-    return value instanceof FrozenMap ? value : freeze(value);
-  }
-
   static Object freeze(Object value) {
     return copy(value, Map.of(), false, true);
   }
@@ -309,14 +305,6 @@ final class ContractData {
       return true;
     }
     return isImmutableContainer(value);
-  }
-
-  static Object detached(Object value) {
-    return copy(value, Map.of(), false, false);
-  }
-
-  static Object host(Object value, Map<String, Long> limits) {
-    return copy(value, limits, true, false);
   }
 
   private static Object copy(

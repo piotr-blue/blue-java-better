@@ -289,12 +289,6 @@ final class ContractNative {
       }
     }
 
-    public RuntimeMeter finish() {
-      require(binding.meterMode.equals("ledger"), "DOUBLE_GAS_DEBIT");
-      finished = true;
-      return this;
-    }
-
     void merge(Object returned, boolean failed) {
       require(!merged, "DOUBLE_GAS_DEBIT");
       merged = true;

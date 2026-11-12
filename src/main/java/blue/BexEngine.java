@@ -156,24 +156,11 @@ final class BexEngine {
     return new BexPlanCompiler(intrinsics.keySet(), bounded).compile(source, definition, entry);
   }
 
-  public Result execute(Map<String, Object> source, Context context, long limit) {
-    return execute(source, context, new BexGas(limit));
-  }
-
   public Result execute(Map<String, Object> source, Context context, BexGas gas) {
     return execute(
         new BexPlanCompiler(intrinsics.keySet(), bounded || gas.boundedHost()).compile(source),
         context,
         gas);
-  }
-
-  public Result execute(
-      Map<String, Object> source, Context context, BexGas gas, TraceMode traceMode) {
-    return execute(
-        new BexPlanCompiler(intrinsics.keySet(), bounded || gas.boundedHost()).compile(source),
-        context,
-        gas,
-        traceMode);
   }
 
   public Result execute(BexPlanCompiler.Program program, Context context, BexGas gas) {
