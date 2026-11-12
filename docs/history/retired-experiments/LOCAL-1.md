@@ -4,7 +4,7 @@
 
 This is the earlier `Blue` / `Program` / `Coordinator` experiment. Its identities, execution profiles,
 gas and timings are not canonical Contracts results. It remains available for existing experiments;
-new Blue applications should start with [the current README](../README.md), canonical `Language`,
+new Blue applications should start with [the current README](../../../README.md), canonical `Language`,
 `Bex`, `Contracts`, or the explicitly separate `DocumentRuntime` host protocol.
 
 ## Build and run the Local-1 examples

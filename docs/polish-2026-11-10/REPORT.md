@@ -37,7 +37,7 @@ application measurements with shared immutable packages and JVM, not AWS or full
 The structural path still visits graph metadata. The improvement does not establish constant-time
 creation or unrestricted cyclic ownership migration.
 
-The [complete three-project report](../../../myos-aws-test-better/docs/polish-2026-11-10/REPORT.md)
+The [complete three-project report](../../../myos-core-better/docs/polish-2026-11-10/REPORT.md)
 contains raw measurements, iteration decisions, artifact hashes and explicit exclusions. Its source
 candidate is separate from the still-running AWS benchmark's older deployment.
 
@@ -45,5 +45,5 @@ I rate the public API and test organization around 9/10, but the complete librar
 9+ release claim while structural scalability, wider compatibility qualification and publication
 coordinates/license remain open. These are engineering judgments, not external audit results.
 
-The resumed iteration is recorded in the [startup and deployment follow-up](../../../myos-aws-test-better/docs/polish-2026-11-10/FOLLOWUP.md).
+The resumed iteration is recorded in the [startup and deployment follow-up](../../../myos-core-better/docs/polish-2026-11-10/FOLLOWUP.md).
 It further reduces 1,000-Order initialization while preserving canonical commitments.

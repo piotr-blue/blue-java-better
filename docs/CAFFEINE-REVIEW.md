@@ -4,7 +4,7 @@ For the later historical scores, see [the November 4 review](QUALITY-REVIEW.md).
 Current implementation evidence is in [the iteration log](ITERATIONS-2026-11.md) and
 [test strategy](TESTING.md).
 
-Historical review before the execution-profile iteration; see [current profile design](EXECUTION-PROFILES.md).
+Historical review before the execution-profile iteration; see [current profile design](history/retired-experiments/EXECUTION-PROFILES.md).
 
 Review date: 2026-11-03. Scope: the experimental `blue-java-better` library.
 

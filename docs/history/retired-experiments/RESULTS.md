@@ -4,7 +4,7 @@
 
 **Historical baseline before the polish iteration.** The current implementation has no Caffeine
 dependency or CommitId. The results below describe the earlier source and its guarantees.
-See [the current comparison](CAFFEINE-REVIEW.md) for the new build and measured before/after.
+See [the current comparison](../../CAFFEINE-REVIEW.md) for the new build and measured before/after.
 
 The experiment demonstrates a small public API and local execution of actual authored
 workflows. It does **not** establish full Blue/Python parity or production readiness.

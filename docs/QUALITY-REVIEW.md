@@ -95,7 +95,7 @@ time or allocations for arbitrary graphs. Full initialization, serialization and
 identity calculations have different cost models.
 
 Previous bounded JMH observations remain in [CAFFEINE-REVIEW.md](CAFFEINE-REVIEW.md) and
-[RESULTS.md](RESULTS.md), with their exclusions. The original engine produces protocol artifacts
+[RESULTS.md](history/retired-experiments/RESULTS.md), with their exclusions. The original engine produces protocol artifacts
 that Local-1 omits. Those measurements cannot justify a universal speed ranking, and comparing
 Blue's execution latency to cache operations would not be meaningful.
 

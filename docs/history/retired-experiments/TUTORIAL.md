@@ -11,7 +11,7 @@ These examples use `blue-java-better`. Run them with JDK 25:
 ./gradlew tutorialExample
 ```
 
-The executable [TutorialExample](../src/demo/java/blue/examples/TutorialExample.java) checks its
+The executable [TutorialExample](../../../src/demo/java/blue/examples/TutorialExample.java) checks its
 results and writes YAML and canonical JSON under `build/reports/tutorial/`. Its tests do not need
 Python, sibling checkouts, the original ZIP, or network access. Selected YAML examples from the
 supplied `BLUE_MYOS_TUTORIAL_AND_CODEX_PROMPT_20260830/tutorial/tutorial.zip` are bundled unchanged
@@ -157,7 +157,7 @@ The code uses `.type(qualifiedName, definition)` to install these already-resolv
 retain their content. It is the low-level Language registration API, not a package constructor
 or a `.bluepkg` verifier/loader. Canonical loading is now available through `BluePackage` and
 `PackageLoader`; use `Language.Builder.mount` to establish verified scoped exports. The
-[package guide](PACKAGES.md) demonstrates this same Point example using real archives.
+[package guide](../../PACKAGES.md) demonstrates this same Point example using real archives.
 
 The original archive used qualified strings as `name` labels. Those bytes are legal as labels,
 but imply no registration; these curated examples deliberately use plain labels instead. Editing
@@ -282,4 +282,4 @@ related ideas from lessons 10, 13 and 14: keyed embedded orders, child initializ
 parent reactions and operations on a selected child. Run `./gradlew example` for that Local-1
 adaptation. The archive's shared managed cycles, durable history/recovery, MyOS authorization,
 FINOS package installation and complete Agreement/Order/Payment protocol are not claimed here.
-See [supported surface](SUPPORTED.md).
+See [supported surface](../../SUPPORTED.md).

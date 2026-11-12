@@ -102,7 +102,7 @@ are not qualified. Edition 1 cannot initialize a parent that depends on its fres
 children; the explicit preview below addresses that case. Changing an active embedding boundary requires first removing its
 links. These boundaries are not claims of full MyOS or distributed canonical parity.
 
-See [iteration decisions](ITERATIONS-2026-11.md) and the companion MyOS project's architecture,
+See [iteration decisions](../../ITERATIONS-2026-11.md) and the companion MyOS project's architecture,
 operations and test reports. Keep canonical `Contracts` for consumers requiring whole-graph atomicity,
 cyclic scheduling or canonical receipts.
 

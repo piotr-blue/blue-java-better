@@ -1,7 +1,7 @@
 # Proposal: deterministic execution proportional to affected work
 
 Status: original design proposal, 2026-11-03. No canonical specification has been edited.
-The partial experiment now exists; see [current rules](EXPERIMENT-SPEC.md) and [results](RESULTS.md).
+The partial experiment now exists; see [current rules](history/retired-experiments/EXPERIMENT-SPEC.md) and [results](history/retired-experiments/RESULTS.md).
 
 ## Required experiment
 

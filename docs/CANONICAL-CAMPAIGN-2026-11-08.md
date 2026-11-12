@@ -139,7 +139,7 @@ does not by itself require inventing another Blue language or pretending gas is 
 
 ### Reproduce and inspect
 
-Use the [preview guide](../../myos-aws-test-better/docs/canonical-preview.md) in the host repository
+Use the [preview guide](../../myos-core-better/docs/canonical-preview.md) in the host repository
 for the authenticated two-Order tutorial. From that checkout:
 
 ```sh

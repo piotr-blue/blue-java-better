@@ -38,7 +38,7 @@ not as authored Source that could replay list construction.
 
 All 18 sections also run as separately named cases in `./gradlew scenarioTest` and the ordinary
 `./gradlew test` / `build` gate. The tests and this runnable guide share the same snippet methods.
-See [test strategy and ownership](TESTING.md) for focused semantic and runtime checks.
+See [test strategy and ownership](../../TESTING.md) for focused semantic and runtime checks.
 
 Use JDK 25 from the project root:
 
@@ -46,7 +46,7 @@ Use JDK 25 from the project root:
 ./gradlew completeTutorialExample
 ```
 
-[CompleteTutorialExample.java](../src/demo/java/blue/examples/CompleteTutorialExample.java)
+[CompleteTutorialExample.java](../../../src/demo/java/blue/examples/CompleteTutorialExample.java)
 contains all snippets, imports, definitions and checks in execution order. It is a demo source,
 not a new runtime feature. Every section's checks are bounded and run without Python, the original
 ZIP, external package services, or a database. A passing section proves only the behavior stated
@@ -201,7 +201,7 @@ The code uses `.type(qualifiedName, definition)` to install these already-resolv
 retain their content. It is the low-level Language registration API, not a package constructor
 or a `.bluepkg` verifier/loader. Canonical loading is now available through `BluePackage` and
 `PackageLoader`; use `Language.Builder.mount` to establish verified scoped exports. The
-[package guide](PACKAGES.md) demonstrates this same Point example using real archives.
+[package guide](../../PACKAGES.md) demonstrates this same Point example using real archives.
 
 The original archive used qualified strings as `name` labels. Those bytes are legal as labels,
 but imply no registration; these curated examples deliberately use plain labels instead. Editing
@@ -1076,7 +1076,7 @@ The archive supplies **no concrete repo.blue or FINOS fixture/identity** for par
 invent one or claim a tested FINOS integration. The first example creates a clearly named local
 Money definition to demonstrate the same provider boundary. Replace it only with verified
 records from an actual pinned publication when integrating that repository. The
-[canonical package loader](PACKAGES.md) can now provide those verified definitions; a concrete
+[canonical package loader](../../PACKAGES.md) can now provide those verified definitions; a concrete
 FINOS publication and its execution integration are still absent from this example.
 
 Canonical Language supports `Double` (`9.5` below). Local-1 execution does not; the cold-chain
@@ -1423,7 +1423,7 @@ canonical BEX/Contracts/Coordination is separate work. Local-1 does not provide 
 actor authorization, durable commands/demands, canonical epochs/checkpoints/gas receipts,
 historical session reopening, source-shared managed identities, occurrence catch-up, cyclic
 managed component publication, external event delivery, real FINOS execution integration or `.bluepkg` runtime
-installation. See [SUPPORTED.md](SUPPORTED.md) and [EXPERIMENT-SPEC.md](EXPERIMENT-SPEC.md).
+installation. See [SUPPORTED.md](../../SUPPORTED.md) and [EXPERIMENT-SPEC.md](EXPERIMENT-SPEC.md).
 
 The archive's examples also contain teaching shortcuts: qualified strings used as type labels
 in lesson 3 (labels are not export bindings), the counter-value mismatch in lesson 7,

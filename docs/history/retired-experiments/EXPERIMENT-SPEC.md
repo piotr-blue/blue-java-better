@@ -22,7 +22,7 @@ cycles fail. A returned ContractState is not a portable proof.
 ## Canonical Language API
 
 `Language` and `Blue.language()` implement the fixed canonical Language edition described in
-[LANGUAGE.md](LANGUAGE.md). They provide full Language construction, admission and exact graph
+[LANGUAGE.md](../../LANGUAGE.md). They provide full Language construction, admission and exact graph
 operations, including list evolution, schema constraints and cyclic owning sets. These operations
 are separate from the Local-1 `Node`-based runtime described below. A canonical Language document
 is not automatically an executable Local-1 document; `contracts` is ordinary Language content

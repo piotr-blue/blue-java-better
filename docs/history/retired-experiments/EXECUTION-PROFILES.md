@@ -274,8 +274,8 @@ not a claim of literally constant physical latency. No sibling-wide profile vali
 on ordinary calls.
 
 Compact measurements and source fingerprints are in
-[execution-profiles.json](measurements/execution-profiles.json) and
-[execution-profile-sources.json](measurements/execution-profile-sources.json).
+[execution-profiles.json](../../measurements/execution-profiles.json) and
+[execution-profile-sources.json](../../measurements/execution-profile-sources.json).
 Reproduce the bounded run with:
 
 ```bash
