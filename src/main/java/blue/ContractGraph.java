@@ -519,7 +519,7 @@ final class ContractGraph {
   boolean collectionAppend(Document previous, Document next, String path) {
     if (meter == null
         || meter.schedule != GasSchedule.STANDARD
-        || Boolean.getBoolean("blue.physical.fullCollectionReconciliation")) {
+        || DiagnosticSwitches.fullCollectionReconciliation()) {
       return false;
     }
     var parts = segments(path);
@@ -689,7 +689,7 @@ final class ContractGraph {
     observePartition();
     for (var group : topology().components(selected)) {
       var index = topology();
-      if (!Boolean.getBoolean("blue.canonical.finalizationReuseDisabled")
+      if (!DiagnosticSwitches.finalizationReuseDisabled()
           && group.stream().allMatch(k -> referencesUnchanged(k, index))) {
         ContractMetrics.add("graph.finalize.reusedMembers", group.size());
         continue;

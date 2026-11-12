@@ -974,7 +974,7 @@ final class ContractRun {
             identity(doc.body),
             "after",
             identity(next)));
-    if (localWrite && !Boolean.getBoolean("blue.physical.fullPatch")) {
+    if (localWrite && !DiagnosticSwitches.fullPatch()) {
       // The patch is disjoint from every declared embedding and cannot change declarations.
       // Full Language validation and Document Update reactions still run.
       state.documents.put(key, doc.withBody(next));
@@ -1394,9 +1394,7 @@ final class ContractRun {
     if (p.schedule == null || p.schedule.topology != topology) {
       p.schedule =
           new ContractSchedule(
-              p,
-              topology,
-              sparseScheduling && !Boolean.getBoolean("blue.physical.sparseScheduleDisabled"));
+              p, topology, sparseScheduling && !DiagnosticSwitches.sparseScheduleDisabled());
     }
     return p.schedule;
   }
@@ -1628,7 +1626,7 @@ final class ContractRun {
   void installInputs(String key, List<Batch> incoming) {
     Document document = state.documents.get(key);
     ExactNode previous = document.body;
-    boolean indexed = !incoming.isEmpty() && !Boolean.getBoolean("blue.physical.inputsFullScan");
+    boolean indexed = !incoming.isEmpty() && !DiagnosticSwitches.inputsFullScan();
     Map<Edge, String> established = new HashMap<>();
     var links = document.finalizedLinks;
     if (!indexed
@@ -2097,7 +2095,7 @@ final class ContractRun {
   }
 
   private Set<String> initializationCandidates() {
-    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled")) {
+    if (!blue.context.nativeReuse() || DiagnosticSwitches.nativeReuseDisabled()) {
       return graph.reachable();
     }
     if (initializationCandidates == null) {

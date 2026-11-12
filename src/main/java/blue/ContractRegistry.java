@@ -410,10 +410,7 @@ final class ContractRegistry {
   private ContractLanguage.EvidenceScope declarationScope;
   private final ContractCache<String, Map<String, Map<String, Object>>> declarations =
       new ContractCache<>(
-          "contracts.declarations",
-          Long.getLong("blue.physical.contractFactsBytes", 8L * 1024 * 1024),
-          4096,
-          256 * 1024);
+          "contracts.declarations", DiagnosticSwitches.contractFactsBytes(), 4096, 256 * 1024);
 
   private final ContractCache<String, Map<String, Object>> declarationHeaders =
       new ContractCache<>("contracts.headers", 8L * 1024 * 1024, 4096, 256 * 1024);
@@ -425,8 +422,7 @@ final class ContractRegistry {
   }
 
   private Map<String, Object> header(Recipe recipe) {
-    boolean reuse =
-        blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
+    boolean reuse = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
     String key = recipe.key();
     Map<String, Object> cached = reuse ? declarationHeaders.get(key) : null;
     if (cached != null) {
@@ -465,8 +461,7 @@ final class ContractRegistry {
       }
       return prepared.declarations();
     }
-    boolean reusable =
-        blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
+    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
     if (!reusable) {
       return contracts(document.body);
     }
@@ -494,8 +489,7 @@ final class ContractRegistry {
       clearDeclarations();
       declarationScope = scope;
     }
-    boolean reusable =
-        blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
+    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
     // State-only writes leave the effective contract recipe unchanged. Declarations depend
     // on this recipe and its evidence scope, not on unrelated document fields.
     Recipe contracts = blue.head(body).contracts;
@@ -581,7 +575,7 @@ final class ContractRegistry {
     if (prepared != null) {
       return prepared.markers().get(key).orElse(null);
     }
-    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled")) {
+    if (!blue.context.nativeReuse() || DiagnosticSwitches.nativeReuseDisabled()) {
       return marker(document.body, key);
     }
     var scope = blue.context.evidenceScope();

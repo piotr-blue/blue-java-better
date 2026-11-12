@@ -14,10 +14,7 @@ final class ContractFacts {
   private Object configuration = new Object();
   private final ContractCache<Object, Boolean> facts =
       new ContractCache<>(
-          "contracts.facts",
-          Long.getLong("blue.physical.contractFactsBytes", 8L * 1024 * 1024),
-          8192,
-          256 * 1024);
+          "contracts.facts", DiagnosticSwitches.contractFactsBytes(), 8192, 256 * 1024);
 
   ContractFacts(ContractBridge blue) {
     this.blue = blue;
@@ -49,8 +46,7 @@ final class ContractFacts {
       scope = current;
     }
     Object fact = List.of(kind, key, identity(document.body), document.metadata(), extra);
-    boolean reusable =
-        blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
+    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
     // The initialized and pre-initialization lifetime checks are distinct facts. Keeping both
     // avoids alternately evicting one while installing protected preparation.
     String slot = kind.equals("lifetimes") ? kind + ":" + extra : kind;
@@ -70,7 +66,7 @@ final class ContractFacts {
 
   void established(Check check) {
     if (blue.context.nativeReuse()
-        && !Boolean.getBoolean("blue.physical.nativeDisabled")
+        && !DiagnosticSwitches.nativeReuseDisabled()
         && check.scope() == blue.context.evidenceScope()) {
       var updated = new HashMap<>(check.document.validation);
       updated.put(check.kind, new Established(configuration, check.scope, check.key));

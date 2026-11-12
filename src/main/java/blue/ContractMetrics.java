@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 /** Optional process-wide diagnostic counters. Never used for gas or acceptance decisions. */
 final class ContractMetrics {
-  private static final boolean ENABLED = Boolean.getBoolean("blue.physical.counters");
+  private static final boolean ENABLED = DiagnosticSwitches.counters();
   private static final Map<String, LongAdder> COUNTS = new ConcurrentHashMap<>();
   private static final Map<String, Map<String, LongAdder>> SCOPED = new ConcurrentHashMap<>();
   private static final ThreadLocal<Scope> ACTIVE = new ThreadLocal<>();
@@ -20,7 +20,7 @@ final class ContractMetrics {
       java.lang.management.ManagementFactory.getThreadMXBean();
   private static final boolean CPU_ENABLED =
       ENABLED
-          && Boolean.getBoolean("blue.physical.cpu")
+          && DiagnosticSwitches.cpuTime()
           && CPU.isCurrentThreadCpuTimeSupported()
           && CPU.isThreadCpuTimeEnabled();
 

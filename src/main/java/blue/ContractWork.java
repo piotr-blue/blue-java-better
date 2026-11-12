@@ -68,7 +68,7 @@ final class ContractWork {
     Collection<String> selected =
         rootWitnesses == null
                 || rootWitnessScope != scope
-                || Boolean.getBoolean("blue.physical.nativeDisabled")
+                || DiagnosticSwitches.nativeReuseDisabled()
             ? documents.keySet()
             : documents.changedValueKeys(rootWitnesses);
     int visited = 0;

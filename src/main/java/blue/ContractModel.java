@@ -600,7 +600,7 @@ final class ContractModel {
 
     String identity() {
       if (identityVersion == null || !identityVersion.matches(this)) {
-        if (Boolean.getBoolean("blue.canonical.fragmentedSnapshotDisabled")) {
+        if (DiagnosticSwitches.fragmentedSnapshotDisabled()) {
           cachedIdentity = digest("contracts.snapshot/completion-1", wire());
         } else {
           // Member keys depend on the exact growing snapshot. Reuse its unchanged record

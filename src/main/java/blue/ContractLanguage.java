@@ -50,7 +50,7 @@ final class ContractLanguage {
   private ContractLanguage(Language language, LanguageContext context, EvidenceScope scope) {
     this.language = language;
     this.context = context;
-    context.reuseWithinHostBudget = !Boolean.getBoolean("blue.canonical.revalidateClosures");
+    context.reuseWithinHostBudget = !DiagnosticSwitches.revalidateClosures();
     this.scope = scope;
     context.recordTexts = scope.recordTexts;
   }

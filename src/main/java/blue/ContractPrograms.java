@@ -18,7 +18,7 @@ final class ContractPrograms {
 
   /** Pure projection of an already logically visited constants/functions field. */
   Object definitionValue(String identity, Supplier<Object> projection) {
-    if (Boolean.getBoolean("blue.canonical.recompile")) {
+    if (DiagnosticSwitches.recompile()) {
       return projection.get();
     }
     Object cached = definitionValues.get(identity);
@@ -39,7 +39,7 @@ final class ContractPrograms {
   /** The caller must select, verify and logically read both declarations before lookup. */
   BexPlanCompiler.Program compile(
       String step, String definition, Supplier<BexPlanCompiler.Program> compiler) {
-    if (Boolean.getBoolean("blue.canonical.recompile")) {
+    if (DiagnosticSwitches.recompile()) {
       return compiler.get();
     }
     Key key = new Key(step, definition);

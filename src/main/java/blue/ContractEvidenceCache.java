@@ -18,7 +18,7 @@ final class ContractEvidenceCache {
   private ContractEvidenceCache() {}
 
   static Key key(String id, Object response, Map<String, Long> limits, boolean reuse) {
-    if (!reuse || Boolean.getBoolean("blue.physical.nativeDisabled") || id.contains("#")) {
+    if (!reuse || DiagnosticSwitches.nativeReuseDisabled() || id.contains("#")) {
       return null;
     }
     if (!(response instanceof Map<?, ?> map)

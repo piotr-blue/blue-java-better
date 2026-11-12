@@ -537,7 +537,7 @@ final class LanguageOperations {
     // Native records use exact syntax and enumerate every referenced child above. The
     // canonical rendering's $previous witnesses are unnecessary for this representation.
     // Public Language exports retain their canonical-rendering closure contract.
-    if (c.recordTexts != null && !Boolean.getBoolean("blue.canonical.prefixWitnesses")) {
+    if (c.recordTexts != null && !DiagnosticSwitches.prefixWitnesses()) {
       return records;
     }
     for (ExactNode n : roots) {
@@ -572,10 +572,10 @@ final class LanguageOperations {
     var cache = context.recordTexts;
     if (cache == null
         || !(value instanceof Value body)
-        || Boolean.getBoolean("blue.canonical.recordTextDisabled")) {
+        || DiagnosticSwitches.recordTextDisabled()) {
       return exactText(value);
     }
-    if (!Boolean.getBoolean("blue.canonical.inlineRecords")) {
+    if (!DiagnosticSwitches.inlineRecords()) {
       // A record owns one node. Descendants have their own records in the same closure;
       // referencing them avoids serializing the same subtree once for each ancestor.
       // Contracts are a literal inspection boundary: preserve their source presentation.

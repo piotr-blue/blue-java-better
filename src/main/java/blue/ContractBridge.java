@@ -213,7 +213,7 @@ final class ContractBridge {
               ? exact
               : context.prepare(input(BexValues.copy(value), true));
       ExactNode admitted =
-          context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled")
+          context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled()
               ? context.admitLocal(n, goal)
               : wireAdmission(n, goal);
       String admittedId = identity(admitted);
@@ -267,8 +267,7 @@ final class ContractBridge {
   void retain(Collection<ExactNode> nodes) {
     // Collect the complete closure before merging alternate encodings. A replacement can
     // invalidate cached owning-set proofs; it must not do so halfway through this export.
-    boolean nativeRecords =
-        context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
+    boolean nativeRecords = context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
     if (nativeRecords) {
       context.retain(nodes);
     } else {
@@ -345,7 +344,7 @@ final class ContractBridge {
   Head head(Object r) {
     try {
       Recipe selected = r instanceof Recipe x ? x : recipe(r);
-      return Boolean.getBoolean("blue.physical.borrowedHeadsDisabled")
+      return DiagnosticSwitches.borrowedHeadsDisabled()
           ? ContractLanguage.head(selected, context)
           : ContractLanguage.readHead(selected, context);
     } catch (LanguageFailure e) {
