@@ -1,0 +1,20 @@
+{
+  "blue-java-better": {
+    "tests": 2492,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "myos-simplified": {
+    "tests": 82,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "myos-core-better": {
+    "tests": 821,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

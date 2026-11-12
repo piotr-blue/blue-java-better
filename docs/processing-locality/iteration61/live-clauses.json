@@ -1,0 +1,314 @@
+{
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "account": "user-ff574bbc4f2d73e74e19e8031d49fb899d773f622cb578c20af6b0e6507bea6a",
+  "checks": [
+    "Cognito login",
+    "anonymous rejection",
+    "cross-origin write rejection",
+    "bootstrap retry",
+    "cross-account isolation",
+    "two shared participant timelines",
+    "Payment to Order to Agreement propagation",
+    "operation retry",
+    "retained events",
+    "immutable initialization history after later operations",
+    "latest applied history",
+    "API key creation, authenticated read and revocation"
+  ],
+  "startedAt": "2026-11-09T02:03:42Z",
+  "measurementBoundary": "HTTPS client submission through the Agreement committed APPLIED history for this exact submitted entry, including client network and polling with persistent TLS; catalogue and initial-head lookup reported separately",
+  "agreement": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77",
+  "bootstrapMillis": 5430.348083,
+  "initialHead": {
+    "document": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77",
+    "edition": "myos.canonical-owners/2",
+    "localBlueId": "5k49BXmLHziunNRZ9bZ2efzwE1agu96HYZ6HHwYuVYtN",
+    "version": 1
+  },
+  "passed": true,
+  "measurements": [
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77",
+      "submitMillis": 853.5687500000008,
+      "parentObservedMillis": 6882.286833999999,
+      "businessStateObservedMillis": 6381.8935,
+      "entry": "2QfzoLy8UaDiAY3gd8EcjhhPtNqFjRvnXytajT9ybNCw",
+      "parentVersion": 2,
+      "catalogueMillis": 558.9406659999999,
+      "observedWithCatalogueMillis": 7441.227499999998,
+      "submitServerTiming": "app;dur=554.369"
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-e028cd3debdc14796c7f89ecf6b922aee5f1fcb9a09fa66f",
+      "submitMillis": 556.2129169999998,
+      "parentObservedMillis": 6597.520457999998,
+      "businessStateObservedMillis": 6098.6860830000005,
+      "entry": "8NtT7iVKZjGintsj7y9HaoEdegFWGfnxSnQNbBP9gvr1",
+      "parentVersion": 3,
+      "catalogueMillis": 555.9522080000008,
+      "observedWithCatalogueMillis": 7153.472665999999,
+      "submitServerTiming": "app;dur=312.449"
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-cb657f75c2e9dd1770682cd5c073c49d24040c4f60e0a54c",
+      "submitMillis": 598.6983749999979,
+      "parentObservedMillis": 5271.477124999997,
+      "businessStateObservedMillis": 1775.3752089999964,
+      "entry": "6R9KWfcjZjzgbHEj24J4MqaPqWp2M87pYiLZcP4DN9hS",
+      "parentVersion": 4,
+      "catalogueMillis": 556.1504580000012,
+      "observedWithCatalogueMillis": 5827.627582999998,
+      "submitServerTiming": "app;dur=309.901"
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-cb657f75c2e9dd1770682cd5c073c49d24040c4f60e0a54c",
+      "submitMillis": 371.51241700000526,
+      "parentObservedMillis": 5415.595834000002,
+      "businessStateObservedMillis": 1830.7679589999993,
+      "entry": "HDNPBRkKTKhReuSnLZZeNMFFWwN3snMso3w7aFANMpyS",
+      "parentVersion": 5,
+      "catalogueMillis": 586.2300840000003,
+      "observedWithCatalogueMillis": 6001.825918000002,
+      "submitServerTiming": "app;dur=131.212"
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-cb657f75c2e9dd1770682cd5c073c49d24040c4f60e0a54c",
+      "submitMillis": 347.44608399999777,
+      "parentObservedMillis": 4948.211041999997,
+      "businessStateObservedMillis": 4452.055125000001,
+      "entry": "36wxAGwA2hdrLfAdcwjtgj4xNqury7myowwd5TY5S8WV",
+      "parentVersion": 6,
+      "catalogueMillis": 556.0881250000023,
+      "observedWithCatalogueMillis": 5504.299166999999,
+      "submitServerTiming": "app;dur=106.764"
+    },
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77",
+      "submitMillis": 357.9889590000036,
+      "parentObservedMillis": 3714.070708999998,
+      "businessStateObservedMillis": 3162.93675,
+      "entry": "EB79nPwfZeyETEphgEUeAcHaFkzNgX8WkV97esSV3NAQ",
+      "parentVersion": 7,
+      "catalogueMillis": 552.9933329999963,
+      "observedWithCatalogueMillis": 4267.0640419999945,
+      "submitServerTiming": "app;dur=115.266"
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-027b0b5a8bf1172b3403331052e970279d02bd19b1fe33b6",
+      "submitMillis": 449.2102090000003,
+      "parentObservedMillis": 4975.513083999999,
+      "businessStateObservedMillis": 3709.911833999996,
+      "entry": "GcjdhvwZQXFiaZiDsbUxa1jCpKKrRzHyjgxHpjWx97Hd",
+      "parentVersion": 8,
+      "catalogueMillis": 555.5542090000004,
+      "observedWithCatalogueMillis": 5531.067293,
+      "submitServerTiming": "app;dur=208.737"
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-d3d0ae521b2b4c94a38dc640c903299ef1873224a3c77ba2",
+      "submitMillis": 476.225208999999,
+      "parentObservedMillis": 4380.729084000002,
+      "businessStateObservedMillis": 1539.3327500000069,
+      "entry": "FLPyP8fqyg7zsMzKV16rea8kMRj6yFBdx2FGUfRNjt33",
+      "parentVersion": 9,
+      "catalogueMillis": 562.0543750000024,
+      "observedWithCatalogueMillis": 4942.783459000005,
+      "submitServerTiming": "app;dur=181.604"
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-d3d0ae521b2b4c94a38dc640c903299ef1873224a3c77ba2",
+      "submitMillis": 351.31287500000496,
+      "parentObservedMillis": 4578.828125000001,
+      "businessStateObservedMillis": 1840.3206659999967,
+      "entry": "6T5geRv4hPDNG5gLYPPfWrtkFrCA3r9TjKbGa6ErYwh2",
+      "parentVersion": 10,
+      "catalogueMillis": 616.4911669999924,
+      "observedWithCatalogueMillis": 5195.319291999993,
+      "submitServerTiming": "app;dur=105.511"
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-d3d0ae521b2b4c94a38dc640c903299ef1873224a3c77ba2",
+      "submitMillis": 347.5253330000072,
+      "parentObservedMillis": 4683.433875000006,
+      "businessStateObservedMillis": 4123.491541999996,
+      "entry": "7CvZHPFpmbRKEXNjefcabwkJgDgxzzmt46XPNBfWTMD5",
+      "parentVersion": 11,
+      "catalogueMillis": 551.5569159999956,
+      "observedWithCatalogueMillis": 5234.990791000002,
+      "submitServerTiming": "app;dur=107.365"
+    }
+  ],
+  "finalHead": {
+    "document": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77",
+    "edition": "myos.canonical-owners/2",
+    "localBlueId": "FRSiXXihWB7NtuywkEa31mWJE1ponBqRjPhswgzDojB4",
+    "version": 11
+  },
+  "finalHistory": {
+    "events": [
+      {
+        "amountMinor": 200,
+        "kind": "Agreement Payment Received"
+      }
+    ],
+    "input": {
+      "admission": {
+        "channels": {
+          "61wceG5tZtQgdHtRkVCNXS6Ky6uHsne7dZcvcJ3FkrDR": [
+            {
+              "addressed": false,
+              "channel": "provider",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:15271b20ae2d83a93c6053a683bc88aa2a6e56de7c4732a99594b7296681bb14"
+            },
+            {
+              "addressed": false,
+              "channel": "provider",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:ff73fff815d1fa44f5fe9bcd4be1266611bfb6e303f747a5e2552d01d0a4de53"
+            }
+          ],
+          "Fh9emBnwsK89m6QPnm1e1kQva69YEFusFahYct1rWcBT": [
+            {
+              "addressed": false,
+              "channel": "customer",
+              "disposition": "INAPPLICABLE",
+              "member": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77"
+            },
+            {
+              "addressed": false,
+              "channel": "seller",
+              "disposition": "INAPPLICABLE",
+              "member": "graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77"
+            },
+            {
+              "addressed": false,
+              "channel": "guarantor",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:1be12ac56ec75196380176477f5d501158e3fa5be0378dd5035981cdabfdfb42"
+            },
+            {
+              "addressed": false,
+              "channel": "payee",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:1be12ac56ec75196380176477f5d501158e3fa5be0378dd5035981cdabfdfb42"
+            },
+            {
+              "addressed": false,
+              "channel": "payer",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:1be12ac56ec75196380176477f5d501158e3fa5be0378dd5035981cdabfdfb42"
+            },
+            {
+              "addressed": false,
+              "channel": "buyer",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:73b87c05f2366149089e9e32ce5abf64253a7f92cde1f47e710af09def870139"
+            },
+            {
+              "addressed": false,
+              "channel": "supplier",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:73b87c05f2366149089e9e32ce5abf64253a7f92cde1f47e710af09def870139"
+            },
+            {
+              "addressed": true,
+              "channel": "guarantor",
+              "disposition": "ELIGIBLE",
+              "member": "sha256:c09e46f3334dfde2dffab33074f0943d892a0a63a250fb83ede422e3c2ba2f64"
+            },
+            {
+              "addressed": true,
+              "channel": "payee",
+              "disposition": "ELIGIBLE",
+              "member": "sha256:c09e46f3334dfde2dffab33074f0943d892a0a63a250fb83ede422e3c2ba2f64"
+            },
+            {
+              "addressed": true,
+              "channel": "payer",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:c09e46f3334dfde2dffab33074f0943d892a0a63a250fb83ede422e3c2ba2f64"
+            },
+            {
+              "addressed": false,
+              "channel": "buyer",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:d38ba002bd1812b153d944bebc029adbe3378b4a5232586fe24196ff49bc8c0b"
+            },
+            {
+              "addressed": false,
+              "channel": "supplier",
+              "disposition": "INAPPLICABLE",
+              "member": "sha256:d38ba002bd1812b153d944bebc029adbe3378b4a5232586fe24196ff49bc8c0b"
+            }
+          ]
+        },
+        "snapshot": "sha256:05279b40b852ed84516aacfaf54e57673c71c850a4909b76f3b0b50d118b27b8"
+      },
+      "entry": "7CvZHPFpmbRKEXNjefcabwkJgDgxzzmt46XPNBfWTMD5",
+      "mode": "fast",
+      "sources": [
+        {
+          "binding": {
+            "generation": 1,
+            "id": "embedding:graph-fast-46a70f9106f42899e2cadd18b31ff75f81c709045231db77:/orders/order-2:1",
+            "kind": "OWNER",
+            "position": 3,
+            "source": "graph-fast-027b0b5a8bf1172b3403331052e970279d02bd19b1fe33b6"
+          },
+          "order": {
+            "entry": "7CvZHPFpmbRKEXNjefcabwkJgDgxzzmt46XPNBfWTMD5",
+            "timeline": "5fZLt7D9UDiP3ZWthmzPpb2UXAfV4vvCphCVG6CGMfEP",
+            "timestamp": 1794189889970000
+          },
+          "position": 4,
+          "receipt": "sha256:48db07bba650bf630607931674c9e39e8eab05e54a6c9f9f82e5a825d34c48eb"
+        }
+      ],
+      "timestamp": 1794189889970000
+    },
+    "inputAvailable": true,
+    "kind": "TIMELINE",
+    "outcome": {
+      "blueId": "FRSiXXihWB7NtuywkEa31mWJE1ponBqRjPhswgzDojB4",
+      "diagnostic": {},
+      "events": [
+        {
+          "amountMinor": 200,
+          "kind": "Agreement Payment Received"
+        }
+      ],
+      "executionNanos": 1257712121,
+      "gas": 21103,
+      "identity": "sha256:a5e31291bc2665873a5d7b552e464e2fb94b6064d06bfd942f2089ed95fb2e7a",
+      "receipt": "sha256:f98eb817977ed6bb663bfbf8efe59980808a746571130d51cf09f6c981525efd",
+      "status": "APPLIED",
+      "version": 11
+    },
+    "performance": {},
+    "publishedAt": "2026-11-09T02:04:53.636862137Z",
+    "timestamp": 1794189889970000,
+    "version": 11
+  },
+  "orders": [
+    {
+      "order": "graph-fast-e028cd3debdc14796c7f89ecf6b922aee5f1fcb9a09fa66f",
+      "payment": "graph-fast-cb657f75c2e9dd1770682cd5c073c49d24040c4f60e0a54c"
+    },
+    {
+      "order": "graph-fast-027b0b5a8bf1172b3403331052e970279d02bd19b1fe33b6",
+      "payment": "graph-fast-d3d0ae521b2b4c94a38dc640c903299ef1873224a3c77ba2"
+    }
+  ],
+  "paidTotal": 400
+}

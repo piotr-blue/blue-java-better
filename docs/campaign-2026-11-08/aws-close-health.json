@@ -1,0 +1,9 @@
+{
+  "account": "581571886327",
+  "region": "eu-west-1",
+  "instance": "i-052007ebaf704c0ad",
+  "instanceHealthy": true,
+  "consoleStatus": 200,
+  "activeQualificationWorkers": [],
+  "deploymentCommand": "011844bb-832d-4cc1-bbde-7320bfcf5826"
+}

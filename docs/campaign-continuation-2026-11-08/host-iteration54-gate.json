@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "command": "./gradlew --offline --no-parallel check installDist qualificationJar",
+  "tests": 818,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

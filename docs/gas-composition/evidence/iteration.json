@@ -1,0 +1,40 @@
+{
+  "iteration": 60,
+  "completedUtc": "2026-11-09T01:38:34.508834+00:00",
+  "decision": "KEEP explicit compositional gas and exact source reuse; physical locality remains incomplete",
+  "report": "blue-java-better/docs/gas-composition/REPORT.md",
+  "gates": {
+    "libraryTests": 2487,
+    "localTests": 82,
+    "hostTests": 821,
+    "helperTests": 48,
+    "localScaleOracleInputs": 6,
+    "awsScaleOracleInputs": 16,
+    "liveClauseOperations": 10,
+    "liveClausePaidTotal": 400,
+    "mixedExternalThenLocal": [
+      14,
+      19
+    ]
+  },
+  "localGas": [
+    51,
+    104,
+    157
+  ],
+  "local10MedianMs": 52.61625,
+  "local1000MedianMs": 326.224459,
+  "awsGas": 148,
+  "aws10ProcessingMedianMs": 916.639294,
+  "aws1000ProcessingMedianMs": 2233.8293795,
+  "aws10AcquisitionPlusProcessingMedianMs": 1077.525029,
+  "aws1000AcquisitionPlusProcessingMedianMs": 4480.180849,
+  "artifactSha256": "7640589682c3e6bccef1544a10a035f6513547edf33d2c26f97d5b160ff11a32",
+  "ratings": {
+    "correctness": 7,
+    "compatibility": 6,
+    "clarity": 8,
+    "performance": 3,
+    "operations": 5
+  }
+}

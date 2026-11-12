@@ -1,0 +1,23 @@
+{
+  "commandId": "95a78878-0c96-46b8-8c1a-302b2e515767",
+  "instance": "i-052007ebaf704c0ad",
+  "artifactSha256": "3dfb410da8c1843533d332bc9eccfb0e66038bcd735ecf6025507be6fd17e4c4",
+  "status": "Success",
+  "start": "2026-11-09T02:02:14.152Z",
+  "end": "2026-11-09T02:02:35.152Z",
+  "health": {
+    "canonicalGraphs": true,
+    "combinedAcknowledgements": true,
+    "durable": true,
+    "edition": "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup",
+    "nativeAdmission": true,
+    "newOwnerGasSchedule": "contracts-compositional-gas-1",
+    "status": "ok",
+    "supportedEditions": [
+      "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup"
+    ],
+    "timelineAutomatic": true,
+    "timelineProcessing": true,
+    "workers": 2
+  }
+}

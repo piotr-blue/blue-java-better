@@ -1,0 +1,14 @@
+{
+  "sha256": {
+    "src/demo/resources/canonical/connections.bluepkg": "dcfdbb09596ab9dfb5e0d51a80a7395f01c7daa8d350e7bddfff8ab6255fc928",
+    "src/main/resources/runtime/deterministic/blue-bex.bluepkg": "5998a83724b69b4065dc6bd3cc1a0a5af7b5d041e6b3957cbb4949fb2b338f3e",
+    "src/main/resources/runtime/deterministic/blue-contracts.bluepkg": "405bcc2749e45ae6cee435c42043a5e7dae11d7f9acb8a6acca19d7ac3170f8d",
+    "src/main/resources/runtime/deterministic/blue-dispatch.bluepkg": "412aa71c7758e36cc7e6dc6d5199a98a6baa3a205b4061e5e6918859d7022ef3",
+    "src/main/resources/runtime/deterministic/blue-language.bluepkg": "a030dd4c88e41a414918ef4895017862e154b438848bd5c0e4f5bc880e7b8a90",
+    "src/test/resources/canonical/bex.json": "52448429f24b4daeceb883e3bf15157760024e817630283f62cc56dc3ce7d823",
+    "src/test/resources/canonical/contracts.json": "864018bbc75e7afac1fe08536af766daa575f7a2caf934df0bfcd8341818f93c"
+  },
+  "language": "8XGYNufx24r7Dc5bGoeobcGNCn9roLzSfZCQyHBTaTx4",
+  "bexRules": "8ncKHLULWkzyNKEHfzpswF6iKZfc3H1DzDpgH8UC1hV",
+  "contractsRules": "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup"
+}

@@ -1,0 +1,32 @@
+{
+  "content": {
+    "blueId": "7QE5obau2Hu1pTrKtwCd1TBsgUUn5hGRdLbck4WbQmpg",
+    "sha256": "1501c6be23f8c29e7c743e5f2fab6d6a0cc81222e818848a6fff88fd85cd8f0f",
+    "source": "blue.PackageFixtureGenerator (Java test source)"
+  },
+  "contracts": {
+    "blueId": "4Jmza3Z7eEDah9qtyYq5i2AqX5tKfUnLNKYAoAPoWzmF",
+    "sha256": "405bcc2749e45ae6cee435c42043a5e7dae11d7f9acb8a6acca19d7ac3170f8d",
+    "source": "blue-packages/blue-contracts/dist/package.bluepkg"
+  },
+  "drawing": {
+    "blueId": "DmgQQFoRoikCw8SpyzgHxef3CZsyCkxkVbFDWa3EVbuZ",
+    "sha256": "68e4eb7b0a325f17ae59cc4687cf1b15510fcf284d09ed341b99aa3c1bbf90c9",
+    "source": "blue.PackageFixtureGenerator (Java test source)"
+  },
+  "geometry-v2": {
+    "blueId": "8g8Xq4RS4pQmyLReVMPHFpgfnEoT6GBfyW153hUrALtN",
+    "sha256": "af2e8b9584bf5eb0cf796a6825eacc83c36964434a03c70f1e54c4f66114bfdc",
+    "source": "blue.PackageFixtureGenerator (Java test source)"
+  },
+  "geometry": {
+    "blueId": "9Ru5h2T2c6N4daUET2LLHArEvQT6TR3QFPwTfteaq57v",
+    "sha256": "34a0b49b48bc4938b3bf97fba888e101ef80c764441d6553bd376913c3dcd80d",
+    "source": "blue.PackageFixtureGenerator (Java test source)"
+  },
+  "language": {
+    "blueId": "9gmTH7AViM69tjyPBsczyFq9G6XZZCYPnDrkgCQCNeWZ",
+    "sha256": "fbf9913233a036ef6a31729bfd2cc415f84075cf3e891d2cc9d7099d6afc4d6f",
+    "source": "blue.PackageFixtureGenerator (Java test source)"
+  }
+}

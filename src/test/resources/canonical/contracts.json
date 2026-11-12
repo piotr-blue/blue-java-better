@@ -1,0 +1,5890 @@
+{
+  "format": "blue-canonical-contract-reference-cases/1",
+  "rules": "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup",
+  "cases": [
+    {
+      "name": "declarations-static",
+      "budget": 582,
+      "source": {
+        "name": "Minimal initialization static",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:cfecbd80878c2b88b89bc755c96097cd28eb1086415dd531021348f178225e83",
+        "output": "sha256:cfecbd80878c2b88b89bc755c96097cd28eb1086415dd531021348f178225e83",
+        "invocation": "sha256:3a298e710f1ea088e5f526b6533401c7ebde5b273a54f6bbe5fd001c7f97636c",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+            "identity": "sha256:78c721477551a372f88280ea8933dba63cb7f5d86e7e2bbe48b2632a40f7f231"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 582,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "validationProofReused",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:e69433a60fb17b707cbc2154be1f508024e3ebde93c4e872cc5759bdb0bc9e2b"
+    },
+    {
+      "name": "declarations-static",
+      "budget": 583,
+      "source": {
+        "name": "Minimal initialization static",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:cfecbd80878c2b88b89bc755c96097cd28eb1086415dd531021348f178225e83",
+        "output": "sha256:2beef74c495c8b67f0b5f062828a108b03df3e38b625e7b263de353c64e437c5",
+        "invocation": "sha256:ae42254632515551a48b62bac03e381a34ab4cb004739c6ef94ca52309eeeecb",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+            "identity": "sha256:b48acbf78e1443c021babd202dc5e4a7437c526f035ae7ea8e8c7fe0d7348d75"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 583,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7"
+                }
+              },
+              "logicalContext": "sha256:1e2efb9095974b63b3f0e524695172ca8c827ff459b815dff8c69e71457b9ddf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "52bbqqxEV2WQU1NNbZvWrMYV7gEssYKGwn1iATibGJeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                "after": "HUQf9FUnTYPRjF6WWB6C2JY7YYrLqxpfGKgcuogeomtB"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 428,
+            "identity": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986",
+                "output": []
+              }
+            ],
+            "gas": 436,
+            "identity": "sha256:889ade3c5ec453382881a30cb89e123020812910135ae67afec08dddbef661e5"
+          }
+        ]
+      },
+      "receipt": "sha256:19520b04b46f8f63169d028f20413342168ac67f768734f332b00ff6614f37c8"
+    },
+    {
+      "name": "declarations-static",
+      "budget": 584,
+      "source": {
+        "name": "Minimal initialization static",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:cfecbd80878c2b88b89bc755c96097cd28eb1086415dd531021348f178225e83",
+        "output": "sha256:2beef74c495c8b67f0b5f062828a108b03df3e38b625e7b263de353c64e437c5",
+        "invocation": "sha256:fe2e3001df24203de5d7e49d7dbef5295ad5c4f8f295ea0e505b5d8c79e83aa4",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+            "identity": "sha256:0f0b655fd93bfbc21318ea0c0882fefe384d2878b9cd59db03336f3c0f36c5bd"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 583,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7"
+                }
+              },
+              "logicalContext": "sha256:1e2efb9095974b63b3f0e524695172ca8c827ff459b815dff8c69e71457b9ddf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "52bbqqxEV2WQU1NNbZvWrMYV7gEssYKGwn1iATibGJeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                "after": "HUQf9FUnTYPRjF6WWB6C2JY7YYrLqxpfGKgcuogeomtB"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 428,
+            "identity": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986",
+                "output": []
+              }
+            ],
+            "gas": 436,
+            "identity": "sha256:889ade3c5ec453382881a30cb89e123020812910135ae67afec08dddbef661e5"
+          }
+        ]
+      },
+      "receipt": "sha256:4dc66bb6deda0effe45c65f5381841ab6ac7894f954e5d82c9aebcd5ad83232e"
+    },
+    {
+      "name": "declarations-static",
+      "budget": 10000000,
+      "source": {
+        "name": "Minimal initialization static",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:cfecbd80878c2b88b89bc755c96097cd28eb1086415dd531021348f178225e83",
+        "output": "sha256:2beef74c495c8b67f0b5f062828a108b03df3e38b625e7b263de353c64e437c5",
+        "invocation": "sha256:36ee95138e58a0068bda15f72185af753b651f11e982d9167593ed46c1ba044f",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+            "identity": "sha256:04c17de8c060267d5e1d14794fb250f41fa6804cf8f186b587a570099c2cc48d"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 583,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7"
+                }
+              },
+              "logicalContext": "sha256:1e2efb9095974b63b3f0e524695172ca8c827ff459b815dff8c69e71457b9ddf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "52bbqqxEV2WQU1NNbZvWrMYV7gEssYKGwn1iATibGJeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "8FdFDtWpe3fyzDpBP5SEXNRkTSET5PVrbGRDSFp1ZfQM",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                "after": "HUQf9FUnTYPRjF6WWB6C2JY7YYrLqxpfGKgcuogeomtB"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 428,
+            "identity": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "EfhaF9oipasCa3s6BLUWCaPJNLCQqasRrjfSqDzuypm7",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "CkuZpZH1cVhC6wKLs4UkMdYDgJ6UZZyJ6EjeaT5goWf8",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:e8fdd368a1d5a2a6346ea0e1a2fab0dcb7ca51046bc64b956074859712146986",
+                "output": []
+              }
+            ],
+            "gas": 436,
+            "identity": "sha256:889ade3c5ec453382881a30cb89e123020812910135ae67afec08dddbef661e5"
+          }
+        ]
+      },
+      "receipt": "sha256:dda6e3dfe7a3d71cf214846c8332e3fec6f6ab69ecdb067af426ffaff94035d3"
+    },
+    {
+      "name": "declarations-add",
+      "budget": 694,
+      "source": {
+        "name": "Minimal initialization add-channel",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "add",
+                    "path": "/contracts/new",
+                    "val": {
+                      "$literal": {
+                        "type": {
+                          "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+                        },
+                        "event": {
+                          "kind": "never"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:f2ad21aa63d76130afbefcadcc08c2511f43e8b5e0132e442fab7e7e97311a2e",
+        "output": "sha256:f2ad21aa63d76130afbefcadcc08c2511f43e8b5e0132e442fab7e7e97311a2e",
+        "invocation": "sha256:ffe16fc9e8252ee4a5c3b725b6466a2bbba1db1fa07307c86d53f79d5d125366",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+            "identity": "sha256:9e563831dec3d22da58b2292f2d329afaaf27dfbeea88f8b53274dda5b712035"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 694,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "validationProofReused",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:aafc8613252daceed362b12f34bec0f19eb17636e6bcdb7aafac32493789c69d"
+    },
+    {
+      "name": "declarations-add",
+      "budget": 695,
+      "source": {
+        "name": "Minimal initialization add-channel",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "add",
+                    "path": "/contracts/new",
+                    "val": {
+                      "$literal": {
+                        "type": {
+                          "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+                        },
+                        "event": {
+                          "kind": "never"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f2ad21aa63d76130afbefcadcc08c2511f43e8b5e0132e442fab7e7e97311a2e",
+        "output": "sha256:b326bd409ab51b405b2f5a6790879163d7a7b163c39e56ffc5258218c53640be",
+        "invocation": "sha256:19c3c902914dc248e35f184545274466c2fd5bf34e6e9bc439fe7118fdf625f0",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+            "identity": "sha256:cfd32320f0da182742ffd56cf5ed3cc2a28146c016cd430dd65edc53a0e7d8d4"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 695,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz"
+                }
+              },
+              "logicalContext": "sha256:c00912ba146859a969d742a62f7ccac53f53f4efef509fdc7f8afb41bf1a84cf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+              "channels": {
+                "new": {
+                  "generation": 1,
+                  "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                }
+              },
+              "channelSerials": {
+                "new": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "6CLEbi6bptcEoqxtAsqH7PvynKd6wuPv9ytUExt5qcgz",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+                  "call": null
+                },
+                "op": "add",
+                "path": "/contracts/new",
+                "before": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                "after": "BHWkAeZoRZdt1RUsfRpBAznuaUjzw1cM1L4eQyXfaZ9K"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 540,
+            "identity": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9",
+                "output": []
+              }
+            ],
+            "gas": 548,
+            "identity": "sha256:cc2c6e17211a6bc4759ec89868af9e4c783f2b66d4a83224bfd0a928aa4ee067"
+          }
+        ]
+      },
+      "receipt": "sha256:861e42e519a6233fc08fa2b20ded5f3c9fd6f4c94c34a808c0994fcad7369fea"
+    },
+    {
+      "name": "declarations-add",
+      "budget": 696,
+      "source": {
+        "name": "Minimal initialization add-channel",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "add",
+                    "path": "/contracts/new",
+                    "val": {
+                      "$literal": {
+                        "type": {
+                          "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+                        },
+                        "event": {
+                          "kind": "never"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f2ad21aa63d76130afbefcadcc08c2511f43e8b5e0132e442fab7e7e97311a2e",
+        "output": "sha256:b326bd409ab51b405b2f5a6790879163d7a7b163c39e56ffc5258218c53640be",
+        "invocation": "sha256:dffe7dbcc2a3054fb1af3664f1d86548c85739075376f9335a0e642b6cb11ce3",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+            "identity": "sha256:302edf1b13a20cdfd58e448ef8ce6355817de223ff486d998e1ee93733c19f9d"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 695,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz"
+                }
+              },
+              "logicalContext": "sha256:c00912ba146859a969d742a62f7ccac53f53f4efef509fdc7f8afb41bf1a84cf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+              "channels": {
+                "new": {
+                  "generation": 1,
+                  "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                }
+              },
+              "channelSerials": {
+                "new": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "6CLEbi6bptcEoqxtAsqH7PvynKd6wuPv9ytUExt5qcgz",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+                  "call": null
+                },
+                "op": "add",
+                "path": "/contracts/new",
+                "before": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                "after": "BHWkAeZoRZdt1RUsfRpBAznuaUjzw1cM1L4eQyXfaZ9K"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 540,
+            "identity": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9",
+                "output": []
+              }
+            ],
+            "gas": 548,
+            "identity": "sha256:cc2c6e17211a6bc4759ec89868af9e4c783f2b66d4a83224bfd0a928aa4ee067"
+          }
+        ]
+      },
+      "receipt": "sha256:7d3d035a5b3977cecc6b096a099a874afc8bea2633080a9dc0ad18f6a4f51497"
+    },
+    {
+      "name": "declarations-add",
+      "budget": 10000000,
+      "source": {
+        "name": "Minimal initialization add-channel",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            },
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "add",
+                    "path": "/contracts/new",
+                    "val": {
+                      "$literal": {
+                        "type": {
+                          "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+                        },
+                        "event": {
+                          "kind": "never"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f2ad21aa63d76130afbefcadcc08c2511f43e8b5e0132e442fab7e7e97311a2e",
+        "output": "sha256:b326bd409ab51b405b2f5a6790879163d7a7b163c39e56ffc5258218c53640be",
+        "invocation": "sha256:7fea6cfdf343416a99298679863d945bb6931b22f1d369b7e4442ba6ac775994",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+            "identity": "sha256:88ab966565e2525ad7c5c768cb8de0c03dfafa45d2b9b65bff7333bacd5d2562"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 695,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz"
+                }
+              },
+              "logicalContext": "sha256:c00912ba146859a969d742a62f7ccac53f53f4efef509fdc7f8afb41bf1a84cf"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+              "channels": {
+                "new": {
+                  "generation": 1,
+                  "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                }
+              },
+              "channelSerials": {
+                "new": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "6CLEbi6bptcEoqxtAsqH7PvynKd6wuPv9ytUExt5qcgz",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "9kVG5J2gjCruSr7r5bY8C1cJdEezjpwK4NsAk4F1bdwg",
+                  "call": null
+                },
+                "op": "add",
+                "path": "/contracts/new",
+                "before": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                "after": "BHWkAeZoRZdt1RUsfRpBAznuaUjzw1cM1L4eQyXfaZ9K"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 540,
+            "identity": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "7VLL46NcBhfQMqb9SJBR1puCEaH2kAd9zSYaspguPsaz",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "DttuwYTTpvK9B6aZkrzsF8oAJ6CcdEJhceXroN5MfdHL",
+                  "channels": {
+                    "new": {
+                      "generation": 1,
+                      "signature": "sha256:5240436a75790751afbee5d04bcceb74f6a204867e8b523824442f6ca496a0ce"
+                    }
+                  },
+                  "channelSerials": {
+                    "new": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:ae2143e1d204a4ba5bfc034ce18a1292ddcd61647ecdf85d19cd51558f6284f9",
+                "output": []
+              }
+            ],
+            "gas": 548,
+            "identity": "sha256:cc2c6e17211a6bc4759ec89868af9e4c783f2b66d4a83224bfd0a928aa4ee067"
+          }
+        ]
+      },
+      "receipt": "sha256:e434ac49144a640e020e9d0e48ed9c3194031556dd896fed34aca1ef0a033529"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 251,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "invocation": "sha256:d32392eb70ad3ee8ba4765681cb014a7035ab7f85f11b44098dacab74f2e8fc9",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:ab9ef134a0c22af2d2fc315586598f12b43df3996aa37ff5a74653874a8379c9"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 251,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "listItemRead",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:d096c15766c1131018401c723abade0747550ba206c860a67ec3a3ec647a3aac"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 253,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "invocation": "sha256:65b3b8e245aa7b47dd280c577b0f3d51170ac22f03b5bf00385322f3333d1725",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:72ad00b84dbc91715072a91f5a589dd2897fac11f81a958c0cd4f89515ed1dd0"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 253,
+        "rejected": {
+          "namespace": "bex",
+          "counter": "valueMember",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:46ae9bb47215223df8d42625070a94605d9b6a965e983bbf36b9e7f065bb7ed2"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 656,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "invocation": "sha256:79c704dc9fe0560a2f2948d24621b8ec24e0df5c0edd17c98ac528ca78725b02",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:f776b436ce511b2044bd461ccc6d992a164aef63bec223dd063d10b7a79d3dde"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 656,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "validationProofReused",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:931e6a52f5ef886076ea3b9b0660888c15baf8ca5cc5995f9342843acc9dfa71"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 657,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:7cb7d779df3a4d1dbe960542629a1c498b5fc4eb76dd3f8ff7eb76220420d9c0",
+        "invocation": "sha256:38ce37fc212768c7b82ee12808c824eae70ee1e791229d00917e89dd65455f31",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:fc57283f14483f6707af6540ce03b51b3f4d437e38f23211b2122c87096c217d"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 657,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM"
+                }
+              },
+              "logicalContext": "sha256:9db5e11a26c757ea5e4f5a7ec7ce473dd01bfefa391f8e34541ce47ee5c71e2a"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "CTFLYJ5D1zzRqJ4J5RdkELerT3LEVpEj26aSje2K9yi2",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/copied",
+                "before": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                "after": "34gkBF4T6FUZ5DEWEgCJ26XF3C7MdK5TpGuxwS1K72bw"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 500,
+            "identity": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775",
+                "output": []
+              }
+            ],
+            "gas": 510,
+            "identity": "sha256:953920c41f17b6e59dcfc1256e9fc643dd68f9a331c0b328d89c25b72e4f5d08"
+          }
+        ]
+      },
+      "receipt": "sha256:1e2acc19f7fee144885c854f78a432c1ec45d68d49f402a23ed1935745581491"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 658,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:7cb7d779df3a4d1dbe960542629a1c498b5fc4eb76dd3f8ff7eb76220420d9c0",
+        "invocation": "sha256:794024d84092312ebc4499e123f11f186166f16da3bc7824bcf18a48907b4705",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:470edf0a3c6a3245e7d87a870f69983c380478ca252a184ed79b1564d2660c74"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 657,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM"
+                }
+              },
+              "logicalContext": "sha256:9db5e11a26c757ea5e4f5a7ec7ce473dd01bfefa391f8e34541ce47ee5c71e2a"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "CTFLYJ5D1zzRqJ4J5RdkELerT3LEVpEj26aSje2K9yi2",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/copied",
+                "before": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                "after": "34gkBF4T6FUZ5DEWEgCJ26XF3C7MdK5TpGuxwS1K72bw"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 500,
+            "identity": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775",
+                "output": []
+              }
+            ],
+            "gas": 510,
+            "identity": "sha256:953920c41f17b6e59dcfc1256e9fc643dd68f9a331c0b328d89c25b72e4f5d08"
+          }
+        ]
+      },
+      "receipt": "sha256:edd9e0d7f732f94f4d2075da2ee2f2ac657c6013b6390cf5e62aa1f5b701d3d9"
+    },
+    {
+      "name": "lazy-list",
+      "budget": 10000000,
+      "source": {
+        "name": "Lazy overlay list concatenation",
+        "values": [
+          1,
+          2
+        ],
+        "copied": [],
+        "contracts": {
+          "init": {
+            "event": {
+              "type": {
+                "blueId": "AvmWtdRP6uRtTNWLfds7A9wcM33xa8zH6S2pi4sqMaXD"
+              }
+            },
+            "type": {
+              "blueId": "8hX7njQVDAaHcpNjwpNFVegsyrZVcmK3Rr7ybpHX6xPZ"
+            }
+          },
+          "setup": {
+            "type": {
+              "blueId": "4985juLfaMXkg3qqif3wTCF8M5pnirZ4QnU2wUeCQTYH"
+            },
+            "channel": "init",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "ECgYet3mHNqyQspivZqrMpy8o3ucmNhyP6oz4x2hwHQg"
+                },
+                "do": [
+                  {
+                    "$let": {
+                      "name": "copied",
+                      "expr": {
+                        "$listConcat": [
+                          {
+                            "$resultValue": "/values"
+                          },
+                          []
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/copied",
+                      "val": {
+                        "$var": "copied"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:f42efc28414200273e633b1d9b5dc11dfe376e01062737fa473975f0c807101f",
+        "output": "sha256:7cb7d779df3a4d1dbe960542629a1c498b5fc4eb76dd3f8ff7eb76220420d9c0",
+        "invocation": "sha256:0eb52a7332bf05e618e3b5a25fc24ffa0e2c9d6341809db54a2a5027ca12ec86",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+            "identity": "sha256:bdc30a78ff04d22442f2f80e673bf7ffa05b95f4155075350f46f016be68eed1"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 657,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM"
+                }
+              },
+              "logicalContext": "sha256:9db5e11a26c757ea5e4f5a7ec7ce473dd01bfefa391f8e34541ce47ee5c71e2a"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "CTFLYJ5D1zzRqJ4J5RdkELerT3LEVpEj26aSje2K9yi2",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "HHmaioh3traiqXMgV1cUTa9LrWuxx8LaSqTbenLG4WVt",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/copied",
+                "before": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                "after": "34gkBF4T6FUZ5DEWEgCJ26XF3C7MdK5TpGuxwS1K72bw"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 500,
+            "identity": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GEgpddswbuwhrTHbUXbVeRsNLDw6EgHexjAfdqNCcuYM",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "E313UtdZFNcnYr5NrzSny5EWjUPKCH1o9w99TXzJBvqH",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:46e6096d16a377c2e9f580c6103996e973840a6ed6accab872c1bf7f576c2775",
+                "output": []
+              }
+            ],
+            "gas": 510,
+            "identity": "sha256:953920c41f17b6e59dcfc1256e9fc643dd68f9a331c0b328d89c25b72e4f5d08"
+          }
+        ]
+      },
+      "receipt": "sha256:42efb6d257f98ef66c5057ca85ab4dbd293ed36958646caf94d33c50623186ad"
+    },
+    {
+      "name": "large-workflow",
+      "budget": 100000,
+      "source": {
+        "name": "Shared gas above 100k",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": "Lifecycle Event Channel",
+            "event": {
+              "type": "Document Processing Initiated"
+            }
+          },
+          "setup": {
+            "type": "Sequential Workflow",
+            "channel": "init",
+            "steps": [
+              {
+                "type": "Compute",
+                "do": [
+                  {
+                    "$let": {
+                      "name": "sum",
+                      "expr": 0
+                    }
+                  },
+                  {
+                    "$forEach": {
+                      "in": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                        64,
+                        65,
+                        66,
+                        67,
+                        68,
+                        69,
+                        70,
+                        71,
+                        72,
+                        73,
+                        74,
+                        75,
+                        76,
+                        77,
+                        78,
+                        79,
+                        80,
+                        81,
+                        82,
+                        83,
+                        84,
+                        85,
+                        86,
+                        87,
+                        88,
+                        89,
+                        90,
+                        91,
+                        92,
+                        93,
+                        94,
+                        95,
+                        96,
+                        97,
+                        98,
+                        99
+                      ],
+                      "item": "i",
+                      "do": [
+                        {
+                          "$forEach": {
+                            "in": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                              31,
+                              32,
+                              33,
+                              34,
+                              35,
+                              36,
+                              37,
+                              38,
+                              39,
+                              40,
+                              41,
+                              42,
+                              43,
+                              44,
+                              45,
+                              46,
+                              47,
+                              48,
+                              49,
+                              50,
+                              51,
+                              52,
+                              53,
+                              54,
+                              55,
+                              56,
+                              57,
+                              58,
+                              59,
+                              60,
+                              61,
+                              62,
+                              63,
+                              64,
+                              65,
+                              66,
+                              67,
+                              68,
+                              69,
+                              70,
+                              71,
+                              72,
+                              73,
+                              74,
+                              75,
+                              76,
+                              77,
+                              78,
+                              79,
+                              80,
+                              81,
+                              82,
+                              83,
+                              84,
+                              85,
+                              86,
+                              87,
+                              88,
+                              89,
+                              90,
+                              91,
+                              92,
+                              93,
+                              94,
+                              95,
+                              96,
+                              97,
+                              98,
+                              99,
+                              100,
+                              101,
+                              102,
+                              103,
+                              104,
+                              105,
+                              106,
+                              107,
+                              108,
+                              109,
+                              110,
+                              111,
+                              112,
+                              113,
+                              114,
+                              115,
+                              116,
+                              117,
+                              118,
+                              119,
+                              120,
+                              121,
+                              122,
+                              123,
+                              124,
+                              125,
+                              126,
+                              127,
+                              128,
+                              129,
+                              130,
+                              131,
+                              132,
+                              133,
+                              134,
+                              135,
+                              136,
+                              137,
+                              138,
+                              139,
+                              140,
+                              141,
+                              142,
+                              143,
+                              144,
+                              145,
+                              146,
+                              147,
+                              148,
+                              149,
+                              150,
+                              151,
+                              152,
+                              153,
+                              154,
+                              155,
+                              156,
+                              157,
+                              158,
+                              159,
+                              160,
+                              161,
+                              162,
+                              163,
+                              164,
+                              165,
+                              166,
+                              167,
+                              168,
+                              169,
+                              170,
+                              171,
+                              172,
+                              173,
+                              174,
+                              175,
+                              176,
+                              177,
+                              178,
+                              179,
+                              180,
+                              181,
+                              182,
+                              183,
+                              184,
+                              185,
+                              186,
+                              187,
+                              188,
+                              189,
+                              190,
+                              191,
+                              192,
+                              193,
+                              194,
+                              195,
+                              196,
+                              197,
+                              198,
+                              199
+                            ],
+                            "item": "j",
+                            "do": [
+                              {
+                                "$set": {
+                                  "name": "sum",
+                                  "expr": {
+                                    "$add": [
+                                      {
+                                        "$var": "sum"
+                                      },
+                                      1
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/count",
+                      "val": {
+                        "$var": "sum"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "output": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "invocation": "sha256:196bebd34130cc6e2dedd3021605914f51d276589063ad2513df5523860d5ee9",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+            "identity": "sha256:e80576ce922976c29f2c48cc2855a72c5d78ccea54e8c41a7b6f3d44b1ecbecb"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 100000,
+        "rejected": {
+          "namespace": "bex",
+          "counter": "statementBase",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:6b92b4dd18025374dfcd2cdd46244465767bd8d324e9c90fbcbb88b7f53393f0"
+    },
+    {
+      "name": "large-workflow",
+      "budget": 160997,
+      "source": {
+        "name": "Shared gas above 100k",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": "Lifecycle Event Channel",
+            "event": {
+              "type": "Document Processing Initiated"
+            }
+          },
+          "setup": {
+            "type": "Sequential Workflow",
+            "channel": "init",
+            "steps": [
+              {
+                "type": "Compute",
+                "do": [
+                  {
+                    "$let": {
+                      "name": "sum",
+                      "expr": 0
+                    }
+                  },
+                  {
+                    "$forEach": {
+                      "in": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                        64,
+                        65,
+                        66,
+                        67,
+                        68,
+                        69,
+                        70,
+                        71,
+                        72,
+                        73,
+                        74,
+                        75,
+                        76,
+                        77,
+                        78,
+                        79,
+                        80,
+                        81,
+                        82,
+                        83,
+                        84,
+                        85,
+                        86,
+                        87,
+                        88,
+                        89,
+                        90,
+                        91,
+                        92,
+                        93,
+                        94,
+                        95,
+                        96,
+                        97,
+                        98,
+                        99
+                      ],
+                      "item": "i",
+                      "do": [
+                        {
+                          "$forEach": {
+                            "in": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                              31,
+                              32,
+                              33,
+                              34,
+                              35,
+                              36,
+                              37,
+                              38,
+                              39,
+                              40,
+                              41,
+                              42,
+                              43,
+                              44,
+                              45,
+                              46,
+                              47,
+                              48,
+                              49,
+                              50,
+                              51,
+                              52,
+                              53,
+                              54,
+                              55,
+                              56,
+                              57,
+                              58,
+                              59,
+                              60,
+                              61,
+                              62,
+                              63,
+                              64,
+                              65,
+                              66,
+                              67,
+                              68,
+                              69,
+                              70,
+                              71,
+                              72,
+                              73,
+                              74,
+                              75,
+                              76,
+                              77,
+                              78,
+                              79,
+                              80,
+                              81,
+                              82,
+                              83,
+                              84,
+                              85,
+                              86,
+                              87,
+                              88,
+                              89,
+                              90,
+                              91,
+                              92,
+                              93,
+                              94,
+                              95,
+                              96,
+                              97,
+                              98,
+                              99,
+                              100,
+                              101,
+                              102,
+                              103,
+                              104,
+                              105,
+                              106,
+                              107,
+                              108,
+                              109,
+                              110,
+                              111,
+                              112,
+                              113,
+                              114,
+                              115,
+                              116,
+                              117,
+                              118,
+                              119,
+                              120,
+                              121,
+                              122,
+                              123,
+                              124,
+                              125,
+                              126,
+                              127,
+                              128,
+                              129,
+                              130,
+                              131,
+                              132,
+                              133,
+                              134,
+                              135,
+                              136,
+                              137,
+                              138,
+                              139,
+                              140,
+                              141,
+                              142,
+                              143,
+                              144,
+                              145,
+                              146,
+                              147,
+                              148,
+                              149,
+                              150,
+                              151,
+                              152,
+                              153,
+                              154,
+                              155,
+                              156,
+                              157,
+                              158,
+                              159,
+                              160,
+                              161,
+                              162,
+                              163,
+                              164,
+                              165,
+                              166,
+                              167,
+                              168,
+                              169,
+                              170,
+                              171,
+                              172,
+                              173,
+                              174,
+                              175,
+                              176,
+                              177,
+                              178,
+                              179,
+                              180,
+                              181,
+                              182,
+                              183,
+                              184,
+                              185,
+                              186,
+                              187,
+                              188,
+                              189,
+                              190,
+                              191,
+                              192,
+                              193,
+                              194,
+                              195,
+                              196,
+                              197,
+                              198,
+                              199
+                            ],
+                            "item": "j",
+                            "do": [
+                              {
+                                "$set": {
+                                  "name": "sum",
+                                  "expr": {
+                                    "$add": [
+                                      {
+                                        "$var": "sum"
+                                      },
+                                      1
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/count",
+                      "val": {
+                        "$var": "sum"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "output": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "invocation": "sha256:350f5e5efcf7dbc186cc815b2eef0c7802a0c0510f529bfc5b3eacb7a4ffabfc",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+            "identity": "sha256:23d235c3520709d7adaee29ae1457e66c7105052af862e6e853f5a2ffca249c3"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 160997,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "validationProofReused",
+          "units": 1,
+          "amount": 1,
+          "owner": "root",
+          "remaining": 0,
+          "cap": "SHARED",
+          "sharedRemaining": 0,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:d0874a4c8cee9d1bb1ca570fb7b7993a8dfbc2dd3b71a75da4ad18b7b9a160cf"
+    },
+    {
+      "name": "large-workflow",
+      "budget": 160998,
+      "source": {
+        "name": "Shared gas above 100k",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": "Lifecycle Event Channel",
+            "event": {
+              "type": "Document Processing Initiated"
+            }
+          },
+          "setup": {
+            "type": "Sequential Workflow",
+            "channel": "init",
+            "steps": [
+              {
+                "type": "Compute",
+                "do": [
+                  {
+                    "$let": {
+                      "name": "sum",
+                      "expr": 0
+                    }
+                  },
+                  {
+                    "$forEach": {
+                      "in": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                        64,
+                        65,
+                        66,
+                        67,
+                        68,
+                        69,
+                        70,
+                        71,
+                        72,
+                        73,
+                        74,
+                        75,
+                        76,
+                        77,
+                        78,
+                        79,
+                        80,
+                        81,
+                        82,
+                        83,
+                        84,
+                        85,
+                        86,
+                        87,
+                        88,
+                        89,
+                        90,
+                        91,
+                        92,
+                        93,
+                        94,
+                        95,
+                        96,
+                        97,
+                        98,
+                        99
+                      ],
+                      "item": "i",
+                      "do": [
+                        {
+                          "$forEach": {
+                            "in": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                              31,
+                              32,
+                              33,
+                              34,
+                              35,
+                              36,
+                              37,
+                              38,
+                              39,
+                              40,
+                              41,
+                              42,
+                              43,
+                              44,
+                              45,
+                              46,
+                              47,
+                              48,
+                              49,
+                              50,
+                              51,
+                              52,
+                              53,
+                              54,
+                              55,
+                              56,
+                              57,
+                              58,
+                              59,
+                              60,
+                              61,
+                              62,
+                              63,
+                              64,
+                              65,
+                              66,
+                              67,
+                              68,
+                              69,
+                              70,
+                              71,
+                              72,
+                              73,
+                              74,
+                              75,
+                              76,
+                              77,
+                              78,
+                              79,
+                              80,
+                              81,
+                              82,
+                              83,
+                              84,
+                              85,
+                              86,
+                              87,
+                              88,
+                              89,
+                              90,
+                              91,
+                              92,
+                              93,
+                              94,
+                              95,
+                              96,
+                              97,
+                              98,
+                              99,
+                              100,
+                              101,
+                              102,
+                              103,
+                              104,
+                              105,
+                              106,
+                              107,
+                              108,
+                              109,
+                              110,
+                              111,
+                              112,
+                              113,
+                              114,
+                              115,
+                              116,
+                              117,
+                              118,
+                              119,
+                              120,
+                              121,
+                              122,
+                              123,
+                              124,
+                              125,
+                              126,
+                              127,
+                              128,
+                              129,
+                              130,
+                              131,
+                              132,
+                              133,
+                              134,
+                              135,
+                              136,
+                              137,
+                              138,
+                              139,
+                              140,
+                              141,
+                              142,
+                              143,
+                              144,
+                              145,
+                              146,
+                              147,
+                              148,
+                              149,
+                              150,
+                              151,
+                              152,
+                              153,
+                              154,
+                              155,
+                              156,
+                              157,
+                              158,
+                              159,
+                              160,
+                              161,
+                              162,
+                              163,
+                              164,
+                              165,
+                              166,
+                              167,
+                              168,
+                              169,
+                              170,
+                              171,
+                              172,
+                              173,
+                              174,
+                              175,
+                              176,
+                              177,
+                              178,
+                              179,
+                              180,
+                              181,
+                              182,
+                              183,
+                              184,
+                              185,
+                              186,
+                              187,
+                              188,
+                              189,
+                              190,
+                              191,
+                              192,
+                              193,
+                              194,
+                              195,
+                              196,
+                              197,
+                              198,
+                              199
+                            ],
+                            "item": "j",
+                            "do": [
+                              {
+                                "$set": {
+                                  "name": "sum",
+                                  "expr": {
+                                    "$add": [
+                                      {
+                                        "$var": "sum"
+                                      },
+                                      1
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/count",
+                      "val": {
+                        "$var": "sum"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "output": "sha256:9552d8d33190b762574e0d9195c9ac8344ded56638ed97f61778ea67d3369671",
+        "invocation": "sha256:38a3e19e6e4f09e3206c7ba54d1bf1b3fd9795455592f762bc4e59b5f76f513b",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+            "identity": "sha256:4ab06e703d59e76f172b700c7df1f159a01763e05d3c37528479863065b75503"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 160998,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5"
+                }
+              },
+              "logicalContext": "sha256:7711c74baacff121834d829fd70dfd092d7915113beba1f731a216d5cd1f3520"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "EGnFdTofjgvaBJYt1hg78cze249kgzprSqksuxvFgeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                "after": "EzTT9kk9cdgj5WnromE1Ax7otqKqJPa7pjoRT2dbRWZT"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 160843,
+            "identity": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521",
+                "output": []
+              }
+            ],
+            "gas": 160851,
+            "identity": "sha256:eebb5321bfc669d151f3980faeaa5d8b3025d6fd33677cdc426ad7d4c4ec455f"
+          }
+        ]
+      },
+      "receipt": "sha256:98feda5ffe97b1cad9692545f400806d4739cdaf09e12e8420e8c470001f510d"
+    },
+    {
+      "name": "large-workflow",
+      "budget": 160999,
+      "source": {
+        "name": "Shared gas above 100k",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": "Lifecycle Event Channel",
+            "event": {
+              "type": "Document Processing Initiated"
+            }
+          },
+          "setup": {
+            "type": "Sequential Workflow",
+            "channel": "init",
+            "steps": [
+              {
+                "type": "Compute",
+                "do": [
+                  {
+                    "$let": {
+                      "name": "sum",
+                      "expr": 0
+                    }
+                  },
+                  {
+                    "$forEach": {
+                      "in": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                        64,
+                        65,
+                        66,
+                        67,
+                        68,
+                        69,
+                        70,
+                        71,
+                        72,
+                        73,
+                        74,
+                        75,
+                        76,
+                        77,
+                        78,
+                        79,
+                        80,
+                        81,
+                        82,
+                        83,
+                        84,
+                        85,
+                        86,
+                        87,
+                        88,
+                        89,
+                        90,
+                        91,
+                        92,
+                        93,
+                        94,
+                        95,
+                        96,
+                        97,
+                        98,
+                        99
+                      ],
+                      "item": "i",
+                      "do": [
+                        {
+                          "$forEach": {
+                            "in": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                              31,
+                              32,
+                              33,
+                              34,
+                              35,
+                              36,
+                              37,
+                              38,
+                              39,
+                              40,
+                              41,
+                              42,
+                              43,
+                              44,
+                              45,
+                              46,
+                              47,
+                              48,
+                              49,
+                              50,
+                              51,
+                              52,
+                              53,
+                              54,
+                              55,
+                              56,
+                              57,
+                              58,
+                              59,
+                              60,
+                              61,
+                              62,
+                              63,
+                              64,
+                              65,
+                              66,
+                              67,
+                              68,
+                              69,
+                              70,
+                              71,
+                              72,
+                              73,
+                              74,
+                              75,
+                              76,
+                              77,
+                              78,
+                              79,
+                              80,
+                              81,
+                              82,
+                              83,
+                              84,
+                              85,
+                              86,
+                              87,
+                              88,
+                              89,
+                              90,
+                              91,
+                              92,
+                              93,
+                              94,
+                              95,
+                              96,
+                              97,
+                              98,
+                              99,
+                              100,
+                              101,
+                              102,
+                              103,
+                              104,
+                              105,
+                              106,
+                              107,
+                              108,
+                              109,
+                              110,
+                              111,
+                              112,
+                              113,
+                              114,
+                              115,
+                              116,
+                              117,
+                              118,
+                              119,
+                              120,
+                              121,
+                              122,
+                              123,
+                              124,
+                              125,
+                              126,
+                              127,
+                              128,
+                              129,
+                              130,
+                              131,
+                              132,
+                              133,
+                              134,
+                              135,
+                              136,
+                              137,
+                              138,
+                              139,
+                              140,
+                              141,
+                              142,
+                              143,
+                              144,
+                              145,
+                              146,
+                              147,
+                              148,
+                              149,
+                              150,
+                              151,
+                              152,
+                              153,
+                              154,
+                              155,
+                              156,
+                              157,
+                              158,
+                              159,
+                              160,
+                              161,
+                              162,
+                              163,
+                              164,
+                              165,
+                              166,
+                              167,
+                              168,
+                              169,
+                              170,
+                              171,
+                              172,
+                              173,
+                              174,
+                              175,
+                              176,
+                              177,
+                              178,
+                              179,
+                              180,
+                              181,
+                              182,
+                              183,
+                              184,
+                              185,
+                              186,
+                              187,
+                              188,
+                              189,
+                              190,
+                              191,
+                              192,
+                              193,
+                              194,
+                              195,
+                              196,
+                              197,
+                              198,
+                              199
+                            ],
+                            "item": "j",
+                            "do": [
+                              {
+                                "$set": {
+                                  "name": "sum",
+                                  "expr": {
+                                    "$add": [
+                                      {
+                                        "$var": "sum"
+                                      },
+                                      1
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/count",
+                      "val": {
+                        "$var": "sum"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "output": "sha256:9552d8d33190b762574e0d9195c9ac8344ded56638ed97f61778ea67d3369671",
+        "invocation": "sha256:2eb4dc0400a5df68863fb710647a7db503b013f685d22baf1dbef3aaa29e020d",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+            "identity": "sha256:5d8652bedada679419ff34233d0dc23146791ed0259cf7bc4874125be78dcb8c"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 160998,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5"
+                }
+              },
+              "logicalContext": "sha256:7711c74baacff121834d829fd70dfd092d7915113beba1f731a216d5cd1f3520"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "EGnFdTofjgvaBJYt1hg78cze249kgzprSqksuxvFgeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                "after": "EzTT9kk9cdgj5WnromE1Ax7otqKqJPa7pjoRT2dbRWZT"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 160843,
+            "identity": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521",
+                "output": []
+              }
+            ],
+            "gas": 160851,
+            "identity": "sha256:eebb5321bfc669d151f3980faeaa5d8b3025d6fd33677cdc426ad7d4c4ec455f"
+          }
+        ]
+      },
+      "receipt": "sha256:6c0d2d7f414442a50773c52a1d48942876b2c982d56e5c38fc90bb3bc7f67c35"
+    },
+    {
+      "name": "large-workflow",
+      "budget": 10000000,
+      "source": {
+        "name": "Shared gas above 100k",
+        "count": 0,
+        "contracts": {
+          "init": {
+            "type": "Lifecycle Event Channel",
+            "event": {
+              "type": "Document Processing Initiated"
+            }
+          },
+          "setup": {
+            "type": "Sequential Workflow",
+            "channel": "init",
+            "steps": [
+              {
+                "type": "Compute",
+                "do": [
+                  {
+                    "$let": {
+                      "name": "sum",
+                      "expr": 0
+                    }
+                  },
+                  {
+                    "$forEach": {
+                      "in": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                        64,
+                        65,
+                        66,
+                        67,
+                        68,
+                        69,
+                        70,
+                        71,
+                        72,
+                        73,
+                        74,
+                        75,
+                        76,
+                        77,
+                        78,
+                        79,
+                        80,
+                        81,
+                        82,
+                        83,
+                        84,
+                        85,
+                        86,
+                        87,
+                        88,
+                        89,
+                        90,
+                        91,
+                        92,
+                        93,
+                        94,
+                        95,
+                        96,
+                        97,
+                        98,
+                        99
+                      ],
+                      "item": "i",
+                      "do": [
+                        {
+                          "$forEach": {
+                            "in": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8,
+                              9,
+                              10,
+                              11,
+                              12,
+                              13,
+                              14,
+                              15,
+                              16,
+                              17,
+                              18,
+                              19,
+                              20,
+                              21,
+                              22,
+                              23,
+                              24,
+                              25,
+                              26,
+                              27,
+                              28,
+                              29,
+                              30,
+                              31,
+                              32,
+                              33,
+                              34,
+                              35,
+                              36,
+                              37,
+                              38,
+                              39,
+                              40,
+                              41,
+                              42,
+                              43,
+                              44,
+                              45,
+                              46,
+                              47,
+                              48,
+                              49,
+                              50,
+                              51,
+                              52,
+                              53,
+                              54,
+                              55,
+                              56,
+                              57,
+                              58,
+                              59,
+                              60,
+                              61,
+                              62,
+                              63,
+                              64,
+                              65,
+                              66,
+                              67,
+                              68,
+                              69,
+                              70,
+                              71,
+                              72,
+                              73,
+                              74,
+                              75,
+                              76,
+                              77,
+                              78,
+                              79,
+                              80,
+                              81,
+                              82,
+                              83,
+                              84,
+                              85,
+                              86,
+                              87,
+                              88,
+                              89,
+                              90,
+                              91,
+                              92,
+                              93,
+                              94,
+                              95,
+                              96,
+                              97,
+                              98,
+                              99,
+                              100,
+                              101,
+                              102,
+                              103,
+                              104,
+                              105,
+                              106,
+                              107,
+                              108,
+                              109,
+                              110,
+                              111,
+                              112,
+                              113,
+                              114,
+                              115,
+                              116,
+                              117,
+                              118,
+                              119,
+                              120,
+                              121,
+                              122,
+                              123,
+                              124,
+                              125,
+                              126,
+                              127,
+                              128,
+                              129,
+                              130,
+                              131,
+                              132,
+                              133,
+                              134,
+                              135,
+                              136,
+                              137,
+                              138,
+                              139,
+                              140,
+                              141,
+                              142,
+                              143,
+                              144,
+                              145,
+                              146,
+                              147,
+                              148,
+                              149,
+                              150,
+                              151,
+                              152,
+                              153,
+                              154,
+                              155,
+                              156,
+                              157,
+                              158,
+                              159,
+                              160,
+                              161,
+                              162,
+                              163,
+                              164,
+                              165,
+                              166,
+                              167,
+                              168,
+                              169,
+                              170,
+                              171,
+                              172,
+                              173,
+                              174,
+                              175,
+                              176,
+                              177,
+                              178,
+                              179,
+                              180,
+                              181,
+                              182,
+                              183,
+                              184,
+                              185,
+                              186,
+                              187,
+                              188,
+                              189,
+                              190,
+                              191,
+                              192,
+                              193,
+                              194,
+                              195,
+                              196,
+                              197,
+                              198,
+                              199
+                            ],
+                            "item": "j",
+                            "do": [
+                              {
+                                "$set": {
+                                  "name": "sum",
+                                  "expr": {
+                                    "$add": [
+                                      {
+                                        "$var": "sum"
+                                      },
+                                      1
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$appendChange": {
+                      "op": "replace",
+                      "path": "/count",
+                      "val": {
+                        "$var": "sum"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:ea60b97346cec035c47a112dc7bdf018f36d606abc9b717cf03ed591ca373e48",
+        "output": "sha256:9552d8d33190b762574e0d9195c9ac8344ded56638ed97f61778ea67d3369671",
+        "invocation": "sha256:0e61398b1422e4e3df8131ce6aec1e6ce7dc1632799d92cf5675186c04c43432",
+        "publicEvents": [],
+        "events": [],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "init",
+            "kind": "INITIALIZATION",
+            "payload": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+            "identity": "sha256:fd992fd4326c7a70b914413d8ff61e8213e8991429ef181fb55aad28dfc29333"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 160998,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                    "channels": {},
+                    "channelSerials": {},
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "INITIALIZE"
+              },
+              "phase": "INITIALIZE",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [],
+              "lifecycle": {
+                "kind": "INITIALIZE",
+                "document": {
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5"
+                }
+              },
+              "logicalContext": "sha256:7711c74baacff121834d829fd70dfd092d7915113beba1f731a216d5cd1f3520"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+              "channels": {},
+              "channelSerials": {},
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "setup",
+                  "declaration": "EGnFdTofjgvaBJYt1hg78cze249kgzprSqksuxvFgeL",
+                  "channel": "init",
+                  "kind": "INITIALIZATION",
+                  "event": "EzpEcPpUQBPfzn7CpXvhDAmWiMQ63G9XWcgK5cLirsNH",
+                  "call": null
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                "after": "EzTT9kk9cdgj5WnromE1Ax7otqKqJPa7pjoRT2dbRWZT"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 160843,
+            "identity": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "81QzRwfhx6XBFYWNd7EYfG1QMrMQPjJ3TuJ5Rcj9ETR5",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "GmKHwXvgxgQo6HgcCHwnL5XjZceC8LLk1c9NcX7URZEV",
+                  "channels": {},
+                  "channelSerials": {},
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:f7d47bc0997a2736a7b9e503658f8a4e6c9ff0217d0d013b93ca1579db83a521",
+                "output": []
+              }
+            ],
+            "gas": 160851,
+            "identity": "sha256:eebb5321bfc669d151f3980faeaa5d8b3025d6fd33677cdc426ad7d4c4ec455f"
+          }
+        ]
+      },
+      "receipt": "sha256:d168c3bdc8fa4c72c90084ef40b151a64a7b9013ac397be74d36f92c679c6618"
+    },
+    {
+      "name": "published-counter",
+      "budget": 630,
+      "source": {
+        "name": "Counter",
+        "count": 0,
+        "contracts": {
+          "input": {
+            "type": {
+              "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+            }
+          },
+          "increment": {
+            "type": {
+              "blueId": "9ce56oc2N4S6C2SwTjWk54bTyV7fM6TGWka2WvpoAPKW"
+            },
+            "channel": "input",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": {
+                      "$add": [
+                        {
+                          "$document": "/count"
+                        },
+                        1
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "blueId": "6JTDdFF75Fs9sNkTtJ8Hw99QeykQcaFB1zQj8e4u45ab"
+                },
+                "event": {
+                  "count": {
+                    "$document": "/count"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event": {
+        "type": {
+          "blueId": "FvWU7m59sNtXkEtzPH9uroF9tWME7g4yz7pgkQcSrTMv"
+        },
+        "channel": "input",
+        "operation": "increment"
+      },
+      "timestamp": 1,
+      "observations": {
+        "status": "GAS_LIMIT_EXCEEDED",
+        "input": "sha256:722563e1bfa98a3659fcf7e9a98de2bc4b9d4b1ce6b8195f5c8a8a39bbc553f8",
+        "output": "sha256:722563e1bfa98a3659fcf7e9a98de2bc4b9d4b1ce6b8195f5c8a8a39bbc553f8",
+        "invocation": "sha256:12a410462a4be4244283d3fc6e3575d3605005eefa4112982862f886f9341468",
+        "publicEvents": [],
+        "events": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "input",
+            "kind": "EXTERNAL",
+            "payload": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+            "identity": "sha256:aa6dd7a6b47186227d990f471b5c9eb2484d9f1a65cbbfc09f4ede4e0e6cb53c"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [],
+        "gas": 629,
+        "rejected": {
+          "namespace": "contracts",
+          "counter": "rootEventRecorded",
+          "units": 1,
+          "amount": 2,
+          "owner": "root",
+          "remaining": 1,
+          "cap": "SHARED",
+          "sharedRemaining": 1,
+          "localRemaining": null
+        },
+        "diagnostic": {
+          "code": "GAS_LIMIT_EXCEEDED"
+        },
+        "completions": [],
+        "rounds": [],
+        "units": []
+      },
+      "receipt": "sha256:6b88459ea13ff7111f1821120a4cc5b30a662d8ec94d370185f7099cd736f071"
+    },
+    {
+      "name": "published-counter",
+      "budget": 631,
+      "source": {
+        "name": "Counter",
+        "count": 0,
+        "contracts": {
+          "input": {
+            "type": {
+              "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+            }
+          },
+          "increment": {
+            "type": {
+              "blueId": "9ce56oc2N4S6C2SwTjWk54bTyV7fM6TGWka2WvpoAPKW"
+            },
+            "channel": "input",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": {
+                      "$add": [
+                        {
+                          "$document": "/count"
+                        },
+                        1
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "blueId": "6JTDdFF75Fs9sNkTtJ8Hw99QeykQcaFB1zQj8e4u45ab"
+                },
+                "event": {
+                  "count": {
+                    "$document": "/count"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event": {
+        "type": {
+          "blueId": "FvWU7m59sNtXkEtzPH9uroF9tWME7g4yz7pgkQcSrTMv"
+        },
+        "channel": "input",
+        "operation": "increment"
+      },
+      "timestamp": 1,
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:722563e1bfa98a3659fcf7e9a98de2bc4b9d4b1ce6b8195f5c8a8a39bbc553f8",
+        "output": "sha256:507e6779c0fa93a3b24dd5da48c3f45650ce0b1758c2e5995d5718bf0c535f63",
+        "invocation": "sha256:e8f00c6d2f6e8d64b44ee12c4acd624481c09d2bc4b48f4aebe744ff8530a469",
+        "publicEvents": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "events": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "input",
+            "kind": "EXTERNAL",
+            "payload": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+            "identity": "sha256:41e701d2e581ff5b08b18848828997c0aa2781a340c6925c15a7f920b0bc5668"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [
+          {
+            "document": "root",
+            "channel": "input",
+            "before": null,
+            "after": {
+              "timestamp": 1,
+              "event": {
+                "blueId": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+              }
+            }
+          }
+        ],
+        "gas": 631,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                    "channels": {
+                      "input": {
+                        "generation": 1,
+                        "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                      }
+                    },
+                    "channelSerials": {
+                      "input": 1
+                    },
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "PROCESS",
+                "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                "timestamp": 1
+              },
+              "phase": "PROCESS",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [
+                {
+                  "document": "root",
+                  "channel": "input",
+                  "generation": 1,
+                  "operation": "increment"
+                }
+              ],
+              "lifecycle": {
+                "kind": "NONE"
+              },
+              "logicalContext": "sha256:25e293923c7c43a06067942520b6b3245583d9fc60fbd3eb50e38b3cbbc1c24c"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [
+              {
+                "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                "ordinal": 0,
+                "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+              }
+            ],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+              "channels": {
+                "input": {
+                  "generation": 1,
+                  "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                }
+              },
+              "channelSerials": {
+                "input": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [
+              {
+                "document": "root",
+                "channel": "input",
+                "generation": 1,
+                "operation": "increment"
+              }
+            ],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "increment",
+                  "declaration": "6zaJmGDUZfGEeaDGS8db2JhrJaGSGc1E3SxodYUQx1P1",
+                  "channel": "input",
+                  "kind": "EXTERNAL",
+                  "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                  "call": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                "after": "5LVmgiforWvypisqeEhtotW9gMd48k4DRjp8cALNqAfc"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 463,
+            "identity": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [],
+            "output": [],
+            "gas": 0,
+            "identity": "sha256:de5465aaca9e31662c91f5993e77f04fd1082637cb1b1468cd9d9f58f26c3d59"
+          },
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3",
+                "output": [
+                  {
+                    "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                    "ordinal": 0,
+                    "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                    "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+                  }
+                ]
+              }
+            ],
+            "gas": 471,
+            "identity": "sha256:c4153ce4302935ab1eb3582af1cb0f19fbec17b458024c8f773aff0cd9484e90"
+          }
+        ]
+      },
+      "receipt": "sha256:912b36fec7d120bf3ae416a819e11cdcde6726b0ace7887b878fbe3a3c5619da"
+    },
+    {
+      "name": "published-counter",
+      "budget": 632,
+      "source": {
+        "name": "Counter",
+        "count": 0,
+        "contracts": {
+          "input": {
+            "type": {
+              "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+            }
+          },
+          "increment": {
+            "type": {
+              "blueId": "9ce56oc2N4S6C2SwTjWk54bTyV7fM6TGWka2WvpoAPKW"
+            },
+            "channel": "input",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": {
+                      "$add": [
+                        {
+                          "$document": "/count"
+                        },
+                        1
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "blueId": "6JTDdFF75Fs9sNkTtJ8Hw99QeykQcaFB1zQj8e4u45ab"
+                },
+                "event": {
+                  "count": {
+                    "$document": "/count"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event": {
+        "type": {
+          "blueId": "FvWU7m59sNtXkEtzPH9uroF9tWME7g4yz7pgkQcSrTMv"
+        },
+        "channel": "input",
+        "operation": "increment"
+      },
+      "timestamp": 1,
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:722563e1bfa98a3659fcf7e9a98de2bc4b9d4b1ce6b8195f5c8a8a39bbc553f8",
+        "output": "sha256:507e6779c0fa93a3b24dd5da48c3f45650ce0b1758c2e5995d5718bf0c535f63",
+        "invocation": "sha256:e29c4b7a06a3f9180212db33b926aeb2f07ad592f74d7395eed304521e869306",
+        "publicEvents": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "events": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "input",
+            "kind": "EXTERNAL",
+            "payload": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+            "identity": "sha256:7878840303941e094a644733b13747d34473fa8e2417c334da78231086444002"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [
+          {
+            "document": "root",
+            "channel": "input",
+            "before": null,
+            "after": {
+              "timestamp": 1,
+              "event": {
+                "blueId": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+              }
+            }
+          }
+        ],
+        "gas": 631,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                    "channels": {
+                      "input": {
+                        "generation": 1,
+                        "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                      }
+                    },
+                    "channelSerials": {
+                      "input": 1
+                    },
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "PROCESS",
+                "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                "timestamp": 1
+              },
+              "phase": "PROCESS",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [
+                {
+                  "document": "root",
+                  "channel": "input",
+                  "generation": 1,
+                  "operation": "increment"
+                }
+              ],
+              "lifecycle": {
+                "kind": "NONE"
+              },
+              "logicalContext": "sha256:25e293923c7c43a06067942520b6b3245583d9fc60fbd3eb50e38b3cbbc1c24c"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [
+              {
+                "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                "ordinal": 0,
+                "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+              }
+            ],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+              "channels": {
+                "input": {
+                  "generation": 1,
+                  "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                }
+              },
+              "channelSerials": {
+                "input": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [
+              {
+                "document": "root",
+                "channel": "input",
+                "generation": 1,
+                "operation": "increment"
+              }
+            ],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "increment",
+                  "declaration": "6zaJmGDUZfGEeaDGS8db2JhrJaGSGc1E3SxodYUQx1P1",
+                  "channel": "input",
+                  "kind": "EXTERNAL",
+                  "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                  "call": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                "after": "5LVmgiforWvypisqeEhtotW9gMd48k4DRjp8cALNqAfc"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 463,
+            "identity": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [],
+            "output": [],
+            "gas": 0,
+            "identity": "sha256:de5465aaca9e31662c91f5993e77f04fd1082637cb1b1468cd9d9f58f26c3d59"
+          },
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3",
+                "output": [
+                  {
+                    "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                    "ordinal": 0,
+                    "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                    "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+                  }
+                ]
+              }
+            ],
+            "gas": 471,
+            "identity": "sha256:c4153ce4302935ab1eb3582af1cb0f19fbec17b458024c8f773aff0cd9484e90"
+          }
+        ]
+      },
+      "receipt": "sha256:74de72e3c07d55063842c7ff7c43a7e5f526a81e2f5858a8f6eebdea19df0381"
+    },
+    {
+      "name": "published-counter",
+      "budget": 10000000,
+      "source": {
+        "name": "Counter",
+        "count": 0,
+        "contracts": {
+          "input": {
+            "type": {
+              "blueId": "CP4itFXS5YAn7hAtc5pss7aRRbRt8PhdtfKiantg4rka"
+            }
+          },
+          "increment": {
+            "type": {
+              "blueId": "9ce56oc2N4S6C2SwTjWk54bTyV7fM6TGWka2WvpoAPKW"
+            },
+            "channel": "input",
+            "steps": [
+              {
+                "type": {
+                  "blueId": "2idGxSrgYbz1s4YoajtaU7pcEbXUoyuuDR54oodRphhH"
+                },
+                "changeset": [
+                  {
+                    "op": "replace",
+                    "path": "/count",
+                    "val": {
+                      "$add": [
+                        {
+                          "$document": "/count"
+                        },
+                        1
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": {
+                  "blueId": "6JTDdFF75Fs9sNkTtJ8Hw99QeykQcaFB1zQj8e4u45ab"
+                },
+                "event": {
+                  "count": {
+                    "$document": "/count"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event": {
+        "type": {
+          "blueId": "FvWU7m59sNtXkEtzPH9uroF9tWME7g4yz7pgkQcSrTMv"
+        },
+        "channel": "input",
+        "operation": "increment"
+      },
+      "timestamp": 1,
+      "observations": {
+        "status": "APPLIED",
+        "input": "sha256:722563e1bfa98a3659fcf7e9a98de2bc4b9d4b1ce6b8195f5c8a8a39bbc553f8",
+        "output": "sha256:507e6779c0fa93a3b24dd5da48c3f45650ce0b1758c2e5995d5718bf0c535f63",
+        "invocation": "sha256:c8517b36c307b68306610c273bebc3851032f80de9c3aa54e1dd7ecc9052ab51",
+        "publicEvents": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "events": [
+          {
+            "ordinal": 0,
+            "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53",
+            "document": "root",
+            "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+            "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+            "sourceOrdinal": 0
+          }
+        ],
+        "work": [
+          {
+            "ordinal": 0,
+            "document": "root",
+            "channel": "input",
+            "kind": "EXTERNAL",
+            "payload": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+            "identity": "sha256:853dd3bc2f22d9217e08aa989cb727484e206fdfd525543c3e56d6b979ad52b0"
+          }
+        ],
+        "changes": [],
+        "checkpoints": [
+          {
+            "document": "root",
+            "channel": "input",
+            "before": null,
+            "after": {
+              "timestamp": 1,
+              "event": {
+                "blueId": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+              }
+            }
+          }
+        ],
+        "gas": 631,
+        "rejected": null,
+        "diagnostic": null,
+        "completions": [
+          {
+            "turnInput": {
+              "member": "root",
+              "activation": 0,
+              "beforeView": {
+                "root": {
+                  "document": {
+                    "key": "root",
+                    "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                    "channels": {
+                      "input": {
+                        "generation": 1,
+                        "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                      }
+                    },
+                    "channelSerials": {
+                      "input": 1
+                    },
+                    "edgeSerials": {},
+                    "birth": null
+                  },
+                  "edges": []
+                }
+              },
+              "profile": "contracts-deterministic-gas-6",
+              "cause": {
+                "kind": "PROCESS",
+                "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                "timestamp": 1
+              },
+              "phase": "PROCESS",
+              "turnSerial": 0,
+              "dependencies": {},
+              "incoming": [],
+              "seeds": [
+                {
+                  "document": "root",
+                  "channel": "input",
+                  "generation": 1,
+                  "operation": "increment"
+                }
+              ],
+              "lifecycle": {
+                "kind": "NONE"
+              },
+              "logicalContext": "sha256:25e293923c7c43a06067942520b6b3245583d9fc60fbd3eb50e38b3cbbc1c24c"
+            },
+            "afterView": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "output": [
+              {
+                "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                "ordinal": 0,
+                "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+              }
+            ],
+            "memberMetadata": {
+              "key": "root",
+              "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+              "channels": {
+                "input": {
+                  "generation": 1,
+                  "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                }
+              },
+              "channelSerials": {
+                "input": 1
+              },
+              "edgeSerials": {},
+              "birth": null
+            },
+            "edgeChanges": [],
+            "consumedSeeds": [
+              {
+                "document": "root",
+                "channel": "input",
+                "generation": 1,
+                "operation": "increment"
+              }
+            ],
+            "writes": [
+              {
+                "writer": {
+                  "handler": "increment",
+                  "declaration": "6zaJmGDUZfGEeaDGS8db2JhrJaGSGc1E3SxodYUQx1P1",
+                  "channel": "input",
+                  "kind": "EXTERNAL",
+                  "event": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S",
+                  "call": "82JpXs33bQs6RNCkZW5jibUcLQfcXwFnBeRAqR2VtR4S"
+                },
+                "op": "replace",
+                "path": "/count",
+                "before": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                "after": "5LVmgiforWvypisqeEhtotW9gMd48k4DRjp8cALNqAfc"
+              }
+            ],
+            "retiredTickets": [],
+            "gas": 463,
+            "identity": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+          }
+        ],
+        "rounds": [],
+        "units": [
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [],
+            "output": [],
+            "gas": 0,
+            "identity": "sha256:de5465aaca9e31662c91f5993e77f04fd1082637cb1b1468cd9d9f58f26c3d59"
+          },
+          {
+            "members": [
+              "root"
+            ],
+            "beforeViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "6y8LZvmFV5jZQTuFgAK4CUUeGen2sHnbVoNR4FvpzzAJ",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "afterViews": {
+              "root": {
+                "document": {
+                  "key": "root",
+                  "blueId": "FVM5Sdyy2e9SLvBHdkkt6aMQzZNJehK5eLd6Udfjv8ey",
+                  "channels": {
+                    "input": {
+                      "generation": 1,
+                      "signature": "sha256:d92814df87875d27c19df2ee654e931201e75ef009ae06312f534f7d7c68871f"
+                    }
+                  },
+                  "channelSerials": {
+                    "input": 1
+                  },
+                  "edgeSerials": {},
+                  "birth": null
+                },
+                "edges": []
+              }
+            },
+            "turnResults": [
+              "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3"
+            ],
+            "output": [
+              {
+                "source": "root",
+                "completion": "sha256:26dbcc3274f698535b1035d5173b03fc115a0fe939ccdf4807c46ea205b414e3",
+                "output": [
+                  {
+                    "sourceTurn": "sha256:6575fbfa2ba1f4825192fa423a86b756a3185ef502d95acdfbc188d4160e76db",
+                    "ordinal": 0,
+                    "event": "C5eqecdDxuGcL1kvSyvePH5u6zeWuTetKUCZTYkhGkHv",
+                    "identity": "sha256:7ac045c7aca9698a6d99c7e58cd3e3e38b4877c5222388137d915af11236ca53"
+                  }
+                ]
+              }
+            ],
+            "gas": 471,
+            "identity": "sha256:c4153ce4302935ab1eb3582af1cb0f19fbec17b458024c8f773aff0cd9484e90"
+          }
+        ]
+      },
+      "receipt": "sha256:b3cffcdd20229d452df92a3d2b6d69e9ae0d6b58322fc736d7b805beef67e925"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "command": "mixed-qa-e25f0ba605db",
+  "document": "graph-fast-3ab1901ff375b64bc5e741450e33f99b84be689d022d6d10",
+  "imported": [
+    {
+      "timeline": "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+      "entry": "7qsqtThn1hGBxeqMUkJMddUzhQmWh2Cx21wdhe4kBAxB",
+      "completeBefore": 1794181939181000
+    },
+    {
+      "timeline": "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+      "entry": "8iy1VqK5JAymHrPnHbt7pBo7377E52rdxnL6BYxPWcgr",
+      "completeBefore": 1794181939181000
+    }
+  ],
+  "bootstrapMillis": 878.6834170000004,
+  "bootstrapThroughReplayMillis": 1439.2095830000003,
+  "historicalCount": 14,
+  "finalCount": 19,
+  "localOperation": {
+    "operation": "increment",
+    "document": "graph-fast-3ab1901ff375b64bc5e741450e33f99b84be689d022d6d10",
+    "entry": "57qgGSBBjJqdFQo9J2ZbULqp7gAEKYtBEurVFzGtLgzy",
+    "version": 4,
+    "restoreAdmissionExecutionMillis": 61.400462,
+    "lookupMillis": 454.6386249999994,
+    "submitMillis": 343.8561670000002,
+    "submitServerTiming": "app;dur=123.995",
+    "serverPerformance": {},
+    "observedWithLookupMillis": 1774.0786249999996,
+    "observedTotalMillis": 1319.4415829999998
+  },
+  "checks": [
+    "two signed historical external entries replayed",
+    "local operation waits for required external completeness",
+    "exact submitted entry has a committed APPLIED outcome",
+    "count is 14 after replay and 19 after local input"
+  ]
+}

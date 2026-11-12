@@ -1,0 +1,87 @@
+runtime: Blue/Local 1
+name: Agreement
+orders: {}
+initializedOrders: 0
+submittedOrders: 0
+rejectSubmissions: false
+contracts:
+  bex:
+    blueId: J13749eVM7Z6NgDhb6JY2d6RyyofijcdXDEiELkuj73f
+  capabilities: []
+  contract:
+    blueId: 9eAmCke6PnSwPp5YjUuLLYeXvCFh86JNEKmbTQaKY2s
+  coordination:
+    blueId: 47mAMfUrnx4Wz6EPMbMkvqtkPB8uBFCuozUZjwH7sGag
+  language:
+    blueId: B8qQWuqNEWwPdYHuaMdKBNEr8xpsB8KeJCa4M2EeTezq
+  type: Coordination/Execution
+  in: {type: Local/Operation Channel}
+  embedded:
+    type: Contracts/Process Embedded
+    collectionPaths: [/orders]
+  initialized:
+    type: Contracts/Embedded Node Channel
+    event: {kind: Order Initialized}
+  submitted:
+    type: Contracts/Embedded Node Channel
+    event: {kind: Order Submitted}
+  onInitialized:
+    type: Contracts/Sequential Workflow
+    channel: initialized
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: /initializedOrders
+              val: {$add: [{$document: /initializedOrders}, 1]}
+  onSubmitted:
+    type: Contracts/Sequential Workflow
+    channel: submitted
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: /submittedOrders
+              val: {$add: [{$document: /submittedOrders}, 1]}
+          - $failIf: {cond: {$document: /rejectSubmissions}, message: Parent rejected the submission}
+          - $appendEvent: {kind: Agreement Updated}
+  addOrder:
+    type: Contracts/Sequential Workflow Operation
+    channel: in
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $failIf:
+              cond: {$hasKey: {object: {$document: /orders}, key: {$binding: call/request/key}}}
+              message: Order already exists
+          - $appendChange:
+              op: add
+              path: {$pointerJoin: [orders, {$binding: call/request/key}]}
+              val: {$binding: call/request/order}
+  removeOrder:
+    type: Contracts/Sequential Workflow Operation
+    channel: in
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: remove
+              path: {$pointerJoin: [orders, {$binding: call/request/key}]}
+  exhaust:
+    type: Contracts/Sequential Workflow Operation
+    channel: in
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange: {op: replace, path: /submittedOrders, val: 999}
+          - $appendEvent: {kind: Again}
+  again: {type: Contracts/Triggered Event Channel, event: {kind: Again}}
+  repeat:
+    type: Contracts/Sequential Workflow
+    channel: again
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendEvent: {kind: Again}

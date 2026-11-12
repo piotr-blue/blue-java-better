@@ -1,0 +1,41 @@
+# How the Blue runtime executes an embedded document
+
+An Agreement can contain an Order whose Payment changes independently. When the Payment emits an event, the Order may run its own clause, then emit an event that the Agreement receives. The runtime establishes each containing document's new BlueId, the order of its events and the gas it used. The host supplies the original input and publishes the result. This boundary lets a local Java session and a durable service use the same authored clauses.
+
+| If you are changing… | Start here | What the component owns |
+|---|---|---|
+| A value's identity or the evidence needed to open it | [Language](../src/main/java/blue/Language.java) | Canonical values and content resolution. A BlueId identifies a value. A member key identifies an occurrence in the executing graph. |
+| A package or an operator | [PackageVerifier](../src/main/java/blue/PackageVerifier.java), [BexPlanCompiler](../src/main/java/blue/BexPlanCompiler.java), [BexMachine](../src/main/java/blue/BexMachine.java) | Package integrity, compiled programs, then per-invocation evaluation and effects. |
+| The result of an authored clause | [Contracts](../src/main/java/blue/Contracts.java), [ContractRun](../src/main/java/blue/ContractRun.java) | Public session and host interfaces, native channel admission, turns, lifecycle, gas and observations. |
+| Embedding order or a cycle | [ContractTopology](../src/main/java/blue/ContractTopology.java), [ContractComponents](../src/main/java/blue/ContractComponents.java), [ContractSchedule](../src/main/java/blue/ContractSchedule.java) | Physical edges, component partition and execution order, then the work ready in the current phase. |
+| Restoring a protected owner | [ContractLocalCheckpoint](../src/main/java/blue/ContractLocalCheckpoint.java) | Committed member metadata, embedding generations, exact references and preparation for the selected runtime environment. |
+| Applying a child completion to a parent | [ContractLocal](../src/main/java/blue/ContractLocal.java) | Generation and predecessor checks, source gas, event order and the parent's native result. |
+
+## What can be shared between executions
+
+A package loader verifies the publication and its dependency pins. A Language context mounts the package's exported names and their evidence. The name in authored YAML therefore resolves through the selected package. Two runtimes that select different definitions cannot silently treat their identically named types as interchangeable. A Language provider supplies content by identity. This allows durable hosts to fetch a referenced value when the operation actually opens it. [Package loading](PACKAGES.md) · [Language identity tests](../src/test/java/blue/LanguageIdentityTest.java)
+
+BEX compiles a program once and can share that immutable program across threads. Each evaluation owns its input, remaining gas and effects. Contracts decides when to apply those effects to a member. A patch first checks managed boundaries and protected state, then reconciles any change to the embedding graph. It emits Document Update events for generalization repairs before the requested update. Mutable continuations and tentative snapshots belong to the current attempt. A host can share immutable program and content caches across attempts and still discard the entire failed attempt. [BEX execution contract](../src/main/java/blue/Bex.java) · [Transaction and rollback rules](CANONICAL-TRANSACTIONS.md) · [Conformance tests](../src/test/java/blue/CanonicalBexConformanceTest.java)
+
+## Why scheduling uses strongly connected components
+
+A parent can observe a child's result. A cycle makes the members mutually dependent, so Contracts schedules them as a group. A single pass over members in map order could expose a different result after a restart. The topology computes components with two iterative graph traversals and orders the resulting acyclic graph children first. Where several components are ready, their canonical member-name sequences break the tie. The ordering compares Unicode scalar values. An explicit stack handles deep chains.
+
+A snapshot can share its physical topology with another snapshot whose member and edge structures have the same identity. The mutable phase still owns readiness, active lifecycle and gas. A topology cache hit therefore saves reconstruction while the invocation performs its own eligibility checks. The topology tests cover cycles, repeated edges, permuted input order, Unicode ties and speculative forks. [Implementation](../src/main/java/blue/ContractComponents.java) · [Ordering and isolation tests](../src/test/java/blue/ContractTopologyTest.java)
+
+## Why a checkpoint binds more than the owner's BlueId
+
+The same child value can occupy two paths. Removing and reattaching a child at the same path creates a new binding generation. The parent can adopt a completion only for the path, generation and prior child BlueId it held when that input was selected. The checkpoint also commits to runtime bindings and preparation. Local recovery verifies its identity and environment before installing those facts. Whole-graph recovery verifies the assembled members and edges, including legacy checkpoints that require ordinary edge validation. A host must control who can supply these checkpoints. The hash authenticates their contents relative to the trusted predecessor. [Checkpoint codec](../src/main/java/blue/ContractLocalCheckpoint.java) · [Recovery and tamper cases](../src/test/java/blue/LocalBindingRecoveryTest.java)
+
+## Following one Payment acknowledgement
+
+1. The host opens a thread-confined `Contracts.Execution` for a pinned predecessor and supplies the admitted original entry. The ordinary native channel rules select the receiving declarations.
+2. When advancing the Order, `ContractLocal` checks that each selected Payment path names the same cause and timestamp, generation and previous child BlueId. Multiple paths may carry the same completion. Distinct child completions require whole-graph execution to resolve their relative work.
+3. The runtime checks the child's entire gas allocation before charging it, imports its ordered events once and passes its output batches to the Order's native turn. The Order's clause determines the business effect. The Agreement can consume the Order's completion under the same rules.
+4. If a creating turn introduces one fresh child, the runtime can resolve its existing leaf references through the host's pinned live-member lookup. The same component owns the rules for projecting a fresh child from an already issued whole-graph result. It verifies that the child initialized and the shared leaves stayed unchanged. Ambiguous identity, stale bindings and unsupported graph changes require recovery of the full graph. The host publishes only a completed tentative result.
+
+[Child creation and completion](../src/main/java/blue/ContractBirth.java) · [Local execution and whole-graph comparisons](../src/test/java/blue/LocalOwnerExecutionTest.java) · [Gas rules](SEMANTIC-GAS.md)
+
+## Which invariant to verify
+
+A change to caching or persistence should preserve the result after a cold restore. A scheduling change should preserve document identity, status, gas by member and ordered observations when the same input is replayed in the ordinary engine. Receipt identities also include the execution boundary, so compare like boundaries for exact receipt equality. An optimization to physical reads must still charge whatever the selected gas schedule requires. The number of visited channels and the bytes required to encode a growing parent map measure different work. [Gas composition tests](../src/test/java/blue/GasCompositionTest.java) · [Validation and binding reuse](../src/test/java/blue/LocalBindingReuseTest.java) · [Test ownership](TESTING.md)

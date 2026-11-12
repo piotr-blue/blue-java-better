@@ -1,0 +1,764 @@
+{
+  "command": {
+    "commandId": "fd6b7f2b-d059-40e1-9b54-b0dcb42bdfc8",
+    "instance": "i-00c89c61b4977718f",
+    "table": "myos-better-20261105-documents",
+    "account": "owner-qa-6db39aac017b",
+    "digest": "f93667b72f0acc602738a02c01121ab0c34e76eae3c660ff4d057f106c6cb3bf",
+    "counts": [
+      10,
+      1000
+    ],
+    "cold": true,
+    "profileSummaries": true
+  },
+  "status": "Success",
+  "result": {
+    "account": "owner-qa-6db39aac017b",
+    "comparisonOracleDuringMeasurement": false,
+    "mutableSessionCaching": false,
+    "ownerStorageReopenedPerInput": true,
+    "results": [
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 235.92351,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 1008.316875,
+            "gas": 3866,
+            "gcMillis": 54,
+            "heapAfterBytes": 111959408,
+            "heapBeforeBytes": 89932784,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 125.870531,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 151.142398,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 833.197573,
+            "gas": 3866,
+            "gcMillis": 4,
+            "heapAfterBytes": 78324032,
+            "heapBeforeBytes": 78981160,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 116.987461,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 165.972555,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 791.359417,
+            "gas": 3866,
+            "gcMillis": 5,
+            "heapAfterBytes": 109800104,
+            "heapBeforeBytes": 110222336,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 113.001861,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 159.740156,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 770.48633,
+            "gas": 3866,
+            "gcMillis": 7,
+            "heapAfterBytes": 96194008,
+            "heapBeforeBytes": 89818536,
+            "orders": 10,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 97.726101,
+            "sample": 3
+          }
+        ],
+        "documents": 21,
+        "initialPrepareAdmissionMillis": 420.915875,
+        "initializationMillis": 1284.204217,
+        "orders": 10
+      },
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 1921.320326,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3443.942596,
+            "gas": 169287,
+            "gcMillis": 201,
+            "heapAfterBytes": 904993160,
+            "heapBeforeBytes": 644067648,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 942.826426,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 1970.563766,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3330.020649,
+            "gas": 169287,
+            "gcMillis": 483,
+            "heapAfterBytes": 178097176,
+            "heapBeforeBytes": 877395608,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 904.624975,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 1946.193112,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3063.480454,
+            "gas": 169287,
+            "gcMillis": 230,
+            "heapAfterBytes": 528037000,
+            "heapBeforeBytes": 407733704,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 984.170794,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 1865.89361,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 2877.564927,
+            "gas": 169287,
+            "gcMillis": 172,
+            "heapAfterBytes": 619977728,
+            "heapBeforeBytes": 502956488,
+            "orders": 1000,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 830.697421,
+            "sample": 3
+          }
+        ],
+        "documents": 2001,
+        "initialPrepareAdmissionMillis": 22544.833943,
+        "initializationMillis": 40553.534773,
+        "orders": 1000
+      }
+    ],
+    "store": "myos-better-20261105-documents",
+    "transportCachesDisabled": true
+  },
+  "io": [
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 109701802,
+        "commit.retryableFailures": 0,
+        "content.calls": 67,
+        "content.failures": 0,
+        "content.nanos": 252733336,
+        "contentAll.calls": 22,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 101411153,
+        "get.calls": 42,
+        "get.failures": 0,
+        "get.nanos": 143798949,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 95339310,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 0
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 106931059,
+        "commit.retryableFailures": 0,
+        "content.calls": 89,
+        "content.failures": 0,
+        "content.nanos": 278059056,
+        "contentAll.calls": 27,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 97534033,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 137099698,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 66821457,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 1
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 100868428,
+        "commit.retryableFailures": 0,
+        "content.calls": 113,
+        "content.failures": 0,
+        "content.nanos": 301859175,
+        "contentAll.calls": 27,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 87128841,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 105101197,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 68902825,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 2
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 99558636,
+        "commit.retryableFailures": 0,
+        "content.calls": 123,
+        "content.failures": 0,
+        "content.nanos": 307939391,
+        "contentAll.calls": 27,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 84913779,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 99730257,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 72679218,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 3
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 96109197,
+        "commit.retryableFailures": 0,
+        "content.calls": 445,
+        "content.failures": 0,
+        "content.nanos": 899246350,
+        "contentAll.calls": 70,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 429784008,
+        "get.calls": 42,
+        "get.failures": 0,
+        "get.nanos": 81334794,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 646904148,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 0
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 98056111,
+        "commit.retryableFailures": 0,
+        "content.calls": 466,
+        "content.failures": 0,
+        "content.nanos": 958584129,
+        "contentAll.calls": 86,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 573616634,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 77613203,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 118154423,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 1
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 95410590,
+        "commit.retryableFailures": 0,
+        "content.calls": 481,
+        "content.failures": 0,
+        "content.nanos": 980646478,
+        "contentAll.calls": 85,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 575373298,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 73681400,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 75775176,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 2
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 95342249,
+        "commit.retryableFailures": 0,
+        "content.calls": 487,
+        "content.failures": 0,
+        "content.nanos": 924603831,
+        "contentAll.calls": 86,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 538379646,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 71668133,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 98137580,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 3
+    }
+  ],
+  "profiles": [
+    {
+      "orders": 10,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 32,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 19
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 18
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 15
+          },
+          {
+            "method": "myos.better.MeasuredStore.measure",
+            "samples": 11
+          },
+          {
+            "method": "myos.better.DynamoStore.content",
+            "samples": 7
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 6
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 6
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.MeasuredStore.content",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.Repository$Blobs.get",
+            "samples": 6
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OrderedIndex.load",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerGraphs.prepare",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerGraphs.preparePages",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractAttempt.advanceLocal",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractBridge.certify",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractLanguage.strict",
+            "samples": 3
+          }
+        ],
+        "leaf": [
+          {
+            "method": "com.sun.crypto.provider.GHASH.processBlocks",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractModel.require",
+            "samples": 1
+          },
+          {
+            "method": "blue.ExactNode$Value.ordinary",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageCore.digestBase58",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageSemantics.effective",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.util.TextBuffer.contentsAsString",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.databind.util.internal.PrivateMaxEntriesMap.drainReadBuffer",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.StringLatin1.compareToCI",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.invoke.DirectMethodHandle.allocateInstance",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.invoke.LambdaForm$MH.0x000000001a48bc00.invoke",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.invoke.VarHandleByteArrayAsLongs$ArrayHandle.set",
+            "samples": 1
+          },
+          {
+            "method": "java.time.LocalTime.getLong",
+            "samples": 1
+          },
+          {
+            "method": "java.time.format.DateTimeFormatterBuilder$NumberPrinterParser.format",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.getNode",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.resize",
+            "samples": 1
+          },
+          {
+            "method": "java.util.ImmutableCollections$Set12$1.next",
+            "samples": 1
+          },
+          {
+            "method": "java.util.Map.forEach",
+            "samples": 1
+          },
+          {
+            "method": "java.util.zip.GZIPInputStream.createInflater",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.classfile.impl.AbstractInstruction$UnboundThrowInstruction.<init>",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.classfile.impl.AbstractPoolEntry$ClassEntryImpl.hashCode",
+            "samples": 1
+          }
+        ]
+      }
+    },
+    {
+      "orders": 1000,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 111,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 104
+          },
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 104
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 102
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 76
+          },
+          {
+            "method": "myos.better.OwnerGraphs.prepare",
+            "samples": 56
+          },
+          {
+            "method": "myos.better.OwnerGraphs.preparePages",
+            "samples": 56
+          },
+          {
+            "method": "myos.better.RadixIndex.load",
+            "samples": 43
+          },
+          {
+            "method": "myos.better.RadixIndex.get",
+            "samples": 33
+          },
+          {
+            "method": "blue.ContractStorage.export",
+            "samples": 32
+          },
+          {
+            "method": "blue.Contracts$Execution$State.checkpoint",
+            "samples": 32
+          },
+          {
+            "method": "blue.ContractLanguage.records",
+            "samples": 31
+          },
+          {
+            "method": "blue.LanguageOperations.records",
+            "samples": 31
+          },
+          {
+            "method": "myos.better.OwnerRecords.restore",
+            "samples": 23
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 20
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 20
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 20
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 20
+          },
+          {
+            "method": "blue.ContractProcessor.importSnapshot",
+            "samples": 19
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 19
+          },
+          {
+            "method": "blue.ContractStorage.restore",
+            "samples": 19
+          }
+        ],
+        "leaf": [
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._verifySharing",
+            "samples": 18
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2",
+            "samples": 5
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName",
+            "samples": 3
+          },
+          {
+            "method": "java.security.MessageDigest$Delegate.engineUpdate",
+            "samples": 3
+          },
+          {
+            "method": "java.util.HashMap.putVal",
+            "samples": 3
+          },
+          {
+            "method": "java.util.TreeMap.put",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractCanonical.write",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractPreparations.lambda$decode$1",
+            "samples": 2
+          },
+          {
+            "method": "blue.LanguageCodec.appendQuote",
+            "samples": 2
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._appendLongName",
+            "samples": 2
+          },
+          {
+            "method": "java.lang.AbstractStringBuilder.ensureCapacitySameCoder",
+            "samples": 2
+          },
+          {
+            "method": "java.util.HashMap.getNode",
+            "samples": 2
+          },
+          {
+            "method": "java.util.HashMap.hash",
+            "samples": 2
+          },
+          {
+            "method": "java.util.TreeMap.getFirstEntry",
+            "samples": 2
+          },
+          {
+            "method": "java.util.TreeMap.successor",
+            "samples": 2
+          },
+          {
+            "method": "myos.better.RadixIndex.getAll",
+            "samples": 2
+          },
+          {
+            "method": "myos.better.RadixIndex.load",
+            "samples": 2
+          },
+          {
+            "method": "software.amazon.awssdk.protocols.json.internal.marshall.JsonProtocolMarshaller.marshallPayloadField",
+            "samples": 2
+          },
+          {
+            "method": "software.amazon.awssdk.thirdparty.jackson.core.json.UTF8StreamJsonParser._finishString2",
+            "samples": 2
+          },
+          {
+            "method": "blue.BlueIdSyntax.digest",
+            "samples": 1
+          }
+        ]
+      }
+    }
+  ]
+}

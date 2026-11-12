@@ -1,0 +1,38 @@
+{
+  "blue-java-better": {
+    "test": {
+      "tests": 2500,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "myos-simplified": {
+    "test": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "clausesTest": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "scaleTest": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "myos-core-better": {
+    "test": {
+      "tests": 822,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}

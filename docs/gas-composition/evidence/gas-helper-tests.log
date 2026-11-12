@@ -1,0 +1,10 @@
+.....................{"phase": "installed", "peer": "i-peer", "artifact": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+...........{"phase": "qualification-host-created", "instance": "temporary"}
+{"phase": "qualification-host-terminated", "instance": "temporary"}
+..{"phase": "qualification-completed", "status": "Success"}
+.{"phase": "qualification-completed", "status": "Failed"}
+.............
+----------------------------------------------------------------------
+Ran 48 tests in 1.067s
+
+OK

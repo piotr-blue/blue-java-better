@@ -1,0 +1,169 @@
+{
+  "scope": "Changed source/build/helper files; full deployed runtime identified separately",
+  "files": [
+    {
+      "path": "blue-java-better/src/main/java/blue/BexGas.java",
+      "sha256": "be0fc5477b310c7139ad59119677dc619ed56229dab3ba45438ae9bbc2b435de"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractBindings.java",
+      "sha256": "8010263d9b4494ce3ea2480033a974b98feb71ad73feac21f6ce42094c52ff35"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractCompletions.java",
+      "sha256": "7101d2332c822443cafd5da190742fe38be7444052a83b5cf3188890f82531f1"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractGas.java",
+      "sha256": "cd506c7fc9925b74758ff75b8bf12251793227f67d1747b80ee208cfe66ffd20"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractGraph.java",
+      "sha256": "b07b1fd33b31ceeb98d160f02112b33a28935ba66360183ffb4f4cc901c244d1"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractModel.java",
+      "sha256": "39cf5f176075ebdccaac17d6cb3284f938e950d4f3c1e136aad161aed466c3ec"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractNative.java",
+      "sha256": "502db58bbb8c0ffaf944a9c632322783680517902228aeee36336fbe08a70cc9"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractPortable.java",
+      "sha256": "06bf2213ca83dca409a8c5d8a1bd84b033c05d349be78834cda8e5c1239a3080"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractProcessor.java",
+      "sha256": "82b27bedcd47d7c13bd01287afe1fda5f6730466f50f51a0877ee8111cd9f243"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractRun.java",
+      "sha256": "a73f08b1158581e864aada69c28ffeaf3053dd2941d6a101cce1b25024474e49"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractRunFork.java",
+      "sha256": "433f70ef69f4f7171f5529b9b164fa789c892dd0b182a543e2fa33cc6d06b622"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractStorage.java",
+      "sha256": "7c129873298bf206b3869dcf7198eab516eb05d2cd94b1c32eb7292c36952abf"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractWork.java",
+      "sha256": "982293eca6343e2be44b0e5a63f575dd94c2369474481cb12dd5ad8a6c212b26"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Contracts.java",
+      "sha256": "fbeaa4edb957e71a88aea49b9bd9f807ccadb7edd1ce1e6e7be65de201b4e707"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/GasSchedule.java",
+      "sha256": "117cab25e76795252b16e2f1047bffc066670048e10e19744ce93ed11a462696"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CompositionalGasTest.java",
+      "sha256": "48ee5c6e6d6ab02d59aa6ccb0061ea13ee46cd637e94c5e03e02de091a4699a1"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractRetainedCompositionTest.java",
+      "sha256": "272350e7b5d744a44c06972e48f0975c7dbb6300f2cc7e3caf7a9aa22e3f5262"
+    },
+    {
+      "path": "myos-core-better/build.gradle.kts",
+      "sha256": "ee43691e8a77033bb36dd7beccfc768d59c21d77b4b36e4080c426e525df1e27"
+    },
+    {
+      "path": "myos-core-better/scripts/deploy.py",
+      "sha256": "87e58e3e399a8bf9f216cc76703db5405f3aa3d518e0d09445bb6772a19fa406"
+    },
+    {
+      "path": "myos-core-better/scripts/qualify_owners.py",
+      "sha256": "edafce81958c49812cc9abce5b7ccaa48bd455c306c0755e2e58ed469f0ab5c0"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/CanonicalEmissions.java",
+      "sha256": "83683357059c7d35e00de153ca442fb8f30dedb234d7cd3cbb8363e7adc55d8d"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/CanonicalGraphs.java",
+      "sha256": "60315cfc165d3c7a094cc915121c6c85eac1956feeb3f2476985829ff2dc3438"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/CanonicalRuntime.java",
+      "sha256": "16a73c30cfcbb48e61f1b91e62001f0055c89c78f44d9217aeafe681fa4b1203"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/CanonicalSnapshots.java",
+      "sha256": "ff8945ada1e64af860b14c253d157211440b8277715c7911c7d74ce286542558"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/GraphDocuments.java",
+      "sha256": "53a7fe39880ecd93d6d2c90e3395a3503a715b654f8d75c766ee43b94c366a9e"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/OwnerGraphs.java",
+      "sha256": "858526591b7790a6a5370f0fc5efd20c608d366ed4780f7d40235f4429d62724"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/RuntimeConfiguration.java",
+      "sha256": "a64060232171e0562cb23185acad459a966c4bbe57fbf0f1f83ca9059cadc189"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/Server.java",
+      "sha256": "32fdc48cab4019b1ffb787b2b89b66bef99be162e6118554283ce4794dbbb9a6"
+    },
+    {
+      "path": "myos-core-better/src/main/java/myos/better/TimelineService.java",
+      "sha256": "876d33d8ad514bc31de104b7f39b41d6ac00ecdca86943b8c278f93a5aabfa36"
+    },
+    {
+      "path": "myos-core-better/src/qualification/java/myos/better/OwnerScaleProbe.java",
+      "sha256": "f9d329419e95c46ca3514ed4e1939641d0a9a0a9531afc91068e5549f31b5ba2"
+    },
+    {
+      "path": "myos-core-better/src/test/java/myos/better/OwnerGraphsTest.java",
+      "sha256": "290aec5824bff9462d31ab8594304b3378956abcb52cc9f200c9174ed2087bab"
+    },
+    {
+      "path": "myos-simplified/build.gradle.kts",
+      "sha256": "535ab28bd36dbcc1a765069e76bf382f97696474ca93a597e30e159f9c59f5ce"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Execution.java",
+      "sha256": "d74f4e7e30e2911b6b1c0eb82512b09eb0cb410a84cfe9adff85b6b5464d8a02"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/LocalRuntime.java",
+      "sha256": "e234e45d412c50c043a6673c4f62f0bfe8779b9e2832ea55460f33ddb2818ceb"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Main.java",
+      "sha256": "f30c83ff453813029e9797d6ecc9bac12efcf45075ab03c972c162f0d5c0a1c4"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Repository.java",
+      "sha256": "48dbf45a5e3859ecb33cadef1b595a6b950f711fe2444f55a71cb127a0c99887"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/OrderScale.java",
+      "sha256": "20d1de522cf0283a8837e454b2b13eb5dbbf055af7bcb3343d404e36b5c39801"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/GraphShapeParityTest.java",
+      "sha256": "8188eb5b076da7162ec47e1c7744884f91d0dd7143107aaff15f036ba270e927"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/LocalExecutionTest.java",
+      "sha256": "fe2d8a36ee557518fbf879c03f029ad01440edb3f08f23276615bfd58de74d3a"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/RejectedInputTest.java",
+      "sha256": "d5cf478beba01241788f22c93e14a9fcfba4a96c31b2f4bac5ae873325c1954b"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/RootedCompositionTest.java",
+      "sha256": "35dba587b3db6c1f467238179bba0bf990c762df4312d8e8ac8d94889f3e1863"
+    }
+  ]
+}

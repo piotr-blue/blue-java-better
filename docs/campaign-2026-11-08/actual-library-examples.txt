@@ -1,0 +1,44 @@
+Calculating task graph as no cached configuration is available for tasks: languageExample tutorialExample packageExample
+> Task :processResources UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :processDemoResources
+> Task :compileDemoJava FROM-CACHE
+> Task :demoClasses
+
+> Task :languageExample
+{"x":{"type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},"value":1}}
+{"values":[{"type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},"value":1},{"type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},"value":3}]}
+
+> Task :packageExample
+01. Pinned local archive: passed
+02. Classpath resource: passed
+03. Caller-owned stream: passed
+04. Prepared directory: passed
+05. Package metadata and documentation: passed
+06. Mount and read YAML: passed
+07. YAML, JSON and direct specialization share identity: passed
+08. Two packages, one definition: passed
+09. Inheritance across package imports: passed
+10. Local extension of a published type: passed
+11. Explicit import namespaces: passed
+12. Coexisting pinned versions: passed
+13. Arbitrary collapsed content: passed
+14. Three list edits, one canonical form: passed
+15. Cyclic evidence from a package: passed
+16. Immutable documents after loading: passed
+17. Bounded caching and pin failures: passed
+18. Real Contracts, BEX and Language declarations: passed
+States, identities and canonical forms: /Users/piotr/data/blue-java-better/build/reports/packages
+
+> Task :tutorialExample
+Tutorial: identity, references, missing-content retry, Point subtyping, invalid Point rejection,
+list canonical forms and copy-on-write all passed.
+List [1,3] BlueId: DWApZ5K9EUY4M3oW2d83kqpiDGAwYGP2WAxQayXvQqiw
+Canonical JSON: {"values":[{"type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},"value":1},{"type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},"value":3}]}
+Canonical counter: 0 -> 3 -> 2, with Counter Changed events.
+Results: /Users/piotr/data/blue-java-better/build/reports/tutorial
+
+BUILD SUCCESSFUL in 1s
+7 actionable tasks: 4 executed, 1 from cache, 2 up-to-date
+Configuration cache entry stored.

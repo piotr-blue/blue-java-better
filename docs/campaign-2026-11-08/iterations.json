@@ -1,0 +1,455 @@
+{
+  "startUtc": "2026-11-08T15:35:29Z",
+  "deadlineUtc": "2026-11-08T21:35:29Z",
+  "iteration": 37,
+  "stage": "All final checks complete; evidence and source audit",
+  "constraints": [
+    "No GitHub",
+    "No silent data migration",
+    "Exact document/gas/ordered-event parity before accepting optimizations",
+    "Separate local engine and AWS end-to-end timings",
+    "Reversible AWS deployment; preserve existing histories"
+  ],
+  "iterations": [
+    {
+      "iteration": 1,
+      "completedUtc": "2026-11-08T15:58:01.422025+00:00",
+      "decision": "KEEP canonical consolidation; REVERT inconsistent configuration cache experiment",
+      "gates": {
+        "libraryTests": 2448,
+        "localTests": 90,
+        "hostTests": 788,
+        "deploymentHelperTests": 39,
+        "originalJavaTransitions": 40
+      },
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 4
+      }
+    },
+    {
+      "iteration": 2,
+      "completedUtc": "2026-11-08T16:08:39.275135+00:00",
+      "decision": "KEEP absent field-count traversal fix and restarted benchmark; REVERT channel-lifetime memo",
+      "local1000MedianMs": 415.16,
+      "baseline1000MedianMs": 474.46,
+      "awsParityInputs": 8,
+      "aws128MedianMs": 692.257058,
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 3,
+      "completedUtc": "2026-11-08T16:30:08.170249+00:00",
+      "decision": "KEEP physical proof paging and lazy protocol resolver fix; no demonstrated latency gain",
+      "gates": {
+        "libraryTests": 2449,
+        "localTests": 92,
+        "hostTests": 791
+      },
+      "awsParityInputs": 8,
+      "aws1000": "OutOfMemoryError during publication at 1 GiB heap",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 4
+      }
+    },
+    {
+      "iteration": 4,
+      "decision": "bounded per-owner emissions and ordered proof inventories (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 5,
+      "decision": "remove disposable preparation and separate timed execution from replay (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 6,
+      "decision": "packed metadata, owned local copies and redundant head reads (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 7,
+      "decision": "lazy preparation experiments (rejected)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 8,
+      "decision": "bounded local topology and semantic fact lifetime (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 9,
+      "decision": "canonical encoding and SCC allocation (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 10,
+      "decision": "per-history preparation pages (rejected); dynamic growth qualification (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 11,
+      "decision": "exact target admission and packed immutable content (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 12,
+      "decision": "incremental local scheduler inputs and demand-driven AWS completeness (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 13,
+      "decision": "linear partition comparison and canonical API documentation (keep)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 14,
+      "decision": "compressed protected native preparation (rejected)",
+      "report": "blue-java-better/docs/CANONICAL-CAMPAIGN-2026-11-08.md",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 15,
+      "decision": "KEEP byte-bounded immutable indices",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 16,
+      "decision": "KEEP phase recording and stronger oracle",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 17,
+      "decision": "KEEP provider construction-charge boundary",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 18,
+      "decision": "KEEP installed package reuse",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 19,
+      "decision": "HOLD bounded protected preparations; stronger oracle found mismatch",
+      "ratings": {
+        "correctness": 6,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 20,
+      "decision": "KEEP nested exact views at BEX function argument boundary, pending full gates",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 21,
+      "decision": "KEEP bounded 100-page reads; 8 exact AWS receipts and fewer network batches",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 22,
+      "decision": "KEEP deferred retained-body verification with detached provider lifetime",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 23,
+      "decision": "KEEP immutable per-member preparations; cold medians 779/4376 ms",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 24,
+      "decision": "REJECT selective remote loader: large AWS latency regressed",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 25,
+      "decision": "KEEP corrected native restoration; REJECT selective remote host loading",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 26,
+      "decision": "KEEP parser scope and batched loader; cold AWS 772/4050 ms, exact parity",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 27,
+      "decision": "REJECT deferred source cursors: subscription changes need historical exclusion boundaries",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 28,
+      "decision": "REJECT disabling metadata field-name canonicalization; retain iteration 26",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 29,
+      "decision": "REJECT two concurrent read batches: improvement not established",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 30,
+      "decision": "KEEP remote fresh-frontier polling; AWS import and mixed replay pass",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 31,
+      "decision": "KEEP indexed lookup; repeated AWS latency qualification pending",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 32,
+      "decision": "KEEP invocation-local ownership index; full gates pass, AWS measurement pending",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 33,
+      "decision": "KEEP indexed adopted sources; full host gate and enumeration invariant pass",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 34,
+      "decision": "KEEP accurate timing labels and bounded full qualification output collection",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 35,
+      "decision": "QUALIFY exact root-completion timing; retain earlier condition-based measurements with explicit boundary",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 36,
+      "decision": "KEEP current-guide corrections, repeated local parity qualification and compact retained evidence",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    },
+    {
+      "iteration": 37,
+      "decision": "KEEP exact-version signing visibility retry: 812 host tests pass; deployment and mixed-source replay pass",
+      "ratings": {
+        "correctness": 7,
+        "compatibility": 6,
+        "clarity": 7,
+        "performance": 3,
+        "operations": 5
+      }
+    }
+  ],
+  "current": "Canonical runtime deployed and qualified on selected cases; requested flat graph-size latency remains unmet"
+}

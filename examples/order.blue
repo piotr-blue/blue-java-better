@@ -1,0 +1,38 @@
+runtime: Blue/Local 1
+name: Order
+ready: false
+submissions: 0
+contracts:
+  bex:
+    blueId: J13749eVM7Z6NgDhb6JY2d6RyyofijcdXDEiELkuj73f
+  capabilities: []
+  contract:
+    blueId: 9eAmCke6PnSwPp5YjUuLLYeXvCFh86JNEKmbTQaKY2s
+  coordination:
+    blueId: 47mAMfUrnx4Wz6EPMbMkvqtkPB8uBFCuozUZjwH7sGag
+  language:
+    blueId: B8qQWuqNEWwPdYHuaMdKBNEr8xpsB8KeJCa4M2EeTezq
+  type: Coordination/Execution
+  in:
+    type: Local/Operation Channel
+  lifecycle:
+    type: Contracts/Lifecycle Event Channel
+  initialize:
+    type: Contracts/Sequential Workflow
+    channel: lifecycle
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange: {op: replace, path: /ready, val: true}
+          - $appendEvent: {kind: Order Initialized}
+  submit:
+    type: Contracts/Sequential Workflow Operation
+    channel: in
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: /submissions
+              val: {$add: [{$document: /submissions}, 1]}
+          - $appendEvent: {kind: Order Submitted}

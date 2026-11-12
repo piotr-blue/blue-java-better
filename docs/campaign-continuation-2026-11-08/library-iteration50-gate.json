@@ -1,0 +1,8 @@
+{
+  "command": "./gradlew --offline --no-parallel format build",
+  "status": "PASS",
+  "tests": 2472,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

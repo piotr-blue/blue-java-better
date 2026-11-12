@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "command": "mixed-qa-aecaaee9ce69",
+  "document": "graph-fast-fb3779460b0eb875f31a92ea5a22935d7cc5e6635b363a3a",
+  "bootstrapMillis": 1022.9041250000001,
+  "historicalCount": 14,
+  "bootstrapThroughReplayMillis": 1591.06375,
+  "localOperation": {
+    "operation": "increment",
+    "document": "graph-fast-fb3779460b0eb875f31a92ea5a22935d7cc5e6635b363a3a",
+    "entry": "618tbLfCd4ZwytLca7KgRdmj8jWQdizPYTQjMWqL7iDu",
+    "version": 4,
+    "restoreAdmissionExecutionMillis": 56.956624,
+    "lookupMillis": 463.8067079999999,
+    "submitMillis": 351.95416699999885,
+    "submitServerTiming": "app;dur=128.488",
+    "serverPerformance": {},
+    "observedWithLookupMillis": 1805.8402499999993,
+    "observedTotalMillis": 1342.0356249999993
+  },
+  "finalCount": 19,
+  "checks": [
+    "two signed historical external entries replayed",
+    "local operation waits for required external completeness",
+    "exact submitted entry has a committed APPLIED outcome",
+    "count is 14 after replay and 19 after local input"
+  ]
+}

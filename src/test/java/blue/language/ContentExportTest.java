@@ -1,0 +1,126 @@
+package blue.language;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import blue.*;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+@Tag("language")
+class ContentExportTest {
+  @org.junit.jupiter.params.ParameterizedTest
+  @org.junit.jupiter.params.provider.ValueSource(
+      strings = {
+        "hello",
+        "type: Integer\nvalue: '123456789012345678901234567890'",
+        "type: Double\nvalue: 1.25",
+        "name: Record\nmessage: Hello\nletters: [A, B, C]",
+        "type: Dictionary\nvalueType: Integer\napples: 3\npears: 5",
+        "name: Schema\nfield: {type: Text}",
+        "type: List\nmergePolicy: append-only\nitems: [{$previousItems: false}, A, B]"
+      })
+  void admittedContentExportsAnIdentityPreservingCanonicalRepresentation(String source) {
+    Language language = Language.create();
+    LanguageDocument admitted = language.defineYaml(source);
+    String canonical = admitted.canonicalJson();
+    Language.Builder receiving = Language.newBuilder();
+    admitted.records().forEach(receiving::record);
+    LanguageDocument restored =
+        receiving.build().read(Language.Input.compactJson(canonical), Language.Goal.DEFINITION);
+    assertEquals(admitted.blueId(), restored.blueId());
+    assertEquals(canonical, restored.canonicalJson());
+  }
+
+  @Test
+  void incrementalExportDoesNotOpenAnAlreadyRetainedClosure() {
+    LanguageDocument previous = Language.create().readYaml("old: 7");
+    AtomicInteger fetches = new AtomicInteger();
+    Language sender =
+        Language.newBuilder()
+            .provider(
+                id -> {
+                  fetches.incrementAndGet();
+                  return Optional.empty();
+                })
+            .build();
+    LanguageContent next =
+        sender.prepare(
+            Language.Input.exactJson(
+                "{\"next\":{\"value\":1},\"previous\":{\"blueId\":\""
+                    + previous.blueId()
+                    + "\"}}"));
+    Map<BlueId, LanguageRecord> delta = next.records(previous.blueId()::equals);
+    assertEquals(0, fetches.get());
+    assertFalse(delta.containsKey(previous.blueId()));
+    assertTrue(delta.containsKey(next.blueId()));
+    Language.Builder receiving = Language.newBuilder();
+    previous.records().forEach(receiving::record);
+    delta.forEach((id, record) -> receiving.record(id, LanguageRecord.fromJson(record.toJson())));
+    assertEquals(7, receiving.build().read(next.blueId()).at("/previous/old").integer());
+    Language.Builder incomplete = Language.newBuilder();
+    delta.forEach(incomplete::record);
+    assertTrue(
+        assertThrows(LanguageException.class, () -> incomplete.build().read(next.blueId()))
+            .incomplete());
+    assertTrue(sender.reference(previous.blueId()).records(id -> true).isEmpty());
+  }
+
+  @Test
+  void inheritedAppendOnlyListsRoundTripWithOnlyNewRecords() {
+    LanguageDocument first =
+        Language.create()
+            .readYaml("type: List\nmergePolicy: append-only\nitems: [{$previousItems: false}, A]");
+    LanguageDocument second = first.specializeYaml("items: [{$previousItems: true}, B]");
+    Map<BlueId, LanguageRecord> retained = first.records();
+    Map<BlueId, LanguageRecord> delta = second.records(retained::containsKey);
+    assertTrue(delta.keySet().stream().noneMatch(retained::containsKey));
+    Language.Builder receiver = Language.newBuilder();
+    retained.forEach(receiver::record);
+    delta.forEach((id, record) -> receiver.record(id, LanguageRecord.fromJson(record.toJson())));
+    LanguageDocument restored =
+        receiver
+            .build()
+            .read(Language.Input.compactJson(second.canonicalJson()), Language.Goal.VALUE);
+    assertEquals(second.blueId(), restored.blueId());
+    assertEquals(second.canonicalJson(), restored.canonicalJson());
+    assertEquals("A", restored.at("/items/0").text());
+    assertEquals("B", restored.at("/items/1").text());
+  }
+
+  @Test
+  void cyclicProofsAndBodiesSurvivePortableRecordEnvelopes() {
+    Language.CyclicSet set =
+        Language.create()
+            .finalizeSet(
+                List.of(
+                    Language.Input.exactJson(
+                        "{\"name\":\"Loop\",\"self\":{\"blueId\":\"this#0\"}}")),
+                Language.Goal.VALUE);
+    LanguageDocument member = set.members().getFirst();
+    Language.Builder reader = Language.newBuilder();
+    member
+        .records()
+        .forEach((id, record) -> reader.record(id, LanguageRecord.fromJson(record.toJson())));
+    LanguageDocument restored = reader.build().read(member.blueId());
+    assertEquals(member.blueId(), restored.blueId());
+    assertTrue(restored.at("/self/self").exists());
+  }
+
+  @Test
+  void serializationNeverTurnsAnUnverifiedRecordIntoAuthority() {
+    BlueId expected = Language.create().readJson("1").blueId();
+    LanguageRecord wrong = LanguageRecord.fromJson(LanguageRecord.json("2").toJson());
+    Language reader = Language.newBuilder().record(expected, wrong).build();
+    assertEquals(
+        "ProviderBlueIdMismatch",
+        assertThrows(LanguageException.class, () -> reader.read(expected)).category());
+    assertThrows(
+        LanguageException.class,
+        () -> LanguageRecord.fromJson("{\"text\":\"1\",\"mode\":\"source\"}"));
+    assertThrows(
+        LanguageException.class,
+        () -> LanguageRecord.fromJson("{\"text\":\"1\",\"trusted\":true}"));
+  }
+}

@@ -1,0 +1,4 @@
+format: blue-local-package/1
+name: Examples
+exports:
+  Counter: counter.blue

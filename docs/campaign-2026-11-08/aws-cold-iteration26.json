@@ -1,0 +1,146 @@
+{
+  "account": "owner-qa-c11019b585d2",
+  "comparisonOracleDuringMeasurement": false,
+  "mutableSessionCaching": false,
+  "ownerStorageReopenedPerInput": true,
+  "results": [
+    {
+      "calls": [
+        {
+          "acquisitionMillis": 204.978822,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 945.670782,
+          "gas": 3866,
+          "gcMillis": 52,
+          "heapAfterBytes": 91313120,
+          "heapBeforeBytes": 81904832,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 134.147536,
+          "sample": 0
+        },
+        {
+          "acquisitionMillis": 147.554002,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 757.381814,
+          "gas": 3866,
+          "gcMillis": 4,
+          "heapAfterBytes": 92209896,
+          "heapBeforeBytes": 56991792,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 129.739808,
+          "sample": 1
+        },
+        {
+          "acquisitionMillis": 138.634315,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 772.347562,
+          "gas": 3866,
+          "gcMillis": 3,
+          "heapAfterBytes": 96682048,
+          "heapBeforeBytes": 59348896,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 117.195269,
+          "sample": 2
+        },
+        {
+          "acquisitionMillis": 135.609041,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 693.046678,
+          "gas": 3866,
+          "gcMillis": 6,
+          "heapAfterBytes": 115616856,
+          "heapBeforeBytes": 75082800,
+          "orders": 10,
+          "parity": true,
+          "profiled": true,
+          "rootExecutionMillis": 100.203088,
+          "sample": 3
+        }
+      ],
+      "documents": 21,
+      "initializationMillis": 1164.401014,
+      "nativeInitializationMillis": 352.888461,
+      "orders": 10
+    },
+    {
+      "calls": [
+        {
+          "acquisitionMillis": 1815.343148,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 4934.091424,
+          "gas": 169287,
+          "gcMillis": 818,
+          "heapAfterBytes": 373055512,
+          "heapBeforeBytes": 698536256,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 2594.42434,
+          "sample": 0
+        },
+        {
+          "acquisitionMillis": 1807.401826,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 4042.453229,
+          "gas": 169287,
+          "gcMillis": 451,
+          "heapAfterBytes": 657891440,
+          "heapBeforeBytes": 338505312,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 2653.199679,
+          "sample": 1
+        },
+        {
+          "acquisitionMillis": 1994.99758,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 4049.744732,
+          "gas": 169287,
+          "gcMillis": 445,
+          "heapAfterBytes": 751206456,
+          "heapBeforeBytes": 627914056,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootExecutionMillis": 2524.087602,
+          "sample": 2
+        },
+        {
+          "acquisitionMillis": 1845.412931,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 4275.088348,
+          "gas": 169287,
+          "gcMillis": 746,
+          "heapAfterBytes": 322967840,
+          "heapBeforeBytes": 726218688,
+          "orders": 1000,
+          "parity": true,
+          "profiled": true,
+          "rootExecutionMillis": 2773.03729,
+          "sample": 3
+        }
+      ],
+      "documents": 2001,
+      "initializationMillis": 38003.541956,
+      "nativeInitializationMillis": 20582.872782,
+      "orders": 1000
+    }
+  ],
+  "store": "myos-better-20261105-documents",
+  "transportCachesDisabled": true
+}

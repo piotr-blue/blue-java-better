@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "document": "graph-fast-89bf2fb08f00e387a29b16bf4ca7477801f2254e17cdd50f",
+  "bootstrapMillis": 2019.268375000001,
+  "imported": [
+    {
+      "timeline": "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+      "entry": "7qsqtThn1hGBxeqMUkJMddUzhQmWh2Cx21wdhe4kBAxB",
+      "completeBefore": 1794170111920000
+    },
+    {
+      "timeline": "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+      "entry": "8iy1VqK5JAymHrPnHbt7pBo7377E52rdxnL6BYxPWcgr",
+      "completeBefore": 1794170113994000
+    }
+  ],
+  "historicalCount": 14,
+  "bootstrapThroughReplayMillis": 2587.1831660000007,
+  "localOperation": {
+    "operation": "increment",
+    "document": "graph-fast-89bf2fb08f00e387a29b16bf4ca7477801f2254e17cdd50f",
+    "entry": "BfcPPYfGNFaJiphaU6GCkugA3VQ1GhpKDGuuv7y3G8Pk",
+    "version": 4,
+    "engineMillis": 121.600894,
+    "lookupMillis": 482.46983299999965,
+    "submitMillis": 397.92762499999947,
+    "submitServerTiming": "app;dur=181.568",
+    "serverPerformance": {},
+    "observedWithLookupMillis": 1900.9124169999989,
+    "observedTotalMillis": 1418.444375
+  },
+  "finalCount": 19,
+  "processing": {
+    "propagation": {
+      "closed": false,
+      "coverage": {
+        "before": 1794170119090000,
+        "local": true
+      },
+      "deferred": null,
+      "mode": "fast",
+      "owner": "graph-fast-89bf2fb08f00e387a29b16bf4ca7477801f2254e17cdd50f",
+      "position": 3,
+      "refreshNeeded": {},
+      "through": {
+        "timestamp": 1794170118924000,
+        "timeline": "XFhkNrPnazrVbVyPm1bzxncmxGGfQhoUFs2HoD9heGN",
+        "entry": "BfcPPYfGNFaJiphaU6GCkugA3VQ1GhpKDGuuv7y3G8Pk"
+      }
+    },
+    "timelines": {
+      "account": "user-ff574bbc4f2d73e74e19e8031d49fb899d773f622cb578c20af6b0e6507bea6a",
+      "addressHints": false,
+      "document": "graph-fast-89bf2fb08f00e387a29b16bf4ca7477801f2254e17cdd50f",
+      "inputSources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+        "XFhkNrPnazrVbVyPm1bzxncmxGGfQhoUFs2HoD9heGN"
+      ],
+      "kind": "receiver",
+      "observedSources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX"
+      ],
+      "queue": {
+        "again": 0,
+        "ordinary": 0,
+        "running": 0,
+        "urgent": 0
+      },
+      "reason": "No owner input",
+      "scope": "a2fbc899529768aaabf73a8138b6d0d3280fc2675864f39c20d1bf23986a9aa9",
+      "sources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "72YT5hCR9QdaL9MKY3FGHxUeqYS53f9GGeEAec1XZuXM",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+        "XFhkNrPnazrVbVyPm1bzxncmxGGfQhoUFs2HoD9heGN"
+      ],
+      "status": "IDLE",
+      "worker": {
+        "discovered": 1,
+        "discoveries": 351,
+        "drains": 6978,
+        "failed": 0,
+        "processed": 65,
+        "scope": "a2fbc899529768aaabf73a8138b6d0d3280fc2675864f39c20d1bf23986a9aa9",
+        "skipped": 0
+      }
+    }
+  },
+  "checks": [
+    "two signed historical external entries replayed",
+    "local operation waits for required external completeness",
+    "exact submitted entry has a committed APPLIED outcome",
+    "count is 14 after replay and 19 after local input"
+  ]
+}

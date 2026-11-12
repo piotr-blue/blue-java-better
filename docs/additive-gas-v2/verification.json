@@ -1,0 +1,1369 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "repository": "blue-java-better",
+      "task": "test",
+      "totals": {
+        "tests": 2528,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "blue.AdditiveBexTest",
+          "tests": "11",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.59"
+        },
+        {
+          "name": "blue.AdditiveCompositionTest",
+          "tests": "16",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "4.02"
+        },
+        {
+          "name": "blue.BexNumbersTest$ContractOrdering",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.BexNumbersTest$Conversion",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.02"
+        },
+        {
+          "name": "blue.BlueIdTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.052"
+        },
+        {
+          "name": "blue.CanonicalAgreementTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.282"
+        },
+        {
+          "name": "blue.CanonicalBexApiTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.01"
+        },
+        {
+          "name": "blue.CanonicalBexConformanceTest",
+          "tests": "191",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.077"
+        },
+        {
+          "name": "blue.CanonicalClausesTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.552"
+        },
+        {
+          "name": "blue.CanonicalCompatibilityTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.21"
+        },
+        {
+          "name": "blue.CanonicalConfigurationTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.143"
+        },
+        {
+          "name": "blue.CanonicalContractsConformanceTest",
+          "tests": "23",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.208"
+        },
+        {
+          "name": "blue.CanonicalEffectTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.015"
+        },
+        {
+          "name": "blue.CanonicalEncodingTest",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.011"
+        },
+        {
+          "name": "blue.CanonicalInputEvidenceTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.084"
+        },
+        {
+          "name": "blue.CanonicalPortableTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.404"
+        },
+        {
+          "name": "blue.CanonicalReuseTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.064"
+        },
+        {
+          "name": "blue.CanonicalTransactionTest$Equivalence",
+          "tests": "11",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.512"
+        },
+        {
+          "name": "blue.CanonicalTransactionTest$Publication",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.058"
+        },
+        {
+          "name": "blue.CompositionalGasTest",
+          "tests": "15",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "3.312"
+        },
+        {
+          "name": "blue.ContractArchiveTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.004"
+        },
+        {
+          "name": "blue.ContractCalculationReuseTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "41.153"
+        },
+        {
+          "name": "blue.ContractCompactionTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.063"
+        },
+        {
+          "name": "blue.ContractContentScopeTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.149"
+        },
+        {
+          "name": "blue.ContractDeclarationReuseTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.ContractDeclarationTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.002"
+        },
+        {
+          "name": "blue.ContractDefinitionWorkTest$Accounting",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.019"
+        },
+        {
+          "name": "blue.ContractDefinitionWorkTest$Locality",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.002"
+        },
+        {
+          "name": "blue.ContractEvidenceTest",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.013"
+        },
+        {
+          "name": "blue.ContractExecutionTest",
+          "tests": "10",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.081"
+        },
+        {
+          "name": "blue.ContractFinalizationReuseTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.002"
+        },
+        {
+          "name": "blue.ContractIdentityMapTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.073"
+        },
+        {
+          "name": "blue.ContractIdentityTest$CyclicConstruction",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.ContractIdentityTest$OrdinaryConstruction",
+          "tests": "10",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.ContractInitializationTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.052"
+        },
+        {
+          "name": "blue.ContractIntegerTest",
+          "tests": "13",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.ContractInventoryTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.ContractLanguageSnapshotTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.124"
+        },
+        {
+          "name": "blue.ContractManagedBoundaryTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.021"
+        },
+        {
+          "name": "blue.ContractMemberRecoveryTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.084"
+        },
+        {
+          "name": "blue.ContractPreparationDeltaTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "2.671"
+        },
+        {
+          "name": "blue.ContractPreparationTest",
+          "tests": "16",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.278"
+        },
+        {
+          "name": "blue.ContractProgramsTest",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.017"
+        },
+        {
+          "name": "blue.ContractRetainedCompositionTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.154"
+        },
+        {
+          "name": "blue.ContractSnapshotCommitmentTest",
+          "tests": "32",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.045"
+        },
+        {
+          "name": "blue.ContractSnapshotDeltaTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.013"
+        },
+        {
+          "name": "blue.ContractSnapshotExportTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.073"
+        },
+        {
+          "name": "blue.ContractSnapshotSharingTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.015"
+        },
+        {
+          "name": "blue.ContractStructuralReuseTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.162"
+        },
+        {
+          "name": "blue.ContractTopologyTest",
+          "tests": "12",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.014"
+        },
+        {
+          "name": "blue.ContractUnicodeOrderTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.048"
+        },
+        {
+          "name": "blue.ContractViewTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.ContractWitnessesTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.IncrementalDocumentsTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "2.115"
+        },
+        {
+          "name": "blue.LanguageConcretenessTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.008"
+        },
+        {
+          "name": "blue.LanguageConfigurationTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.LanguageConformanceTest",
+          "tests": "1460",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.176"
+        },
+        {
+          "name": "blue.LanguageEncodingTest",
+          "tests": "16",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.045"
+        },
+        {
+          "name": "blue.LanguageFactSnapshotTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.LanguageIdentityTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.026"
+        },
+        {
+          "name": "blue.LanguageKeyTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.007"
+        },
+        {
+          "name": "blue.LanguageMapTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.LanguageNormalizationTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.LanguageRecipeTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.LanguageSchemaTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.LanguageSetTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.023"
+        },
+        {
+          "name": "blue.LanguageTrieTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.061"
+        },
+        {
+          "name": "blue.LanguageValidationTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.MeteredTextTest",
+          "tests": "20",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.NativeAdmissionOwnershipTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.463"
+        },
+        {
+          "name": "blue.NativeAdmissionReplayTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.168"
+        },
+        {
+          "name": "blue.NodeTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.356"
+        },
+        {
+          "name": "blue.PackageIntegrityTest",
+          "tests": "13",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.005"
+        },
+        {
+          "name": "blue.ProviderSignaturesTest",
+          "tests": "26",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.18"
+        },
+        {
+          "name": "blue.TimelineChannelBindingTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.105"
+        },
+        {
+          "name": "blue.TimelineValidationReuseTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.115"
+        },
+        {
+          "name": "blue.TopologyMapTest",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.007"
+        },
+        {
+          "name": "blue.contracts.InspectionTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.contracts.NativeAdmissionTest",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.073"
+        },
+        {
+          "name": "blue.contracts.NativeChannelTest",
+          "tests": "12",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.083"
+        },
+        {
+          "name": "blue.contracts.NativeStepTest",
+          "tests": "11",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.065"
+        },
+        {
+          "name": "blue.contracts.OperationRequestTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.01"
+        },
+        {
+          "name": "blue.contracts.ProjectionLimitsTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.01"
+        },
+        {
+          "name": "blue.contracts.ProjectionTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.007"
+        },
+        {
+          "name": "blue.contracts.ReadBudgetTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.059"
+        },
+        {
+          "name": "blue.coordination.TimelineAccessTest$Confirmation",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.046"
+        },
+        {
+          "name": "blue.coordination.TimelineAccessTest$ExecutedReplacements",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.807"
+        },
+        {
+          "name": "blue.coordination.TimelineAccessTest$IntegrityAndAtomicity",
+          "tests": "11",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.133"
+        },
+        {
+          "name": "blue.coordination.TimelineAccessTest$ProviderPreparation",
+          "tests": "9",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.207"
+        },
+        {
+          "name": "blue.coordination.TimelineChannelsTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.14"
+        },
+        {
+          "name": "blue.coordination.TimelinePublisherTest$ProtectedRecovery",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.01"
+        },
+        {
+          "name": "blue.coordination.TimelinePublisherTest$SourceOrder",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.coordination.TimelinePublisherTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.097"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$AcceptedEntries",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.143"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$CheckpointAndFailureClaims",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.042"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$CompletedRangeReuse",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.03"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$DiscoveryAndRequests",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.043"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$PaginationContinuity",
+          "tests": "9",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "2.892"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$ReferencedContent",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.018"
+        },
+        {
+          "name": "blue.coordination.TimelineReaderTest$WireAndSelectedContent",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.022"
+        },
+        {
+          "name": "blue.coordination.TimelineRequestsTest$EntryRequests",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.094"
+        },
+        {
+          "name": "blue.coordination.TimelineRequestsTest$Grammar",
+          "tests": "9",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.007"
+        },
+        {
+          "name": "blue.coordination.TimelineRequestsTest$ReaderAuthentication",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.023"
+        },
+        {
+          "name": "blue.coordination.TimelineRequestsTest$TargetAndValues",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.004"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$DocumentExecution",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.153"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$IntegrityBoundaries",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.036"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$Locality",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.118"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$OperationTargets",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.028"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$OriginalContent",
+          "tests": "10",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.039"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$PrefixAdvancement",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.025"
+        },
+        {
+          "name": "blue.coordination.TimelineVerifierTest$ProtectedRecovery",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.052"
+        },
+        {
+          "name": "blue.examples.PackageExamplesTest",
+          "tests": "18",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.113"
+        },
+        {
+          "name": "blue.examples.TutorialExportTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.015"
+        },
+        {
+          "name": "blue.examples.TutorialScenariosTest",
+          "tests": "9",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.language.AdmissionEvidenceTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.language.CheckpointTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.008"
+        },
+        {
+          "name": "blue.language.ContentExportTest",
+          "tests": "11",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.005"
+        },
+        {
+          "name": "blue.language.ContentGraphTest",
+          "tests": "10",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.005"
+        },
+        {
+          "name": "blue.language.DocumentEditingTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.002"
+        },
+        {
+          "name": "blue.language.InheritanceTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.006"
+        },
+        {
+          "name": "blue.language.LanguageConcurrencyTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.003"
+        },
+        {
+          "name": "blue.language.LanguageIngressTest",
+          "tests": "12",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.008"
+        },
+        {
+          "name": "blue.language.LanguageLimitsTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.language.ListIdentityTest",
+          "tests": "16",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.008"
+        },
+        {
+          "name": "blue.language.ListSemanticsTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.005"
+        },
+        {
+          "name": "blue.language.ProviderTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.001"
+        },
+        {
+          "name": "blue.language.TypeBindingsTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.0"
+        },
+        {
+          "name": "blue.packages.PackageArchiveTest",
+          "tests": "25",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.08"
+        },
+        {
+          "name": "blue.packages.PackageCacheTest",
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.025"
+        },
+        {
+          "name": "blue.packages.PackageEvidenceTest",
+          "tests": "15",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.061"
+        },
+        {
+          "name": "blue.packages.PackageGraphTest",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.031"
+        },
+        {
+          "name": "blue.packages.PackageLoadingTest",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.11"
+        },
+        {
+          "name": "blue.packages.PackageMountTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.015"
+        },
+        {
+          "name": "blue.packages.PublishedPackageTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.07"
+        }
+      ]
+    },
+    {
+      "repository": "myos-simplified",
+      "task": "test",
+      "totals": {
+        "tests": 84,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "myos.local.AdditivePolicyTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "1.517"
+        },
+        {
+          "name": "myos.local.BacklogReconciliationTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.059"
+        },
+        {
+          "name": "myos.local.CanonicalEvidenceTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.07"
+        },
+        {
+          "name": "myos.local.ChannelActivationOrderTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.311"
+        },
+        {
+          "name": "myos.local.CompositionBoundaryTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.054"
+        },
+        {
+          "name": "myos.local.CoverageTreeTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "3.388"
+        },
+        {
+          "name": "myos.local.CrashRecoveryTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "2.603"
+        },
+        {
+          "name": "myos.local.EventInspectionTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.148"
+        },
+        {
+          "name": "myos.local.ExternalTimelinesTest$DurablePublication",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.139"
+        },
+        {
+          "name": "myos.local.ExternalTimelinesTest$Verification",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.099"
+        },
+        {
+          "name": "myos.local.ExternalTimelinesTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.095"
+        },
+        {
+          "name": "myos.local.GraphShapeParityTest",
+          "tests": "12",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "17.343"
+        },
+        {
+          "name": "myos.local.HistoricalBoundaryTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.128"
+        },
+        {
+          "name": "myos.local.HttpApiTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.202"
+        },
+        {
+          "name": "myos.local.LocalExecutionTest",
+          "tests": "7",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.296"
+        },
+        {
+          "name": "myos.local.MixedEmbeddingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.097"
+        },
+        {
+          "name": "myos.local.MixedTimelineProcessingTest",
+          "tests": "6",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.6"
+        },
+        {
+          "name": "myos.local.NativeReceivingTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.025"
+        },
+        {
+          "name": "myos.local.OrderingParityTest",
+          "tests": "8",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.807"
+        },
+        {
+          "name": "myos.local.OwnerConcurrencyTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.381"
+        },
+        {
+          "name": "myos.local.ProcessingEvidenceTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.054"
+        },
+        {
+          "name": "myos.local.RejectedInputTest",
+          "tests": "4",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.272"
+        },
+        {
+          "name": "myos.local.RetainedCompositionTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.367"
+        },
+        {
+          "name": "myos.local.RootedCompositionTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.29"
+        },
+        {
+          "name": "myos.local.SharedGraphTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.05"
+        },
+        {
+          "name": "myos.local.SourceInspectionTest",
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.199"
+        },
+        {
+          "name": "myos.local.StoredInspectionTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.439"
+        },
+        {
+          "name": "myos.local.TerminalPrefixTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.118"
+        },
+        {
+          "name": "myos.local.TimelineRoutingTest",
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.079"
+        }
+      ]
+    },
+    {
+      "repository": "myos-simplified",
+      "task": "clausesTest",
+      "totals": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "myos.local.ClauseJourneyTest",
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "12.075"
+        },
+        {
+          "name": "myos.local.ClauseValidationTest",
+          "tests": "14",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "10.477"
+        }
+      ]
+    }
+  ],
+  "independentExpressionComparisons": 7200,
+  "deepExpressionLevels": 20000,
+  "measuredWholeRootComparisons": 30,
+  "notes": [
+    "The new schedule is a bounded prototype; broad suites also cover retained published behavior.",
+    "Formatting, Javadoc and benchmark compilation passed.",
+    "Custom shared/member caps replay source work without fresh allowances."
+  ]
+}

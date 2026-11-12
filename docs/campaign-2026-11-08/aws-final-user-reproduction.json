@@ -1,0 +1,163 @@
+{
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "orders": 2,
+  "calls": [
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-c5dd3478152c9ca3f005967c76f4cf8da2bfcfe9b5b06547",
+      "entry": "BdohBiQiFUhWkg3c9Hk2ihF6fV9zHvHzmpbKd56xoEPv",
+      "version": 2,
+      "restoreAdmissionExecutionMillis": 505.571481,
+      "lookupMillis": 448.363917,
+      "submitMillis": 679.2160410000001,
+      "submitServerTiming": "app;dur=341.075",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2650.6439579999997,
+      "observedTotalMillis": 2202.282125
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-b3e07a49c8a79e1792501be0b436fa141e372ecd13b213bd",
+      "entry": "PD34rXeRRaGPgsAU4yYhPNV48mb1sy6A5AibcP7ncs4",
+      "version": 3,
+      "restoreAdmissionExecutionMillis": 622.416048,
+      "lookupMillis": 450.4814160000006,
+      "submitMillis": 446.5103749999999,
+      "submitServerTiming": "app;dur=231.059",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 3228.1717080000003,
+      "observedTotalMillis": 2777.692833999999
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-e740b470b8f35757f2e39a345351d1811d9d83269cf7ba16",
+      "entry": "4aLwVEQQ4w3N61TEbnimGLoFAomMJzaGoKaFdBah5FCN",
+      "version": 4,
+      "restoreAdmissionExecutionMillis": 293.560408,
+      "lookupMillis": 462.3374579999986,
+      "submitMillis": 463.1531249999998,
+      "submitServerTiming": "app;dur=247.693",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2999.189166999999,
+      "observedTotalMillis": 2536.852584
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-e740b470b8f35757f2e39a345351d1811d9d83269cf7ba16",
+      "entry": "6qztUB6twGNERDKx5cRAZcLP1hzzTLacs6zUAimUp9ME",
+      "version": 5,
+      "restoreAdmissionExecutionMillis": 348.868583,
+      "lookupMillis": 455.69395799999944,
+      "submitMillis": 412.2526250000007,
+      "submitServerTiming": "app;dur=137.415",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2868.7566659999993,
+      "observedTotalMillis": 2413.064875000002
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-e740b470b8f35757f2e39a345351d1811d9d83269cf7ba16",
+      "entry": "FviqoJhKTSYDe4v9kUFPjG3zPc8hX95A3FzwZSgCZuCJ",
+      "version": 6,
+      "restoreAdmissionExecutionMillis": 388.742329,
+      "lookupMillis": 505.68108300000245,
+      "submitMillis": 366.04112499999883,
+      "submitServerTiming": "app;dur=121.832",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2855.497875000001,
+      "observedTotalMillis": 2349.8186669999973
+    },
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-c5dd3478152c9ca3f005967c76f4cf8da2bfcfe9b5b06547",
+      "entry": "9vwJL12gbuJwaef6siYQvxVpyoPGJXmcfDa8vMWGAxZV",
+      "version": 7,
+      "restoreAdmissionExecutionMillis": 512.198843,
+      "lookupMillis": 450.5783749999992,
+      "submitMillis": 364.48791699999816,
+      "submitServerTiming": "app;dur=120.033",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2268.281208999998,
+      "observedTotalMillis": 1817.705374999999
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-667f7e32197a2092441ad8df8b3d01a3b5cf848f98169d0d",
+      "entry": "B3gFdPdEQA4imz9VXEQtSpPhKT21ombASrduaW4wEPdA",
+      "version": 8,
+      "restoreAdmissionExecutionMillis": 551.940207,
+      "lookupMillis": 453.8311660000005,
+      "submitMillis": 545.9648749999992,
+      "submitServerTiming": "app;dur=235.239",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 3291.9015410000015,
+      "observedTotalMillis": 2838.072458999999
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-271ff9e2fe996606f368ff8c8ca56725c87e4b7f1ba7294a",
+      "entry": "CQUmfnpqdJ77A4chT6joFZD6bajmzgGmiHSrn8WRfPyp",
+      "version": 9,
+      "restoreAdmissionExecutionMillis": 326.215633,
+      "lookupMillis": 483.9844580000019,
+      "submitMillis": 407.77158399999894,
+      "submitServerTiming": "app;dur=191.820",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2928.3445000000015,
+      "observedTotalMillis": 2444.3619589999985
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-271ff9e2fe996606f368ff8c8ca56725c87e4b7f1ba7294a",
+      "entry": "FXXK433Zsev7TPdabN6JRSuc2j91hQiU6hrLtroU5NS3",
+      "version": 10,
+      "restoreAdmissionExecutionMillis": 317.648446,
+      "lookupMillis": 480.42916700000046,
+      "submitMillis": 322.6629999999986,
+      "submitServerTiming": "app;dur=106.699",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 3357.2866670000003,
+      "observedTotalMillis": 2876.8593329999985
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-271ff9e2fe996606f368ff8c8ca56725c87e4b7f1ba7294a",
+      "entry": "BLDePwVMU9KrXBwkjFzsWuddFh2xZ2uHZt2yvJGYPukp",
+      "version": 11,
+      "restoreAdmissionExecutionMillis": 480.543057,
+      "lookupMillis": 485.48912500000085,
+      "submitMillis": 336.0130420000047,
+      "submitServerTiming": "app;dur=119.337",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2816.868250000006,
+      "observedTotalMillis": 2331.3795830000004
+    }
+  ],
+  "bootstrapCommand": "15979e38-1763-4742-95fc-5bc52146deb1",
+  "agreement": "graph-fast-c5dd3478152c9ca3f005967c76f4cf8da2bfcfe9b5b06547",
+  "bootstrapMillis": 2683.7510840000004,
+  "agreementUrl": "https://d2buikczdox1rt.cloudfront.net/#documents/graph-fast-c5dd3478152c9ca3f005967c76f4cf8da2bfcfe9b5b06547",
+  "lastOrder": "graph-fast-667f7e32197a2092441ad8df8b3d01a3b5cf848f98169d0d",
+  "lastPayment": "graph-fast-271ff9e2fe996606f368ff8c8ca56725c87e4b7f1ba7294a",
+  "verifiedOrders": 2,
+  "paidTotal": 400,
+  "unrelatedIdentities": {
+    "before": {
+      "graph-fast-b3e07a49c8a79e1792501be0b436fa141e372ecd13b213bd": "6kK9H8CLADt1KhxYVKvc166X3EsrC98CY3AXxZMjAFzH",
+      "graph-fast-e740b470b8f35757f2e39a345351d1811d9d83269cf7ba16": "AQq6vufas1jKJ8uXFgk78R39HWyES4XvzawyiP5jfqvR"
+    },
+    "after": {
+      "graph-fast-b3e07a49c8a79e1792501be0b436fa141e372ecd13b213bd": "6kK9H8CLADt1KhxYVKvc166X3EsrC98CY3AXxZMjAFzH",
+      "graph-fast-e740b470b8f35757f2e39a345351d1811d9d83269cf7ba16": "AQq6vufas1jKJ8uXFgk78R39HWyES4XvzawyiP5jfqvR"
+    },
+    "unchanged": true
+  },
+  "checks": [
+    "every requested Order exists in the final collection",
+    "Payment, Order and Agreement totals agree",
+    "all three documents reuse the same two participant Timelines",
+    "every submitted entry has a committed APPLIED outcome"
+  ],
+  "medianRestoreAdmissionExecutionMillis": 434.642693,
+  "timingBoundary": "Legacy API executionNanos includes root restoration, admission and native invocation; observedTotalMillis ends after the exact submitted entry is found in committed parent history."
+}

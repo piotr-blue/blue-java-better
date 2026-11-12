@@ -1,0 +1,179 @@
+{
+  "window": {
+    "startUtc": "2026-11-08T15:35:29Z",
+    "deadlineUtc": "2026-11-08T21:35:29Z"
+  },
+  "flatLatencyAchieved": false,
+  "previewUrl": "https://d2buikczdox1rt.cloudfront.net",
+  "previewRuntimeArtifact": "66042c7b4db5c7903369373d0cfcf5a8719b9b4a07153fbc8a80551ee3e2b40d",
+  "ratings": {
+    "correctness": 7,
+    "compatibility": 6,
+    "clarity": 7,
+    "performance": 3,
+    "operations": 5
+  },
+  "local": [
+    {
+      "report": "local-growth-final.json",
+      "orders": 10,
+      "samples": 5,
+      "addMedianMillis": 40.001709,
+      "payMedianMillis": 59.235042,
+      "initializationMillis": 275.709291
+    },
+    {
+      "report": "local-growth-final.json",
+      "orders": 1000,
+      "samples": 5,
+      "addMedianMillis": 412.984167,
+      "payMedianMillis": 381.198084,
+      "initializationMillis": 17356.142833
+    },
+    {
+      "report": "local-growth-repeat.json",
+      "orders": 10,
+      "samples": 5,
+      "addMedianMillis": 35.579333,
+      "payMedianMillis": 40.970333,
+      "initializationMillis": 249.184375
+    },
+    {
+      "report": "local-growth-repeat.json",
+      "orders": 1000,
+      "samples": 5,
+      "addMedianMillis": 359.574541,
+      "payMedianMillis": 351.161125,
+      "initializationMillis": 15531.066458
+    }
+  ],
+  "awsCold": [
+    {
+      "orders": 10,
+      "unprofiledSamples": 3,
+      "medianDurableProcessingMillis": 884.677851,
+      "profiledSamples": 1,
+      "initializationMillis": 1295.70048
+    },
+    {
+      "orders": 1000,
+      "unprofiledSamples": 3,
+      "medianDurableProcessingMillis": 4512.703721,
+      "profiledSamples": 1,
+      "initializationMillis": 42360.996809
+    }
+  ],
+  "publishedClauses": {
+    "orders": 10,
+    "exactComparisons": 50,
+    "total": 2000,
+    "bootstrapMillis": 5017.1096,
+    "operations": [
+      {
+        "operation": "placeOrder",
+        "samples": 10,
+        "medianRootCompletionMillis": 4105.900072,
+        "medianStateObservedMillis": 4105.895901,
+        "firstRootCompletionMillis": 5944.44611,
+        "lastRootCompletionMillis": 5134.160731,
+        "medianSummedPhaseWork": {
+          "restoreMillis": 196.5760545,
+          "admissionMillis": 282.617235,
+          "executionMillis": 587.80015,
+          "preparationMillis": 385.52347199999997,
+          "commitMillis": 63.1247775
+        }
+      },
+      {
+        "operation": "preparePayment",
+        "samples": 10,
+        "medianRootCompletionMillis": 4208.1279225,
+        "medianStateObservedMillis": 4201.940985,
+        "firstRootCompletionMillis": 6006.974454,
+        "lastRootCompletionMillis": 4280.420565,
+        "medianSummedPhaseWork": {
+          "restoreMillis": 185.176981,
+          "admissionMillis": 489.930207,
+          "executionMillis": 1434.3306785,
+          "preparationMillis": 419.085689,
+          "commitMillis": 124.500903
+        }
+      },
+      {
+        "operation": "acceptPaymentInstruction",
+        "samples": 10,
+        "medianRootCompletionMillis": 2230.888049,
+        "medianStateObservedMillis": 1070.3728015000002,
+        "firstRootCompletionMillis": 2349.113455,
+        "lastRootCompletionMillis": 2482.83083,
+        "medianSummedPhaseWork": {
+          "restoreMillis": 200.32811750000002,
+          "admissionMillis": 352.9519135,
+          "executionMillis": 566.4715605,
+          "preparationMillis": 204.347268,
+          "commitMillis": 146.109447
+        }
+      },
+      {
+        "operation": "reportTransfer",
+        "samples": 10,
+        "medianRootCompletionMillis": 2582.799564,
+        "medianStateObservedMillis": 1379.069555,
+        "firstRootCompletionMillis": 3006.760657,
+        "lastRootCompletionMillis": 2927.495236,
+        "medianSummedPhaseWork": {
+          "restoreMillis": 243.60301800000002,
+          "admissionMillis": 425.7209235,
+          "executionMillis": 722.9035644999999,
+          "preparationMillis": 598.1370115,
+          "commitMillis": 139.0193695
+        }
+      },
+      {
+        "operation": "acknowledgeTransfer",
+        "samples": 10,
+        "medianRootCompletionMillis": 2374.163884,
+        "medianStateObservedMillis": 2368.6936465,
+        "firstRootCompletionMillis": 2209.980618,
+        "lastRootCompletionMillis": 2577.140938,
+        "medianSummedPhaseWork": {
+          "restoreMillis": 251.021694,
+          "admissionMillis": 414.46551800000003,
+          "executionMillis": 905.1865615,
+          "preparationMillis": 200.843007,
+          "commitMillis": 145.218827
+        }
+      }
+    ]
+  },
+  "previewRuntimeCommand": "011844bb-832d-4cc1-bbde-7320bfcf5826",
+  "scaleMeasurementNote": "Scale timings precede the custody-only correction in iteration 37; do not claim a remeasured final-artifact speedup.",
+  "finalLiveReproduction": {
+    "report": "aws-final-custody-user-reproduction.json",
+    "orders": 2,
+    "calls": 10,
+    "total": 400,
+    "bootstrapMillis": 3664.4185,
+    "minObservedMillis": 2079.3572079999976,
+    "maxObservedMillis": 3864.241667,
+    "lookupExcluded": true
+  },
+  "finalCycles": {
+    "report": "local-final-rings64.json",
+    "rings": 8,
+    "membersPerRing": 8,
+    "preloadedEntries": 48,
+    "exactOracleReceipts": 48,
+    "workers": [
+      1,
+      4,
+      8
+    ],
+    "identicalHistories": true,
+    "maxConcurrentNativeCalls": [
+      1,
+      4,
+      8
+    ]
+  }
+}

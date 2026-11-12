@@ -1,0 +1,290 @@
+{
+  "cases": [
+    {
+      "samples": [
+        {
+          "sample": 0,
+          "add": {
+            "appendThroughCommitMillis": 82.387166,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 10,
+            "phases": [
+              {
+                "owner": "doc-d7541f60-42f8-4a51-9b79-67d740c7debf",
+                "sequence": 1,
+                "restore_ns": 10811292,
+                "execution_ns": 33025042,
+                "prepare_ns": 5025041
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 54.254,
+            "ordersBefore": 11,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 1,
+          "add": {
+            "appendThroughCommitMillis": 40.245542,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 11,
+            "phases": [
+              {
+                "owner": "doc-d7541f60-42f8-4a51-9b79-67d740c7debf",
+                "sequence": 3,
+                "restore_ns": 2160875,
+                "execution_ns": 16935417,
+                "prepare_ns": 5644458
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 43.51425,
+            "ordersBefore": 12,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 2,
+          "add": {
+            "appendThroughCommitMillis": 34.394166,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 12,
+            "phases": [
+              {
+                "owner": "doc-d7541f60-42f8-4a51-9b79-67d740c7debf",
+                "sequence": 5,
+                "restore_ns": 2247083,
+                "execution_ns": 14903334,
+                "prepare_ns": 3657667
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 40.318417,
+            "ordersBefore": 13,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 3,
+          "add": {
+            "appendThroughCommitMillis": 29.938292,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 13,
+            "phases": [
+              {
+                "owner": "doc-d7541f60-42f8-4a51-9b79-67d740c7debf",
+                "sequence": 7,
+                "restore_ns": 1842167,
+                "execution_ns": 11827750,
+                "prepare_ns": 3448125
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 39.176667,
+            "ordersBefore": 14,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 4,
+          "add": {
+            "appendThroughCommitMillis": 31.38975,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 14,
+            "phases": [
+              {
+                "owner": "doc-d7541f60-42f8-4a51-9b79-67d740c7debf",
+                "sequence": 9,
+                "restore_ns": 1833000,
+                "execution_ns": 12930459,
+                "prepare_ns": 3685083
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 39.905125,
+            "ordersBefore": 15,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        }
+      ],
+      "initializationMillis": 237.692459,
+      "initialOrders": 10
+    },
+    {
+      "samples": [
+        {
+          "sample": 0,
+          "add": {
+            "appendThroughCommitMillis": 384.238666,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 1000,
+            "phases": [
+              {
+                "owner": "doc-9b0aae0a-2bb4-4500-86bb-35c619735eda",
+                "sequence": 1,
+                "restore_ns": 60451875,
+                "execution_ns": 187838708,
+                "prepare_ns": 62195333
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 354.843792,
+            "ordersBefore": 1001,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 1,
+          "add": {
+            "appendThroughCommitMillis": 346.464166,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 1001,
+            "phases": [
+              {
+                "owner": "doc-9b0aae0a-2bb4-4500-86bb-35c619735eda",
+                "sequence": 3,
+                "restore_ns": 60533792,
+                "execution_ns": 165527333,
+                "prepare_ns": 55536834
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 341.206666,
+            "ordersBefore": 1002,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 2,
+          "add": {
+            "appendThroughCommitMillis": 350.645916,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 1002,
+            "phases": [
+              {
+                "owner": "doc-9b0aae0a-2bb4-4500-86bb-35c619735eda",
+                "sequence": 5,
+                "restore_ns": 58154417,
+                "execution_ns": 167555792,
+                "prepare_ns": 66859167
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 330.904375,
+            "ordersBefore": 1003,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 3,
+          "add": {
+            "appendThroughCommitMillis": 344.389875,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 1003,
+            "phases": [
+              {
+                "owner": "doc-9b0aae0a-2bb4-4500-86bb-35c619735eda",
+                "sequence": 7,
+                "restore_ns": 57715042,
+                "execution_ns": 166600625,
+                "prepare_ns": 60208792
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 314.988583,
+            "ordersBefore": 1004,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        },
+        {
+          "sample": 4,
+          "add": {
+            "appendThroughCommitMillis": 325.804,
+            "operation": "addOrder",
+            "profiled": false,
+            "exactReceiptParity": true,
+            "jobs": 1,
+            "ordersBefore": 1004,
+            "phases": [
+              {
+                "owner": "doc-9b0aae0a-2bb4-4500-86bb-35c619735eda",
+                "sequence": 9,
+                "restore_ns": 61335416,
+                "execution_ns": 157396375,
+                "prepare_ns": 49752000
+              }
+            ]
+          },
+          "pay": {
+            "appendThroughCommitMillis": 333.134458,
+            "ordersBefore": 1005,
+            "exactReceiptParity": true,
+            "jobs": 3,
+            "operation": "recordPayment"
+          }
+        }
+      ],
+      "initializationMillis": 14968.808959,
+      "initialOrders": 1000
+    }
+  ],
+  "reopenedBeforeEveryOperation": true,
+  "status": "PASS",
+  "packageCatalogShared": true,
+  "residentDocumentSessions": 0
+}

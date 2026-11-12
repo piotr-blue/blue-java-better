@@ -1,0 +1,11 @@
+{
+  "command": "./gradlew --offline --no-parallel build installDist qualificationJar",
+  "totals": {
+    "tests": 812,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "PASS",
+  "logSha256": "144e3bb27db10a43d6f8cb602b0282f9e4583422260fbc4ef5fee62f0fbc2063"
+}

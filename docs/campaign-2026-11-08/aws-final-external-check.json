@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "endpoint": "https://dzkbzs1daaeut.cloudfront.net/api/provider",
+  "timelineId": "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+  "readerKeyId": "7cbb940829916ee3d6712870d04db0467ed685f7127f9988257d0ab4f021a9d6",
+  "importAndAcquireMillis": 674.5743339999999,
+  "reusedExistingImport": true,
+  "completeBefore": 1794171742920000,
+  "refreshedCompleteBefore": 1794171743956000,
+  "initialHead": "7qsqtThn1hGBxeqMUkJMddUzhQmWh2Cx21wdhe4kBAxB",
+  "refreshedHead": "7qsqtThn1hGBxeqMUkJMddUzhQmWh2Cx21wdhe4kBAxB",
+  "firstPageEntries": 1,
+  "checks": [
+    "authenticated import",
+    "verified prefix acquired",
+    "strictly newer verified prefix after refresh",
+    "entries readable",
+    "remote append rejected"
+  ],
+  "scope": "Acquisition/API check; document execution parity is qualified separately."
+}

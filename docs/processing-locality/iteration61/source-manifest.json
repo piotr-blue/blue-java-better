@@ -1,0 +1,8 @@
+{
+  "blue-java-better/src/main/java/blue/ContractAttempt.java": "ed02fdd8e25d6a0db7d1ac7eff84163eb99cc332b629a10293b6fa6a197553bc",
+  "blue-java-better/src/main/java/blue/ContractRun.java": "1c92abb14347c4f1900aca768306b6eca31301092d190b4f1ae8da3d552c6ea5",
+  "blue-java-better/src/main/java/blue/ContractRunFork.java": "60f08b0b1055c2feea7af752c33f764b0ec3c27ee26d4d204879919c86c08716",
+  "blue-java-better/src/main/java/blue/ContractSchedule.java": "ba7f7452ec666bd01212e33cbe2a45aa46b250fb0b10cec737db77cd1124f06d",
+  "blue-java-better/src/test/java/blue/ContractTopologyTest.java": "bb901fb5a21001b7f17980c10bea6ecf483b4e1916768634a659711c70cf17a2",
+  "blue-java-better/src/test/java/blue/CompositionalGasTest.java": "789d43a2a7d23d205d140e602b2984b5234db040394496a3903b72707bf56fb7"
+}

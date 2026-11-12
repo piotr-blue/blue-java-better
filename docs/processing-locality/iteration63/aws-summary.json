@@ -1,0 +1,44 @@
+[
+  {
+    "orders": 10,
+    "initMillis": 1344.679709,
+    "initialPrepareAdmissionMillis": 392.829263,
+    "processingMillis": [
+      988.817105,
+      822.943927,
+      788.344953,
+      738.47521
+    ],
+    "medianProcessingMillis": 805.64444,
+    "medianAcquisitionMillis": 166.3456225,
+    "medianCombinedMillis": 971.9900625,
+    "gas": [
+      148,
+      148,
+      148,
+      148
+    ],
+    "parityInputs": 4
+  },
+  {
+    "orders": 1000,
+    "initMillis": 36245.355973,
+    "initialPrepareAdmissionMillis": 17445.413948,
+    "processingMillis": [
+      1892.880208,
+      1831.107062,
+      1826.672114,
+      1870.707383
+    ],
+    "medianProcessingMillis": 1850.9072225,
+    "medianAcquisitionMillis": 1951.932258,
+    "medianCombinedMillis": 3800.6220064999998,
+    "gas": [
+      148,
+      148,
+      148,
+      148
+    ],
+    "parityInputs": 4
+  }
+]

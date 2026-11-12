@@ -1,0 +1,38 @@
+{
+  "boundary": {
+    "account": "581571886327",
+    "region": "eu-west-1",
+    "stack": "myos-better-20261105"
+  },
+  "instanceStatus": [
+    {
+      "InstanceId": "i-052007ebaf704c0ad",
+      "InstanceState": {
+        "Code": 16,
+        "Name": "running"
+      },
+      "InstanceStatus": {
+        "Details": [
+          {
+            "Name": "reachability",
+            "Status": "passed"
+          }
+        ],
+        "Status": "ok"
+      },
+      "SystemStatus": {
+        "Details": [
+          {
+            "Name": "reachability",
+            "Status": "passed"
+          }
+        ],
+        "Status": "ok"
+      }
+    }
+  ],
+  "https": {
+    "console": 200,
+    "anonymousDocuments": 401
+  }
+}

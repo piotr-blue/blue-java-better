@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-03",
+  "hardware": "Apple M3 Max",
+  "jdk": "25.0.3",
+  "jmh": "1.37",
+  "forks": 1,
+  "warmup": "2 x 500 ms",
+  "measurement": "3 x 500 ms",
+  "heap": "1 GiB",
+  "notes": "Bounded diagnostic comparison against the preceding polished experimental implementation, not the old full protocol engine. Existing-tree setup, YAML export, explicit canonical identity and durable I/O excluded. Add includes admission of an order and its two nested documents. New profile validation is not included in logical gas.",
+  "tests": {
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "measurements": [
+    {
+      "revision": "baseline",
+      "operation": "addOrder",
+      "orders": 1,
+      "complex": true,
+      "p50_us": 13.328,
+      "p99_us": 25.5046399999999,
+      "bytes_per_operation": 37918.59179081387
+    },
+    {
+      "revision": "baseline",
+      "operation": "addOrder",
+      "orders": 128,
+      "complex": true,
+      "p50_us": 14.208,
+      "p99_us": 23.169919999999923,
+      "bytes_per_operation": 40884.842140985544
+    },
+    {
+      "revision": "baseline",
+      "operation": "addOrder",
+      "orders": 10000,
+      "complex": true,
+      "p50_us": 15.408,
+      "p99_us": 26.00928000000003,
+      "bytes_per_operation": 42949.11207389622
+    },
+    {
+      "revision": "baseline",
+      "operation": "submit",
+      "orders": 1,
+      "complex": true,
+      "p50_us": 22.144000000000002,
+      "p99_us": 31.431679999999933,
+      "bytes_per_operation": 70469.87908110862
+    },
+    {
+      "revision": "baseline",
+      "operation": "submit",
+      "orders": 128,
+      "complex": true,
+      "p50_us": 25.856,
+      "p99_us": 37.312,
+      "bytes_per_operation": 74219.84938197948
+    },
+    {
+      "revision": "baseline",
+      "operation": "submit",
+      "orders": 10000,
+      "complex": true,
+      "p50_us": 27.904,
+      "p99_us": 38.4,
+      "bytes_per_operation": 71839.62464490584
+    },
+    {
+      "revision": "candidate",
+      "operation": "addOrder",
+      "orders": 1,
+      "complex": true,
+      "p50_us": 15.664,
+      "p99_us": 21.472,
+      "bytes_per_operation": 42780.596032453
+    },
+    {
+      "revision": "candidate",
+      "operation": "addOrder",
+      "orders": 128,
+      "complex": true,
+      "p50_us": 17.28,
+      "p99_us": 24.202560000000055,
+      "bytes_per_operation": 44957.84681369138
+    },
+    {
+      "revision": "candidate",
+      "operation": "addOrder",
+      "orders": 10000,
+      "complex": true,
+      "p50_us": 18.432000000000002,
+      "p99_us": 26.528000000000002,
+      "bytes_per_operation": 46733.581612940856
+    },
+    {
+      "revision": "candidate",
+      "operation": "submit",
+      "orders": 1,
+      "complex": true,
+      "p50_us": 21.344,
+      "p99_us": 31.201919999999923,
+      "bytes_per_operation": 68950.10300167247
+    },
+    {
+      "revision": "candidate",
+      "operation": "submit",
+      "orders": 128,
+      "complex": true,
+      "p50_us": 24.16,
+      "p99_us": 33.25887999999989,
+      "bytes_per_operation": 75234.7604839998
+    },
+    {
+      "revision": "candidate",
+      "operation": "submit",
+      "orders": 10000,
+      "complex": true,
+      "p50_us": 26.944,
+      "p99_us": 36.83647999999999,
+      "bytes_per_operation": 69182.41253913242
+    }
+  ]
+}

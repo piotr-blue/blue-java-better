@@ -1,0 +1,18 @@
+{
+  "directory": "/private/tmp/myos-gas-cli-cvsq3d9j",
+  "checks": [
+    {
+      "restart": 0,
+      "value": 1,
+      "gas": 49,
+      "schedule": "contracts-compositional-gas-1"
+    },
+    {
+      "restart": 1,
+      "value": 2,
+      "gas": 49,
+      "schedule": "contracts-compositional-gas-1"
+    }
+  ],
+  "passed": true
+}

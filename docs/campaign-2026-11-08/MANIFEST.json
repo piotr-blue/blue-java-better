@@ -1,0 +1,212 @@
+[
+  {
+    "path": "README.md",
+    "sourcePath": "authored evidence index",
+    "bytes": 4468,
+    "sha256": "0e1a802a2cfa2a4ed325974f8991f1db4a588296f5bd7404ef0962d97be0fde7"
+  },
+  {
+    "path": "actual-host-assembly.txt",
+    "sourcePath": "actual-host-assembly.log",
+    "bytes": 768,
+    "sha256": "a755ef3d3f547c662ddfed23eacb1140b14125b3a28b3ec985d4e2add3e0b3bd"
+  },
+  {
+    "path": "actual-host-final-assembly.txt",
+    "sourcePath": "actual-host-final-assembly.log",
+    "bytes": 626,
+    "sha256": "86e3fea6ba6b3c8ee176b07549cbeb1da1c0b1d59c5e5c986e7939e8653d7e4d"
+  },
+  {
+    "path": "actual-library-examples.txt",
+    "sourcePath": "actual-library-examples.log",
+    "bytes": 2126,
+    "sha256": "b6a8314900b09f896312112a8f99626aaa02fec560e30e18cdf8fa708821f938"
+  },
+  {
+    "path": "aws-clauses10-command.json",
+    "sourcePath": "myos-core-better/reports/clauses-c48472d39fe1/command.json",
+    "bytes": 329,
+    "sha256": "e1c9121e4ab6966e04947b7a31dc54d02021470627761d918b4f7204090875db"
+  },
+  {
+    "path": "aws-clauses10-root-timing.json",
+    "sourcePath": "myos-core-better/reports/iteration35-clauses10-full.json",
+    "bytes": 114020,
+    "sha256": "64ad66a2f3f10243c6d561e68ce86b72604e473e5e1eaf125ed475d4264f1c75"
+  },
+  {
+    "path": "aws-clauses20-condition-timing.json",
+    "sourcePath": "myos-core-better/reports/iteration32-clauses20-full.json",
+    "bytes": 200737,
+    "sha256": "191228c08d514e515374f6d3574f03ea3899a4317ea3d276df85aeb808eda257"
+  },
+  {
+    "path": "aws-close-health.json",
+    "sourcePath": "myos-core-better/reports/campaign-close-health.json",
+    "bytes": 244,
+    "sha256": "05d47c6839f22797bce9f3971b94a44a3ea82054efb97bb613edb54f51799b22"
+  },
+  {
+    "path": "aws-cold-final-command.json",
+    "sourcePath": "myos-core-better/reports/iteration33-owners-command.json",
+    "bytes": 338,
+    "sha256": "622bf8fe7a2017410082256727700df2b658751d99009587f6df2127b9a8ae29"
+  },
+  {
+    "path": "aws-cold-final-phases.json",
+    "sourcePath": "derived from retained reports and test XML",
+    "bytes": 18647,
+    "sha256": "3858d8251a3f64b7f00c6617daa87a73702ff7f2ad03012c298e7cc648f4e0ab"
+  },
+  {
+    "path": "aws-cold-final.json",
+    "sourcePath": "myos-core-better/reports/iteration33-aws-cold.json",
+    "bytes": 4345,
+    "sha256": "c11f0a48bb4121aaab053c03943885e371264496e2ab36af4276458d56fa8533"
+  },
+  {
+    "path": "aws-cold-iteration26.json",
+    "sourcePath": "myos-core-better/reports/iteration26-aws-cold.json",
+    "bytes": 4210,
+    "sha256": "968f51d902489e0926c0f99c007548450210c19b4234f828c1337167a08cfc51"
+  },
+  {
+    "path": "aws-final-custody-user-reproduction.json",
+    "sourcePath": "myos-core-better/reports/iteration37-user-reproduction.json",
+    "bytes": 6963,
+    "sha256": "f5e6405ba893289d8deb8d2e6eac9340de8038af3e687a55a95156c5f9c611d2"
+  },
+  {
+    "path": "aws-final-deployment.json",
+    "sourcePath": "myos-core-better/reports/iteration37-deployment-preserving-custody.json",
+    "bytes": 1568,
+    "sha256": "40a67957bed3dd51ab343ea32e5333faf61f687377f2e48747b1dc5ff7fc957e"
+  },
+  {
+    "path": "aws-final-external-check.json",
+    "sourcePath": "myos-core-better/reports/external-qa-4bec713a290e.json",
+    "bytes": 880,
+    "sha256": "00aa16c36420103170489b305abcf30f386a0ec1f3499e9bb7e8a691a02e4a2f"
+  },
+  {
+    "path": "aws-final-https-check.json",
+    "sourcePath": "myos-core-better/reports/preview-http-https-qa-27ae8e168684.json",
+    "bytes": 10843,
+    "sha256": "b468b2ec71cbf4932b1289b493224ae03146cd49215c508b1f7c7c66fced06f8"
+  },
+  {
+    "path": "aws-final-instance-health.json",
+    "sourcePath": "myos-core-better/reports/campaign-final-instance-health.json",
+    "bytes": 707,
+    "sha256": "613975ddd317c34b98a0ce176d64b6a91d9b07c694c78babae3dc8439d941eb7"
+  },
+  {
+    "path": "aws-final-user-reproduction.json",
+    "sourcePath": "myos-core-better/reports/campaign-final-user-reproduction.json",
+    "bytes": 6968,
+    "sha256": "885bd8e684a402335327b7e115c273cb5b53b43449cf03ae33c3b43bd93b7cf6"
+  },
+  {
+    "path": "aws-final-worker-cleanup.json",
+    "sourcePath": "myos-core-better/reports/campaign-final-worker-cleanup.json",
+    "bytes": 159,
+    "sha256": "ae196f09179d829ccc29ae6ca3c8c14bff36d346d0b23f17c5d7b29063148681"
+  },
+  {
+    "path": "aws-mixed-final-runtime.json",
+    "sourcePath": "myos-core-better/reports/mixed-qa-ee417f228158.json",
+    "bytes": 3388,
+    "sha256": "c5898b401ac652e4e3753a82f3743898d13284e817fe21521fcdd5cb0334c2b6"
+  },
+  {
+    "path": "aws-mixed-pre-fix-rerun.json",
+    "sourcePath": "myos-core-better/reports/mixed-qa-29f20f799e91.json",
+    "bytes": 3386,
+    "sha256": "425429cffeb35edcdf480feb530ae5d54efeebdaadfb4a20cc8b0f97b96873a8"
+  },
+  {
+    "path": "aws-mixed-rerun-failure.txt",
+    "sourcePath": "myos-core-better/reports/campaign-final-mixed.log",
+    "bytes": 637,
+    "sha256": "cf460b05c1b9c199aacade7d8f90172995bbbdb9791962c4911e7750822769ef"
+  },
+  {
+    "path": "aws-mixed-source-check.json",
+    "sourcePath": "myos-core-better/reports/mixed-qa-1bc73cb48450.json",
+    "bytes": 3304,
+    "sha256": "968f2b76cfe06579291074cf65957c955087463b52c00c74d24200acd36513c9"
+  },
+  {
+    "path": "iteration37-host-gate.txt",
+    "sourcePath": "iteration37-full.log",
+    "bytes": 985,
+    "sha256": "1ee8eb79992d54249bcb98be70d9c6707add0196fb2991592cff5afc9334a8c6"
+  },
+  {
+    "path": "iterations.json",
+    "sourcePath": "campaign.json",
+    "bytes": 12420,
+    "sha256": "b9b14604b0b3b4b5cb8cc3d45b4284b277cbbdab713289ca470018459bc92f2d"
+  },
+  {
+    "path": "local-cycle20.json",
+    "sourcePath": "myos-simplified/build/qualification/iteration17-cycle/report.json",
+    "bytes": 9763,
+    "sha256": "7871a8c86960624055684a9e5dc73f9095969f75b01c0317770ce7bd12b8e174"
+  },
+  {
+    "path": "local-eight-rings.json",
+    "sourcePath": "myos-simplified/build/qualification/iteration17-rings/report.json",
+    "bytes": 17446,
+    "sha256": "254e94aa29ed289737fbfc12a041f6ba26b8c0f3cd121b824db2c517d11af0ca"
+  },
+  {
+    "path": "local-final-rings64.json",
+    "sourcePath": "/Users/piotr/data/myos-simplified/build/qualification/campaign-final-rings64/report.json",
+    "bytes": 17476,
+    "sha256": "771ef424c424453f2de76d0b94436bb8f93a1332a77258f3a4b25f83fef5d87b"
+  },
+  {
+    "path": "local-growth-final.json",
+    "sourcePath": "myos-simplified/build/qualification/iteration32-final-growth/report.json",
+    "bytes": 4520,
+    "sha256": "224d65fdacf246ca207bd90482effb7a9c25c4fb5471c2635cb3903f9c753c79"
+  },
+  {
+    "path": "local-growth-repeat.json",
+    "sourcePath": "myos-simplified/build/qualification/campaign-final-repeat/report.json",
+    "bytes": 4517,
+    "sha256": "21beb88aca42c48ee000683b5ef62de59042deff9059e07842c28a79eda44f3e"
+  },
+  {
+    "path": "local-physical-work.json",
+    "sourcePath": "/Users/piotr/data/myos-simplified/build/qualification/campaign-final-physical-work/report.json",
+    "bytes": 66029,
+    "sha256": "2324bb04c2e168a35d95d5444b47a564164bef0112554c93bf70d759d42fbc30"
+  },
+  {
+    "path": "lookup-jmh.json",
+    "sourcePath": "iteration31-jmh-results.json",
+    "bytes": 22728,
+    "sha256": "29818d60c8964584a114ad638718f55acc05efb9cf96d670835c18105fa4bd6d"
+  },
+  {
+    "path": "original-java-comparison.txt",
+    "sourcePath": "original-java-campaign-final.log",
+    "bytes": 3751,
+    "sha256": "49da218a55ba93cd30eff7262aee48341c547ce5345f95b8e1aa0feeafa34152"
+  },
+  {
+    "path": "summary.json",
+    "sourcePath": "derived from retained reports and test XML",
+    "bytes": 5330,
+    "sha256": "b01c1bcbe9db114bdc84790ab9abd9b65af3cf66a7fda485585b659adf6744e1"
+  },
+  {
+    "path": "test-gates.json",
+    "sourcePath": "derived from retained reports and test XML",
+    "bytes": 1405,
+    "sha256": "2c06deca54ec06db2bfb290c3b5ba1de7b924e4076d3ddec52f3f5900d7d3428"
+  }
+]

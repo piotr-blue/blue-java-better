@@ -1,0 +1,24 @@
+{
+  "archive": "tutorial.zip (BLUE_MYOS_TUTORIAL_AND_CODEX_PROMPT_20260830)",
+  "archiveSha256": "176d42f32755048785205be9a5730459b8dc468a876a0788ab4bf7dbc12e5062",
+  "files": {
+    "01_blue_workbench_and_identity/03_scalar_compact.yaml": "d09edadd173a8bbc233d47dcafc30cc876af2fb569812f2bbe0e92a1905bbce8",
+    "01_blue_workbench_and_identity/01_xyz.yaml": "5a0286947324076f8ec82a08cb54fe3f51a905ea6127bbd45089f9bc458af575",
+    "01_blue_workbench_and_identity/02_xyz_changed.yaml": "f723db02f35bec1a85b0a6bd32f4a488a398425b37c140eeb6191af6da253803",
+    "01_blue_workbench_and_identity/04_scalar_explicit.yaml": "a0bd06859e919568c92c817676af68779a4b75e2806c417e1ac2d03f0741248a",
+    "02_content_graph_and_references/02_parent_reference.template.yaml": "729afa9a8a28ea74864df55c8a6067bb4f7fdbb377f0382e542600498a81db23",
+    "02_content_graph_and_references/03_missing_reference.template.yaml": "7d0dc456ef1a5b40cccdd017ff28af7ea60279d5a1838a0d961103268570e01e",
+    "02_content_graph_and_references/01_parent_inline.yaml": "fb2b99346f33aae98ff47098c0a5db5f6039eac4ad8ad80a7cbc5dd423c95aa1",
+    "03_types_and_liskov/01_point_type.yaml": "ec1d63c4a468130f49480a4be863ffb4a613337758636059940a96b20731d202",
+    "03_types_and_liskov/05_invalid_point.template.yaml": "c79f4f2fb0906ed6d97fe69298a51b65892c0015a34ecec0c6c004597113a000",
+    "03_types_and_liskov/02_colored_point_type.template.yaml": "31097f0f2c0e4c1202987234621ed2c4dc5197cd3833a1adea886d08ff301024",
+    "03_types_and_liskov/04_valid_colored_point.template.yaml": "494669a943fe51f297556a26d420bdf1a566db4877030220b10d74c8d522c4ef",
+    "03_types_and_liskov/03_valid_point.template.yaml": "52043a14c328e257b6237ef198615811bde9e6dc187ca01b3f38f9587f935390",
+    "04_lists_and_canonical_forms/05_type_only_list.yaml": "679a68f46eb2b06ca3ea461abb5dac4aee6bff22a82da67adb2861845887c4c4",
+    "04_lists_and_canonical_forms/02_list_explicit.yaml": "dfd3fc327c6952a0577ee7ce65576acea05578dc0ef0c007b6be1015119e7574",
+    "04_lists_and_canonical_forms/03_list_reordered.yaml": "67d1813a7cddfb1ab17779fc0d3668eca2c5c5070d4d96b8a75609b92dd5e27a",
+    "04_lists_and_canonical_forms/04_empty_list.yaml": "c06e3ee65340d2bbd851226413f9384aefe27258fbb8f2500a0ce6185233a6c9",
+    "04_lists_and_canonical_forms/01_list_compact.yaml": "9c06b7a59b547a8719eeeb794d64ba96f0672d2a61ee3f4fc934a325e7e6912b",
+    "07_reference_transparency_and_missing_content/02_counter_value.yaml": "8bc8a1b1f507566458dbcdcbee891a10c3d88f28dac345731dfb2e5d20188b17"
+  }
+}

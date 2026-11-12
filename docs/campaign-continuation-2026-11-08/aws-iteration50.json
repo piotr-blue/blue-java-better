@@ -1,0 +1,505 @@
+{
+  "metadata": {
+    "commandId": "4066a102-308a-4c20-b17c-f017b8b0cce9",
+    "instance": "i-08a8fc65dfef2809e",
+    "table": "myos-better-20261105-documents",
+    "account": "owner-qa-65d27a0ea3bb",
+    "digest": "4d9c5a079ccbbbc8721c6fa6f263b4a6f19e5ac9e6f78299160a0392ac686945",
+    "counts": [
+      10,
+      1000
+    ],
+    "cold": true,
+    "profileSummaries": true
+  },
+  "measurement": {
+    "account": "owner-qa-65d27a0ea3bb",
+    "comparisonOracleDuringMeasurement": false,
+    "mutableSessionCaching": false,
+    "ownerStorageReopenedPerInput": true,
+    "results": [
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 241.691393,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 1056.985581,
+            "gas": 3866,
+            "gcMillis": 56,
+            "heapAfterBytes": 81674152,
+            "heapBeforeBytes": 83254536,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 148.164766,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 153.78734,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 872.008994,
+            "gas": 3866,
+            "gcMillis": 10,
+            "heapAfterBytes": 76329864,
+            "heapBeforeBytes": 110698632,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 139.041155,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 172.85804,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 757.415264,
+            "gas": 3866,
+            "gcMillis": 7,
+            "heapAfterBytes": 72955328,
+            "heapBeforeBytes": 108509416,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 114.997991,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 149.798681,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 737.816344,
+            "gas": 3866,
+            "gcMillis": 9,
+            "heapAfterBytes": 85435664,
+            "heapBeforeBytes": 115315416,
+            "orders": 10,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 102.643164,
+            "sample": 3
+          }
+        ],
+        "documents": 21,
+        "initialPrepareAdmissionMillis": 363.428363,
+        "initializationMillis": 1261.200776,
+        "orders": 10
+      },
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 1847.497969,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3990.136624,
+            "gas": 169287,
+            "gcMillis": 263,
+            "heapAfterBytes": 847463216,
+            "heapBeforeBytes": 815015584,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 1916.683896,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 1974.812107,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3481.431216,
+            "gas": 169287,
+            "gcMillis": 481,
+            "heapAfterBytes": 281104392,
+            "heapBeforeBytes": 819501872,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 2041.332706,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 1951.397348,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3276.819744,
+            "gas": 169287,
+            "gcMillis": 269,
+            "heapAfterBytes": 347677696,
+            "heapBeforeBytes": 247474096,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 1742.958173,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 1901.437227,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 3315.446572,
+            "gas": 169287,
+            "gcMillis": 255,
+            "heapAfterBytes": 589332984,
+            "heapBeforeBytes": 577015808,
+            "orders": 1000,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 1866.17617,
+            "sample": 3
+          }
+        ],
+        "documents": 2001,
+        "initialPrepareAdmissionMillis": 22251.016155,
+        "initializationMillis": 40581.044837,
+        "orders": 1000
+      }
+    ],
+    "store": "myos-better-20261105-documents",
+    "transportCachesDisabled": true
+  },
+  "profiles": [
+    {
+      "orders": 10,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 39,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 22
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 21
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 19
+          },
+          {
+            "method": "myos.better.MeasuredStore.measure",
+            "samples": 10
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 8
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 6
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 6
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 5
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 5
+          },
+          {
+            "method": "myos.better.DynamoStore.contentAll",
+            "samples": 5
+          },
+          {
+            "method": "myos.better.OwnerRecords.restore",
+            "samples": 5
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractBridge.certify",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractLanguage.strict",
+            "samples": 4
+          },
+          {
+            "method": "blue.LanguageDiagnostics.at",
+            "samples": 4
+          },
+          {
+            "method": "blue.LanguageSemantics.strict",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.closure",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.load",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.loadForExecution",
+            "samples": 4
+          }
+        ],
+        "leaf": [
+          {
+            "method": "com.sun.crypto.provider.GHASH.processBlocks",
+            "samples": 3
+          },
+          {
+            "method": "com.sun.crypto.provider.CounterMode.implCrypt",
+            "samples": 2
+          },
+          {
+            "method": "java.lang.StringUTF16.codePointCount",
+            "samples": 2
+          },
+          {
+            "method": "org.apache.hc.core5.http.impl.io.BHttpConnectionBase.createContentOutputStream",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractData.copy",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractGraph.verifyEdges",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageFacts.retained",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageMap.immutable",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageOperations.recordText",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageTrie.replace",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.StringLatin1.toLowerCase",
+            "samples": 1
+          },
+          {
+            "method": "java.security.MessageDigest.getInstance",
+            "samples": 1
+          },
+          {
+            "method": "java.util.ArrayDeque.push",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.clear",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HexFormat.formatOptDelimiter",
+            "samples": 1
+          },
+          {
+            "method": "java.util.Map.ofEntries",
+            "samples": 1
+          },
+          {
+            "method": "java.util.concurrent.locks.ReentrantLock$Sync.lock",
+            "samples": 1
+          },
+          {
+            "method": "java.util.regex.Pattern.clazz",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.classfile.impl.AbstractBoundLocalVariable.startPc",
+            "samples": 1
+          }
+        ]
+      }
+    },
+    {
+      "orders": 1000,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 154,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 143
+          },
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 143
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 141
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 81
+          },
+          {
+            "method": "myos.better.OwnerRecords.restore",
+            "samples": 57
+          },
+          {
+            "method": "myos.better.OwnerGraphs.prepare",
+            "samples": 50
+          },
+          {
+            "method": "myos.better.OwnerGraphs.preparePages",
+            "samples": 50
+          },
+          {
+            "method": "myos.better.RadixIndex.load",
+            "samples": 43
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.load",
+            "samples": 34
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.loadForExecution",
+            "samples": 34
+          },
+          {
+            "method": "myos.better.CanonicalSnapshots.closure",
+            "samples": 28
+          },
+          {
+            "method": "blue.ContractStorage.export",
+            "samples": 26
+          },
+          {
+            "method": "blue.Contracts$Execution$State.checkpoint",
+            "samples": 26
+          },
+          {
+            "method": "blue.LanguageOperations.records",
+            "samples": 26
+          },
+          {
+            "method": "blue.ContractLanguage.records",
+            "samples": 25
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 25
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 25
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 25
+          },
+          {
+            "method": "myos.better.RadixIndex.get",
+            "samples": 25
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 24
+          }
+        ],
+        "leaf": [
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._verifySharing",
+            "samples": 15
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2",
+            "samples": 13
+          },
+          {
+            "method": "java.security.MessageDigest$Delegate.engineDigest",
+            "samples": 6
+          },
+          {
+            "method": "java.util.HashMap.getNode",
+            "samples": 5
+          },
+          {
+            "method": "java.util.HashMap.putVal",
+            "samples": 5
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser.addName",
+            "samples": 4
+          },
+          {
+            "method": "java.lang.String.compareTo",
+            "samples": 4
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._appendLongName",
+            "samples": 3
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer.findSymbol",
+            "samples": 3
+          },
+          {
+            "method": "java.lang.String.equals",
+            "samples": 3
+          },
+          {
+            "method": "blue.CanonicalOutput.appendUtf8",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractData.copy",
+            "samples": 2
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findOffsetForAdd",
+            "samples": 2
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.findName",
+            "samples": 2
+          },
+          {
+            "method": "java.lang.StringUTF16.hashCode",
+            "samples": 2
+          },
+          {
+            "method": "java.security.MessageDigest$Delegate.engineUpdate",
+            "samples": 2
+          },
+          {
+            "method": "java.util.HashMap.putMapEntries",
+            "samples": 2
+          },
+          {
+            "method": "java.util.HashMap.resize",
+            "samples": 2
+          },
+          {
+            "method": "java.util.ImmutableCollections$MapN.probe",
+            "samples": 2
+          },
+          {
+            "method": "java.util.TreeMap.getEntry",
+            "samples": 2
+          }
+        ]
+      }
+    }
+  ]
+}

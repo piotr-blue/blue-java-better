@@ -1,0 +1,53 @@
+{
+  "iteration": 61,
+  "completedUtc": "2026-11-09T02:06:09.393604+00:00",
+  "decision": "KEEP sparse native scheduling with unchanged portable chunk sequence; no reliable wall-time speedup claimed",
+  "report": "blue-java-better/docs/processing-locality/ITERATION-61.md",
+  "gates": {
+    "blue-java-better": {
+      "tests": 2492,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "myos-simplified": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "myos-core-better": {
+      "tests": 821,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "localGas": 157,
+  "localSchedulingSelections": [
+    3,
+    3
+  ],
+  "local10MedianMs": 53.377876,
+  "local1000MedianMs": 335.687917,
+  "awsGas": 148,
+  "awsScaleOracleInputs": 8,
+  "aws10ProcessingMedianMs": 832.061717,
+  "aws1000ProcessingMedianMs": 2167.344258,
+  "aws10AcquisitionPlusProcessingMedianMs": 993.7216675,
+  "aws1000AcquisitionPlusProcessingMedianMs": 4338.0677515,
+  "liveClauseOperations": 10,
+  "liveClausePaidTotal": 400,
+  "mixedExternalThenLocal": [
+    14,
+    19
+  ],
+  "ratings": {
+    "correctness": 7,
+    "compatibility": 6,
+    "clarity": 8,
+    "performance": 3,
+    "operations": 5
+  },
+  "artifactSha256": "3dfb410da8c1843533d332bc9eccfb0e66038bcd735ecf6025507be6fd17e4c4"
+}

@@ -1,0 +1,395 @@
+{
+  "method": "Same authored documents, sequential graph construction, complete process + receipt; exports excluded; 4 warmups and 9 samples per operation; one measured JVM per implementation; Java 25, 256 MiB initial/2 GiB maximum heap.",
+  "old": {
+    "scenarios": [
+      {
+        "orders": 1,
+        "steps": [
+          {
+            "gas": 5763,
+            "samplesMs": [
+              4.276959,
+              4.334459,
+              4.972458,
+              5.107708,
+              5.335667,
+              5.525584,
+              5.628792,
+              6.61825,
+              6.842666
+            ],
+            "receipt": "sha256:672636e545ae18476b65839bf590ec9edc92e2af8636c30b5b34f09bfc99b94b",
+            "medianMs": 5.335667,
+            "maxMs": 6.842666,
+            "step": "add"
+          },
+          {
+            "gas": 5218,
+            "samplesMs": [
+              3.844875,
+              4.029125,
+              4.049333,
+              4.081833,
+              4.466792,
+              4.9495,
+              5.433083,
+              5.442375,
+              5.909416
+            ],
+            "receipt": "sha256:4109c5b2182d55733b7f31bea8abab1dd9d1c138919f57d765f1a05b8ef93109",
+            "medianMs": 4.466792,
+            "maxMs": 5.909416,
+            "step": "submit"
+          },
+          {
+            "gas": 5201,
+            "samplesMs": [
+              3.25425,
+              3.415833,
+              3.452916,
+              3.721208,
+              3.833333,
+              3.869667,
+              4.342042,
+              4.591542,
+              5.544958
+            ],
+            "receipt": "sha256:dbd47249e54caff6a77dfbed229c10e6b2150888a4cb9041c4b003aec8d37231",
+            "medianMs": 3.833333,
+            "maxMs": 5.544958,
+            "step": "settle"
+          }
+        ],
+        "initializationMs": 5.370916,
+        "setupMs": 9.411583,
+        "constructionMs": 97.417375,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040"
+      },
+      {
+        "orders": 16,
+        "steps": [
+          {
+            "gas": 12047,
+            "samplesMs": [
+              13.095417,
+              13.320667,
+              14.001542,
+              14.868958,
+              15.021541,
+              15.252541,
+              15.535,
+              15.696625,
+              16.714084
+            ],
+            "receipt": "sha256:c2bd80de5cf45f2d54abab817d83dd741d3a850c15fd0f560742ca46641f3f2f",
+            "medianMs": 15.021541,
+            "maxMs": 16.714084,
+            "step": "add"
+          },
+          {
+            "gas": 11383,
+            "samplesMs": [
+              13.067167,
+              13.336833,
+              13.360958,
+              13.437,
+              13.463791,
+              13.885917,
+              14.05625,
+              16.077125,
+              16.256875
+            ],
+            "receipt": "sha256:20e8715512e4a5d7a64bdd77299980d2025ba32115be0a29fd5776ba2676df89",
+            "medianMs": 13.463791,
+            "maxMs": 16.256875,
+            "step": "submit"
+          },
+          {
+            "gas": 11366,
+            "samplesMs": [
+              13.2815,
+              13.328625,
+              13.351291,
+              13.599667,
+              13.747416,
+              14.153334,
+              16.139792,
+              18.414875,
+              18.777291
+            ],
+            "receipt": "sha256:cc2dd6b24cf4185614a64b0c6099177aa8070be5688c1aead333a414e490f075",
+            "medianMs": 13.747416,
+            "maxMs": 18.777291,
+            "step": "settle"
+          }
+        ],
+        "initializationMs": 4.817791,
+        "setupMs": 221.697042,
+        "constructionMs": 93.152208,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040"
+      },
+      {
+        "orders": 128,
+        "steps": [
+          {
+            "gas": 58974,
+            "samplesMs": [
+              351.406042,
+              354.065333,
+              354.106459,
+              355.1745,
+              355.465958,
+              355.927459,
+              356.26125,
+              357.027042,
+              358.020667
+            ],
+            "receipt": "sha256:cdacd87fc1bcb914594aae4ed16ad536f45a45efc6eddb71149cb0038907046c",
+            "medianMs": 355.465958,
+            "maxMs": 358.020667,
+            "step": "add"
+          },
+          {
+            "gas": 57415,
+            "samplesMs": [
+              388.96475,
+              398.435916,
+              419.291416,
+              424.289917,
+              427.608542,
+              428.516042,
+              430.987167,
+              435.747875,
+              456.579
+            ],
+            "receipt": "sha256:2f7b8c3119b9cda14193ba51c6c4655e08b12c12979dfee9c4a62e9e1823320c",
+            "medianMs": 427.608542,
+            "maxMs": 456.579,
+            "step": "submit"
+          },
+          {
+            "gas": 57398,
+            "samplesMs": [
+              373.628042,
+              384.595167,
+              385.61475,
+              386.563,
+              391.052875,
+              395.893083,
+              398.425125,
+              402.278084,
+              409.633084
+            ],
+            "receipt": "sha256:38f04293bb9e6386e402824bfe8dab71d4c93fe83904d288cc560b030a57625e",
+            "medianMs": 391.052875,
+            "maxMs": 409.633084,
+            "step": "settle"
+          }
+        ],
+        "initializationMs": 4.164125,
+        "setupMs": 18918.411625,
+        "constructionMs": 84.058916,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040"
+      }
+    ],
+    "java": "25.0.3+9-LTS-195",
+    "samples": 9,
+    "runtime": "old"
+  },
+  "improved": {
+    "scenarios": [
+      {
+        "setupMs": 8.833959,
+        "initializationMs": 5.441541,
+        "steps": [
+          {
+            "medianMs": 4.480333,
+            "receipt": "sha256:672636e545ae18476b65839bf590ec9edc92e2af8636c30b5b34f09bfc99b94b",
+            "samplesMs": [
+              4.071417,
+              4.23175,
+              4.429209,
+              4.459459,
+              4.480333,
+              4.948875,
+              5.953959,
+              6.587166,
+              7.728875
+            ],
+            "gas": 5763,
+            "step": "add",
+            "maxMs": 7.728875
+          },
+          {
+            "medianMs": 4.127875,
+            "receipt": "sha256:4109c5b2182d55733b7f31bea8abab1dd9d1c138919f57d765f1a05b8ef93109",
+            "samplesMs": [
+              3.390625,
+              3.609291,
+              3.899916,
+              3.91525,
+              4.127875,
+              4.409042,
+              4.523709,
+              4.538541,
+              4.77925
+            ],
+            "gas": 5218,
+            "step": "submit",
+            "maxMs": 4.77925
+          },
+          {
+            "medianMs": 3.381709,
+            "receipt": "sha256:dbd47249e54caff6a77dfbed229c10e6b2150888a4cb9041c4b003aec8d37231",
+            "samplesMs": [
+              3.148,
+              3.209541,
+              3.244917,
+              3.271291,
+              3.381709,
+              3.503125,
+              3.50875,
+              4.120042,
+              6.512667
+            ],
+            "gas": 5201,
+            "step": "settle",
+            "maxMs": 6.512667
+          }
+        ],
+        "orders": 1,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040",
+        "constructionMs": 0.346208
+      },
+      {
+        "setupMs": 185.766209,
+        "initializationMs": 4.113,
+        "steps": [
+          {
+            "medianMs": 11.731666,
+            "receipt": "sha256:c2bd80de5cf45f2d54abab817d83dd741d3a850c15fd0f560742ca46641f3f2f",
+            "samplesMs": [
+              11.118,
+              11.620208,
+              11.681875,
+              11.684875,
+              11.731666,
+              12.247709,
+              12.661541,
+              14.240667,
+              14.747958
+            ],
+            "gas": 12047,
+            "step": "add",
+            "maxMs": 14.747958
+          },
+          {
+            "medianMs": 10.865625,
+            "receipt": "sha256:20e8715512e4a5d7a64bdd77299980d2025ba32115be0a29fd5776ba2676df89",
+            "samplesMs": [
+              9.957542,
+              10.368041,
+              10.465292,
+              10.865208,
+              10.865625,
+              11.068917,
+              11.4995,
+              12.620583,
+              13.336
+            ],
+            "gas": 11383,
+            "step": "submit",
+            "maxMs": 13.336
+          },
+          {
+            "medianMs": 10.6785,
+            "receipt": "sha256:cc2dd6b24cf4185614a64b0c6099177aa8070be5688c1aead333a414e490f075",
+            "samplesMs": [
+              9.812125,
+              10.475959,
+              10.489125,
+              10.494666,
+              10.6785,
+              11.022625,
+              11.341709,
+              12.057958,
+              14.394792
+            ],
+            "gas": 11366,
+            "step": "settle",
+            "maxMs": 14.394792
+          }
+        ],
+        "orders": 16,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040",
+        "constructionMs": 0.348334
+      },
+      {
+        "setupMs": 10593.747292,
+        "initializationMs": 3.572583,
+        "steps": [
+          {
+            "medianMs": 184.635833,
+            "receipt": "sha256:cdacd87fc1bcb914594aae4ed16ad536f45a45efc6eddb71149cb0038907046c",
+            "samplesMs": [
+              181.681542,
+              182.52675,
+              182.722291,
+              184.091542,
+              184.635833,
+              185.291292,
+              188.954708,
+              190.366792,
+              193.729375
+            ],
+            "gas": 58974,
+            "step": "add",
+            "maxMs": 193.729375
+          },
+          {
+            "medianMs": 191.301459,
+            "receipt": "sha256:2f7b8c3119b9cda14193ba51c6c4655e08b12c12979dfee9c4a62e9e1823320c",
+            "samplesMs": [
+              185.215083,
+              187.54225,
+              189.05525,
+              190.922709,
+              191.301459,
+              193.311292,
+              194.16425,
+              194.586167,
+              198.017041
+            ],
+            "gas": 57415,
+            "step": "submit",
+            "maxMs": 198.017041
+          },
+          {
+            "medianMs": 187.927417,
+            "receipt": "sha256:38f04293bb9e6386e402824bfe8dab71d4c93fe83904d288cc560b030a57625e",
+            "samplesMs": [
+              181.710792,
+              182.984625,
+              183.210417,
+              183.4655,
+              187.927417,
+              190.374042,
+              194.706084,
+              197.966084,
+              204.284792
+            ],
+            "gas": 57398,
+            "step": "settle",
+            "maxMs": 204.284792
+          }
+        ],
+        "orders": 128,
+        "initializationReceipt": "sha256:7a90644080d9866d708e22bea841aa56c383fcdeaecca4b33e1924ae4ddb4040",
+        "constructionMs": 0.319083
+      }
+    ],
+    "runtime": "new",
+    "samples": 9,
+    "java": "25.0.3+9-LTS-195"
+  }
+}

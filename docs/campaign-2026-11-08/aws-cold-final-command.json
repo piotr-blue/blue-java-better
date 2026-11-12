@@ -1,0 +1,13 @@
+{
+  "commandId": "b696f3c2-5943-4f45-bd17-dc839a55d59c",
+  "instance": "i-0d348bc1ebde2e399",
+  "table": "myos-better-20261105-documents",
+  "account": "owner-qa-2cd3442b5537",
+  "digest": "3df7f13d8239f41c37920b8b1cba244b0bf4627a741460aeac6440e97aa705fe",
+  "counts": [
+    10,
+    1000
+  ],
+  "cold": true,
+  "profileSummaries": true
+}

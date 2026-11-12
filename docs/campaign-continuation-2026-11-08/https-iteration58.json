@@ -1,0 +1,167 @@
+{
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "checks": [
+    "Cognito login",
+    "anonymous rejection",
+    "cross-origin write rejection",
+    "bootstrap retry",
+    "cross-account isolation",
+    "two shared participant timelines",
+    "Payment to Order to Agreement propagation",
+    "operation retry",
+    "retained events",
+    "immutable initialization history after later operations",
+    "latest applied history",
+    "API key creation, authenticated read and revocation"
+  ],
+  "startedAt": "2026-11-09T00:31:40Z",
+  "measurementBoundary": "HTTPS client submission through the Agreement committed APPLIED history for this exact submitted entry, including client network and polling with persistent TLS; catalogue and initial-head lookup reported separately",
+  "agreement": "graph-fast-28e81b7917cfe14291e06047ec9addf6727c88c0fd226e4b",
+  "bootstrapMillis": 5236.779833,
+  "passed": true,
+  "orders": [
+    {
+      "order": "graph-fast-c8b86d068b1f6d74d346614675cfb1bb1a90f98ef6640d4d",
+      "payment": "graph-fast-ba24f2f783f2c3a966818e7a411e20ebe787f145331a00f4"
+    },
+    {
+      "order": "graph-fast-217ffe8dfad9651c1e5fe2538fa25282e22285d6c5f13b63",
+      "payment": "graph-fast-7576f1a3d8c065b55796737a2b1ad9d3ba3074bdfff48582"
+    }
+  ],
+  "paidTotal": 400,
+  "measurements": [
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-28e81b7917cfe14291e06047ec9addf6727c88c0fd226e4b",
+      "submitMillis": 801.7360409999999,
+      "parentObservedMillis": 6908.966041,
+      "businessStateObservedMillis": 6401.885583000002,
+      "entry": "AaXLhNSCUDnPE3271gojRNmxgxhRgUxKh8SCi72G8kB8",
+      "parentVersion": 2,
+      "catalogueMillis": 500.6374579999999,
+      "observedWithCatalogueMillis": 7409.603499,
+      "submitServerTiming": "app;dur=559.628"
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-c8b86d068b1f6d74d346614675cfb1bb1a90f98ef6640d4d",
+      "submitMillis": 603.2302499999993,
+      "parentObservedMillis": 5980.412707999999,
+      "businessStateObservedMillis": 5445.842541000001,
+      "entry": "76sh5qENJ9RpDucTmXyvAsBrnRejBHicw62PA53HYEsH",
+      "parentVersion": 3,
+      "catalogueMillis": 501.99295899999896,
+      "observedWithCatalogueMillis": 6482.405666999998,
+      "submitServerTiming": "app;dur=332.295"
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-ba24f2f783f2c3a966818e7a411e20ebe787f145331a00f4",
+      "submitMillis": 614.4739170000015,
+      "parentObservedMillis": 3089.006542,
+      "businessStateObservedMillis": 1777.736124999997,
+      "entry": "5obKdtxjnrFkFrdPd8y2PqQrS4xzt5XB2D4yH9tBQL6J",
+      "parentVersion": 4,
+      "catalogueMillis": 504.70995899999946,
+      "observedWithCatalogueMillis": 3593.7165009999994,
+      "submitServerTiming": "app;dur=371.804"
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-ba24f2f783f2c3a966818e7a411e20ebe787f145331a00f4",
+      "submitMillis": 372.79295900000164,
+      "parentObservedMillis": 3115.234667000003,
+      "businessStateObservedMillis": 1855.5038750000037,
+      "entry": "AJcd8s9WNiuTJ1Kf4yZwd1zwPrRgKCtAWS8fveKNfTxs",
+      "parentVersion": 5,
+      "catalogueMillis": 502.95258300000256,
+      "observedWithCatalogueMillis": 3618.1872500000054,
+      "submitServerTiming": "app;dur=130.606"
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-ba24f2f783f2c3a966818e7a411e20ebe787f145331a00f4",
+      "submitMillis": 346.5205420000004,
+      "parentObservedMillis": 3058.783208999998,
+      "businessStateObservedMillis": 2504.573542000003,
+      "entry": "AMAPLWyktf6YMwMB4MgPStZWShQaSQyt98DQFVfP7t2C",
+      "parentVersion": 6,
+      "catalogueMillis": 500.29599999999874,
+      "observedWithCatalogueMillis": 3559.079208999997,
+      "submitServerTiming": "app;dur=104.903"
+    },
+    {
+      "operation": "placeOrder",
+      "document": "graph-fast-28e81b7917cfe14291e06047ec9addf6727c88c0fd226e4b",
+      "submitMillis": 343.57916700000146,
+      "parentObservedMillis": 3685.3410420000046,
+      "businessStateObservedMillis": 3185.159167000002,
+      "entry": "4UqAcPFFqjX4P5zRFwXJD2WVvtoh5N5jcSSWWjVKydWs",
+      "parentVersion": 7,
+      "catalogueMillis": 496.5339170000007,
+      "observedWithCatalogueMillis": 4181.874959000005,
+      "submitServerTiming": "app;dur=102.570"
+    },
+    {
+      "operation": "preparePayment",
+      "document": "graph-fast-217ffe8dfad9651c1e5fe2538fa25282e22285d6c5f13b63",
+      "submitMillis": 443.51295799999946,
+      "parentObservedMillis": 5349.712625000002,
+      "businessStateObservedMillis": 4796.640375000003,
+      "entry": "3e8dXpfGejH7HC2wvUowYLNyVgNktFaTLuaaEdjUcgu4",
+      "parentVersion": 8,
+      "catalogueMillis": 550.727166999998,
+      "observedWithCatalogueMillis": 5900.439792,
+      "submitServerTiming": "app;dur=199.751"
+    },
+    {
+      "operation": "acceptPaymentInstruction",
+      "document": "graph-fast-7576f1a3d8c065b55796737a2b1ad9d3ba3074bdfff48582",
+      "submitMillis": 560.8119999999985,
+      "parentObservedMillis": 2895.1910420000004,
+      "businessStateObservedMillis": 1661.332625,
+      "entry": "Bcbsq6xnF9kvF8WruJNAFaVtfPhecP8Xd55J3jXnDXQ1",
+      "parentVersion": 9,
+      "catalogueMillis": 500.2296250000029,
+      "observedWithCatalogueMillis": 3395.420667000003,
+      "submitServerTiming": "app;dur=318.792"
+    },
+    {
+      "operation": "reportTransfer",
+      "document": "graph-fast-7576f1a3d8c065b55796737a2b1ad9d3ba3074bdfff48582",
+      "submitMillis": 346.9967500000024,
+      "parentObservedMillis": 3048.6863340000027,
+      "businessStateObservedMillis": 1818.5745420000003,
+      "entry": "8qbiL4LVvLzVs22FkNp1gdKTTgTE8iPZ86dbLjbm21i3",
+      "parentVersion": 10,
+      "catalogueMillis": 499.363792000004,
+      "observedWithCatalogueMillis": 3548.050126000007,
+      "submitServerTiming": "app;dur=105.244"
+    },
+    {
+      "operation": "acknowledgeTransfer",
+      "document": "graph-fast-7576f1a3d8c065b55796737a2b1ad9d3ba3074bdfff48582",
+      "submitMillis": 375.1379159999999,
+      "parentObservedMillis": 2996.4755829999986,
+      "businessStateObservedMillis": 2470.146457999995,
+      "entry": "FjBeU6U2pMd3TmP56dNWTu4jSRHDQckafM8swsmH64T6",
+      "parentVersion": 11,
+      "catalogueMillis": 500.4564170000023,
+      "observedWithCatalogueMillis": 3496.9320000000007,
+      "submitServerTiming": "app;dur=104.056"
+    }
+  ],
+  "exactParentCompletions": 10,
+  "parentCompletionRangeMillis": [
+    2895.1910420000004,
+    6908.966041
+  ],
+  "medianByOperationMillis": {
+    "placeOrder": 5297.153541500002,
+    "preparePayment": 5665.0626665,
+    "acceptPaymentInstruction": 2992.0987920000002,
+    "reportTransfer": 3081.960500500003,
+    "acknowledgeTransfer": 3027.6293959999985
+  }
+}

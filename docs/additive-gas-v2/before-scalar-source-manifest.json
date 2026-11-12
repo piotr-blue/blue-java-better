@@ -1,0 +1,1577 @@
+{
+  "files": [
+    {
+      "path": "blue-java-better/build.gradle.kts",
+      "sha256": "2ce892080bbbdb3d6eaf49edbcac65b1e6d84298a3f688ae94c7114174a6106a"
+    },
+    {
+      "path": "blue-java-better/gradle.lockfile",
+      "sha256": "e196b153e825e455f83e15c2e8d40c224636cebf8b7ba747c6b6d560e6a46f25"
+    },
+    {
+      "path": "blue-java-better/gradle.properties",
+      "sha256": "8ac475378d3607794162009e88a9597f8dbe9b7f25f459275efca7c339b61bb3"
+    },
+    {
+      "path": "blue-java-better/settings.gradle.kts",
+      "sha256": "50d630569d7a7c8a9d16b7623005ffdfbf7907bf910b55b7fb4fa17316af3cae"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/ConfigurationReuseProbe.java",
+      "sha256": "8861e80ed7d13411a8c14e7e66a25ab0d5a81aa62e47ef98d263cebcd0d3ffa5"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/NormalizationSharingProbe.java",
+      "sha256": "c9e6b4d7945d59416db05e2787d7376ade87e98e3deb27306fe5bcd827477dcf"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/SessionCompactionProbe.java",
+      "sha256": "ba72ba0c36d1af80c4c4c6b3a92e823272d662da8c95520af8388c42c4074c28"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/examples/CanonicalAgreement.java",
+      "sha256": "10604f68689eea600da0baea543cdf58e5c70c4dc082bfb28369753e524be7d4"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/examples/CanonicalClauses.java",
+      "sha256": "2f7b4f4993693e623edc5bc23ff4eb8d068c2496c60d64d81526305a8362bc88"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/examples/CompleteTutorialExample.java",
+      "sha256": "9b64a7cc5021d0a66167f8a1782496753480b334fcb0c0ca6fd6ff19358523a3"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/examples/PackageExample.java",
+      "sha256": "a6ef479c90217c022eed01f9ef163b3ff1330622968e0b798398dd4dcad06996"
+    },
+    {
+      "path": "blue-java-better/src/demo/java/blue/examples/TutorialExample.java",
+      "sha256": "beaaac1baf38f1d23e3908e05eae62e4807fa6ecc3fdec074ce30e431f7604c6"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/canonical/agreement.json",
+      "sha256": "acde78e80ccc80bbfb9c7c6ea43e38e26e44f16bf01a3e5ea1c9439b9ff6dbb6"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/canonical/connections.bluepkg",
+      "sha256": "dcfdbb09596ab9dfb5e0d51a80a7395f01c7daa8d350e7bddfff8ab6255fc928"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/canonical/order.json",
+      "sha256": "fb9620982ab07c74dac47112aa99dddb472ee734e2ae2ddd195f6d8816e85e2a"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/canonical/payment.json",
+      "sha256": "18edf41c7952d2468977f7ab3cc3e23b3f6546c6ea93f814d7cb08976d567d30"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/README.md",
+      "sha256": "e77c04e1b790c4c6e8bfc9d41fd50416128dbfc42576ed2899f932b56b1613f0"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/SOURCES.json",
+      "sha256": "74b783419f623ff6227e8bc4f67cc49984a6adb3002b3b64a8db0c44fec3150a"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/content.bluepkg",
+      "sha256": "1501c6be23f8c29e7c743e5f2fab6d6a0cc81222e818848a6fff88fd85cd8f0f"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/contracts.bluepkg",
+      "sha256": "405bcc2749e45ae6cee435c42043a5e7dae11d7f9acb8a6acca19d7ac3170f8d"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/drawing.bluepkg",
+      "sha256": "68e4eb7b0a325f17ae59cc4687cf1b15510fcf284d09ed341b99aa3c1bbf90c9"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/geometry-v2.bluepkg",
+      "sha256": "af2e8b9584bf5eb0cf796a6825eacc83c36964434a03c70f1e54c4f66114bfdc"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/geometry.bluepkg",
+      "sha256": "34a0b49b48bc4938b3bf97fba888e101ef80c764441d6553bd376913c3dcd80d"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/packages/language.bluepkg",
+      "sha256": "fbf9913233a036ef6a31729bfd2cc415f84075cf3e891d2cc9d7099d6afc4d6f"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/SOURCES.json",
+      "sha256": "c7bd3a304f61cdffe575222c7a0162c4c30be0f776a260e29b2832966a654d15"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/counter.yaml",
+      "sha256": "5c1db688324c34fedcc6efd17237e1a05ed40e4276f47eba01c2ede8f7038234"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/01_blue_workbench_and_identity/01_xyz.yaml",
+      "sha256": "5a0286947324076f8ec82a08cb54fe3f51a905ea6127bbd45089f9bc458af575"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/01_blue_workbench_and_identity/02_xyz_changed.yaml",
+      "sha256": "f723db02f35bec1a85b0a6bd32f4a488a398425b37c140eeb6191af6da253803"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/01_blue_workbench_and_identity/03_scalar_compact.yaml",
+      "sha256": "d09edadd173a8bbc233d47dcafc30cc876af2fb569812f2bbe0e92a1905bbce8"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/01_blue_workbench_and_identity/04_scalar_explicit.yaml",
+      "sha256": "a0bd06859e919568c92c817676af68779a4b75e2806c417e1ac2d03f0741248a"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/02_content_graph_and_references/01_parent_inline.yaml",
+      "sha256": "fb2b99346f33aae98ff47098c0a5db5f6039eac4ad8ad80a7cbc5dd423c95aa1"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/02_content_graph_and_references/02_parent_reference.template.yaml",
+      "sha256": "729afa9a8a28ea74864df55c8a6067bb4f7fdbb377f0382e542600498a81db23"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/02_content_graph_and_references/03_missing_reference.template.yaml",
+      "sha256": "7d0dc456ef1a5b40cccdd017ff28af7ea60279d5a1838a0d961103268570e01e"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/03_types_and_liskov/01_point_type.yaml",
+      "sha256": "ec1d63c4a468130f49480a4be863ffb4a613337758636059940a96b20731d202"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/03_types_and_liskov/02_colored_point_type.template.yaml",
+      "sha256": "31097f0f2c0e4c1202987234621ed2c4dc5197cd3833a1adea886d08ff301024"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/03_types_and_liskov/03_valid_point.template.yaml",
+      "sha256": "52043a14c328e257b6237ef198615811bde9e6dc187ca01b3f38f9587f935390"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/03_types_and_liskov/04_valid_colored_point.template.yaml",
+      "sha256": "494669a943fe51f297556a26d420bdf1a566db4877030220b10d74c8d522c4ef"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/03_types_and_liskov/05_invalid_point.template.yaml",
+      "sha256": "c79f4f2fb0906ed6d97fe69298a51b65892c0015a34ecec0c6c004597113a000"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/04_lists_and_canonical_forms/01_list_compact.yaml",
+      "sha256": "9c06b7a59b547a8719eeeb794d64ba96f0672d2a61ee3f4fc934a325e7e6912b"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/04_lists_and_canonical_forms/02_list_explicit.yaml",
+      "sha256": "dfd3fc327c6952a0577ee7ce65576acea05578dc0ef0c007b6be1015119e7574"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/04_lists_and_canonical_forms/03_list_reordered.yaml",
+      "sha256": "67d1813a7cddfb1ab17779fc0d3668eca2c5c5070d4d96b8a75609b92dd5e27a"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/04_lists_and_canonical_forms/04_empty_list.yaml",
+      "sha256": "c06e3ee65340d2bbd851226413f9384aefe27258fbb8f2500a0ce6185233a6c9"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/04_lists_and_canonical_forms/05_type_only_list.yaml",
+      "sha256": "679a68f46eb2b06ca3ea461abb5dac4aee6bff22a82da67adb2861845887c4c4"
+    },
+    {
+      "path": "blue-java-better/src/demo/resources/tutorial/original/07_reference_transparency_and_missing_content/02_counter_value.yaml",
+      "sha256": "8bc8a1b1f507566458dbcdcbee891a10c3d88f28dac345731dfb2e5d20188b17"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/BexDataBenchmark.java",
+      "sha256": "03230ec2309c10f4c46a51fbc83da72dbb737a213a600e0d476e14f33a6da20d"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/BexReadBenchmark.java",
+      "sha256": "1031a2131090104d49acbf7ab7566dce30fbf70b15ae027f250ac65783d7cb68"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/BlueIdBenchmark.java",
+      "sha256": "b6f53c2a18314552c4d56b9bc16af2cb6acb7190ba7a6943309d042714b869df"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/ContractArchiveBenchmark.java",
+      "sha256": "7254f6150f613b29186bf2324f81843f9c4f5121fcf824d493955d8eb71a76da"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/ContractRecordLookupBenchmark.java",
+      "sha256": "d58593ba13f0d1eda36d4237a14e7b7568329d5d16cdf7a9c6ed9816c8d3e480"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/ContractRetentionBenchmark.java",
+      "sha256": "831c7ff77e4ca85f5659c3ef0bba17073934e1d74bbb1894e1824fa532c12bd7"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/CreationBarrierBenchmark.java",
+      "sha256": "a5ea87ba9525be7ed8ee91ef42d197221d32e1a42125532bb73fc332a13d5f2d"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/EmbeddingReconciliationBenchmark.java",
+      "sha256": "aa2806a295df7e61425cd3fc991403e093d414e6f8fbcc7cdbe3995113c8c6b2"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/LanguageEvidenceBenchmark.java",
+      "sha256": "c709cf1afb3e3360d60cde191f049ce5b45eff4b7269bf49630b76a5737c4169"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/NativeValuesBenchmark.java",
+      "sha256": "87a65d6ecccf06d562d4c7f9dc31dddfac58dfd63c3cfd43535fef1479d571dd"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/NumericConversionBenchmark.java",
+      "sha256": "7b17e38e6e2dc50c5df06fdea36df467e03502a6cccde70cb4dbc57055f9b319"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/bench/CanonicalComparison.java",
+      "sha256": "337f6894471afa14d14b192b2b94937ad4fd58a3bcfbee337702a433ad1e1b23"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/bench/LanguageBenchmark.java",
+      "sha256": "92fca9ad40c37de82253a1b9f7a76ec606e605e10b2413992c4f15ddb38d47b1"
+    },
+    {
+      "path": "blue-java-better/src/jmh/java/blue/bench/TextComparisonBenchmark.java",
+      "sha256": "37c1da91f95daca2f75cf678bb8f2beaa6d7f3ac3417e4cc110502c1705aa883"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/AdditiveBex.java",
+      "sha256": "3c93cfb86df07f0ea899c29b55dc8d7035b79be6107bc4ff7050621ba8513dc4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/AdditiveGas.java",
+      "sha256": "58d6c38d3fa5b25a950c64a1447954cf7c33edcd67b6d7c18e4107d697239300"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/AdmissionEvidence.java",
+      "sha256": "de1eca7481ad447768edd3cb2bb9a7c4e1113bb1e6d8acb1e932548630299933"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Bex.java",
+      "sha256": "437185bf0c518d0578cd97a447ad3c74b1d3a3f725af3a56fce355e3a7b837e2"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexContext.java",
+      "sha256": "a1244f5b206e2671d2f4a49b154d359a569d6c509da57fb6a69339dd3a4eaa53"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexEdition.java",
+      "sha256": "17f403aac81a07c31ad8e13bc5245e9c624d44343b3340be7554a686ca842e80"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexEngine.java",
+      "sha256": "0752c75a9ba5164f437a7b071f16af94db1b7c523d850966bb9b5ee6cad9b2f9"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexFailure.java",
+      "sha256": "6d48e1fc45dcec8ad1cc69b106897e4c3d142d318faa877b7a933c80a03484b6"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexGas.java",
+      "sha256": "cfe806abf186a11f0e1f9712c26f1defaf455d5ba704dceaca90cf972170f1c1"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexKernel.java",
+      "sha256": "f2a81781287b36a2cd54387096c99fa9e50cd56ddf95e2165ddf24fe5f0f5ad6"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexPlanCompiler.java",
+      "sha256": "577ecabd87d6b2f6a2669d6e84208a575230750eed5e43034741972c509bda17"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexTransport.java",
+      "sha256": "a85fc93501a103b76bd1c875c949fa80ca59562f92973a746c0fe5e01e7eba2a"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BexValues.java",
+      "sha256": "27200c9443e477c554f8e95bfc75dfc1aa99754335be84421878d97c03aa3df7"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BlueException.java",
+      "sha256": "0d0016e193c898ab089ee0f5431114b2a8af13c214b8275a10c88bee9658eb1f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BlueId.java",
+      "sha256": "ed6d6ff11fc37b2a1f2965c3c69bdc7b734b6e4e8030ef6e3a9891c70a507c7c"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BlueIdSyntax.java",
+      "sha256": "5b601e78ccad8a4298f64583ea2cfc25c1c883edc75c4e332b0e63af5d0db9ff"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/BluePackage.java",
+      "sha256": "e28cd67e5dd164546570e944b6e6e2cee5e00f0d30fe2d0197218167d4fcd676"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/CanonicalOutput.java",
+      "sha256": "df15f5646111cd77911c097ed0900bae416aff650c1e46a3528c4e7a8ef6c852"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/CanonicalWireMeasurementV1.java",
+      "sha256": "9027411e382bbe806dc1e895f311829da8ece6a4ecffb457a50be9cf258a266f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractAttempt.java",
+      "sha256": "ed02fdd8e25d6a0db7d1ac7eff84163eb99cc332b629a10293b6fa6a197553bc"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractBindings.java",
+      "sha256": "8f436caf62f6fd973e005b69aeb1cde614626e5f7e2615e6b447cf74e9d07753"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractBridge.java",
+      "sha256": "efb7daeccd24e77a6cfa073786d0b412d9e3b3906a68efef559f36e4712ecef4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractCache.java",
+      "sha256": "5900aa60c55e0e78dbdb3b9ce22c36154a3235a9bc3dc828eb63850fa339c71f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractCalculations.java",
+      "sha256": "7f704b2ed8fb886389391571af0502bd3a34350dfc2f67d9b4e174f6cd35c222"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractCanonical.java",
+      "sha256": "e4007c9b9332403d991b677c4f84dc84ff1faad99e36754c30af674e20705020"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractChannels.java",
+      "sha256": "5c79bc8920215eb2f0acd7281b239d2b52203770059ac0f28947fa61a2f020af"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractCompletions.java",
+      "sha256": "ba275989c38ec486c842ce4c1747ae6fc23fd64a6b0b0e73ec9c0ca488e14423"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractData.java",
+      "sha256": "59b0b8b44f3802cab0f8b5dc3fc08972347c52dc260c574d11f814fc73e0a1bb"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractDefinitionWork.java",
+      "sha256": "faff9c0a3d728a8edd082c2eefd2a10c9417eb01c2ef0987a287cf4e896e0c2e"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractEvidenceCache.java",
+      "sha256": "996ee2e302327119dc977cb6990f03e18ea24967b65f70db14c064340c84a17e"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractFacts.java",
+      "sha256": "a8ea8f73ef809d89c6089bbd28765199d40978f9fb4eb8f0e6577f062905cdd5"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractFault.java",
+      "sha256": "d871c6f7bf1b458844be68212c0927f549d7250eb9c4c889904352a5d66ac5e6"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractGas.java",
+      "sha256": "cd506c7fc9925b74758ff75b8bf12251793227f67d1747b80ee208cfe66ffd20"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractGraph.java",
+      "sha256": "80c3baa030b73c75bae878e0dbda7ee7d0708ee0cfdaec2ddf0630c533e39881"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractIdentityMap.java",
+      "sha256": "09fbdaee4f88442908c98aac33190707beb46b0d2a3f82cc9ef712e1ea1ff2bd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractInspection.java",
+      "sha256": "dcda760b400b58b9868fdb1f713960737b0c70a91c99791c7528db62a42ae1c5"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractInventory.java",
+      "sha256": "235cb2bb4aa06dfdbc72e0d16ca7f56ecbf1cd02d46466ddeeae09954e98cbdc"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractLanguage.java",
+      "sha256": "79c1109421118b2f069782781bcd86e2384f04c745e11cb68d9f3cc1f537ec3b"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractMetrics.java",
+      "sha256": "0d617f90b46666e423a81902884a6d63b20640911753368a55667bfbbb8e5f51"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractModel.java",
+      "sha256": "e40faa86b6dcb06924f43cca289f63718f1784bbcaca3938d8814f5eef5db3b6"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractNative.java",
+      "sha256": "870f15c7b9fab9d8e39768a856d5f8b12591f4c8ebd0cb232c56fef97635fd8f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractPortable.java",
+      "sha256": "06bf2213ca83dca409a8c5d8a1bd84b033c05d349be78834cda8e5c1239a3080"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractPreparations.java",
+      "sha256": "02241cd9bdf0c35d214dd3b9104c3118b9eed84900977636c696abd6d5a358ed"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractProcessor.java",
+      "sha256": "82b27bedcd47d7c13bd01287afe1fda5f6730466f50f51a0877ee8111cd9f243"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractPrograms.java",
+      "sha256": "bf212d092a1eccddf11f555e3a7dfbf52c5f5af4d986469f5e69548422e138da"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractReception.java",
+      "sha256": "5aa3f5b0c871ae4018f248e26f892923c7527f48958997fb8784b761d802e0aa"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractRegistry.java",
+      "sha256": "833daa94552713660e3c52035986386eb3b4c0efd2a4145466d3677aa5fe61bd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractRun.java",
+      "sha256": "825dd459f25cc363842e3951f375cc642dbf79bc1d4a32b0963ab12a0e3de3a3"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractRunFork.java",
+      "sha256": "60f08b0b1055c2feea7af752c33f764b0ec3c27ee26d4d204879919c86c08716"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractSchedule.java",
+      "sha256": "ba7f7452ec666bd01212e33cbe2a45aa46b250fb0b10cec737db77cd1124f06d"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractStorage.java",
+      "sha256": "c594c5c0a74ada7c484041489573348a5d3a73888b5c318fac5b420004234f02"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractTopology.java",
+      "sha256": "3262f2c817963df1538005c85050c64d512b84d9a39604fc41f051ef6402bea4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractWire.java",
+      "sha256": "f005a9505a165b609538eefdb2fed42ddf6c990629ff54c39518282da08e1542"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractWork.java",
+      "sha256": "6fe86def54a49655e4d44105c4083ef291c6072baa9edeb8b9ee213b7b5bf837"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Contracts.java",
+      "sha256": "29e4081272376f401370f325bfca7cb7a92bf14edd1ac38cb00ea976254b5ebe"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ContractsEdition.java",
+      "sha256": "bd697fd47fc509b016f8956167bf79ff316dcb8f1bb63c8e7e38b3851bd68152"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/DeterministicPublications.java",
+      "sha256": "2e0f957e28af8ca4d8d5815b17812b364ff3ed96f084017f5eb296336d886ae2"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/DocumentDispatchV1.java",
+      "sha256": "04530cf50c57fceee6ea745108d50eb33b3fb5442fbf2eac0a5ce32e3317ec2f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ExactNode.java",
+      "sha256": "5184af91732668a93a7b5c628d557a0d437e2dccc67f3c1617ea5246302163a2"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/GasSchedule.java",
+      "sha256": "65dfaff18bdb53c15b89841f79323da2091f0a667550cddcc13d1356c5b8d266"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Generalization.java",
+      "sha256": "65d9b297e0967062c487aced66d9cba0226da9918025ffd001714e89f17e03c4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Language.java",
+      "sha256": "aed4050a574b824896b9e3fd3cbf223fb4618b758fdd5518e824ba80eb92384b"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageAdmission.java",
+      "sha256": "9d4b22b3ea56261970f2228fb885f281ef1b3bd75c626aaee4aa451e27cc9d9a"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageCheckpoint.java",
+      "sha256": "f224d7ad3bff2c0229ea3e3ecc0c2d458f2c277b7f16721695b3e3e385d58c28"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageCodec.java",
+      "sha256": "4ba16939756e92114db2586b4d4141c889646c9d9517b82d6662c91d45273678"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageContent.java",
+      "sha256": "d1bb5e2ef9f90ce6d7a6a0d2eda3627de4129280f46005e9e2455b361121803f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageContext.java",
+      "sha256": "249e3a21d4c739d24bfa1767d4240edccd1b6db8a7df620db3ed07d24e74c430"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageCore.java",
+      "sha256": "db03d67e8003872cd0ceb2b7cf7cc60fde2a23fc3cf70f1f0eb1ab1958ae6ea9"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageDiagnostics.java",
+      "sha256": "1db85d28dda72959659c1fc03ef5f911e0748dbf66e1ad76ef97d841d03c3ce9"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageDocument.java",
+      "sha256": "a3e4098df406c088fd427e9e496e0e69fc8ae6ac2fb9e23e22616a1608e59aef"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageException.java",
+      "sha256": "3bf0f0a4f7e1984f728fa327596894302e8a41be2b7438a7753ba885104aed78"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageFacts.java",
+      "sha256": "5c15511cad0a4ecc06deb1cd4b54e035203b130ddfae8e81a4d9caca5f431694"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageFailure.java",
+      "sha256": "f2c4e4c04f2b8ca0ad19b84e38ba4110ab648ca5c0a8d7b6d2ef595df029eb51"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageFragments.java",
+      "sha256": "e87eb57f1bb7cc645768837767b50845ae068a77244c5df5e4d6081614a2a612"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageMap.java",
+      "sha256": "772cfb0393a97d4f78cfb6b1342a6a8e430a09700d695e82a8d95052b4534924"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageMemoScope.java",
+      "sha256": "69a922eb15df674a02d021c744ac807f369b529ed15ec9aab1b0817e5200188b"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageModel.java",
+      "sha256": "98753781109dd11c2deddd61a3498ffbfe3d6a65057f6ec3fd1c379ba5b0fdb8"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageOperations.java",
+      "sha256": "6e84fe0eff89d136a3ccc36f26bae944929144a8ca476abf0e2547653e507ebd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageProvider.java",
+      "sha256": "5369e2fe9f6ed5f15e34f8a2f188fb4ef136239a4cf4d26ab888f049ee3bd69a"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageRecord.java",
+      "sha256": "62d220f20074359070996cb724bbb812f61f85e376d8e13c0d90c5ae7c1a3873"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageSchema.java",
+      "sha256": "e267fbefed710937b8148fb54d6c22597193b4d3ac114a8c9e0394c6e3875a34"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageSemantics.java",
+      "sha256": "c67c7714647bbd8b87cf0b339377f5dbe977672e69f9ca73117e00bcb60f594c"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageSet.java",
+      "sha256": "c6f483d7b70a6a43ea2979514de64848d3ec03fbaf187563e471deaede6f9aba"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageSource.java",
+      "sha256": "889d7776a78b6c92083a83c1ea6cfc5c63ccb0b04f2c30643bf26aa84ff03b43"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageSyntax.java",
+      "sha256": "84384c510127a8e529013782c6aa453c994fbf71cc614b6946bd4407a09a33bd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageTrie.java",
+      "sha256": "2d47d88b66dae29f4fb4e51b7a29caaff5a6d93b34ef5ec604050f62684dfb5a"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageValues.java",
+      "sha256": "12da4a534d7f9a00759762b04992dd61fad6095a2a59a30d4468600bba06cd91"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/LanguageView.java",
+      "sha256": "58bb636cf6dd82166871a4d5f2993ea6cb87771cd019dcc6bf4e2fe3add8a06f"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/MeteredText.java",
+      "sha256": "3f5623cf74a44e008a8192ab5dc74551cabaa67287e892b947df09279a5ee5bc"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NativeAdmission.java",
+      "sha256": "189764e64b8433d6166007ac5426319ebb310b5c347c8fd3c28c5b7e72df2735"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NativeChannel.java",
+      "sha256": "16b2019ca988449b390bd617d96cf6be2bb6c2ddf9966bd1ec34b5e7a7eaa1cd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NativeStep.java",
+      "sha256": "273120de1bde25cd677f0e8061b14a800292bc09998fd71a351a10bef8e13799"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NativeValues.java",
+      "sha256": "977915aba72a1244896327007597ee59bd623b3fb4c895767a3242bfbcf38f83"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Node.java",
+      "sha256": "4fe3497292e7d2b9faa5cf800c921f162adaf8a0d23a99e579c57ce836c6207d"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NodeCodec.java",
+      "sha256": "f45b430ed494b0134a8b8f43e1bb991b25134296c8994fe19a797c689795ee30"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/NodeProvider.java",
+      "sha256": "29bd9db30b91cb8ec76b95d939ef3fb994f9041fa524ff9e2192d740888aa69b"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageArchive.java",
+      "sha256": "e89a9b5d404a7655ae4eadb2b4e6c5e5803a50cc556a657dfe08e9b7b992d58a"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageException.java",
+      "sha256": "0f5571db14a14da541504d0dbd7938deb885184cf28ee42200966f8641d7e1dc"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageIntegrity.java",
+      "sha256": "fe45049b01113780bdfc13100fd0106f310e04266921cca7c95f81155849a6ea"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageLimits.java",
+      "sha256": "f836a5fcc5dc78a873203311fc920a1e230cb03be92f2d2a70e504bc8d48a37e"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageLoader.java",
+      "sha256": "d3eeb7521ee652de69404f2ff1abfa2f969c00c961f5f27d68ec6f5b85e05ab0"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackagePaths.java",
+      "sha256": "9d5011682a63095ef6286ddb8aa17a7b7755ad5087f30b9025b291f891d45556"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/PackageVerifier.java",
+      "sha256": "613fa2684dd8c1e7ad077e2abbb24bbe80b5b570a98a00d8a38215da77f05f12"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Pointer.java",
+      "sha256": "3f2b9815a8e026fd1cb70405fd07327b1f1a1cc914859aa1eebd34e8ec240a0d"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ProjectionBudget.java",
+      "sha256": "25150e10d5c727f2fdfddb5996647dd7e725e724f28a04164dd331d7ff2b2599"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ProjectionLimits.java",
+      "sha256": "64281e9334097e7e2bc5c4c05d060b697d28c04ce020b532a81674fe6f5587e4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ProtocolPublications.java",
+      "sha256": "4c1208117c3909916444706d4e8a7e01d9f479e2499dea8d7518aaf44b8764b4"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/ProviderSignatures.java",
+      "sha256": "4fbfc684fc4e09842b55c43277a595f3c1359b7f5908244d37a77ac041809957"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/Rational.java",
+      "sha256": "ebcc782d038b98e44ad2ccbeda950892614fd8f0325321aa51c8abf10f117101"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineAccess.java",
+      "sha256": "07773560bb83f547831590a7e900ca96cd7540575c4b1121b066d757fe4ae0ee"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineAccessDefinition.java",
+      "sha256": "7c1acd8077db7c7f1026adb28f17e031200b97b719d16657029a31cbcad6be76"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineAccessProgram.java",
+      "sha256": "2a9704503dd140aa7bef986d573ce9147ea6c34316be0b89e86b687254e76970"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineAccessReplay.java",
+      "sha256": "211bd699e69620ba28be63e10da96346fa421012204fa0a8989df9af33a17e72"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineChannels.java",
+      "sha256": "8cbd1495452760b2a99c26523b6ae5e24222344621c5ce449889b0e083f93dcd"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineContent.java",
+      "sha256": "97738e145e86c7ba65a6cd0b0d19ef5a4268b6e5ea6fff7e48c00db997e3ae97"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelinePublisher.java",
+      "sha256": "0fd6652c347b64006a0655002d505eeb390200e8d6424ed7a86f66c459dc79b3"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineReader.java",
+      "sha256": "fdb0259a28b121e6940ae5b2b2485cad8d9d3e6660599e8a3841a4b5729b1dc6"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineReads.java",
+      "sha256": "c55c92b450c5daa5d09d2fd1502e6a21f3d01eb771076e8c8e3e716009dab57b"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineRequests.java",
+      "sha256": "200aa98969142e2c1e2a91fbd4556cd69e92dab7b148b0210a1cc6c393328fba"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TimelineVerifier.java",
+      "sha256": "d7ea4a8ae9375ff10d4270ac8e76deb6b044581d3adedb25916fd33d0510a6fb"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/TopologyMap.java",
+      "sha256": "1545046c50044b97ece4f3675409fcf8bb3917c12241aca3196939808575539d"
+    },
+    {
+      "path": "blue-java-better/src/main/java/blue/package-info.java",
+      "sha256": "cb8e8ab76d947f1ec19b0c39916eeb12b42a18a7a29e5100a80d25400c9c533d"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/casefold-15.1.txt",
+      "sha256": "c0e1957822d46966d4d6ce7935de171b4c1afdda798ffea3daffa7caca6d5c73"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/Boolean.json",
+      "sha256": "608f30cf9e47ccbdb9f77192c6bbced96ac64e4776d67e68e614fb1f0573f147"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/Dictionary.json",
+      "sha256": "ca4b23c5a5baaec8e6e627b4f98758e003d5da4fcae5f51a7a3bca57ff8a7e8c"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/Double.json",
+      "sha256": "d482eab4e1fbc334f75902015610bb89c36b9d61c40b74c99bdf900cdba11f53"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/Integer.json",
+      "sha256": "9ee1829a188dc21a74a0fee0f576668a979d80350d510aa574a0b508512b3986"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/List.json",
+      "sha256": "7b4fd14d8dad9739a521e971a6e858a113af2bd1bc23db8783703cd39a329d33"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/registry/Text.json",
+      "sha256": "85bd424b0aa10325a6187ea2c042fd757ff4e5817b3c3f9181b902c7a03d75eb"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/standard/Package.json",
+      "sha256": "1ecba7d114100f094c4acc27d0cc9e810804151102dc666734ce1f6fb0598313"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/blue/standard/ProtocolSpecification.json",
+      "sha256": "3ea3b47ffa150220f70dc0e5632ce5b456af49e7dc4595e176f52d3d205b0aef"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/contracts/GAS_MANIFEST.json",
+      "sha256": "fa2a7ab4ede39b2d4a273da8ce0208d1d69d271ce56cf291f8376b54a231b810"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/runtime/deterministic/blue-bex.bluepkg",
+      "sha256": "5998a83724b69b4065dc6bd3cc1a0a5af7b5d041e6b3957cbb4949fb2b338f3e"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/runtime/deterministic/blue-contracts.bluepkg",
+      "sha256": "405bcc2749e45ae6cee435c42043a5e7dae11d7f9acb8a6acca19d7ac3170f8d"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/runtime/deterministic/blue-dispatch.bluepkg",
+      "sha256": "412aa71c7758e36cc7e6dc6d5199a98a6baa3a205b4061e5e6918859d7022ef3"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/runtime/deterministic/blue-language.bluepkg",
+      "sha256": "a030dd4c88e41a414918ef4895017862e154b438848bd5c0e4f5bc880e7b8a90"
+    },
+    {
+      "path": "blue-java-better/src/main/resources/runtime/deterministic/selection.json",
+      "sha256": "5e878cfc94e042b1bb923fddffefbb11e904de99415dac906d74e192f835c996"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/AdditiveBexTest.java",
+      "sha256": "28110d50dc9464c0591c7719b4a75b951bbeb775ae649f08d1f274da1da5046c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/AdditiveCompositionTest.java",
+      "sha256": "d72e3eb94d897cf777e3bf7c0c4743534e4f6bc48b8b929d6ae48893fd0b6a45"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/BexNumbersTest.java",
+      "sha256": "dd153f9066186571bf1b958a43d27a9e1bde541c2a3515304fa9edef5d20200e"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/BlueIdTest.java",
+      "sha256": "cdbbc7e61243daeb27d3a535d966bb7cccc1988c786d24debd86c6feab197ef1"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalAgreementTest.java",
+      "sha256": "16dd4bf6f13e805ad045d2e4fa0491aa8fcbc9e39d06dd10108a176f0bf2902c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalBexApiTest.java",
+      "sha256": "f220cf10ebaa4dc3e4e5d9d432f0c34a004063ec8a49b744fe1030d38f364b54"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalBexConformanceTest.java",
+      "sha256": "51254dde9847471171b857728acf529ed470dcce2e7fa2ca109f75d4f024456a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalClausesTest.java",
+      "sha256": "aaed52ff7babdb3ed43dcf7a937d7f7cc00eb2373ece26c8458943def81a3118"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalCompatibilityTest.java",
+      "sha256": "a61b7d348ffecf7453abb9d91e89f998b8318edddfdff8cfb50b81ac485f6f71"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalConfigurationTest.java",
+      "sha256": "54ec562c2a832efcc0257640ec639deb8979cf1d91d775307b3fe7428552dfc7"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalContractsConformanceTest.java",
+      "sha256": "9184c841818585fdbbe2e5ee2df2be5d179ad9e01c229a6bc501327d1eb96fb4"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalEffectTest.java",
+      "sha256": "447db7316b841aabd098d696fd81d9b7721962af5d1c0b17769e836f50c41aca"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalEncodingTest.java",
+      "sha256": "ce222e3716058ee44c1dcc35c7c2a1cf00753fc57160144ea6108ccd8ee091aa"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalInputEvidenceTest.java",
+      "sha256": "eaf5b96b81700e434a2ac98be3579d8824b3da4a31ff9bb47178c509c811b50a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalPortableTest.java",
+      "sha256": "f9c0120587d3029211ef04fa173f9061631ed260fe8ade0859508e0e349ac430"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalReuseTest.java",
+      "sha256": "93d68b96e791221b37f4de6296c6e176bc178b3cd7e776a3fa4a1ece2887fcb6"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CanonicalTransactionTest.java",
+      "sha256": "299283c7b1ee02c4a10994a126946376286a9ff5f0d251004b21cb383e94308c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/CompositionalGasTest.java",
+      "sha256": "789d43a2a7d23d205d140e602b2984b5234db040394496a3903b72707bf56fb7"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractArchiveTest.java",
+      "sha256": "d7ef77c06089d3614e3329b96ba7ca702eb93d548e3af2872d2966c0642dce3e"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractCalculationReuseTest.java",
+      "sha256": "347ace6fadf3cb09b109a66b2811db2f8877958fac3f21e1c9c1ef60b56b1fd1"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractCompactionTest.java",
+      "sha256": "cd94585b1de40f87968a328ee491b7407a55dfdd075f9ac80cc9b41a38c5cf99"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractContentScopeTest.java",
+      "sha256": "995bf24b57c9d78bf074636b2a969fdfe33f056f9465171bcae717f19cdd1fd4"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractDeclarationReuseTest.java",
+      "sha256": "b724398d3d054f64b64a15d92bf4aca7702323844cdf730d83d8728488dc44af"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractDeclarationTest.java",
+      "sha256": "de764a1aace4dc656da4adee1829278b4efd995134858829a4098a69a088ee25"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractDefinitionWorkTest.java",
+      "sha256": "a52ad6813376d0575c4240bd3cec50cfa3a20792121cdb686f063865b348520d"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractEvidenceTest.java",
+      "sha256": "14005958ab9889c3ec0768b025107014c218ff3363c3574d970249fea1147dc4"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractExecutionTest.java",
+      "sha256": "07eba3920f6d615fa6f81843b2c00ab3a2a927ece9d21976b84497f731028b1b"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractFinalizationReuseTest.java",
+      "sha256": "cc3f4077e01d05575aaa612347e2ff505077454e232035359b18273d95413b3f"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractIdentityMapTest.java",
+      "sha256": "15f5943e00ca09742f775b4562580779ed73ee8b9881c4008bd529749e0624e7"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractIdentityTest.java",
+      "sha256": "93c3032d2b02056476612f22377f5e25a3b96f21689db221cbb8c5c33ce054fb"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractInitializationTest.java",
+      "sha256": "2835d0215060a55af28975ef43f0f716da9ceb499ba1cde6382c13f276c4c788"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractIntegerTest.java",
+      "sha256": "c09713481bba362cf100916ffc31d397f5e867610dccab35b9b6ccc92088bcec"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractInventoryTest.java",
+      "sha256": "0c3c5cf02f8fbd432dce7f9b090b0c12075256d9f816bd291a8c4458c8a36d09"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractLanguageSnapshotTest.java",
+      "sha256": "fd2e1562519e049bff00922bdd9a367caab2eba8c9aa0beadb2106c290728daf"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractManagedBoundaryTest.java",
+      "sha256": "159a60040b3bce014e43e07f310912513c9f4a4ca35a137b201f311017d86561"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractMemberRecoveryTest.java",
+      "sha256": "b501ed3369d140de3d77d02caa01945140be19e3e192087fddbe53a65874c263"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractPreparationDeltaTest.java",
+      "sha256": "3c737c689432da978dabb18cacf54576da42b1852a7f24fab57a6d97ee2e15bb"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractPreparationTest.java",
+      "sha256": "eadbea8f3335a036e859e7ab709de791b4c8e4884bb7e0a21cd6134ef940dfbc"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractProgramsTest.java",
+      "sha256": "60cc41865dc559ec4d8d7a54002fc36e20fcced4af03c1ea15975aea8f63017a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractRetainedCompositionTest.java",
+      "sha256": "82f130db699704636892c95afada2ca1286ca6e069d1d864a38d5c518638adfa"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractSnapshotCommitmentTest.java",
+      "sha256": "02669764894d0586e00602284487f96b33edb8bf722147ae4fa95314f7a40245"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractSnapshotDeltaTest.java",
+      "sha256": "b2c9027fac359936340a90c9f745f2fdb15ffc7a76545b1634bace4c853e7eb4"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractSnapshotExportTest.java",
+      "sha256": "43356f33038e8beee185070ed5ddd728c37d75b8d7f5a9c37a31bba301fda8e0"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractSnapshotSharingTest.java",
+      "sha256": "37f21f48cd6656b9681de9830888cb9347e5f14ac6aee6788c9f3a65d68f1e44"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractStructuralReuseTest.java",
+      "sha256": "e7d16fa71941ef2259b6e53372752e4e39934e7b61ca68ae04a6f05c9de1c15f"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractTopologyTest.java",
+      "sha256": "4fd735f7a48a3c91b8b0c612afaa6784a82ebe0447ae86396da34d1e289f6224"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractUnicodeOrderTest.java",
+      "sha256": "524ec1864033dfea87190fc493a2b675f22289faaf2a7f67777a3ff040ec8da2"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractViewTest.java",
+      "sha256": "224a8ea0e4cf2dd6c7d30daccbbd9e86ce423a96d5a70d11689c8dae84516e6d"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ContractWitnessesTest.java",
+      "sha256": "afb0741bbad88eed382f2a5a6a7b34a1129049bce49e79211df67b521a986ad9"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/IncrementalDocumentsTest.java",
+      "sha256": "54561e23cfb40ad9b97b6f66465a08701f6bcc8411e2aec07ef23befd473a836"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageConcretenessTest.java",
+      "sha256": "5c5b883a96d3c912ef6f8bf3017a431ce6ce54b430f8f7b8a15f802c97811858"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageConfigurationTest.java",
+      "sha256": "67350466be718660d4e9e1a29158e30c54796d657ef96f0da9d39b534afb502a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageConformanceTest.java",
+      "sha256": "b271cbecbee578b53aaaff55ae953c85fef3dce84a7a82300340a6b30cd8f297"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageEncodingTest.java",
+      "sha256": "bcc612bf1f0fdde87d79c7e74876503575615e31ec6605c98f507ac097217142"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageFactSnapshotTest.java",
+      "sha256": "d6df82aa5e0979d352388a4d42733b610ef4797276574baa2353c318787991e3"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageIdentityTest.java",
+      "sha256": "2e3127f7b26208adb319599e4dc2b390d8fa3bc136e1111fa5cd2d46cc1c66a4"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageKeyTest.java",
+      "sha256": "3328b009dc8c604118af6dc47be4bbb6587749b85730be90eae90e665fafc88e"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageMapTest.java",
+      "sha256": "803662618de9a27c4eae6793855839db3b4bd8ca5df6f6d81cf3f2c126ccddb2"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageNormalizationTest.java",
+      "sha256": "912447893517ac5621a08430d89d4d28c905389252068d88cc6c69f6d2e0e5f5"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageRecipeTest.java",
+      "sha256": "48cb99138db2b937a58f0a744a23bfda79f3813cad31e202e25ed30231b08139"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageSchemaTest.java",
+      "sha256": "7813d709eb8bcd0f1c0f948e848d119264cefccde6fb11a2105ed770d738e562"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageSetTest.java",
+      "sha256": "133ab2a42c7706225ea1bc5b0a3aafe492c23c7b103d85fb7d3459740518b6c3"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageTrieTest.java",
+      "sha256": "a31531bff9bcc4ddbf919430bee17fef4694b9a1c5e5adeee654c7072bdf36b8"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/LanguageValidationTest.java",
+      "sha256": "477393987255eac7c8177f15e3bba7665ef79464d225c396bcd457b10035479a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/MeteredTextTest.java",
+      "sha256": "724581f1dbadcb82977f073ec1dcc346428bd92817f94edf387186c6b1478955"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/NativeAdmissionOwnershipTest.java",
+      "sha256": "dab47e04e031141ecdcfeb25f06713174372a2e5d01e12a2e31fafe05e81f370"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/NativeAdmissionReplayTest.java",
+      "sha256": "0b08cf1014be77cfbb92765dfca9642aada7b3f417646fc951fee03d001380d2"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/NodeTest.java",
+      "sha256": "166ea45a9dc1376d695ea823150225c60378d565552fb10cebc0cb24e5fac26d"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/PackageFixtureGenerator.java",
+      "sha256": "681687d9409f04a379d2f0b4f128a3823b2c48d3003b0ca939b335ac1efb43de"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/PackageFixtures.java",
+      "sha256": "16d46f9fa6f924ad027654cc44a73f4a941fcf9dd02440f543da6b8e50de3f0c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/PackageIntegrityTest.java",
+      "sha256": "71c64a13dea2ad7bd80f335816b0320f3c8e9cd76016119a3798293c60840574"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/ProviderSignaturesTest.java",
+      "sha256": "e524744a2c6a3a8ace5e04751838cb9674f1b01e03c8e84130a7fbee4030efa3"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/TimelineChannelBindingTest.java",
+      "sha256": "dd402605e5bdd07fe9328e7b53c23ed7cfe49e4060fb0e173b557a2a15325853"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/TimelineValidationReuseTest.java",
+      "sha256": "50ce1420c2684bb51e2813395748bd27e466bced008545993e9ec1c5ad313ed6"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/TopologyMapTest.java",
+      "sha256": "4cf13a95a6e6719638853d67317074a2181344878da1793faa4c4aa370904b15"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/InspectionTest.java",
+      "sha256": "a902de13e761bc8af154ad69d8cb595996d6a1eea0707ba30cf7c09a78f9859c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/NativeAdmissionTest.java",
+      "sha256": "72a13d30dc8c30ad8d2c8cd8bb7a47f600565dfc4596895c80c2e3d1987d8f60"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/NativeChannelTest.java",
+      "sha256": "b552b51f9436d028b96bfec9d630e0a8d366eb96721dfe73857efeba54c297b0"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/NativeStepTest.java",
+      "sha256": "eb9313e7db508eec589d0e40857d00b1fad5c0e77a81d449c3bcf35d1bbfe098"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/OperationRequestTest.java",
+      "sha256": "8e97572abab20b44fca83c48441fe74d223c6a16407e7c1f8146f6d24a8d2bbc"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/ProjectionLimitsTest.java",
+      "sha256": "58f14217973569e8cfb0b979675e53549610b99614752f83c5494a1d9b544708"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/ProjectionTest.java",
+      "sha256": "99907e2736f9efc7dbfb196549e68887362fd7ba31cdf1899f200c2f01d4ed7a"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/contracts/ReadBudgetTest.java",
+      "sha256": "c442ce08a18defb58fb0d4a594714a70cc6e712156adaaa9d5cfd664fdc0f1f8"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelineAccessTest.java",
+      "sha256": "442425333d7f4cb43b40eb01aeb277cab930816067d9ee26d5d0638da5656519"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelineChannelsTest.java",
+      "sha256": "885c4538e7c3d6b7010d831b0cfc6505d0a9e4738e90a7b49aab9e3072129c11"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelinePublisherTest.java",
+      "sha256": "13458c0f751dbb2e8d5998048e61e2107a83ae13ce84791bf72ad784b3929edd"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelineReaderTest.java",
+      "sha256": "c84d69d4afda0ec278226353ba8f3152d25a61010abaf3ab4bc435215f857b27"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelineRequestsTest.java",
+      "sha256": "dbc1e368b35c9e6f0d94ab897083e42108c368c0252bad81dc4ecfb18a978b34"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/coordination/TimelineVerifierTest.java",
+      "sha256": "1bded46edd685d8bedd670d0e94a7538be7f71c00f6b0b4b054fdd30ceb0ca98"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/examples/PackageExamplesTest.java",
+      "sha256": "ff1c1cab16315e831e254684bfe6b73afd55190c669d340f9969c6c0b036d684"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/examples/TutorialExportTest.java",
+      "sha256": "30ceacaef5a0580c1b8d33552779fd3f547ec083c31beee6b3596222551d3e5c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/examples/TutorialScenariosTest.java",
+      "sha256": "fb265095689c7d611fc293a40d49e2ef678e7bb31cb4573c2598803b5df73c34"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/AdmissionEvidenceTest.java",
+      "sha256": "c1c2078667c2b755dd9e65a27859661672745fca686e0ab24c82660c50c043ec"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/CheckpointTest.java",
+      "sha256": "aeaad4161130b6bc5485cb19e35d8c84aa82a0bd7d418019810887b23cbec92e"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/ContentExportTest.java",
+      "sha256": "6cd06a23598deeeb3ad4d017f38f47b547b6ca11162011c6d93c77b147831f56"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/ContentGraphTest.java",
+      "sha256": "1a7051f927a00b04850657e5740b40c37484e3ef86cf1551ff1df0e58978883d"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/DocumentEditingTest.java",
+      "sha256": "76941b9625ddb48efc75e5f45529d79c43e6d23ffc8a499953b0c2b11a1aad47"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/InheritanceTest.java",
+      "sha256": "453fe270f3f6246d0cb3373dafae1f2fbea19a382f7ac908040ca3739c335db5"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/LanguageConcurrencyTest.java",
+      "sha256": "fc1e5326138db0a451b41550f4fb4a2f75f88d0a8f883c6f1d5632ee6be93db6"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/LanguageIngressTest.java",
+      "sha256": "bf66e5b0b842d610375470dee8744014f6e010b9044bd4d271e099dd872490c6"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/LanguageLimitsTest.java",
+      "sha256": "e24d84426903afb5b350176a9a20b778cb7717ed8ae72700d047cf83f18c802f"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/ListIdentityTest.java",
+      "sha256": "cc838d5a7f2dd5748db5310c0a41766586fb0c1d587e24c888e54eecd4b8339d"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/ListSemanticsTest.java",
+      "sha256": "bc3e0045fa3ac73a185809eb71b75a374ef7d52d2e856371c146397adbc4a267"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/ProviderTest.java",
+      "sha256": "b2c98806cfe5b3e89f40d593b061ecca682ddc2d41134ccf1c0f0215751a477e"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/language/TypeBindingsTest.java",
+      "sha256": "01f6f37fa9ea15df37e5d71f5e0da37c7f48b3f95cb304a241e68d7529804ebd"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageArchiveTest.java",
+      "sha256": "c8f4bbe5ad4d0a2880933a35cc3e3e25d3863275e9f71dadea7004dd51f44d66"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageCacheTest.java",
+      "sha256": "19b0b3585f3667b1cf0a50406ad0c815f8f06d05e3ed2498e2de00f5b8dd8bc0"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageEvidenceTest.java",
+      "sha256": "08c55014ce276ba1755329f324b238a84378b6807f8a575784709cb973321364"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageGraphTest.java",
+      "sha256": "ec0717d8459f22f8a0d66c47a0fd84855cba0b671ddf0c1eab7a25a59dd8e9c5"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageLoadingTest.java",
+      "sha256": "cf59ee3c519f23cd5a4f8af60b998ee4e0c22cf84330ae70c538f695c019a738"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageMountTest.java",
+      "sha256": "da0bf8bfdb6863e6af0ad583d29a6b36f76ba0496f6e2dad35e0470b5c45398c"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PackageTestSupport.java",
+      "sha256": "0ed6bbc666ac712b59bd767cec4c09c6c58988a403d24192e0e975587f9dcdfa"
+    },
+    {
+      "path": "blue-java-better/src/test/java/blue/packages/PublishedPackageTest.java",
+      "sha256": "73652db2ecc15e5c900f06a973816255df79b63cc329c45f363c8d9a19a28810"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/canonical/bex.json",
+      "sha256": "52448429f24b4daeceb883e3bf15157760024e817630283f62cc56dc3ce7d823"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/canonical/compatibility-receipts.txt",
+      "sha256": "400496570b67fe5c253685feb87d99a25e88bab1aae44400e06488f6c5a81826"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/canonical/contracts.json",
+      "sha256": "864018bbc75e7afac1fe08536af766daa575f7a2caf934df0bfcd8341818f93c"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/catalogue/README.md",
+      "sha256": "d72a214ee48ba19a322c0fac179cf801d10ea847b7eb763c32ab69b1487f063c"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/catalogue/activation.bluepkg",
+      "sha256": "3edf433b7b5feabbccab56394258306b0edae5d5ab4bb97832ec74b32c0ae26b"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/catalogue/hello.blue",
+      "sha256": "a89f347e7e481195132464a9fb4b2a0948acc75432f160f38df0117f3cb3bf11"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/catalogue/hello.case.yaml",
+      "sha256": "004727e847ab923202b4185b0ef5ffe21c9ce2b1ab7e9dcd546622b0fea7a0ea"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/clauses/incremental-documents.bluepkg",
+      "sha256": "f9c56df30c8cf1331c1929224003678da07e21f1a91f376a4e44c6c2c50ed0a7"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/coordination/README.md",
+      "sha256": "4a41519b40b4033f101070b80206e436da7b9f2bf4753d001df5d0755250a6f9"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/coordination/coordination.bluepkg",
+      "sha256": "e46a16ead0492739abb9a46bd3ef8220bea7e4accb53ce6a6b158741e4264f5a"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/junit-platform.properties",
+      "sha256": "a64292b2e27cfe348501d5bb52caa21ced488ba391276e131e16bdd7353cc270"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/language/language-cases.json",
+      "sha256": "3603aa1589d9384123b656628eacf2773bb34ad6a5ea90e7972d40311e2bac93"
+    },
+    {
+      "path": "blue-java-better/src/test/resources/language/language-edge-cases.json",
+      "sha256": "e0dfd7efbf784bf3d63cf681c01a0155df2139a23b74b63d0f85d696a1d544bc"
+    },
+    {
+      "path": "myos-simplified/build.gradle.kts",
+      "sha256": "535ab28bd36dbcc1a765069e76bf382f97696474ca93a597e30e159f9c59f5ce"
+    },
+    {
+      "path": "myos-simplified/examples/coordination-packages.json",
+      "sha256": "3e12e6706fec6faa853a167d4e71ac6197562470bbfbd7d7944e589f77c9e1b4"
+    },
+    {
+      "path": "myos-simplified/gradle.lockfile",
+      "sha256": "b15c2c2a636f155f89868efe782fbeaa0b281db4f07f0af0ce56fe034f9cc782"
+    },
+    {
+      "path": "myos-simplified/gradle.properties",
+      "sha256": "9522770589c9b5fc895dcebb7db9f72a433cf2fba63f9e9fa72e5510ed7926ab"
+    },
+    {
+      "path": "myos-simplified/settings.gradle.kts",
+      "sha256": "e7dfd1e566986726c75fdb153c8b9b50e83fe0e9331fd8540360552a8e2cb0eb"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Backlog.java",
+      "sha256": "723d8c950ea309f739567ab71495250cbbe6f66bb97977762088f9bd8ff847ba"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/CanonicalEvidence.java",
+      "sha256": "6851f2605a8f963ef22e6596e7a17814517eb28d70d5f2f4d148413593a656ed"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Coverage.java",
+      "sha256": "5ab40dbba0ab11d9249c9c698d3e8331bc5ccbe588edd8e174f4976a96428a95"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/CoverageTree.java",
+      "sha256": "b4dffe73851fc88bca4c30207ba207f940377be92405c45be87052755113079e"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Database.java",
+      "sha256": "257f7e7f4f369529c529a4de0fba9d9cc48c9a972c6607518e35556e798661d4"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Demo.java",
+      "sha256": "5a66b574199dcb216a5175b49cab41efc780adee3341d09e18d58382f15ba69e"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/EvidenceRecords.java",
+      "sha256": "58cba66b52be46dc985d4b29a630b30541c3a813c8c6f6e837c970d308d99c3c"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Execution.java",
+      "sha256": "d74f4e7e30e2911b6b1c0eb82512b09eb0cb410a84cfe9adff85b6b5464d8a02"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/ExternalTimelines.java",
+      "sha256": "df03a0db78bad130f4016f9e4faf5c3c72683ab4d704f37b4e7a04d6883fa385"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/HostWork.java",
+      "sha256": "e6c091f28bb8924ab8ad9ff9618b0a300cc11b5fb54e75920b5d4beab8d3c948"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Json.java",
+      "sha256": "3919fd59be10a9464ced61d69be342773d79d27b24f006b24c01089aa56f6d7b"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/LocalRuntime.java",
+      "sha256": "bd8ef017fcb8c033b6b6350c8a35c888f84da4b131a827d9274bb8196cab99ec"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/LocalServer.java",
+      "sha256": "84d7389ed5c253a6691714b0d969fa39e25e9f89bc4f7aa53817eaac94d4df09"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Main.java",
+      "sha256": "f30c83ff453813029e9797d6ecc9bac12efcf45075ab03c972c162f0d5c0a1c4"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/MixedTimelinesDemo.java",
+      "sha256": "f5646e9278b037403fe98905138d02b31342efe99319444d3f6ec94a11266fbe"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/OwnerAliases.java",
+      "sha256": "9cc6342f6671d62f1345fd712de60ca8913a27ad0aaaea4680063d022cc9df2d"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/PackageCatalog.java",
+      "sha256": "e764a2e4d5d295edf40d3f21276c984d00dfa814f9133913eca27ce76accfc4b"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/ProcessingEvidence.java",
+      "sha256": "4283b35efecc585c33ca23f85aa877b58f7e29e41c19a2a8772e56a3ca4383ea"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Publications.java",
+      "sha256": "5b412f83032979884524970aa527b5ac928a23dc58530283669c8ba3c39078f2"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Repository.java",
+      "sha256": "8bebc98dc8aca72dc704cc56e236360c474f66756988b1b12327b384591ca74b"
+    },
+    {
+      "path": "myos-simplified/src/main/java/myos/local/Timelines.java",
+      "sha256": "c51797b8251da96d8631ae34abf359c3b0540831b343caeabe1f3dd8e6e33ef9"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/AuditExisting.java",
+      "sha256": "1db67fdeba9a7a33098d4b034aa3932620b3e5b0b211dfb915fa237daedcf745"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/CycleScenario.java",
+      "sha256": "7dc34c8dfff1e6bff76e6002986b007edc86ad9c1236fc561e168ffd81b44ce5"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/DependencyDemo.java",
+      "sha256": "b3aa8625c05b326f0b3674e44314b14a13bb0240d48d376581e582cb43943c62"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/InspectionBenchmark.java",
+      "sha256": "8566f8ac438663c494e1a0c0705dced1f34a1e71f9d7bf9b042ab96b41f5ddc3"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/MixedOfferScenario.java",
+      "sha256": "79bc48ae0b42dbb939385890c70ec02404351f7fb2f9dc78f835d5c553c75739"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/MultiCycleScenario.java",
+      "sha256": "f412ae8e4da307c490252388f4ca0c16fa03126e558195569163252103b77f79"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/NativeOracle.java",
+      "sha256": "ba84ed8d575fed2393c3e33b112b77ac5d1c379c1bf33a1561d376f3540fcb4d"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/OfferScenario.java",
+      "sha256": "efca098fd33067b55074cdeecd8c96e097e8bbdd9c1d3afdb38aadb11367ee8d"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/OrderGrowth.java",
+      "sha256": "b9406d43aa357cb4b233f863a44f9f074b5ef1e22409cdd39c55e70bc29bca3b"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/OrderScale.java",
+      "sha256": "02220a07a7932e026266ab1ede337f8c00072a81ba91d0195a43359fc13f0681"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/PaymentScenario.java",
+      "sha256": "6cb701c6c3054cc6eeb572acf107bb11d20de7b430eaaff222efb519fae7fd28"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/Qualification.java",
+      "sha256": "256d09cf5d9957929724769b9400e7088c28d6a353ba9943f83a8fd7507e0276"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/QualificationSupport.java",
+      "sha256": "32868767871fd80fe166292e4ec61b1adc39ea319c846b761b0ff3850b03e40e"
+    },
+    {
+      "path": "myos-simplified/src/qualification/java/myos/local/RootedParityAudit.java",
+      "sha256": "1beb97a5cd6fae7257dfa0bca1d16ef8bb45cd84f8616a731dad06f0f587da6b"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/AdditivePolicyTest.java",
+      "sha256": "e4151f2d39021404e64138ce1bd8dfdacdc866454e2a769f4bde337fd4d472ff"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/BacklogReconciliationTest.java",
+      "sha256": "1645d4a16550b0b90f5b9bb843c924fbdf59ab09b5d171f7144609e0299857f7"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/BacklogScaleTest.java",
+      "sha256": "c650ea2177810f2ffe3300c16d6f7a6a9efc52d2658328b61e1a0f9af8528afe"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/CanonicalEvidenceTest.java",
+      "sha256": "441882d65c83493bda852f02b138724f17f0b715127aba57b40210e33aa43559"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/ChannelActivationOrderTest.java",
+      "sha256": "da4fe267574aaaf1d9d50bd0034a9d44a94964671e353bd6ec43fbc3a94abc05"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/ClauseJourneyTest.java",
+      "sha256": "69b7b705517b02fb90573d64fca781eef54379e0e4e70e9124d6297b2545a641"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/ClauseValidationTest.java",
+      "sha256": "57693254daa645128def09014ffd501ad3d6401fa2a9ff9b5ec2ac83045589d9"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/CompositionBoundaryTest.java",
+      "sha256": "76c8cdaffac67c5e35a9e37a2e7038abefc962c25080a0b0e97b5a7ffe76bb7b"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/CoverageTreeTest.java",
+      "sha256": "805570882c98d8d53efca5858616c5bffe752f46587aec134732d5c8ae4d758d"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/CrashFixture.java",
+      "sha256": "b62d6e591cb557088382d213d23014f10d8337f8700db78409f194a1fc8b7bdc"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/CrashRecoveryTest.java",
+      "sha256": "3d23604d5ef79d92ce32ef5a79344b099e8c4653e0edc4763dd670f5a17bd4c1"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/EventInspectionTest.java",
+      "sha256": "8e49acf4d8451765cba1fab6b901fceba6436b9205250c9d54cafbc60987a1b0"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/ExternalTimelinesTest.java",
+      "sha256": "52e830bfed233d4af77735f65e2c7e87ba5bde4ec56ffbbafdf9fd5ccda0d8ef"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/GraphShapeParityTest.java",
+      "sha256": "8188eb5b076da7162ec47e1c7744884f91d0dd7143107aaff15f036ba270e927"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/HistoricalBoundaryTest.java",
+      "sha256": "e8bf2ca9bb63d1e3777f126c71d7a430850f5c91f07a37015ee8cba5f3618cc6"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/HttpApiTest.java",
+      "sha256": "bc1042276521f5de0906e5e2eab8242b707aa591caf00804f3ded299602270e4"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/LocalExecutionTest.java",
+      "sha256": "bc77b20ed5029e266dab962c822750eb0c93e95c6ec0a950fc54ec658ea4983c"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/MixedEmbeddingTest.java",
+      "sha256": "4b7f6c533ed44a37b3c65d722d72df100750b304f0c01a2532f5f69b4da7f77e"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/MixedTimelineProcessingTest.java",
+      "sha256": "c1dc2117090280ebab45c59aa6a5afde328e0caa10da3575948edcc49c2b82aa"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/NativeFanoutTest.java",
+      "sha256": "10774ed6aa60e23ce97dfe3f97ec75db9c6b88b123193757187cd8d593a3b71b"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/NativeReceivingTest.java",
+      "sha256": "feb0bfee4913813656ad8ccdbfba43da0d32e0c20c0c2b453b4de04515480d5c"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/OrderingParityTest.java",
+      "sha256": "93eb16b4da607a3850ae53c6a2951c6b05680d4c636acd0bea388970a464bd16"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/OwnerConcurrencyTest.java",
+      "sha256": "c69c1fed71b69cf5181d32f46459fd632618d9948bfadfb28ba984d58f4911fe"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/ProcessingEvidenceTest.java",
+      "sha256": "d966aef5a5f405e61d533635b02377ef436aee1e7ab8259c9b6ff13ccab3af03"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/RejectedInputTest.java",
+      "sha256": "9fee6e7e120a953d37842a64e1c3e4d3b808ff3a7d510be1a1e0f7d2fb0c7e07"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/RetainedCompositionTest.java",
+      "sha256": "ad0543e6d4454bf3843582173cfb2847084f4ea176c6271f8e129d44daf83dd3"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/RootedCompositionTest.java",
+      "sha256": "a1e9a15dfcdd1c997ca9e0f8161415d20b9ef86a75c56ebe33ad59c7bb8ea4b4"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/SharedGraphTest.java",
+      "sha256": "043a40a5c67da37398619def4efc0197daf32efa475546a7e4004cea706ac837"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/SourceInspectionTest.java",
+      "sha256": "17d1d5930b5cce05f1f12846797cbd7a3329e8b173b789b27b3446ad1a2d150c"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/StoredInspectionTest.java",
+      "sha256": "cee7229946d4f702f8a1876c1cbbd37bc841d89304cbce67bf6ed0486cdae351"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/TerminalPrefixTest.java",
+      "sha256": "3b5f49afb9dcf3ae39a9d583db7c85dd52c2b5a6ff9f791ff4cc3be0f39fa314"
+    },
+    {
+      "path": "myos-simplified/src/test/java/myos/local/TimelineRoutingTest.java",
+      "sha256": "ebdb7ec6e7e50ff6f47691e961da94b79a42894503790378b08a69cd23f14a4c"
+    }
+  ],
+  "auditorFeedbackSha256": "d689f91a64ea7754210dcb9febed95bf8a0cc2a7afd9d83847e397fb5d4db927"
+}

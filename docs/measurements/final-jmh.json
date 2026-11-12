@@ -1,0 +1,146 @@
+[
+  {
+    "operation": "addOrder",
+    "complex": false,
+    "orders": 1,
+    "medianUs": 8.288,
+    "p99Us": 15.386400000000139,
+    "meanUs": 8.591812265331667,
+    "bytesPerOperation": 16867.733326224276
+  },
+  {
+    "operation": "addOrder",
+    "complex": false,
+    "orders": 128,
+    "medianUs": 9.120000000000001,
+    "p99Us": 14.736,
+    "meanUs": 9.39278616026259,
+    "bytesPerOperation": 17547.60393474261
+  },
+  {
+    "operation": "addOrder",
+    "complex": false,
+    "orders": 1000,
+    "medianUs": 11.696,
+    "p99Us": 20.87552000000002,
+    "meanUs": 12.365513657129894,
+    "bytesPerOperation": 24519.69717597138
+  },
+  {
+    "operation": "addOrder",
+    "complex": false,
+    "orders": 10000,
+    "medianUs": 12.24,
+    "p99Us": 21.824,
+    "meanUs": 13.238917262512764,
+    "bytesPerOperation": 26588.724188003005
+  },
+  {
+    "operation": "addOrder",
+    "complex": true,
+    "orders": 1,
+    "medianUs": 21.312,
+    "p99Us": 30.688000000000002,
+    "meanUs": 21.82177342689652,
+    "bytesPerOperation": 42889.35266087877
+  },
+  {
+    "operation": "addOrder",
+    "complex": true,
+    "orders": 128,
+    "medianUs": 22.72,
+    "p99Us": 31.432320000000065,
+    "meanUs": 23.120943252849607,
+    "bytesPerOperation": 45927.21140746452
+  },
+  {
+    "operation": "addOrder",
+    "complex": true,
+    "orders": 1000,
+    "medianUs": 25.664,
+    "p99Us": 36.416000000000004,
+    "meanUs": 26.40244716476714,
+    "bytesPerOperation": 58286.04059857395
+  },
+  {
+    "operation": "addOrder",
+    "complex": true,
+    "orders": 10000,
+    "medianUs": 26.816,
+    "p99Us": 38.51519999999995,
+    "meanUs": 27.456367455212753,
+    "bytesPerOperation": 61589.51743193617
+  },
+  {
+    "operation": "submit",
+    "complex": false,
+    "orders": 1,
+    "medianUs": 6.832,
+    "p99Us": 13.456,
+    "meanUs": 7.239566947685142,
+    "bytesPerOperation": 12052.965539627041
+  },
+  {
+    "operation": "submit",
+    "complex": false,
+    "orders": 128,
+    "medianUs": 7.5760000000000005,
+    "p99Us": 14.368,
+    "meanUs": 8.09022505771249,
+    "bytesPerOperation": 12447.816423483391
+  },
+  {
+    "operation": "submit",
+    "complex": false,
+    "orders": 1000,
+    "medianUs": 7.5840000000000005,
+    "p99Us": 13.536,
+    "meanUs": 7.92827790860025,
+    "bytesPerOperation": 11779.525364177423
+  },
+  {
+    "operation": "submit",
+    "complex": false,
+    "orders": 10000,
+    "medianUs": 8.864,
+    "p99Us": 14.208,
+    "meanUs": 9.098174191669097,
+    "bytesPerOperation": 11764.390850034337
+  },
+  {
+    "operation": "submit",
+    "complex": true,
+    "orders": 1,
+    "medianUs": 53.568,
+    "p99Us": 73.21600000000001,
+    "meanUs": 54.55632760305459,
+    "bytesPerOperation": 104557.6950922156
+  },
+  {
+    "operation": "submit",
+    "complex": true,
+    "orders": 128,
+    "medianUs": 55.552,
+    "p99Us": 79.232,
+    "meanUs": 57.10944964410121,
+    "bytesPerOperation": 106282.26945609176
+  },
+  {
+    "operation": "submit",
+    "complex": true,
+    "orders": 1000,
+    "medianUs": 55.872,
+    "p99Us": 73.08800000000001,
+    "meanUs": 56.770202404734015,
+    "bytesPerOperation": 105277.58986616385
+  },
+  {
+    "operation": "submit",
+    "complex": true,
+    "orders": 10000,
+    "medianUs": 56.768,
+    "p99Us": 74.752,
+    "meanUs": 57.661685947875505,
+    "bytesPerOperation": 107464.93666075867
+  }
+]

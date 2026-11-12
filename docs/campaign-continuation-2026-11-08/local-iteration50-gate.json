@@ -1,0 +1,9 @@
+{
+  "command": "./gradlew --offline --no-parallel build clausesTest scaleTest orderGrowth -PpackagesDir=/Users/piotr/data/blue-packages",
+  "status": "PASS",
+  "tests": 93,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exactGrowthReceipts": 20
+}

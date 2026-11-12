@@ -1,0 +1,57 @@
+{
+  "java": [
+    {
+      "project": "blue-java-better",
+      "suite": "test",
+      "tests": 2467,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "classes": 129,
+      "xmlDigest": "fd50549185e50dc7698b4bfd28d9389220db4ddf64f8859c4480b6c066884895"
+    },
+    {
+      "project": "myos-simplified",
+      "suite": "clausesTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "classes": 2,
+      "xmlDigest": "f9e4dd41b8b890b83522349e596b9046b8eaa0fc1a4bda028f275d4b706da0f8"
+    },
+    {
+      "project": "myos-simplified",
+      "suite": "scaleTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "classes": 2,
+      "xmlDigest": "53b9e09ca4dd20f88313675d10c8c97930548e48fba9c3dadfe650c134d2c14e"
+    },
+    {
+      "project": "myos-simplified",
+      "suite": "test",
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "classes": 28,
+      "xmlDigest": "068b44d8f5033357fd9c1f856eba1d9479465e6d9e23ba0a0d67d2b75aecb40e"
+    },
+    {
+      "project": "myos-core-better",
+      "suite": "test",
+      "tests": 812,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "classes": 223,
+      "xmlDigest": "0b119344569f9fa0e1d9da286bd0c98c6c4ecae5c933ff7054d0c4f0056fcb95"
+    }
+  ],
+  "javaTotal": 3372,
+  "helperTests": 46,
+  "originalJavaExactComparisons": 40
+}

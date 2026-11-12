@@ -1,0 +1,3 @@
+name: Parent with missing child
+child:
+  blueId: <UNKNOWN_BLUE_ID>

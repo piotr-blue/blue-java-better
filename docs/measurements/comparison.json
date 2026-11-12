@@ -1,0 +1,99 @@
+{
+  "java": "25.0.3+9-LTS-195",
+  "reports": [
+    {
+      "baseline": {
+        "batchNs": [
+          1275.958,
+          1455.375,
+          1551.479,
+          1604.2705,
+          1608.9375,
+          1702.604,
+          2667.0625
+        ],
+        "medianBytes": 6556.836,
+        "medianNs": 1604.2705
+      },
+      "candidate": {
+        "batchNs": [
+          217.9585,
+          229.0835,
+          236,
+          292.1875,
+          356.583,
+          359.1665,
+          484.542
+        ],
+        "medianBytes": 648,
+        "medianNs": 292.1875
+      },
+      "sameResult": 56,
+      "scope": "Compiled BEX evaluation; experimental gas differs",
+      "workload": "arithmetic"
+    },
+    {
+      "baseline": {
+        "batchNs": [
+          91239.1455,
+          92465.9585,
+          92659.375,
+          93048.375,
+          93967.229,
+          96080,
+          96553.0835
+        ],
+        "medianBytes": 396064,
+        "medianNs": 93048.375
+      },
+      "candidate": {
+        "batchNs": [
+          24152.1665,
+          24531.854,
+          25074.5625,
+          26215.8955,
+          26301.1665,
+          27941.854,
+          36731.125
+        ],
+        "medianBytes": 49600,
+        "medianNs": 26215.8955
+      },
+      "sameResult": 707264,
+      "scope": "Compiled BEX evaluation; experimental gas differs",
+      "workload": "sum128"
+    },
+    {
+      "baseline": {
+        "batchNs": [
+          545303.75,
+          665350,
+          738385,
+          754187.08,
+          820750.42,
+          958840.42,
+          1035175
+        ],
+        "medianBytes": 964416.4,
+        "medianNs": 754187.08
+      },
+      "candidate": {
+        "batchNs": [
+          10082.5,
+          10170.42,
+          10807.5,
+          13543.33,
+          18128.33,
+          21119.17,
+          23057.5
+        ],
+        "medianBytes": 5792,
+        "medianNs": 13543.33
+      },
+      "sameResult": 1,
+      "scope": "Same business update/events, NOT equivalent protocol: candidate has no canonical receipts/checkpoints",
+      "workload": "counter"
+    }
+  ],
+  "sharedBexVectors": 36
+}

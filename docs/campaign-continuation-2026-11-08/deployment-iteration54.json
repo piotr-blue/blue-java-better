@@ -1,0 +1,11 @@
+{
+  "iteration": 54,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "commandId": "2ee2ada2-df07-4e3b-8633-e2812042007b",
+  "instance": "i-052007ebaf704c0ad",
+  "status": "Success",
+  "startedUtc": "2026-11-08T23:49:22.378Z",
+  "completedUtc": "2026-11-08T23:49:43.378Z",
+  "artifactSha256": "0101bb6f95b1690fdf43c1e543ed49e17d4360ca3bf2f1d54a6a389db1dd99c7",
+  "scope": "canonical preview; provider identity, webhook custody, Cognito pool and histories preserved; isolated worker benchmarks separate"
+}

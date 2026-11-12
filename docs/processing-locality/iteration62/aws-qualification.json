@@ -1,0 +1,14 @@
+{
+  "commandId": "70d835b0-d841-4dd5-8aef-0225ec4f8c07",
+  "instance": "i-0574a4837ef41fce1",
+  "table": "myos-better-20261105-documents",
+  "account": "owner-qa-d7dabb6d19ce",
+  "digest": "f33228b624abc153a6398373df3745b3fcec4cfd8918bb9b1fbb21dfbbeb350e",
+  "counts": [
+    10,
+    1000
+  ],
+  "cold": true,
+  "profileSummaries": false,
+  "gasSchedule": "COMPOSITIONAL_V1"
+}

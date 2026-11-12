@@ -1,0 +1,146 @@
+{
+  "account": "owner-qa-39fd01065dfd",
+  "comparisonOracleDuringMeasurement": false,
+  "mutableSessionCaching": false,
+  "ownerStorageReopenedPerInput": true,
+  "results": [
+    {
+      "calls": [
+        {
+          "acquisitionMillis": 213.333834,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 1061.236786,
+          "gas": 3866,
+          "gcMillis": 51,
+          "heapAfterBytes": 58739312,
+          "heapBeforeBytes": 82302672,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 231.495025,
+          "sample": 0
+        },
+        {
+          "acquisitionMillis": 149.447582,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 861.819766,
+          "gas": 3866,
+          "gcMillis": 5,
+          "heapAfterBytes": 93219008,
+          "heapBeforeBytes": 87882656,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 197.031375,
+          "sample": 1
+        },
+        {
+          "acquisitionMillis": 162.617253,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 797.508022,
+          "gas": 3866,
+          "gcMillis": 7,
+          "heapAfterBytes": 67413448,
+          "heapBeforeBytes": 61460616,
+          "orders": 10,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 180.320931,
+          "sample": 2
+        },
+        {
+          "acquisitionMillis": 143.743067,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 792.514154,
+          "gas": 3866,
+          "gcMillis": 5,
+          "heapAfterBytes": 119149584,
+          "heapBeforeBytes": 109503376,
+          "orders": 10,
+          "parity": true,
+          "profiled": true,
+          "rootRestoreAdmissionExecutionMillis": 167.132246,
+          "sample": 3
+        }
+      ],
+      "documents": 21,
+      "initialPrepareAdmissionMillis": 372.292382,
+      "initializationMillis": 1272.515071,
+      "orders": 10
+    },
+    {
+      "calls": [
+        {
+          "acquisitionMillis": 1947.973998,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 14768.098392,
+          "gas": 169287,
+          "gcMillis": 576,
+          "heapAfterBytes": 833388200,
+          "heapBeforeBytes": 722522248,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 12747.572168,
+          "sample": 0
+        },
+        {
+          "acquisitionMillis": 1952.204479,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 13259.952232,
+          "gas": 169287,
+          "gcMillis": 679,
+          "heapAfterBytes": 385225016,
+          "heapBeforeBytes": 777409448,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 11827.034132,
+          "sample": 1
+        },
+        {
+          "acquisitionMillis": 1998.949756,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 13580.80561,
+          "gas": 169287,
+          "gcMillis": 612,
+          "heapAfterBytes": 480848688,
+          "heapBeforeBytes": 348918840,
+          "orders": 1000,
+          "parity": true,
+          "profiled": false,
+          "rootRestoreAdmissionExecutionMillis": 12014.83398,
+          "sample": 2
+        },
+        {
+          "acquisitionMillis": 1954.436179,
+          "appliedOwners": 3,
+          "disposedOwners": 0,
+          "durableProcessingMillis": 13256.358686,
+          "gas": 169287,
+          "gcMillis": 522,
+          "heapAfterBytes": 704861880,
+          "heapBeforeBytes": 715072576,
+          "orders": 1000,
+          "parity": true,
+          "profiled": true,
+          "rootRestoreAdmissionExecutionMillis": 11791.027555,
+          "sample": 3
+        }
+      ],
+      "documents": 2001,
+      "initialPrepareAdmissionMillis": 19635.607201,
+      "initializationMillis": 36395.396035,
+      "orders": 1000
+    }
+  ],
+  "store": "myos-better-20261105-documents",
+  "transportCachesDisabled": true
+}

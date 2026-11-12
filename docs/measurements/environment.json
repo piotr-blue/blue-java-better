@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-03",
+  "cpu": "Apple M3 Max",
+  "architecture": "arm64",
+  "candidateJava": "25.0.3+9-LTS-195",
+  "previousGitHead": "a7a0585261a350f1611c3bf4783cce978ba3c5e7",
+  "previousWorkingTree": "Contains pre-existing uncommitted changes; the jars below identify the actual measurement inputs.",
+  "baselineJars": {
+    "blue-language-core/build/libs/blue-language-core-0.1.0-local.1.jar": "c545b7fcd59709a99cd96ab6df1fa0d9a24fb0f27d416f8a856c3846c6ce5519",
+    "blue-bex-core/build/libs/blue-bex-core-0.1.0-local.1.jar": "fc32e5816ff9a062c6ec96c2d1fc85d48c3c3e019b7d908811f522e11ef89217",
+    "blue-contracts-core/build/libs/blue-contracts-core-0.1.0-local.1.jar": "db284b39234a9bba71a474e9b626f335bcefd9a6fbcd2012f79625c5e18314dc",
+    "blue-coordination-core/build/libs/blue-coordination-core-0.1.0-local.1.jar": "d30b25cdb24ee91e702a2b7551e594b9f462a3a4456fab0dbb03769cbeaa5590"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "stack": "myos-better-canonical-20261108",
+  "instance": "i-052007ebaf704c0ad",
+  "artifactSha256": "3fca7a0296e4844ba1a00ef71d8f57a54efdf2290c031724b246179250528e43",
+  "commandId": "096e0324-b8bf-40ca-9777-45f57157f204",
+  "runtimeProfile": "console-native",
+  "independentOwners": true,
+  "Status": "Success",
+  "ExecutionStartDateTime": "2026-11-08T23:05:34.411Z",
+  "ExecutionEndDateTime": "2026-11-08T23:05:55.411Z"
+}

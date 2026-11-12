@@ -1,0 +1,18 @@
+Calculating task graph as configuration cache cannot be reused because an input to build file 'build.gradle.kts' has changed.
+> Task :processTestResources UP-TO-DATE
+> Task :processDemoResources UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :format
+> Task :compileJava
+> Task :classes
+> Task :compileDemoJava
+> Task :demoClasses
+> Task :checkFormat
+> Task :compileTestJava
+> Task :testClasses
+> Task :javadoc
+> Task :test
+
+BUILD SUCCESSFUL in 1m
+10 actionable tasks: 7 executed, 3 up-to-date
+Configuration cache entry stored.

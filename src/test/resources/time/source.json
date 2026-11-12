@@ -1,0 +1,7 @@
+{
+  "source": "/Users/piotr/data/blue-packages/blue-time/dist/package.bluepkg",
+  "sha256": "1481cdf0ba15d01b04a36fae9d49dc772661aff3d1fde0bb199c34e9e606d564",
+  "packageBlueId": "6QHd1RcXJnddfLyePbtHouNYEpis6CXe4mMu4pNBqZrU",
+  "originalHostReferenceCommit": "8b71a0e7de48aaeb79bddddb25ae04e0fc0f2d85",
+  "note": "Archive copied from current blue-packages, not from the original Core commit. Original Core was used only as a behavioral reference."
+}

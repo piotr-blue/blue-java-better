@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/private/tmp/blue-canonical-20261108/myos-core-better/scripts/qualify_mixed_preview.py", line 85, in <module>
+    main()
+  File "/private/tmp/blue-canonical-20261108/myos-core-better/scripts/qualify_mixed_preview.py", line 56, in main
+    created, _ = document_client.call('bootstrap',
+  File "/private/tmp/blue-canonical-20261108/myos-core-better/scripts/reproduce_canonical.py", line 51, in call
+    raise RuntimeError(f'{response.status} {path}: {value.get("message", value.get("code"))}')
+RuntimeError: 503 bootstrap: The request could not complete. Retry with the same command identifier.

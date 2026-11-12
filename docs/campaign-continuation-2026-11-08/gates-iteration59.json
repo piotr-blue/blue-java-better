@@ -1,0 +1,9 @@
+{
+  "localNormalTests": {
+    "tests": 71,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "note": "Initial invocation omitted packagesDir and failed setup. Corrected command executed all71 normal tests successfully; runtime candidate was subsequently rejected for latency, not correctness. Growth comparisons:16 baseline and16 candidate."
+}

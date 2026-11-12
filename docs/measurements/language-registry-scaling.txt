@@ -1,0 +1,4 @@
+JMH 1.37; JDK 25.0.3; one fork/thread; 3 x 1s warmup; 3 x 1s measurement; gc profiler.
+Command: ./gradlew benchmark -PbenchmarkFilter=blue.bench.LanguageBenchmark "-PbenchmarkArgs=-f 1 -wi 3 -i 3 -w 1s -r 1s -prof gc"
+
+

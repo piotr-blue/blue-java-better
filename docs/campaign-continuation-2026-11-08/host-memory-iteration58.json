@@ -1,0 +1,3495 @@
+{
+  "iteration": 58,
+  "boundary": "Hosted implementation on memory storage; no mutable document sessions; owner storage reopened per input; transport caches disabled; shared JVM/package configuration. Oracle outside timing. Three unprofiled and one profiled sample per size.",
+  "medianMillis": {
+    "10": 49.782208,
+    "100": 76.179083,
+    "1000": 396.139833
+  },
+  "result": {
+    "account": "iteration58-local",
+    "comparisonOracleDuringMeasurement": false,
+    "mutableSessionCaching": false,
+    "ownerStorageReopenedPerInput": true,
+    "results": [
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 34.797667,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 95.398875,
+            "gas": 3866,
+            "gcMillis": 0,
+            "heapAfterBytes": 236473624,
+            "heapBeforeBytes": 192433432,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 18.456459,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 14.356125,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 49.782208,
+            "gas": 3866,
+            "gcMillis": 0,
+            "heapAfterBytes": 300436760,
+            "heapBeforeBytes": 261639448,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 15.218125,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 10.906667,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 46.706916,
+            "gas": 3866,
+            "gcMillis": 0,
+            "heapAfterBytes": 365448472,
+            "heapBeforeBytes": 325602584,
+            "orders": 10,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 14.447625,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 9.837041,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 46.618292,
+            "gas": 3866,
+            "gcMillis": 0,
+            "heapAfterBytes": 444091672,
+            "heapBeforeBytes": 402148632,
+            "orders": 10,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 14.609792,
+            "sample": 3
+          }
+        ],
+        "documents": 21,
+        "initialPrepareAdmissionMillis": 126.698083,
+        "initializationMillis": 334.61575,
+        "orders": 10
+      },
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 19.180208,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 77.415375,
+            "gas": 18903,
+            "gcMillis": 0,
+            "heapAfterBytes": 705172128,
+            "heapBeforeBytes": 490214048,
+            "orders": 100,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 34.694084,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 16.775875,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 76.179083,
+            "gas": 18903,
+            "gcMillis": 3,
+            "heapAfterBytes": 173106208,
+            "heapBeforeBytes": 742920864,
+            "orders": 100,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 32.014292,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 16.29325,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 63.975166,
+            "gas": 18903,
+            "gcMillis": 1,
+            "heapAfterBytes": 148464672,
+            "heapBeforeBytes": 212952096,
+            "orders": 100,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 29.931291,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 16.882459,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 70.188541,
+            "gas": 18903,
+            "gcMillis": 1,
+            "heapAfterBytes": 154240832,
+            "heapBeforeBytes": 190407712,
+            "orders": 100,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 33.530625,
+            "sample": 3
+          }
+        ],
+        "documents": 201,
+        "initialPrepareAdmissionMillis": 275.460792,
+        "initializationMillis": 895.119334,
+        "orders": 100
+      },
+      {
+        "calls": [
+          {
+            "acquisitionMillis": 217.400833,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 466.976709,
+            "gas": 169287,
+            "gcMillis": 19,
+            "heapAfterBytes": 885498656,
+            "heapBeforeBytes": 850395136,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 265.595459,
+            "sample": 0
+          },
+          {
+            "acquisitionMillis": 199.030417,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 389.47375,
+            "gas": 169287,
+            "gcMillis": 14,
+            "heapAfterBytes": 732487832,
+            "heapBeforeBytes": 1276617504,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 255.702,
+            "sample": 1
+          },
+          {
+            "acquisitionMillis": 204.229125,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 396.139833,
+            "gas": 169287,
+            "gcMillis": 19,
+            "heapAfterBytes": 796819968,
+            "heapBeforeBytes": 1123606680,
+            "orders": 1000,
+            "parity": true,
+            "profiled": false,
+            "rootRestoreAdmissionExecutionMillis": 250.59775,
+            "sample": 2
+          },
+          {
+            "acquisitionMillis": 194.126791,
+            "appliedOwners": 3,
+            "disposedOwners": 0,
+            "durableProcessingMillis": 396.288875,
+            "gas": 169287,
+            "gcMillis": 20,
+            "heapAfterBytes": 811597824,
+            "heapBeforeBytes": 1203667456,
+            "orders": 1000,
+            "parity": true,
+            "profiled": true,
+            "rootRestoreAdmissionExecutionMillis": 247.615875,
+            "sample": 3
+          }
+        ],
+        "documents": 2001,
+        "initialPrepareAdmissionMillis": 11037.528458,
+        "initializationMillis": 16606.287458,
+        "orders": 1000
+      }
+    ],
+    "store": "memory",
+    "transportCachesDisabled": true
+  },
+  "profiles": [
+    {
+      "orders": 10,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 4,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 4
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 3
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 3
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractAttempt.advanceLocal",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractRun.runLocal",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractRun.runUnit",
+            "samples": 2
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 2
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractBridge.evidence",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractBridge.open",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractCache.weight",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractGraph.paths",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractGraph.reconcile",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractGraph.terminated",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractIdentityMap.containsKey",
+            "samples": 1
+          }
+        ],
+        "leaf": [
+          {
+            "method": "blue.ContractCache.weight",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractIdentityMap.leaf",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.databind.type.TypeFactory.constructType",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.constant.MethodTypeDescImpl.ofDescriptor",
+            "samples": 1
+          }
+        ],
+        "preparation": [
+          {
+            "encodedBytes": 0,
+            "millis": 0.013708,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.011958,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.008292,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.039167,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.016875,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.049208,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.090833,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.0375,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.024959,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.338208,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.047666,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.226958,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.007791,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 340,
+            "millis": 0.020958,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 5527,
+            "millis": 0.198292,
+            "owner": null,
+            "recordsChanged": 10,
+            "recordsEncoded": 10,
+            "recordsExamined": 10,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 253,
+            "millis": 0.021791,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.307916,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.040334,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.028917,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.03725,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.023708,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.079834,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 2632,
+            "millis": 0.044458,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.0565,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.042584,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.146292,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.036583,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.763209,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.046708,
+            "owner": "sha256:10bbd294cddf51c4e3819cdd6c27f9ecb6ecb0efb81aba052d46831574e946a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.014541,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.014125,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.039292,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.04275,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.019542,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.076625,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 6,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.104208,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.053542,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.023834,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.346916,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.054084,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.310042,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 204,
+            "millis": 0.014167,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 557,
+            "millis": 0.026666,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 8240,
+            "millis": 0.225459,
+            "owner": null,
+            "recordsChanged": 12,
+            "recordsEncoded": 12,
+            "recordsExamined": 12,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 506,
+            "millis": 0.029541,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.365666,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.05175,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.090458,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.037791,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.018042,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.108625,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 4596,
+            "millis": 0.06125,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.072375,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.054583,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.16875,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.088792,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 2.132833,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.053333,
+            "owner": "sha256:c03ee9263373fef44b6a614cb59d97d96645e1b68cf88a0d9074da7b822c20e9",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.037208,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.044916,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.085583,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.045584,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.110875,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.138333,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 9,
+            "recordsRemoved": 0,
+            "recordsReused": 18,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.2315,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.094958,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.036625,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.702375,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.330917,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.553125,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 3726,
+            "millis": 0.043167,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 19,
+            "recordsExamined": 20,
+            "recordsRemoved": 0,
+            "recordsReused": 1,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 5951,
+            "millis": 0.11975,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 21,
+            "recordsExamined": 21,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 10514,
+            "millis": 0.580333,
+            "owner": null,
+            "recordsChanged": 14,
+            "recordsEncoded": 14,
+            "recordsExamined": 14,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 759,
+            "millis": 0.066542,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 3,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.904834,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.131,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.112916,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.04725,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.001,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.311084,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 43680,
+            "millis": 0.6065,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 21,
+            "recordsExamined": 21,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.620125,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.183667,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.24,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.042125,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 4.63025,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.134208,
+            "owner": "graph-fast-scale-62bc27d9-d1d7-4b10-9752-38eaa95d0d96",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          }
+        ]
+      }
+    },
+    {
+      "orders": 100,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 6,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 6
+          },
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 6
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractReception.inspect",
+            "samples": 2
+          },
+          {
+            "method": "blue.Contracts$Execution$State.reception",
+            "samples": 2
+          },
+          {
+            "method": "blue.Contracts.reception",
+            "samples": 2
+          },
+          {
+            "method": "myos.better.GraphTimelineIngress.declarations",
+            "samples": 2
+          },
+          {
+            "method": "blue.ContractAttempt.advanceLocal",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractBridge.open",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractCanonical.write",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractChannels.checkpoint",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractLanguage.open",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractModel$Document.idleUnit",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractModel.digest",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractReception.receiver",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractRegistry.idleUnit",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractRegistry.markerRecord",
+            "samples": 1
+          }
+        ],
+        "leaf": [
+          {
+            "method": "blue.ContractCanonical.write",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegment2",
+            "samples": 1
+          },
+          {
+            "method": "java.util.TreeMap.fixAfterInsertion",
+            "samples": 1
+          },
+          {
+            "method": "java.util.TreeMap.getEntryUsingComparator",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.misc.Unsafe.putInt",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.util.DecimalDigits.uncheckedGetCharsLatin1",
+            "samples": 1
+          }
+        ],
+        "preparation": [
+          {
+            "encodedBytes": 0,
+            "millis": 0.0125,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.009875,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.006625,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.024167,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.033291,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.084375,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.068042,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.046792,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.021,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.307458,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.051333,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.180416,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.015583,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 340,
+            "millis": 0.01475,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 5530,
+            "millis": 0.173667,
+            "owner": null,
+            "recordsChanged": 10,
+            "recordsEncoded": 10,
+            "recordsExamined": 10,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 253,
+            "millis": 0.01475,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.284834,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.018375,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.013292,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.02675,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.015792,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.055667,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 2635,
+            "millis": 0.026292,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.03375,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.033917,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.161875,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.037833,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.525667,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.039875,
+            "owner": "sha256:ccc9fc4301d20eeec29725bc26000d0d67b905b9b12add2349f905a040fedbe2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.012584,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.011625,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.047,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.039375,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.015584,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.144542,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 6,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.08175,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.060292,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.02225,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.397292,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.07075,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.243083,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 204,
+            "millis": 0.009125,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 557,
+            "millis": 0.016958,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 8243,
+            "millis": 0.198375,
+            "owner": null,
+            "recordsChanged": 12,
+            "recordsEncoded": 12,
+            "recordsExamined": 12,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 506,
+            "millis": 0.019042,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.34325,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.039875,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.019709,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.03875,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.018834,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.081083,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 4599,
+            "millis": 0.04975,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.057708,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.041541,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.126542,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.022792,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.828333,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.059,
+            "owner": "sha256:3cacd518011f466d7232c6407f8ecf778847cd91c89b81efd174c40510ac7020",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.194834,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.204041,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.2225,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.084542,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.494167,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.259083,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 9,
+            "recordsRemoved": 0,
+            "recordsReused": 198,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.833375,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.093083,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.081959,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.919709,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.445458,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.935375,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 39186,
+            "millis": 0.229208,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 199,
+            "recordsExamined": 200,
+            "recordsRemoved": 0,
+            "recordsReused": 1,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 58142,
+            "millis": 0.622417,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 201,
+            "recordsExamined": 201,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 17263,
+            "millis": 0.363708,
+            "owner": null,
+            "recordsChanged": 14,
+            "recordsEncoded": 14,
+            "recordsExamined": 14,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 759,
+            "millis": 0.091083,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 3,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.482458,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.546,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.396791,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.112792,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.00125,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.097541,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 419997,
+            "millis": 2.838125,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 201,
+            "recordsExamined": 201,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 2.857709,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.267417,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.374541,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.071709,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 12.551875,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.208542,
+            "owner": "graph-fast-scale-4d154e37-e450-4a40-9ef3-c672636c21a2",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          }
+        ]
+      }
+    },
+    {
+      "orders": 1000,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 29,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 29
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 29
+          },
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 29
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 19
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 9
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 9
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 9
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 9
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 9
+          },
+          {
+            "method": "myos.better.OwnerRecords.restore",
+            "samples": 9
+          },
+          {
+            "method": "blue.ContractProcessor.importSnapshot",
+            "samples": 8
+          },
+          {
+            "method": "blue.ContractStorage.restore",
+            "samples": 8
+          },
+          {
+            "method": "blue.Contracts$Execution.restore",
+            "samples": 8
+          },
+          {
+            "method": "myos.better.OwnerGraphs.prepare",
+            "samples": 8
+          },
+          {
+            "method": "myos.better.OwnerGraphs.preparePages",
+            "samples": 8
+          },
+          {
+            "method": "myos.better.OwnerPreparationEvent.measure",
+            "samples": 8
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 6
+          },
+          {
+            "method": "blue.ContractAttempt.advanceLocal",
+            "samples": 5
+          },
+          {
+            "method": "blue.ContractRun.runUnit",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.Json.hash",
+            "samples": 4
+          }
+        ],
+        "leaf": [
+          {
+            "method": "java.util.HashMap.getNode",
+            "samples": 3
+          },
+          {
+            "method": "java.util.TreeMap.getEntryUsingComparator",
+            "samples": 3
+          },
+          {
+            "method": "sun.security.provider.ByteArrayAccess.i2bBig",
+            "samples": 3
+          },
+          {
+            "method": "blue.LanguageCodec.unicode",
+            "samples": 2
+          },
+          {
+            "method": "java.util.HashMap.putVal",
+            "samples": 2
+          },
+          {
+            "method": "blue.CanonicalOutput.drain",
+            "samples": 1
+          },
+          {
+            "method": "blue.ContractPreparations.lambda$decode$1",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageTrie.union",
+            "samples": 1
+          },
+          {
+            "method": "blue.TimelineChannels.projection",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser.nextToken",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegment",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishAndReturnString",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName",
+            "samples": 1
+          },
+          {
+            "method": "java.security.MessageDigest$Delegate.engineUpdate",
+            "samples": 1
+          },
+          {
+            "method": "java.util.AbstractCollection.containsAll",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.removeNode",
+            "samples": 1
+          },
+          {
+            "method": "java.util.Objects.equals",
+            "samples": 1
+          },
+          {
+            "method": "java.util.TreeMap.put",
+            "samples": 1
+          },
+          {
+            "method": "java.util.regex.Pattern$BmpCharProperty.match",
+            "samples": 1
+          },
+          {
+            "method": "java.util.stream.AbstractPipeline.wrapAndCopyInto",
+            "samples": 1
+          }
+        ],
+        "preparation": [
+          {
+            "encodedBytes": 0,
+            "millis": 0.017167,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.012083,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.009958,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.050209,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.018083,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.101292,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.046084,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.049125,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.015208,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.296125,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.048292,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.343791,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.002541,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 340,
+            "millis": 0.011333,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 5531,
+            "millis": 0.122959,
+            "owner": null,
+            "recordsChanged": 10,
+            "recordsEncoded": 10,
+            "recordsExamined": 10,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 253,
+            "millis": 0.009875,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.477166,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.013417,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.009917,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.023708,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.053375,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.04475,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 2637,
+            "millis": 0.027209,
+            "owner": null,
+            "recordsChanged": 1,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.037542,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.027875,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.125875,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.020791,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.721834,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.045167,
+            "owner": "sha256:10de1327ad93f2deedfcce34fc92d6d6d13c1cca9dcddfa7411fab00f8ef5e48",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.007833,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.009458,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.040666,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.018417,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.01225,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.159083,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 6,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.082417,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.068625,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.015875,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.372334,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.074208,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.18725,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 204,
+            "millis": 0.004625,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 1,
+            "recordsExamined": 1,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 557,
+            "millis": 0.0145,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 8244,
+            "millis": 0.171083,
+            "owner": null,
+            "recordsChanged": 12,
+            "recordsEncoded": 12,
+            "recordsExamined": 12,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 506,
+            "millis": 0.0135,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.27375,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.014875,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.013459,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.030625,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.016,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.047666,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 4601,
+            "millis": 0.044833,
+            "owner": null,
+            "recordsChanged": 2,
+            "recordsEncoded": 2,
+            "recordsExamined": 2,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.051709,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.02725,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.113584,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.035709,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.4825,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.0565,
+            "owner": "sha256:b0ea82d6ba826bd6e7d9287cd1e05d8965890948cbbfa2fcf02fe15aa50ffeb1",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.660958,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "aliases"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.956041,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "partition"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.687375,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "owner-validation"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.686666,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-previous-read"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 5.34025,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-inventory"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.225708,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 9,
+            "recordsRemoved": 0,
+            "recordsReused": 1998,
+            "stage": "evidence-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 12.593083,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-additions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.155208,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.551791,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence-manifest"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 20.151333,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "evidence"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 25.814125,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "retained-membership"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 8.429042,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-export"
+          },
+          {
+            "encodedBytes": 394686,
+            "millis": 2.314583,
+            "owner": null,
+            "recordsChanged": 0,
+            "recordsEncoded": 1999,
+            "recordsExamined": 2000,
+            "recordsRemoved": 0,
+            "recordsReused": 1,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 582736,
+            "millis": 4.102042,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 2001,
+            "recordsExamined": 2001,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 85611,
+            "millis": 2.928334,
+            "owner": null,
+            "recordsChanged": 14,
+            "recordsEncoded": 14,
+            "recordsExamined": 14,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 759,
+            "millis": 0.122,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 3,
+            "recordsExamined": 3,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 10.880083,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "checkpoint-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 5.138084,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-after"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 4.070833,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "reception-before"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.541334,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "lineage"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.004459,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "emissions"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 7.139542,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-export"
+          },
+          {
+            "encodedBytes": 4187719,
+            "millis": 21.65825,
+            "owner": null,
+            "recordsChanged": 3,
+            "recordsEncoded": 2001,
+            "recordsExamined": 2001,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "index-update"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 21.706583,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "native-preparation-pages"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 2.264417,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "operations"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 2.572166,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "source-bindings"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 0.747708,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "completion-record"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 117.402084,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "plan"
+          },
+          {
+            "encodedBytes": 0,
+            "millis": 1.258417,
+            "owner": "graph-fast-scale-fa6a49a2-239e-4cb6-b8ad-cafa0c290f37",
+            "recordsChanged": 0,
+            "recordsEncoded": 0,
+            "recordsExamined": 0,
+            "recordsRemoved": 0,
+            "recordsReused": 0,
+            "stage": "flush"
+          }
+        ]
+      }
+    }
+  ]
+}

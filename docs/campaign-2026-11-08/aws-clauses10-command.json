@@ -1,0 +1,8 @@
+{
+  "commandId": "e1b63eb3-bf7c-4768-8071-3c017fe88078",
+  "instance": "i-0cddebb56e844baef",
+  "account": "clause-qa-c52d8fcab289",
+  "digest": "dc6d0b65f20da1d1a347417c79efd7122c41c58ee780da4ef2aae5e03ea909e8",
+  "orders": 10,
+  "reports": "/private/tmp/blue-canonical-20261108/myos-core-better/reports/clauses-c48472d39fe1"
+}

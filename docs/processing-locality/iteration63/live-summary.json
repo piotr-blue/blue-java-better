@@ -1,0 +1,48 @@
+{
+  "operations": 10,
+  "paidTotal": 400,
+  "checks": [
+    "Cognito login",
+    "anonymous rejection",
+    "cross-origin write rejection",
+    "bootstrap retry",
+    "cross-account isolation",
+    "two shared participant timelines",
+    "Payment to Order to Agreement propagation",
+    "operation retry",
+    "retained events",
+    "immutable initialization history after later operations",
+    "latest applied history",
+    "API key creation, authenticated read and revocation"
+  ],
+  "bootstrapMillis": 5393.813125,
+  "measurementBoundary": "HTTPS client submission through the Agreement committed APPLIED history for this exact submitted entry, including client network and polling with persistent TLS; catalogue and initial-head lookup reported separately",
+  "parentObservedMillis": {
+    "median": 5077.934104,
+    "min": 3611.262624999995,
+    "max": 6267.225125
+  },
+  "observedWithCatalogueMillis": {
+    "median": 5583.779791499999,
+    "min": 4169.034582999999,
+    "max": 6824.849334
+  },
+  "mixed": {
+    "historicalCount": 14,
+    "finalCount": 19,
+    "bootstrapThroughReplayMillis": 1863.3904580000005,
+    "localOperation": {
+      "operation": "increment",
+      "document": "graph-fast-03c555cb4a1f5ae6593b83c3d155acc9556443bbcb8c72e3",
+      "entry": "34wD7wyaAKn5QKHQDhrs4csq2aKvcWBk3Cjhrv9TyxXJ",
+      "version": 4,
+      "restoreAdmissionExecutionMillis": 108.932166,
+      "lookupMillis": 490.5196249999992,
+      "submitMillis": 381.5139580000011,
+      "submitServerTiming": "app;dur=141.938",
+      "serverPerformance": {},
+      "observedWithLookupMillis": 2023.027291,
+      "observedTotalMillis": 1532.5099580000003
+    }
+  }
+}

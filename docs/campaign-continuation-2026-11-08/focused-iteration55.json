@@ -1,0 +1,27 @@
+{
+  "initialRun": "executed freshly, iteration55-focused.log",
+  "postRevertRun": "same inputs/results FROM-CACHE; checkFormat executed",
+  "tests": [
+    {
+      "name": "myos.better.OwnerGraphsTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "myos.better.CanonicalSnapshotsTest",
+      "tests": "11",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "myos.better.CanonicalExecutionContentTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ]
+}

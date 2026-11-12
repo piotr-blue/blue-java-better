@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/main/java/blue/ContractChannels.java",
+    "before": "bd3a81ee0d81951004374820039b1a78f10e3c91c06ebdc55466dcef7a1d31d8",
+    "after": "3d8529d74e0c7a639a25171a3a991a91ec2457ff5a7a8655455b41e29ae84ec9"
+  },
+  {
+    "path": "src/main/java/blue/ContractGraph.java",
+    "before": "b07b1fd33b31ceeb98d160f02112b33a28935ba66360183ffb4f4cc901c244d1",
+    "after": "80c3baa030b73c75bae878e0dbda7ee7d0708ee0cfdaec2ddf0630c533e39881"
+  },
+  {
+    "path": "src/main/java/blue/ContractModel.java",
+    "before": "39cf5f176075ebdccaac17d6cb3284f938e950d4f3c1e136aad161aed466c3ec",
+    "after": "6df543f69f9185ab1db2e5a38c5ac0c6298078b9e94ee104dff33ecf01d2348d"
+  },
+  {
+    "path": "src/main/java/blue/ContractRun.java",
+    "before": "1c92abb14347c4f1900aca768306b6eca31301092d190b4f1ae8da3d552c6ea5",
+    "after": "a0adb6d2a8db184ae2d3c47eeba20f8812707da83e80a5a5a045fb1ebf641a89"
+  },
+  {
+    "path": "src/main/java/blue/ContractStorage.java",
+    "before": "7c129873298bf206b3869dcf7198eab516eb05d2cd94b1c32eb7292c36952abf",
+    "after": "c594c5c0a74ada7c484041489573348a5d3a73888b5c318fac5b420004234f02"
+  },
+  {
+    "path": "src/main/java/blue/SharedMetadataMap.java",
+    "before": "2985e7b38d2e7339b542f37a820f26dc126ab666bed0fcee4cd87b27cd57d426",
+    "after": null
+  },
+  {
+    "path": "src/main/java/blue/TopologyMap.java",
+    "before": "9fa56db116b2093ca0ff1460fedb13587d74fea530ec0b6534146716beee5a3a",
+    "after": "682b6908dd15f57cb9ad4d94cdeea6623b25e4711a1a0c8f283782e78f57d53c"
+  },
+  {
+    "path": "src/test/java/blue/ContractArchiveTest.java",
+    "before": "ba287f7b0d406aa64856c55c0b1138bdd332806f21ccc975b785ed7c95482139",
+    "after": "d7ef77c06089d3614e3329b96ba7ca702eb93d548e3af2872d2966c0642dce3e"
+  },
+  {
+    "path": "src/test/java/blue/ContractCompactionTest.java",
+    "before": "d1ffc2f04a92a25538f843877bd5b7a10bab603d80fc366db94adb7e1faaf0de",
+    "after": "cd94585b1de40f87968a328ee491b7407a55dfdd075f9ac80cc9b41a38c5cf99"
+  },
+  {
+    "path": "src/test/java/blue/ContractDeclarationReuseTest.java",
+    "before": "07afc183f46a85d1dbc27cc70cb2ca2f4da7a77c0dc6b730601daab01e9c9a07",
+    "after": "b724398d3d054f64b64a15d92bf4aca7702323844cdf730d83d8728488dc44af"
+  },
+  {
+    "path": "src/test/java/blue/ContractFinalizationReuseTest.java",
+    "before": "62421cad243dd680f0f495ef34fa32a301d6165451eab0732f938449efab519a",
+    "after": "cc3f4077e01d05575aaa612347e2ff505077454e232035359b18273d95413b3f"
+  },
+  {
+    "path": "src/test/java/blue/ContractSnapshotCommitmentTest.java",
+    "before": "77dadadd0005ca216daee5e0f6484f8fd62abb8fae4871056dc3f6238f4e6741",
+    "after": "02669764894d0586e00602284487f96b33edb8bf722147ae4fa95314f7a40245"
+  },
+  {
+    "path": "src/test/java/blue/ContractSnapshotSharingTest.java",
+    "before": null,
+    "after": "37f21f48cd6656b9681de9830888cb9347e5f14ac6aee6788c9f3a65d68f1e44"
+  },
+  {
+    "path": "src/test/java/blue/ContractStructuralReuseTest.java",
+    "before": "67b9bd56f1e44f593ea8a2f9b88e71a86c218d4cfd721932655e229be2a2c831",
+    "after": "e7d16fa71941ef2259b6e53372752e4e39934e7b61ca68ae04a6f05c9de1c15f"
+  },
+  {
+    "path": "src/test/java/blue/ContractTopologyTest.java",
+    "before": "bb901fb5a21001b7f17980c10bea6ecf483b4e1916768634a659711c70cf17a2",
+    "after": "4fd735f7a48a3c91b8b0c612afaa6784a82ebe0447ae86396da34d1e289f6224"
+  },
+  {
+    "path": "src/test/java/blue/TopologyMapTest.java",
+    "before": "b3cc7abea054f2953b437511178dde5656f55066d9aa248e48f30ba6c0b50145",
+    "after": "ae21023c0f733c40620d532a3a5b7ad54a84fdb51709b30b2d1207b4e3f613e9"
+  }
+]

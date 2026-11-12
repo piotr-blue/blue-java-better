@@ -1,0 +1,67 @@
+Calculating task graph as configuration cache cannot be reused because file 'build.gradle.kts' has changed.
+> Task :processResources NO-SOURCE
+> Task :blue-java-better:compileJava UP-TO-DATE
+> Task :blue-java-better:processResources UP-TO-DATE
+> Task :blue-java-better:classes UP-TO-DATE
+> Task :blue-java-better:jar UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava
+> Task :testClasses
+
+> Task :clausesTest
+
+ClauseJourneyTest > publishedActivationDocumentsAndPaymentSurviveRestartAndPropagateToAgreement() PASSED
+
+ClauseValidationTest > statusClauseHandlesAcceptedDuplicateAndDisallowedTransitions() > repetition 1 of 3 PASSED
+
+ClauseValidationTest > statusClauseHandlesAcceptedDuplicateAndDisallowedTransitions() > repetition 2 of 3 PASSED
+
+ClauseValidationTest > statusClauseHandlesAcceptedDuplicateAndDisallowedTransitions() > repetition 3 of 3 PASSED
+
+ClauseValidationTest > duplicateQuoteKeepsDistinctEventOccurrencesWithoutChangingTheBusinessValue() PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "zero price" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "normal" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "upper bounds" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "extra business context" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "negative price" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "excessive price" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "zero quantity" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "excessive quantity" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "text price" PASSED
+
+ClauseValidationTest > productClauseEnforcesPublishedBoundsWithAtomicRollback(String, Map, boolean, long) > "missing quantity" PASSED
+
+> Task :scaleTest
+
+BacklogScaleTest > oneChangedSourceBlocksItsParentWithoutPollingUnrelatedTimelines(int) > [1] 1 PASSED
+
+BacklogScaleTest > oneChangedSourceBlocksItsParentWithoutPollingUnrelatedTimelines(int) > [2] 100 PASSED
+
+BacklogScaleTest > oneChangedSourceBlocksItsParentWithoutPollingUnrelatedTimelines(int) > [3] 100000 PASSED
+
+NativeFanoutTest > oneChildAndOneParentExecuteAfterRestart(int) > [1] 1 PASSED
+
+NativeFanoutTest > oneChildAndOneParentExecuteAfterRestart(int) > [2] 5 PASSED
+
+NativeFanoutTest > oneChildAndOneParentExecuteAfterRestart(int) > [3] 100 PASSED
+
+> Task :test
+
+> Task :scaleTest
+
+NativeFanoutTest > oneChildAndOneParentExecuteAfterRestart(int) > [4] 1000 PASSED
+
+BUILD SUCCESSFUL in 33s
+8 actionable tasks: 4 executed, 4 up-to-date
+Configuration cache entry stored.

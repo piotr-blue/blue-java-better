@@ -1,0 +1,102 @@
+[
+  {
+    "report": "local-final.json",
+    "orders": 10,
+    "samples": 3,
+    "medianAppendThroughCommitMillis": 50.214666,
+    "gasByOwner": [
+      {
+        "owner": "doc-717bf99a-d258-4237-adb1-278bebac1a3f",
+        "gas": 157
+      },
+      {
+        "owner": "sha256:568f4fed9f6918dc0739b5728be0e9c0f04ad8fa794ad8a840e59a093c48ae6b",
+        "gas": 51
+      },
+      {
+        "owner": "sha256:604e7a99363f2554f62e4e03efacf79198fadf642b81b824be5c33ef0f59fcd3",
+        "gas": 104
+      }
+    ],
+    "preparationRows": [
+      6,
+      6,
+      6
+    ]
+  },
+  {
+    "report": "local-final.json",
+    "orders": 1000,
+    "samples": 3,
+    "medianAppendThroughCommitMillis": 319.895625,
+    "gasByOwner": [
+      {
+        "owner": "doc-d22c2f68-e65d-441b-8221-a5e0e69dafc9",
+        "gas": 157
+      },
+      {
+        "owner": "sha256:307ce6ec63d6bcd0f256bce2ef04db4ceb576ba756a70a0294e8f54336470abd",
+        "gas": 51
+      },
+      {
+        "owner": "sha256:ab447c6d9c9a14cd641d77709afd2c219c3a542caa956f79898aa49ddda3692d",
+        "gas": 104
+      }
+    ],
+    "preparationRows": [
+      6,
+      6,
+      6
+    ]
+  },
+  {
+    "report": "local-repeat.json",
+    "orders": 10,
+    "samples": 3,
+    "medianAppendThroughCommitMillis": 52.123708,
+    "gasByOwner": [
+      {
+        "owner": "doc-5955cd15-3a10-4a4a-8deb-e5db8cbb78b4",
+        "gas": 157
+      },
+      {
+        "owner": "sha256:836dbfadb73e7a3fe96644278047086d43b7c99ee5a0b187afd84e67158966ae",
+        "gas": 51
+      },
+      {
+        "owner": "sha256:8a79d922aa7e0a0441d9ba51e3e257456e8919dbb3994b99dc128a3906a51dd2",
+        "gas": 104
+      }
+    ],
+    "preparationRows": [
+      6,
+      6,
+      6
+    ]
+  },
+  {
+    "report": "local-repeat.json",
+    "orders": 1000,
+    "samples": 3,
+    "medianAppendThroughCommitMillis": 297.65104199999996,
+    "gasByOwner": [
+      {
+        "owner": "doc-baf8985c-590d-44b1-acdd-cf6013cdbfad",
+        "gas": 157
+      },
+      {
+        "owner": "sha256:142a33bea6d82a058ba920d61bec357f1e741c5ec47cfad8bf8d0b3c8ae33389",
+        "gas": 104
+      },
+      {
+        "owner": "sha256:6bc661d0ad49edf1ea61fc510579973338a7abad12e60bed913f1e4ddc498645",
+        "gas": 51
+      }
+    ],
+    "preparationRows": [
+      6,
+      6,
+      6
+    ]
+  }
+]

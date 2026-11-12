@@ -1,0 +1,12 @@
+{
+  "host": {
+    "tests": 819,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "checkFormat": "PASS",
+  "hostTestTask": "executed",
+  "awsExactReceipts": 8,
+  "hostMemoryExactReceipts": 12
+}

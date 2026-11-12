@@ -1,0 +1,11 @@
+{
+  "command": "./gradlew --offline --no-parallel format build",
+  "totals": {
+    "tests": 2471,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "PASS",
+  "logSha256": "735a81c94d8222a9063150b49097ce4f845ce0abcfe3ac869412db50ded86419"
+}

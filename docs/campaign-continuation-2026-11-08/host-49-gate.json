@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "totals": {
+    "tests": 812,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "logSha256": "0c8483986d46c16d07fb128113af7934ba3cae43f2e8d5916cbf6aaa7152f94d"
+}

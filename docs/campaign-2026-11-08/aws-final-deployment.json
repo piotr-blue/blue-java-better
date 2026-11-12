@@ -1,0 +1,40 @@
+{
+  "account": "581571886327",
+  "region": "eu-west-1",
+  "stack": "myos-better-canonical-20261108",
+  "instance": "i-052007ebaf704c0ad",
+  "table": "myos-better-canonical-20261108-documents",
+  "bucket": "myos-better-canonical-20261108-artifacts-y9kcxxg2eyvc",
+  "artifactSha256": "66042c7b4db5c7903369373d0cfcf5a8719b9b4a07153fbc8a80551ee3e2b40d",
+  "commandId": "011844bb-832d-4cc1-bbde-7320bfcf5826",
+  "projections": "bounded",
+  "workers": 2,
+  "sessionEntries": 64,
+  "sessionMiB": 128,
+  "sessionUses": 32,
+  "combinedAcknowledgements": true,
+  "runtimeProfile": "console-native",
+  "edition": "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup",
+  "supportedEditions": [
+    "AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup"
+  ],
+  "console": {
+    "UserPool": "eu-west-1_sWm7zJJEO",
+    "UserClient": "4qja6n3otf2nkt753ai44lgkep",
+    "Distribution": "E1CK41T06GCWTM",
+    "Url": "https://d2buikczdox1rt.cloudfront.net"
+  },
+  "hostedProvider": {
+    "secretArn": "arn:aws:secretsmanager:eu-west-1:581571886327:secret:ProviderIdentity-YqbaoJVpTT3m-yjaKn2",
+    "secretVersion": "58c686a6-33ce-4b79-af51-74295dcb2692",
+    "providerId": "7ntiPrK8zUW77KjRVgE5oHCKF1QiwuDgPhwtZ5MiPNzT",
+    "endpoint": "https://d2buikczdox1rt.cloudfront.net/api/provider",
+    "namespace": "console-timelines"
+  },
+  "webhookCustody": {
+    "secretArn": "arn:aws:secretsmanager:eu-west-1:581571886327:secret:Identity-va5KCe2HPg1o-ilyS6d",
+    "secretVersion": "99558a12-ccd8-5013-4285-2ff92245b3c9"
+  },
+  "independentOwners": true,
+  "newDocumentEdition": "myos.canonical-owners/2"
+}

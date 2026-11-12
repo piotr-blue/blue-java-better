@@ -1,0 +1,74 @@
+[
+  {
+    "project": "blue-java-better",
+    "path": "src/main/java/blue/ContractCompletions.java",
+    "before": "7101d2332c822443cafd5da190742fe38be7444052a83b5cf3188890f82531f1",
+    "after": "ffbf8b48441f6dbd1822a5b130435830380ee6634625961854086e6cb25d5c38"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/main/java/blue/ContractPreparations.java",
+    "before": "5238275fd75f1c9c7143da65d4c24af3e56868de7ac2e4b8c4ac8a5711d4051f",
+    "after": "02241cd9bdf0c35d214dd3b9104c3118b9eed84900977636c696abd6d5a358ed"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/main/java/blue/Contracts.java",
+    "before": "fbeaa4edb957e71a88aea49b9bd9f807ccadb7edd1ce1e6e7be65de201b4e707",
+    "after": "29e4081272376f401370f325bfca7cb7a92bf14edd1ac38cb00ea976254b5ebe"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/main/java/blue/TopologyMap.java",
+    "before": "682b6908dd15f57cb9ad4d94cdeea6623b25e4711a1a0c8f283782e78f57d53c",
+    "after": "1545046c50044b97ece4f3675409fcf8bb3917c12241aca3196939808575539d"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/test/java/blue/ContractPreparationDeltaTest.java",
+    "before": null,
+    "after": "3c737c689432da978dabb18cacf54576da42b1852a7f24fab57a6d97ee2e15bb"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/test/java/blue/ContractRetainedCompositionTest.java",
+    "before": "272350e7b5d744a44c06972e48f0975c7dbb6300f2cc7e3caf7a9aa22e3f5262",
+    "after": "82f130db699704636892c95afada2ca1286ca6e069d1d864a38d5c518638adfa"
+  },
+  {
+    "project": "blue-java-better",
+    "path": "src/test/java/blue/TopologyMapTest.java",
+    "before": "ae21023c0f733c40620d532a3a5b7ad54a84fdb51709b30b2d1207b4e3f613e9",
+    "after": "4cf13a95a6e6719638853d67317074a2181344878da1793faa4c4aa370904b15"
+  },
+  {
+    "project": "myos-simplified",
+    "path": "src/main/java/myos/local/Publications.java",
+    "before": "0bcb6db188ccd8bbc936659e148426398ecb0137dd5ff2eecdc265124c2f4368",
+    "after": "5b412f83032979884524970aa527b5ac928a23dc58530283669c8ba3c39078f2"
+  },
+  {
+    "project": "myos-simplified",
+    "path": "src/main/java/myos/local/Repository.java",
+    "before": "48dbf45a5e3859ecb33cadef1b595a6b950f711fe2444f55a71cb127a0c99887",
+    "after": "8bebc98dc8aca72dc704cc56e236360c474f66756988b1b12327b384591ca74b"
+  },
+  {
+    "project": "myos-core-better",
+    "path": "src/main/java/myos/better/CanonicalSnapshots.java",
+    "before": "ff8945ada1e64af860b14c253d157211440b8277715c7911c7d74ce286542558",
+    "after": "6e3d30d65959f865fe805dcabd9452983983a007d39ada9e792d0cc92c325c97"
+  },
+  {
+    "project": "myos-core-better",
+    "path": "src/main/java/myos/better/OwnerGraphs.java",
+    "before": "858526591b7790a6a5370f0fc5efd20c608d366ed4780f7d40235f4429d62724",
+    "after": "6791458e8cce507074ec7393411b45f06abf65041dc0a708d68fc244313f174c"
+  },
+  {
+    "project": "myos-core-better",
+    "path": "src/test/java/myos/better/CanonicalSnapshotsTest.java",
+    "before": "eeec0bcfcd90a172c22e686d444d1035a1f45def01d918c74b0383d7e2b98e1d",
+    "after": "07054f9f0ec9a894a2961be19ae100f5d13627c1730e1cba1a63920654cb83c4"
+  }
+]

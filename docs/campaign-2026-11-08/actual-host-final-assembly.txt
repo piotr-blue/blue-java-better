@@ -1,0 +1,19 @@
+Calculating task graph as no cached configuration is available for tasks: checkFormat assemble installDist
+> Task :processResources UP-TO-DATE
+> Task :blue-java-better:processResources UP-TO-DATE
+> Task :blue-java-better:compileJava UP-TO-DATE
+> Task :blue-java-better:classes UP-TO-DATE
+> Task :blue-java-better:jar UP-TO-DATE
+> Task :compileJava FROM-CACHE
+> Task :classes UP-TO-DATE
+> Task :jar
+> Task :startScripts
+> Task :installDist
+> Task :distTar
+> Task :checkFormat
+> Task :distZip
+> Task :assemble
+
+BUILD SUCCESSFUL in 2s
+11 actionable tasks: 6 executed, 1 from cache, 4 up-to-date
+Configuration cache entry stored.

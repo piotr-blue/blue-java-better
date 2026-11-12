@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "command": "mixed-qa-1806294fad30",
+  "imported": [
+    {
+      "timeline": "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+      "entry": "7qsqtThn1hGBxeqMUkJMddUzhQmWh2Cx21wdhe4kBAxB",
+      "completeBefore": 1794189905926000
+    },
+    {
+      "timeline": "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+      "entry": "8iy1VqK5JAymHrPnHbt7pBo7377E52rdxnL6BYxPWcgr",
+      "completeBefore": 1794189905925000
+    }
+  ],
+  "resumed": false,
+  "document": "graph-fast-e7e4e7c658ceb13cb9a48bc59030cd2ad364f64ad16b4c20",
+  "bootstrapMillis": 1121.4262919999999,
+  "historicalCount": 14,
+  "bootstrapThroughReplayMillis": 1682.6889169999993,
+  "localOperation": {
+    "operation": "increment",
+    "document": "graph-fast-e7e4e7c658ceb13cb9a48bc59030cd2ad364f64ad16b4c20",
+    "entry": "J9LrTwuSmmtzK2roGJggddJzup5gjksExSj6pGqk3TfY",
+    "version": 4,
+    "restoreAdmissionExecutionMillis": 114.226116,
+    "lookupMillis": 452.2700840000002,
+    "submitMillis": 365.3502079999988,
+    "submitServerTiming": "app;dur=145.969",
+    "serverPerformance": {},
+    "observedWithLookupMillis": 1800.6760419999991,
+    "observedTotalMillis": 1348.4071249999995
+  },
+  "finalCount": 19,
+  "processing": {
+    "propagation": {
+      "closed": false,
+      "coverage": {
+        "before": 1794189911804000,
+        "local": true
+      },
+      "deferred": null,
+      "mode": "fast",
+      "owner": "graph-fast-e7e4e7c658ceb13cb9a48bc59030cd2ad364f64ad16b4c20",
+      "position": 3,
+      "refreshNeeded": {},
+      "through": {
+        "timestamp": 1794189911555000,
+        "timeline": "FWnaDZnHJGPVmqpZMGs5WkkesWHXgpGc93kaPrGe25ui",
+        "entry": "J9LrTwuSmmtzK2roGJggddJzup5gjksExSj6pGqk3TfY"
+      }
+    },
+    "timelines": {
+      "account": "user-ff574bbc4f2d73e74e19e8031d49fb899d773f622cb578c20af6b0e6507bea6a",
+      "addressHints": false,
+      "document": "graph-fast-e7e4e7c658ceb13cb9a48bc59030cd2ad364f64ad16b4c20",
+      "inputSources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+        "FWnaDZnHJGPVmqpZMGs5WkkesWHXgpGc93kaPrGe25ui"
+      ],
+      "kind": "receiver",
+      "observedSources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX"
+      ],
+      "queue": {
+        "again": 0,
+        "ordinary": 0,
+        "running": 0,
+        "urgent": 0
+      },
+      "reason": "No owner input",
+      "scope": "a2fbc899529768aaabf73a8138b6d0d3280fc2675864f39c20d1bf23986a9aa9",
+      "sources": [
+        "6bd1f9VEkDYyyhAys8wzSK7aRPaJgN5MDXV76whz8WEm",
+        "72YT5hCR9QdaL9MKY3FGHxUeqYS53f9GGeEAec1XZuXM",
+        "BVLnBzLP7m8NDbqBJKskwrGLUM7LomjMrp21cxcWuofX",
+        "FWnaDZnHJGPVmqpZMGs5WkkesWHXgpGc93kaPrGe25ui"
+      ],
+      "status": "IDLE",
+      "worker": {
+        "discovered": 19,
+        "discoveries": 615,
+        "drains": 10909,
+        "failed": 0,
+        "processed": 285,
+        "scope": "a2fbc899529768aaabf73a8138b6d0d3280fc2675864f39c20d1bf23986a9aa9",
+        "skipped": 2
+      }
+    }
+  },
+  "checks": [
+    "two signed historical external entries replayed",
+    "local operation waits for required external completeness",
+    "exact submitted entry has a committed APPLIED outcome",
+    "count is 14 after replay and 19 after local input"
+  ]
+}

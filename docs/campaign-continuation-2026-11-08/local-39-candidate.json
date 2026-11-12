@@ -1,0 +1,332 @@
+{
+  "run": "39-candidate",
+  "status": "PASS",
+  "timing": "append through all owner commits; runtime/store opening excluded; reopened per input",
+  "fullyOrdinaryOracle": false,
+  "cases": [
+    {
+      "orders": 10,
+      "initializationMillis": 237.971209,
+      "medianMillis": 44.078792,
+      "samples": [
+        {
+          "millis": 84.934334,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-060cb78e-007b-426b-a75f-bfae7c745d6e",
+              "sequence": 1,
+              "restore_ns": 2297250,
+              "execution_ns": 14194584,
+              "prepare_ns": 2762500,
+              "engine_nanos": 16491834
+            },
+            {
+              "owner": "sha256:3c35397eca6915e21c583ccf80a6d13f05ed5b36289e9656aae62ea9194f8311",
+              "sequence": 1,
+              "restore_ns": 1445375,
+              "execution_ns": 12529541,
+              "prepare_ns": 1805875,
+              "engine_nanos": 13974916
+            },
+            {
+              "owner": "sha256:fd6fa6977bf1c4a911e29d494c3d3cdee13dabddf3fc4caa762913ee379705c4",
+              "sequence": 1,
+              "restore_ns": 2483667,
+              "execution_ns": 13473125,
+              "prepare_ns": 2763000,
+              "engine_nanos": 15956792
+            }
+          ]
+        },
+        {
+          "millis": 50.858666,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-060cb78e-007b-426b-a75f-bfae7c745d6e",
+              "sequence": 2,
+              "restore_ns": 1954584,
+              "execution_ns": 12497958,
+              "prepare_ns": 2132417,
+              "engine_nanos": 14452542
+            },
+            {
+              "owner": "sha256:3c35397eca6915e21c583ccf80a6d13f05ed5b36289e9656aae62ea9194f8311",
+              "sequence": 2,
+              "restore_ns": 1255292,
+              "execution_ns": 7070458,
+              "prepare_ns": 1306083,
+              "engine_nanos": 8325750
+            },
+            {
+              "owner": "sha256:fd6fa6977bf1c4a911e29d494c3d3cdee13dabddf3fc4caa762913ee379705c4",
+              "sequence": 2,
+              "restore_ns": 1156083,
+              "execution_ns": 5941459,
+              "prepare_ns": 3408208,
+              "engine_nanos": 7097542
+            }
+          ]
+        },
+        {
+          "millis": 43.458749,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-060cb78e-007b-426b-a75f-bfae7c745d6e",
+              "sequence": 3,
+              "restore_ns": 1719000,
+              "execution_ns": 11288167,
+              "prepare_ns": 1955833,
+              "engine_nanos": 13007167
+            },
+            {
+              "owner": "sha256:3c35397eca6915e21c583ccf80a6d13f05ed5b36289e9656aae62ea9194f8311",
+              "sequence": 3,
+              "restore_ns": 1067875,
+              "execution_ns": 5991834,
+              "prepare_ns": 1206042,
+              "engine_nanos": 7059709
+            },
+            {
+              "owner": "sha256:fd6fa6977bf1c4a911e29d494c3d3cdee13dabddf3fc4caa762913ee379705c4",
+              "sequence": 3,
+              "restore_ns": 843625,
+              "execution_ns": 5006333,
+              "prepare_ns": 1142125,
+              "engine_nanos": 5849958
+            }
+          ]
+        },
+        {
+          "millis": 44.078792,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-060cb78e-007b-426b-a75f-bfae7c745d6e",
+              "sequence": 4,
+              "restore_ns": 1678459,
+              "execution_ns": 10806291,
+              "prepare_ns": 1881916,
+              "engine_nanos": 12484750
+            },
+            {
+              "owner": "sha256:3c35397eca6915e21c583ccf80a6d13f05ed5b36289e9656aae62ea9194f8311",
+              "sequence": 4,
+              "restore_ns": 1015875,
+              "execution_ns": 5808125,
+              "prepare_ns": 987375,
+              "engine_nanos": 6824000
+            },
+            {
+              "owner": "sha256:fd6fa6977bf1c4a911e29d494c3d3cdee13dabddf3fc4caa762913ee379705c4",
+              "sequence": 4,
+              "restore_ns": 865208,
+              "execution_ns": 6526500,
+              "prepare_ns": 1187167,
+              "engine_nanos": 7391708
+            }
+          ]
+        },
+        {
+          "millis": 38.784709,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-060cb78e-007b-426b-a75f-bfae7c745d6e",
+              "sequence": 5,
+              "restore_ns": 1583167,
+              "execution_ns": 9794125,
+              "prepare_ns": 1686542,
+              "engine_nanos": 11377292
+            },
+            {
+              "owner": "sha256:3c35397eca6915e21c583ccf80a6d13f05ed5b36289e9656aae62ea9194f8311",
+              "sequence": 5,
+              "restore_ns": 904625,
+              "execution_ns": 5465958,
+              "prepare_ns": 1005041,
+              "engine_nanos": 6370583
+            },
+            {
+              "owner": "sha256:fd6fa6977bf1c4a911e29d494c3d3cdee13dabddf3fc4caa762913ee379705c4",
+              "sequence": 5,
+              "restore_ns": 746667,
+              "execution_ns": 4609125,
+              "prepare_ns": 1104792,
+              "engine_nanos": 5355792
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "orders": 1000,
+      "initializationMillis": 15400.631709,
+      "medianMillis": 335.408041,
+      "samples": [
+        {
+          "millis": 404.205833,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-915d1358-07d8-4582-8b56-70e7a8654f55",
+              "sequence": 1,
+              "restore_ns": 50806208,
+              "execution_ns": 182825917,
+              "prepare_ns": 63450709,
+              "engine_nanos": 233632125
+            },
+            {
+              "owner": "sha256:ae4514111aee8ebaaaf378c849765e474a1abd120499e5049f77e434409349f1",
+              "sequence": 1,
+              "restore_ns": 517125,
+              "execution_ns": 5181292,
+              "prepare_ns": 1482792,
+              "engine_nanos": 5698417
+            },
+            {
+              "owner": "sha256:f97331b8b3c70db87acf9a776aa991b00c258c6fea231633cba12f16dfcfd8e6",
+              "sequence": 1,
+              "restore_ns": 580917,
+              "execution_ns": 3999500,
+              "prepare_ns": 873167,
+              "engine_nanos": 4580417
+            }
+          ]
+        },
+        {
+          "millis": 325.5025,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-915d1358-07d8-4582-8b56-70e7a8654f55",
+              "sequence": 2,
+              "restore_ns": 48718333,
+              "execution_ns": 164286500,
+              "prepare_ns": 43739125,
+              "engine_nanos": 213004833
+            },
+            {
+              "owner": "sha256:ae4514111aee8ebaaaf378c849765e474a1abd120499e5049f77e434409349f1",
+              "sequence": 2,
+              "restore_ns": 532791,
+              "execution_ns": 3337209,
+              "prepare_ns": 1025541,
+              "engine_nanos": 3870000
+            },
+            {
+              "owner": "sha256:f97331b8b3c70db87acf9a776aa991b00c258c6fea231633cba12f16dfcfd8e6",
+              "sequence": 2,
+              "restore_ns": 787334,
+              "execution_ns": 3822000,
+              "prepare_ns": 844875,
+              "engine_nanos": 4609334
+            }
+          ]
+        },
+        {
+          "millis": 348.082042,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-915d1358-07d8-4582-8b56-70e7a8654f55",
+              "sequence": 3,
+              "restore_ns": 48079583,
+              "execution_ns": 176073334,
+              "prepare_ns": 54721708,
+              "engine_nanos": 224152917
+            },
+            {
+              "owner": "sha256:ae4514111aee8ebaaaf378c849765e474a1abd120499e5049f77e434409349f1",
+              "sequence": 3,
+              "restore_ns": 535417,
+              "execution_ns": 3548500,
+              "prepare_ns": 980834,
+              "engine_nanos": 4083917
+            },
+            {
+              "owner": "sha256:f97331b8b3c70db87acf9a776aa991b00c258c6fea231633cba12f16dfcfd8e6",
+              "sequence": 3,
+              "restore_ns": 543417,
+              "execution_ns": 3210375,
+              "prepare_ns": 731208,
+              "engine_nanos": 3753792
+            }
+          ]
+        },
+        {
+          "millis": 335.408041,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-915d1358-07d8-4582-8b56-70e7a8654f55",
+              "sequence": 4,
+              "restore_ns": 50450292,
+              "execution_ns": 165223583,
+              "prepare_ns": 49492792,
+              "engine_nanos": 215673875
+            },
+            {
+              "owner": "sha256:ae4514111aee8ebaaaf378c849765e474a1abd120499e5049f77e434409349f1",
+              "sequence": 4,
+              "restore_ns": 654583,
+              "execution_ns": 3454792,
+              "prepare_ns": 1104083,
+              "engine_nanos": 4109375
+            },
+            {
+              "owner": "sha256:f97331b8b3c70db87acf9a776aa991b00c258c6fea231633cba12f16dfcfd8e6",
+              "sequence": 4,
+              "restore_ns": 594000,
+              "execution_ns": 3621042,
+              "prepare_ns": 746708,
+              "engine_nanos": 4215042
+            }
+          ]
+        },
+        {
+          "millis": 333.973583,
+          "receiptParity": true,
+          "jobs": 3,
+          "phases": [
+            {
+              "owner": "doc-915d1358-07d8-4582-8b56-70e7a8654f55",
+              "sequence": 5,
+              "restore_ns": 50490292,
+              "execution_ns": 163062500,
+              "prepare_ns": 52038708,
+              "engine_nanos": 213552792
+            },
+            {
+              "owner": "sha256:ae4514111aee8ebaaaf378c849765e474a1abd120499e5049f77e434409349f1",
+              "sequence": 5,
+              "restore_ns": 563917,
+              "execution_ns": 3127625,
+              "prepare_ns": 981458,
+              "engine_nanos": 3691542
+            },
+            {
+              "owner": "sha256:f97331b8b3c70db87acf9a776aa991b00c258c6fea231633cba12f16dfcfd8e6",
+              "sequence": 5,
+              "restore_ns": 552959,
+              "execution_ns": 3192958,
+              "prepare_ns": 736042,
+              "engine_nanos": 3745917
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

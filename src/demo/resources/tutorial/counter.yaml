@@ -1,0 +1,18 @@
+# Canonical Contracts counter using standard channel and operation declarations.
+name: Tutorial Counter
+counter: 0
+contracts:
+  owner: {type: Contracts/External Channel}
+  increment:
+    type: Contracts/Sequential Workflow Operation
+    channel: owner
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: /counter
+              val: {$add: [{$document: /counter}, {$binding: call/request/amount}]}
+          - $appendEvent:
+              kind: Counter Changed
+              count: {$resultValue: /counter}

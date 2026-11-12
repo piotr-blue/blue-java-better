@@ -1,0 +1,38 @@
+name: Audit Clause
+parameters:
+  path: {type: Text}
+  action: {type: List}
+contracts:
+  bex:
+    blueId: J13749eVM7Z6NgDhb6JY2d6RyyofijcdXDEiELkuj73f
+  capabilities: []
+  contract:
+    blueId: 9eAmCke6PnSwPp5YjUuLLYeXvCFh86JNEKmbTQaKY2s
+  coordination:
+    blueId: 47mAMfUrnx4Wz6EPMbMkvqtkPB8uBFCuozUZjwH7sGag
+  language:
+    blueId: B8qQWuqNEWwPdYHuaMdKBNEr8xpsB8KeJCa4M2EeTezq
+  type: Coordination/Execution
+  life: {type: Contracts/Lifecycle Event Channel}
+  init:
+    type: Contracts/Sequential Workflow
+    channel: life
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange: {op: add, path: {$binding: params/path}, val: 0}
+  source:
+    type: Contracts/Triggered Event Channel
+    event: {kind: Order Submitted}
+  record:
+    type: Contracts/Sequential Workflow
+    channel: source
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: {$binding: params/path}
+              val: {$add: [{$document: {$binding: params/path}}, 1]}
+      - type: Local/Run Workflow
+        parameter: action

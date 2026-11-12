@@ -1,0 +1,27 @@
+{
+  "url": "https://d2buikczdox1rt.cloudfront.net",
+  "account": "user-ff574bbc4f2d73e74e19e8031d49fb899d773f622cb578c20af6b0e6507bea6a",
+  "checks": [
+    "Cognito login",
+    "anonymous rejection",
+    "cross-origin write rejection"
+  ],
+  "startedAt": "2026-11-09T01:27:37Z",
+  "measurementBoundary": "HTTPS client submission through the Agreement committed APPLIED history for this exact submitted entry, including client network and polling with persistent TLS; catalogue and initial-head lookup reported separately",
+  "agreement": "graph-fast-267047e37cb8cf437581e30518c4c9cebc861b8f9148035d",
+  "bootstrapMillis": 5265.350166000001,
+  "initialHead": {
+    "document": "graph-fast-267047e37cb8cf437581e30518c4c9cebc861b8f9148035d",
+    "edition": "myos.canonical-owners/2",
+    "localBlueId": "EhqFBSe756ZfMXzR1EmhhNQQiZDVBjcDZWRyWMu2bEzf",
+    "version": 1
+  },
+  "passed": false,
+  "measurements": [],
+  "acceptanceFailure": {
+    "endpoint": "children",
+    "status": 400,
+    "code": "INVALID_REQUEST",
+    "cause": "Snapshot inspection restored a new-schedule history with the published default; corrected and rerun successfully"
+  }
+}

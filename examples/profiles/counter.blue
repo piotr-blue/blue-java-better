@@ -1,0 +1,26 @@
+name: Counter
+count: 0
+contracts:
+  bex:
+    blueId: J13749eVM7Z6NgDhb6JY2d6RyyofijcdXDEiELkuj73f
+  capabilities: []
+  contract:
+    blueId: 9eAmCke6PnSwPp5YjUuLLYeXvCFh86JNEKmbTQaKY2s
+  coordination:
+    blueId: 47mAMfUrnx4Wz6EPMbMkvqtkPB8uBFCuozUZjwH7sGag
+  language:
+    blueId: B8qQWuqNEWwPdYHuaMdKBNEr8xpsB8KeJCa4M2EeTezq
+  type: Coordination/Execution
+  input:
+    type: Local/Operation Channel
+  increment:
+    type: Contracts/Sequential Workflow Operation
+    channel: input
+    steps:
+      - type: Contracts/Compute
+        do:
+          - $appendChange:
+              op: replace
+              path: /count
+              val: {$add: [{$document: /count}, 1]}
+          - $appendEvent: {kind: Counter Incremented}

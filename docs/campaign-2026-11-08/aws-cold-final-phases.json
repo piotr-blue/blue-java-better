@@ -1,0 +1,686 @@
+{
+  "command": "b696f3c2-5943-4f45-bd17-dc839a55d59c",
+  "status": "Success",
+  "worker": "i-0d348bc1ebde2e399",
+  "started": "2026-11-08T20:58:13.810Z",
+  "ended": "2026-11-08T21:00:17.810Z",
+  "stdoutSha256": "46862539e352b3dcc362363f0fde1572fd54c73e40baba91cf6276e144b2e375",
+  "outputStorage": {
+    "bucket": "myos-better-20261105-artifacts-2d9fwz4fu2pf",
+    "prefix": "reports/qualification/owner-qa-2cd3442b5537"
+  },
+  "records": [
+    {
+      "io": {
+        "commit.calls": 4,
+        "commit.failures": 0,
+        "commit.nanos": 141390567,
+        "commit.retryableFailures": 0,
+        "content.calls": 0,
+        "content.failures": 0,
+        "content.nanos": 0,
+        "contentAll.calls": 0,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 0,
+        "get.calls": 9,
+        "get.failures": 0,
+        "get.nanos": 115684183,
+        "getAll.calls": 1,
+        "getAll.failures": 0,
+        "getAll.nanos": 425487156,
+        "publishContent.calls": 2,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 307563813,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "millis": 1295.70048,
+      "orders": 10,
+      "phase": "initialized"
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 112685045,
+        "commit.retryableFailures": 0,
+        "content.calls": 44,
+        "content.failures": 0,
+        "content.nanos": 188377600,
+        "contentAll.calls": 35,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 223864744,
+        "get.calls": 42,
+        "get.failures": 0,
+        "get.nanos": 184051214,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 100630499,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 0
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 107349241,
+        "commit.retryableFailures": 0,
+        "content.calls": 53,
+        "content.failures": 0,
+        "content.nanos": 180765743,
+        "contentAll.calls": 43,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 218626421,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 128713410,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 72761026,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 1
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 101476522,
+        "commit.retryableFailures": 0,
+        "content.calls": 61,
+        "content.failures": 0,
+        "content.nanos": 179613881,
+        "contentAll.calls": 47,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 180450700,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 109950424,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 62261699,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 2
+    },
+    {
+      "orders": 10,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 29,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 23
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 21
+          },
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 19
+          },
+          {
+            "method": "myos.better.MeasuredStore.measure",
+            "samples": 10
+          },
+          {
+            "method": "myos.better.DynamoStore.get",
+            "samples": 5
+          },
+          {
+            "method": "myos.better.DynamoStore.readItem",
+            "samples": 5
+          },
+          {
+            "method": "myos.better.GraphTimelineIngress.owner",
+            "samples": 5
+          },
+          {
+            "method": "myos.better.MeasuredStore.get",
+            "samples": 5
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerFrontiers.change",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerGraphs.prepare",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerGraphs.preparePages",
+            "samples": 4
+          },
+          {
+            "method": "myos.better.OwnerMetadata.begin",
+            "samples": 4
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 3
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 3
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 3
+          },
+          {
+            "method": "blue.LanguageCore.open",
+            "samples": 3
+          },
+          {
+            "method": "blue.LanguageCore.providerBody",
+            "samples": 3
+          }
+        ],
+        "leaf": [
+          {
+            "method": "blue.ContractModel$Snapshot$$Lambda.0x000000003839a400.apply",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageContext.bound",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageCore.digestBase58",
+            "samples": 1
+          },
+          {
+            "method": "blue.LanguageTrie.union",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.ByteSourceJsonBootstrapper.detectEncoding",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser._decodeEscaped",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.core.util.TextBuffer.contentsAsString",
+            "samples": 1
+          },
+          {
+            "method": "com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.StringLatin1.inflate",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.StringUTF16.putChars",
+            "samples": 1
+          },
+          {
+            "method": "java.lang.invoke.LambdaForm$MH.0x00000000380d5800.invoke",
+            "samples": 1
+          },
+          {
+            "method": "java.security.MessageDigest$Delegate.engineUpdate",
+            "samples": 1
+          },
+          {
+            "method": "java.util.AbstractCollection.containsAll",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.<init>",
+            "samples": 1
+          },
+          {
+            "method": "java.util.HashMap.putVal",
+            "samples": 1
+          },
+          {
+            "method": "java.util.TreeMap.put",
+            "samples": 1
+          },
+          {
+            "method": "java.util.concurrent.ThreadPoolExecutor.ensurePrestart",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.classfile.impl.AbstractPoolEntry$Utf8EntryImpl.<init>",
+            "samples": 1
+          },
+          {
+            "method": "jdk.internal.classfile.impl.BoundAttribute.standardAttribute",
+            "samples": 1
+          },
+          {
+            "method": "org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute",
+            "samples": 1
+          }
+        ]
+      }
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 103724564,
+        "commit.retryableFailures": 0,
+        "content.calls": 73,
+        "content.failures": 0,
+        "content.nanos": 212872545,
+        "contentAll.calls": 48,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 179782342,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 109914964,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 63374619,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 10,
+      "phase": "io",
+      "sample": 3
+    },
+    {
+      "inputs": 4,
+      "orders": 10,
+      "phase": "parity-verified"
+    },
+    {
+      "io": {
+        "commit.calls": 36,
+        "commit.failures": 0,
+        "commit.nanos": 751646858,
+        "commit.retryableFailures": 0,
+        "content.calls": 369,
+        "content.failures": 0,
+        "content.nanos": 1259666064,
+        "contentAll.calls": 177,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 820944286,
+        "get.calls": 200,
+        "get.failures": 0,
+        "get.nanos": 751498935,
+        "getAll.calls": 2,
+        "getAll.failures": 0,
+        "getAll.nanos": 429679631,
+        "publishContent.calls": 44,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 7898679544,
+        "query.calls": 4,
+        "query.failures": 0,
+        "query.nanos": 34606136,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "millis": 42360.996809,
+      "orders": 1000,
+      "phase": "initialized"
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 107395218,
+        "commit.retryableFailures": 0,
+        "content.calls": 171,
+        "content.failures": 0,
+        "content.nanos": 442052503,
+        "contentAll.calls": 108,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 1108333260,
+        "get.calls": 42,
+        "get.failures": 0,
+        "get.nanos": 99259015,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 790476816,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 0
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 97756811,
+        "commit.retryableFailures": 0,
+        "content.calls": 156,
+        "content.failures": 0,
+        "content.nanos": 341304091,
+        "contentAll.calls": 127,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 1316473578,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 86573818,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 92324842,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 1
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 102056942,
+        "commit.retryableFailures": 0,
+        "content.calls": 160,
+        "content.failures": 0,
+        "content.nanos": 355716641,
+        "contentAll.calls": 131,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 1247942748,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 89349070,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 145018475,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 2
+    },
+    {
+      "orders": 1000,
+      "phase": "profile",
+      "summary": {
+        "executionSamples": 217,
+        "inclusive": [
+          {
+            "method": "myos.better.OwnerGraphs.process",
+            "samples": 197
+          },
+          {
+            "method": "myos.better.OwnerGraphs.step",
+            "samples": 196
+          },
+          {
+            "method": "myos.better.OwnerScaleProbe.main",
+            "samples": 196
+          },
+          {
+            "method": "blue.Contracts.boundary",
+            "samples": 142
+          },
+          {
+            "method": "blue.ContractProcessor.process",
+            "samples": 78
+          },
+          {
+            "method": "blue.ContractRun.guard",
+            "samples": 78
+          },
+          {
+            "method": "blue.ContractRun.attempt",
+            "samples": 77
+          },
+          {
+            "method": "blue.Contracts$Execution.process",
+            "samples": 77
+          },
+          {
+            "method": "myos.better.OwnerGraphs.invoke",
+            "samples": 76
+          },
+          {
+            "method": "blue.LanguageDiagnostics.at",
+            "samples": 70
+          },
+          {
+            "method": "blue.ContractAttempt.finishLocalOutcome",
+            "samples": 68
+          },
+          {
+            "method": "myos.better.OwnerRecords.restore",
+            "samples": 65
+          },
+          {
+            "method": "blue.ContractAttempt.advanceLocal",
+            "samples": 61
+          },
+          {
+            "method": "blue.ContractRun.runUnit",
+            "samples": 61
+          },
+          {
+            "method": "blue.ContractLanguage.strict",
+            "samples": 56
+          },
+          {
+            "method": "blue.ContractRun.runLocal",
+            "samples": 56
+          },
+          {
+            "method": "blue.LanguageSemantics.strict",
+            "samples": 56
+          },
+          {
+            "method": "blue.ContractBridge.certify",
+            "samples": 55
+          },
+          {
+            "method": "blue.ContractRun.installInputs",
+            "samples": 55
+          },
+          {
+            "method": "blue.ContractGraph.finalizeLocal",
+            "samples": 54
+          }
+        ],
+        "leaf": [
+          {
+            "method": "java.util.HashMap.getNode",
+            "samples": 14
+          },
+          {
+            "method": "sun.security.provider.DigestBase.engineDigest",
+            "samples": 13
+          },
+          {
+            "method": "java.util.HashMap.putVal",
+            "samples": 10
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2",
+            "samples": 8
+          },
+          {
+            "method": "blue.LanguageCodec.appendQuote",
+            "samples": 7
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser.findName",
+            "samples": 7
+          },
+          {
+            "method": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._checkNeedForRehash",
+            "samples": 6
+          },
+          {
+            "method": "java.lang.String.equals",
+            "samples": 6
+          },
+          {
+            "method": "java.util.TreeMap.getEntry",
+            "samples": 6
+          },
+          {
+            "method": "blue.LanguageCore.digestBase58",
+            "samples": 5
+          },
+          {
+            "method": "blue.LanguageTrie.with",
+            "samples": 4
+          },
+          {
+            "method": "java.util.HashMap.resize",
+            "samples": 4
+          },
+          {
+            "method": "java.util.Objects.equals",
+            "samples": 4
+          },
+          {
+            "method": "java.util.TreeMap.getEntryUsingComparator",
+            "samples": 4
+          },
+          {
+            "method": "java.util.TreeMap.put",
+            "samples": 4
+          },
+          {
+            "method": "java.util.TreeMap.successor",
+            "samples": 4
+          },
+          {
+            "method": "blue.LanguageCodec.unicode",
+            "samples": 3
+          },
+          {
+            "method": "blue.LanguageTrie.union",
+            "samples": 3
+          },
+          {
+            "method": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser._finishString",
+            "samples": 3
+          },
+          {
+            "method": "java.util.HashMap.hash",
+            "samples": 3
+          }
+        ]
+      }
+    },
+    {
+      "io": {
+        "commit.calls": 6,
+        "commit.failures": 0,
+        "commit.nanos": 108690608,
+        "commit.retryableFailures": 0,
+        "content.calls": 165,
+        "content.failures": 0,
+        "content.nanos": 384224246,
+        "contentAll.calls": 133,
+        "contentAll.failures": 0,
+        "contentAll.nanos": 1293764941,
+        "get.calls": 40,
+        "get.failures": 0,
+        "get.nanos": 99189571,
+        "getAll.calls": 0,
+        "getAll.failures": 0,
+        "getAll.nanos": 0,
+        "publishContent.calls": 6,
+        "publishContent.failures": 0,
+        "publishContent.nanos": 107097671,
+        "query.calls": 0,
+        "query.failures": 0,
+        "query.nanos": 0,
+        "work.calls": 0,
+        "work.failures": 0,
+        "work.nanos": 0
+      },
+      "orders": 1000,
+      "phase": "io",
+      "sample": 3
+    },
+    {
+      "inputs": 4,
+      "orders": 1000,
+      "phase": "parity-verified"
+    }
+  ]
+}
