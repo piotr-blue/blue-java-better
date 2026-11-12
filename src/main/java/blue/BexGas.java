@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 /** Scalar admitted gas and the first rejected charge. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 class BexGas {
   public static final Map<String, Long> DEFAULT;
 

@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 
 /** Read-only invocation data. Capability callbacks are borrowed and must be deterministic. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 record BexContext(
     Object document,
     Object event,

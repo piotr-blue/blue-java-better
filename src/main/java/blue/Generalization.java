@@ -8,6 +8,7 @@ import static blue.ContractModel.pointer;
 import static blue.ContractModel.prefix;
 import static blue.ContractModel.require;
 import static blue.ContractModel.segments;
+import static blue.LanguageCore.exactItems;
 
 import blue.ContractModel.Meter;
 import blue.ExactNode.Ref;
@@ -20,7 +21,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class Generalization {
   static final Set<String> SEMANTIC =
       Set.of("TypeCompatibilityViolation", "SchemaViolation", "FixedValueConflict");
@@ -59,7 +59,7 @@ final class Generalization {
     for (String k : parts) {
       Value b = blue.open(n);
       if (b.has("items")) {
-        var items = (List<ExactNode>) b.get("items");
+        var items = exactItems(b.get("items"));
         if (!k.matches("[0-9]+") || Integer.parseInt(k) >= items.size()) return null;
         n = items.get(Integer.parseInt(k));
       } else {
@@ -77,7 +77,7 @@ final class Generalization {
     var fields = new TreeMap<>(b.fields());
     String k = parts.getFirst();
     if (b.has("items")) {
-      var items = new ArrayList<>((List<ExactNode>) b.get("items"));
+      var items = new ArrayList<>(exactItems(b.get("items")));
       int i = Integer.parseInt(k);
       items.set(i, replace(blue, items.get(i), parts.subList(1, parts.size()), value));
       fields.put("items", List.copyOf(items));
@@ -100,10 +100,10 @@ final class Generalization {
         String k = e.getKey();
         Object v = e.getValue();
         if (k.equals("items")) {
-          var items = (List<ExactNode>) v;
+          var items = exactItems(v);
           var before =
               old != null && old.get(k) instanceof List
-                  ? (List<ExactNode>) old.get(k)
+                  ? exactItems(old.get(k))
                   : List.<ExactNode>of();
           for (int i = 0; i < items.size(); i++) {
             var p = new ArrayList<>(at);

@@ -29,7 +29,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /** Native, atomic Contracts processor. All state is carried by immutable selected snapshots. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractProcessor {
   final ContractBridge blue;
   final ContractRegistry registry;

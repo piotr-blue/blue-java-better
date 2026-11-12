@@ -23,7 +23,6 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 /** BEX null, undefined, integers and decimal values remain distinct. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexValues {
   private static final Pattern NUMBER_TEXT =
       Pattern.compile("[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?");
@@ -164,6 +163,7 @@ final class BexValues {
     return copy(value, null);
   }
 
+  @SuppressWarnings("unchecked") // Every pending target is a container created by this method.
   static Object copy(Object value, java.util.function.UnaryOperator<HostValue> replace) {
     record Pending(Object target, Object key, Object source) {}
     var holder = new ArrayList<Object>(Collections.singletonList(null));
@@ -508,6 +508,7 @@ final class BexValues {
 
   private record PointerParent(Object container, Object key, boolean last) {}
 
+  @SuppressWarnings("unchecked") // Every parent container is a copy created by this method.
   private static Object overlayAt(
       Object at, List<String> parts, Object replacement, boolean remove, BexGas gas) {
     var parents = new ArrayDeque<PointerParent>();

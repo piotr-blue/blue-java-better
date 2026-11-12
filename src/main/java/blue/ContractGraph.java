@@ -35,7 +35,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractGraph {
   record Link(String document) {}
 

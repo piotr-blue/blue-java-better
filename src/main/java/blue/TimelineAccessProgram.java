@@ -147,7 +147,6 @@ public final class TimelineAccessProgram {
   }
 
   /** A caller-confined tentative execution lifetime; no method publishes or grants access. */
-  @SuppressWarnings("try")
   public static final class Session implements AutoCloseable {
     private final TimelineAccessDefinition definition;
     private ContractProcessor processor;
@@ -204,6 +203,7 @@ public final class TimelineAccessProgram {
       return processLocal(entry, prepared);
     }
 
+    @SuppressWarnings("try") // The scope is held for its lifetime, not referenced.
     private Contracts.Transition processLocal(
         LanguageContent entry, TimelinePublisher.Prepared prepared) {
       checkInitialized();
@@ -312,6 +312,7 @@ public final class TimelineAccessProgram {
      * @param retained lookup for exact identities already retained with their supporting closures
      * @return canonical snapshot and incremental evidence; not a self-contained transport package
      */
+    @SuppressWarnings("try") // The scope is held for its lifetime, not referenced.
     public Map<String, Object> snapshot(java.util.function.Predicate<BlueId> retained) {
       checkInitialized();
       Objects.requireNonNull(retained);

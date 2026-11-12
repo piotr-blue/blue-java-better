@@ -1,7 +1,6 @@
 package blue;
 
 /** Canonical wire data utilities for adapters. No admission, trust or mutable runtime state. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractWire {
   private ContractWire() {}
 

@@ -14,7 +14,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** Data-only compile-time validation. Compilation consumes no semantic gas. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexPlanCompiler {
   static final Set<String> RESERVED =
       words(
@@ -113,11 +112,13 @@ final class BexPlanCompiler {
     if (!test) throw new BexFailure("BEX_COMPILE_ERROR", message);
   }
 
+  @SuppressWarnings("unchecked") // BEX objects are decoded with text keys.
   static Map<String, Object> map(Object value) {
     check(value instanceof Map, "operator body must be an object");
     return (Map<String, Object>) value;
   }
 
+  @SuppressWarnings("unchecked")
   static List<Object> list(Object value) {
     check(value instanceof List, "operand must be list");
     return (List<Object>) value;

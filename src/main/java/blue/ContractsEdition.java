@@ -1,7 +1,6 @@
 package blue;
 
 /** Installed native rules, independent of a distribution's protocol wrapper identity. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 enum ContractsEdition {
   DETERMINISTIC("AYqefXDffJR23qq1exeZN33bNVxT6ZiraXtJg9bk4Vup", 10_000_000);
   private final String specification;

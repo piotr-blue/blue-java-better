@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractChannels {
   record Seed(String document, String channel, long generation, String operation) {
     Map<String, Object> wire() {

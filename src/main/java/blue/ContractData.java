@@ -23,7 +23,6 @@ import java.util.TreeSet;
 import java.util.function.Consumer;
 
 /** Stack-safe copies at Java input and wire-data boundaries. Exact graphs are already immutable. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractData {
   static Object wireCopy(Object v) {
     if (v == null

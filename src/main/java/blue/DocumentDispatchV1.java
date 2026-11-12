@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 
 /** An explicitly selected native policy; the runtime knows no Activation fields or party rules. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class DocumentDispatchV1 {
   private DocumentDispatchV1() {}
 

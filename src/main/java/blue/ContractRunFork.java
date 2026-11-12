@@ -13,7 +13,6 @@ import java.util.TreeMap;
 /**
  * Copy only mutable continuation state. Exact Language nodes and installed capabilities are shared.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractRunFork {
   @SuppressWarnings("unchecked")
   static <T> T data(T value) {

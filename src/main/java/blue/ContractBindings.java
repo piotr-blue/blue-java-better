@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 /** Exact canonical package bindings. Capability selection never chooses older rules. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractBindings {
   private final Set<String> packages;
   private final boolean canonicalWire;
@@ -137,11 +136,13 @@ final class ContractBindings {
   }
 
   public static class Unsupported extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     /** The unsupported exact requirement. */
     private final String required;
 
-    /** The dependency route that introduced the requirement. */
-    private final List<String> path;
+    /** The dependency route that introduced the requirement; not part of the serialized form. */
+    private final transient List<String> path;
 
     public Unsupported(String required, List<String> path) {
       super(

@@ -25,7 +25,6 @@ import java.util.function.Function;
 /**
  * Explicit host-installed deterministic extensions; package imports do not install executable code.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractNative {
   private ContractNative() {}
 
@@ -379,7 +378,7 @@ final class ContractNative {
               ContractLanguage.identity(run.event),
               run.timestamp,
               obj(frozen(binding.wire())),
-              (List<Object>) frozen(members),
+              arr(frozen(members)),
               frozen(run.admissionEvidence.get(binding.typeId)),
               gas);
       Map<String, Object> projection;

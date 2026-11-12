@@ -3,8 +3,8 @@ package blue;
 import java.util.Map;
 
 /** A stable Contracts/Coordination failure category and detached diagnostic context. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 class ContractFault extends RuntimeException {
+  private static final long serialVersionUID = 1L;
   private final String code;
   private final String contextJson;
 

@@ -39,7 +39,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 /** Native BEX evaluator. Effects remain data until the Contracts boundary applies them. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexEngine {
   /**
    * Controls only the result's trace snapshot. The supplied meter decides whether to retain charge
@@ -222,11 +221,13 @@ final class BexEngine {
       startTrace = traceMode == TraceMode.CAPTURE ? gas.traceSize() : 0;
     }
 
+    @SuppressWarnings("unchecked") // BEX objects are decoded with text keys.
     static Map<String, Object> map(Object value) {
       require(value instanceof Map, "object required");
       return (Map<String, Object>) value;
     }
 
+    @SuppressWarnings("unchecked")
     static List<Object> list(Object value) {
       require(value instanceof List, "list required");
       return (List<Object>) value;

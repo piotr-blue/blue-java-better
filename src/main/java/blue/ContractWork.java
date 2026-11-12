@@ -32,7 +32,6 @@ import java.util.TreeMap;
 import java.util.function.IntFunction;
 
 /** Lazy exact-content operations; representation work does not consume semantic gas. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractWork {
   final ContractBridge blue;
   final Meter meter;

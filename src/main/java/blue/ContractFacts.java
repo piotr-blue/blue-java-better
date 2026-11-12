@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 /** Positive structural checks under one exact evidence context. Never caches authority/inputs. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractFacts {
   private final ContractBridge blue;
   private ContractLanguage.EvidenceScope scope;

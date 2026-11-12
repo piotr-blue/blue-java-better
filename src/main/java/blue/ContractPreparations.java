@@ -29,7 +29,6 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 
 /** Attempt-scoped reuse of protected native preparation, never portable admission authority. */
-@SuppressWarnings("unchecked")
 final class ContractPreparations {
   private Contracts.Execution.PreparationReader reader;
   private final String environment;
@@ -128,6 +127,8 @@ final class ContractPreparations {
             ? null
             : obj(ContractWire.immutable(row.get("headerRecords")));
     if (headerRecords != null) registry.blue.context.supplyRetainedEvidence(headerRecords);
+    // The protected record was written by export(), which stores one object per declaration.
+    @SuppressWarnings("unchecked")
     var declarations = (Map<String, Map<String, Object>>) decode(row.get("declarations"), registry);
     Map<String, Optional<ExactNode>> markers = new HashMap<>();
     obj(row.get("markers"))

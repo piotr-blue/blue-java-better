@@ -42,7 +42,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractRun {
   final ContractProcessor engine;
   final ContractBridge blue;

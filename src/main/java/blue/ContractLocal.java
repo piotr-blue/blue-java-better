@@ -29,7 +29,6 @@ import java.util.Set;
 /**
  * Protected owner execution. The ordinary interpreter runs; unrelated owners are never restored.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractLocal {
   record Result(Snapshot before, Outcome outcome) {}
 

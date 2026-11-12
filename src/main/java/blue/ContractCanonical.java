@@ -20,7 +20,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** Private Contracts records. This codec is never used to calculate a BlueId. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractCanonical {
   private ContractCanonical() {}
 

@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 /** Physical structure only. Never caches active/lifecycle eligibility or logical charges. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractTopology {
   volatile ContractSchedule.Plan schedulePlan;
   final List<Edge> edges;

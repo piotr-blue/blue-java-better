@@ -9,7 +9,6 @@ import java.util.Map;
 /**
  * Instance-owned bounded LRU. Weight includes keys and reachable payload; zero means no retention.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractCache<K, V> {
   private record Item<V>(V value, long weight) {}
 

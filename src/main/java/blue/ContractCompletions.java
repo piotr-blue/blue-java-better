@@ -35,7 +35,6 @@ import java.util.UUID;
 /**
  * Process-local completion capabilities. Only a locally executed, successful outcome can issue one.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractCompletions {
   static Outcome restore(Snapshot after, Map<String, Object> o, String receipt) {
     require(
@@ -64,9 +63,14 @@ final class ContractCompletions {
       require(total == result.gas, "INVALID_GAS_LEDGER");
       result.gasByMember = Map.copyOf(ledger);
     }
-    if (after.release.equals(ContractsEdition.DETERMINISTIC.specificationBlueId()))
+    if (after.release.equals(ContractsEdition.DETERMINISTIC.specificationBlueId())) {
       require(!o.containsKey("gasTrace"), "UNEXPECTED_GAS_TRACE");
-    else result.gasTrace = (List<Map<String, Object>>) (List<?>) arr(o.get("gasTrace"));
+    } else {
+      // Trace rows are opaque diagnostics here; consumers that read them check each row.
+      @SuppressWarnings("unchecked")
+      var trace = (List<Map<String, Object>>) (List<?>) arr(o.get("gasTrace"));
+      result.gasTrace = trace;
+    }
     result.rejected = o.get("rejected");
     result.diagnostic = o.get("diagnostic");
     result.completions = arr(o.get("completions"));

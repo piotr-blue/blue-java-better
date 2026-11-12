@@ -20,7 +20,6 @@ import java.util.TreeSet;
  * reverse dependencies. SCCs may split, but existing phase groups only merge. No part is exported
  * in a snapshot or copied to a continuation: cold/chunk execution reconstructs from phase facts.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractSchedule {
   final ContractTopology topology;
   final Map<String, List<String>> owner;

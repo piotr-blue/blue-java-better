@@ -31,7 +31,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractRegistry {
   // Host-approved ordinary programs carrying an additional protocol specification.
   // Trust is granted to the exact definition/rules pair, never to arbitrary subtypes.

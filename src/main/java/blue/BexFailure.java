@@ -1,7 +1,8 @@
 package blue;
 
-@SuppressWarnings({"unchecked", "serial", "try"})
+/** A BEX compilation or evaluation failure with its stable category. */
 class BexFailure extends RuntimeException {
+  private static final long serialVersionUID = 1L;
   private final String code;
 
   public BexFailure(String message) {

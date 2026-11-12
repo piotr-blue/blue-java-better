@@ -1,7 +1,6 @@
 package blue;
 
 /** Exact current Language/BEX publication. No alternate semantic editions. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexEdition {
   public static final String LANGUAGE = "8XGYNufx24r7Dc5bGoeobcGNCn9roLzSfZCQyHBTaTx4";
   public static final String PROTOCOL = "9X3Ws96pyH1SdP4yuXpkNfWPfW3vJCzDzhdza3u9NpoB";

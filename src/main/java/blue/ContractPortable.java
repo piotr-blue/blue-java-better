@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /** Explicit verified serialization boundaries; no request can install a runtime implementation. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractPortable {
   static Meter policyMeter(long shared, Map<String, Long> locals, Snapshot snapshot) {
     var meter = new Meter(shared, locals, snapshot.documents.keySet());

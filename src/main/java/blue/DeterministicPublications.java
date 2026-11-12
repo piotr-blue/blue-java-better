@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /** Generated selection data is checked against each actual canonical archive. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class DeterministicPublications {
   private DeterministicPublications() {}
 

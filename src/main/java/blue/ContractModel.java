@@ -19,7 +19,6 @@ import java.util.TreeMap;
 import org.pcollections.TreePMap;
 
 /** Closed platform records and the shared invocation ledger. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractModel {
   static final long SAFE = (1L << 53) - 1, DEFAULT_LIMIT = 10_000_000;
   // A host must not widen the maximum specified by the selected Contracts publication.
@@ -58,8 +57,10 @@ final class ContractModel {
   }
 
   static class Error extends ContractFault {
+    private static final long serialVersionUID = 1L;
     final String code;
-    final Map<String, Object> context;
+    // Diagnostic detail for callers in this JVM; the serialized form keeps the superclass JSON.
+    final transient Map<String, Object> context;
 
     Error(String code, Object... context) {
       super(code, m(context));
@@ -116,6 +117,7 @@ final class ContractModel {
     return out;
   }
 
+  @SuppressWarnings("try") // The span only brackets the measured region.
   static String digest(String kind, Object value) {
     try (var ignored = ContractMetrics.span("digest." + kind)) {
       var digest = MessageDigest.getInstance("SHA-256");

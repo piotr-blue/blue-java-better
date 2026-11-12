@@ -11,7 +11,6 @@ import java.util.Objects;
  * Identity trie with constant-time snapshots. A map edits its own branches in place; a fork revokes
  * that ownership so shared branches are copied before either map changes them.
  */
-@SuppressWarnings({"unchecked", "serial", "try", "varargs"})
 final class ContractIdentityMap<V> {
   private Trie<V> root;
   private Object owner = new Object();
@@ -191,6 +190,7 @@ final class ContractIdentityMap<V> {
   }
 
   @SafeVarargs
+  @SuppressWarnings("varargs") // The array becomes the branch's own children and stays Trie<V>[].
   private static <V> Branch<V> branch(Object owner, int bitmap, Trie<V>... children) {
     return new Branch<>(owner, bitmap, children);
   }

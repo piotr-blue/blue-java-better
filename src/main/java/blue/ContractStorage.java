@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /** Cold snapshot restoration validates commitments and exact dependencies before publication. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractStorage {
   /** In-process maintenance over a completed snapshot; this is never an import boundary. */
   static Snapshot compact(ContractProcessor source, ContractProcessor target, Snapshot selected) {

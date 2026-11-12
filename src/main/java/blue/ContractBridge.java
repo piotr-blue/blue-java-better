@@ -16,6 +16,7 @@ import static blue.ContractLanguage.recipe;
 import static blue.ContractLanguage.refine;
 import static blue.ContractModel.require;
 import static blue.ExactNode.scalar;
+import static blue.LanguageCore.exactItems;
 
 import blue.ExactNode.Local;
 import blue.ExactNode.Ref;
@@ -34,7 +35,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** Native Language boundary for contract execution. Exact handles never become lossy maps. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractBridge {
   final Language language;
   ContractLanguage context;
@@ -259,7 +259,7 @@ final class ContractBridge {
         for (var e : b.fields().entrySet())
           if (!LITERALS.contains(e.getKey()) && !e.getKey().equals("mergePolicy")) {
             if (e.getKey().equals("items")) {
-              for (ExactNode child : (List<ExactNode>) e.getValue())
+              for (ExactNode child : exactItems(e.getValue()))
                 if (child instanceof Value && !evidence(child)) note(child, null);
             } else if (e.getValue() instanceof Value child && !evidence(child)) note(child, null);
           }
@@ -522,7 +522,7 @@ final class ContractBridge {
     }
     if (fields.keySet().equals(Set.of("items"))
         || fields.keySet().equals(Set.of("items", "type")) && CORE.get("List").equals(type))
-      return projectedItems((List<ExactNode>) fields.get("items"), budget, depth, inlineScalars);
+      return projectedItems(exactItems(fields.get("items")), budget, depth, inlineScalars);
     Map<String, Object> result = new TreeMap<>();
     for (var entry : fields.entrySet()) {
       String key = entry.getKey();
@@ -532,7 +532,7 @@ final class ContractBridge {
         result.put(key, budget.scalar(value, depth + 1));
       else if (key.equals("items")) {
         budget.value(depth + 1);
-        result.put(key, projectedItems((List<ExactNode>) value, budget, depth + 1, inlineScalars));
+        result.put(key, projectedItems(exactItems(value), budget, depth + 1, inlineScalars));
       } else
         result.put(
             key,
@@ -617,7 +617,7 @@ final class ContractBridge {
               if (LITERALS.contains(k) || k.equals("mergePolicy")) out.put(k, v);
               else if (TYPES.contains(k)) out.put(k, export((ExactNode) v));
               else if (k.equals("items"))
-                out.put(k, ((List<ExactNode>) v).stream().map(x -> bexData(x, next)).toList());
+                out.put(k, exactItems(v).stream().map(x -> bexData(x, next)).toList());
               else out.put(k, bexData(v, next));
             });
     // Descendants have already been converted by bexData. Rewalking them here makes

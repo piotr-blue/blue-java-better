@@ -8,7 +8,6 @@ import java.util.Objects;
 /**
  * Small native, thread-safe BEX entry point. No I/O, dependency acquisition or implicit matcher.
  */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexKernel {
   private final BexEdition profile;
   private final BexEngine engine;

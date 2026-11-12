@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 /** Explicitly versioned native intrinsic. Report acceptance remains authored Blue policy. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class CanonicalWireMeasurementV1 {
   private static final String NAME = "Canonical Wire Byte Length V1";
   private static final String RULES =

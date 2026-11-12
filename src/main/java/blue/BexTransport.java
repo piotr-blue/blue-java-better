@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /** Explicit JSON transport tags. Single-key tag shapes are reserved in this transport. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class BexTransport {
   private BexTransport() {}
 

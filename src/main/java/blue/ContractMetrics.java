@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.LongAdder;
 
 /** Optional process-wide diagnostic counters. Never used for gas or acceptance decisions. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractMetrics {
   private static final boolean ENABLED = Boolean.getBoolean("blue.physical.counters");
   private static final Map<String, LongAdder> COUNTS = new ConcurrentHashMap<>();
@@ -94,6 +93,7 @@ final class ContractMetrics {
     return new Span(name);
   }
 
+  @SuppressWarnings("try") // The span only brackets the measured region.
   public static <T> T measured(String name, java.util.function.Supplier<T> work) {
     try (var ignored = span(name)) {
       return work.get();

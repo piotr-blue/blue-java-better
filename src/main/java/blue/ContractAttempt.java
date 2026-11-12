@@ -22,7 +22,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** A thread-confined atomic continuation. Accepted chunks never publish partial business state. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractAttempt {
   ContractRun run;
   private Outcome outcome;

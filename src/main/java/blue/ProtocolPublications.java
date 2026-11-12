@@ -1,7 +1,6 @@
 package blue;
 
 /** The one canonical package set, verified against the selected archive bytes. */
-@SuppressWarnings({"unchecked", "serial", "try"})
 final class ProtocolPublications {
   private ProtocolPublications() {}
 
