@@ -9,8 +9,11 @@ checked-in data and do not execute Python or read a sibling source checkout.
 | Published semantic oracle | `LanguageConformanceTest`, `CanonicalBexConformanceTest`, `CanonicalContractsConformanceTest` | Canonical values, exact gas, observations or receipts changed |
 | Public configuration | `CanonicalConfigurationTest`, `LanguageConfigurationTest`, `ContractProgramsTest` | API selection, immutable configuration or invocation isolation changed |
 | Language | `blue.language.*`, `Language*Test`, `NodeTest` | Parsing, identity, lists, inheritance, evidence or immutable source values changed |
+| Public value types | `blue.language.PointerTest`, `BlueIdTest`, `RationalTest` | Pointer parsing/escaping/prefix rules, identity syntax or exact schema arithmetic changed |
+| BEX configuration | `BexConfigurationTest`, `CanonicalBexApiTest` | Builder validation, compilation entry points, intrinsics, host gas charges or input channels changed |
 | Packages | `Package*Test` | Publication identity, dependency resolution or namespace mapping changed |
 | Contracts lifecycle | `ContractInitializationTest`, `ContractTopologyTest`, `ContractManagedBoundaryTest` | Initialization, attachment, termination or cyclic topology changed |
+| Type generalization | `blue.contracts.TypeGeneralizationTest`, `GeneralizationPolicyTest` | Repair by nearest valid ancestor, floors, rule precedence or policy validation changed |
 | Atomic execution | `CanonicalTransactionTest`, `CanonicalPortableTest`, `CanonicalReuseTest` | Commit/discard, replay, gas limits or cache neutrality changed |
 | Semantic gas | `CompositionalGasTest`, `ContractRetainedCompositionTest` | Representation neutrality, sibling independence, additive child/parent gas, overflow or bounded cyclic work changed; `GasSchedule.STANDARD` is the sole policy, documented in [SEMANTIC-GAS.md](SEMANTIC-GAS.md) |
 | Durable records | `ContractExecutionTest`, `ContractPreparationTest`, `ContractPreparationDeltaTest`, `ContractPreparationTopologyTest`, `ContractCalculationReuseTest`, `ContractSnapshot*Test` | Stored evidence or physical reuse changed semantic outcomes |
@@ -26,6 +29,11 @@ The removed Local-1 and detached-runtime suites asserted different semantics. Ca
 mixed suites were retained and migrated, including language ingress, native steps/channels/admission,
 projection, timeline verification/reads, and language tutorial examples. The old Local-1 BEX vector
 set is superseded by the canonical BEX corpus. Do not count retired tests as passing tests.
+
+`DiagnosticSwitchesTest` pins the name and default of every `blue.physical.*` and
+`blue.canonical.*` system property. Suites that prove an optimization is neutral flip those
+switches under `@ResourceLock(Resources.SYSTEM_PROPERTIES)`; they are documented in
+`DiagnosticSwitches`.
 
 Performance probes report physical time separately from gas. Use identical inputs and starting
 snapshots, state whether user-document state is resident, separate initialization from processing,

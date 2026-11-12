@@ -3208,7 +3208,7 @@ Decision: KEEP the functional capability. All334 host tests pass, including actu
 execution across restart, private history in both source profiles, portable collapsed metadata and
 cache eviction. Four launcher tests pass. The unchanged library reuses release121's2,343-test evidence
 after exact source/artifact comparison. Final Main/HTTP and AWS results are retained in manifest122.
-See [the directory guide](../../myos-aws-test-better/docs/TIMELINE-DIRECTORY.md) in the host project for configuration and APIs.
+See [the directory guide](../../myos-core-better/docs/TIMELINE-DIRECTORY.md) in the host project for configuration and APIs.
 
 
 The AWS Main/HTTP directory qualification passed with DynamoDB and a second fresh Main process:

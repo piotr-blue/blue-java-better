@@ -19,13 +19,21 @@ thread-safety where callers need them. Use explicit control-flow braces and name
 compilation from execution. Comments should explain ownership, invariants or non-obvious costs.
 Do not add an interface or class merely to wrap a single method.
 
+Import each type and static member by name; do not use on-demand (`.*`) imports. Mark every
+override with `@Override`. Suppress a lint warning only on the one method or variable that needs
+it, with the reason beside it, and never on a class: `-Xlint:all -Werror` should keep applying to
+the rest of the file. Delete a method when its last caller goes. A package-private member that
+only tests call should be rare and deliberate.
+
 Keep mutable work inside an invocation. Public values and admitted plans are immutable. Contracts execution belongs in the package-private `Contract*` classes; BEX uses its compiler
 and explicit continuation machine. Canonical Language operations are composed by Language; parsing,
 Source construction, schema predicates and contextual semantics have separate implementation
 classes. LanguageContext owns operation state; LanguageMap publishes persistent snapshots. Domain behavior belongs in authored Blue examples and packages.
 
 Cache only values that can be recomputed. Test with caching disabled and under collisions when
-changing reuse behavior. Providers may receive concurrent repeated requests. Do not use a host
+changing reuse behavior. The system properties that turn individual reuse strategies off are
+declared and documented in `DiagnosticSwitches`; add a new one there, not as a string at its call
+site, and keep the rule that a switch never changes a document, event, identity or gas amount. Providers may receive concurrent repeated requests. Do not use a host
 cache hit as evidence of semantic eligibility or as a reason to change logical gas.
 
 Follow the [test strategy and ownership map](docs/TESTING.md). Add behavior coverage to its
