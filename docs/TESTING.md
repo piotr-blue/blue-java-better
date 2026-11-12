@@ -7,7 +7,7 @@ checked-in data and do not execute Python or read a sibling source checkout.
 | Boundary | Tests | What a failure means |
 | --- | --- | --- |
 | Published semantic oracle | `LanguageConformanceTest`, `CanonicalBexConformanceTest`, `CanonicalContractsConformanceTest` | Canonical values, exact gas, observations or receipts changed |
-| Public configuration | `CanonicalConfigurationTest`, `LanguageConfigurationTest`, `ContractProgramsTest` | API selection, immutable configuration or invocation isolation changed |
+| Public configuration | `CanonicalConfigurationTest`, `LanguageConfigurationTest`, `blue.contracts.ContractsConfigurationTest`, `ContractProgramsTest` | API selection, immutable configuration or invocation isolation changed |
 | Language | `blue.language.*`, `Language*Test`, `NodeTest` | Parsing, identity, lists, inheritance, evidence or immutable source values changed |
 | Public value types | `blue.language.PointerTest`, `BlueIdTest`, `RationalTest` | Pointer parsing/escaping/prefix rules, identity syntax or exact schema arithmetic changed |
 | BEX configuration | `BexConfigurationTest`, `CanonicalBexApiTest` | Builder validation, compilation entry points, intrinsics, host gas charges or input channels changed |
