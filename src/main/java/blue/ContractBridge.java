@@ -1,13 +1,37 @@
 package blue;
 
 import static blue.BexValues.UNDEFINED;
-import static blue.ContractLanguage.*;
+import static blue.ContractLanguage.ABSENT;
+import static blue.ContractLanguage.CORE;
+import static blue.ContractLanguage.CORE_NAME;
+import static blue.ContractLanguage.LITERALS;
+import static blue.ContractLanguage.TYPES;
+import static blue.ContractLanguage.ancestry;
+import static blue.ContractLanguage.concrete;
+import static blue.ContractLanguage.export;
+import static blue.ContractLanguage.identity;
+import static blue.ContractLanguage.map;
+import static blue.ContractLanguage.normalize;
+import static blue.ContractLanguage.recipe;
+import static blue.ContractLanguage.refine;
 import static blue.ContractModel.require;
-import static blue.ExactNode.*;
+import static blue.ExactNode.scalar;
 
-import blue.LanguageModel.*;
-import java.math.*;
-import java.util.*;
+import blue.ExactNode.Local;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import blue.LanguageModel.Head;
+import blue.LanguageModel.Recipe;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** Native Language boundary for contract execution. Exact handles never become lossy maps. */
 @SuppressWarnings({"unchecked", "serial", "try"})

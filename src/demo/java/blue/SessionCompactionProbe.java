@@ -1,6 +1,10 @@
 package blue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /** Bounded same-state comparison; no AWS, persistence, signed Timeline or statistical claim. */
 public final class SessionCompactionProbe {

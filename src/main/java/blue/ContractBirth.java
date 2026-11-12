@@ -1,9 +1,23 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.HOST_LIMIT;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
 
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Edge;
+import blue.ContractModel.Snapshot;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Native rules for an owner adding one fresh embedded child. A live lookup is pinned to the

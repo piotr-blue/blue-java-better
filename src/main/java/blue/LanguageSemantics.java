@@ -1,13 +1,39 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.ExactNode.scalar;
+import static blue.LanguageCore.ABSENT;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.CORE_NAME;
+import static blue.LanguageCore.LABELS;
+import static blue.LanguageCore.LITERALS;
+import static blue.LanguageCore.TYPES;
+import static blue.LanguageCore.decimal;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.hole;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.index;
+import static blue.LanguageCore.normalize;
+import static blue.LanguageCore.open;
 import static blue.LanguageFailure.require;
 
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import blue.LanguageModel.Head;
 import blue.LanguageModel.Recipe;
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** A06/A07: declaration recipes, contextual interpretation and admission. */
 final class LanguageSemantics {

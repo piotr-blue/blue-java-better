@@ -1,6 +1,6 @@
 package blue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import blue.examples.CanonicalAgreement;
 import java.math.BigInteger;

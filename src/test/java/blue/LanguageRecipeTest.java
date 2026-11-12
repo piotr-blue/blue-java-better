@@ -1,7 +1,9 @@
 package blue;
 
-import static blue.LanguageSemantics.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.LanguageSemantics.recipe;
+import static blue.LanguageSemantics.recipeWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

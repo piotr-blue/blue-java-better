@@ -1,11 +1,24 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ContractRun.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
 
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Edge;
+import blue.ContractModel.Snapshot;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.TreeMap;
 
 /**
  * Writes and restores the native owner's protected checkpoint, including its embedding commitments.

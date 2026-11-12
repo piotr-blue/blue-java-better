@@ -1,6 +1,8 @@
 package blue;
 
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.string;
 
 import blue.ExactNode.NumberToken;
 import java.math.BigDecimal;
@@ -11,7 +13,14 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.StringJoiner;
+import java.util.TreeMap;
 
 /** Carrier encoding is separate from the Language hash-helper encoding. */
 final class PackageIntegrity {

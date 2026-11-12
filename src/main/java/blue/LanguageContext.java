@@ -1,11 +1,22 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.normalize;
 import static blue.LanguageFailure.require;
 
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
 
 /** Working state confined to one operation; published evidence uses persistent maps. */
 final class LanguageContext {

@@ -1,6 +1,19 @@
 package blue;
 
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.ABSENT;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.LITERALS;
+import static blue.LanguageCore.TYPES;
+import static blue.LanguageCore.appendId;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.export;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.normalize;
+import static blue.LanguageCore.open;
+import static blue.LanguageCore.path;
+import static blue.LanguageCore.plainId;
 
 import java.io.IOException;
 import java.nio.file.Files;

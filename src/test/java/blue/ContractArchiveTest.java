@@ -1,7 +1,11 @@
 package blue;
 
-import static blue.ContractModel.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.ContractModel.m;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 import org.junit.jupiter.api.Tag;

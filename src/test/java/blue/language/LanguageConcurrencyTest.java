@@ -1,7 +1,7 @@
 package blue.language;
 
-import static blue.Language.Goal.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.Language.Goal.DEFINITION;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import blue.Language;
 import java.util.concurrent.Executors;

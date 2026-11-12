@@ -1,11 +1,20 @@
 package blue.packages;
 
-import static blue.packages.PackageTestSupport.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.packages.PackageTestSupport.IDS;
+import static blue.packages.PackageTestSupport.altered;
+import static blue.packages.PackageTestSupport.files;
+import static blue.packages.PackageTestSupport.map;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.nio.file.*;
-import java.util.*;
+import blue.BluePackage;
+import blue.Language;
+import blue.LanguageDocument;
+import blue.PackageException;
+import blue.PackageFixtures;
+import java.nio.file.Path;
+import java.util.Map;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

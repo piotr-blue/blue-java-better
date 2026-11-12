@@ -1,11 +1,31 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
 
+import blue.ContractModel.Document;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import blue.LanguageModel.Recipe;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 /** Attempt-scoped reuse of protected native preparation, never portable admission authority. */

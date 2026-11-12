@@ -1,12 +1,26 @@
 package blue.packages;
 
-import static blue.packages.PackageTestSupport.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.packages.PackageTestSupport.IDS;
+import static blue.packages.PackageTestSupport.bytes;
+import static blue.packages.PackageTestSupport.copy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import blue.BlueId;
+import blue.BluePackage;
+import blue.PackageException;
+import blue.PackageLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

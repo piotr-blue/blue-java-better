@@ -1,10 +1,20 @@
 package blue.packages;
 
-import static blue.packages.PackageTestSupport.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.packages.PackageTestSupport.IDS;
+import static blue.packages.PackageTestSupport.load;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.util.*;
+import blue.BluePackage;
+import blue.Language;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.PackageException;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

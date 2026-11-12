@@ -3,7 +3,17 @@ package blue;
 import static blue.ContractModel.require;
 
 import blue.ContractModel.Edge;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeSet;
 
 /** Strongly connected embedding components in canonical execution order, with children first. */
 final class ContractComponents {

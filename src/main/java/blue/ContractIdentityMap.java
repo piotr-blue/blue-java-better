@@ -1,6 +1,11 @@
 package blue;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Identity trie with constant-time snapshots. A map edits its own branches in place; a fork revokes

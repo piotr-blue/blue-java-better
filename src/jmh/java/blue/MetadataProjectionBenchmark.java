@@ -1,8 +1,16 @@
 package blue;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 
 /** One metadata projection after a scalar revision; excludes hashing, execution and storage. */
 @State(Scope.Thread)

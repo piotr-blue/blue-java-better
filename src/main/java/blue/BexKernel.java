@@ -1,6 +1,9 @@
 package blue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Small native, thread-safe BEX entry point. No I/O, dependency acquisition or implicit matcher.

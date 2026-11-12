@@ -1,7 +1,10 @@
 package blue;
 
-import blue.LanguageModel.*;
-import java.util.*;
+import blue.LanguageModel.Recipe;
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Instance-owned bounded LRU. Weight includes keys and reachable payload; zero means no retention.

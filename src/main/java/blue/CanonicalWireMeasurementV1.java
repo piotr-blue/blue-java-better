@@ -2,7 +2,9 @@ package blue;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** Explicitly versioned native intrinsic. Report acceptance remains authored Blue policy. */
 @SuppressWarnings({"unchecked", "serial", "try"})

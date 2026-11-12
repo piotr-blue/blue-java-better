@@ -1,10 +1,28 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.finalId;
+import static blue.ContractModel.SAFE;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
+import static blue.ContractModel.token;
 
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Edge;
+import blue.ContractModel.Life;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Ref;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /** Cold snapshot restoration validates commitments and exact dependencies before publication. */
 @SuppressWarnings({"unchecked", "serial", "try"})

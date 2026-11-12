@@ -1,8 +1,12 @@
 package blue;
 
-import static blue.ContractModel.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.str;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import blue.ContractModel.Document;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;

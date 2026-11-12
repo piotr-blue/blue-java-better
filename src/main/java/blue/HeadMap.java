@@ -1,6 +1,10 @@
 package blue;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.BiFunction;
 
 /** Ordered draft fields with immutable snapshots; the first later mutation copies the tree. */

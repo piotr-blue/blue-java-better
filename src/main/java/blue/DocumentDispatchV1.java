@@ -1,9 +1,15 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** An explicitly selected native policy; the runtime knows no Activation fields or party rules. */
 @SuppressWarnings({"unchecked", "serial", "try"})

@@ -1,11 +1,33 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
-import static blue.PackageIntegrity.*;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.CORE_NAME;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.list;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.normalize;
+import static blue.LanguageCore.string;
+import static blue.PackageIntegrity.check;
+import static blue.PackageIntegrity.data;
+import static blue.PackageIntegrity.equal;
+import static blue.PackageIntegrity.ref;
+import static blue.PackageIntegrity.repositoryCanonical;
+import static blue.PackageIntegrity.sha;
+import static blue.PackageIntegrity.utf8;
+import static blue.PackageIntegrity.version;
 
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Package-role verification over the canonical Language engine. Mutable state belongs to one load.

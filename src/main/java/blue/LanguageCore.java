@@ -1,13 +1,31 @@
 package blue;
 
-import static blue.ExactNode.*;
+import static blue.ExactNode.scalar;
 import static blue.LanguageFailure.require;
 
-import java.math.*;
+import blue.ExactNode.Local;
+import blue.ExactNode.NumberToken;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.security.*;
-import java.util.*;
-import java.util.function.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.IntFunction;
+import java.util.function.UnaryOperator;
 
 /** Exact identities, verified graph access and owning-set finalization (Language A01–A04, A10). */
 final class LanguageCore {

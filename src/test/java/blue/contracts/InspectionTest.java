@@ -1,9 +1,26 @@
 package blue.contracts;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.util.*;
+import blue.Bex;
+import blue.BlueException;
+import blue.BlueId;
+import blue.ContractInspection;
+import blue.Contracts;
+import blue.Language;
+import blue.LanguageDocument;
+import blue.LanguageRecord;
+import blue.ProjectionLimits;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

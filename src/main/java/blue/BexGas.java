@@ -1,6 +1,8 @@
 package blue;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Scalar admitted gas and the first rejected charge. */
 @SuppressWarnings({"unchecked", "serial", "try"})

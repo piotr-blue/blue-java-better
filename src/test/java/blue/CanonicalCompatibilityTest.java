@@ -1,6 +1,7 @@
 package blue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import blue.examples.CanonicalAgreement;
 import java.io.IOException;

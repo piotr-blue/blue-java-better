@@ -1,9 +1,11 @@
 package blue;
 
 import static blue.ContractLanguage.identity;
-import static blue.ContractModel.*;
 
-import java.util.*;
+import blue.ContractModel.Document;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Positive structural checks under one exact evidence context. Never caches authority/inputs. */
 @SuppressWarnings({"unchecked", "serial", "try"})

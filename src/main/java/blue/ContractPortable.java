@@ -1,11 +1,25 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ContractRun.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.finalId;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.DEFAULT_LIMIT;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
+import static blue.ContractRun.committed;
 
-import java.util.*;
+import blue.ContractModel.Meter;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Ref;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /** Explicit verified serialization boundaries; no request can install a runtime implementation. */
 @SuppressWarnings({"unchecked", "serial", "try"})

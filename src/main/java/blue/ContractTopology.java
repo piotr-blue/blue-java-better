@@ -1,8 +1,18 @@
 package blue;
 
-import static blue.ContractModel.*;
+import static blue.ContractModel.segments;
 
-import java.util.*;
+import blue.ContractModel.Edge;
+import blue.ContractModel.Snapshot;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** Physical structure only. Never caches active/lifecycle eligibility or logical charges. */
 @SuppressWarnings({"unchecked", "serial", "try"})

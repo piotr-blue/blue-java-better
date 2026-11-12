@@ -1,6 +1,7 @@
 package blue;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiPredicate;
 
 /** Read-only invocation data. Capability callbacks are borrowed and must be deterministic. */

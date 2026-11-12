@@ -1,9 +1,24 @@
 package blue;
 
-import static blue.ContractModel.*;
+import static blue.ContractModel.TARIFF;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
 
-import java.math.*;
-import java.util.*;
+import blue.ContractModel.Meter;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Supplier;
 
 /**

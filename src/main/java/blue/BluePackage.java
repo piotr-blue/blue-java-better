@@ -1,10 +1,21 @@
 package blue;
 
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.list;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.string;
 import static blue.PackageIntegrity.ref;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * An immutable canonical package and its verified, self-contained evidence.

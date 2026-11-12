@@ -1,6 +1,11 @@
 package blue;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Local structural retention diagnosis, outside ordinary tests. */
 public final class NormalizationSharingProbe {

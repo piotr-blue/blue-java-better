@@ -1,11 +1,35 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.ancestry;
+import static blue.ContractLanguage.export;
+import static blue.ContractLanguage.identity;
+import static blue.ContractLanguage.present;
+import static blue.ContractLanguage.recipe;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.segments;
+import static blue.ContractModel.str;
+import static blue.ContractModel.token;
 
-import blue.LanguageModel.*;
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import blue.LanguageModel.Head;
+import blue.LanguageModel.Recipe;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
 
 @SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractRegistry {

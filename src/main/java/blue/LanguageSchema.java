@@ -1,11 +1,26 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.ABSENT;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.CORE_NAME;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.open;
 import static blue.LanguageFailure.require;
 
-import java.math.*;
-import java.util.*;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** A05: finite schema vocabulary and exact rational predicates. */
 final class LanguageSchema {

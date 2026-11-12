@@ -1,13 +1,50 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.CONTROLS;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.HOLE;
+import static blue.LanguageCore.LABELS;
+import static blue.LanguageCore.LITERALS;
+import static blue.LanguageCore.RESERVED;
+import static blue.LanguageCore.TYPES;
+import static blue.LanguageCore.encode;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.hole;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.list;
+import static blue.LanguageCore.listId;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.normalize;
+import static blue.LanguageCore.open;
+import static blue.LanguageCore.plainId;
+import static blue.LanguageCore.string;
 import static blue.LanguageFailure.require;
-import static blue.LanguageSemantics.*;
+import static blue.LanguageSemantics.child;
+import static blue.LanguageSemantics.exact;
+import static blue.LanguageSemantics.head;
+import static blue.LanguageSemantics.merge;
+import static blue.LanguageSemantics.recipeWith;
+import static blue.LanguageSemantics.refine;
+import static blue.LanguageSemantics.requirement;
+import static blue.LanguageSemantics.single;
 
+import blue.ExactNode.NumberToken;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import blue.LanguageModel.Head;
 import blue.LanguageModel.Recipe;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.function.Supplier;
 
 /** A08/A09: LanguageSource syntax is compiled once against its explicit environment. */

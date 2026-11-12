@@ -1,10 +1,25 @@
 package blue;
 
-import static blue.ContractModel.*;
-import static blue.ContractRun.*;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
+import static blue.ContractRun.committed;
+import static blue.ContractRun.vector;
 import static blue.ContractRunFork.data;
 
-import java.util.*;
+import blue.ContractModel.Outcome;
+import blue.ContractRun.Ticket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** A thread-confined atomic continuation. Accepted chunks never publish partial business state. */
 @SuppressWarnings({"unchecked", "serial", "try"})

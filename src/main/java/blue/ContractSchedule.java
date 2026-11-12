@@ -1,8 +1,19 @@
 package blue;
 
-import static blue.ContractModel.*;
+import static blue.ContractModel.require;
 
-import java.util.*;
+import blue.ContractModel.Edge;
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Phase-owned plan. Structural generations rebuild indexes; completion/reopening only adjusts

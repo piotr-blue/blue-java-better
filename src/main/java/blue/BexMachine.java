@@ -1,11 +1,35 @@
 package blue;
 
-import static blue.BexEngine.Invocation.*;
+import static blue.BexEngine.Invocation.list;
+import static blue.BexEngine.Invocation.map;
 import static blue.BexFailure.require;
-import static blue.BexValues.*;
+import static blue.BexValues.UNDEFINED;
+import static blue.BexValues.copy;
+import static blue.BexValues.equal;
+import static blue.BexValues.get;
+import static blue.BexValues.keys;
+import static blue.BexValues.kind;
+import static blue.BexValues.ordered;
+import static blue.BexValues.overlay;
+import static blue.BexValues.pointerGet;
+import static blue.BexValues.requiredText;
+import static blue.BexValues.segments;
+import static blue.BexValues.size;
+import static blue.BexValues.truthy;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 
 /** Explicit continuations for the complete BEX language; user nesting never uses the Java stack. */

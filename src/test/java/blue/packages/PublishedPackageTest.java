@@ -1,9 +1,17 @@
 package blue.packages;
 
-import static blue.packages.PackageTestSupport.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.packages.PackageTestSupport.CONTRACTS;
+import static blue.packages.PackageTestSupport.CURRENT_LANGUAGE;
+import static blue.packages.PackageTestSupport.bytes;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
+import blue.BluePackage;
+import blue.Language;
+import blue.LanguageException;
+import blue.PackageLoader;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

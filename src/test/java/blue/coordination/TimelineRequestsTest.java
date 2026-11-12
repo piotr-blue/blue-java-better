@@ -1,10 +1,24 @@
 package blue.coordination;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import blue.BlueException;
+import blue.BlueId;
+import blue.BluePackage;
+import blue.Language;
+import blue.LanguageContent;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.PackageLoader;
+import blue.ProviderSignatures;
+import blue.TimelineRequests;
+import java.util.HexFormat;
+import java.util.List;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

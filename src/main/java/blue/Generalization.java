@@ -1,11 +1,24 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.LITERALS;
+import static blue.ContractLanguage.TYPES;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.m;
+import static blue.ContractModel.pointer;
+import static blue.ContractModel.prefix;
+import static blue.ContractModel.require;
+import static blue.ContractModel.segments;
 
-import java.util.*;
-import java.util.function.*;
+import blue.ContractModel.Meter;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.Consumer;
 
 @SuppressWarnings({"unchecked", "serial", "try"})
 final class Generalization {

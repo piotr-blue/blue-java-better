@@ -1,8 +1,8 @@
 package blue;
 
-import static blue.ExactNode.*;
-
-import java.util.*;
+import blue.ExactNode.Ref;
+import java.util.List;
+import java.util.Map;
 
 final class LanguageModel {
   private LanguageModel() {}

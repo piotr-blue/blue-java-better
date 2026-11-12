@@ -1,10 +1,18 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.ABSENT;
+import static blue.LanguageCore.CORE_NAME;
+import static blue.LanguageCore.identity;
 
-import java.math.*;
-import java.util.*;
+import blue.ExactNode.NumberToken;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import java.math.BigInteger;
+import java.util.ArrayDeque;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 /** Diagnostic context is observational: it never changes content or fetches new dependencies. */

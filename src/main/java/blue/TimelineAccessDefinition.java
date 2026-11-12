@@ -1,12 +1,18 @@
 package blue;
 
 import static blue.LanguageCore.identity;
-import static blue.LanguageSemantics.*;
+import static blue.LanguageSemantics.child;
+import static blue.LanguageSemantics.exact;
+import static blue.LanguageSemantics.head;
+import static blue.LanguageSemantics.recipe;
 import static blue.TimelineContent.require;
 
 import blue.ExactNode.Ref;
 import blue.LanguageModel.Head;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** Shared published access-document shape and program checks; this class grants no authority. */
 final class TimelineAccessDefinition {

@@ -1,10 +1,14 @@
 package blue;
 
-import static blue.ContractModel.*;
-import static blue.ContractRun.*;
+import static blue.ContractModel.require;
 
-import blue.LanguageModel.*;
-import java.util.*;
+import blue.ContractRun.Batch;
+import blue.ContractRun.Phase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Copy only mutable continuation state. Exact Language nodes and installed capabilities are shared.

@@ -1,7 +1,17 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.ContractLanguage.CORE;
+import static blue.ContractLanguage.exact;
+import static blue.ContractLanguage.exactText;
+import static blue.ContractLanguage.head;
+import static blue.ContractLanguage.identity;
+import static blue.ContractLanguage.recipe;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;

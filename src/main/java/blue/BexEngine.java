@@ -1,11 +1,42 @@
 package blue;
 
 import static blue.BexFailure.require;
-import static blue.BexValues.*;
+import static blue.BexValues.UNDEFINED;
+import static blue.BexValues.blueInput;
+import static blue.BexValues.blueValue;
+import static blue.BexValues.chunks;
+import static blue.BexValues.copy;
+import static blue.BexValues.equal;
+import static blue.BexValues.get;
+import static blue.BexValues.integer;
+import static blue.BexValues.keys;
+import static blue.BexValues.kind;
+import static blue.BexValues.limbs;
+import static blue.BexValues.number;
+import static blue.BexValues.ordered;
+import static blue.BexValues.pointerGet;
+import static blue.BexValues.requiredText;
+import static blue.BexValues.segments;
+import static blue.BexValues.size;
+import static blue.BexValues.sizeParts;
+import static blue.BexValues.text;
+import static blue.BexValues.truthy;
 
-import java.math.*;
-import java.util.*;
-import java.util.function.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 
 /** Native BEX evaluator. Effects remain data until the Contracts boundary applies them. */
 @SuppressWarnings({"unchecked", "serial", "try"})

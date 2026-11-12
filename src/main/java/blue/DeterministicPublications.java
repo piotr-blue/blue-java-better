@@ -1,9 +1,12 @@
 package blue;
 
-import static blue.ContractModel.*;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.str;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 
 /** Generated selection data is checked against each actual canonical archive. */
 @SuppressWarnings({"unchecked", "serial", "try"})

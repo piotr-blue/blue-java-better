@@ -1,10 +1,32 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.ABSENT;
+import static blue.ContractLanguage.exactText;
+import static blue.ContractLanguage.finalId;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.DEFAULT_LIMIT;
+import static blue.ContractModel.HOST_LIMIT;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.str;
 
-import java.util.*;
+import blue.ContractModel.Life;
+import blue.ContractModel.Meter;
+import blue.ContractModel.Outcome;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Ref;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
 
 /** Native, atomic Contracts processor. All state is carried by immutable selected snapshots. */
 @SuppressWarnings({"unchecked", "serial", "try"})

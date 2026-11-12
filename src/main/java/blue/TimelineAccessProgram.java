@@ -2,7 +2,10 @@ package blue;
 
 import static blue.TimelineContent.require;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Tentative provider-side execution of the published Timeline Access program. The provider must

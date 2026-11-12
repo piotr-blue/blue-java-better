@@ -1,6 +1,16 @@
 package blue;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
 
 /** Immutable hash trie whose union skips physically shared branches. */
 final class LanguageTrie<K, V> extends AbstractMap<K, V> {

@@ -1,11 +1,39 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.ABSENT;
+import static blue.ContractLanguage.identity;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.pointer;
+import static blue.ContractModel.prefix;
+import static blue.ContractModel.require;
+import static blue.ContractModel.segments;
+import static blue.ContractModel.str;
+import static blue.ContractModel.token;
 
-import blue.LanguageModel.*;
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Edge;
+import blue.ContractModel.EdgeKey;
+import blue.ContractModel.Meter;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Local;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 @SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractGraph {

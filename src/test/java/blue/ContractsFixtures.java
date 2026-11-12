@@ -1,6 +1,8 @@
 package blue;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /** Small arithmetic and embedding fixtures shared by accounting and locality tests. */
 final class ContractsFixtures {

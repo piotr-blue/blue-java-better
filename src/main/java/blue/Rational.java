@@ -1,6 +1,7 @@
 package blue;
 
-import java.math.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 
 record Rational(BigInteger numerator, BigInteger denominator) implements Comparable<Rational> {

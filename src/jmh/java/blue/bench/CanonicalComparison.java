@@ -1,9 +1,15 @@
 package blue.bench;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.util.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /** Same source, events, timestamp, gas and receipt boundary in both Java implementations. */
 public final class CanonicalComparison {

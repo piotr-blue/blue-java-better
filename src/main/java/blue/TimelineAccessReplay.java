@@ -1,12 +1,14 @@
 package blue;
 
 import static blue.LanguageCore.identity;
-import static blue.LanguageSemantics.*;
 import static blue.TimelineContent.require;
 
 import blue.ExactNode.Ref;
 import blue.TimelineAccessDefinition.Permissions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /** Executable access history. Only a verified source suffix may enter the scoped native gate. */
 final class TimelineAccessReplay {

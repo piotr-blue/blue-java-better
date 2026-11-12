@@ -1,8 +1,13 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.ExactNode.scalar;
+import static blue.ExactNode.value;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import blue.ExactNode.Value;
 import java.util.Map;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

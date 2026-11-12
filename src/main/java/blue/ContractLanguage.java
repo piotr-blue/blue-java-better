@@ -1,10 +1,26 @@
 package blue;
 
-import static blue.ExactNode.*;
-
-import blue.LanguageModel.*;
-import java.util.*;
-import java.util.function.*;
+import blue.ExactNode.NumberToken;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import blue.LanguageModel.Head;
+import blue.LanguageModel.Recipe;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
 
 /** Invocation-confined native access to the same canonical Language implementation. */
 final class ContractLanguage {

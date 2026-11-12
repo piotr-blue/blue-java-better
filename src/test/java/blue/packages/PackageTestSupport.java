@@ -5,8 +5,11 @@ import blue.BluePackage;
 import blue.PackageFixtures;
 import blue.PackageLoader;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 import java.util.zip.ZipInputStream;
 
 final class PackageTestSupport {

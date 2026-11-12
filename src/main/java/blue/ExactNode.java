@@ -1,6 +1,13 @@
 package blue;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** Immutable exact graph. References are commitments, not admission evidence. */
 sealed interface ExactNode permits ExactNode.Value, ExactNode.Ref, ExactNode.Local {

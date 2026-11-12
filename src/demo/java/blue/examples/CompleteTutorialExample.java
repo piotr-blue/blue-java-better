@@ -1,7 +1,16 @@
 package blue.examples;
 
-import blue.*;
-import java.util.*;
+import blue.BlueId;
+import blue.Language;
+import blue.LanguageContent;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.LanguageRecord;
+import blue.Node;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /** Canonical Language mappings from the tutorial. Execution scenarios use Contracts directly. */

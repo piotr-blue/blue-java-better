@@ -1,15 +1,53 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static blue.LanguageCore.*;
+import static blue.LanguageCore.ABSENT;
+import static blue.LanguageCore.CONTROLS;
+import static blue.LanguageCore.CORE_NAME;
+import static blue.LanguageCore.LITERALS;
+import static blue.LanguageCore.TYPES;
+import static blue.LanguageCore.at;
+import static blue.LanguageCore.exactItems;
+import static blue.LanguageCore.exactText;
+import static blue.LanguageCore.export;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.list;
+import static blue.LanguageCore.listId;
+import static blue.LanguageCore.map;
+import static blue.LanguageCore.normalize;
+import static blue.LanguageCore.open;
+import static blue.LanguageCore.path;
+import static blue.LanguageCore.plainId;
+import static blue.LanguageCore.string;
 import static blue.LanguageFailure.require;
-import static blue.LanguageSemantics.*;
+import static blue.LanguageSemantics.certify;
+import static blue.LanguageSemantics.child;
+import static blue.LanguageSemantics.concrete;
+import static blue.LanguageSemantics.exact;
+import static blue.LanguageSemantics.head;
+import static blue.LanguageSemantics.recipe;
+import static blue.LanguageSemantics.requirement;
+import static blue.LanguageSemantics.resolvedAt;
+import static blue.LanguageSemantics.strict;
 
+import blue.ExactNode.NumberToken;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
 import blue.LanguageModel.Head;
 import blue.LanguageModel.Recipe;
 import java.math.BigInteger;
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 
 final class LanguageOperations {
   private LanguageOperations() {}

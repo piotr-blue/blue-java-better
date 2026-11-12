@@ -1,6 +1,7 @@
 package blue.language;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import blue.Language;
 import blue.LanguageDocument;

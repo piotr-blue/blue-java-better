@@ -1,9 +1,12 @@
 package blue;
 
-import static blue.ExactNode.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.ExactNode.scalar;
+import static blue.ExactNode.value;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 /** Reusing an unchanged child requires the same contextual obligation, not just its BlueId. */

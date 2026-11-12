@@ -1,7 +1,16 @@
 package blue;
 
-import static blue.LanguageCore.*;
-import static blue.LanguageSemantics.*;
+import static blue.LanguageCore.CORE;
+import static blue.LanguageCore.TYPES;
+import static blue.LanguageCore.identity;
+import static blue.LanguageCore.open;
+import static blue.LanguageSemantics.ancestry;
+import static blue.LanguageSemantics.checkKey;
+import static blue.LanguageSemantics.child;
+import static blue.LanguageSemantics.exact;
+import static blue.LanguageSemantics.head;
+import static blue.LanguageSemantics.recipe;
+import static blue.LanguageSemantics.strict;
 
 import blue.ExactNode.Ref;
 import blue.ExactNode.Value;

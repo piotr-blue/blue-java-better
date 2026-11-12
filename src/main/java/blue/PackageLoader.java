@@ -1,14 +1,30 @@
 package blue;
 
-import static blue.LanguageCore.*;
-import static blue.PackageIntegrity.*;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.map;
+import static blue.PackageIntegrity.check;
+import static blue.PackageIntegrity.data;
+import static blue.PackageIntegrity.digest;
+import static blue.PackageIntegrity.require;
+import static blue.PackageIntegrity.utf8;
 
-import java.io.*;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.util.*;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 import java.util.zip.ZipException;
 
 /**

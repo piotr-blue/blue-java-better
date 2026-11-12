@@ -1,7 +1,11 @@
 package blue;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /** Explicit JSON transport tags. Single-key tag shapes are reserved in this transport. */
 @SuppressWarnings({"unchecked", "serial", "try"})

@@ -1,10 +1,19 @@
 package blue.language;
 
-import static blue.Language.Goal.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static blue.Language.Goal.DEFINITION;
+import static blue.Language.Goal.VALUE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.util.*;
+import blue.Contracts;
+import blue.Language;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.Node;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

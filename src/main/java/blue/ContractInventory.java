@@ -1,6 +1,12 @@
 package blue;
 
-import java.util.*;
+import java.util.AbstractSet;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.NavigableMap;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Function;
 
 /** Append-only invocation evidence, ordered and encoded once when each identity is admitted. */

@@ -1,12 +1,34 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.LITERALS;
+import static blue.ContractLanguage.identity;
+import static blue.ContractLanguage.map;
+import static blue.ContractLanguage.normalize;
+import static blue.ContractLanguage.recipe;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.require;
+import static blue.ContractModel.segments;
+import static blue.ContractModel.str;
 
-import blue.LanguageModel.*;
-import java.math.*;
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Meter;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import blue.LanguageModel.Head;
+import blue.LanguageModel.Recipe;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.function.IntFunction;
 
 /** Lazy exact-content operations; representation work does not consume semantic gas. */

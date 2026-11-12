@@ -1,10 +1,27 @@
 package blue.coordination;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import blue.BlueException;
+import blue.BlueId;
+import blue.BluePackage;
+import blue.Contracts;
+import blue.Language;
+import blue.LanguageContent;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.PackageLoader;
+import blue.ProviderSignatures;
+import blue.TimelinePublisher;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 /** Publisher recovery is a protected local validation fact, never consumer evidence. */
 @Tag("coordination")

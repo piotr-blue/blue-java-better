@@ -1,12 +1,46 @@
 package blue;
 
-import static blue.ContractLanguage.*;
-import static blue.ContractModel.*;
-import static blue.ContractRegistry.*;
-import static blue.ExactNode.*;
+import static blue.ContractLanguage.ABSENT;
+import static blue.ContractLanguage.identity;
+import static blue.ContractLanguage.recipe;
+import static blue.ContractModel.arr;
+import static blue.ContractModel.closed;
+import static blue.ContractModel.digest;
+import static blue.ContractModel.integer;
+import static blue.ContractModel.m;
+import static blue.ContractModel.obj;
+import static blue.ContractModel.pointer;
+import static blue.ContractModel.prefix;
+import static blue.ContractModel.require;
+import static blue.ContractModel.segments;
+import static blue.ContractModel.str;
+import static blue.ContractRegistry.EXECUTABLE;
+import static blue.ContractRegistry.MARKERS;
 
-import blue.LanguageModel.*;
-import java.util.*;
+import blue.ContractModel.Document;
+import blue.ContractModel.Edge;
+import blue.ContractModel.EdgeKey;
+import blue.ContractModel.Life;
+import blue.ContractModel.Meter;
+import blue.ContractModel.Outcome;
+import blue.ContractModel.Snapshot;
+import blue.ExactNode.Ref;
+import blue.ExactNode.Value;
+import blue.LanguageModel.Recipe;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 @SuppressWarnings({"unchecked", "serial", "try"})
 final class ContractRun {

@@ -1,7 +1,10 @@
 package blue;
 
-import static blue.LanguageCore.*;
-import static blue.LanguageSemantics.*;
+import static blue.LanguageCore.finalId;
+import static blue.LanguageCore.identity;
+import static blue.LanguageSemantics.ancestry;
+import static blue.LanguageSemantics.head;
+import static blue.LanguageSemantics.recipe;
 import static blue.TimelineContent.require;
 import static blue.TimelineVerifier.id;
 

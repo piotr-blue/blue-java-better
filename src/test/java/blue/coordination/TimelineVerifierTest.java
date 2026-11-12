@@ -1,8 +1,26 @@
 package blue.coordination;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import blue.*;
+import blue.AdmissionEvidence;
+import blue.BlueException;
+import blue.BlueId;
+import blue.BluePackage;
+import blue.Contracts;
+import blue.Language;
+import blue.LanguageContent;
+import blue.LanguageDocument;
+import blue.LanguageException;
+import blue.LanguageRecord;
+import blue.NativeChannel;
+import blue.Node;
+import blue.PackageLoader;
+import blue.ProviderSignatures;
+import blue.TimelinePublisher;
+import blue.TimelineVerifier;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.Signature;
