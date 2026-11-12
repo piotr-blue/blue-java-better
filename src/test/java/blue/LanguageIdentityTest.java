@@ -25,7 +25,9 @@ class LanguageIdentityTest {
   @ValueSource(ints = {0, 1, 2, 3})
   void nestedHelpersKeepCanonicalBytesAcrossFieldKindsAndKeyOrder(int seed) {
     Random random = new Random(seed);
-    for (int i = 0; i < 40; i++) verify(value(random, 3), null);
+    for (int i = 0; i < 40; i++) {
+      verify(value(random, 3), null);
+    }
   }
 
   @Test
@@ -61,11 +63,17 @@ class LanguageIdentityTest {
   }
 
   private static void verify(ExactNode node, IntFunction<String> token) {
-    if (!(node instanceof ExactNode.Value value)) return;
+    if (!(node instanceof ExactNode.Value value)) {
+      return;
+    }
     for (Object child : value.fields().values()) {
-      if (child instanceof ExactNode exact) verify(exact, token);
-      else if (child instanceof List<?> children)
-        for (Object item : children) verify((ExactNode) item, token);
+      if (child instanceof ExactNode exact) {
+        verify(exact, token);
+      } else if (child instanceof List<?> children) {
+        for (Object item : children) {
+          verify((ExactNode) item, token);
+        }
+      }
     }
     String expected;
     if (value.fields().keySet().equals(Set.of("items"))) {
@@ -84,13 +92,15 @@ class LanguageIdentityTest {
           LanguageCodec.write(LanguageCore.helper(value, token)).getBytes(StandardCharsets.UTF_8);
       expected = LanguageCore.hashBytes(bytes);
       assertEquals(expected, LanguageCore.identity(value, token));
-      if (token == null) assertEquals(bytes.length, value.identityBytes);
+      if (token == null) {
+        assertEquals(bytes.length, value.identityBytes);
+      }
     }
     assertEquals(expected, LanguageCore.identity(value, token));
   }
 
   private static ExactNode.Value value(Random random, int depth) {
-    if (depth == 0)
+    if (depth == 0) {
       return switch (random.nextInt(5)) {
         case 0 -> ExactNode.scalar("Text", "é🌍\"\\\n\u0001".repeat(random.nextInt(20)));
         case 1 -> ExactNode.scalar("Integer", new BigInteger(200, random).negate());
@@ -99,6 +109,7 @@ class LanguageIdentityTest {
         case 3 -> ExactNode.scalar("Boolean", random.nextBoolean());
         default -> ExactNode.value(Collections.singletonMap("value", null));
       };
+    }
     Map<String, Object> fields = new LinkedHashMap<>();
     switch (random.nextInt(4)) {
       case 0 -> {

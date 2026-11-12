@@ -30,10 +30,14 @@ final class ContractStorage {
   static Snapshot compact(ContractProcessor source, ContractProcessor target, Snapshot selected) {
     source.validate(selected, true);
     var roots = new ArrayList<ExactNode>();
-    for (Document document : selected.documents.values()) roots.add(document.body);
-    for (Object raw : selected.runtimes)
-      for (String field : List.of("type_id", "semantics_id"))
+    for (Document document : selected.documents.values()) {
+      roots.add(document.body);
+    }
+    for (Object raw : selected.runtimes) {
+      for (String field : List.of("type_id", "semantics_id")) {
         roots.add(new Ref(str(obj(raw).get(field))));
+      }
+    }
     source.blue.context.copyReachableTo(target.blue.context, roots);
 
     // Document.copy() also preserves resolver-backed declaration caches. A maintenance boundary
@@ -97,7 +101,9 @@ final class ContractStorage {
               Set.of());
       String key = token(row.get("key")), identity = finalId(row.get("blueId"));
       require(keys.add(key), "DUPLICATE_DOCUMENT_KEY");
-      if (key.equals(member)) selected = identity;
+      if (key.equals(member)) {
+        selected = identity;
+      }
     }
     require(keys.contains(root), "MISSING_ROOT_DOCUMENT");
     require(selected != null, "UNKNOWN_DOCUMENT_KEY");
@@ -206,24 +212,36 @@ final class ContractStorage {
         || !before.release.equals(after.release)
         || before.gasSchedule != after.gasSchedule
         || !before.runtimes.equals(after.runtimes)
-        || after.documents.size() != before.documents.size() + 1) return Map.of();
+        || after.documents.size() != before.documents.size() + 1) {
+      return Map.of();
+    }
     var members = after.documents.changedKeys(before.documents);
     var edges = after.edges.changedKeys(before.edges);
-    if (members.size() > 8 || edges.isEmpty() || edges.size() > 16) return Map.of();
+    if (members.size() > 8 || edges.isEmpty() || edges.size() > 16) {
+      return Map.of();
+    }
     var added = new ArrayList<String>();
     var rows = new TreeMap<String, Object>();
     var roots = new ArrayList<ExactNode>();
     for (String key : members) {
       Document d = after.documents.get(key);
-      if (d == null) return Map.of();
-      if (!before.documents.containsKey(key)) added.add(key);
+      if (d == null) {
+        return Map.of();
+      }
+      if (!before.documents.containsKey(key)) {
+        added.add(key);
+      }
       rows.put(key, d.metadata());
       roots.add(d.body);
     }
-    if (added.size() != 1) return Map.of();
+    if (added.size() != 1) {
+      return Map.of();
+    }
     var links = new ArrayList<Object>();
     for (var key : edges) {
-      if (before.edges.containsKey(key) || after.edges.get(key) == null) return Map.of();
+      if (before.edges.containsKey(key) || after.edges.get(key) == null) {
+        return Map.of();
+      }
       links.add(after.edges.get(key).wire());
     }
     // An identical immutable member in this exact predecessor already has its closure.
@@ -283,10 +301,14 @@ final class ContractStorage {
     require(!s.ownerLocal, "LOCAL_CHECKPOINT_IS_NOT_PORTABLE");
     engine.validate(s, initialized);
     var roots = new ArrayList<ExactNode>();
-    for (Document d : s.documents.values()) roots.add(d.body);
-    for (Object raw : s.runtimes)
-      for (String field : List.of("type_id", "semantics_id"))
+    for (Document d : s.documents.values()) {
+      roots.add(d.body);
+    }
+    for (Object raw : s.runtimes) {
+      for (String field : List.of("type_id", "semantics_id")) {
         roots.add(new Ref(str(obj(raw).get(field))));
+      }
+    }
     var content = engine.blue.context.records(roots, supplied);
     return m("snapshot", s.wire(), "identity", s.identity(), "content", content);
   }
@@ -313,8 +335,9 @@ final class ContractStorage {
         initialized && engine.registry.preparations != null
             ? engine.registry.preparations.read(expected)
             : null;
-    if (prepared == null) c.addEvidence(obj(packageData.get("content")));
-    else {
+    if (prepared == null) {
+      c.addEvidence(obj(packageData.get("content")));
+    } else {
       Map<String, Object> records = obj(packageData.get("content"));
       c.supplyRetainedEvidence(records);
       // The protected preparation supplies prior semantic validation. Exact response identity
@@ -324,7 +347,9 @@ final class ContractStorage {
     Snapshot s;
     try {
       s = restore(engine, wire, prepared != null);
-      if (prepared != null) engine.registry.preparations.install(engine.registry, s, prepared);
+      if (prepared != null) {
+        engine.registry.preparations.install(engine.registry, s, prepared);
+      }
       require(s.identity().equals(expected), "INVALID_SNAPSHOT_COMMITMENT");
       engine.validate(s, initialized);
     } catch (RuntimeException e) {

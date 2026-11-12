@@ -102,7 +102,9 @@ final class ContractCompletions {
     out.seal();
     out.established = new Remembered(before.copy(), event, timestamp);
     outcomes.put(out.receipt(), new Proof(out.inputIdentity, event, timestamp));
-    while (outcomes.size() > 128) outcomes.remove(outcomes.keySet().iterator().next());
+    while (outcomes.size() > 128) {
+      outcomes.remove(outcomes.keySet().iterator().next());
+    }
   }
 
   ContractProcessor.SourceCompletion capture(
@@ -148,7 +150,9 @@ final class ContractCompletions {
     d.put("identity", digest("contracts.retained-completion/1", d));
     String token = UUID.randomUUID().toString();
     capabilities.add(token);
-    while (capabilities.size() > 128) capabilities.remove(capabilities.iterator().next());
+    while (capabilities.size() > 128) {
+      capabilities.remove(capabilities.iterator().next());
+    }
     return processor.issue(
         token, new Record(d, r.before, out, r.event, r.timestamp, Set.copyOf(members)));
   }
@@ -206,24 +210,29 @@ final class ContractCompletions {
         eligible &=
             record.outcome.snapshot.documents.keySet().containsAll(record.before.documents.keySet())
                 && record.outcome.rounds.isEmpty();
-        for (String member : record.outcome.gasByMember.keySet())
+        for (String member : record.outcome.gasByMember.keySet()) {
           eligible &=
               record.before.documents.containsKey(member)
                   ? snapshot.documents.containsKey(member)
                       && vector(snapshot, List.of(member))
                           .equals(vector(record.before, List.of(member)))
                   : !snapshot.documents.containsKey(member);
+        }
       }
       var accounted = new HashSet<String>();
       records.forEach(record -> accounted.addAll(record.outcome.gasByMember.keySet()));
       // Required predicates outside the source can interleave with its selection prefix.
       // Until that decomposition is bound, replay rather than treating a member-total union
       // as evidence of canonical action order.
-      for (var row : snapshot.documents.entrySet())
-        if (!accounted.contains(row.getKey()))
-          for (var declaration : processor.registry.contracts(row.getValue()).values())
-            if ("external".equals(declaration.get("_role")) && declaration.containsKey("event"))
+      for (var row : snapshot.documents.entrySet()) {
+        if (!accounted.contains(row.getKey())) {
+          for (var declaration : processor.registry.contracts(row.getValue()).values()) {
+            if ("external".equals(declaration.get("_role")) && declaration.containsKey("event")) {
               eligible = false;
+            }
+          }
+        }
+      }
       if (!eligible) {
         ContractMetrics.count("contracts.sourceCompletionReplayed");
         run.admissionEvidence.putAll(evidence);
@@ -246,11 +255,12 @@ final class ContractCompletions {
         return run;
       }
       var amounts = new TreeMap<String, Long>();
-      for (var record : records)
+      for (var record : records) {
         for (var row : record.outcome.gasByMember.entrySet()) {
           Long previous = amounts.putIfAbsent(row.getKey(), row.getValue());
           require(previous == null || previous.equals(row.getValue()), "INCOMPATIBLE_SOURCE_GAS");
         }
+      }
       long remaining = run.meter.limit;
       for (var row : amounts.entrySet()) {
         if (row.getValue() > remaining
@@ -298,7 +308,9 @@ final class ContractCompletions {
     records.forEach(r -> owners.addAll(r.members));
     var routes = new TreeMap<String, List<Ticket>>(ContractCanonical.CODE_POINTS);
     owners.forEach(k -> routes.put(k, run.captureRoutes(k, run.state)));
-    if (live) run.seeds = run.seeds.stream().filter(s -> !owners.contains(s.document())).toList();
+    if (live) {
+      run.seeds = run.seeds.stream().filter(s -> !owners.contains(s.document())).toList();
+    }
     var carried = new TreeMap<String, Document>(ContractCanonical.CODE_POINTS);
     for (var r : records) {
       var source = r.outcome.snapshot;
@@ -306,8 +318,12 @@ final class ContractCompletions {
       var pending = new ArrayDeque<>(r.members);
       while (!pending.isEmpty()) {
         String k = pending.pop();
-        if (!closure.add(k)) continue;
-        for (Edge e : source.outgoingEdges(k)) pending.push(e.target());
+        if (!closure.add(k)) {
+          continue;
+        }
+        for (Edge e : source.outgoingEdges(k)) {
+          pending.push(e.target());
+        }
       }
       require(!closure.contains(run.input.root), "CYCLIC_RECEIVING_REQUIRES_ATOMIC_INVOCATION");
       closure.removeAll(owners);
@@ -334,11 +350,12 @@ final class ContractCompletions {
             k);
         installMember(run.state, after, k);
       }
-      for (String k : after.documents.keySet())
+      for (String k : after.documents.keySet()) {
         if (!before.documents.containsKey(k)) {
           require(!run.input.documents.containsKey(k), "CONFLICTING_MEMBER_BIRTH");
           installMember(run.state, after, k);
         }
+      }
     }
     {
       ContractMetrics.count("contracts.sourceCompletionReused");
@@ -355,7 +372,7 @@ final class ContractCompletions {
       }
       run.meter.owner = "";
       var emitted = new HashSet<String>();
-      for (var r : records)
+      for (var r : records) {
         for (Object raw : r.outcome.events) {
           var occurrence = obj(raw);
           if (emitted.add(str(occurrence.get("identity")))) {
@@ -364,29 +381,34 @@ final class ContractCompletions {
             run.events.add(copy);
           }
         }
+      }
     }
     run.graph = run.forkGraph(run.state);
     run.graph.refreshAliases();
     var completed = new HashSet<>(owners);
     completed.addAll(carried.keySet());
-    if (live)
+    if (live) {
       run.seeds = run.seeds.stream().filter(s -> !completed.contains(s.document())).toList();
+    }
     run.phase = run.newPhase(live ? "PROCESS" : "RECEIVE", null, false);
     for (var group : run.phase.groups) {
       require(
           Collections.disjoint(group, owners) || owners.containsAll(group),
           "CYCLIC_RECEIVING_REQUIRES_ATOMIC_INVOCATION");
-      if (completed.containsAll(group))
+      if (completed.containsAll(group)) {
         run.phase.done.add(List.copyOf(ContractCanonical.keys(group)));
+      }
     }
-    for (var r : records)
+    for (var r : records) {
       for (String k : ContractCanonical.keys(r.members)) {
         // A cyclic source can have several turns. Preserve their batch boundaries and serials:
         // both are semantic inputs to the receiver's event occurrence identities.
         for (Object raw : r.outcome.completions) {
           var turn = obj(raw);
           var input = obj(turn.get("turnInput"));
-          if (!input.get("member").equals(k)) continue;
+          if (!input.get("member").equals(k)) {
+            continue;
+          }
           var batch =
               new Batch(
                   k,
@@ -399,15 +421,22 @@ final class ContractCompletions {
           run.routeBatch(run.phase, batch, owners, false);
         }
       }
+    }
   }
 
   static void installMember(Snapshot destination, Snapshot source, String member) {
     destination.documents.put(member, source.documents.get(member).copy());
     // Installing a child's new body does not remove and re-add its unchanged attachments.
     // Preserve topology ownership and inspect only this member's contiguous outgoing range.
-    for (Edge old : destination.outgoingEdges(member))
-      if (!source.edges.containsKey(old.key())) destination.edges.remove(old.key());
-    for (Edge edge : source.outgoingEdges(member))
-      if (!edge.equals(destination.edges.get(edge.key()))) destination.edges.put(edge.key(), edge);
+    for (Edge old : destination.outgoingEdges(member)) {
+      if (!source.edges.containsKey(old.key())) {
+        destination.edges.remove(old.key());
+      }
+    }
+    for (Edge edge : source.outgoingEdges(member)) {
+      if (!edge.equals(destination.edges.get(edge.key()))) {
+        destination.edges.put(edge.key(), edge);
+      }
+    }
   }
 }

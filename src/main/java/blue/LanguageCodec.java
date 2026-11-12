@@ -361,7 +361,9 @@ final class LanguageCodec {
       boolean first = true;
       // Exact fields are immutable and already in canonical key order.
       for (var field : fields.entrySet()) {
-        if (!first) out.append(',');
+        if (!first) {
+          out.append(',');
+        }
         first = false;
         String key = field.getKey();
         appendQuote(key, out);
@@ -382,7 +384,9 @@ final class LanguageCodec {
     out.append('[');
     boolean first = true;
     for (ExactNode item : LanguageCore.exactItems(value)) {
-      if (!first) out.append(',');
+      if (!first) {
+        out.append(',');
+      }
       first = false;
       appendExact(item, out);
     }

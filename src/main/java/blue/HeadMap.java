@@ -26,13 +26,19 @@ final class HeadMap<V> extends AbstractMap<String, V> {
   }
 
   static <V> Map<String, V> freeze(Map<String, V> source) {
-    if (source.isEmpty()) return Map.of();
-    if (source instanceof Frozen<V>) return source;
+    if (source.isEmpty()) {
+      return Map.of();
+    }
+    if (source instanceof Frozen<V>) {
+      return source;
+    }
     return source instanceof HeadMap<V> draft ? draft.freeze() : new HeadMap<>(source).freeze();
   }
 
   private Frozen<V> freeze() {
-    if (published == null) published = new Frozen<>(values);
+    if (published == null) {
+      published = new Frozen<>(values);
+    }
     return published;
   }
 
@@ -76,7 +82,9 @@ final class HeadMap<V> extends AbstractMap<String, V> {
 
   @Override
   public void putAll(Map<? extends String, ? extends V> source) {
-    if (!source.isEmpty() && source != this) writable().putAll(source);
+    if (!source.isEmpty() && source != this) {
+      writable().putAll(source);
+    }
   }
 
   @Override

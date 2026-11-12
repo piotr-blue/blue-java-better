@@ -238,7 +238,9 @@ final class BexEngine {
     }
 
     BigInteger toInteger(Object value) {
-      if (value instanceof BigInteger b) return b;
+      if (value instanceof BigInteger b) {
+        return b;
+      }
       long digits;
       if (value instanceof String s) {
         gas.charge("textWork", chunks(s));
@@ -285,15 +287,21 @@ final class BexEngine {
     }
 
     boolean matches(Object value, Object pattern) {
-      if (value == UNDEFINED) return false;
+      if (value == UNDEFINED) {
+        return false;
+      }
       Object converted;
       try {
         converted = blueInput(value);
       } catch (BexFailure e) {
-        if (e.code().equals("BEX_OUTPUT_INVALID")) return false;
+        if (e.code().equals("BEX_OUTPUT_INVALID")) {
+          return false;
+        }
         throw e;
       }
-      if (context.inputObserver != null) context.inputObserver.opaque();
+      if (context.inputObserver != null) {
+        context.inputObserver.opaque();
+      }
       require(context.matcher != null, "Language matching capability unavailable");
       return context.matcher.test(original(converted), original(copy(pattern)));
     }
@@ -304,22 +312,30 @@ final class BexEngine {
 
     Object unary(String op, Object x) {
       if (op.equals("$nodeBlueId")) {
-        if (context.inputObserver != null) context.inputObserver.opaque();
+        if (context.inputObserver != null) {
+          context.inputObserver.opaque();
+        }
         gas.charge("nodeIdentityRequested");
-        if (context.nodeBlueId == null)
+        if (context.nodeBlueId == null) {
           throw new BexFailure("BEX_OUTPUT_INVALID", "Language identity boundary unavailable");
+        }
         String id = context.nodeBlueId.identify(original(copy(x)), gas);
-        if (id == null || id.isEmpty())
+        if (id == null || id.isEmpty()) {
           throw new BexFailure(
               "BEX_OUTPUT_INVALID", "Language identity boundary returned invalid identity");
+        }
         return id;
       }
       if (op.equals("$unwrap")) {
         while (true) {
           gas.charge("valueMember");
-          if (!kind(x).equals("object")) return x;
+          if (!kind(x).equals("object")) {
+            return x;
+          }
           Object child = get(x, "value");
-          if (child == UNDEFINED) return x;
+          if (child == UNDEFINED) {
+            return x;
+          }
           x = child;
         }
       }
@@ -335,19 +351,26 @@ final class BexEngine {
           if (x instanceof BigInteger n) {
             long limbs = limbs(n);
             gas.charge("integerWork", limbs * limbs);
-          } else if (x instanceof String s) gas.charge("textWork", chunks(s));
+          } else if (x instanceof String s) {
+            gas.charge("textWork", chunks(s));
+          }
           return number(x);
         case "$boolean":
-          if ("true".equals(x)) return true;
-          if ("false".equals(x)) return false;
+          if ("true".equals(x)) {
+            return true;
+          }
+          if ("false".equals(x)) {
+            return false;
+          }
           return truthy(x);
         case "$object", "$list":
           {
             String expected = op.equals("$object") ? "object" : "list";
-            if (k.equals("null") || k.equals("undefined"))
+            if (k.equals("null") || k.equals("undefined")) {
               return expected.equals("object")
                   ? new TreeMap<String, Object>()
                   : new ArrayList<Object>();
+            }
             require(k.equals(expected), "wrong collection kind");
             return x;
           }
@@ -358,12 +381,16 @@ final class BexEngine {
         case "$exists":
           return x != UNDEFINED;
         case "$keys":
-          if (!k.equals("object")) return List.of();
+          if (!k.equals("object")) {
+            return List.of();
+          }
           gas.charge("valueMember", size(x));
           return keys(x);
         case "$entries":
           {
-            if (!k.equals("object")) return List.of();
+            if (!k.equals("object")) {
+              return List.of();
+            }
             gas.charge("valueMember", size(x));
             var out = new ArrayList<Object>();
             for (String key : keys(x)) {
@@ -389,8 +416,11 @@ final class BexEngine {
               require(kind(row).equals("object"), "entry must be object");
               String key = requiredText(get(row, "key"));
               Object v = get(row, "val");
-              if (v == UNDEFINED) out.remove(key);
-              else out.put(key, v);
+              if (v == UNDEFINED) {
+                out.remove(key);
+              } else {
+                out.put(key, v);
+              }
             }
             return out;
           }
@@ -422,14 +452,18 @@ final class BexEngine {
             ? s.startsWith(p)
             : s.startsWith(p) ? s.substring(p.length()) : "";
       }
-      if (op.equals("$eq") || op.equals("$ne"))
+      if (op.equals("$eq") || op.equals("$ne")) {
         return equal(args.get(0), args.get(1), gas) == op.equals("$eq");
+      }
       if (Set.of("$gt", "$gte", "$lt", "$lte").contains(op)) {
-        for (Object v : args)
+        for (Object v : args) {
           if (v instanceof BigInteger n) {
             long limbs = limbs(n);
             gas.charge("integerWork", limbs * limbs);
-          } else if (v instanceof String s) gas.charge("textWork", chunks(s));
+          } else if (v instanceof String s) {
+            gas.charge("textWork", chunks(s));
+          }
+        }
         int cmp = number(args.get(0)).compareTo(number(args.get(1)));
         return switch (op) {
           case "$gt" -> cmp > 0;
@@ -465,7 +499,9 @@ final class BexEngine {
         return r;
       }
       if (op.equals("$listConcat")) {
-        for (Object x : args) require(kind(x).equals("list"), "listConcat requires lists");
+        for (Object x : args) {
+          require(kind(x).equals("list"), "listConcat requires lists");
+        }
         var out = new ArrayList<Object>();
         for (Object x : args) {
           for (int i = 0; i < size(x); i++) {
@@ -481,7 +517,9 @@ final class BexEngine {
         var out = new TreeMap<String, Object>();
         for (Object x : args) {
           require(kind(x).equals("object"), "merge requires objects");
-          for (String key : ordered(x, gas)) out.put(key, get(x, key));
+          for (String key : ordered(x, gas)) {
+            out.put(key, get(x, key));
+          }
         }
         return out;
       }
@@ -506,7 +544,9 @@ final class BexEngine {
             }
 
             public Row next() {
-              if (!hasNext()) throw new NoSuchElementException();
+              if (!hasNext()) {
+                throw new NoSuchElementException();
+              }
               int i = index++;
               Object key = kind.equals("list") ? UNDEFINED : orderedKeys.get(i);
               return new Row(key, get(value, kind.equals("list") ? i : key), BigInteger.valueOf(i));
@@ -523,8 +563,12 @@ final class BexEngine {
       String operation = requiredText(get(value, "op"));
       require(Set.of("add", "replace", "remove").contains(operation), "unsupported patch op");
       String path = requiredText(get(value, "path"));
-      if (!path.startsWith("/")) path = context.scope.replaceAll("/$", "") + "/" + path;
-      if (path.isEmpty() || path.equals("/")) path = context.scope;
+      if (!path.startsWith("/")) {
+        path = context.scope.replaceAll("/$", "") + "/" + path;
+      }
+      if (path.isEmpty() || path.equals("/")) {
+        path = context.scope;
+      }
       segments(path);
       Object val = operation.equals("remove") ? UNDEFINED : get(value, "val");
       require(operation.equals("remove") || val != UNDEFINED, "patch val is required");
@@ -532,7 +576,9 @@ final class BexEngine {
       var change = new TreeMap<String, Object>();
       change.put("op", operation);
       change.put("path", path);
-      if (!operation.equals("remove")) change.put("val", val);
+      if (!operation.equals("remove")) {
+        change.put("val", val);
+      }
       changes.add(change);
     }
 

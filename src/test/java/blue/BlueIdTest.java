@@ -20,7 +20,9 @@ class BlueIdTest {
         byte[] bytes = new byte[32];
         random.nextBytes(bytes);
         java.util.Arrays.fill(bytes, 0, zeros, (byte) 0);
-        if (zeros < 32) bytes[zeros] = (byte) (1 << (sample % 8));
+        if (zeros < 32) {
+          bytes[zeros] = (byte) (1 << (sample % 8));
+        }
         String value = encode(bytes);
         assertEquals(value, new BlueId(value).value());
         assertEquals(value, LanguageCore.plainId(value));
@@ -34,16 +36,24 @@ class BlueIdTest {
     for (int sample = 0; sample < 6000; sample++) {
       StringBuilder value = new StringBuilder();
       int length = 24 + random.nextInt(25);
-      for (int i = 0; i < length; i++) value.append(ALPHABET.charAt(random.nextInt(58)));
-      if (sample % 3 == 0) value.insert(0, "1".repeat(sample % 33));
-      if (sample % 17 == 0) value.insert(random.nextInt(value.length()), "0IOl#é");
+      for (int i = 0; i < length; i++) {
+        value.append(ALPHABET.charAt(random.nextInt(58)));
+      }
+      if (sample % 3 == 0) {
+        value.insert(0, "1".repeat(sample % 33));
+      }
+      if (sample % 17 == 0) {
+        value.insert(random.nextInt(value.length()), "0IOl#é");
+      }
       String text = value.toString();
       boolean expected = valid(text);
       assertEquals(expected, BlueIdSyntax.digest(text), text);
-      if (expected) assertEquals(text, new BlueId(text).value());
-      else
+      if (expected) {
+        assertEquals(text, new BlueId(text).value());
+      } else {
         assertEquals(
             "INVALID_BLUE_ID", assertThrows(BlueException.class, () -> new BlueId(text)).code());
+      }
     }
   }
 
@@ -55,7 +65,9 @@ class BlueIdTest {
         for (int delta = -1; delta <= 1; delta++) {
           BigInteger number = boundary.add(BigInteger.valueOf(delta));
           byte[] raw = number.toByteArray();
-          if (raw[0] == 0) raw = java.util.Arrays.copyOfRange(raw, 1, raw.length);
+          if (raw[0] == 0) {
+            raw = java.util.Arrays.copyOfRange(raw, 1, raw.length);
+          }
           String value = "1".repeat(zeros) + encode(raw);
           assertEquals(valid(value), BlueIdSyntax.digest(value), value);
         }
@@ -74,18 +86,23 @@ class BlueIdTest {
       assertEquals(id + "#" + suffix, new BlueId(id + "#" + suffix).value());
       assertEquals(id + "#" + suffix, LanguageCore.finalId(id + "#" + suffix));
     }
-    for (String suffix : new String[] {"", "00", "01", "-1", "+1", "1.0", "1#2", "１"})
+    for (String suffix : new String[] {"", "00", "01", "-1", "+1", "1.0", "1#2", "１"}) {
       assertThrows(BlueException.class, () -> new BlueId(id + "#" + suffix));
+    }
     assertThrows(BlueException.class, () -> new BlueId("1".repeat(31) + "#1"));
   }
 
   private static boolean valid(String value) {
     BigInteger number = BigInteger.ZERO;
     int zeros = 0;
-    while (zeros < value.length() && value.charAt(zeros) == '1') zeros++;
+    while (zeros < value.length() && value.charAt(zeros) == '1') {
+      zeros++;
+    }
     for (int i = 0; i < value.length(); i++) {
       int digit = ALPHABET.indexOf(value.charAt(i));
-      if (digit < 0) return false;
+      if (digit < 0) {
+        return false;
+      }
       number = number.multiply(BigInteger.valueOf(58)).add(BigInteger.valueOf(digit));
     }
     return zeros + (number.bitLength() + 7) / 8 == 32;
@@ -100,7 +117,9 @@ class BlueIdTest {
       value = step[0];
     }
     for (byte element : bytes) {
-      if (element != 0) break;
+      if (element != 0) {
+        break;
+      }
       text.append('1');
     }
     return text.reverse().toString();

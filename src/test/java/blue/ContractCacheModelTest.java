@@ -53,19 +53,22 @@ class ContractCacheModelTest {
               && weight <= entryBytes
               && weight <= bytes) {
             model.removeIf(item -> item.key().equals(key));
-            while (!model.isEmpty() && (model.size() >= entries || weight(model) + weight > bytes))
+            while (!model.isEmpty()
+                && (model.size() >= entries || weight(model) + weight > bytes)) {
               model.removeFirst();
+            }
             model.add(new Item(key, value, weight));
           }
         }
       }
       assertEquals(model.size(), cache.size(), "entry bound after operation " + step);
       assertEquals(weight(model), cache.bytes(), "weight after operation " + step);
-      if (step % 97 == 0)
+      if (step % 97 == 0) {
         for (int n = 0; n < 24; n++) {
           Key candidate = new Key(n);
           assertSame(read(model, candidate), cache.get(candidate), "lookup at operation " + step);
         }
+      }
     }
   }
 
@@ -91,7 +94,9 @@ class ContractCacheModelTest {
                 }));
       }
       start.countDown();
-      for (var task : tasks) task.get(30, TimeUnit.SECONDS);
+      for (var task : tasks) {
+        task.get(30, TimeUnit.SECONDS);
+      }
     }
     assertEquals(8, cache.size());
     assertEquals(8, cache.bytes());

@@ -82,7 +82,9 @@ class ContractSnapshotSharingTest {
                 }));
       }
       start.countDown();
-      for (var result : results) result.get(20, TimeUnit.SECONDS);
+      for (var result : results) {
+        result.get(20, TimeUnit.SECONDS);
+      }
     }
   }
 }

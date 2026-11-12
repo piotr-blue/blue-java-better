@@ -71,9 +71,13 @@ final class ContractPreparations {
   }
 
   Map<String, Object> read(String identity) {
-    if (reader == null) return null;
+    if (reader == null) {
+      return null;
+    }
     var value = reader.find(identity).orElse(null);
-    if (value == null || !environment.equals(value.get("environment"))) return null;
+    if (value == null || !environment.equals(value.get("environment"))) {
+      return null;
+    }
     require(identity.equals(value.get("snapshot")), "WRONG_PREPARATION_SNAPSHOT");
     return value;
   }
@@ -89,8 +93,9 @@ final class ContractPreparations {
   void install(ContractRegistry registry, Snapshot state, Map<String, Object> record) {
     Map<String, Object> rows = obj(record.get("documents"));
     require(rows.keySet().equals(state.documents.keySet()), "INVALID_PREPARATION_MEMBERS");
-    for (var document : state.documents.values())
+    for (var document : state.documents.values()) {
       installMember(registry, document, obj(rows.get(document.key)));
+    }
     ContractTopology topology = ContractTopology.of(state);
     for (var document : state.documents.values()) {
       var edges = topology.outgoingEdges(document.key);
@@ -119,14 +124,17 @@ final class ContractPreparations {
 
   void installMember(ContractRegistry registry, Document document, Map<String, Object> row) {
     require(document.blueId.equals(row.get("blueId")), "INVALID_PREPARATION_MEMBER");
-    if (row.containsKey("languageFacts"))
+    if (row.containsKey("languageFacts")) {
       registry.blue.context.restoreSemanticPreparation(
           document.body, arr(row.get("languageFacts")));
+    }
     Map<String, Object> headerRecords =
         row.get("headerRecords") == null
             ? null
             : obj(ContractWire.immutable(row.get("headerRecords")));
-    if (headerRecords != null) registry.blue.context.supplyRetainedEvidence(headerRecords);
+    if (headerRecords != null) {
+      registry.blue.context.supplyRetainedEvidence(headerRecords);
+    }
     // The protected record was written by export(), which stores one object per declaration.
     @SuppressWarnings("unchecked")
     var declarations = (Map<String, Map<String, Object>>) decode(row.get("declarations"), registry);
@@ -138,13 +146,14 @@ final class ContractPreparations {
     markers.get("initialized").ifPresent(marker -> initializedMarkers.add(identity(marker)));
     Map<String, Object> markerFacts =
         row.get("markerFacts") == null ? null : obj(ContractWire.immutable(row.get("markerFacts")));
-    if (markerFacts != null)
+    if (markerFacts != null) {
       markerFacts.forEach(
           (name, facts) -> {
             var marker = markers.get(name);
             require(marker != null && marker.isPresent(), "INVALID_PREPARATION_MARKER");
             registry.blue.context.restoreSemanticPreparation(marker.orElseThrow(), arr(facts));
           });
+    }
     documents.put(
         document.blueId,
         new Prepared(
@@ -171,7 +180,9 @@ final class ContractPreparations {
     Set<String> active =
         new ContractGraph(state, processor.registry, processor.archive).reachable(true, Set.of());
     for (var document : state.documents.values()) {
-      if (!retained.test(document.blueId)) return Map.of();
+      if (!retained.test(document.blueId)) {
+        return Map.of();
+      }
       rows.put(document.key, exportRow(processor, document, active.contains(document.key)));
     }
     return m(
@@ -187,13 +198,16 @@ final class ContractPreparations {
   static Map<String, Object> delta(
       ContractProcessor processor, Snapshot before, Snapshot after, Predicate<String> retained) {
     var preparation = processor.registry.preparations;
-    if (preparation == null || !preparation.installedSnapshots.contains(before.identity()))
+    if (preparation == null || !preparation.installedSnapshots.contains(before.identity())) {
       return Map.of();
+    }
     require(before.root.equals(after.root), "PREPARATION_ROOT_CHANGED");
     processor.validate(after, true);
     Set<String> changed = new TreeSet<>(after.documents.changedKeys(before.documents));
     // Retired members remain in canonical history. An actual removal needs a full export.
-    if (changed.stream().anyMatch(key -> !after.documents.containsKey(key))) return Map.of();
+    if (changed.stream().anyMatch(key -> !after.documents.containsKey(key))) {
+      return Map.of();
+    }
     List<String> added =
         changed.stream().filter(key -> !before.documents.containsKey(key)).toList();
     Map<String, Object> rows = new TreeMap<>();
@@ -206,8 +220,16 @@ final class ContractPreparations {
       Set<String> previous =
           new ContractGraph(before, processor.registry, processor.archive)
               .reachable(true, Set.of());
-      for (String key : active) if (!previous.contains(key)) changed.add(key);
-      for (String key : previous) if (!active.contains(key)) changed.add(key);
+      for (String key : active) {
+        if (!previous.contains(key)) {
+          changed.add(key);
+        }
+      }
+      for (String key : previous) {
+        if (!active.contains(key)) {
+          changed.add(key);
+        }
+      }
     }
     for (String key : changed) {
       var document = after.documents.get(key);
@@ -217,8 +239,12 @@ final class ContractPreparations {
       var newTermination = processor.registry.marker(document, "terminated");
       if (!Objects.equals(
           oldTermination == null ? null : identity(oldTermination),
-          newTermination == null ? null : identity(newTermination))) return Map.of();
-      if (!retained.test(document.blueId)) return Map.of();
+          newTermination == null ? null : identity(newTermination))) {
+        return Map.of();
+      }
+      if (!retained.test(document.blueId)) {
+        return Map.of();
+      }
       rows.put(key, exportRow(processor, document, active.contains(key)));
     }
     return m(
@@ -278,7 +304,9 @@ final class ContractPreparations {
     Map<String, Object> facts = new LinkedHashMap<>();
     for (String name : ContractRegistry.MARKERS) {
       ExactNode marker = registry.marker(document, name);
-      if (marker != null) facts.put(name, registry.blue.context.semanticPreparation(marker));
+      if (marker != null) {
+        facts.put(name, registry.blue.context.semanticPreparation(marker));
+      }
     }
     return Collections.unmodifiableMap(facts);
   }
@@ -289,16 +317,26 @@ final class ContractPreparations {
     Map<String, Object> records = new LinkedHashMap<>();
     for (String key : ContractRegistry.MARKERS) {
       ExactNode marker = registry.marker(document, key);
-      if (marker != null && !headerRecord(registry, marker, records)) return null;
-    }
-    if (active)
-      for (var declaration : registry.contracts(document).values()) {
-        if (!ContractRegistry.EXTERNAL.contains(declaration.get("_role"))) continue;
-        Recipe recipe = LanguageSemantics.recipe(declaration.get("_recipe"));
-        for (ExactNode part : recipe.parts())
-          if (!headerRecord(registry, part, records)) return null;
-        if (!headerRecord(registry, registry.blue.exact(recipe), records)) return null;
+      if (marker != null && !headerRecord(registry, marker, records)) {
+        return null;
       }
+    }
+    if (active) {
+      for (var declaration : registry.contracts(document).values()) {
+        if (!ContractRegistry.EXTERNAL.contains(declaration.get("_role"))) {
+          continue;
+        }
+        Recipe recipe = LanguageSemantics.recipe(declaration.get("_recipe"));
+        for (ExactNode part : recipe.parts()) {
+          if (!headerRecord(registry, part, records)) {
+            return null;
+          }
+        }
+        if (!headerRecord(registry, registry.blue.exact(recipe), records)) {
+          return null;
+        }
+      }
+    }
     return Collections.unmodifiableMap(records);
   }
 
@@ -306,7 +344,9 @@ final class ContractPreparations {
       ContractRegistry registry, ExactNode node, Map<String, Object> records) {
     String id = identity(node);
     // Owning-set proofs retain their ordinary member-opening boundary.
-    if (id.contains("#")) return false;
+    if (id.contains("#")) {
+      return false;
+    }
     records.computeIfAbsent(
         id,
         key ->
@@ -320,7 +360,9 @@ final class ContractPreparations {
 
   private static List<Object> headerWalk(ContractRegistry registry, Document document) {
     var previous = registry.preparations == null ? null : registry.preparations.get(document);
-    if (previous != null && previous.headers() != null) return previous.headers();
+    if (previous != null && previous.headers() != null) {
+      return previous.headers();
+    }
     List<Object> walk = new ArrayList<>();
     Set<String> seen = new HashSet<>();
     ExactNode node = document.body;
@@ -341,17 +383,23 @@ final class ContractPreparations {
 
   // Tag every container, so user-authored pattern keys cannot collide with internal encodings.
   private static Object encode(Object value) {
-    if (value instanceof Recipe recipe) return List.of("recipe", recipe.key());
-    if (value instanceof ExactNode node) return List.of("node", identity(node));
-    if (value instanceof ContractNative.Installed nativeType)
+    if (value instanceof Recipe recipe) {
+      return List.of("recipe", recipe.key());
+    }
+    if (value instanceof ExactNode node) {
+      return List.of("node", identity(node));
+    }
+    if (value instanceof ContractNative.Installed nativeType) {
       return List.of("extension", nativeType.binding.typeId());
+    }
     if (value instanceof Map<?, ?> map) {
       Map<String, Object> fields = new TreeMap<>();
       map.forEach((key, item) -> fields.put((String) key, encode(item)));
       return List.of("map", fields);
     }
-    if (value instanceof List<?> list)
+    if (value instanceof List<?> list) {
       return List.of("list", list.stream().map(ContractPreparations::encode).toList());
+    }
     return Arrays.asList("scalar", value);
   }
 

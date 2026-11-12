@@ -29,7 +29,9 @@ final class PackageArchive {
   }
 
   void bound(boolean valid, String detail) {
-    if (!valid) throw new PackageException("OperationLimitExceeded", detail);
+    if (!valid) {
+      throw new PackageException("OperationLimitExceeded", detail);
+    }
   }
 
   void entry(String name) {
@@ -42,10 +44,11 @@ final class PackageArchive {
   }
 
   byte[] content(InputStream in, long declared) throws IOException {
-    if (declared >= 0)
+    if (declared >= 0) {
       bound(
           declared <= limits.entryBytes() && declared <= limits.expandedBytes() - expanded,
           "package entry bytes");
+    }
     var bytes = new ByteArrayOutputStream();
     byte[] buffer = new byte[8192];
     long size = 0;
@@ -98,12 +101,18 @@ final class PackageArchive {
       var iterator = paths.iterator();
       while (iterator.hasNext()) {
         Path path = iterator.next();
-        if (path.equals(root)) continue;
+        if (path.equals(root)) {
+          continue;
+        }
         PackageIntegrity.require(!Files.isSymbolicLink(path), "InvalidPackage", "symlink member");
         String name = root.relativize(path).toString().replace(File.separatorChar, '/');
-        if (name.equals("package.bluepkg")) continue;
+        if (name.equals("package.bluepkg")) {
+          continue;
+        }
         entry(name);
-        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) continue;
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
+          continue;
+        }
         PackageIntegrity.require(
             Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS),
             "InvalidPackage",

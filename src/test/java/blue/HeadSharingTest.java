@@ -40,7 +40,9 @@ class HeadSharingTest {
         case 3 -> {
           retained.add(HeadMap.freeze(draft));
           expected.add(new TreeMap<>(model));
-          if (random.nextBoolean()) draft = new HeadMap<>(retained.getLast());
+          if (random.nextBoolean()) {
+            draft = new HeadMap<>(retained.getLast());
+          }
         }
         default -> {
           if (random.nextInt(20) == 0) {
@@ -58,10 +60,11 @@ class HeadSharingTest {
     assertEquals(expected, retained);
     for (var frozen : retained) {
       assertThrows(UnsupportedOperationException.class, () -> frozen.put("illegal", 1));
-      if (!frozen.isEmpty())
+      if (!frozen.isEmpty()) {
         assertThrows(
             UnsupportedOperationException.class,
             () -> frozen.entrySet().iterator().next().setValue(1));
+      }
     }
   }
 
@@ -99,12 +102,18 @@ class HeadSharingTest {
     allocation.setThreadAllocatedMemoryEnabled(true);
     var draft = new LanguageSemantics.HeadDraft();
     var recipe = LanguageSemantics.recipe(new ExactNode.Ref(LanguageCore.CORE.get("Text")));
-    for (int i = 0; i < width; i++) draft.fields.put("field-" + i, recipe);
+    for (int i = 0; i < width; i++) {
+      draft.fields.put("field-" + i, recipe);
+    }
     var head = draft.build();
-    for (int i = 0; i < 100; i++) head = head.copy().build();
+    for (int i = 0; i < 100; i++) {
+      head = head.copy().build();
+    }
     long thread = Thread.currentThread().threadId();
     long before = allocation.getThreadAllocatedBytes(thread);
-    for (int i = 0; i < 100; i++) head = head.copy().build();
+    for (int i = 0; i < 100; i++) {
+      head = head.copy().build();
+    }
     long bytes = allocation.getThreadAllocatedBytes(thread) - before;
     assertEquals(width, head.fields.size());
     assertTrue(bytes < 2 * 1024 * 1024, "Unchanged head copies allocated " + bytes + " bytes");

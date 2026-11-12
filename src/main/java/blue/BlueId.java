@@ -19,7 +19,9 @@ public record BlueId(String value) {
       }
       value = value.substring(0, separator);
     }
-    if (!BlueIdSyntax.digest(value)) throw new BlueException("INVALID_BLUE_ID", value);
+    if (!BlueIdSyntax.digest(value)) {
+      throw new BlueException("INVALID_BLUE_ID", value);
+    }
     value = original;
   }
 

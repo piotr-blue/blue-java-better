@@ -43,7 +43,9 @@ public class BlueIdBenchmark {
       value = step[0];
     }
     for (byte element : bytes) {
-      if (element != 0) break;
+      if (element != 0) {
+        break;
+      }
       text.append('1');
     }
     return text.reverse().toString();

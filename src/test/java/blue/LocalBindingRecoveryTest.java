@@ -144,10 +144,11 @@ class LocalBindingRecoveryTest {
           Language.newBuilder()
               .provider(
                   id -> {
-                    if (forbidBodies)
+                    if (forbidBodies) {
                       assertFalse(
                           protectedBodies.contains(id.value()),
                           "Structural recovery reopened a protected owner body: " + id);
+                    }
                     return Optional.ofNullable(records.get(id.value()))
                         .map(raw -> new LanguageRecord(ContractModel.obj(raw)));
                   })

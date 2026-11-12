@@ -30,7 +30,9 @@ class ContractRootWitnessTest {
     var blue = new ContractBridge(Language.create());
     var work = new ContractWork(blue, new ContractModel.Meter(100));
     var original = documents();
-    for (int i = 0; i < 10000; i++) original.put("d" + i, document("d" + i));
+    for (int i = 0; i < 10000; i++) {
+      original.put("d" + i, document("d" + i));
+    }
     assertEquals(10000, work.noteRoots(original));
     assertEquals(0, work.noteRoots(original), "quiet siblings were scanned again");
     var changed = documents();
@@ -65,7 +67,9 @@ class ContractRootWitnessTest {
     changed.put("b", document("b").withBlueId("another"));
     assertEquals(Set.of("b"), changed.changedKeys(original));
     assertEquals(Set.of("a", "b"), changed.changedValueKeys(original));
-    for (int i = 0; i < 4200; i++) changed.put("counter", document("counter"));
+    for (int i = 0; i < 4200; i++) {
+      changed.put("counter", document("counter"));
+    }
     assertEquals(Set.of("a", "b", "counter"), changed.changedValueKeys(original));
     changed.remove("counter");
     changed.put("a", original.get("a"));
@@ -86,8 +90,11 @@ class ContractRootWitnessTest {
       assertEquals(1, work.noteRoots(roots));
       assertEquals(roots.get("a").blueId, blue.known(roots.get("a").body));
     } finally {
-      if (previous == null) System.clearProperty(property);
-      else System.setProperty(property, previous);
+      if (previous == null) {
+        System.clearProperty(property);
+      } else {
+        System.setProperty(property, previous);
+      }
     }
   }
 

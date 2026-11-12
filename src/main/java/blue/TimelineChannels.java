@@ -111,8 +111,9 @@ public final class TimelineChannels {
   private TimelineChannels(BluePackage publication, HistoryVerifier verifier) {
     Objects.requireNonNull(publication);
     Objects.requireNonNull(verifier, "A host history verifier is required");
-    if (!ProviderSignatures.COORDINATION_PACKAGE.equals(publication.blueId()))
+    if (!ProviderSignatures.COORDINATION_PACKAGE.equals(publication.blueId())) {
       throw new IllegalArgumentException("Unsupported Coordination publication");
+    }
     LanguageDocument rules =
         Language.newBuilder()
             .content(publication.document())
@@ -161,9 +162,10 @@ public final class TimelineChannels {
     for (NativeChannel channel : channels) {
       if (steps.containsKey(channel.typeId())
           || registered.containsKey(channel.typeId())
-              && registered.get(channel.typeId()) != channel)
+              && registered.get(channel.typeId()) != channel) {
         throw new IllegalArgumentException(
             "Conflicting timeline registration: " + channel.typeId());
+      }
     }
   }
 
@@ -244,8 +246,9 @@ public final class TimelineChannels {
   private static Map<String, Object> projection(
       Request request, ContractNative.Binding binding, List<Assessment> supplied) {
     Map<String, NativeAdmission.Receiver> expected = new HashMap<>();
-    for (NativeAdmission.Receiver receiver : request.receivers())
+    for (NativeAdmission.Receiver receiver : request.receivers()) {
       require(expected.put(key(receiver), receiver) == null, "DUPLICATE_ADMISSION_RECEIVER");
+    }
     Map<String, Object> decisions = new TreeMap<>(ContractCanonical.CODE_POINTS);
     Map<String, Object> audience = new TreeMap<>(ContractCanonical.CODE_POINTS);
     List<Assessment> ordered = new ArrayList<>(supplied);

@@ -33,11 +33,15 @@ final class ContractMetrics {
     private Scope(String name) {
       this.name = name;
       previous = ACTIVE.get();
-      if (ENABLED) ACTIVE.set(this);
+      if (ENABLED) {
+        ACTIVE.set(this);
+      }
     }
 
     public void close() {
-      if (!ENABLED) return;
+      if (!ENABLED) {
+        return;
+      }
       distinct.forEach((k, v) -> add(k + ".distinctPerClaim", v.size()));
       ACTIVE.set(previous);
     }
@@ -48,8 +52,9 @@ final class ContractMetrics {
   }
 
   public static void distinct(String name, String identity) {
-    if (ENABLED && ACTIVE.get() != null)
+    if (ENABLED && ACTIVE.get() != null) {
       ACTIVE.get().distinct.computeIfAbsent(name, k -> new HashSet<>()).add(identity);
+    }
   }
 
   public static final class Span implements AutoCloseable {
@@ -65,11 +70,15 @@ final class ContractMetrics {
       parent = ENABLED ? ACTIVE_SPAN.get() : null;
       start = ENABLED ? System.nanoTime() : 0;
       cpuStart = CPU_ENABLED ? CPU.getCurrentThreadCpuTime() : 0;
-      if (ENABLED) ACTIVE_SPAN.set(this);
+      if (ENABLED) {
+        ACTIVE_SPAN.set(this);
+      }
     }
 
     public void close() {
-      if (!ENABLED || closed) return;
+      if (!ENABLED || closed) {
+        return;
+      }
       closed = true;
       long elapsed = System.nanoTime() - start;
       long cpu = CPU_ENABLED ? CPU.getCurrentThreadCpuTime() - cpuStart : 0;
@@ -80,8 +89,9 @@ final class ContractMetrics {
         add("phase." + name + ".cpuNanos", cpu);
         add("phase." + name + ".selfCpuNanos", cpu - childCpu);
       }
-      if (parent == null) ACTIVE_SPAN.remove();
-      else {
+      if (parent == null) {
+        ACTIVE_SPAN.remove();
+      } else {
         parent.children += elapsed;
         parent.childCpu += cpu;
         ACTIVE_SPAN.set(parent);
@@ -102,7 +112,9 @@ final class ContractMetrics {
 
   /** Diagnostic sizes are characters; large-root labels contain identities, never payloads. */
   public static void materialized(String kind, String id, long characters) {
-    if (!ENABLED) return;
+    if (!ENABLED) {
+      return;
+    }
     count(kind + ".calls");
     add(kind + ".characters", characters);
     distinct(kind, id);
@@ -119,12 +131,15 @@ final class ContractMetrics {
   }
 
   public static void add(String name, long amount) {
-    if (ENABLED) COUNTS.computeIfAbsent(name, k -> new LongAdder()).add(amount);
-    if (ENABLED && ACTIVE.get() != null)
+    if (ENABLED) {
+      COUNTS.computeIfAbsent(name, k -> new LongAdder()).add(amount);
+    }
+    if (ENABLED && ACTIVE.get() != null) {
       SCOPED
           .computeIfAbsent(ACTIVE.get().name, k -> new ConcurrentHashMap<>())
           .computeIfAbsent(name, k -> new LongAdder())
           .add(amount);
+    }
   }
 
   public static void count(String name) {

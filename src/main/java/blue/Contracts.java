@@ -42,8 +42,9 @@ public final class Contracts {
     nativeChannels = List.copyOf(builder.nativeChannels.values());
     interpretedPrograms = Map.copyOf(builder.interpretedPrograms);
     // Fail at configuration time without retaining a mutable template processor.
-    if (!nativeSteps.isEmpty() || !nativeChannels.isEmpty() || !interpretedPrograms.isEmpty())
+    if (!nativeSteps.isEmpty() || !nativeChannels.isEmpty() || !interpretedPrograms.isEmpty()) {
       processor();
+    }
   }
 
   /**
@@ -336,8 +337,9 @@ public final class Contracts {
      * @return this builder
      */
     public Builder gasLimit(long value) {
-      if (value < 0 || value > 10_000_000)
+      if (value < 0 || value > 10_000_000) {
         throw new IllegalArgumentException("Gas limit must be 0..10000000");
+      }
       gasLimit = value;
       return this;
     }
@@ -382,12 +384,14 @@ public final class Contracts {
      */
     public Builder nativeStep(NativeStep value) {
       Objects.requireNonNull(value);
-      if (nativeChannels.containsKey(value.typeId()))
+      if (nativeChannels.containsKey(value.typeId())) {
         throw new IllegalArgumentException(
             "Type already registered as a native channel: " + value.typeId());
+      }
       NativeStep previous = nativeSteps.putIfAbsent(value.typeId(), value);
-      if (previous != null && previous != value)
+      if (previous != null && previous != value) {
         throw new IllegalArgumentException("Conflicting native step: " + value.typeId());
+      }
       return this;
     }
 
@@ -401,12 +405,14 @@ public final class Contracts {
      */
     public Builder nativeChannel(NativeChannel value) {
       Objects.requireNonNull(value);
-      if (nativeSteps.containsKey(value.typeId()))
+      if (nativeSteps.containsKey(value.typeId())) {
         throw new IllegalArgumentException(
             "Type already registered as a native step: " + value.typeId());
+      }
       NativeChannel previous = nativeChannels.putIfAbsent(value.typeId(), value);
-      if (previous != null && previous != value)
+      if (previous != null && previous != value) {
         throw new IllegalArgumentException("Conflicting native channel: " + value.typeId());
+      }
       return this;
     }
 
@@ -475,9 +481,10 @@ public final class Contracts {
     String identity = document.identity();
     var channels = new java.util.ArrayList<Contracts.ReceivingChannel>();
     var graph = new ContractGraph(document.state, processor.registry, processor.archive);
-    for (String member : ContractCanonical.keys(graph.reachable(true, java.util.Set.of())))
+    for (String member : ContractCanonical.keys(graph.reachable(true, java.util.Set.of()))) {
       channels.addAll(
           ContractReception.inspect(processor, document.state, member, identity).channels());
+    }
     return new Contracts.Reception(identity, channels);
   }
 
@@ -524,7 +531,9 @@ public final class Contracts {
      * @return the atomic outcome
      */
     public synchronized Transition process(Object event, long timestamp) {
-      if (event instanceof LanguageContent content) return process(content, timestamp);
+      if (event instanceof LanguageContent content) {
+        return process(content, timestamp);
+      }
       checkOpen();
       return boundary(() -> apply(processor.process(document, event, timestamp)));
     }
@@ -540,7 +549,9 @@ public final class Contracts {
      */
     public synchronized Transition process(
         Object event, long timestamp, AdmissionEvidence evidence) {
-      if (event instanceof LanguageContent content) return process(content, timestamp, evidence);
+      if (event instanceof LanguageContent content) {
+        return process(content, timestamp, evidence);
+      }
       checkOpen();
       Objects.requireNonNull(evidence);
       return boundary(
@@ -665,7 +676,9 @@ public final class Contracts {
      */
     public synchronized Transaction begin(
         Object event, long timestamp, AdmissionEvidence evidence) {
-      if (event instanceof LanguageContent content) return begin(content, timestamp, evidence);
+      if (event instanceof LanguageContent content) {
+        return begin(content, timestamp, evidence);
+      }
       checkOpen();
       Objects.requireNonNull(event);
       Objects.requireNonNull(evidence);
@@ -725,7 +738,9 @@ public final class Contracts {
      */
     public synchronized Contracts.Reception reception() {
       checkOpen();
-      if (reception == null) reception = boundary(() -> Contracts.reception(processor, document));
+      if (reception == null) {
+        reception = boundary(() -> Contracts.reception(processor, document));
+      }
       return reception;
     }
 
@@ -738,7 +753,9 @@ public final class Contracts {
     public synchronized LanguageDocument member(String member) {
       checkOpen();
       var selected = document.state.documents.get(Objects.requireNonNull(member));
-      if (selected == null) throw new IllegalArgumentException("Unknown graph member: " + member);
+      if (selected == null) {
+        throw new IllegalArgumentException("Unknown graph member: " + member);
+      }
       return processor.blue.context.document(selected.body);
     }
 
@@ -899,7 +916,9 @@ public final class Contracts {
     }
 
     private void checkOpen() {
-      if (processor == null) throw new IllegalStateException("Contracts session is closed");
+      if (processor == null) {
+        throw new IllegalStateException("Contracts session is closed");
+      }
     }
 
     /** Releases this session's working state. Previously returned immutable values remain valid. */
@@ -947,7 +966,9 @@ public final class Contracts {
      */
     public synchronized boolean advance() {
       checkOpen();
-      if (result != null) return false;
+      if (result != null) {
+        return false;
+      }
       return boundary(attempt::advanceLocal);
     }
 
@@ -1003,7 +1024,9 @@ public final class Contracts {
      */
     public synchronized Contracts.Reception reception() {
       finish();
-      if (reception == null) reception = boundary(() -> Contracts.reception(processor, document()));
+      if (reception == null) {
+        reception = boundary(() -> Contracts.reception(processor, document()));
+      }
       return reception;
     }
 
@@ -1038,7 +1061,9 @@ public final class Contracts {
      */
     public synchronized LanguageDocument member(String member) {
       var selected = document().state.documents.get(Objects.requireNonNull(member));
-      if (selected == null) throw new IllegalArgumentException("Unknown graph member: " + member);
+      if (selected == null) {
+        throw new IllegalArgumentException("Unknown graph member: " + member);
+      }
       return processor.blue.context.document(selected.body);
     }
 
@@ -1046,7 +1071,9 @@ public final class Contracts {
     // transaction, then share it across its serialized inspection and publication methods.
     private ContractProcessor.Document document() {
       finish();
-      if (completed == null) completed = result.document();
+      if (completed == null) {
+        completed = result.document();
+      }
       return completed;
     }
 
@@ -1081,8 +1108,9 @@ public final class Contracts {
       finish();
       synchronized (owner) {
         owner.checkOpen();
-        if (owner.document != before)
+        if (owner.document != before) {
           throw new IllegalStateException("Stale Contracts transaction");
+        }
         if (result.commits()) {
           owner.processor = processor;
           owner.document = document();
@@ -1095,7 +1123,9 @@ public final class Contracts {
     }
 
     private void checkOpen() {
-      if (processor == null) throw new IllegalStateException("Contracts transaction is closed");
+      if (processor == null) {
+        throw new IllegalStateException("Contracts transaction is closed");
+      }
     }
 
     /** Discards private state without changing the originating session. */
@@ -1254,8 +1284,9 @@ public final class Contracts {
      * @throws BlueException when the invocation did not commit
      */
     public Transition requireApplied() {
-      if (!applied())
+      if (!applied()) {
         throw new BlueException(status, ContractWire.write(observations.get("diagnostic")));
+      }
       return this;
     }
   }
@@ -1470,12 +1501,13 @@ public final class Contracts {
 
     private Execution(Contracts configuration, CompletionReader reader) {
       processor = configuration.processor();
-      if (reader != null)
+      if (reader != null) {
         processor.installCompletionReader(
             (engine, receipt) -> {
               Retained record = Objects.requireNonNull(reader.read(receipt));
-              if (!receipt.equals(record.receipt()))
+              if (!receipt.equals(record.receipt())) {
                 throw new IllegalArgumentException("Wrong completion");
+              }
               return new ContractProcessor.CompletedRecord(
                   engine.importSnapshot(record.before(), (String) record.before().get("identity")),
                   engine.importSnapshot(record.after(), (String) record.after().get("identity")),
@@ -1484,6 +1516,7 @@ public final class Contracts {
                   record.event(),
                   record.timestamp());
             });
+      }
     }
 
     /**
@@ -1543,10 +1576,13 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withTimelineEntry(TimelineVerifier.Entry entry) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       Objects.requireNonNull(entry);
-      if (validationScope == null)
+      if (validationScope == null) {
         validationScope = processor.blue.context.validationScope(key -> Optional.empty());
+      }
       validationScope.withTimelineEntry(entry);
       return this;
     }
@@ -1558,7 +1594,9 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withContent(LanguageContent content) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       contentScopes.add(processor.blue.context.withContent(Objects.requireNonNull(content)));
       return this;
     }
@@ -1572,7 +1610,9 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withContent(LanguageProvider provider) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       contentScopes.add(processor.blue.context.withProvider(Objects.requireNonNull(provider)));
       return this;
     }
@@ -1598,8 +1638,9 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution reuseCalculations(CalculationReader reader) {
-      if (processor.calculations != null)
+      if (processor.calculations != null) {
         throw new IllegalStateException("Calculations already enabled");
+      }
       processor.calculations = new ContractCalculations(Objects.requireNonNull(reader));
       return this;
     }
@@ -1638,12 +1679,20 @@ public final class Contracts {
     /** Revokes borrowed facts across every resolver branch created by this attempt. */
     @Override
     public void close() {
-      if (closed) return;
+      if (closed) {
+        return;
+      }
       closed = true;
       processor.blue.context.clearLocalRetention();
-      if (validationScope != null) validationScope.close();
-      if (processor.registry.preparations != null) processor.registry.preparations.close();
-      for (int i = contentScopes.size() - 1; i >= 0; i--) contentScopes.get(i).close();
+      if (validationScope != null) {
+        validationScope.close();
+      }
+      if (processor.registry.preparations != null) {
+        processor.registry.preparations.close();
+      }
+      for (int i = contentScopes.size() - 1; i >= 0; i--) {
+        contentScopes.get(i).close();
+      }
       contentScopes.clear();
     }
 
@@ -1671,14 +1720,17 @@ public final class Contracts {
                     && ContractLanguage.identity(processor.blue.exact(channel.get("_recipe")))
                         .equals(receiver.declarationId().value()),
                 "DIFFERENT_RECEIVER_DECLARATION");
-            for (var declaration : declarations.values())
+            for (var declaration : declarations.values()) {
               if (Set.of("workflow", "extension_handler").contains(declaration.get("_role"))
                   && declarations.containsKey(declaration.get("channel"))
                   && ContractRegistry.EXTERNAL.contains(
                       declarations.get(declaration.get("channel")).get("_role"))
                   && ContractChannels.leaves(
                           declarations, ContractModel.str(declaration.get("channel")))
-                      .contains(receiver.channel())) return true;
+                      .contains(receiver.channel())) {
+                return true;
+              }
+            }
             return false;
           });
     }
@@ -1783,8 +1835,9 @@ public final class Contracts {
     public Outcome receive(
         State before, List<Source> sources, boolean live, AdmissionEvidence evidence) {
       check(before);
-      if (sources.isEmpty())
+      if (sources.isEmpty()) {
         throw new IllegalArgumentException("Receiving requires a completed source");
+      }
       return Contracts.boundary(
           () -> {
             List<ContractProcessor.SourceCompletion> completions =
@@ -1839,9 +1892,12 @@ public final class Contracts {
      */
     public State restoreLocalGraph(
         Map<String, Object> root, List<Map<String, Object>> members, List<Embedding> edges) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
-      if (validationScope == null)
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
+      if (validationScope == null) {
         throw new IllegalStateException("Protected graph recovery requires a validation scope");
+      }
       return Contracts.boundary(
           () ->
               new State(
@@ -1856,7 +1912,9 @@ public final class Contracts {
      * @return own-member state, without descendant restoration
      */
     public State restoreLocal(Map<String, Object> checkpoint) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       return Contracts.boundary(
           () ->
               new State(
@@ -1938,7 +1996,9 @@ public final class Contracts {
         long timestamp,
         AdmissionEvidence evidence,
         java.util.function.Function<BlueId, Map<String, Object>> liveMember) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       return Contracts.boundary(
           () -> {
             contentScopes.add(processor.blue.context.withContent(entry));
@@ -1969,11 +2029,14 @@ public final class Contracts {
      */
     public Map<String, Object> localContent(Outcome result, Predicate<String> retained) {
       check(result.after());
-      if (!result.after().value.state.ownerLocal)
+      if (!result.after().value.state.ownerLocal) {
         throw new IllegalArgumentException("Not a local result");
+      }
       var roots = new ArrayList<ExactNode>();
       roots.add(result.after().value.state.documents.get(result.after().root()).body);
-      for (var emission : result.transition().emissions()) roots.add(emission.event().exact);
+      for (var emission : result.transition().emissions()) {
+        roots.add(emission.event().exact);
+      }
       return processor.blue.context.records(
           roots, id -> processor.blue.context.locallyRetained(id) || retained.test(id));
     }
@@ -2004,7 +2067,9 @@ public final class Contracts {
      * @return missing native records keyed by BlueId
      */
     public Map<String, Object> missingContent(List<String> roots, Predicate<String> retained) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
       List<ExactNode> nodes =
           roots.stream()
               .distinct()
@@ -2024,9 +2089,12 @@ public final class Contracts {
     }
 
     private void check(State state) {
-      if (closed) throw new IllegalStateException("Owner attempt is closed");
-      if (state.owner() != this)
+      if (closed) {
+        throw new IllegalStateException("Owner attempt is closed");
+      }
+      if (state.owner() != this) {
         throw new IllegalArgumentException("State belongs to another attempt");
+      }
     }
 
     /** Immutable snapshot handle; all business changes are produced by the native processor. */
@@ -2147,7 +2215,9 @@ public final class Contracts {
        */
       public LanguageDocument member(String member) {
         var selected = value.state.documents.get(Objects.requireNonNull(member));
-        if (selected == null) throw new IllegalArgumentException("Unknown member: " + member);
+        if (selected == null) {
+          throw new IllegalArgumentException("Unknown member: " + member);
+        }
         return processor.blue.context.document(selected.body);
       }
 
@@ -2242,9 +2312,12 @@ public final class Contracts {
        * @return a snapshot restricted to that member's reachable graph
        */
       public State rooted(String member) {
-        if (!value.state.documents.containsKey(member))
+        if (!value.state.documents.containsKey(member)) {
           throw new IllegalArgumentException("Unknown member");
-        if (root().equals(member)) return this;
+        }
+        if (root().equals(member)) {
+          return this;
+        }
         var topology = ContractTopology.of(value.state);
         var selected = ContractGraph.reachable(member, topology.outgoing, key -> false);
         var s = new ContractModel.Snapshot(member);
@@ -2253,9 +2326,14 @@ public final class Contracts {
         s.generation = value.state.generation;
         s.revision = value.state.revision;
         s.runtimes = new ArrayList<>(value.state.runtimes);
-        for (String key : selected) s.documents.put(key, value.state.documents.get(key).copy());
-        for (String key : selected)
-          for (var edge : topology.outgoingEdges(key)) s.edges.put(edge.key(), edge);
+        for (String key : selected) {
+          s.documents.put(key, value.state.documents.get(key).copy());
+        }
+        for (String key : selected) {
+          for (var edge : topology.outgoingEdges(key)) {
+            s.edges.put(edge.key(), edge);
+          }
+        }
         return new State(new ContractProcessor.Document(s));
       }
 
@@ -2297,7 +2375,9 @@ public final class Contracts {
        *     results
        */
       public Map<String, Boolean> validationFacts(Predicate<String> retained) {
-        if (closed) throw new IllegalStateException("Owner attempt is closed");
+        if (closed) {
+          throw new IllegalStateException("Owner attempt is closed");
+        }
         Objects.requireNonNull(retained);
         return processor.blue.context.validationFacts(
             id ->

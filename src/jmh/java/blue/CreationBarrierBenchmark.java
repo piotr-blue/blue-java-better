@@ -28,7 +28,9 @@ public class CreationBarrierBenchmark {
   @Setup
   public void setup() {
     var members = new LinkedHashMap<String, Object>();
-    for (int i = 0; i < children; i++) members.put("child-" + i, Map.of("count", i));
+    for (int i = 0; i < children; i++) {
+      members.put("child-" + i, Map.of("count", i));
+    }
     processor = new ContractProcessor();
     document =
         processor.create(
@@ -47,9 +49,12 @@ public class CreationBarrierBenchmark {
     ContractRun run = invocation();
     long gas = run.meter.used();
     String identity = run.state.identity();
-    for (int i = 0; i < 8; i++) run.creationBarrier();
-    if (gas != run.meter.used() || !identity.equals(run.state.identity()))
+    for (int i = 0; i < 8; i++) {
+      run.creationBarrier();
+    }
+    if (gas != run.meter.used() || !identity.equals(run.state.identity())) {
       throw new IllegalStateException("Empty barriers changed gas or state");
+    }
   }
 
   private ContractRun invocation() {
@@ -61,7 +66,9 @@ public class CreationBarrierBenchmark {
   @Benchmark
   public Object beginAndCheck() {
     ContractRun run = invocation();
-    for (int i = 0; i < 8; i++) run.creationBarrier();
+    for (int i = 0; i < 8; i++) {
+      run.creationBarrier();
+    }
     return run;
   }
 }

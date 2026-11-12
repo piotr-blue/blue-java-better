@@ -17,9 +17,15 @@ final class LanguageMemoScope implements AutoCloseable {
   private boolean closed;
 
   void attach(LanguageContext context) {
-    if (closed) throw new IllegalStateException("Semantic memo scope is closed");
-    if (context.memoScope == this) return;
-    if (context.memoScope != null) throw new IllegalStateException("Nested semantic memo scope");
+    if (closed) {
+      throw new IllegalStateException("Semantic memo scope is closed");
+    }
+    if (context.memoScope == this) {
+      return;
+    }
+    if (context.memoScope != null) {
+      throw new IllegalStateException("Nested semantic memo scope");
+    }
     branches.put(
         context,
         new Saved(
@@ -38,7 +44,9 @@ final class LanguageMemoScope implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed) return;
+    if (closed) {
+      return;
+    }
     closed = true;
     branches.forEach(
         (context, saved) -> {

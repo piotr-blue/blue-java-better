@@ -204,7 +204,9 @@ final class ContractNative {
     }
     if (value instanceof List<?> a) {
       var out = new ArrayList<Object>();
-      for (Object v : a) out.add(frozen(v));
+      for (Object v : a) {
+        out.add(frozen(v));
+      }
       return Collections.unmodifiableList(out);
     }
     return value;
@@ -241,7 +243,9 @@ final class ContractNative {
     }
 
     public long remaining() {
-      if (hostWork) return HOST_LIMIT - parent.hostUsed;
+      if (hostWork) {
+        return HOST_LIMIT - parent.hostUsed;
+      }
       if (binding.meterMode.equals("live")) {
         long shared = parent.limit - parent.used;
         return parent.localLimits.containsKey(owner)
@@ -262,15 +266,17 @@ final class ContractNative {
       require(
           binding.tariff.containsKey(counter), "UNDECLARED_RUNTIME_COUNTER", "counter", counter);
       long price = binding.tariff.get(counter);
-      if (hostWork)
+      if (hostWork) {
         require(
             price == 0 || units <= (HOST_LIMIT - parent.hostUsed) / price,
             "HOST_INCOMPLETE",
             "resource",
             "native-admission-work");
+      }
       long amount = BexGas.cost(price, units);
-      if (hostWork) parent.hostDebit(amount);
-      else if (binding.meterMode.equals("live")) {
+      if (hostWork) {
+        parent.hostDebit(amount);
+      } else if (binding.meterMode.equals("live")) {
         parent.owner = owner;
         parent.debit(binding.namespace, counter, units, amount);
       } else if (amount > remaining()) {
@@ -278,8 +284,9 @@ final class ContractNative {
         throw new BexFailure("GAS_LIMIT_EXCEEDED", counter);
       }
       used += amount;
-      if (parent.recordCharges && binding.meterMode.equals("ledger"))
+      if (parent.recordCharges && binding.meterMode.equals("ledger")) {
         rows.add(new Charge(counter, units, amount));
+      }
     }
 
     public RuntimeMeter finish() {
@@ -296,11 +303,18 @@ final class ContractNative {
         return;
       }
       require(failed || returned == this && finished, "INVALID_RUNTIME_LEDGER");
-      if (hostWork) return;
+      if (hostWork) {
+        return;
+      }
       require(parent.used == start, "RUNTIME_LEDGER_ALLOWANCE_CHANGED");
       parent.owner = owner;
-      if (parent.finalGas()) parent.mergeAdmitted(used);
-      else for (var row : rows) parent.debit(binding.namespace, row.counter, row.units, row.amount);
+      if (parent.finalGas()) {
+        parent.mergeAdmitted(used);
+      } else {
+        for (var row : rows) {
+          parent.debit(binding.namespace, row.counter, row.units, row.amount);
+        }
+      }
       if (rejected != null) {
         parent.debit(binding.namespace, rejected.counter, rejected.units, rejected.amount);
         throw new ContractModel.Error("RUNTIME_LEDGER_REJECTION_MISMATCH");
@@ -326,19 +340,25 @@ final class ContractNative {
             case "dispatch-policy" -> "extension_dispatch_policy";
             default -> "extension_step";
           };
-      if (b.role.equals("external-channel"))
+      if (b.role.equals("external-channel")) {
         require(b.meterMode.equals("live"), "EXTERNAL_RUNTIME_REQUIRES_LIVE_METER");
-      if (b.role.equals("processor-channel"))
+      }
+      if (b.role.equals("processor-channel")) {
         require(
             !i.families().isEmpty()
                 && Set.of("TRIGGERED", "EMBEDDED", "UPDATE", "INITIALIZATION", "TERMINATION")
                     .containsAll(i.families()),
             "INVALID_RUNTIME_EVENT_FAMILIES");
+      }
     }
 
     Map<String, Object> header(Map<String, Object> d) {
       var out = new TreeMap<String, Object>();
-      for (String k : binding.headerFields) if (d.containsKey(k)) out.put(k, d.get(k));
+      for (String k : binding.headerFields) {
+        if (d.containsKey(k)) {
+          out.put(k, d.get(k));
+        }
+      }
       return obj(frozen(out));
     }
 
@@ -348,19 +368,27 @@ final class ContractNative {
       for (String field : binding.peerFields) {
         var values = arr(d.getOrDefault(field, List.of()));
         require(values.stream().allMatch(v -> v instanceof String), "INVALID_PEER_DECLARATION");
-        for (Object v : values) names.add((String) v);
+        for (Object v : values) {
+          names.add((String) v);
+        }
       }
       return name -> {
         require(names.contains(name), "UNDECLARED_PEER_LOOKUP", "peer", name);
         var value = contracts.get(name);
-        if (value == null) return frozen(m("status", "absent"));
+        if (value == null) {
+          return frozen(m("status", "absent"));
+        }
         String role = str(value.get("_role"));
-        if (!ContractRegistry.EXTERNAL.contains(role) && !ContractRegistry.INTERNAL.contains(role))
+        if (!ContractRegistry.EXTERNAL.contains(role)
+            && !ContractRegistry.INTERNAL.contains(role)) {
           return frozen(m("status", "non-channel"));
+        }
         var header = new TreeMap<String, Object>();
         value.forEach(
             (k, v) -> {
-              if (!k.startsWith("_")) header.put(k, v);
+              if (!k.startsWith("_")) {
+                header.put(k, v);
+              }
             });
         return frozen(m("status", "present", "header", header));
       };

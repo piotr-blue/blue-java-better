@@ -30,7 +30,9 @@ class ContractSnapshotCommitmentTest {
     source.documents.put("child", member("child", 1));
     Edge edge = new Edge("root", "/child", "child", 1);
     source.edges.put(edge.key(), edge);
-    if (encoded) source.identity();
+    if (encoded) {
+      source.identity();
+    }
 
     change.accept(source);
     Snapshot candidate = source.copy();

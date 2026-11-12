@@ -97,7 +97,9 @@ final class LanguageSchema {
   static final LanguageSchema EMPTY = new LanguageSchema(new LanguageSchema());
 
   LanguageSchema frozen() {
-    if (frozen) return this;
+    if (frozen) {
+      return this;
+    }
     // Absence is distinct from explicit false/zero. Authored facets remain observable.
     if (required == null
         && unique == null
@@ -108,7 +110,9 @@ final class LanguageSchema {
         && lowerFacets.isEmpty()
         && upperFacets.isEmpty()
         && enums.isEmpty()
-        && enumValues.isEmpty()) return EMPTY;
+        && enumValues.isEmpty()) {
+      return EMPTY;
+    }
     return new LanguageSchema(this);
   }
 

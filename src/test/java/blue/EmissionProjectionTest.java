@@ -22,7 +22,9 @@ class EmissionProjectionTest {
             "kind: Event\namount: 7",
             "[1, 2, 3]",
             "hello",
-            "left: {text: repeated}\nright: {text: repeated}")) events.add(language.readYaml(yaml));
+            "left: {text: repeated}\nright: {text: repeated}")) {
+      events.add(language.readYaml(yaml));
+    }
     events.add(
         language
             .finalizeSet(

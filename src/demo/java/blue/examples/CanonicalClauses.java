@@ -18,7 +18,9 @@ public final class CanonicalClauses {
     static BluePackage load() {
       try (InputStream input =
           CanonicalClauses.class.getResourceAsStream("/canonical/connections.bluepkg")) {
-        if (input == null) throw new IllegalStateException("Missing bundled Connections package");
+        if (input == null) {
+          throw new IllegalStateException("Missing bundled Connections package");
+        }
         return PackageLoader.create().read(input);
       } catch (IOException error) {
         throw new IllegalStateException(error);

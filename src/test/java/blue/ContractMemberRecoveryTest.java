@@ -82,8 +82,9 @@ class ContractMemberRecoveryTest {
           Language.newBuilder()
               .provider(
                   id -> {
-                    if (id.equals(history.blueId()))
+                    if (id.equals(history.blueId())) {
                       throw new AssertionError("Historical value fetched");
+                    }
                     reads.incrementAndGet();
                     return Optional.ofNullable(content.get(id));
                   })
@@ -179,7 +180,9 @@ class ContractMemberRecoveryTest {
     return Language.newBuilder()
         .provider(
             id -> {
-              if (!content.containsKey(id.value())) return Optional.empty();
+              if (!content.containsKey(id.value())) {
+                return Optional.empty();
+              }
               var row = obj(content.get(id.value()));
               return Optional.of(
                   row.containsKey("proof")

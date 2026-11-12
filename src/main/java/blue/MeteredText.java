@@ -16,11 +16,15 @@ final class MeteredText {
       }
       while (a < aEnd && b < bEnd) {
         int x = left.codePointAt(a), y = right.codePointAt(b);
-        if (x != y) return Integer.compare(x, y);
+        if (x != y) {
+          return Integer.compare(x, y);
+        }
         a += Character.charCount(x);
         b += Character.charCount(y);
       }
-      if (a < aEnd || b < bEnd) return Integer.compare(aEnd - a, bEnd - b);
+      if (a < aEnd || b < bEnd) {
+        return Integer.compare(aEnd - a, bEnd - b);
+      }
     }
     return Integer.compare(left.length() - a, right.length() - b);
   }
@@ -29,7 +33,9 @@ final class MeteredText {
     int end = start + Math.min(64, text.length() - start);
     if (end < text.length()
         && Character.isHighSurrogate(text.charAt(end - 1))
-        && Character.isLowSurrogate(text.charAt(end))) end--;
+        && Character.isLowSurrogate(text.charAt(end))) {
+      end--;
+    }
     int remaining = 64 - text.codePointCount(start, end);
     while (remaining-- > 0 && end < text.length()) {
       end += Character.charCount(text.codePointAt(end));

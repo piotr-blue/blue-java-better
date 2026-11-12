@@ -37,8 +37,11 @@ class ExactFieldUpdateTest {
       Object next = random.nextInt(5) == 0 ? null : values.get(random.nextInt(values.size()));
       var before = actual;
       var frozen = new TreeMap<>(actual.fields());
-      if (next == null) expected.remove(key);
-      else expected.put(key, next);
+      if (next == null) {
+        expected.remove(key);
+      } else {
+        expected.put(key, next);
+      }
       actual = actual.with(key, next);
       var rebuilt = new ExactNode.Value(expected);
       assertEquals(rebuilt, actual);

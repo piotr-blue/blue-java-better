@@ -34,8 +34,9 @@ public class NumericConversionBenchmark {
           case "decimal" -> new BigDecimal("123456.000");
           default -> throw new IllegalArgumentException(representation);
         };
-    if (!integer().equals(decimalRoundTrip()))
+    if (!integer().equals(decimalRoundTrip())) {
       throw new IllegalStateException("Integer conversion differs");
+    }
   }
 
   @Benchmark

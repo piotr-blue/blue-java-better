@@ -18,9 +18,10 @@ class ContractTopologyTest {
   @Test
   void deferredAliasesFreezeReachabilityAndIdentityAndKeepSpeculationPrivate() {
     var source = new ContractModel.Snapshot("root");
-    for (String key : List.of("root", "a", "b", "detached"))
+    for (String key : List.of("root", "a", "b", "detached")) {
       source.documents.put(
           key, new ContractModel.Document(key, ExactNode.value(Map.of()), key, null));
+    }
     var a = new ContractModel.Edge("root", "/a", "a", 1);
     source.edges.put(a.key(), a);
     var aliases = new ContractGraph.Aliases(source);
@@ -60,8 +61,9 @@ class ContractTopologyTest {
             new String[] {"d", "a"},
             new String[] {"d", "leaf"},
             new String[] {"\uE000", "\uD83D\uDE00"},
-            new String[] {"\uD83D\uDE00", "\uE000"}))
+            new String[] {"\uD83D\uDE00", "\uE000"})) {
       edges.add(new ContractModel.Edge(pair[0], "/edge-" + edges.size(), pair[1], 1));
+    }
     var expected =
         List.of(
             List.of("leaf"),
@@ -79,15 +81,18 @@ class ContractTopologyTest {
   @Test
   void outgoingRangeIsOrderedAndStableAcrossRemovalWithoutScanningSiblingEdges() {
     var state = new ContractModel.Snapshot("root");
-    for (String member : List.of("a", "root", "root-extra", "z"))
+    for (String member : List.of("a", "root", "root-extra", "z")) {
       for (String path : List.of("/b", "/a", "/a~1")) {
         var edge = new ContractModel.Edge(member, path, "child", 1);
         state.edges.put(edge.key(), edge);
       }
+    }
     var selected = state.outgoingEdges("root");
     assertEquals(
         List.of("/a", "/a~1", "/b"), selected.stream().map(ContractModel.Edge::path).toList());
-    for (var edge : selected) state.edges.remove(edge.key());
+    for (var edge : selected) {
+      state.edges.remove(edge.key());
+    }
     assertEquals(3, selected.size());
     assertEquals(9, state.edges.size());
     assertTrue(state.outgoingEdges("root").isEmpty());
@@ -105,8 +110,9 @@ class ContractTopologyTest {
   @Test
   void containingReferenceOrderIsDecodedAndUnaffectedByOtherMembers() {
     var state = new ContractModel.Snapshot("root");
-    for (String key : List.of("root", "child", "other"))
+    for (String key : List.of("root", "child", "other")) {
       state.documents.put(key, new ContractModel.Document(key, ExactNode.value(Map.of())));
+    }
     for (String path : List.of("/a~0", "/a0", "/a~1", "/a/b", "/a")) {
       var edge = new ContractModel.Edge("root", path, "child", 1);
       state.edges.put(edge.key(), edge);
@@ -157,8 +163,9 @@ class ContractTopologyTest {
   @Test
   void localTurnsIsolateTheirWriterAndGraphStructureWhileBorrowingSealedDependencies() {
     var source = new ContractModel.Snapshot("a");
-    for (String key : List.of("a", "b"))
+    for (String key : List.of("a", "b")) {
       source.documents.put(key, new ContractModel.Document(key, ExactNode.value(Map.of())));
+    }
     var edge = new ContractModel.Edge("a", "/peer", "b", 1);
     source.edges.put(edge.key(), edge);
     var a = source.copyForLocalTurn("a");
@@ -182,8 +189,9 @@ class ContractTopologyTest {
   @Test
   void schedulePlansAreSharedButCompletionAndCyclicPromotionRemainPrivate() {
     var source = new ContractModel.Snapshot("a");
-    for (String key : List.of("a", "b", "c"))
+    for (String key : List.of("a", "b", "c")) {
       source.documents.put(key, new ContractModel.Document(key, ExactNode.value(Map.of())));
+    }
     for (String[] edge :
         List.of(new String[] {"a", "b"}, new String[] {"b", "c"}, new String[] {"c", "b"})) {
       var value = new ContractModel.Edge(edge[0], "/peer", edge[1], 1);
@@ -209,8 +217,9 @@ class ContractTopologyTest {
   private static ContractRun.Phase phase(ContractTopology topology) {
     var phase = new ContractRun.Phase();
     phase.allowed = ContractCanonical.keys(topology.live);
-    for (var group : topology.components(topology.live))
+    for (var group : topology.components(topology.live)) {
       phase.groups.add(ContractCanonical.keys(group));
+    }
     return phase;
   }
 
@@ -280,12 +289,15 @@ class ContractTopologyTest {
     state.documents.put("root", new ContractModel.Document("root", ExactNode.value(Map.of())));
     for (int i = 0; i < branches; i++) {
       String branch = "branch-" + i, leaf = "leaf-" + i;
-      for (String key : List.of(branch, leaf))
+      for (String key : List.of(branch, leaf)) {
         state.documents.put(key, new ContractModel.Document(key, ExactNode.value(Map.of())));
+      }
       for (var edge :
           List.of(
               new ContractModel.Edge("root", "/" + branch, branch, 1),
-              new ContractModel.Edge(branch, "/leaf", leaf, 1))) state.edges.put(edge.key(), edge);
+              new ContractModel.Edge(branch, "/leaf", leaf, 1))) {
+        state.edges.put(edge.key(), edge);
+      }
     }
     return state;
   }

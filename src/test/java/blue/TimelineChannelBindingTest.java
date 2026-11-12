@@ -99,7 +99,7 @@ class TimelineChannelBindingTest {
                   request.inputId(), request.entryId(), "Local command envelopes remain distinct");
               assertEquals(Map.of("transportOnly", "not-a-commitment-field"), request.evidence());
               List<TimelineChannels.Assessment> result = new ArrayList<>();
-              for (NativeAdmission.Receiver row : request.receivers())
+              for (NativeAdmission.Receiver row : request.receivers()) {
                 result.add(
                     new TimelineChannels.Assessment(
                         row,
@@ -108,6 +108,7 @@ class TimelineChannelBindingTest {
                             : TimelineChannels.Disposition.INAPPLICABLE,
                         false,
                         "Established decision"));
+              }
               Collections.reverse(result);
               return result;
             });
@@ -153,10 +154,11 @@ class TimelineChannelBindingTest {
                   return r.get("member") + ":" + r.get("channel");
                 })
             .toList());
-    for (Object raw : rows)
+    for (Object raw : rows) {
       assertEquals(
           Set.of("member", "document", "channel", "generation", "disposition", "reason"),
           ((Map<?, ?>) raw).keySet());
+    }
     Map<?, ?> decisions = (Map<?, ?>) value.get("decisions");
     assertEquals(true, decisions.get("[\"\uE000\",\"" + ID + "\",\"first\",1]"));
     assertEquals(false, decisions.get("[\"\uE000\",\"" + ID + "\",\"second\",1]"));
@@ -190,7 +192,9 @@ class TimelineChannelBindingTest {
         processor.registry.extensions.get(PACKAGE.export("Timeline Channel").value());
     List<Object> rows = new ArrayList<>();
     // This collection exceeds the old aggregate value budget while each receiver is tiny.
-    for (int index = 0; index < 20_000; index++) rows.add(row("member-" + index, "input"));
+    for (int index = 0; index < 20_000; index++) {
+      rows.add(row("member-" + index, "input"));
+    }
     var input =
         new ContractNative.AdmissionContext(
             "snapshot", ID.value(), ID.value(), 7, installed.binding.wire(), rows, Map.of(), null);
@@ -233,7 +237,9 @@ class TimelineChannelBindingTest {
       ContractNative.Installed installed =
           processor.registry.extensions.get(PACKAGE.export("Timeline Channel").value());
       Map<String, Object> receiver = row("member", "input");
-      if (oversizedHeader) receiver.put("header", Map.of("tooLarge", oversized));
+      if (oversizedHeader) {
+        receiver.put("header", Map.of("tooLarge", oversized));
+      }
       var input =
           new ContractNative.AdmissionContext(
               "snapshot",

@@ -77,8 +77,9 @@ final class ContractFacts {
       check.document.validation = Map.copyOf(updated);
       // Structural facts already live on the snapshot-owned document and survive its copies.
       // Only restore-body uses a temporary document, so only that check needs the bounded LRU.
-      if (check.kind.equals("restore-body") && !check.known)
+      if (check.kind.equals("restore-body") && !check.known) {
         facts.put(check.key(), Boolean.TRUE, ContractCache.weight(check.key()));
+      }
     }
   }
 }

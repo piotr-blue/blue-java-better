@@ -26,16 +26,19 @@ final class ContractModel {
 
   private static long hostLimit() {
     long value = Long.parseLong(System.getProperty("blue.hostGasLimit", "10000000"));
-    if (value != DEFAULT_LIMIT)
+    if (value != DEFAULT_LIMIT) {
       throw new IllegalArgumentException(
           "Published Contracts requires blue.hostGasLimit=10000000; "
               + "select lower budgets per invocation, not a different host maximum");
+    }
     return DEFAULT_LIMIT;
   }
 
   static Map<String, Object> m(Object... pairs) {
     var out = new LinkedHashMap<String, Object>();
-    for (int i = 0; i < pairs.length; i += 2) out.put((String) pairs[i], pairs[i + 1]);
+    for (int i = 0; i < pairs.length; i += 2) {
+      out.put((String) pairs[i], pairs[i + 1]);
+    }
     return out;
   }
 
@@ -70,7 +73,9 @@ final class ContractModel {
   }
 
   static void require(boolean ok, String code, Object... context) {
-    if (!ok) throw new Error(code, context);
+    if (!ok) {
+      throw new Error(code, context);
+    }
   }
 
   static String token(Object v) {
@@ -84,8 +89,12 @@ final class ContractModel {
   }
 
   static long integer(Object v, long min, long max) {
-    if (v instanceof Long n) return integer(n.longValue(), min, max);
-    if (v instanceof Integer n) return integer(n.longValue(), min, max);
+    if (v instanceof Long n) {
+      return integer(n.longValue(), min, max);
+    }
+    if (v instanceof Integer n) {
+      return integer(n.longValue(), min, max);
+    }
     require(v instanceof BigInteger, "INVALID_INTEGER", "minimum", min, "maximum", max);
     BigInteger n = (BigInteger) v;
     require(
@@ -100,8 +109,9 @@ final class ContractModel {
   }
 
   static long integer(long value, long min, long max) {
-    if (value < min || max >= 0 && value > max)
+    if (value < min || max >= 0 && value > max) {
       throw new Error("INVALID_INTEGER", "minimum", min, "maximum", max < 0 ? null : max);
+    }
     return value;
   }
 
@@ -135,7 +145,9 @@ final class ContractModel {
         Normalizer.isNormalized(p, Normalizer.Form.NFC) && (p.isEmpty() || p.startsWith("/")),
         "INVALID_POINTER");
     var out = new ArrayList<String>();
-    if (p.isEmpty()) return out;
+    if (p.isEmpty()) {
+      return out;
+    }
     for (String s : p.substring(1).split("/", -1)) {
       require(!LanguageSyntax.INVALID_POINTER_ESCAPE.matcher(s).matches(), "INVALID_POINTER");
       out.add(s.replace("~1", "/").replace("~0", "~"));
@@ -337,15 +349,18 @@ final class ContractModel {
           && Objects.equals(this.birth, birth)
           && channelLives == lives
           && channelSerials == serials
-          && edgeSerials == edges) return this;
+          && edgeSerials == edges) {
+        return this;
+      }
       var d = new Document(key, body, id, birth, initialBlueId, lives, serials, edges);
       d.declarations = declarations;
       d.markers = markers;
       d.finalizedLinks = finalizedLinks;
       d.validation = validation;
       d.bindingMemo = bindingMemo;
-      if (channelLives == lives && channelSerials == serials && edgeSerials == edges)
+      if (channelLives == lives && channelSerials == serials && edgeSerials == edges) {
         d.cachedCollections = cachedCollections;
+      }
       if (sameMetadata(d)) {
         d.cachedMetadata = cachedMetadata;
         d.metadataEncoding = metadataEncoding;
@@ -371,7 +386,9 @@ final class ContractModel {
 
     Map<String, Object> view(List<Edge> edges) {
       var previous = cachedView;
-      if (previous != null && edges.equals(previous.edges)) return previous.value;
+      if (previous != null && edges.equals(previous.edges)) {
+        return previous.value;
+      }
       // The same member view enters turn inputs, vectors and receipts. Encode its immutable
       // commitment once; every containing digest still consumes all of these exact bytes.
       var result =
@@ -411,7 +428,9 @@ final class ContractModel {
 
     ContractCanonical.Fragment encodedMetadata() {
       var previous = metadataEncoding;
-      if (previous != null) return previous;
+      if (previous != null) {
+        return previous;
+      }
       var result = new ContractCanonical.Fragment(metadata());
       metadataEncoding = result;
       return result;
@@ -606,7 +625,9 @@ final class ContractModel {
             var fragments = new ArrayList<ContractCanonical.Fragment>();
             for (Edge edge : edges.values()) {
               var fragment = edgeEncodings.get(edge);
-              if (fragment == null) fragment = new ContractCanonical.Fragment(edge.wire());
+              if (fragment == null) {
+                fragment = new ContractCanonical.Fragment(edge.wire());
+              }
               nextEdges.put(edge, fragment);
               fragments.add(fragment);
             }
@@ -667,8 +688,9 @@ final class ContractModel {
     }
 
     private ContractCanonical.Fields localUsedEncoding() {
-      for (String key : changedLocalOwners)
+      for (String key : changedLocalOwners) {
         localFields.put(key, new ContractCanonical.Field(key, localUsed.get(key)));
+      }
       changedLocalOwners.clear();
       return new ContractCanonical.Fields(localFields.values());
     }
@@ -715,8 +737,12 @@ final class ContractModel {
     }
 
     void debit(String namespace, String counter, long units, long amount) {
-      if (calculation != null) calculation.charge(namespace);
-      if (rejected != null) throw new BexFailure("GAS_LIMIT_EXCEEDED", counter);
+      if (calculation != null) {
+        calculation.charge(namespace);
+      }
+      if (rejected != null) {
+        throw new BexFailure("GAS_LIMIT_EXCEEDED", counter);
+      }
       integer(units, 0, -1);
       integer(amount, 0, -1);
       long shared = limit - used;
@@ -739,7 +765,9 @@ final class ContractModel {
                     amount,
                     "owner",
                     owner));
-        if (recordCharges) rejected.put("ordinal", trace.size());
+        if (recordCharges) {
+          rejected.put("ordinal", trace.size());
+        }
         rejected.putAll(
             m(
                 "remaining",
@@ -752,10 +780,13 @@ final class ContractModel {
                 local));
         throw new BexFailure("GAS_LIMIT_EXCEEDED", counter);
       }
-      if (recordCharges)
+      if (recordCharges) {
         trace.add(TRACE.record(trace.size(), namespace, counter, units, amount, owner));
+      }
       used += amount;
-      if (!owner.isEmpty()) addLocalUsed(owner, amount);
+      if (!owner.isEmpty()) {
+        addLocalUsed(owner, amount);
+      }
     }
 
     @Override
@@ -818,10 +849,13 @@ final class ContractModel {
     }
 
     Object segment(long start) {
-      if (!recordCharges) return used - start;
+      if (!recordCharges) {
+        return used - start;
+      }
       var rows = new ArrayList<Object>();
-      for (int i = Math.toIntExact(start); i < trace.size(); i++)
+      for (int i = Math.toIntExact(start); i < trace.size(); i++) {
         rows.add(relative(trace.get(i), i - Math.toIntExact(start)));
+      }
       return rows;
     }
 
@@ -854,7 +888,9 @@ final class ContractModel {
     }
 
     void contracts(String counter, long units) {
-      if (semantic) SemanticGas.contracts(this, counter, units);
+      if (semantic) {
+        SemanticGas.contracts(this, counter, units);
+      }
     }
   }
 
@@ -886,7 +922,9 @@ final class ContractModel {
     }
 
     Map<String, Object> observations() {
-      if (sealedObservations != null) return sealedObservations;
+      if (sealedObservations != null) {
+        return sealedObservations;
+      }
       var observation =
           m(
               "status",
@@ -921,13 +959,16 @@ final class ContractModel {
               rounds,
               "units",
               units);
-      if (snapshot.release.equals(ContractsEdition.DETERMINISTIC.specificationBlueId()))
+      if (snapshot.release.equals(ContractsEdition.DETERMINISTIC.specificationBlueId())) {
         observation.remove("gasTrace");
+      }
       {
         observation.put("gasSchedule", snapshot.gasSchedule.id());
         observation.put("gasByMember", gasByMember);
       }
-      if (snapshot.ownerLocal) observation.put("executionBoundary", "owner");
+      if (snapshot.ownerLocal) {
+        observation.put("executionBoundary", "owner");
+      }
       return observation;
     }
 
@@ -941,7 +982,9 @@ final class ContractModel {
 
     /** Called only after execution/restoration has finalized every semantic field. */
     void seal() {
-      if (sealedObservations != null) return;
+      if (sealedObservations != null) {
+        return;
+      }
       sealedObservations = obj(ContractWire.immutable(observations()));
       sealedReceipt = digest(receiptDomain(), sealedObservations);
     }

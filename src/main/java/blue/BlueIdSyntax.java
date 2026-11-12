@@ -13,7 +13,9 @@ final class BlueIdSyntax {
   private static final String[] MAXIMUM = new String[32];
 
   static {
-    for (int i = 0; i < ALPHABET.length(); i++) DIGITS[ALPHABET.charAt(i)] = true;
+    for (int i = 0; i < ALPHABET.length(); i++) {
+      DIGITS[ALPHABET.charAt(i)] = true;
+    }
     for (int zeros = 0; zeros < 32; zeros++) {
       MINIMUM[zeros] = bound(zeros, BigInteger.ONE.shiftLeft(8 * (31 - zeros)));
       MAXIMUM[zeros] =
@@ -26,22 +28,38 @@ final class BlueIdSyntax {
   private BlueIdSyntax() {}
 
   static boolean digest(String value) {
-    if (value.length() < 32 || value.length() > 44) return false;
+    if (value.length() < 32 || value.length() > 44) {
+      return false;
+    }
     Set<String> valid = VALID.get();
-    if (valid.contains(value)) return true;
+    if (valid.contains(value)) {
+      return true;
+    }
     int zeros = 0;
-    while (zeros < value.length() && value.charAt(zeros) == '1') zeros++;
-    if (zeros == value.length()) return zeros == 32;
-    if (zeros >= 32) return false;
+    while (zeros < value.length() && value.charAt(zeros) == '1') {
+      zeros++;
+    }
+    if (zeros == value.length()) {
+      return zeros == 32;
+    }
+    if (zeros >= 32) {
+      return false;
+    }
     for (int i = zeros; i < value.length(); i++) {
       char digit = value.charAt(i);
-      if (digit >= DIGITS.length || !DIGITS[digit]) return false;
+      if (digit >= DIGITS.length || !DIGITS[digit]) {
+        return false;
+      }
     }
     // Valid base58 digits sort in numeric order. Comparing with the encoded byte-width
     // bounds avoids decoding every new digest into eight integer limbs. Leading zero
     // bytes remain part of the bounds, so short numbers cannot masquerade as digests.
-    if (compare(value, MINIMUM[zeros]) < 0 || compare(value, MAXIMUM[zeros]) > 0) return false;
-    if (valid.size() >= 8192) valid.clear();
+    if (compare(value, MINIMUM[zeros]) < 0 || compare(value, MAXIMUM[zeros]) > 0) {
+      return false;
+    }
+    if (valid.size() >= 8192) {
+      valid.clear();
+    }
     valid.add(value);
     return true;
   }
@@ -62,11 +80,17 @@ final class BlueIdSyntax {
   }
 
   static boolean member(String value, int start) {
-    if (start >= value.length()) return false;
-    if (value.charAt(start) == '0') return start + 1 == value.length();
+    if (start >= value.length()) {
+      return false;
+    }
+    if (value.charAt(start) == '0') {
+      return start + 1 == value.length();
+    }
     for (int i = start; i < value.length(); i++) {
       char digit = value.charAt(i);
-      if (digit < '0' || digit > '9') return false;
+      if (digit < '0' || digit > '9') {
+        return false;
+      }
     }
     return true;
   }

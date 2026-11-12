@@ -296,9 +296,12 @@ public final class Language {
         this,
         id -> {
           Object response = lookup.apply(id.value());
-          if (response == null) return Optional.empty();
-          if (response instanceof ExactNode.Value value)
+          if (response == null) {
+            return Optional.empty();
+          }
+          if (response instanceof ExactNode.Value value) {
             return Optional.of(LanguageRecord.json(LanguageCore.exactText(value)));
+          }
           return Optional.of(new LanguageRecord(LanguageCore.map(response)));
         });
   }
@@ -434,7 +437,9 @@ public final class Language {
     Objects.requireNonNull(input);
     // Expansion/collapse keeps a separate semantic origin. Reparse that uncommon presentation
     // path so a collapsed value cannot smuggle its hidden origin across a transport boundary.
-    if (input.exact != input.semantic) return prepare(Input.exactJson(input.toJson()));
+    if (input.exact != input.semantic) {
+      return prepare(Input.exactJson(input.toJson()));
+    }
     return run(
         () -> {
           LanguageContext context = context();
@@ -453,25 +458,33 @@ public final class Language {
       return ref.body() == null ? ref : new ExactNode.Ref(ref.id());
     }
     ExactNode known = imported.get(node);
-    if (known != null) return known;
+    if (known != null) {
+      return known;
+    }
     ExactNode.Value original = (ExactNode.Value) node;
     ExactNode.Value result = original;
     for (var field : original.fields().entrySet()) {
       Object value = field.getValue();
       if (value instanceof ExactNode child) {
         ExactNode retained = materialization(child, context, imported, depth + 1);
-        if (retained != child) result = result.with(field.getKey(), retained);
+        if (retained != child) {
+          result = result.with(field.getKey(), retained);
+        }
       } else if (value instanceof List<?> items) {
         List<ExactNode> retained = null;
         for (int i = 0; i < items.size(); i++) {
           ExactNode item = (ExactNode) items.get(i);
           ExactNode child = materialization(item, context, imported, depth + 2);
           if (child != item) {
-            if (retained == null) retained = new ArrayList<>(exactItems(items));
+            if (retained == null) {
+              retained = new ArrayList<>(exactItems(items));
+            }
             retained.set(i, child);
           }
         }
-        if (retained != null) result = result.with(field.getKey(), retained);
+        if (retained != null) {
+          result = result.with(field.getKey(), retained);
+        }
       }
     }
     context.remember(result);
@@ -1144,12 +1157,18 @@ public final class Language {
             if (key.equals("items")) {
               LanguageFailure.require(
                   i + 1 < parts.size(), "InvalidOperation", "Select a complete list item");
-              if (head.items == null) return Optional.empty();
+              if (head.items == null) {
+                return Optional.empty();
+              }
               int index = LanguageCore.index(parts.get(++i));
-              if (index >= head.items.size()) return Optional.empty();
+              if (index >= head.items.size()) {
+                return Optional.empty();
+              }
               selected = LanguageSemantics.child(head, index);
             } else if (key.equals("contracts")) {
-              if (head.contracts == null) return Optional.empty();
+              if (head.contracts == null) {
+                return Optional.empty();
+              }
               selected = head.contracts;
             } else if (TYPES.contains(key)) {
               String id =
@@ -1159,17 +1178,23 @@ public final class Language {
                     case "keyType" -> head.keyType;
                     default -> head.valueType;
                   };
-              if (id == null) return Optional.empty();
+              if (id == null) {
+                return Optional.empty();
+              }
               selected = LanguageSemantics.recipe(new ExactNode.Ref(id));
             } else if (key.equals("specification")) {
-              if (head.specification == null) return Optional.empty();
+              if (head.specification == null) {
+                return Optional.empty();
+              }
               selected = LanguageSemantics.recipe(head.specification);
             } else {
               LanguageFailure.require(
                   !LITERALS.contains(key) && !key.equals("mergePolicy"),
                   "InvalidOperation",
                   "Select a complete node, not a literal");
-              if (!head.fields.containsKey(key)) return Optional.empty();
+              if (!head.fields.containsKey(key)) {
+                return Optional.empty();
+              }
               selected = LanguageSemantics.child(head, key);
             }
           }
@@ -1184,9 +1209,12 @@ public final class Language {
           Object selected =
               LanguageSemantics.resolvedAt(
                   LanguageSemantics.recipe(content.semantic), path(pointer), current);
-          if (selected == ABSENT) return false;
-          if (!(selected instanceof LanguageModel.Head head))
+          if (selected == ABSENT) {
+            return false;
+          }
+          if (!(selected instanceof LanguageModel.Head head)) {
             throw new IllegalArgumentException("Select a node to inspect concrete presence");
+          }
           return LanguageSemantics.concrete(head, current);
         });
   }
@@ -1197,9 +1225,12 @@ public final class Language {
           Object selected =
               LanguageSemantics.resolvedAt(
                   LanguageSemantics.recipe(content.semantic), path(pointer), context(content));
-          if (selected == ABSENT) return List.of();
-          if (!(selected instanceof LanguageModel.Head head))
+          if (selected == ABSENT) {
+            return List.of();
+          }
+          if (!(selected instanceof LanguageModel.Head head)) {
             throw new IllegalArgumentException("Select a node to inspect its field declarations");
+          }
           return List.copyOf(head.fields.keySet());
         });
   }
@@ -1287,17 +1318,20 @@ public final class Language {
 
   private LanguageContext admissionContext(LanguageDocument[] values) {
     values = Objects.requireNonNull(values).clone();
-    for (LanguageDocument value : values)
-      if (Objects.requireNonNull(value).goal() != Goal.VALUE)
+    for (LanguageDocument value : values) {
+      if (Objects.requireNonNull(value).goal() != Goal.VALUE) {
         throw new IllegalArgumentException("Completed Language value required");
+      }
+    }
     LanguageContext context = context(values);
     Map<String, LanguageModel.Head> established = new HashMap<>();
     for (LanguageDocument value : values) {
       String id = value.blueId().value();
       // Presentation changes must not attribute admission to a different semantic identity.
-      if (id.equals(identity(value.semantic)))
+      if (id.equals(identity(value.semantic))) {
         established.put(
             id, LanguageSemantics.head(LanguageSemantics.recipe(value.semantic), context));
+      }
     }
     context.establishedValues = established;
     return context;
@@ -1308,8 +1342,12 @@ public final class Language {
     Builder builder = null;
     for (LanguageContent content : Objects.requireNonNull(contents)) {
       Objects.requireNonNull(content);
-      if (content.owner == this || retainedSnapshots.contains(content.snapshot)) continue;
-      if (builder == null) builder = toBuilder();
+      if (content.owner == this || retainedSnapshots.contains(content.snapshot)) {
+        continue;
+      }
+      if (builder == null) {
+        builder = toBuilder();
+      }
       builder.content(content);
     }
     return builder == null ? this : builder.build();
@@ -1509,17 +1547,28 @@ public final class Language {
     public Builder content(LanguageContent content) {
       Objects.requireNonNull(content);
       if (retainedSnapshots.add(content.snapshot)) {
-        if (bodies.isEmpty()) bodies.reset(content.snapshot.bodies());
-        else bodies.putAll(content.snapshot.bodies());
-        if (proofs.isEmpty()) proofs.reset(content.snapshot.proofs());
-        else proofs.putAll(content.snapshot.proofs());
+        if (bodies.isEmpty()) {
+          bodies.reset(content.snapshot.bodies());
+        } else {
+          bodies.putAll(content.snapshot.bodies());
+        }
+        if (proofs.isEmpty()) {
+          proofs.reset(content.snapshot.proofs());
+        } else {
+          proofs.putAll(content.snapshot.proofs());
+        }
         // A recovered checkpoint intentionally contains only selected bodies. Retain its
         // deferred evidence too, without traversing the closure or nesting resolver chains.
-        if (records.isEmpty()) records.reset(content.owner.records);
-        else content.owner.records.forEach(records::putIfAbsent);
-        for (LanguageProvider provider : content.owner.providers)
-          if (providers.stream().noneMatch(existing -> existing == provider))
+        if (records.isEmpty()) {
+          records.reset(content.owner.records);
+        } else {
+          content.owner.records.forEach(records::putIfAbsent);
+        }
+        for (LanguageProvider provider : content.owner.providers) {
+          if (providers.stream().noneMatch(existing -> existing == provider)) {
             providers.add(provider);
+          }
+        }
       }
       if (content.semantic instanceof ExactNode.Value value) {
         bodies.put(content.blueId().value(), value);

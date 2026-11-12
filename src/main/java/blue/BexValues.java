@@ -100,7 +100,9 @@ final class BexValues {
 
   /** Immutable host-input snapshot. Rejects cycles, non-text keys and non-BEX host objects. */
   public static Object freeze(Object value) {
-    if (value instanceof FrozenMap || value instanceof FrozenList) return value;
+    if (value instanceof FrozenMap || value instanceof FrozenList) {
+      return value;
+    }
     record Visit(Object value, boolean finish) {}
     var todo = new ArrayDeque<Visit>();
     var frozen = new IdentityHashMap<Object, Object>();
@@ -123,9 +125,13 @@ final class BexValues {
           || v instanceof Byte
           || v instanceof Short
           || v instanceof Integer
-          || v instanceof Long) continue;
+          || v instanceof Long) {
+        continue;
+      }
       require(v instanceof Map<?, ?> || v instanceof List<?>, "Unsupported BEX host input");
-      if (frozen.containsKey(v)) continue;
+      if (frozen.containsKey(v)) {
+        continue;
+      }
       if (visit.finish()) {
         Object result;
         if (v instanceof Map<?, ?> m) {
@@ -147,7 +153,11 @@ final class BexValues {
             require(e.getKey() instanceof String, "BEX object keys must be Text");
             todo.push(new Visit(e.getValue(), false));
           }
-        } else for (Object x : (List<?>) v) todo.push(new Visit(x, false));
+        } else {
+          for (Object x : (List<?>) v) {
+            todo.push(new Visit(x, false));
+          }
+        }
       }
     }
     return frozen.getOrDefault(value, scalar(value));
@@ -173,7 +183,9 @@ final class BexValues {
     while (!pending.isEmpty()) {
       var row = pending.pop();
       Object source = row.source();
-      if (replace != null && source instanceof HostValue host) source = replace.apply(host);
+      if (replace != null && source instanceof HostValue host) {
+        source = replace.apply(host);
+      }
       Object out = source;
       if (!(source instanceof HostValue)
           && (source instanceof Map<?, ?> || source instanceof List<?>)) {
@@ -183,66 +195,104 @@ final class BexValues {
             var target = new TreeMap<String, Object>();
             out = target;
             memo.put(source, out);
-            for (var entry : map.entrySet())
+            for (var entry : map.entrySet()) {
               pending.push(new Pending(target, entry.getKey().toString(), entry.getValue()));
+            }
           } else {
             var list = (List<?>) source;
             var target = new ArrayList<Object>(Collections.nCopies(list.size(), null));
             out = target;
             memo.put(source, out);
-            for (int i = list.size() - 1; i >= 0; i--)
+            for (int i = list.size() - 1; i >= 0; i--) {
               pending.push(new Pending(target, i, list.get(i)));
+            }
           }
         }
       } else if (source instanceof Byte
           || source instanceof Short
           || source instanceof Integer
-          || source instanceof Long) out = BigInteger.valueOf(((Number) source).longValue());
-      if (row.target() instanceof Map<?, ?> map)
+          || source instanceof Long) {
+        out = BigInteger.valueOf(((Number) source).longValue());
+      }
+      if (row.target() instanceof Map<?, ?> map) {
         ((Map<String, Object>) map).put((String) row.key(), out);
-      else ((List<Object>) row.target()).set((Integer) row.key(), out);
+      } else {
+        ((List<Object>) row.target()).set((Integer) row.key(), out);
+      }
     }
     return holder.getFirst();
   }
 
   public static String kind(Object v) {
-    if (v instanceof HostValue h) return h.kind();
-    if (v == UNDEFINED) return "undefined";
-    if (v == null) return "null";
-    if (v instanceof Boolean) return "boolean";
-    if (v instanceof BigInteger || v instanceof Integer || v instanceof Long) return "integer";
+    if (v instanceof HostValue h) {
+      return h.kind();
+    }
+    if (v == UNDEFINED) {
+      return "undefined";
+    }
+    if (v == null) {
+      return "null";
+    }
+    if (v instanceof Boolean) {
+      return "boolean";
+    }
+    if (v instanceof BigInteger || v instanceof Integer || v instanceof Long) {
+      return "integer";
+    }
     if (v instanceof BigDecimal || v instanceof Double || v instanceof Float) {
       number(v);
       return "double";
     }
-    if (v instanceof String) return "text";
-    if (v instanceof Map) return "object";
-    if (v instanceof List) return "list";
+    if (v instanceof String) {
+      return "text";
+    }
+    if (v instanceof Map) {
+      return "object";
+    }
+    if (v instanceof List) {
+      return "list";
+    }
     throw new BexFailure("not a BEX value: " + v.getClass());
   }
 
   public static int size(Object v) {
-    if (v instanceof HostValue h) return h.size();
-    if (v instanceof Map<?, ?> m) return m.size();
-    if (v instanceof List<?> a) return a.size();
-    if (v instanceof String s) return s.codePointCount(0, s.length());
+    if (v instanceof HostValue h) {
+      return h.size();
+    }
+    if (v instanceof Map<?, ?> m) {
+      return m.size();
+    }
+    if (v instanceof List<?> a) {
+      return a.size();
+    }
+    if (v instanceof String s) {
+      return s.codePointCount(0, s.length());
+    }
     return 0;
   }
 
   public static Object get(Object v, Object key) {
-    if (v instanceof HostValue h) return h.get(key);
-    if (v instanceof Map<?, ?> m) return m.containsKey(key) ? m.get(key) : UNDEFINED;
-    if (v instanceof List<?> a && key instanceof Integer i)
+    if (v instanceof HostValue h) {
+      return h.get(key);
+    }
+    if (v instanceof Map<?, ?> m) {
+      return m.containsKey(key) ? m.get(key) : UNDEFINED;
+    }
+    if (v instanceof List<?> a && key instanceof Integer i) {
       return i >= 0 && i < a.size() ? a.get(i) : UNDEFINED;
+    }
     return UNDEFINED;
   }
 
   public static List<String> keys(Object v) {
     List<String> keys;
-    if (v instanceof HostValue h) keys = new ArrayList<>(h.keys());
-    else if (v instanceof Map<?, ?> m)
+    if (v instanceof HostValue h) {
+      keys = new ArrayList<>(h.keys());
+    } else if (v instanceof Map<?, ?> m) {
       keys = new ArrayList<>(m.keySet().stream().map(Object::toString).toList());
-    else return List.of();
+    } else {
+      return List.of();
+    }
     keys.sort(BexValues::compareKeys);
     return keys;
   }
@@ -251,7 +301,9 @@ final class BexValues {
     int i = 0, j = 0;
     while (i < a.length() && j < b.length()) {
       int left = a.codePointAt(i), right = b.codePointAt(j);
-      if (left != right) return Integer.compare(left, right);
+      if (left != right) {
+        return Integer.compare(left, right);
+      }
       i += Character.charCount(left);
       j += Character.charCount(right);
     }
@@ -260,12 +312,16 @@ final class BexValues {
 
   public static List<String> ordered(Object v, BexGas gas) {
     int n = size(v), rounds = n == 0 ? 0 : 32 - Integer.numberOfLeadingZeros(n - 1);
-    if (gas != null) gas.charge("valueMember", n);
+    if (gas != null) {
+      gas.charge("valueMember", n);
+    }
     var keys = keys(v);
     if (gas != null) {
       gas.charge("valueMember", (long) n * rounds);
       long work = 0;
-      for (String k : keys) work += chunks(k);
+      for (String k : keys) {
+        work += chunks(k);
+      }
       gas.charge("textWork", work * (rounds + 1));
     }
     return keys;
@@ -287,18 +343,25 @@ final class BexValues {
   public static BigDecimal number(Object v) {
     try {
       BigDecimal d;
-      if (v instanceof BigDecimal b) d = b;
-      else if (v instanceof BigInteger b) d = new BigDecimal(b);
-      else if (v instanceof Byte || v instanceof Short || v instanceof Integer || v instanceof Long)
+      if (v instanceof BigDecimal b) {
+        d = b;
+      } else if (v instanceof BigInteger b) {
+        d = new BigDecimal(b);
+      } else if (v instanceof Byte
+          || v instanceof Short
+          || v instanceof Integer
+          || v instanceof Long) {
         d = BigDecimal.valueOf(((Number) v).longValue());
-      else if (v instanceof Double || v instanceof Float) {
+      } else if (v instanceof Double || v instanceof Float) {
         double value = ((Number) v).doubleValue();
         require(Double.isFinite(value), "non-finite Double");
         d = BigDecimal.valueOf(value);
       } else if (v instanceof String s) {
         require(NUMBER_TEXT.matcher(s).matches(), "invalid numeric text");
         d = new BigDecimal(s);
-      } else throw new BexFailure("numeric conversion requires Integer, Double or Text");
+      } else {
+        throw new BexFailure("numeric conversion requires Integer, Double or Text");
+      }
       return d;
     } catch (NumberFormatException e) {
       throw new BexFailure("invalid numeric text");
@@ -355,24 +418,34 @@ final class BexValues {
         }
         continue;
       }
-      if (gas != null) gas.charge("valueMember");
+      if (gas != null) {
+        gas.charge("valueMember");
+      }
       String ka = kind(a), kb = kind(b);
       if (Set.of("integer", "double").contains(ka) && Set.of("integer", "double").contains(kb)) {
         boolean both = ka.equals("integer") && kb.equals("integer");
         long work = 0;
-        for (Object x : new Object[] {a, b})
+        for (Object x : new Object[] {a, b}) {
           if (kind(x).equals("integer")) {
             int n = limbs(integer(x));
             work += both ? n : (long) n * n;
           }
-        if (gas != null) gas.charge("integerWork", work);
-        if (number(a).compareTo(number(b)) != 0) return false;
-      } else if (!ka.equals(kb)) return false;
-      else if (ka.equals("object") || ka.equals("list")) {
+        }
+        if (gas != null) {
+          gas.charge("integerWork", work);
+        }
+        if (number(a).compareTo(number(b)) != 0) {
+          return false;
+        }
+      } else if (!ka.equals(kb)) {
+        return false;
+      } else if (ka.equals("object") || ka.equals("list")) {
         if (active.add(new Pair(a, b))) {
           if (ka.equals("list")) {
             int length = size(a);
-            if (length != size(b)) return false;
+            if (length != size(b)) {
+              return false;
+            }
             current.children =
                 new Iterator<Integer>() {
                   int index;
@@ -387,16 +460,21 @@ final class BexValues {
                 };
           } else {
             List<String> left = ordered(a, gas), right = ordered(b, gas);
-            if (!left.equals(right)) return false;
+            if (!left.equals(right)) {
+              return false;
+            }
             current.children = left.iterator();
           }
           continue;
         }
       } else if (ka.equals("text") && gas != null) {
         if (size(a) != size(b)
-            || MeteredText.compare((String) a, (String) b, () -> gas.charge("textWork", 2)) != 0)
+            || MeteredText.compare((String) a, (String) b, () -> gas.charge("textWork", 2)) != 0) {
           return false;
-      } else if (!ka.equals("undefined") && !Objects.equals(a, b)) return false;
+        }
+      } else if (!ka.equals("undefined") && !Objects.equals(a, b)) {
+        return false;
+      }
       pending.pop();
     }
     return true;
@@ -429,34 +507,48 @@ final class BexValues {
     pending.add(root);
     while (!pending.isEmpty()) {
       Object v = pending.removeLast();
-      if (v instanceof HostValue h) v = h.accountingView();
+      if (v instanceof HostValue h) {
+        v = h.accountingView();
+      }
       String k = kind(v);
-      if (k.equals("undefined") || k.equals("null")) continue;
+      if (k.equals("undefined") || k.equals("null")) {
+        continue;
+      }
       if (k.equals("list")) {
         consume.accept(size(v));
-        for (int i = size(v) - 1; i >= 0; i--) pending.add(get(v, i));
+        for (int i = size(v) - 1; i >= 0; i--) {
+          pending.add(get(v, i));
+        }
       } else if (k.equals("object")) {
         consume.accept(size(v));
         var keys = ordered(v, gas);
         for (String key : keys) {
-          if (gas != null) gas.charge("textWork", chunks(key));
+          if (gas != null) {
+            gas.charge("textWork", chunks(key));
+          }
           consume.accept(key.length());
         }
-        for (int i = keys.size() - 1; i >= 0; i--) pending.add(get(v, keys.get(i)));
+        for (int i = keys.size() - 1; i >= 0; i--) {
+          pending.add(get(v, keys.get(i)));
+        }
       } else {
         if (gas != null && k.equals("integer")) {
           long limbs = limbs(integer(v));
           gas.charge("integerWork", limbs * limbs);
         }
         String rendered = text(v);
-        if (gas != null) gas.charge("textWork", chunks(rendered));
+        if (gas != null) {
+          gas.charge("textWork", chunks(rendered));
+        }
         consume.accept(Math.max(1, rendered.length()));
       }
     }
   }
 
   public static List<String> segments(String path) {
-    if (path.isEmpty() || path.equals("/")) return List.of();
+    if (path.isEmpty() || path.equals("/")) {
+      return List.of();
+    }
     require(path.startsWith("/"), "absolute value pointer required");
     var out = new ArrayList<String>();
     for (String part : path.substring(1).split("/", -1)) {
@@ -473,7 +565,9 @@ final class BexValues {
   }
 
   public static int index(String segment, int length, boolean add) {
-    if (add && segment.equals("-")) return length;
+    if (add && segment.equals("-")) {
+      return length;
+    }
     require(LanguageSyntax.LIST_INDEX.matcher(segment).matches(), "noncanonical list index");
     try {
       int i = new BigInteger(segment).intValueExact();
@@ -487,14 +581,17 @@ final class BexValues {
   public static Object pointerGet(Object value, String path) {
     Object at = value;
     for (String s : segments(path)) {
-      if (kind(at).equals("object")) at = get(at, s);
-      else if (kind(at).equals("list")) {
+      if (kind(at).equals("object")) {
+        at = get(at, s);
+      } else if (kind(at).equals("list")) {
         try {
           at = get(at, index(s, size(at), false));
         } catch (BexFailure e) {
           return UNDEFINED;
         }
-      } else return UNDEFINED;
+      } else {
+        return UNDEFINED;
+      }
     }
     return at;
   }
@@ -502,7 +599,9 @@ final class BexValues {
   public static Object overlay(
       Object value, String path, Object replacement, boolean remove, BexGas gas) {
     List<String> parts = segments(path);
-    if (parts.isEmpty()) return remove ? UNDEFINED : copy(replacement);
+    if (parts.isEmpty()) {
+      return remove ? UNDEFINED : copy(replacement);
+    }
     return overlayAt(value, parts, replacement, remove, gas);
   }
 
@@ -513,19 +612,27 @@ final class BexValues {
       Object at, List<String> parts, Object replacement, boolean remove, BexGas gas) {
     var parents = new ArrayDeque<PointerParent>();
     for (int pos = 0; pos < parts.size(); pos++) {
-      if (at == null || at == UNDEFINED) at = Map.of();
+      if (at == null || at == UNDEFINED) {
+        at = Map.of();
+      }
       String kind = kind(at), segment = parts.get(pos);
       boolean last = pos == parts.size() - 1;
       require(kind.equals("object") || kind.equals("list"), "scalar pointer target parent");
       if (kind.equals("object")) {
         var out = new LinkedHashMap<String, Object>();
-        for (String key : ordered(at, gas)) out.put(key, get(at, key));
+        for (String key : ordered(at, gas)) {
+          out.put(key, get(at, key));
+        }
         parents.push(new PointerParent(out, segment, last));
         at = out.getOrDefault(segment, UNDEFINED);
       } else {
-        if (gas != null) gas.charge("valueMember", size(at));
+        if (gas != null) {
+          gas.charge("valueMember", size(at));
+        }
         var out = new ArrayList<Object>();
-        for (int i = 0; i < size(at); i++) out.add(get(at, i));
+        for (int i = 0; i < size(at); i++) {
+          out.add(get(at, i));
+        }
         int key = index(segment, out.size(), last && !remove);
         parents.push(new PointerParent(out, key, last));
         at = last ? UNDEFINED : out.get(key);
@@ -536,13 +643,19 @@ final class BexValues {
       PointerParent parent = parents.pop();
       if (parent.container() instanceof Map<?, ?>) {
         var object = (Map<String, Object>) parent.container();
-        if (parent.last() && result == UNDEFINED) object.remove(parent.key());
-        else object.put((String) parent.key(), result);
+        if (parent.last() && result == UNDEFINED) {
+          object.remove(parent.key());
+        } else {
+          object.put((String) parent.key(), result);
+        }
       } else {
         var list = (List<Object>) parent.container();
         int index = (Integer) parent.key();
-        if (index == list.size()) list.add(result);
-        else list.set(index, result);
+        if (index == list.size()) {
+          list.add(result);
+        } else {
+          list.set(index, result);
+        }
       }
       result = parent.container();
     }
@@ -559,7 +672,9 @@ final class BexValues {
   }
 
   private static Object blueValue(Object v, boolean preserveViews) {
-    if (v instanceof HostValue h) return preserveViews ? h : h.blueOutput();
+    if (v instanceof HostValue h) {
+      return preserveViews ? h : h.blueOutput();
+    }
     return switch (kind(v)) {
       case "undefined", "null" ->
           throw new BexFailure("BEX_OUTPUT_INVALID", "null or undefined is not a Blue value");
@@ -567,19 +682,24 @@ final class BexValues {
         var out = new LinkedHashMap<String, Object>();
         for (String key : keys(v)) {
           Object child = get(v, key);
-          if (child != UNDEFINED) out.put(key, blueValue(child, preserveViews));
+          if (child != UNDEFINED) {
+            out.put(key, blueValue(child, preserveViews));
+          }
         }
         yield out;
       }
       case "list" -> {
         var out = new ArrayList<Object>();
-        for (int i = 0; i < size(v); i++) out.add(blueValue(get(v, i), preserveViews));
+        for (int i = 0; i < size(v); i++) {
+          out.add(blueValue(get(v, i), preserveViews));
+        }
         yield out;
       }
       case "double" -> {
         double d = number(v).doubleValue();
-        if (!Double.isFinite(d))
+        if (!Double.isFinite(d)) {
           throw new BexFailure("BEX_OUTPUT_INVALID", "Double output overflow");
+        }
         yield d;
       }
       default -> v;

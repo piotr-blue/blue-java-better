@@ -122,26 +122,35 @@ public final class Bex {
 
   @SuppressWarnings("unchecked")
   private Map<String, Object> resolveTypes(Map<String, Object> source) {
-    if (source == null) return null;
+    if (source == null) {
+      return null;
+    }
     Map<String, String> aliases = language.context().aliases;
     return (Map<String, Object>) resolveTypes(BexValues.freeze(source), aliases);
   }
 
   private static Object resolveTypes(Object value, Map<String, String> aliases) {
-    if (value instanceof List<?> list)
+    if (value instanceof List<?> list) {
       return list.stream().map(v -> resolveTypes(v, aliases)).toList();
-    if (!(value instanceof Map<?, ?> map)) return value;
+    }
+    if (!(value instanceof Map<?, ?> map)) {
+      return value;
+    }
     Map<String, Object> result = new java.util.LinkedHashMap<>();
     map.forEach(
         (key, child) -> {
-          if (!(key instanceof String name))
+          if (!(key instanceof String name)) {
             throw new BexFailure("BEX_COMPILE_ERROR", "Text object keys required");
+          }
           if (LanguageCore.TYPES.contains(name) && child instanceof String alias) {
             String id = aliases.get(alias);
-            if (id == null)
+            if (id == null) {
               throw new BexFailure("BEX_COMPILE_ERROR", "Unknown type alias: " + alias);
+            }
             result.put(name, Map.of("blueId", id));
-          } else result.put(name, resolveTypes(child, aliases));
+          } else {
+            result.put(name, resolveTypes(child, aliases));
+          }
         });
     return result;
   }
@@ -196,7 +205,9 @@ public final class Bex {
      * @return this builder
      */
     public Builder gasLimit(long value) {
-      if (value < 0) throw new IllegalArgumentException("Negative gas limit");
+      if (value < 0) {
+        throw new IllegalArgumentException("Negative gas limit");
+      }
       gasLimit = value;
       return this;
     }
@@ -214,7 +225,9 @@ public final class Bex {
               type.value(),
               (payload, gas) ->
                   implementation.evaluate(payload, amount -> gas.amount("host", amount)))
-          != null) throw new IllegalArgumentException("Duplicate intrinsic: " + type);
+          != null) {
+        throw new IllegalArgumentException("Duplicate intrinsic: " + type);
+      }
       return this;
     }
 
@@ -328,7 +341,9 @@ public final class Bex {
     }
 
     private ContractBridge bridge() {
-      if (bridge == null) bridge = new ContractBridge(language);
+      if (bridge == null) {
+        bridge = new ContractBridge(language);
+      }
       return bridge;
     }
 
@@ -337,7 +352,9 @@ public final class Bex {
     }
 
     String identity(Object value, BexGas gas) {
-      if (logical == null) logical = new ContractWork(bridge(), meter);
+      if (logical == null) {
+        logical = new ContractWork(bridge(), meter);
+      }
       return logical.nodeBlueId(value, gas);
     }
   }
@@ -480,11 +497,15 @@ public final class Bex {
     /** Copies caller-supplied containers into immutable result data. */
     @SuppressWarnings("unchecked")
     public Result {
-      if (gas < 0) throw new IllegalArgumentException("Negative admitted gas");
+      if (gas < 0) {
+        throw new IllegalArgumentException("Negative admitted gas");
+      }
       value = BexValues.freeze(value);
       changeset = (List<Object>) BexValues.freeze(Objects.requireNonNull(changeset));
       events = (List<Object>) BexValues.freeze(Objects.requireNonNull(events));
-      if (rejected != null) rejected = (Map<String, Object>) ContractData.freeze(rejected);
+      if (rejected != null) {
+        rejected = (Map<String, Object>) ContractData.freeze(rejected);
+      }
     }
 
     /**
@@ -512,7 +533,9 @@ public final class Bex {
      * @throws BlueException on evaluation failure
      */
     public Result requireSuccess() {
-      if (!succeeded()) throw new BlueException(failure, message);
+      if (!succeeded()) {
+        throw new BlueException(failure, message);
+      }
       return this;
     }
   }

@@ -39,32 +39,46 @@ final class ContractIdentityMap<V> {
 
   void put(Object key, V value) {
     var before = leaf(key);
-    if (before != null && Objects.equals(before.value, value)) return;
+    if (before != null && Objects.equals(before.value, value)) {
+      return;
+    }
     var added = new Leaf<V>(key, value, System.identityHashCode(key));
     root = root == null ? added : root.put(added, 0, owner);
-    if (before == null) size++;
+    if (before == null) {
+      size++;
+    }
   }
 
   void remove(Object key) {
     var before = leaf(key);
-    if (before == null) return;
+    if (before == null) {
+      return;
+    }
     root = root.remove(key, before.hash, 0, owner);
     size--;
   }
 
   int trim(int maximum) {
-    if (maximum < 0) throw new IllegalArgumentException("Negative identity-map capacity");
+    if (maximum < 0) {
+      throw new IllegalArgumentException("Negative identity-map capacity");
+    }
     int before = size;
-    if (size <= maximum) return 0;
+    if (size <= maximum) {
+      return 0;
+    }
     var pending = new ArrayDeque<Trie<V>>();
     // Traverse a frozen root while removals edit the current one.
     owner = new Object();
     pending.push(root);
     while (size > maximum) {
       var node = pending.pop();
-      if (node instanceof Leaf<V> leaf) remove(leaf.key);
-      else if (node instanceof Collision<V> collision) pending.addAll(collision.leaves);
-      else Collections.addAll(pending, ((Branch<V>) node).children);
+      if (node instanceof Leaf<V> leaf) {
+        remove(leaf.key);
+      } else if (node instanceof Collision<V> collision) {
+        pending.addAll(collision.leaves);
+      } else {
+        Collections.addAll(pending, ((Branch<V>) node).children);
+      }
     }
     return before - size;
   }
@@ -87,8 +101,12 @@ final class ContractIdentityMap<V> {
     }
 
     public Trie<V> put(Leaf<V> added, int shift, Object owner) {
-      if (key == added.key) return added;
-      if (hash == added.hash) return new Collision<>(hash, List.of(this, added));
+      if (key == added.key) {
+        return added;
+      }
+      if (hash == added.hash) {
+        return new Collision<>(hash, List.of(this, added));
+      }
       return merge(this, hash, added, added.hash, shift, owner);
     }
 
@@ -99,27 +117,40 @@ final class ContractIdentityMap<V> {
 
   private record Collision<V>(int hash, List<Leaf<V>> leaves) implements Trie<V> {
     public Leaf<V> find(Object key, int h, int shift) {
-      if (hash != h) return null;
-      for (var leaf : leaves) if (leaf.key == key) return leaf;
+      if (hash != h) {
+        return null;
+      }
+      for (var leaf : leaves) {
+        if (leaf.key == key) {
+          return leaf;
+        }
+      }
       return null;
     }
 
     public Trie<V> put(Leaf<V> added, int shift, Object owner) {
-      if (hash != added.hash) return merge(this, hash, added, added.hash, shift, owner);
+      if (hash != added.hash) {
+        return merge(this, hash, added, added.hash, shift, owner);
+      }
       var next = new ArrayList<>(leaves);
-      for (int i = 0; i < next.size(); i++)
+      for (int i = 0; i < next.size(); i++) {
         if (next.get(i).key == added.key) {
           next.set(i, added);
           return new Collision<>(hash, List.copyOf(next));
         }
+      }
       next.add(added);
       return new Collision<>(hash, List.copyOf(next));
     }
 
     public Trie<V> remove(Object key, int h, int shift, Object owner) {
-      if (hash != h) return this;
+      if (hash != h) {
+        return this;
+      }
       var next = leaves.stream().filter(leaf -> leaf.key != key).toList();
-      if (next.size() == leaves.size()) return this;
+      if (next.size() == leaves.size()) {
+        return this;
+      }
       return next.size() == 1 ? next.getFirst() : new Collision<>(hash, next);
     }
   }
@@ -155,7 +186,9 @@ final class ContractIdentityMap<V> {
         Trie<V>[] expanded = Arrays.copyOf(children, children.length + 1);
         System.arraycopy(children, index, expanded, index + 1, children.length - index);
         expanded[index] = added;
-        if (owner != editor) return new Branch<>(editor, bitmap | bit, expanded);
+        if (owner != editor) {
+          return new Branch<>(editor, bitmap | bit, expanded);
+        }
         children = expanded;
         bitmap |= bit;
         next = this;
@@ -168,23 +201,35 @@ final class ContractIdentityMap<V> {
 
     public Trie<V> remove(Object key, int hash, int shift, Object editor) {
       int bit = 1 << ((hash >>> shift) & 31);
-      if ((bitmap & bit) == 0) return this;
+      if ((bitmap & bit) == 0) {
+        return this;
+      }
       int index = offset(bit);
       Trie<V> changed = children[index].remove(key, hash, shift + 5, editor);
-      if (changed == children[index]) return this;
+      if (changed == children[index]) {
+        return this;
+      }
       if (changed == null) {
-        if (children.length == 1) return null;
+        if (children.length == 1) {
+          return null;
+        }
         Trie<V>[] reduced = Arrays.copyOf(children, children.length - 1);
         System.arraycopy(children, index + 1, reduced, index, children.length - index - 1);
-        if (reduced.length == 1 && !(reduced[0] instanceof Branch<?>)) return reduced[0];
-        if (owner != editor) return new Branch<>(editor, bitmap & ~bit, reduced);
+        if (reduced.length == 1 && !(reduced[0] instanceof Branch<?>)) {
+          return reduced[0];
+        }
+        if (owner != editor) {
+          return new Branch<>(editor, bitmap & ~bit, reduced);
+        }
         children = reduced;
         bitmap &= ~bit;
         return this;
       }
       Branch<V> next = editable(editor);
       next.children[index] = changed;
-      if (next.children.length == 1 && !(changed instanceof Branch<?>)) return changed;
+      if (next.children.length == 1 && !(changed instanceof Branch<?>)) {
+        return changed;
+      }
       return next;
     }
   }
@@ -197,7 +242,9 @@ final class ContractIdentityMap<V> {
 
   private static <V> Trie<V> merge(Trie<V> a, int ah, Trie<V> b, int bh, int shift, Object owner) {
     int x = (ah >>> shift) & 31, y = (bh >>> shift) & 31;
-    if (x == y) return branch(owner, 1 << x, merge(a, ah, b, bh, shift + 5, owner));
+    if (x == y) {
+      return branch(owner, 1 << x, merge(a, ah, b, bh, shift + 5, owner));
+    }
     return x < y
         ? branch(owner, (1 << x) | (1 << y), a, b)
         : branch(owner, (1 << x) | (1 << y), b, a);

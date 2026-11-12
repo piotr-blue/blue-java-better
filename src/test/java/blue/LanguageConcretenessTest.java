@@ -20,7 +20,9 @@ class LanguageConcretenessTest {
   @Test
   void capturedViewsRetainCompletedPresenceFactsWithoutSharingNewWrites() {
     ExactNode node = value(Map.of("type", new Ref(LanguageCore.CORE.get("Integer"))));
-    for (int i = 0; i < 300; i++) node = value(Map.of("child", node));
+    for (int i = 0; i < 300; i++) {
+      node = value(Map.of("child", node));
+    }
     LanguageContext parent = new LanguageContext();
     assertFalse(LanguageSemantics.concreteNode(node, parent));
     LanguageContext copy = new LanguageContext();
@@ -38,10 +40,11 @@ class LanguageConcretenessTest {
   @Test
   void presenceCacheRemainsBoundedAndLiteralFastPathPreservesHostWork() {
     LanguageContext context = new LanguageContext();
-    for (int i = 0; i < 8300; i++)
+    for (int i = 0; i < 8300; i++) {
       assertTrue(
           LanguageSemantics.concreteNode(
               scalar("Integer", java.math.BigInteger.valueOf(i)), context));
+    }
     assertTrue(context.concreteFacts.size() <= 8192);
     LanguageContext limited = new LanguageContext(Map.of("steps", 100L));
     long before = limited.work.get();
@@ -61,7 +64,9 @@ class LanguageConcretenessTest {
     LanguageContext context = new LanguageContext();
     assertFalse(LanguageSemantics.concreteNode(node, context));
     long work = context.work.get();
-    for (ExactNode child : nodes) assertFalse(LanguageSemantics.concreteNode(child, context));
+    for (ExactNode child : nodes) {
+      assertFalse(LanguageSemantics.concreteNode(child, context));
+    }
     assertEquals(work, context.work.get(), "No subtree must be traversed again");
   }
 

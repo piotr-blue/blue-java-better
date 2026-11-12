@@ -29,14 +29,19 @@ public class EmissionProjectionBenchmark {
   public void setup() {
     Language fresh = Language.create();
     var builder = Language.newBuilder();
-    for (int i = 0; i < entries; i++) builder.content(fresh.readYaml("old: " + i));
+    for (int i = 0; i < entries; i++) {
+      builder.content(fresh.readYaml("old: " + i));
+    }
     var context = new ContractLanguage(builder.build());
-    for (int i = 0; i < entries; i++) context.install(fresh.readYaml("new: " + i));
+    for (int i = 0; i < entries; i++) {
+      context.install(fresh.readYaml("new: " + i));
+    }
     var event = fresh.readYaml("kind: SmallEvent\namount: 7");
     context.install(event);
     emission = new Contracts.Emission("member", context.document(event.semantic));
-    if (!sharedSnapshot().equals(previousCatalogueMerge()))
+    if (!sharedSnapshot().equals(previousCatalogueMerge())) {
       throw new AssertionError("Projection changed");
+    }
   }
 
   @Benchmark

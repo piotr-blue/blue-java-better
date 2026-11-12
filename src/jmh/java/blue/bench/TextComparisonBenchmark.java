@@ -45,8 +45,9 @@ public class TextComparisonBenchmark {
     input = Bex.inputs().document(Map.of("left", left, "right", right)).build();
     Bex.Result result = program.execute(input);
     result.requireSuccess();
-    if (!Boolean.valueOf(position.equals("equal")).equals(result.value()))
+    if (!Boolean.valueOf(position.equals("equal")).equals(result.value())) {
       throw new IllegalStateException("Unexpected comparison result");
+    }
   }
 
   @Benchmark

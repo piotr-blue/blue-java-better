@@ -15,8 +15,9 @@ class LocalValidationTest {
   void validatedTimelineHeadDoesNotWalkThePreviousEntryChainToBorrowFacts() {
     LanguageContext context = new LanguageContext();
     ExactNode chain = value(Map.of("sequence", scalar("Text", "0")));
-    for (int i = 1; i <= 32; i++)
+    for (int i = 1; i <= 32; i++) {
       chain = value(Map.of("sequence", scalar("Text", Integer.toString(i)), "previous", chain));
+    }
     ExactNode before = value(Map.of("entry", chain));
     LanguageSemantics.strict(before, context, "value");
     ExactNode nextEntry = value(Map.of("sequence", scalar("Text", "33"), "previous", chain));

@@ -49,8 +49,9 @@ class LanguageIngressTest {
         language.read(integerDouble, VALUE).blueId());
     assertThrows(LanguageException.class, () -> language.prepare(Node.missing()));
     Node deep = Node.integer(1);
-    for (int i = 0; i <= Language.Limits.defaults().depth(); i++)
+    for (int i = 0; i <= Language.Limits.defaults().depth(); i++) {
       deep = Node.list(java.util.List.of(deep));
+    }
     Node tooDeep = deep;
     assertThrows(LanguageException.class, () -> language.prepare(tooDeep));
   }

@@ -54,7 +54,9 @@ class CanonicalEncodingTest {
   void immutableRecordsPreserveNullPresenceAndDetachedCanonicalValues(int fields) {
     Map<String, Object> source = new java.util.LinkedHashMap<>();
     source.put("nullable", null);
-    for (int i = 0; i < fields; i++) source.put("field-" + i, i);
+    for (int i = 0; i < fields; i++) {
+      source.put("field-" + i, i);
+    }
     String expected = ContractCanonical.text(source);
     Map<String, Object> frozen = ContractModel.obj(ContractData.freeze(source));
     Map<String, Object> encoded = new ContractCanonical.EncodedRecord(source);
@@ -78,7 +80,9 @@ class CanonicalEncodingTest {
       var layout = new ContractData.RecordLayout(keys.toArray(String[]::new));
       Object[] values = {Long.MIN_VALUE, Long.MAX_VALUE, "é\uD83C\uDF0D\n", null};
       Map<String, Object> plain = new java.util.LinkedHashMap<>();
-      for (int i = 0; i < keys.size(); i++) plain.put(keys.get(i), values[i]);
+      for (int i = 0; i < keys.size(); i++) {
+        plain.put(keys.get(i), values[i]);
+      }
       assertEquals(
           ContractCanonical.text(plain),
           ContractCanonical.text(ContractData.scalarRecord(layout, values)));

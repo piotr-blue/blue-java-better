@@ -114,7 +114,9 @@ final class ContractRunFork {
   }
 
   static Phase phase(Phase p) {
-    if (p == null) return null;
+    if (p == null) {
+      return null;
+    }
     var n = new Phase();
     n.name = p.name;
     n.allowed = ContractCanonical.keys(p.allowed);

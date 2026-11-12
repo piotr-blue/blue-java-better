@@ -22,8 +22,9 @@ public final class TimelineRequests {
   private final BigInteger maximumPageSize;
 
   private TimelineRequests(TimelineVerifier verifier, int maximumPageSize) {
-    if (maximumPageSize < 1)
+    if (maximumPageSize < 1) {
       throw new IllegalArgumentException("Positive maximum page size required");
+    }
     this.verifier = verifier;
     this.maximumPageSize = BigInteger.valueOf(maximumPageSize);
   }
@@ -137,9 +138,10 @@ public final class TimelineRequests {
           } else if (isType(fields, request.semantic, "Resolve Timeline Content Request")) {
             content(request);
             operation = Operation.CONTENT;
-          } else
+          } else {
             throw new BlueException(
                 "TIMELINE_READER_OPERATION", "Only Timeline read operations are allowed");
+          }
           return new Reader(request, operation, key);
         });
   }
@@ -204,8 +206,9 @@ public final class TimelineRequests {
   private record Authenticated(LanguageContent request, String key) {}
 
   private static Authenticated authenticate(TimelineContent fields, LanguageContent wire) {
-    if (!isType(fields, wire.semantic, "Signed Reader Request"))
+    if (!isType(fields, wire.semantic, "Signed Reader Request")) {
       return new Authenticated(wire, null);
+    }
     ExactNode body = fields.required(wire.semantic, "Signed Reader Request", "request");
     require(body instanceof ExactNode.Value, "TIMELINE_WIRE_INLINE", "request");
     fields.inspect(wire.semantic, "Signed Reader Request", Set.of("request"));
@@ -341,11 +344,12 @@ public final class TimelineRequests {
       LanguageContent request) {
     ExactNode node = request.semantic;
     fields.typed(node, READ);
-    for (String forbidden : List.of("requestId", "provider", "createdAt", "expiresAt", "nonce"))
+    for (String forbidden : List.of("requestId", "provider", "createdAt", "expiresAt", "nonce")) {
       require(
           fields.supplied(node, "Provider Request", forbidden) == null,
           "TIMELINE_REQUEST_FIELDS",
           forbidden);
+    }
     verifier.sameTimeline(fields.required(node, READ, "timeline"));
     BigInteger limit = fields.bigInteger(node, READ, "limit");
     require(
@@ -390,16 +394,19 @@ public final class TimelineRequests {
   }
 
   private static void readOnly(TimelineContent fields, ExactNode node) {
-    for (String forbidden : List.of("requestId", "provider", "createdAt", "expiresAt", "nonce"))
+    for (String forbidden : List.of("requestId", "provider", "createdAt", "expiresAt", "nonce")) {
       require(
           fields.supplied(node, "Provider Request", forbidden) == null,
           "TIMELINE_REQUEST_FIELDS",
           forbidden);
+    }
   }
 
   private static Long optionalTime(
       TimelineContent fields, ExactNode node, String type, String key, long minimum, long maximum) {
-    if (fields.supplied(node, type, key) == null) return null;
+    if (fields.supplied(node, type, key) == null) {
+      return null;
+    }
     long value = fields.integer(node, type, key);
     require(value >= minimum && value <= maximum, "TIMELINE_TIME", key);
     return value;

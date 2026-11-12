@@ -50,7 +50,9 @@ final class ContractCalculations {
       Object binding,
       Supplier<BexEngine.Result> evaluate) {
     Meter meter = run.meter;
-    if (!meter.finalGas() || meter.calculation != null) return evaluate.get();
+    if (!meter.finalGas() || meter.calculation != null) {
+      return evaluate.get();
+    }
     String key;
     try {
       key =
@@ -61,7 +63,9 @@ final class ContractCalculations {
       return evaluate.get();
     }
     Map<String, Object> retained = completed.get(key);
-    if (retained == null) retained = reader.find(key).orElse(null);
+    if (retained == null) {
+      retained = reader.find(key).orElse(null);
+    }
     if (retained != null
         && VERSION.equals(retained.get("version"))
         && key.equals(retained.get("key"))) {
@@ -114,8 +118,9 @@ final class ContractCalculations {
       context.inputObserver = previousObserver;
     }
     try {
-      if (recording.invalid || bytes >= MAX_ATTEMPT_BYTES)
+      if (recording.invalid || bytes >= MAX_ATTEMPT_BYTES) {
         return recording.wrapped == 0 ? result : unwrap(result);
+      }
       long tail = meter.used() - recording.position;
       Map<String, Object> artifact =
           m(
@@ -136,9 +141,10 @@ final class ContractCalculations {
               "events",
               encode(result.events()));
       long weight = ContractCache.weight(artifact, MAX_BYTES);
-      if (weight <= MAX_BYTES)
+      if (weight <= MAX_BYTES) {
         weight =
             ContractWire.write(artifact).getBytes(java.nio.charset.StandardCharsets.UTF_8).length;
+      }
       if (weight <= MAX_BYTES && bytes + weight <= MAX_ATTEMPT_BYTES) {
         completed.put(key, obj(ContractWire.immutable(artifact)));
         bytes += Math.toIntExact(weight);
@@ -250,17 +256,24 @@ final class ContractCalculations {
     }
 
     void charge(String namespace) {
-      if (!reading && !namespace.equals("bex")) invalidate();
+      if (!reading && !namespace.equals("bex")) {
+        invalidate();
+      }
     }
 
     void manifest(String identity) {
-      if (reading) manifests.add(identity);
-      else invalidate();
+      if (reading) {
+        manifests.add(identity);
+      } else {
+        invalidate();
+      }
     }
 
     @Override
     public Object read(BexEngine.InputRead read, Supplier<Object> action) {
-      if (invalid) return action.get();
+      if (invalid) {
+        return action.get();
+      }
       if (reads.size() >= MAX_READS) {
         invalidate();
         return action.get();
@@ -331,34 +344,51 @@ final class ContractCalculations {
   }
 
   private static Object encode(Object value, int[] remaining, int depth, boolean input) {
-    if (value instanceof ReadView view)
+    if (value instanceof ReadView view) {
       return input
           ? encode(view.value, remaining, depth, true)
           : List.of("input", Integer.toString(view.input));
+    }
     if (input && value instanceof ContractBridge.ExactView view) {
-      if (view.recipe.parts().size() > MAX_VALUES) throw new NotReusable();
+      if (view.recipe.parts().size() > MAX_VALUES) {
+        throw new NotReusable();
+      }
       return List.of(
           "exact", view.recipe.parts().stream().map(ContractLanguage::identity).toList());
     }
-    if (--remaining[0] < 0 || depth > 64 || value instanceof BexValues.HostValue)
+    if (--remaining[0] < 0 || depth > 64 || value instanceof BexValues.HostValue) {
       throw new NotReusable();
-    if (value == BexValues.UNDEFINED) return List.of("undefined");
-    if (value == null) return List.of("null");
+    }
+    if (value == BexValues.UNDEFINED) {
+      return List.of("undefined");
+    }
+    if (value == null) {
+      return List.of("null");
+    }
     if (value instanceof String text) {
       remaining[1] -= Math.min(MAX_BYTES + 1, text.length());
-      if (remaining[1] < 0) throw new NotReusable();
+      if (remaining[1] < 0) {
+        throw new NotReusable();
+      }
       return List.of("literal", text);
     }
-    if (value instanceof Boolean) return List.of("literal", value);
-    if (value instanceof BigInteger number && number.bitLength() > MAX_BYTES)
+    if (value instanceof Boolean) {
+      return List.of("literal", value);
+    }
+    if (value instanceof BigInteger number && number.bitLength() > MAX_BYTES) {
       throw new NotReusable();
-    if (value instanceof BigInteger || value instanceof Long || value instanceof Integer)
+    }
+    if (value instanceof BigInteger || value instanceof Long || value instanceof Integer) {
       return List.of("integer", value.toString());
-    if (value instanceof BigDecimal || value instanceof Double || value instanceof Float)
+    }
+    if (value instanceof BigDecimal || value instanceof Double || value instanceof Float) {
       return List.of("double", value.toString());
+    }
     if (value instanceof List<?> values) {
       var encoded = new ArrayList<>();
-      for (Object item : values) encoded.add(encode(item, remaining, depth + 1, input));
+      for (Object item : values) {
+        encoded.add(encode(item, remaining, depth + 1, input));
+      }
       return List.of("list", encoded);
     }
     if (value instanceof Map<?, ?> values) {
@@ -366,7 +396,9 @@ final class ContractCalculations {
       for (var item : values.entrySet()) {
         String key = (String) item.getKey();
         remaining[1] -= Math.min(MAX_BYTES + 1, key.length());
-        if (remaining[1] < 0) throw new NotReusable();
+        if (remaining[1] < 0) {
+          throw new NotReusable();
+        }
         encoded.put(key, encode(item.getValue(), remaining, depth + 1, input));
       }
       return List.of("object", encoded);

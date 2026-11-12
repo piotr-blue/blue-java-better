@@ -21,11 +21,14 @@ final class PackagePaths {
                     PackagePaths.class.getResourceAsStream("/blue/casefold-15.1.txt")),
                 StandardCharsets.US_ASCII))) {
       for (String line; (line = input.readLine()) != null; ) {
-        if (line.startsWith("#") || line.isEmpty()) continue;
+        if (line.startsWith("#") || line.isEmpty()) {
+          continue;
+        }
         var parts = line.split(";", 2);
         var folded = new StringBuilder();
-        for (String value : parts[1].split(","))
+        for (String value : parts[1].split(",")) {
           folded.appendCodePoint(Integer.parseInt(value, 16));
+        }
         values.put(Integer.parseInt(parts[0], 16), folded.toString());
       }
       return Map.copyOf(values);
@@ -40,8 +43,11 @@ final class PackagePaths {
         .forEach(
             cp -> {
               String folded = FOLD.get(cp);
-              if (folded == null) result.appendCodePoint(cp);
-              else result.append(folded);
+              if (folded == null) {
+                result.appendCodePoint(cp);
+              } else {
+                result.append(folded);
+              }
             });
     return result.toString();
   }

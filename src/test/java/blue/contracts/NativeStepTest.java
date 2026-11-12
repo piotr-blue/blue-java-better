@@ -157,8 +157,11 @@ class NativeStepTest {
           step(context -> {
                 context.replace("/count", 99);
                 context.emit(Map.of("kind", "Never published"));
-                if (exhaust) context.charge("work", 10_000_000);
-                else throw new IllegalStateException("Native bug");
+                if (exhaust) {
+                  context.charge("work", 10_000_000);
+                } else {
+                  throw new IllegalStateException("Native bug");
+                }
               })
               .build();
       try (Contracts.Session session =

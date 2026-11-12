@@ -18,9 +18,10 @@ class LanguageKeyTest {
   void builtInTextAcceptsEveryAdmittedStringKey(boolean nativeReuse) {
     LanguageContext context = Language.create().context();
     context.reuseWithinHostBudget = nativeReuse;
-    for (String key : List.of("", "a", "a/b~c", "ą", "😀", "0", "01", "true"))
+    for (String key : List.of("", "a", "a/b~c", "ą", "😀", "0", "01", "true")) {
       assertDoesNotThrow(
           () -> LanguageSemantics.checkKey(key, LanguageCore.CORE.get("Text"), context));
+    }
   }
 
   @ParameterizedTest

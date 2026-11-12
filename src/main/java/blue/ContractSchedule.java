@@ -49,31 +49,47 @@ final class ContractSchedule {
     this.topology = topology;
     phase.done.removeAll(phase.idle);
     phase.idle.clear();
-    if (!phase.barrier) phase.allowed.addAll(topology.live);
+    if (!phase.barrier) {
+      phase.allowed.addAll(topology.live);
+    }
     Plan plan = topology.schedulePlan;
     if (plan == null
         || !plan.allowed.equals(phase.allowed)
         || !plan.phaseGroups.equals(phase.groups)) {
       plan = compile(phase, topology);
       topology.schedulePlan = plan;
-    } else ContractMetrics.count("schedule.planHits");
+    } else {
+      ContractMetrics.count("schedule.planHits");
+    }
     owner = plan.owner;
     positions = plan.positions;
     groups = plan.groups;
     dependencies = plan.dependencies;
     reverse = plan.reverse;
-    for (var entry : groups.entrySet())
-      if (!phase.barrier && entry.getValue().stream().noneMatch(topology.live::contains))
+    for (var entry : groups.entrySet()) {
+      if (!phase.barrier && entry.getValue().stream().noneMatch(topology.live::contains)) {
         phase.done.add(entry.getKey());
-    if (sparse) completeIdleBranches(phase);
+      }
+    }
+    if (sparse) {
+      completeIdleBranches(phase);
+    }
     for (var entry : dependencies.entrySet()) {
       int count = 0;
-      for (var dependency : entry.getValue()) if (!phase.done.contains(dependency)) count++;
+      for (var dependency : entry.getValue()) {
+        if (!phase.done.contains(dependency)) {
+          count++;
+        }
+      }
       remaining.put(entry.getKey(), count);
-      if (!phase.done.contains(entry.getKey())) pending.add(entry.getKey());
+      if (!phase.done.contains(entry.getKey())) {
+        pending.add(entry.getKey());
+      }
     }
     phase.doneChanges.clear();
-    for (var id : pending) enqueue(id);
+    for (var id : pending) {
+      enqueue(id);
+    }
     ContractMetrics.count("schedule.builds");
   }
 
@@ -88,43 +104,65 @@ final class ContractSchedule {
     java.util.function.Consumer<String> include =
         member -> {
           var id = owner.get(member);
-          if (id != null && !phase.done.contains(id) && working.add(id)) queue.add(id);
+          if (id != null && !phase.done.contains(id) && working.add(id)) {
+            queue.add(id);
+          }
         };
     phase.initialization.keySet().forEach(include);
     phase.pending.forEach(
         (member, inputs) -> {
-          if (!inputs.isEmpty()) include.accept(member);
+          if (!inputs.isEmpty()) {
+            include.accept(member);
+          }
         });
     phase.seeds.forEach(
         (member, inputs) -> {
-          if (!inputs.isEmpty()) include.accept(member);
+          if (!inputs.isEmpty()) {
+            include.accept(member);
+          }
         });
     for (var batch : phase.held) {
       include.accept(batch.source);
       batch.tickets.forEach(ticket -> include.accept(ticket.parent()));
     }
-    for (var id : groups.keySet())
-      if (id.size() > 1 && !phase.done.contains(id) && working.add(id)) queue.add(id);
-    while (!queue.isEmpty())
-      for (var parent : reverse.get(queue.remove()))
-        if (!phase.done.contains(parent) && working.add(parent)) queue.add(parent);
-    for (var id : groups.keySet())
-      if (!working.contains(id) && phase.done.add(id)) phase.idle.add(id);
+    for (var id : groups.keySet()) {
+      if (id.size() > 1 && !phase.done.contains(id) && working.add(id)) {
+        queue.add(id);
+      }
+    }
+    while (!queue.isEmpty()) {
+      for (var parent : reverse.get(queue.remove())) {
+        if (!phase.done.contains(parent) && working.add(parent)) {
+          queue.add(parent);
+        }
+      }
+    }
+    for (var id : groups.keySet()) {
+      if (!working.contains(id) && phase.done.add(id)) {
+        phase.idle.add(id);
+      }
+    }
     ContractMetrics.add("schedule.idleBranchesCompleted", phase.idle.size());
   }
 
   private static Plan compile(ContractRun.Phase phase, ContractTopology topology) {
     var ownership = new HashMap<String, Integer>();
-    for (int i = 0; i < phase.groups.size(); i++)
-      for (String member : phase.groups.get(i)) ownership.put(member, i);
-    for (String member : phase.allowed)
+    for (int i = 0; i < phase.groups.size(); i++) {
+      for (String member : phase.groups.get(i)) {
+        ownership.put(member, i);
+      }
+    }
+    for (String member : phase.allowed) {
       if (!ownership.containsKey(member)) {
         ownership.put(member, phase.groups.size());
         phase.groups.add(ContractCanonical.keys(Set.of(member)));
       }
+    }
     for (var component : topology.components(phase.allowed)) {
       var touched = new HashSet<Integer>();
-      for (String member : component) touched.add(ownership.get(member));
+      for (String member : component) {
+        touched.add(ownership.get(member));
+      }
       ContractMetrics.add("schedule.promotionMemberVisits", component.size());
       if (touched.size() > 1) {
         var union = new TreeSet<String>(ContractCanonical.CODE_POINTS);
@@ -136,7 +174,9 @@ final class ContractSchedule {
         }
         int position = phase.groups.size();
         phase.groups.add(union);
-        for (String member : union) ownership.put(member, position);
+        for (String member : union) {
+          ownership.put(member, position);
+        }
       }
     }
     phase.groups.removeIf(Set::isEmpty);
@@ -150,13 +190,17 @@ final class ContractSchedule {
       groups.put(id, Set.copyOf(group));
       dependencies.put(id, new HashSet<>());
       reverse.put(id, new HashSet<>());
-      for (String member : group) owner.put(member, id);
+      for (String member : group) {
+        owner.put(member, id);
+      }
     }
     for (Edge edge : topology.edges) {
       var from = owner.get(edge.source());
       var to = owner.get(edge.target());
       ContractMetrics.count("schedule.dependencyEdgeVisits");
-      if (from != null && to != null && !from.equals(to)) dependencies.get(from).add(to);
+      if (from != null && to != null && !from.equals(to)) {
+        dependencies.get(from).add(to);
+      }
     }
     dependencies.forEach(
         (group, values) -> values.forEach(dependency -> reverse.get(dependency).add(group)));
@@ -188,15 +232,22 @@ final class ContractSchedule {
     // Topology changes reconstruct the plan and independently reconsider all idle branches.
     if (phase.doneChanges.stream()
         .anyMatch(change -> !change.getValue() && phase.idle.contains(change.getKey()))) {
-      for (var id : phase.idle) phase.completed(id, false);
+      for (var id : phase.idle) {
+        phase.completed(id, false);
+      }
       phase.idle.clear();
       ContractMetrics.count("schedule.idleFallbacks");
     }
     for (var change : phase.doneChanges) {
       var id = change.getKey();
-      if (!groups.containsKey(id)) continue;
-      if (change.getValue()) pending.remove(id);
-      else pending.add(id);
+      if (!groups.containsKey(id)) {
+        continue;
+      }
+      if (change.getValue()) {
+        pending.remove(id);
+      } else {
+        pending.add(id);
+      }
       for (var dependent : reverse.get(id)) {
         remaining.compute(dependent, (k, n) -> n + (change.getValue() ? -1 : 1));
         enqueue(dependent);
@@ -227,7 +278,9 @@ final class ContractSchedule {
     List<String> chosen = null;
     for (String member : members) {
       var id = owner.get(member);
-      if (id != null && (chosen == null || positions.get(id) < positions.get(chosen))) chosen = id;
+      if (id != null && (chosen == null || positions.get(id) < positions.get(chosen))) {
+        chosen = id;
+      }
     }
     return ContractCanonical.keys(chosen == null ? members : groups.get(chosen));
   }
@@ -236,7 +289,9 @@ final class ContractSchedule {
     var result = new HashSet<List<String>>();
     for (String member : members) {
       var id = owner.get(member);
-      if (id != null) result.addAll(dependencies.get(id));
+      if (id != null) {
+        result.addAll(dependencies.get(id));
+      }
     }
     return result;
   }

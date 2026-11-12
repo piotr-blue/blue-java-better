@@ -35,7 +35,9 @@ class GasCompositionTest {
       var result = engine.process(before, Map.of("kind", "tick"), 1);
       assertEquals("APPLIED", result.status(), result.observations().toString());
       assertEquals(1L, ((Number) engine.read(result.document(), "/count")).longValue());
-      if (expected < 0) expected = result.gas();
+      if (expected < 0) {
+        expected = result.gas();
+      }
       assertEquals(expected, result.gas(), "Sibling count " + count);
       String previous = System.getProperty("blue.physical.sparseScheduleDisabled");
       try {
@@ -44,8 +46,11 @@ class GasCompositionTest {
         assertEquals(ordinary.observations(), result.observations());
         assertEquals(ordinary.receipt(), result.receipt());
       } finally {
-        if (previous == null) System.clearProperty("blue.physical.sparseScheduleDisabled");
-        else System.setProperty("blue.physical.sparseScheduleDisabled", previous);
+        if (previous == null) {
+          System.clearProperty("blue.physical.sparseScheduleDisabled");
+        } else {
+          System.setProperty("blue.physical.sparseScheduleDisabled", previous);
+        }
       }
     }
   }
@@ -132,7 +137,9 @@ class GasCompositionTest {
       var restored = limited.importSnapshot(saved, before.identity());
       var result = limited.process(restored, Map.of("kind", "tick"), 1);
       assertEquals(limit == full.gas() ? "APPLIED" : "GAS_LIMIT_EXCEEDED", result.status());
-      if (limit < full.gas()) assertEquals(before.identity(), result.document().identity());
+      if (limit < full.gas()) {
+        assertEquals(before.identity(), result.document().identity());
+      }
     }
   }
 
@@ -242,7 +249,9 @@ class GasCompositionTest {
     for (int count : List.of(1, 3)) {
       var engine = processor(10_000_000);
       var graph = members(count);
-      for (int i = 1; i < count; i++) graph.put("quiet" + i, graph.get("child"));
+      for (int i = 1; i < count; i++) {
+        graph.put("quiet" + i, graph.get("child"));
+      }
       var initialized = engine.admit(graph, "root");
       assertEquals("APPLIED", initialized.status());
       var result = engine.process(initialized.document(), Map.of("kind", "tick"), 1);

@@ -62,10 +62,10 @@ final class BexKernel {
   public Compiled compile(
       Map<String, Object> source, Map<String, Object> definition, String entry) {
     var warnings = new ArrayList<String>();
-    if (definition != null)
+    if (definition != null) {
       for (String field : List.of("functions", "constants")) {
         if (source.get(field) instanceof Map<?, ?> local
-            && definition.get(field) instanceof Map<?, ?> shared)
+            && definition.get(field) instanceof Map<?, ?> shared) {
           local.keySet().stream()
               .filter(shared::containsKey)
               .map(Object::toString)
@@ -78,7 +78,9 @@ final class BexKernel {
                               + "/"
                               + k
                               + " overrides shared definition, including internal calls"));
+        }
       }
+    }
     try {
       return new Compiled(
           new BexPlanCompiler(intrinsics.keySet()).compile(source, definition, entry),
@@ -93,11 +95,13 @@ final class BexKernel {
 
   /** A caller-provided ledger is used directly, including its parent. Compilation is unmetered. */
   public BexEngine.Result execute(Compiled program, BexContext context, BexGas gas) {
-    if (program.owner != this)
+    if (program.owner != this) {
       throw new BexFailure(
           "INCOMPATIBLE_CONTEXT", "Compiled program belongs to another capability context");
-    if (Thread.currentThread().isInterrupted())
+    }
+    if (Thread.currentThread().isInterrupted()) {
       throw new BexFailure("HOST_INCOMPLETE", "Interrupted before execution");
+    }
     try {
       return engine.execute(
           program.program, context.engineContext(), gas, BexEngine.TraceMode.METER_ONLY);

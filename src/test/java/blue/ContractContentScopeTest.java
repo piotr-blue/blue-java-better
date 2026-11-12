@@ -17,8 +17,9 @@ class ContractContentScopeTest {
   void oneMessageDoesNotImportThePublishersUnrelatedCatalogue() {
     Language language = Language.create();
     Language.Builder catalogue = language.toBuilder();
-    for (int i = 0; i < 10_000; i++)
+    for (int i = 0; i < 10_000; i++) {
       catalogue.content(language.prepare(Language.Input.yaml("unrelated: item-" + i)));
+    }
     LanguageContent target = language.prepare(Language.Input.yaml("selected: yes"));
     LanguageContent unread = language.prepare(Language.Input.yaml("unread: private"));
     Language sender = catalogue.content(target).content(unread).build();

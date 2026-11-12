@@ -57,7 +57,9 @@ final class ContractComponents {
               children.get(visit.member()).stream()
                   .sorted(ContractCanonical.CODE_POINTS.reversed())
                   .toList()) {
-            if (!seen.contains(child)) pending.push(new Visit(child, false));
+            if (!seen.contains(child)) {
+              pending.push(new Visit(child, false));
+            }
           }
         }
       }
@@ -69,7 +71,9 @@ final class ContractComponents {
     Set<String> seen = new HashSet<>();
     List<List<String>> groups = new ArrayList<>();
     for (String root : finishingOrder().reversed()) {
-      if (seen.contains(root)) continue;
+      if (seen.contains(root)) {
+        continue;
+      }
       var group = new TreeSet<String>(ContractCanonical.CODE_POINTS);
       var pending = new ArrayDeque<String>();
       pending.push(root);
@@ -104,14 +108,18 @@ final class ContractComponents {
     List<Component> components = groups.stream().map(Component::new).toList();
     Map<String, Component> membership = new HashMap<>();
     for (var component : components) {
-      for (String member : component.members) membership.put(member, component);
+      for (String member : component.members) {
+        membership.put(member, component);
+      }
     }
     children.forEach(
         (member, targets) -> {
           Component parent = membership.get(member);
           for (String target : targets) {
             Component child = membership.get(target);
-            if (parent != child && child.dependents.add(parent)) parent.pendingChildren++;
+            if (parent != child && child.dependents.add(parent)) {
+              parent.pendingChildren++;
+            }
           }
         });
 
@@ -120,14 +128,18 @@ final class ContractComponents {
             Comparator.comparing(
                 component -> component.members, ContractCanonical::compareSegments));
     for (var component : components) {
-      if (component.pendingChildren == 0) ready.add(component);
+      if (component.pendingChildren == 0) {
+        ready.add(component);
+      }
     }
     List<List<String>> ordered = new ArrayList<>(components.size());
     while (!ready.isEmpty()) {
       var child = ready.remove();
       ordered.add(child.members);
       for (var parent : child.dependents) {
-        if (--parent.pendingChildren == 0) ready.add(parent);
+        if (--parent.pendingChildren == 0) {
+          ready.add(parent);
+        }
       }
     }
     require(ordered.size() == components.size(), "INTERNAL_COMPONENT_ORDER");

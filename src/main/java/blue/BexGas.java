@@ -32,7 +32,9 @@ class BexGas {
       "nodeIdentityRequested"
     };
     long[] prices = {1, 1, 2, 1, 1, 1, 1, 2, 1, 3, 2, 5, 5, 1, 2, 1, 1, 1, 5};
-    for (int i = 0; i < names.length; i++) s.put(names[i], prices[i]);
+    for (int i = 0; i < names.length; i++) {
+      s.put(names[i], prices[i]);
+    }
     DEFAULT = Map.copyOf(s);
   }
 
@@ -73,7 +75,9 @@ class BexGas {
 
   public long tariff(String counter) {
     Long price = schedule.get(counter);
-    if (price == null) throw new BexFailure("unknown gas counter: " + counter);
+    if (price == null) {
+      throw new BexFailure("unknown gas counter: " + counter);
+    }
     return price;
   }
 
@@ -113,8 +117,9 @@ class BexGas {
   /** Reject unrepresentable positive costs before the operation starts. */
   static long cost(long price, long units) {
     BexFailure.require(price >= 0 && units >= 0, "invalid charge");
-    if (price != 0 && units > Long.MAX_VALUE / price)
+    if (price != 0 && units > Long.MAX_VALUE / price) {
       throw new BexFailure("GAS_LIMIT_EXCEEDED", "Unrepresentable charge");
+    }
     return price * units;
   }
 
@@ -124,8 +129,9 @@ class BexGas {
 
   public void charge(String counter, long units, long amount) {
     BexFailure.require(units >= 0 && amount >= 0, "invalid charge");
-    if (rejected != null)
+    if (rejected != null) {
       throw new BexFailure("GAS_LIMIT_EXCEEDED", rejected.get("counter").toString());
+    }
     long remaining = (limit < 0 ? Long.MAX_VALUE : limit) - used;
     if (amount > remaining) {
       rejected = chargeRecord(counter, units, amount);

@@ -55,8 +55,9 @@ public class LanguageEvidenceBenchmark {
   public Object previousEntryScan() {
     PMap<String, Object> merged = previousBase;
     for (Map.Entry<String, Object> entry : previousExtension.entrySet()) {
-      if (merged.get(entry.getKey()) != entry.getValue())
+      if (merged.get(entry.getKey()) != entry.getValue()) {
         merged = merged.plus(entry.getKey(), entry.getValue());
+      }
     }
     return merged;
   }

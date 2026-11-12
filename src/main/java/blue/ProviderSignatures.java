@@ -188,15 +188,18 @@ public final class ProviderSignatures {
               && !value.endsWith("/")
               && uri.normalize().equals(uri),
           "INVALID_PROVIDER_ENDPOINT");
-      for (String segment : uri.getPath().split("/", -1))
+      for (String segment : uri.getPath().split("/", -1)) {
         require(!segment.equals(".") && !segment.equals(".."), "INVALID_PROVIDER_ENDPOINT");
+      }
     } catch (IllegalArgumentException invalid) {
       throw failure("INVALID_PROVIDER_ENDPOINT", invalid);
     }
   }
 
   private static void require(boolean accepted, String code) {
-    if (!accepted) throw new BlueException(code, code);
+    if (!accepted) {
+      throw new BlueException(code, code);
+    }
   }
 
   private static BlueException failure(String code, Exception cause) {

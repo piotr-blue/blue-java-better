@@ -16,20 +16,28 @@ final class ProjectionBudget {
   }
 
   void value(int level) {
-    if (level > depth) throw exceeded("nesting depth");
-    if (values == 0) throw exceeded("value count");
+    if (level > depth) {
+      throw exceeded("nesting depth");
+    }
+    if (values == 0) {
+      throw exceeded("value count");
+    }
     values--;
   }
 
   void entry(String key) {
-    if (values == 0) throw exceeded("value count");
+    if (values == 0) {
+      throw exceeded("value count");
+    }
     values--;
     text(key);
   }
 
   void text(Object value) {
     if (value instanceof String text) {
-      if (text.length() > characters) throw exceeded("text length");
+      if (text.length() > characters) {
+        throw exceeded("text length");
+      }
       characters -= text.length();
     }
   }

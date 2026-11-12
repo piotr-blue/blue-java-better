@@ -80,7 +80,9 @@ public final class AdmissionEvidence {
 
   @SuppressWarnings("unchecked")
   private static AdmissionEvidence capture(Map<String, Object> copy) {
-    if (copy.isEmpty()) return EMPTY;
+    if (copy.isEmpty()) {
+      return EMPTY;
+    }
     return Contracts.boundary(
         () -> {
           try {

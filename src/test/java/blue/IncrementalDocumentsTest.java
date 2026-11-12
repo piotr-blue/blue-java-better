@@ -44,8 +44,9 @@ class IncrementalDocumentsTest {
           "usable",
           session.read(itemPath(key) + "/status"),
           () -> session.read("/documents/" + escape(key)).toString() + result.events());
-      for (int i = 0; i < 12; i++)
+      for (int i = 0; i < 12; i++) {
         assertEquals("selected", session.read(itemPath("other" + i) + "/status"));
+      }
       assertEquals(1, result.events().size());
       var repeated =
           session
@@ -68,8 +69,9 @@ class IncrementalDocumentsTest {
     try (Contracts.Session session = open("one", 4, false)) {
       session.process(m("path", "/documents", "op", "replace"), 1).requireApplied();
       assertEquals("usable", session.read(itemPath("one") + "/status"));
-      for (int i = 0; i < 4; i++)
+      for (int i = 0; i < 4; i++) {
         assertEquals("usable", session.read(itemPath("other" + i) + "/status"));
+      }
     }
   }
 
@@ -86,8 +88,9 @@ class IncrementalDocumentsTest {
   void unknownHooksKeepCollectionWideSemantics() {
     try (Contracts.Session session = open("one", 4, true)) {
       session.process(m("sourcePath", "/documents/one"), 1).requireApplied();
-      for (int i = 0; i < 4; i++)
+      for (int i = 0; i < 4; i++) {
         assertEquals("usable", session.read(itemPath("other" + i) + "/status"));
+      }
     }
   }
 
@@ -191,7 +194,9 @@ class IncrementalDocumentsTest {
   static Contracts.Session open(String selected, int others, boolean global) {
     Map<String, Object> documents = new LinkedHashMap<>(), entries = new LinkedHashMap<>();
     add(documents, entries, selected);
-    for (int i = 0; i < others; i++) add(documents, entries, "other" + i);
+    for (int i = 0; i < others; i++) {
+      add(documents, entries, "other" + i);
+    }
     Object clauseType =
         global
             ? m(

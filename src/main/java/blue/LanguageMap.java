@@ -24,7 +24,9 @@ final class LanguageMap<K, V> extends AbstractMap<K, V> {
       return persistent;
     }
     LanguageTrie<K, V> result = LanguageTrie.empty();
-    for (var entry : source.entrySet()) result = result.with(entry.getKey(), entry.getValue());
+    for (var entry : source.entrySet()) {
+      result = result.with(entry.getKey(), entry.getValue());
+    }
     return result;
   }
 
@@ -66,9 +68,12 @@ final class LanguageMap<K, V> extends AbstractMap<K, V> {
   @Override
   @SuppressWarnings("unchecked")
   public void putAll(Map<? extends K, ? extends V> source) {
-    if (source.isEmpty() || source == this || source == values) return;
-    if (source instanceof LanguageMap<?, ?> local)
+    if (source.isEmpty() || source == this || source == values) {
+      return;
+    }
+    if (source instanceof LanguageMap<?, ?> local) {
       source = (Map<? extends K, ? extends V>) local.values;
+    }
     if (source instanceof LanguageTrie<?, ?> persistent) {
       values = values.union((LanguageTrie<K, V>) persistent);
       return;

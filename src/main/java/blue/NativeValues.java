@@ -13,13 +13,17 @@ final class NativeValues {
   private final Map<Object, Object> snapshots = new IdentityHashMap<>();
 
   Object freeze(Object value) {
-    if (snapshots.containsKey(value)) return snapshots.get(value);
+    if (snapshots.containsKey(value)) {
+      return snapshots.get(value);
+    }
     Object result =
         ContractNative.access(
             () -> snapshot(value, new ProjectionBudget(ProjectionLimits.defaults()), 0));
     if (value instanceof Map<?, ?>
         || value instanceof List<?>
-        || value instanceof BexValues.HostValue) snapshots.put(value, result);
+        || value instanceof BexValues.HostValue) {
+      snapshots.put(value, result);
+    }
     return result;
   }
 
@@ -39,8 +43,9 @@ final class NativeValues {
   }
 
   private Object snapshot(Object value, ProjectionBudget budget, int depth) {
-    if (value instanceof ContractBridge.ExactView view)
+    if (value instanceof ContractBridge.ExactView view) {
       return BexValues.freeze(view.bridge.project(view.recipe, budget, depth));
+    }
     budget.value(depth);
     if (value instanceof Map<?, ?> map) {
       Map<String, Object> copy = new LinkedHashMap<>();
@@ -54,7 +59,9 @@ final class NativeValues {
     }
     if (value instanceof List<?> list) {
       List<Object> copy = new ArrayList<>();
-      for (Object item : list) copy.add(snapshot(item, budget, depth + 1));
+      for (Object item : list) {
+        copy.add(snapshot(item, budget, depth + 1));
+      }
       return BexValues.freeze(copy);
     }
     budget.text(value);

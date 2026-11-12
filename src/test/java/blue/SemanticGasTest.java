@@ -71,7 +71,9 @@ class SemanticGasTest {
         assertEquals(expected.used, actual.used(), "budget " + limit);
         assertEquals(
             expected.rejected, actual.rejected() == null ? null : actual.rejected().get("counter"));
-        if (expected.rejected == null) assertEquals(value, result);
+        if (expected.rejected == null) {
+          assertEquals(value, result);
+        }
       }
     }
   }
@@ -100,7 +102,9 @@ class SemanticGasTest {
   @Test
   void deepOperandsUseHeapContinuationsAndUnselectedBranchesAreLazy() {
     Object expression = true;
-    for (int i = 0; i < 20_000; i++) expression = Map.of("$not", expression);
+    for (int i = 0; i < 20_000; i++) {
+      expression = Map.of("$not", expression);
+    }
     assertEquals(true, run(expression, meter(20_004)).value());
     Object lazy =
         Map.of(
@@ -111,8 +115,9 @@ class SemanticGasTest {
   @Test
   void deepStatementsAndValueComparisonsDoNotUseTheJavaCallStack() {
     Object statement = Map.of("$return", 7);
-    for (int i = 0; i < 5000; i++)
+    for (int i = 0; i < 5000; i++) {
       statement = Map.of("$if", Map.of("cond", true, "then", List.of(statement)));
+    }
     assertEquals(
         BigInteger.valueOf(7),
         new BexEngine()
@@ -125,7 +130,9 @@ class SemanticGasTest {
     }
     assertTrue(BexValues.equal(a, b, meter(25_000)));
     Object unequal = 2;
-    for (int i = 0; i < 20_000; i++) unequal = List.of(unequal);
+    for (int i = 0; i < 20_000; i++) {
+      unequal = List.of(unequal);
+    }
     assertFalse(BexValues.equal(a, unequal, meter(25_000)));
   }
 
@@ -135,7 +142,9 @@ class SemanticGasTest {
     String path = "/x".repeat(12_000);
     var gas = meter(100_000);
     Object output = BexValues.overlay(input, path, BigInteger.ONE, false, gas);
-    for (int i = 0; i < 12_000; i++) output = BexValues.get(output, "x");
+    for (int i = 0; i < 12_000; i++) {
+      output = BexValues.get(output, "x");
+    }
     assertEquals(BigInteger.ONE, output);
     assertEquals(Map.of("untouched", BigInteger.TEN), input);
   }
@@ -203,7 +212,9 @@ class SemanticGasTest {
   }
 
   private static Object tree(Random random, int depth) {
-    if (depth == 0 || random.nextInt(3) == 0) return random.nextInt(20);
+    if (depth == 0 || random.nextInt(3) == 0) {
+      return random.nextInt(20);
+    }
     return Map.of(
         random.nextBoolean() ? "$add" : "$multiply",
         List.of(tree(random, depth - 1), tree(random, depth - 1)));
@@ -231,7 +242,9 @@ class SemanticGasTest {
 
     BigInteger eval(Object expression) {
       pay("expressionBase", 1);
-      if (expression instanceof Integer number) return BigInteger.valueOf(number);
+      if (expression instanceof Integer number) {
+        return BigInteger.valueOf(number);
+      }
       Map<?, ?> map = (Map<?, ?>) expression;
       String operator = (String) map.keySet().iterator().next();
       List<?> values = (List<?>) map.get(operator);

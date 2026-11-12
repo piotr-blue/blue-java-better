@@ -62,8 +62,11 @@ class ContractStructuralReuseTest {
             session.snapshot());
       }
     } finally {
-      if (previous == null) System.clearProperty(property);
-      else System.setProperty(property, previous);
+      if (previous == null) {
+        System.clearProperty(property);
+      } else {
+        System.setProperty(property, previous);
+      }
     }
   }
 

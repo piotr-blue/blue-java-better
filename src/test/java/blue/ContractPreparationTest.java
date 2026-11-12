@@ -172,7 +172,9 @@ class ContractPreparationTest {
                   rows.put(member, row);
                 });
         selectedPreparation.put("documents", rows);
-      } else selectedCheckpoint.put("content", Map.of());
+      } else {
+        selectedCheckpoint.put("content", Map.of());
+      }
       try (var restored =
           Contracts.Execution.using(
               configuration,
@@ -342,7 +344,9 @@ class ContractPreparationTest {
         assertEquals(expected.transition().observations(), actual.transition().observations());
         assertEquals(expected.transition().receipt(), actual.transition().receipt());
         assertEquals(expected.after().blueId(), actual.after().blueId());
-        if (!expected.applied()) break;
+        if (!expected.applied()) {
+          break;
+        }
         plain = expected.after();
         cached = actual.after();
       }

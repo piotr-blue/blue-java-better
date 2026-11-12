@@ -38,7 +38,9 @@ final class ContractLocalCheckpoint {
 
   private static BindingInputs bindingInputs(ContractProcessor engine, Document document) {
     var declaration = engine.registry.contracts(document).get("embedded");
-    if (declaration == null) return new BindingInputs(null, List.of());
+    if (declaration == null) {
+      return new BindingInputs(null, List.of());
+    }
     var selected = new ArrayList<String>();
     for (String field : List.of("paths", "collectionPaths")) {
       for (Object raw : arr(declaration.getOrDefault(field, List.of()))) {
@@ -52,8 +54,9 @@ final class ContractLocalCheckpoint {
 
   private static String bindingCommitment(
       ContractProcessor engine, Snapshot state, Document document) {
-    if (!state.ownerLocal)
+    if (!state.ownerLocal) {
       return digest("contracts.local-bindings/1", bindings(engine, state, document));
+    }
     BindingInputs inputs = bindingInputs(engine, document);
     BindingMemo previous = document.bindingMemo;
     if (previous != null
@@ -71,17 +74,24 @@ final class ContractLocalCheckpoint {
     if (!state.ownerLocal) {
       var topology = ContractTopology.of(state);
       if (topology.components(state.documents.keySet()).stream().anyMatch(g -> g.size() > 1)
-          || state.documents.keySet().stream().anyMatch(topology::selfLinked)) return Map.of();
+          || state.documents.keySet().stream().anyMatch(topology::selfLinked)) {
+        return Map.of();
+      }
       // A false predicate on an otherwise idle source still consumes semantic gas. Such graphs
       // require the ordinary selection prefix until a priced selection summary is available.
-      for (var document : state.documents.values())
-        for (var declaration : engine.registry.contracts(document).values())
-          if ("external".equals(declaration.get("_role")) && declaration.containsKey("event"))
+      for (var document : state.documents.values()) {
+        for (var declaration : engine.registry.contracts(document).values()) {
+          if ("external".equals(declaration.get("_role")) && declaration.containsKey("event")) {
             return Map.of();
+          }
+        }
+      }
     }
     Document document = state.documents.get(state.root);
     if (engine.registry.marker(document, "initialized") == null
-        || engine.registry.marker(document, "terminated") != null) return Map.of();
+        || engine.registry.marker(document, "terminated") != null) {
+      return Map.of();
+    }
     var record =
         m(
             "format",
@@ -108,8 +118,11 @@ final class ContractLocalCheckpoint {
             ContractPreparations.exportRow(engine, document, true));
     // A local collection birth seals the exact body and generation map in member metadata.
     // Full recovery validates every declared path against the pinned graph with verifyEdges.
-    if (state.verifyGraphBindings) record.put("verifyGraphBindings", true);
-    else record.put("bindings", bindingCommitment(engine, state, document));
+    if (state.verifyGraphBindings) {
+      record.put("verifyGraphBindings", true);
+    } else {
+      record.put("bindings", bindingCommitment(engine, state, document));
+    }
     record.put("identity", digest(FORMAT, record));
     return obj(ContractWire.immutable(record));
   }
@@ -119,17 +132,20 @@ final class ContractLocalCheckpoint {
       ContractProcessor engine, Snapshot state, Document document) {
     var result = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
     if (!state.ownerLocal) {
-      for (var edge : ContractTopology.of(state).outgoingEdges(document.key))
+      for (var edge : ContractTopology.of(state).outgoingEdges(document.key)) {
         result.put(
             edge.path(), List.of(edge.generation(), state.documents.get(edge.target()).blueId));
+      }
     } else {
       // A partial owner has no sibling graph. Its committed body still contains exact references.
-      for (String path : new ContractGraph(state, engine.registry, engine.archive).paths(document))
+      for (String path :
+          new ContractGraph(state, engine.registry, engine.archive).paths(document)) {
         result.put(
             path,
             List.of(
                 document.edgeSerials.get(path),
                 identity(engine.blue.exact(engine.blue.select(document.body, path)))));
+      }
     }
     return result;
   }
@@ -144,7 +160,9 @@ final class ContractLocalCheckpoint {
         ContractPreparations.environment(engine.registry).equals(record.get("environment")),
         "INCOMPATIBLE_RUNTIME_BINDINGS");
     var wire = new LinkedHashMap<String, Object>();
-    for (String key : SNAPSHOT_FIELDS) wire.put(key, record.get(key));
+    for (String key : SNAPSHOT_FIELDS) {
+      wire.put(key, record.get(key));
+    }
     wire.put("documents", List.of(record.get("member")));
     wire.put("edges", List.of());
     var state = ContractStorage.restore(engine, wire, true);
@@ -153,9 +171,10 @@ final class ContractLocalCheckpoint {
     require(
         state.documents.size() == 1 && state.documents.containsKey(state.root),
         "INVALID_LOCAL_CHECKPOINT");
-    if (engine.registry.preparations == null)
+    if (engine.registry.preparations == null) {
       engine.registry.preparations =
           new ContractPreparations(engine.registry, key -> Optional.empty());
+    }
     var document = state.documents.get(state.root);
     engine.blue.context.retainLocalClosure(document.blueId);
     require(record.get("concrete") instanceof Boolean, "INVALID_LOCAL_CHECKPOINT");
@@ -164,9 +183,10 @@ final class ContractLocalCheckpoint {
         engine.registry, document, obj(record.get("preparation")));
     // This is the protected local recovery boundary, not an untrusted proof import. Reuse
     // the committed binding digest only while every exact selector input is unchanged.
-    if (record.get("bindings") instanceof String commitment)
+    if (record.get("bindings") instanceof String commitment) {
       document.bindingMemo =
           new BindingMemo(document.edgeSerials, bindingInputs(engine, document), commitment);
+    }
     ContractMetrics.count("contracts.local.restoredOwners");
     return state;
   }
@@ -176,7 +196,9 @@ final class ContractLocalCheckpoint {
       List<Map<String, Object>> members,
       List<Contracts.Embedding> edges) {
     var wire = new LinkedHashMap<String, Object>();
-    for (String key : SNAPSHOT_FIELDS) wire.put(key, root.get(key));
+    for (String key : SNAPSHOT_FIELDS) {
+      wire.put(key, root.get(key));
+    }
     var documents = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
     for (var member : members) {
       var copy = new LinkedHashMap<>(member);
@@ -220,8 +242,9 @@ final class ContractLocalCheckpoint {
       require(
           Objects.equals(member.get("root"), obj(member.get("member")).get("key")),
           "INVALID_LOCAL_CHECKPOINT");
-      for (String field : List.of("release", "gasSchedule", "runtimes"))
+      for (String field : List.of("release", "gasSchedule", "runtimes")) {
         require(Objects.equals(root.get(field), member.get(field)), "INCOMPATIBLE_LOCAL_METADATA");
+      }
       if (Objects.equals(root.get("root"), member.get("root"))) {
         require(root.equals(member), "INCOMPATIBLE_LOCAL_METADATA");
         foundRoot = true;
@@ -229,16 +252,19 @@ final class ContractLocalCheckpoint {
     }
     require(foundRoot, "MISSING_ROOT_DOCUMENT");
     Snapshot state = ContractStorage.restore(engine, obj(envelope.get("snapshot")), true);
-    if (engine.registry.preparations == null)
+    if (engine.registry.preparations == null) {
       engine.registry.preparations =
           new ContractPreparations(engine.registry, key -> Optional.empty());
+    }
     for (var member : members) {
       Document document = state.documents.get(str(member.get("root")));
       engine.blue.context.retainLocalClosure(document.blueId);
       engine.blue.context.restoreConcrete(document.blueId, (boolean) member.get("concrete"));
       engine.registry.preparations.installMember(
           engine.registry, document, obj(member.get("preparation")));
-      if (member.containsKey("bindings")) restoreBindings(engine, state, document, member);
+      if (member.containsKey("bindings")) {
+        restoreBindings(engine, state, document, member);
+      }
     }
     // Legacy checkpoints re-open bodies. New checkpoints check the supplied cut against exact
     // references retained by native publication; neither invents a full preparation predecessor.
@@ -292,10 +318,11 @@ final class ContractLocalCheckpoint {
     require(
         FORMAT.equals(copy.get("format")) && digest(FORMAT, copy).equals(id),
         "INVALID_LOCAL_CHECKPOINT");
-    for (String field : SNAPSHOT_FIELDS)
+    for (String field : SNAPSHOT_FIELDS) {
       require(
           Objects.equals(checkpoint.get(field), metadata.get(field)),
           "INCOMPATIBLE_LOCAL_METADATA");
+    }
     var own =
         arr(metadata.get("documents")).stream()
             .map(ContractModel::obj)

@@ -39,8 +39,9 @@ class CanonicalConfigurationTest {
             "ContractOwners",
             "ExecutionProfile",
             "Program",
-            "ContractState"))
+            "ContractState")) {
       assertThrows(ClassNotFoundException.class, () -> Class.forName("blue." + name), name);
+    }
   }
 
   @Test
@@ -49,8 +50,12 @@ class CanonicalConfigurationTest {
     Map<String, Object> expected = observation(shared);
     try (var executor = Executors.newFixedThreadPool(4)) {
       List<Future<Map<String, Object>>> results = new ArrayList<>();
-      for (int i = 0; i < 32; i++) results.add(executor.submit(() -> observation(shared)));
-      for (var result : results) assertEquals(expected, result.get());
+      for (int i = 0; i < 32; i++) {
+        results.add(executor.submit(() -> observation(shared)));
+      }
+      for (var result : results) {
+        assertEquals(expected, result.get());
+      }
     }
     assertEquals(expected, observation(Contracts.newBuilder().enableDocumentDispatch().build()));
   }

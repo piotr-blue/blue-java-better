@@ -115,7 +115,9 @@ class ProjectionLimitsTest {
         merge(result, shape(entry.getValue(), depth + 1));
       }
     } else if (value instanceof List<?> list) {
-      for (Object item : list) merge(result, shape(item, depth + 1));
+      for (Object item : list) {
+        merge(result, shape(item, depth + 1));
+      }
     }
     return result;
   }

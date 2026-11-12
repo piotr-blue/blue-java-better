@@ -44,8 +44,9 @@ class CanonicalTransactionTest {
           candidate = transaction.reception();
           snapshot = transaction.snapshot();
           candidateGraph = transaction.graph();
-          for (var member : candidateGraph.members())
+          for (var member : candidateGraph.members()) {
             candidateOperations.put(member.key(), transaction.operations(member.key()));
+          }
           assertThrows(BlueException.class, () -> transaction.operations("absent"));
           assertEquals(transaction.identity(), candidate.snapshotIdentity());
           assertEquals(transaction.identity(), snapshot.get("identity"));
@@ -127,8 +128,9 @@ class CanonicalTransactionTest {
           Contracts.Session incremental = contracts.restore(direct.snapshot(), direct.identity())) {
         String before = direct.identity();
         compare(direct, incremental, m("target", "a"), 1, !fail);
-        if (fail) assertEquals(before, incremental.identity());
-        else {
+        if (fail) {
+          assertEquals(before, incremental.identity());
+        } else {
           assertEquals("1", incremental.read("/count").toString());
           assertEquals("1", incremental.read("/peer/count").toString());
           assertEquals("1", incremental.read("/peer/peer/count").toString());
@@ -140,8 +142,9 @@ class CanonicalTransactionTest {
     @ValueSource(ints = {1, 2, 3})
     void feedbackCyclesAdvanceInCanonicalRounds(int size) {
       Map<String, Object> members = new java.util.LinkedHashMap<>();
-      for (int i = 0; i < size; i++)
+      for (int i = 0; i < size; i++) {
         members.put("n" + i, feedbackMember("n" + i, "n" + ((i + 1) % size), false));
+      }
       ContractProcessor source = new ContractProcessor();
       ContractProcessor.Result initial = source.admit(members, "n0");
       assertEquals("APPLIED", initial.status());

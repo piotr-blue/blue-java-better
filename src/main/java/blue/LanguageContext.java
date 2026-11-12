@@ -73,18 +73,26 @@ final class LanguageContext {
 
   /** Ordinary admission stays mutable; captured views switch once to persistent memo roots. */
   void snapshotHeadsTo(LanguageContext copy) {
-    if (memoScope != null) memoScope.attach(copy);
-    if (!(heads instanceof LanguageMap<?, ?>)) heads = new LanguageMap<>(heads);
+    if (memoScope != null) {
+      memoScope.attach(copy);
+    }
+    if (!(heads instanceof LanguageMap<?, ?>)) {
+      heads = new LanguageMap<>(heads);
+    }
     copy.heads = new LanguageMap<>(heads);
     // Both contexts retain the same verified immutable content. Completed semantic checks
     // are reusable too. Temporary Timeline facts require a shared revocation scope.
     if (establishedValues.isEmpty() || memoScope != null) {
-      if (!(concreteFacts instanceof LanguageMap<?, ?>))
+      if (!(concreteFacts instanceof LanguageMap<?, ?>)) {
         concreteFacts = new LanguageMap<>(concreteFacts);
+      }
       copy.concreteFacts = new LanguageMap<>(concreteFacts);
-      if (!(validation instanceof LanguageSet<?>)) validation = new LanguageSet<>(validation);
-      if (!(verifiedClosures instanceof LanguageSet<?>))
+      if (!(validation instanceof LanguageSet<?>)) {
+        validation = new LanguageSet<>(validation);
+      }
+      if (!(verifiedClosures instanceof LanguageSet<?>)) {
         verifiedClosures = new LanguageSet<>(verifiedClosures);
+      }
       copy.validation = new LanguageSet<>(validation);
       copy.verifiedClosures = new LanguageSet<>(verifiedClosures);
     }
@@ -177,9 +185,13 @@ final class LanguageContext {
   }
 
   Value retainedBody(Value body) {
-    if (durableClosures.isEmpty()) return body;
+    if (durableClosures.isEmpty()) {
+      return body;
+    }
     String id = identity(body);
-    if (!durableClosures.contains(id)) return body;
+    if (!durableClosures.contains(id)) {
+      return body;
+    }
     if (expansionEvidence != verifiedClosures
         || expansionFacts != facts
         || expansionStorage != durableClosures
@@ -193,30 +205,47 @@ final class LanguageContext {
     boolean storage = !durableClosures.expanded(id);
     // Evidence is monotonic within this context. A new branch or revoked scope gets a fresh memo.
     boolean verified = verifiedClosures.contains(id) && !expandedVerifiedClosures.contains(id);
-    if (!storage && !verified) return body;
-    for (var field : body.fields().entrySet()) {
-      if (field.getValue() instanceof ExactNode child) retainedChild(child, storage, verified);
-      else if (field.getKey().equals("items"))
-        for (ExactNode child : exactItems(field.getValue()))
-          retainedChild(child, storage, verified);
+    if (!storage && !verified) {
+      return body;
     }
-    if (storage) durableClosures.complete(id);
-    if (verified) expandedVerifiedClosures.add(id);
+    for (var field : body.fields().entrySet()) {
+      if (field.getValue() instanceof ExactNode child) {
+        retainedChild(child, storage, verified);
+      } else if (field.getKey().equals("items")) {
+        for (ExactNode child : exactItems(field.getValue())) {
+          retainedChild(child, storage, verified);
+        }
+      }
+    }
+    if (storage) {
+      durableClosures.complete(id);
+    }
+    if (verified) {
+      expandedVerifiedClosures.add(id);
+    }
     return body;
   }
 
   private void retainedChild(ExactNode child, boolean storage, boolean verified) {
     String id = identity(child);
-    if (storage) durableClosures.add(id);
+    if (storage) {
+      durableClosures.add(id);
+    }
     if (verified) {
       verifiedClosures.add(id);
-      if (facts != null) facts.restoredClosure(id);
+      if (facts != null) {
+        facts.restoredClosure(id);
+      }
     }
   }
 
   ExactNode remember(ExactNode value) {
-    if (onRemember != null) onRemember.accept(value);
-    if (providerDepth == 0 && onConstruct != null) onConstruct.accept(value);
+    if (onRemember != null) {
+      onRemember.accept(value);
+    }
+    if (providerDepth == 0 && onConstruct != null) {
+      onConstruct.accept(value);
+    }
     if (value instanceof Value body) {
       Value selected = rememberBody(body);
       if (body.has("items") && body.fields().size() > 1) {
@@ -232,26 +261,44 @@ final class LanguageContext {
   private Value rememberBody(Value offered) {
     String id = identity(offered);
     Value previous = bodies.get(id);
-    if (previous != null && sameMaterialization(previous, offered)) return previous;
+    if (previous != null && sameMaterialization(previous, offered)) {
+      return previous;
+    }
     bodies.put(id, offered);
     return offered;
   }
 
   private static boolean sameMaterialization(Value left, Value right) {
-    if (!left.fields().keySet().equals(right.fields().keySet())) return false;
-    for (var field : left.fields().entrySet())
-      if (!sameField(field.getValue(), right.get(field.getKey()))) return false;
+    if (!left.fields().keySet().equals(right.fields().keySet())) {
+      return false;
+    }
+    for (var field : left.fields().entrySet()) {
+      if (!sameField(field.getValue(), right.get(field.getKey()))) {
+        return false;
+      }
+    }
     return true;
   }
 
   private static boolean sameField(Object left, Object right) {
-    if (left == right) return true;
-    if (left instanceof Ref a && right instanceof Ref b)
+    if (left == right) {
+      return true;
+    }
+    if (left instanceof Ref a && right instanceof Ref b) {
       return a.id().equals(b.id()) && a.body() == b.body();
-    if (left instanceof ExactNode || right instanceof ExactNode) return false;
+    }
+    if (left instanceof ExactNode || right instanceof ExactNode) {
+      return false;
+    }
     if (left instanceof List<?> a && right instanceof List<?> b) {
-      if (a.size() != b.size()) return false;
-      for (int i = 0; i < a.size(); i++) if (!sameField(a.get(i), b.get(i))) return false;
+      if (a.size() != b.size()) {
+        return false;
+      }
+      for (int i = 0; i < a.size(); i++) {
+        if (!sameField(a.get(i), b.get(i))) {
+          return false;
+        }
+      }
       return true;
     }
     return Objects.equals(left, right);

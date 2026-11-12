@@ -23,7 +23,9 @@ class LanguageFactSnapshotTest {
   @Test
   void verifiedSnapshotRetainsCompletedChecksWithoutRewalkingTheDocument() {
     List<ExactNode> items = new ArrayList<>();
-    for (int i = 0; i < 200; i++) items.add(scalar("Text", "value-" + i));
+    for (int i = 0; i < 200; i++) {
+      items.add(scalar("Text", "value-" + i));
+    }
     ExactNode original = list(items);
     LanguageContext source = new LanguageContext();
     LanguageSemantics.strict(original, source, "value");

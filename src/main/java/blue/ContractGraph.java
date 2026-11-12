@@ -41,11 +41,14 @@ final class ContractGraph {
   /** Exact immutable inputs to a previously completed containing-reference check. */
   record FinalizedLinks(ExactNode body, String blueId, List<Edge> edges, List<String> targets) {
     boolean matches(Document document, List<Edge> current, Snapshot state) {
-      if (body != document.body || !blueId.equals(document.blueId) || !edges.equals(current))
+      if (body != document.body || !blueId.equals(document.blueId) || !edges.equals(current)) {
         return false;
-      for (int i = 0; i < current.size(); i++)
-        if (!targets.get(i).equals(state.documents.get(current.get(i).target()).blueId))
+      }
+      for (int i = 0; i < current.size(); i++) {
+        if (!targets.get(i).equals(state.documents.get(current.get(i).target()).blueId)) {
           return false;
+        }
+      }
       return true;
     }
   }
@@ -81,8 +84,12 @@ final class ContractGraph {
       roots.forEach(
           (k, ids) -> {
             String selected = choices.get(k);
-            if (selected == null && ids.size() == 1) selected = ids.keySet().iterator().next();
-            if (selected != null) out.put(k, selected);
+            if (selected == null && ids.size() == 1) {
+              selected = ids.keySet().iterator().next();
+            }
+            if (selected != null) {
+              out.put(k, selected);
+            }
           });
       return out;
     }
@@ -105,10 +112,13 @@ final class ContractGraph {
 
     Snapshot get(String id) {
       var candidates = roots.get(id);
-      if (candidates == null) return null;
+      if (candidates == null) {
+        return null;
+      }
       String selected = choices.get(id);
-      if (selected == null && candidates.size() == 1)
+      if (selected == null && candidates.size() == 1) {
         selected = candidates.keySet().iterator().next();
+      }
       require(selected != null, "AMBIGUOUS_PROCESS_VIEW", "blueId", id);
       return versions.get(selected).copy();
     }
@@ -156,9 +166,13 @@ final class ContractGraph {
     if (m != null) {
       logical = inherited == null ? new ContractWork(blue, m) : inherited;
       logical.noteRoots(s.documents);
-      if (inherited == null)
-        for (Document d : s.documents.values())
-          if (!d.blueId.isEmpty()) logical.carriedRoots.add(d.blueId);
+      if (inherited == null) {
+        for (Document d : s.documents.values()) {
+          if (!d.blueId.isEmpty()) {
+            logical.carriedRoots.add(d.blueId);
+          }
+        }
+      }
       if (inherited == null) {
         logical.boundIdentities.addAll(r.types.values());
         logical.boundIdentities.add(r.specification);
@@ -177,7 +191,9 @@ final class ContractGraph {
     }
 
     ExactNode get(String key) {
-      if (changes.containsKey(key)) return changes.get(key);
+      if (changes.containsKey(key)) {
+        return changes.get(key);
+      }
       Document document = baseline.get(key);
       return document == null || document.blueId.isEmpty() ? null : document.body;
     }
@@ -194,7 +210,9 @@ final class ContractGraph {
   }
 
   void charge(String c) {
-    if (meter != null) meter.contracts(c);
+    if (meter != null) {
+      meter.contracts(c);
+    }
   }
 
   boolean terminated(String k) {
@@ -211,7 +229,9 @@ final class ContractGraph {
 
   Set<String> reachable(String root, boolean active, Set<String> terminating) {
     var index = topology();
-    if (!active && root.equals(state.root)) return index.live;
+    if (!active && root.equals(state.root)) {
+      return index.live;
+    }
     return reachable(
         root, index.outgoing, k -> active && (terminating.contains(k) || terminated(k)));
   }
@@ -222,8 +242,9 @@ final class ContractGraph {
 
   static Map<String, List<String>> outgoing(Snapshot snapshot) {
     var outgoing = new HashMap<String, List<String>>();
-    for (Edge edge : snapshot.edges.values())
+    for (Edge edge : snapshot.edges.values()) {
       outgoing.computeIfAbsent(edge.source(), k -> new ArrayList<>()).add(edge.target());
+    }
     return outgoing;
   }
 
@@ -236,9 +257,13 @@ final class ContractGraph {
     pending.push(root);
     while (!pending.isEmpty()) {
       String k = pending.pop();
-      if (seen.contains(k) || excluded.test(k)) continue;
+      if (seen.contains(k) || excluded.test(k)) {
+        continue;
+      }
       seen.add(k);
-      for (String target : outgoing.getOrDefault(k, List.of())) pending.push(target);
+      for (String target : outgoing.getOrDefault(k, List.of())) {
+        pending.push(target);
+      }
     }
     return seen;
   }
@@ -288,8 +313,9 @@ final class ContractGraph {
         values = new HashMap<>();
         documents.forEach(
             (key, document) -> {
-              if (live.contains(key) && !document.blueId.isEmpty())
+              if (live.contains(key) && !document.blueId.isEmpty()) {
                 values.computeIfAbsent(document.blueId, unused -> new HashSet<>()).add(key);
+              }
             });
         ContractMetrics.add("graph.aliasIndex.memberVisits", documents.size());
       }
@@ -310,33 +336,53 @@ final class ContractGraph {
   }
 
   private List<String> declaredPaths(ExactNode body, Map<String, Object> e) {
-    if (e == null) return List.of();
+    if (e == null) {
+      return List.of();
+    }
     require(e.get("_role").equals("embedding"), "INVALID_EMBEDDING");
     var paths = new ArrayList<String>();
     boolean first = pathHeaders.add(identity(blue.exact(e.get("_recipe"))));
     for (Object raw : arr(e.getOrDefault("paths", List.of()))) {
       String p = str(raw);
-      if (first) charge("embeddedPathEntryRead");
+      if (first) {
+        charge("embeddedPathEntryRead");
+      }
       var parts = segments(p);
-      if (first) for (String ignored : parts) charge("embeddedPathSegmentValidated");
+      if (first) {
+        for (String ignored : parts) {
+          charge("embeddedPathSegmentValidated");
+        }
+      }
       require(
           !parts.isEmpty() && !parts.contains("") && !parts.getFirst().equals("contracts"),
           "INVALID_EMBEDDED_PATH");
-      if (blue.select(body, p) != null) paths.add(p);
+      if (blue.select(body, p) != null) {
+        paths.add(p);
+      }
     }
     for (Object raw : arr(e.getOrDefault("collectionPaths", List.of()))) {
       String base = str(raw);
-      if (first) charge("embeddedPathEntryRead");
+      if (first) {
+        charge("embeddedPathEntryRead");
+      }
       var parts = segments(base);
-      if (first) for (String ignored : parts) charge("embeddedPathSegmentValidated");
+      if (first) {
+        for (String ignored : parts) {
+          charge("embeddedPathSegmentValidated");
+        }
+      }
       require(!parts.isEmpty() && !parts.getFirst().equals("contracts"), "INVALID_EMBEDDED_PATH");
       var r = blue.select(body, base);
-      if (r == null) continue;
+      if (r == null) {
+        continue;
+      }
       var h = blue.head(r);
       require(
           Set.of("object", "none").contains(h.kind) && h.items == null && h.value == ABSENT,
           "EMBEDDED_COLLECTION_NOT_OBJECT");
-      for (String name : h.fields.keySet()) paths.add(base + pointer(List.of(name)));
+      for (String name : h.fields.keySet()) {
+        paths.add(base + pointer(List.of(name)));
+      }
     }
     return orderPaths(paths);
   }
@@ -345,7 +391,9 @@ final class ContractGraph {
     require(new HashSet<>(paths).size() == paths.size(), "DUPLICATE_EMBEDDED_PATH");
     record Path(String text, List<String> parts) {}
     var ordered = new ArrayList<Path>(paths.size());
-    for (String path : paths) ordered.add(new Path(path, segments(path)));
+    for (String path : paths) {
+      ordered.add(new Path(path, segments(path)));
+    }
     ordered.sort((a, b) -> ContractCanonical.compareSegments(a.parts, b.parts));
     // In segment-lexicographic order, an ancestor immediately precedes its first
     // descendant. Adjacent checks are sufficient; unrelated sibling paths never
@@ -396,7 +444,9 @@ final class ContractGraph {
     var known = aliases.get(id);
     require(known.size() <= 1, "AMBIGUOUS_LIVE_REFERENCE", "blueId", id);
 
-    if (!known.isEmpty()) return known.iterator().next();
+    if (!known.isEmpty()) {
+      return known.iterator().next();
+    }
 
     Snapshot imported = archive.get(id);
     if (imported != null) {
@@ -448,10 +498,12 @@ final class ContractGraph {
     require(
         Set.of("object", "none").contains(h.kind) && h.items == null && h.value == ABSENT,
         "EMBEDDED_DOCUMENT_NOT_OBJECT");
-    for (String reserved : ContractRegistry.MARKERS)
-      if (registry.marker(body, reserved) != null)
+    for (String reserved : ContractRegistry.MARKERS) {
+      if (registry.marker(body, reserved) != null) {
         throw new ContractModel.Error(
             "NEEDS_RESOURCES", "required", List.of(id), "requiredHistory", List.of(id));
+      }
+    }
     String key = freshKey(source, path, id);
     state.documents.put(key, new Document(key, body, id, birth));
     aliases.add(id, key);
@@ -467,26 +519,40 @@ final class ContractGraph {
   boolean collectionAppend(Document previous, Document next, String path) {
     if (meter == null
         || meter.schedule != GasSchedule.STANDARD
-        || Boolean.getBoolean("blue.physical.fullCollectionReconciliation")) return false;
+        || Boolean.getBoolean("blue.physical.fullCollectionReconciliation")) {
+      return false;
+    }
     var parts = segments(path);
-    if (parts.size() < 2 || parts.stream().anyMatch(LanguageCore.RESERVED::contains)) return false;
+    if (parts.size() < 2 || parts.stream().anyMatch(LanguageCore.RESERVED::contains)) {
+      return false;
+    }
     var old = registry.contracts(previous).get("embedded");
     var current = registry.contracts(next).get("embedded");
     if (old == null
         || current == null
         || !identity(blue.exact(old.get("_recipe")))
-            .equals(identity(blue.exact(current.get("_recipe"))))) return false;
+            .equals(identity(blue.exact(current.get("_recipe"))))) {
+      return false;
+    }
     String base = pointer(parts.subList(0, parts.size() - 1));
     int matches = 0;
-    for (String field : List.of("collectionPaths", "paths"))
+    for (String field : List.of("collectionPaths", "paths")) {
       for (Object raw : arr(current.getOrDefault(field, List.of()))) {
         String declaration = str(raw);
-        if (field.equals("collectionPaths") && base.equals(declaration)) matches++;
-        else if (prefix(declaration, path) || prefix(path, declaration)) return false;
+        if (field.equals("collectionPaths") && base.equals(declaration)) {
+          matches++;
+        } else if (prefix(declaration, path) || prefix(path, declaration)) {
+          return false;
+        }
       }
-    if (matches != 1) return false;
+    }
+    if (matches != 1) {
+      return false;
+    }
     var parent = blue.select(previous.body, base);
-    if (parent == null) return false;
+    if (parent == null) {
+      return false;
+    }
     var head = blue.head(parent);
     return Set.of("object", "none").contains(head.kind)
         && head.items == null
@@ -504,18 +570,24 @@ final class ContractGraph {
     todo.add(owner == null ? state.root : owner);
     while (!todo.isEmpty()) {
       String key = todo.remove();
-      if (!visited.add(key)) continue;
+      if (!visited.add(key)) {
+        continue;
+      }
       Document d = state.documents.get(key);
       // Preserve canonical traversal order without scanning the path list for every edge.
       boolean point = append && key.equals(owner);
       var required = point ? new LinkedHashSet<>(replaced) : new LinkedHashSet<>(paths(d));
-      if (point) ContractMetrics.count("contracts.collectionAppend.pointReconciliations");
-      if (!point)
-        for (Edge e : state.outgoingEdges(key))
+      if (point) {
+        ContractMetrics.count("contracts.collectionAppend.pointReconciliations");
+      }
+      if (!point) {
+        for (Edge e : state.outgoingEdges(key)) {
           if (!required.contains(e.path())) {
             state.edges.remove(e.key());
             record("REMOVE", e, null);
           }
+        }
+      }
       for (String path : required) {
 
         var r = blue.select(d.body, path);
@@ -530,7 +602,9 @@ final class ContractGraph {
         if (e == null
             || !target.equals(e.target())
             || replaced.stream().anyMatch(p -> prefix(p, path))) {
-          if (e != null) record("REMOVE", e, null);
+          if (e != null) {
+            record("REMOVE", e, null);
+          }
           long generation = integer(d.edgeSerials.getOrDefault(path, 0L) + 1);
           d = d.withEdgeSerial(path, generation);
           state.documents.put(key, d);
@@ -538,7 +612,9 @@ final class ContractGraph {
           state.edges.put(next.key(), next);
           record("ADD", null, next);
         }
-        if (owner == null || !original.contains(target)) todo.add(target);
+        if (owner == null || !original.contains(target)) {
+          todo.add(target);
+        }
       }
     }
     refreshAliases();
@@ -559,9 +635,13 @@ final class ContractGraph {
     Edge e = after == null ? before : after;
     dirty.add(e.source());
     dirty.add(e.target());
-    if (meter != null) meter.owner = e.source();
+    if (meter != null) {
+      meter.owner = e.source();
+    }
     charge("processEmbeddedEdgeExamined");
-    if (kind.equals("ADD") && added.contains(e.target())) charge("closureExpanded");
+    if (kind.equals("ADD") && added.contains(e.target())) {
+      charge("closureExpanded");
+    }
   }
 
   List<List<String>> observePartition() {
@@ -573,20 +653,30 @@ final class ContractGraph {
       // A single added child must not compare every current component to every previous one.
       Set<List<String>> established = previous == null ? Set.of() : new HashSet<>(previous);
       for (var group : p) {
-        if (established.contains(group)) continue;
+        if (established.contains(group)) {
+          continue;
+        }
         for (String k : group) {
-          if (meter != null) meter.owner = k;
+          if (meter != null) {
+            meter.owner = k;
+          }
           charge("componentMemberPartitioned");
         }
         // groupEdges preserves the canonical source/path order without scanning unrelated edges.
         for (Edge e : topology().groupEdges(group)) {
-          if (meter != null) meter.owner = e.source();
+          if (meter != null) {
+            meter.owner = e.source();
+          }
           charge("componentEdgePartitioned");
         }
-        if (previous != null && !previous.isEmpty()) charge("componentPartitionChanged");
+        if (previous != null && !previous.isEmpty()) {
+          charge("componentPartitionChanged");
+        }
       }
       partition = p;
-      if (logical != null) logical.partition(p);
+      if (logical != null) {
+        logical.partition(p);
+      }
     }
     return p;
   }
@@ -607,23 +697,32 @@ final class ContractGraph {
       var edges = index.groupEdges(group);
       var groupSet = new HashSet<>(group);
       var positions = new HashMap<String, Integer>();
-      for (int i = 0; i < group.size(); i++) positions.put(group.get(i), i);
+      for (int i = 0; i < group.size(); i++) {
+        positions.put(group.get(i), i);
+      }
       ContractMetrics.add("graph.finalize.edgeVisits", edges.size());
       var bodies = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
-      for (String k : group) bodies.put(k, state.documents.get(k).body);
+      for (String k : group) {
+        bodies.put(k, state.documents.get(k).body);
+      }
       for (String k : group) {
         var replacements = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
-        for (Edge e : index.outgoingEdges(k))
+        for (Edge e : index.outgoingEdges(k)) {
           if (!groupSet.contains(e.target())
               && !identity(blue.exact(blue.select(bodies.get(k), e.path())))
                   .equals(state.documents.get(e.target()).blueId)) {
-            if (meter != null) meter.owner = k;
+            if (meter != null) {
+              meter.owner = k;
+            }
             charge("containingReferenceUpdated");
             replacements.put(e.path(), new Ref(state.documents.get(e.target()).blueId));
           }
+        }
         if (!replacements.isEmpty()) {
           ExactNode n = blue.substitute(bodies.get(k), replacements);
-          if (logical != null) logical.establish(n, bodies.get(k));
+          if (logical != null) {
+            logical.establish(n, bodies.get(k));
+          }
           bodies.put(k, n);
         }
       }
@@ -640,20 +739,26 @@ final class ContractGraph {
       boolean cyclic =
           group.size() > 1 || edges.stream().anyMatch(e -> e.source().equals(e.target()));
       if (cyclic) {
-        if (meter != null) meter.owner = "";
+        if (meter != null) {
+          meter.owner = "";
+        }
         charge("tentativeComponentFinalization");
       }
       for (String k : group) {
-        if (meter != null) meter.owner = k;
+        if (meter != null) {
+          meter.owner = k;
+        }
         ExactNode n = bodies.get(k);
         if (cyclic) {
           var replacement = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
-          for (Edge e : index.outgoingEdges(k))
-            if (groupSet.contains(e.target()))
+          for (Edge e : index.outgoingEdges(k)) {
+            if (groupSet.contains(e.target())) {
               replacement.put(e.path(), new Local(positions.get(e.target())));
+            }
+          }
           n = blue.substitute(n, replacement);
         }
-        if (logical != null)
+        if (logical != null) {
           logical.establish(
               n,
               cyclic ? null : finalized.get(k),
@@ -663,10 +768,13 @@ final class ContractGraph {
                       .map(member -> List.of(member, state.documents.get(member).blueId))
                       .toList()
                   : null);
+        }
       }
       if (cyclic) {
         for (String k : group) {
-          if (meter != null) meter.owner = k;
+          if (meter != null) {
+            meter.owner = k;
+          }
           charge("cyclicMemberFinalized");
         }
         for (var e : blue.finalizeComponent(group, bodies, edges).entrySet()) {
@@ -681,9 +789,14 @@ final class ContractGraph {
       }
       for (String k : group) {
         if (validate) {
-          if (meter != null) meter.owner = k;
-          if (logical != null) logical.validate(state.documents.get(k).body, finalized.get(k));
-          else blue.certify(state.documents.get(k).body);
+          if (meter != null) {
+            meter.owner = k;
+          }
+          if (logical != null) {
+            logical.validate(state.documents.get(k).body, finalized.get(k));
+          } else {
+            blue.certify(state.documents.get(k).body);
+          }
         }
         finalized.put(k, state.documents.get(k).body);
       }
@@ -716,8 +829,11 @@ final class ContractGraph {
   void finalizeLocal(String k) {
     Document d = state.documents.get(k);
     blue.remember(d.body);
-    if (logical != null) logical.validate(d.body, finalized.get(k));
-    else blue.certify(d.body);
+    if (logical != null) {
+      logical.validate(d.body, finalized.get(k));
+    } else {
+      blue.certify(d.body);
+    }
     finalized.put(k, d.body);
   }
 
@@ -739,15 +855,18 @@ final class ContractGraph {
                               : "<missing>"))
               .toList();
       var fact = registry.facts.check("edges", k, d, dependencies);
-      if (fact.known()) continue;
+      if (fact.known()) {
+        continue;
+      }
       ContractMetrics.count("contracts.edges.bodyChecks");
       require(
           k.equals(d.key) && (identity(d.body).equals(d.blueId) || d.blueId.contains("#")),
           "INVALID_DOCUMENT_RECORD");
-      if (d.blueId.contains("#"))
+      if (d.blueId.contains("#")) {
         require(
             identity(blue.open(new Ref(d.blueId))).equals(identity(blue.open(d.body))),
             "INVALID_CYCLIC_BODY");
+      }
       blue.certify(d.body);
       var paths = ContractCanonical.keys(paths(d));
       var actual = new TreeSet<String>(ContractCanonical.CODE_POINTS);
@@ -803,8 +922,9 @@ final class ContractGraph {
       require(
           Set.of("object", "none").contains(h.kind) && h.items == null && h.value == ABSENT,
           "PROCESSING_DOCUMENT_NOT_OBJECT");
-      for (String reserved : ContractRegistry.MARKERS)
+      for (String reserved : ContractRegistry.MARKERS) {
         require(reg.marker(n, reserved) == null, "AUTHORED_PROCESSOR_STATE", "key", reserved);
+      }
       s.documents.put(k, new Document(k, n));
     }
     for (var e : explicit.entrySet()) {

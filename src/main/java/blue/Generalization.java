@@ -44,11 +44,12 @@ final class Generalization {
     Rule select(String path) {
       Rule selected = new Rule("", defaultMode, null);
       int depth = -1;
-      for (Rule r : rules)
+      for (Rule r : rules) {
         if (prefix(r.path, path) && segments(r.path).size() > depth) {
           selected = r;
           depth = segments(r.path).size();
         }
+      }
       return selected;
     }
   }
@@ -60,11 +61,15 @@ final class Generalization {
       Value b = blue.open(n);
       if (b.has("items")) {
         var items = exactItems(b.get("items"));
-        if (!k.matches("[0-9]+") || Integer.parseInt(k) >= items.size()) return null;
+        if (!k.matches("[0-9]+") || Integer.parseInt(k) >= items.size()) {
+          return null;
+        }
         n = items.get(Integer.parseInt(k));
       } else {
         Object v = b.get(k);
-        if (!(v instanceof ExactNode)) return null;
+        if (!(v instanceof ExactNode)) {
+          return null;
+        }
         n = (ExactNode) v;
       }
     }
@@ -72,7 +77,9 @@ final class Generalization {
   }
 
   static ExactNode replace(ContractBridge blue, ExactNode n, List<String> parts, ExactNode value) {
-    if (parts.isEmpty()) return value;
+    if (parts.isEmpty()) {
+      return value;
+    }
     Value b = blue.open(n);
     var fields = new TreeMap<>(b.fields());
     String k = parts.getFirst();
@@ -81,9 +88,10 @@ final class Generalization {
       int i = Integer.parseInt(k);
       items.set(i, replace(blue, items.get(i), parts.subList(1, parts.size()), value));
       fields.put("items", List.copyOf(items));
-    } else
+    } else {
       fields.put(
           k, replace(blue, (ExactNode) fields.get(k), parts.subList(1, parts.size()), value));
+    }
     return ExactNode.value(fields);
   }
 
@@ -93,7 +101,9 @@ final class Generalization {
       ExactNode prior,
       List<String> at,
       List<List<String>> paths) {
-    if (n == null || prior != null && identity(n).equals(identity(prior))) return;
+    if (n == null || prior != null && identity(n).equals(identity(prior))) {
+      return;
+    }
     if (n instanceof Value b) {
       Value old = prior == null ? null : blue.open(prior);
       for (var e : b.fields().entrySet()) {
@@ -136,21 +146,31 @@ final class Generalization {
       validate.accept(changed);
       return new Repair(changed, List.of());
     } catch (ContractModel.Error e) {
-      if (!e.code.startsWith("LANGUAGE_") || !SEMANTIC.contains(e.code.substring(9))) throw e;
+      if (!e.code.startsWith("LANGUAGE_") || !SEMANTIC.contains(e.code.substring(9))) {
+        throw e;
+      }
       original = e;
     }
     var parts = segments(path);
     var paths = new ArrayList<List<String>>();
     var writes = new ArrayList<Map<String, Object>>();
     affected(blue, direct(blue, changed, parts), direct(blue, before, parts), parts, paths);
-    for (int size = parts.size() - 1; size >= 0; size--) paths.add(parts.subList(0, size));
+    for (int size = parts.size() - 1; size >= 0; size--) {
+      paths.add(parts.subList(0, size));
+    }
     for (var at : paths) {
       ExactNode n = direct(blue, changed, at);
-      if (n == null) continue;
+      if (n == null) {
+        continue;
+      }
       Value body = blue.open(n);
-      if (!(body.get("type") instanceof Ref typ)) continue;
+      if (!(body.get("type") instanceof Ref typ)) {
+        continue;
+      }
       Rule rule = policy.select(pointer(at));
-      if (rule.mode.equals("reject")) continue;
+      if (rule.mode.equals("reject")) {
+        continue;
+      }
       String candidateId = typ.id();
       Set<String> seen = new HashSet<>();
       ExactNode valid = null;
@@ -173,15 +193,21 @@ final class Generalization {
             chosen = candidateId;
             break;
           } catch (LanguageFailure e) {
-            if (!SEMANTIC.contains(e.category())) throw blue.translate(e);
+            if (!SEMANTIC.contains(e.category())) {
+              throw blue.translate(e);
+            }
           } catch (ContractModel.Error e) {
-            if (!e.code.startsWith("LANGUAGE_") || !SEMANTIC.contains(e.code.substring(9))) throw e;
+            if (!e.code.startsWith("LANGUAGE_") || !SEMANTIC.contains(e.code.substring(9))) {
+              throw e;
+            }
           }
         }
         require(floor, "TYPE_GENERALIZATION_FLOOR", "path", pointer(at));
         Object parent = blue.open(new Ref(candidateId)).get("type");
         candidateId = parent instanceof Ref r ? r.id() : null;
-        if (candidateId != null) meter.contracts("typeEdgeFollowed");
+        if (candidateId != null) {
+          meter.contracts("typeEdgeFollowed");
+        }
       }
       require(valid != null, "TYPE_GENERALIZATION_FAILURE", "path", pointer(at));
       if (!chosen.equals(typ.id())) {
@@ -191,7 +217,9 @@ final class Generalization {
         writes.add(m("path", pointer(p), "before", typ, "after", new Ref(chosen)));
       }
     }
-    if (writes.isEmpty()) throw original;
+    if (writes.isEmpty()) {
+      throw original;
+    }
     validate.accept(changed);
     return new Repair(changed, writes);
   }

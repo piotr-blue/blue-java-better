@@ -14,7 +14,9 @@ class ContractUnicodeOrderTest {
   @Test
   void everyBmpScalarSortsBeforeSupplementaryScalarsEvenAtSurrogateBoundaries() {
     for (int value = 0; value <= Character.MAX_VALUE; value++) {
-      if (value >= Character.MIN_SURROGATE && value <= Character.MAX_SURROGATE) continue;
+      if (value >= Character.MIN_SURROGATE && value <= Character.MAX_SURROGATE) {
+        continue;
+      }
       String bmp = "common-prefix/" + (char) value;
       for (String supplementary :
           List.of("common-prefix/\uD800\uDC00", "common-prefix/\uDBFF\uDFFF")) {
@@ -56,12 +58,14 @@ class ContractUnicodeOrderTest {
       }
       values.add(text.toString());
     }
-    for (String left : values)
-      for (String right : values)
+    for (String left : values) {
+      for (String right : values) {
         assertEquals(
             Integer.signum(
                 java.util.Arrays.compare(
                     left.codePoints().toArray(), right.codePoints().toArray())),
             Integer.signum(ContractCanonical.compare(left, right)));
+      }
+    }
   }
 }

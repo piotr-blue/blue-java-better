@@ -77,8 +77,9 @@ final class ContractBirth {
         "reason",
         "Shared target is not an independent initialized leaf");
     shared.put(reference.key, reference);
-    if (!graph.state.documents.containsKey(reference.key))
+    if (!graph.state.documents.containsKey(reference.key)) {
       graph.state.documents.put(reference.key, reference.copy());
+    }
     return reference.key;
   }
 
@@ -88,12 +89,13 @@ final class ContractBirth {
         "LOCAL_EXECUTION_UNAVAILABLE",
         "reason",
         "Additional members changed during birth");
-    for (var reference : shared.values())
+    for (var reference : shared.values()) {
       require(
           reference.metadata().equals(turn.documents().get(reference.key).metadata()),
           "LOCAL_EXECUTION_UNAVAILABLE",
           "reason",
           "Shared predecessor changed during creation");
+    }
     var fresh = turn.documents().get(child);
     require(
         engine.registry.marker(fresh, "initialized") != null
@@ -104,12 +106,14 @@ final class ContractBirth {
     int incoming = 0;
     Set<String> targets = new HashSet<>();
     for (Edge edge : turn.edges().values()) {
-      if (edge.source().equals(owner) && edge.target().equals(child)) incoming++;
-      else if (edge.source().equals(child) && shared.containsKey(edge.target()))
+      if (edge.source().equals(owner) && edge.target().equals(child)) {
+        incoming++;
+      } else if (edge.source().equals(child) && shared.containsKey(edge.target())) {
         targets.add(edge.target());
-      else
+      } else {
         throw new ContractModel.Error(
             "LOCAL_EXECUTION_UNAVAILABLE", "reason", "Nonlocal birth edge");
+      }
     }
     require(incoming == 1 && targets.equals(shared.keySet()), "LOCAL_EXECUTION_UNAVAILABLE");
     after.verifyGraphBindings = true;
@@ -123,8 +127,9 @@ final class ContractBirth {
     if (!FORMAT.equals(source.get("kind"))
         || observation.containsKey("executionBoundary")
         || !Objects.equals(
-            source.get("receipt"), digest("contracts.result/completion-1", observation)))
+            source.get("receipt"), digest("contracts.result/completion-1", observation))) {
       return false;
+    }
     var birth = obj(source.get("birth"));
     var leaf = obj(source.get("leaf"));
     return !child.equals(birth.get("member"))
@@ -139,16 +144,22 @@ final class ContractBirth {
       Contracts.Execution.Outcome result,
       Snapshot before,
       Snapshot after) {
-    if (requiresWholeGraph(processor, result, before, after)) return Map.of();
+    if (requiresWholeGraph(processor, result, before, after)) {
+      return Map.of();
+    }
     var observations = result.transition().observations();
     if (observations.containsKey("executionBoundary")
-        || !((List<?>) observations.get("rounds")).isEmpty()) return Map.of();
+        || !((List<?>) observations.get("rounds")).isEmpty()) {
+      return Map.of();
+    }
     var issued = processor.completions.outcomes.get(result.transition().receipt());
     if (issued == null
         || !issued.beforeIdentity().equals(before.identity())
         || !Objects.equals(issued.event(), result.event())
         || !Objects.equals(issued.timestamp(), result.timestamp())
-        || !Objects.equals(observations.get("output"), after.identity())) return Map.of();
+        || !Objects.equals(observations.get("output"), after.identity())) {
+      return Map.of();
+    }
     var fresh =
         after.documents.keySet().stream()
             .filter(k -> !before.documents.containsKey(k))
@@ -159,25 +170,39 @@ final class ContractBirth {
       var metadata = row.getValue().metadata();
       prior.put(row.getKey(), metadata);
       if (!before.root.equals(row.getKey())
-          && !metadata.equals(after.documents.get(row.getKey()).metadata())) return Map.of();
+          && !metadata.equals(after.documents.get(row.getKey()).metadata())) {
+        return Map.of();
+      }
     }
-    for (var row : before.edges.entrySet())
-      if (!row.getValue().equals(after.edges.get(row.getKey()))) return Map.of();
+    for (var row : before.edges.entrySet()) {
+      if (!row.getValue().equals(after.edges.get(row.getKey()))) {
+        return Map.of();
+      }
+    }
     var added = new ArrayList<Map<String, Object>>();
     int incoming = 0;
     for (var edge : after.edges.values()) {
-      if (before.edges.containsKey(edge.key())) continue;
-      if (edge.source().equals(before.root) && edge.target().equals(fresh)) incoming++;
-      else if (!edge.source().equals(fresh)
+      if (before.edges.containsKey(edge.key())) {
+        continue;
+      }
+      if (edge.source().equals(before.root) && edge.target().equals(fresh)) {
+        incoming++;
+      } else if (!edge.source().equals(fresh)
           || !before.documents.containsKey(edge.target())
-          || edge.target().equals(before.root)) return Map.of();
+          || edge.target().equals(before.root)) {
+        return Map.of();
+      }
       added.add(edge.wire());
     }
-    if (incoming != 1) return Map.of();
+    if (incoming != 1) {
+      return Map.of();
+    }
     var previous = result.before().localCheckpoint();
     var next = result.after().localCheckpoint();
     var leaf = result.after().rooted(fresh).localCheckpoint();
-    if (previous.isEmpty() || next.isEmpty() || leaf.isEmpty()) return Map.of();
+    if (previous.isEmpty() || next.isEmpty() || leaf.isEmpty()) {
+      return Map.of();
+    }
     return Map.of(
         "kind",
         FORMAT,

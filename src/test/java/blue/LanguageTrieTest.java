@@ -25,7 +25,9 @@ class LanguageTrieTest {
     }
     List<Key> keys = new ArrayList<>();
     keys.add(null);
-    for (int n = 0; n < 160; n++) keys.add(new Key(n));
+    for (int n = 0; n < 160; n++) {
+      keys.add(new Key(n));
+    }
     LanguageTrie<Key, String> left = LanguageTrie.empty();
     Map<Key, String> expected = new HashMap<>();
     for (int round = 0; round < 400; round++) {
@@ -83,7 +85,9 @@ class LanguageTrieTest {
     }
     LanguageTrie<Key, Object> base = LanguageTrie.empty();
     Object value = new Object();
-    for (int i = 0; i < 50_000; i++) base = base.with(new Key(i), value);
+    for (int i = 0; i < 50_000; i++) {
+      base = base.with(new Key(i), value);
+    }
     Object replacement = new Object();
     LanguageTrie<Key, Object> left =
         base.with(new Key(0), replacement).with(new Key(50_001), value);

@@ -138,12 +138,13 @@ class TimelineValidationReuseTest {
   @Test
   void completedPresenceFactsReuseAbstractClosuresWithoutExportingThem() {
     Map<String, Object> fields = new java.util.LinkedHashMap<>();
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 64; i++) {
       fields.put(
           "field" + i,
           value(
               Map.of(
                   "type", new Ref(LanguageCore.CORE.get("Integer")), "description", "field " + i)));
+    }
     ExactNode definition = value(fields);
     LanguageFacts facts = new LanguageFacts();
     LanguageContext first = new LanguageContext(Language.Limits.defaults().wire());
@@ -247,7 +248,9 @@ class TimelineValidationReuseTest {
 
   private static ExactNode document() {
     List<ExactNode> items = new ArrayList<>();
-    for (int i = 0; i < 200; i++) items.add(scalar("Text", "item-" + i));
+    for (int i = 0; i < 200; i++) {
+      items.add(scalar("Text", "item-" + i));
+    }
     return list(items);
   }
 }

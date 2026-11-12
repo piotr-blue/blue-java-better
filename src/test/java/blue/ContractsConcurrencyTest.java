@@ -47,7 +47,9 @@ class ContractsConcurrencyTest {
       String initial = session.identity();
       var before = session.snapshot();
       var transactions = new ArrayList<Contracts.Transaction>();
-      for (int n = 1; n <= contenders; n++) transactions.add(session.begin(Map.of("amount", n), n));
+      for (int n = 1; n <= contenders; n++) {
+        transactions.add(session.begin(Map.of("amount", n), n));
+      }
       var ready = new CyclicBarrier(contenders);
       var tasks = new ArrayList<Future<Outcome>>();
       for (int n = 0; n < contenders; n++) {
@@ -71,7 +73,9 @@ class ContractsConcurrencyTest {
                 }));
       }
       var outcomes = new ArrayList<Outcome>();
-      for (var task : tasks) outcomes.add(task.get(30, TimeUnit.SECONDS));
+      for (var task : tasks) {
+        outcomes.add(task.get(30, TimeUnit.SECONDS));
+      }
       var winners = outcomes.stream().filter(Outcome::committed).toList();
       assertEquals(1, winners.size());
       var winner = winners.getFirst();
@@ -103,10 +107,11 @@ class ContractsConcurrencyTest {
                 () -> {
                   try (var session = contracts.restore(snapshot, identity)) {
                     ready.await();
-                    for (int step = 1; step <= 16; step++)
+                    for (int step = 1; step <= 16; step++) {
                       session
                           .process(Map.of("amount", amount, "sequence", step), step)
                           .requireApplied();
+                    }
                     assertEquals(BigInteger.valueOf(16L * amount), session.read("/count"));
                     return session.snapshot();
                   }

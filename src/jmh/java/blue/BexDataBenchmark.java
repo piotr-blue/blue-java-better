@@ -27,14 +27,17 @@ public class BexDataBenchmark {
   @Setup
   public void setup() {
     Object expected = Map.of("amount", BigInteger.valueOf(42), "currency", "EUR");
-    for (int i = 0; i < depth; i++) expected = Map.of("next", List.of(expected));
+    for (int i = 0; i < depth; i++) {
+      expected = Map.of("next", List.of(expected));
+    }
     Language language = Language.create();
     LanguageDocument document = language.readJson(ContractCanonical.text(expected));
     bridge = new ContractBridge(language);
     bridge.context.install(document);
     value = document.exact;
-    if (!expected.equals(bridge.bexData(value)))
+    if (!expected.equals(bridge.bexData(value))) {
       throw new IllegalStateException("Definition data changed during conversion");
+    }
   }
 
   @Benchmark

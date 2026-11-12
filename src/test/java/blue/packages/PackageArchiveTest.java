@@ -158,7 +158,9 @@ class PackageArchiveTest {
 
   private static int firstCentral(ByteBuffer bytes) {
     for (int at = 0; at < bytes.limit() - 4; at++) {
-      if (bytes.getInt(at) == 0x02014b50) return at;
+      if (bytes.getInt(at) == 0x02014b50) {
+        return at;
+      }
     }
     throw new AssertionError("No central header");
   }

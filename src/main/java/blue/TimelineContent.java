@@ -69,8 +69,12 @@ final class TimelineContent {
   }
 
   void rememberFacts() {
-    if (context.facts != null) context.facts.remember(context);
-    if (operations != null) operations.blue.context.rememberProtocolFacts();
+    if (context.facts != null) {
+      context.facts.remember(context);
+    }
+    if (operations != null) {
+      operations.blue.context.rememberProtocolFacts();
+    }
   }
 
   Head typed(ExactNode node, String name) {
@@ -102,11 +106,15 @@ final class TimelineContent {
     while (!identity(cursor).equals(base)) {
       context.step();
       Value body = open(cursor, context);
-      if (body.get(field) instanceof ExactNode value) parts.add(value);
+      if (body.get(field) instanceof ExactNode value) {
+        parts.add(value);
+      }
       require(body.get("type") instanceof Ref, "TIMELINE_TYPE", type);
       cursor = (Ref) body.get("type");
     }
-    if (parts.isEmpty()) return null;
+    if (parts.isEmpty()) {
+      return null;
+    }
     Collections.reverse(parts);
     return exact(recipe(parts.toArray()), context);
   }
@@ -147,9 +155,13 @@ final class TimelineContent {
     Head h = typed(node, type);
     Value body = open(node, context);
     for (String key : TYPES) {
-      if (body.get(key) instanceof Ref value) strict(value, context, "definition");
+      if (body.get(key) instanceof Ref value) {
+        strict(value, context, "definition");
+      }
     }
-    if (body.get("specification") instanceof Ref value) strict(value, context, "definition");
+    if (body.get("specification") instanceof Ref value) {
+      strict(value, context, "definition");
+    }
     h.constraints.consistent();
     // This is a known-present object header. With only required/no predicates there is no
     // root predicate to inspect; ordinary full validation also counts all fields, which would
@@ -160,16 +172,22 @@ final class TimelineContent {
       h.constraints.validate(h, true, "value", true, context);
     }
     for (String field : h.fields.keySet()) {
-      if ("Dictionary".equals(h.core) || h.keyType != null)
+      if ("Dictionary".equals(h.core) || h.keyType != null) {
         checkKey(field, h.keyType == null ? CORE.get("Text") : h.keyType, context);
-      if (deferred.contains(field)) continue;
+      }
+      if (deferred.contains(field)) {
+        continue;
+      }
       Recipe value = child(h, field);
-      for (ExactNode part : value.parts) strict(part, context, "definition");
+      for (ExactNode part : value.parts) {
+        strict(part, context, "definition");
+      }
       LanguageSemantics.validate(value, context, "definition", false);
       LanguageSemantics.validate(value, context, "value", false);
     }
-    if (h.contracts != null || h.items != null)
+    if (h.contracts != null || h.items != null) {
       throw new BlueException("TIMELINE_HEADER_SHAPE", type);
+    }
   }
 
   List<ExactNode> entries(ExactNode evidence, String type) {
@@ -196,8 +214,12 @@ final class TimelineContent {
     out.origin = new Ref(identity(node));
     out.origins = List.of(out.origin);
     out.fields.replaceAll((key, value) -> detached(value));
-    if (out.items != null) out.items = out.items.stream().map(TimelineContent::detached).toList();
-    if (out.contracts != null) out.contracts = detached(out.contracts);
+    if (out.items != null) {
+      out.items = out.items.stream().map(TimelineContent::detached).toList();
+    }
+    if (out.contracts != null) {
+      out.contracts = detached(out.contracts);
+    }
     return out.build();
   }
 
@@ -208,6 +230,8 @@ final class TimelineContent {
   }
 
   static void require(boolean condition, String code, String detail) {
-    if (!condition) throw new BlueException(code, detail);
+    if (!condition) {
+      throw new BlueException(code, detail);
+    }
   }
 }

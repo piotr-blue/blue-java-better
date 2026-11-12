@@ -273,15 +273,18 @@ class ProviderSignaturesTest {
     BlueId object = Language.create().readYaml("42").blueId();
     String signature = sign("blue.coordination.object\n" + provider.blueId() + "\n" + object);
     List<Callable<BlueId>> work = new ArrayList<>();
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < 32; i++) {
       work.add(
           () -> {
             verifier.verifyObject(object, signature);
             assertRejected(() -> verifier.verifyGuarantee(object, signature));
             return verifier.providerId();
           });
+    }
     try (var executor = Executors.newFixedThreadPool(4)) {
-      for (var result : executor.invokeAll(work)) assertEquals(provider.blueId(), result.get());
+      for (var result : executor.invokeAll(work)) {
+        assertEquals(provider.blueId(), result.get());
+      }
     }
   }
 

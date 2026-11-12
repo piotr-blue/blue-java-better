@@ -173,10 +173,13 @@ class TimelineVerifierTest {
       LanguageContent evidence =
           Language.newBuilder().content(range).content(second).build().reference(range.blueId());
       List<java.util.concurrent.Callable<BlueId>> work = new ArrayList<>();
-      for (int i = 0; i < 32; i++)
+      for (int i = 0; i < 32; i++) {
         work.add(() -> f.verifier.advance(prefix, evidence).prefix().headId().orElseThrow());
+      }
       try (var pool = java.util.concurrent.Executors.newFixedThreadPool(4)) {
-        for (var result : pool.invokeAll(work)) assertEquals(second.blueId(), result.get());
+        for (var result : pool.invokeAll(work)) {
+          assertEquals(second.blueId(), result.get());
+        }
       }
       assertEquals(first.blueId(), prefix.headId().orElseThrow());
       assertEquals(2, prefix.completeBefore());
@@ -559,8 +562,9 @@ class TimelineVerifierTest {
           NativeChannel.newBuilder(type, semantics, "testverifiedentry")
               .verifyAdmission(
                   context -> {
-                    if (!Boolean.TRUE.equals(context.evidence()))
+                    if (!Boolean.TRUE.equals(context.evidence())) {
                       context.reject("Test permit missing");
+                    }
                     assertEquals(original.blueId(), context.eventId());
                     assertEquals(original.timestamp(), context.timestamp());
                     return Map.of();
@@ -932,12 +936,13 @@ class TimelineVerifierTest {
       f.keep(changed);
       LanguageContent next = f.operationEntry(first.blueId(), 2, changed, changed);
       f.keep(next);
-      for (int attempt = 0; attempt < 2; attempt++)
+      for (int attempt = 0; attempt < 2; attempt++) {
         assertThrows(
             LanguageException.class,
             () ->
                 f.verifier.advance(
                     prefix, f.range(3, next.blueId(), first.blueId(), List.of(next.blueId()))));
+      }
     }
   }
 

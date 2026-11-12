@@ -160,7 +160,9 @@ public final class Node {
    * @throws IllegalArgumentException if the number is not finite
    */
   public static Node number(double value) {
-    if (!Double.isFinite(value)) throw new IllegalArgumentException("Nonfinite number");
+    if (!Double.isFinite(value)) {
+      throw new IllegalArgumentException("Nonfinite number");
+    }
     return new Node(Kind.DOUBLE, value == 0 ? 0.0 : value);
   }
 

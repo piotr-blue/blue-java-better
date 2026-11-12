@@ -19,7 +19,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 class ContractMetadataSharingTest {
   static ContractModel.Document document(int count) {
     var edges = new TreeMap<String, Long>();
-    for (int i = 0; i < count; i++) edges.put("/children/child-" + i, 1L);
+    for (int i = 0; i < count; i++) {
+      edges.put("/children/child-" + i, 1L);
+    }
     edges.put("/children/\uE000", 2L);
     edges.put("/children/\uD83D\uDE00", 3L);
     return new ContractModel.Document(
@@ -52,8 +54,9 @@ class ContractMetadataSharingTest {
     var result = after.metadata();
     assertEquals("before", before.get("blueId"));
     assertEquals("after", result.get("blueId"));
-    for (String field : List.of("channels", "channelSerials", "edgeSerials"))
+    for (String field : List.of("channels", "channelSerials", "edgeSerials")) {
       assertSame(before.get(field), result.get(field), field);
+    }
     var lives = new TreeMap<String, Object>();
     source.channelLives.forEach((k, v) -> lives.put(k, v.wire()));
     var plain =

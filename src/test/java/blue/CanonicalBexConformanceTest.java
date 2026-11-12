@@ -105,12 +105,16 @@ class CanonicalBexConformanceTest {
   }
 
   private static Object decode(Object value) {
-    if (value instanceof List<?> items)
+    if (value instanceof List<?> items) {
       return items.stream().map(CanonicalBexConformanceTest::decode).toList();
+    }
     if (value instanceof Map<?, ?> map) {
-      if (map.keySet().equals(Set.of("$undefined"))) return BexValues.UNDEFINED;
-      if (map.keySet().equals(Set.of("$decimal")))
+      if (map.keySet().equals(Set.of("$undefined"))) {
+        return BexValues.UNDEFINED;
+      }
+      if (map.keySet().equals(Set.of("$decimal"))) {
         return new java.math.BigDecimal((String) map.get("$decimal"));
+      }
       Map<String, Object> decoded = new TreeMap<>();
       map.forEach((key, child) -> decoded.put((String) key, decode(child)));
       return decoded;

@@ -76,8 +76,9 @@ public final class NativeChannel {
     public Peer {
       Objects.requireNonNull(status);
       header = (Map<String, Object>) BexValues.freeze(Objects.requireNonNull(header));
-      if (status != PeerStatus.PRESENT && !header.isEmpty())
+      if (status != PeerStatus.PRESENT && !header.isEmpty()) {
         throw new IllegalArgumentException("Only a present peer has a header");
+      }
     }
   }
 
@@ -97,8 +98,9 @@ public final class NativeChannel {
     this.binding = Objects.requireNonNull(binding);
     this.implementation = Objects.requireNonNull(implementation);
     if (!type.blueId().value().equals(binding.typeId())
-        || !semantics.blueId().value().equals(binding.semanticsId()))
+        || !semantics.blueId().value().equals(binding.semanticsId())) {
       throw new IllegalArgumentException("Registration content disagrees with its binding");
+    }
   }
 
   private NativeChannel(Builder builder) {
@@ -242,8 +244,9 @@ public final class NativeChannel {
       Objects.requireNonNull(name);
       if (cost < 0
           || name.equals("invocation") && cost == 0
-          || verifier != null && name.equals("admission") && cost == 0)
+          || verifier != null && name.equals("admission") && cost == 0) {
         throw new IllegalArgumentException("Invalid native counter cost");
+      }
       tariff.put(name, cost);
       return this;
     }
@@ -288,8 +291,9 @@ public final class NativeChannel {
      * @return this builder
      */
     public Builder verifyAdmission(AdmissionVerifier value) {
-      if (Long.valueOf(0).equals(tariff.get("admission")))
+      if (Long.valueOf(0).equals(tariff.get("admission"))) {
         throw new IllegalArgumentException("Positive admission tariff required");
+      }
       verifier = Objects.requireNonNull(value);
       tariff.putIfAbsent("admission", 1L);
       return this;
@@ -391,7 +395,9 @@ public final class NativeChannel {
      */
     public Optional<Checkpoint> checkpoint() {
       Object checkpoint = input().checkpoint();
-      if (checkpoint == null) return Optional.empty();
+      if (checkpoint == null) {
+        return Optional.empty();
+      }
       Map<String, Object> value = ContractModel.obj(checkpoint);
       return Optional.of(
           new Checkpoint(
@@ -440,8 +446,9 @@ public final class NativeChannel {
     }
 
     private ContractNative.ExternalContext input() {
-      if (input == null || thread != Thread.currentThread().threadId())
+      if (input == null || thread != Thread.currentThread().threadId()) {
         throw new IllegalStateException("Native context is outside its invocation");
+      }
       return input;
     }
 

@@ -76,8 +76,9 @@ public final class TimelineAccess implements AutoCloseable {
       Objects.requireNonNull(transition);
       Objects.requireNonNull(document);
       if (transition.isPresent() != (kind != Kind.INAPPLICABLE)
-          || document.isPresent() != transition.isPresent())
+          || document.isPresent() != transition.isPresent()) {
         throw new IllegalArgumentException("Applied entries require both outcome and document");
+      }
     }
   }
 
@@ -191,6 +192,8 @@ public final class TimelineAccess implements AutoCloseable {
   }
 
   private void checkOpen() {
-    if (replay == null) throw new IllegalStateException("Timeline Access replay is closed");
+    if (replay == null) {
+      throw new IllegalStateException("Timeline Access replay is closed");
+    }
   }
 }

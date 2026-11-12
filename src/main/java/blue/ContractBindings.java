@@ -88,8 +88,11 @@ final class ContractBindings {
 
   public Set<String> protocolBindings() {
     var protocols = new HashSet<String>();
-    for (var name : List.of("blue-bex", "blue-contracts", "blue-dispatch"))
-      if (packages.contains(id(name, "package"))) protocols.add(id(name, "protocol"));
+    for (var name : List.of("blue-bex", "blue-contracts", "blue-dispatch")) {
+      if (packages.contains(id(name, "package"))) {
+        protocols.add(id(name, "protocol"));
+      }
+    }
     return Set.copyOf(protocols);
   }
 
@@ -98,16 +101,20 @@ final class ContractBindings {
   }
 
   public void require(BluePackage selected) {
-    if (!bex().languageBlueId().equals(selected.languageId().value()))
+    if (!bex().languageBlueId().equals(selected.languageId().value())) {
       throw new Unsupported(
           selected.languageId().value(), List.of(selected.blueId().value(), "language"));
+    }
     Set<BlueId> seen = new HashSet<>();
     ArrayDeque<BlueId> pending = new ArrayDeque<>(selected.declaredRequirements());
     while (!pending.isEmpty()) {
       BlueId id = pending.pop();
-      if (!seen.add(id)) continue;
-      if (!protocolBindings().contains(id.value()))
+      if (!seen.add(id)) {
+        continue;
+      }
+      if (!protocolBindings().contains(id.value())) {
         throw new Unsupported(id.value(), List.of(selected.blueId().value()));
+      }
       pending.addAll(selected.protocol(id).requires().values());
     }
   }
@@ -120,7 +127,9 @@ final class ContractBindings {
     ids.put("bexSpecification", bex().rulesBlueId());
     ids.put("contracts", id("blue-contracts", "protocol"));
     ids.put("contractsSpecification", id("blue-contracts", "rules"));
-    if (canonicalWire) ids.put("canonicalWireMeasurementV1", CanonicalWireMeasurementV1.TYPE_ID);
+    if (canonicalWire) {
+      ids.put("canonicalWireMeasurementV1", CanonicalWireMeasurementV1.TYPE_ID);
+    }
     ids.put("supportedPackages", packages.stream().sorted().toList());
     return Collections.unmodifiableMap(ids);
   }

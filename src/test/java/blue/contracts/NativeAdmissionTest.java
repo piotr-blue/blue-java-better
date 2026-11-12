@@ -111,7 +111,9 @@ class NativeAdmissionTest {
     context.charge("signature", 1);
     Map<?, ?> evidence = (Map<?, ?>) context.evidence();
     byte[] signature = Base64.getDecoder().decode((String) evidence.get("signature"));
-    if (!MessageDigest.isEqual(sign(text), signature)) context.reject("Invalid signed permit");
+    if (!MessageDigest.isEqual(sign(text), signature)) {
+      context.reject("Invalid signed permit");
+    }
     return Map.of("channel", receiver.channel());
   }
 
@@ -262,7 +264,9 @@ class NativeAdmissionTest {
                 context -> {
                   Map<?, ?> evidence = (Map<?, ?>) context.evidence();
                   assertThrows(UnsupportedOperationException.class, evidence::clear);
-                  if (!Boolean.TRUE.equals(evidence.get("allowed"))) context.reject("Denied");
+                  if (!Boolean.TRUE.equals(evidence.get("allowed"))) {
+                    context.reject("Denied");
+                  }
                   return returned;
                 })
             .accept(
@@ -330,7 +334,9 @@ class NativeAdmissionTest {
       NativeChannel registration =
           channel(
                   context -> {
-                    if (exhaust) context.charge("signature", context.remainingGas() / 7 + 1);
+                    if (exhaust) {
+                      context.charge("signature", context.remainingGas() / 7 + 1);
+                    }
                     throw new IllegalStateException("Broken verifier");
                   })
               .accept(
@@ -395,8 +401,9 @@ class NativeAdmissionTest {
         "PROJECTION_LIMIT_EXCEEDED",
         assertThrows(BlueException.class, () -> AdmissionEvidence.of(TYPE.blueId(), large)).code());
     assertThrows(NullPointerException.class, () -> AdmissionEvidence.of(TYPE.blueId(), null));
-    for (Object invalid : List.of(Map.of(1, "non-text key"), new Object(), 0.5, Bex.undefined()))
+    for (Object invalid : List.of(Map.of(1, "non-text key"), new Object(), 0.5, Bex.undefined())) {
       assertThrows(BlueException.class, () -> AdmissionEvidence.of(TYPE.blueId(), invalid));
+    }
   }
 
   @Test
@@ -471,8 +478,11 @@ class NativeAdmissionTest {
         session.initialize().requireApplied();
         Contracts.Transition result =
             session.process(EVENT, 1, AdmissionEvidence.of(TYPE.blueId(), Map.of()));
-        if (registration == denied) assertFalse(result.applied());
-        else gas[i++] = result.requireApplied().gas();
+        if (registration == denied) {
+          assertFalse(result.applied());
+        } else {
+          gas[i++] = result.requireApplied().gas();
+        }
       }
     }
     assertEquals(16, gas[1] - gas[0]);

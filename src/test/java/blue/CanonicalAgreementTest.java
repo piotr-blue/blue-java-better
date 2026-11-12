@@ -120,7 +120,7 @@ class CanonicalAgreementTest {
     Contracts contracts = Contracts.create();
     try (var threads = Executors.newFixedThreadPool(4)) {
       var futures = new ArrayList<java.util.concurrent.Future<String>>();
-      for (int i = 0; i < 8; i++)
+      for (int i = 0; i < 8; i++) {
         futures.add(
             threads.submit(
                 () -> {
@@ -131,8 +131,11 @@ class CanonicalAgreementTest {
                         .receipt();
                   }
                 }));
+      }
       String receipt = futures.getFirst().get();
-      for (var future : futures) assertEquals(receipt, future.get());
+      for (var future : futures) {
+        assertEquals(receipt, future.get());
+      }
     }
   }
 

@@ -107,10 +107,13 @@ class TimelineAccessTest {
       LanguageContent initial = f.initial;
       LanguageContent other = f.initial.edit(e -> e.set("/note", "different initial document"));
       LanguageContent sentRequest = request;
-      if (mutation.equals("request"))
+      if (mutation.equals("request")) {
         sentRequest =
             f.typed("Get Timeline Access Request", "access: {blueId: '" + other.blueId() + "'}");
-      if (mutation.equals("access")) initial = other;
+      }
+      if (mutation.equals("access")) {
+        initial = other;
+      }
       var publication =
           f.entry(null, 2, mutation.equals("publication-message") ? other : f.initial, false);
       LanguageContent first = f.attest(publication), last = first;
@@ -124,14 +127,25 @@ class TimelineAccessTest {
                   + "actor: {type: Coordination/Agent Actor, service: provider}\n"
                   + "message: "
                   + f.initial.toJson());
-      if (mutation.equals("publication-timeline")) first = f.attest(wrongTimeline);
-      if (mutation.equals("last-timeline")) last = f.attest(wrongTimeline);
-      if (mutation.equals("last-before-publication"))
+      if (mutation.equals("publication-timeline")) {
+        first = f.attest(wrongTimeline);
+      }
+      if (mutation.equals("last-timeline")) {
+        last = f.attest(wrongTimeline);
+      }
+      if (mutation.equals("last-before-publication")) {
         last = f.attest(f.entry(null, 1, f.initial, false));
-      if (mutation.equals("publication-signature")) first = badSignature(f, publication);
-      if (mutation.equals("last-signature")) last = badSignature(f, publication);
+      }
+      if (mutation.equals("publication-signature")) {
+        first = badSignature(f, publication);
+      }
+      if (mutation.equals("last-signature")) {
+        last = badSignature(f, publication);
+      }
       var response = response(f, sentRequest, initial, f.initial, first, last);
-      if (mutation.equals("outer-signature")) response = badSignature(f, f.initial);
+      if (mutation.equals("outer-signature")) {
+        response = badSignature(f, f.initial);
+      }
       var candidate = response;
       assertThrows(BlueException.class, () -> reader.access(request).accept(candidate));
     }
@@ -788,10 +802,11 @@ class TimelineAccessTest {
       try (TimelineAccess consumer = f.track(f.initial)) {
         consumer.advance(f.range(null, publication.blueId(), 2, List.of(publication)));
         for (int i = 0; i < 5; i++) {
-          for (var item : ((Map<?, ?>) snapshot.get("content")).entrySet())
+          for (var item : ((Map<?, ?>) snapshot.get("content")).entrySet()) {
             retained.put(
                 new BlueId((String) item.getKey()),
                 LanguageRecord.fromJson(json.writeValueAsString(item.getValue())));
+          }
           Map<String, Object> thin = new LinkedHashMap<>(snapshot);
           thin.put("content", Map.of());
           TimelinePublisher restarted =

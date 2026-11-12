@@ -50,8 +50,9 @@ final class CanonicalWireMeasurementV1 {
 
   static void installMarker(ContractProcessor contracts, ContractBridge blue) {
     var type = blue.source(Map.of("name", NAME, "description", RULES), "definition");
-    if (!TYPE_ID.equals(ContractLanguage.identity(type)))
+    if (!TYPE_ID.equals(ContractLanguage.identity(type))) {
       throw new IllegalStateException("Canonical wire identity mismatch");
+    }
     var semantics = blue.source(RULES);
     var marker =
         blue.source(
@@ -82,12 +83,14 @@ final class CanonicalWireMeasurementV1 {
 
   Object measure(Map<String, Object> payload, BexGas gas) {
     gas.amount("canonicalWireV1Base", 5);
-    if (!payload.keySet().equals(Set.of("input")))
+    if (!payload.keySet().equals(Set.of("input"))) {
       throw new BexFailure(
           "BEX_RUNTIME_ERROR", "canonical wire measurement requires exactly input");
-    if (!(gas instanceof ContractModel.Meter meter))
+    }
+    if (!(gas instanceof ContractModel.Meter meter)) {
       throw new BexFailure(
           "BEX_RUNTIME_ERROR", "canonical wire measurement requires the Contracts shared meter");
+    }
     var value = blue.node(payload.get("input"), "value", true, new ContractWork(blue, meter));
     final String wire;
     try {

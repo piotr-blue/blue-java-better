@@ -56,7 +56,9 @@ class CanonicalContractsConformanceTest {
       result =
           processor.process(
               initialized.document(), row.get("event"), integer(row.get("timestamp")));
-    } else result = processor.initialize(row.get("source"));
+    } else {
+      result = processor.initialize(row.get("source"));
+    }
     Map<String, Object> expected = obj(row.get("observations"));
     assertEquals(expected.get("status"), result.status());
     assertEquals(expected.get("diagnostic"), result.observations().get("diagnostic"));
@@ -67,15 +69,17 @@ class CanonicalContractsConformanceTest {
       obj(obj(completion).get("afterView"))
           .forEach(
               (key, value) -> {
-                if (key.equals("root"))
+                if (key.equals("root")) {
                   expectedRoots.put(key, obj(obj(value).get("document")).get("blueId"));
+                }
               });
     }
     assertEquals(expectedRoots.get("root"), result.document().blueId());
-    for (String field : List.of("events", "publicEvents"))
+    for (String field : List.of("events", "publicEvents")) {
       assertEquals(
           arr(expected.get(field)).stream().map(e -> obj(e).get("event")).toList(),
           arr(result.observations().get(field)).stream().map(e -> obj(e).get("event")).toList());
+    }
     long gas = result.gas();
     assertTrue(gas > 0);
     assertEquals("contracts-semantic-gas", result.observations().get("gasSchedule"));

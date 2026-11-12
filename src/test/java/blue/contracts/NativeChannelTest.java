@@ -125,8 +125,11 @@ class NativeChannelTest {
       NativeChannel registration =
           channel(
                   context -> {
-                    if (exhaust) context.charge("invocation", 10_000_000);
-                    else throw new IllegalStateException("Callback failure");
+                    if (exhaust) {
+                      context.charge("invocation", 10_000_000);
+                    } else {
+                      throw new IllegalStateException("Callback failure");
+                    }
                     return true;
                   })
               .build();

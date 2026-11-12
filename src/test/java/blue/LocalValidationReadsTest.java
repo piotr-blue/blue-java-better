@@ -19,7 +19,9 @@ class LocalValidationReadsTest {
   void unchangedSiblingsUseTheCompletedParentProofBeforeQueryingStorage(int count) {
     var context = new LanguageContext();
     Map<String, Object> fields = new TreeMap<>();
-    for (int i = 0; i < count; i++) fields.put("row-" + i, scalar("Text", "value-" + i));
+    for (int i = 0; i < count; i++) {
+      fields.put("row-" + i, scalar("Text", "value-" + i));
+    }
     fields.put("changed", scalar("Text", "before"));
     ExactNode before = value(fields);
     LanguageSemantics.strict(before, context, "value");

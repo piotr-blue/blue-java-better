@@ -66,8 +66,9 @@ final class ContractLocal {
     engine.blue.context.retainLocalClosure(identity(event));
     String owner = before.root;
     var run = new ContractRun(engine, before, event, timestamp, false);
-    if (attachments.isEmpty() && liveMember != null)
+    if (attachments.isEmpty() && liveMember != null) {
       run.graph.append = new ContractBirth(engine, owner, liveMember);
+    }
     run.admissionEvidence.putAll(evidence);
     Outcome outcome = (Outcome) run.guard(() -> processOwner(run, before, checkpoint, attachments));
     // Failure/rollback across independently advanced sources needs the ordinary whole invocation.
@@ -102,8 +103,9 @@ final class ContractLocal {
       var local =
           run.runLocal(run.state, owner, incoming, null, run.seeds, "PROCESS", List.of(), true);
       after.documents.put(owner, local.documents().get(owner));
-      if (run.graph.append != null && run.graph.append.child() != null)
+      if (run.graph.append != null && run.graph.append.child() != null) {
         run.graph.append.finish(local, after);
+      }
     }
     after.revision++;
     var result = new Outcome("APPLIED", after, str(checkpoint.get("identity")), run.invocation);
@@ -161,7 +163,9 @@ final class ContractLocal {
     }
     // Multiple distinct sources require whole-graph replay to resolve overlap and ordering.
     require(selected.size() <= 1, "LOCAL_EXECUTION_UNAVAILABLE");
-    if (selected.isEmpty()) return List.of();
+    if (selected.isEmpty()) {
+      return List.of();
+    }
     var entry = selected.entrySet().iterator().next();
     return adoptSource(run, owner, entry.getKey(), entry.getValue(), tickets.get(entry.getKey()));
   }
@@ -193,7 +197,9 @@ final class ContractLocal {
     for (Object raw : arr(observations.get("completions"))) {
       var turn = obj(raw);
       var input = obj(turn.get("turnInput"));
-      if (!child.equals(input.get("member"))) continue;
+      if (!child.equals(input.get("member"))) {
+        continue;
+      }
       incoming.add(
           new Batch(
               child,

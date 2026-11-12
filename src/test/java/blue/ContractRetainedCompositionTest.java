@@ -120,8 +120,11 @@ class ContractRetainedCompositionTest {
       assertEquals(
           Set.of("root", "buyer", "seller", "source"),
           new HashSet<>(root.members().stream().map(Contracts.Member::key).toList()));
-      for (var edge : root.embeddings())
-        if (edge.path().equals("/child")) assertEquals("source", edge.target());
+      for (var edge : root.embeddings()) {
+        if (edge.path().equals("/child")) {
+          assertEquals("source", edge.target());
+        }
+      }
     }
   }
 
@@ -185,8 +188,9 @@ class ContractRetainedCompositionTest {
       var expected = engine.process(initial, event, 1, AdmissionEvidence.empty()).requireApplied();
       assertEquals(expected.after().blueId(), actual.after().blueId());
       assertEquals(rootEvents(expected), rootEvents(actual));
-      if (schedule == GasSchedule.STANDARD)
+      if (schedule == GasSchedule.STANDARD) {
         assertEquals(expected.transition().gas(), actual.transition().gas());
+      }
     }
   }
 

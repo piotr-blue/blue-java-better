@@ -114,7 +114,9 @@ final class CanonicalOutput implements Appendable {
   /** Most commitments are small; larger exports amortize writes with a bounded growing buffer. */
   private void makeRoom() throws IOException {
     drain();
-    if (buffer.length < MAX_BUFFER) buffer = new byte[buffer.length * 2];
+    if (buffer.length < MAX_BUFFER) {
+      buffer = new byte[buffer.length * 2];
+    }
   }
 
   private void drain() throws IOException {

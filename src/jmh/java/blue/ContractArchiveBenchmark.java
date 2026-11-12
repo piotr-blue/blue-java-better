@@ -29,7 +29,9 @@ public class ContractArchiveBenchmark {
   @Setup
   public void setup() {
     ContractProcessor processor = new ContractProcessor();
-    for (int i = 0; i < versions; i++) root = processor.create(Map.of("count", i)).blueId();
+    for (int i = 0; i < versions; i++) {
+      root = processor.create(Map.of("count", i)).blueId();
+    }
     archive = processor.archive;
   }
 

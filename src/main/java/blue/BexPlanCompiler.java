@@ -49,7 +49,9 @@ final class BexPlanCompiler {
             QUERY,
             words(
                 "$literal $is $isKind $join $split $listGet $get $objectSet $pointerGet $pointerSet"
-                    + " $includes $hasKey $choose $call $intrinsic"))) EXPR.addAll(set);
+                    + " $includes $hasKey $choose $call $intrinsic"))) {
+      EXPR.addAll(set);
+    }
   }
 
   static Set<String> words(String s) {
@@ -109,7 +111,9 @@ final class BexPlanCompiler {
   }
 
   static void check(boolean test, String message) {
-    if (!test) throw new BexFailure("BEX_COMPILE_ERROR", message);
+    if (!test) {
+      throw new BexFailure("BEX_COMPILE_ERROR", message);
+    }
   }
 
   @SuppressWarnings("unchecked") // BEX objects are decoded with text keys.
@@ -127,7 +131,9 @@ final class BexPlanCompiler {
   static String operator(Object value) {
     if (value instanceof Map<?, ?> m && m.size() == 1) {
       Object key = m.keySet().iterator().next();
-      if (key instanceof String s && s.startsWith("$")) return s;
+      if (key instanceof String s && s.startsWith("$")) {
+        return s;
+      }
     }
     return null;
   }
@@ -153,8 +159,11 @@ final class BexPlanCompiler {
     while (!pending.isEmpty()) {
       Object v = pending.removeLast();
       check(operator(v) == null, "executable form in static Blue position");
-      if (v instanceof Map<?, ?> m) pending.addAll(m.values());
-      else if (v instanceof List<?> a) pending.addAll(a);
+      if (v instanceof Map<?, ?> m) {
+        pending.addAll(m.values());
+      } else if (v instanceof List<?> a) {
+        pending.addAll(a);
+      }
     }
   }
 
@@ -166,10 +175,14 @@ final class BexPlanCompiler {
       if (v instanceof Map<?, ?> m) {
         for (var e : m.entrySet()) {
           check(e.getKey() instanceof String, "object keys must be Text");
-          if (STATIC.contains(e.getKey())) staticValue(e.getValue());
+          if (STATIC.contains(e.getKey())) {
+            staticValue(e.getValue());
+          }
         }
         pending.addAll(m.values());
-      } else if (v instanceof List<?> a) pending.addAll(a);
+      } else if (v instanceof List<?> a) {
+        pending.addAll(a);
+      }
     }
   }
 
@@ -186,27 +199,38 @@ final class BexPlanCompiler {
     while (!pending.isEmpty()) {
       Input item = pending.pop();
       Object value = item.value();
-      if (++nodes > 250_000 || characters > 8_000_000 || item.statements() > 16_384)
+      if (++nodes > 250_000 || characters > 8_000_000 || item.statements() > 16_384) {
         throw new BexFailure("HOST_INCOMPLETE", "BEX compiler input exceeds host quantum");
-      if (value instanceof String text) characters += text.length();
-      else if (value instanceof Map<?, ?> map) {
-        if (!visited.add(value)) continue; // freeze() still rejects actual cycles.
-        if (map.size() > 250_000 - nodes)
+      }
+      if (value instanceof String text) {
+        characters += text.length();
+      } else if (value instanceof Map<?, ?> map) {
+        if (!visited.add(value)) {
+          continue; // freeze() still rejects actual cycles.
+        }
+        if (map.size() > 250_000 - nodes) {
           throw new BexFailure("HOST_INCOMPLETE", "BEX compiler width");
+        }
         for (var row : map.entrySet()) {
-          if (row.getKey() instanceof String key) characters += key.length();
+          if (row.getKey() instanceof String key) {
+            characters += key.length();
+          }
           int depth =
               item.statements() + (Set.of("$if", "$forEach").contains(row.getKey()) ? 1 : 0);
           pending.push(new Input(row.getValue(), depth));
         }
       } else if (value instanceof List<?> list && visited.add(value)) {
-        if (list.size() > 250_000 - nodes)
+        if (list.size() > 250_000 - nodes) {
           throw new BexFailure("HOST_INCOMPLETE", "BEX compiler width");
-        for (Object child : list) pending.push(new Input(child, item.statements()));
+        }
+        for (Object child : list) {
+          pending.push(new Input(child, item.statements()));
+        }
       }
     }
-    if (characters > 8_000_000)
+    if (characters > 8_000_000) {
       throw new BexFailure("HOST_INCOMPLETE", "BEX compiler Text exceeds host quantum");
+    }
   }
 
   public Program compile(Map<String, Object> source) {
@@ -216,19 +240,23 @@ final class BexPlanCompiler {
   public Program compile(Map<String, Object> source, Map<String, Object> definition, String entry) {
     if (bounded) {
       hostBounds(source);
-      if (definition != null) hostBounds(definition);
+      if (definition != null) {
+        hostBounds(definition);
+      }
     }
     Map<String, Object> merged = new TreeMap<>(map(BexValues.freeze(source)));
-    if (definition != null)
+    if (definition != null) {
       for (String k : List.of("constants", "functions")) {
         var values = new TreeMap<>(map(BexValues.freeze(definition.getOrDefault(k, Map.of()))));
         values.putAll(map(merged.getOrDefault(k, Map.of())));
         merged.put(k, Collections.unmodifiableMap(values));
       }
+    }
     constants = map(merged.getOrDefault("constants", Map.of()));
     functions = map(merged.getOrDefault("functions", Map.of()));
-    if (bounded && functions.size() > 128)
+    if (bounded && functions.size() > 128) {
       throw new BexFailure("HOST_INCOMPLETE", "BEX compiler function-depth bound");
+    }
     constants.keySet().forEach(k -> name(k, true));
     functions.keySet().forEach(k -> name(k, true));
     constants.values().forEach(BexPlanCompiler::staticValue);
@@ -260,22 +288,31 @@ final class BexPlanCompiler {
     }
     body(merged, new HashSet<>(), "<root>");
     var done = new HashSet<String>();
-    for (String f : calls.keySet()) visit(f, done, new HashSet<>());
+    for (String f : calls.keySet()) {
+      visit(f, done, new HashSet<>());
+    }
     return new Program(merged, selected, List.copyOf(inventory), intrinsicIds);
   }
 
   void visit(String f, Set<String> done, Set<String> active) {
     check(!active.contains(f), "recursive function call graph");
-    if (done.contains(f)) return;
+    if (done.contains(f)) {
+      return;
+    }
     active.add(f);
-    for (String g : calls.get(f)) visit(g, done, active);
+    for (String g : calls.get(f)) {
+      visit(g, done, active);
+    }
     active.remove(f);
     done.add(f);
   }
 
   void body(Map<String, Object> b, Set<String> slots, String current) {
-    if (b.containsKey("expr")) expr(b.get("expr"), slots, current);
-    else if (b.containsKey("do")) block(b.get("do"), slots, current);
+    if (b.containsKey("expr")) {
+      expr(b.get("expr"), slots, current);
+    } else if (b.containsKey("do")) {
+      block(b.get("do"), slots, current);
+    }
   }
 
   void call(Object raw, Set<String> slots, String current) {
@@ -309,7 +346,9 @@ final class BexPlanCompiler {
         var next = pending.pop();
         children = new ArrayList<>();
         expression(next.value(), next.slots(), next.current());
-        for (int i = children.size() - 1; i >= 0; i--) pending.push(children.get(i));
+        for (int i = children.size() - 1; i >= 0; i--) {
+          pending.push(children.get(i));
+        }
       }
     } finally {
       children = null;
@@ -319,22 +358,28 @@ final class BexPlanCompiler {
   void expression(Object v, Set<String> slots, String current) {
     String op = operator(v);
     if (op == null) {
-      if (v instanceof List<?> a) a.forEach(x -> expr(x, slots, current));
-      else if (v instanceof Map<?, ?> m)
+      if (v instanceof List<?> a) {
+        a.forEach(x -> expr(x, slots, current));
+      } else if (v instanceof Map<?, ?> m) {
         m.forEach(
             (k, x) -> {
-              if (!STATIC.contains(k)) expr(x, slots, current);
+              if (!STATIC.contains(k)) {
+                expr(x, slots, current);
+              }
             });
-      else
+      } else {
         check(
             v == null || v instanceof String || v instanceof Number || v instanceof Boolean,
             "invalid literal value");
+      }
       return;
     }
     check(EXPR.contains(op), "unknown expression operator " + op);
     inventory.add(op);
     Object raw = map(v).get(op);
-    if (op.equals("$literal") || CONSTANT.contains(op)) return;
+    if (op.equals("$literal") || CONSTANT.contains(op)) {
+      return;
+    }
     if (UNARY.contains(op)) {
       expr(raw, slots, current);
       return;
@@ -342,16 +387,20 @@ final class BexPlanCompiler {
     if (ARRAY.contains(op)) {
       var b = list(raw);
       if (Set.of("$startsWith", "$sliceAfter", "$eq", "$ne", "$gt", "$gte", "$lt", "$lte")
-          .contains(op)) check(b.size() == 2, "exactly two operands required");
-      if (Set.of("$add", "$subtract", "$multiply", "$divide").contains(op))
+          .contains(op)) {
+        check(b.size() == 2, "exactly two operands required");
+      }
+      if (Set.of("$add", "$subtract", "$multiply", "$divide").contains(op)) {
         check(!b.isEmpty(), "at least one arithmetic operand required");
+      }
       b.forEach(x -> expr(x, slots, current));
       return;
     }
     if (op.equals("$var") || op.equals("$const")) {
       String n;
-      if (raw instanceof String s) n = s;
-      else {
+      if (raw instanceof String s) {
+        n = s;
+      } else {
         shape(raw, Set.of("name"), Set.of("path"));
         n = name(map(raw).get("name"), false);
         expr(map(raw).getOrDefault("path", ""), slots, current);
@@ -370,7 +419,9 @@ final class BexPlanCompiler {
                     : op.equals("$steps") ? Set.of("step", "path") : Set.of("path");
         shape(raw, Set.of(), allowed);
         map(raw).values().forEach(x -> expr(x, slots, current));
-      } else expr(raw, slots, current);
+      } else {
+        expr(raw, slots, current);
+      }
       return;
     }
     var b = map(raw);
@@ -403,7 +454,9 @@ final class BexPlanCompiler {
           intrinsicIds.contains(map(b.get("type")).get("blueId")), "unknown intrinsic exact type");
       b.forEach(
           (k, x) -> {
-            if (!k.equals("type")) expr(x, slots, current);
+            if (!k.equals("type")) {
+              expr(x, slots, current);
+            }
           });
       return;
     }
@@ -411,14 +464,20 @@ final class BexPlanCompiler {
       String bodyKey =
           Set.of("$filter", "$some", "$find", "$findEntry").contains(op) ? "where" : "expr";
       var required = new HashSet<>(Set.of("in", "item", bodyKey));
-      if (op.equals("$reduce")) required.addAll(Set.of("acc", "init"));
+      if (op.equals("$reduce")) {
+        required.addAll(Set.of("acc", "init"));
+      }
       shape(b, required, Set.of("key", "index"));
       expr(b.get("in"), slots, current);
-      if (op.equals("$reduce")) expr(b.get("init"), slots, current);
+      if (op.equals("$reduce")) {
+        expr(b.get("init"), slots, current);
+      }
       var names = new HashSet<String>();
-      for (String k : List.of("item", "key", "index", "acc"))
-        if (b.containsKey(k))
+      for (String k : List.of("item", "key", "index", "acc")) {
+        if (b.containsKey(k)) {
           check(names.add(name(b.get(k), true)), "collection bindings must differ");
+        }
+      }
       var inner = new HashSet<>(slots);
       inner.addAll(names);
       expr(b.get(bodyKey), inner, current);
@@ -471,7 +530,9 @@ final class BexPlanCompiler {
   void block(Object raw, Set<String> slots, String current) {
     Deque<Runnable> pending = new ArrayDeque<>();
     enqueueBlock(raw, slots, current, pending);
-    while (!pending.isEmpty()) pending.pop().run();
+    while (!pending.isEmpty()) {
+      pending.pop().run();
+    }
   }
 
   private void enqueueBlock(
@@ -479,7 +540,9 @@ final class BexPlanCompiler {
     Iterator<?> statements = list(raw).iterator();
     class Next implements Runnable {
       public void run() {
-        if (!statements.hasNext()) return;
+        if (!statements.hasNext()) {
+          return;
+        }
         Object statement = statements.next();
         pending.push(this);
         statement(statement, slots, current, pending);
@@ -542,23 +605,31 @@ final class BexPlanCompiler {
       var b = map(value);
       expr(b.get("in"), slots, current);
       var names = new HashSet<String>();
-      for (String k : List.of("item", "key", "index"))
-        if (b.containsKey(k)) check(names.add(name(b.get(k), true)), "loop bindings must differ");
+      for (String k : List.of("item", "key", "index")) {
+        if (b.containsKey(k)) {
+          check(names.add(name(b.get(k), true)), "loop bindings must differ");
+        }
+      }
       slots.addAll(names);
       enqueueBlock(b.get("do"), slots, current, pending);
     } else if (op.equals("$appendChange")) {
       shape(value, Set.of("op", "path"), Set.of("val"));
       map(value).values().forEach(x -> expr(x, slots, current));
-    } else if (op.equals("$call")) call(value, slots, current);
-    else if (op.equals("$returnIf") || op.equals("$failIf")) {
+    } else if (op.equals("$call")) {
+      call(value, slots, current);
+    } else if (op.equals("$returnIf") || op.equals("$failIf")) {
       String key = op.equals("$returnIf") ? "expr" : "message";
       shape(value, Set.of("cond"), Set.of(key));
       var b = map(value);
       expr(b.get("cond"), slots, current);
-      if (b.containsKey(key)) expr(b.get(key), slots, current);
+      if (b.containsKey(key)) {
+        expr(b.get(key), slots, current);
+      }
     } else if (op.equals("$fail") && value instanceof Map<?, ?> m && m.containsKey("message")) {
       shape(value, Set.of("message"), Set.of());
       expr(m.get("message"), slots, current);
-    } else expr(value, slots, current);
+    } else {
+      expr(value, slots, current);
+    }
   }
 }

@@ -29,7 +29,9 @@ public class ContractRecordLookupBenchmark {
   @Setup
   public void setup() {
     Map<String, Object> source = new LinkedHashMap<>();
-    for (int i = 0; i < fields; i++) source.put("field-" + i, null);
+    for (int i = 0; i < fields; i++) {
+      source.put("field-" + i, null);
+    }
     present = "field-" + (fields - 1);
     record =
         representation.equals("frozen")

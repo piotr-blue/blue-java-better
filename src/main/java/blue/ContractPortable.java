@@ -70,8 +70,9 @@ final class ContractPortable {
     ExactNode original =
         event instanceof ExactNode n ? engine.blue.node(n) : engine.blue.source(event);
     var views = new ArrayList<Object>();
-    for (String sid : engine.archive.bindings().values())
+    for (String sid : engine.archive.bindings().values()) {
       views.add(ContractStorage.export(engine, engine.archive.versions.get(sid)));
+    }
     var data =
         m(
             "input",
@@ -158,7 +159,9 @@ final class ContractPortable {
     run.graph =
         new ContractGraph(
             run.state, run.reg, engine.archive.restrict(views), run.meter, run.invocation);
-    if (run.eventId != null) run.graph.logical.carriedRoots.add(run.eventId);
+    if (run.eventId != null) {
+      run.graph.logical.carriedRoots.add(run.eventId);
+    }
     run.graph.changes = run.changes;
     run.admissionEvidence =
         ContractRunFork.data(obj(data.getOrDefault("externalEvidence", Map.of())));

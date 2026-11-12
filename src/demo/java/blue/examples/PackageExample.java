@@ -455,7 +455,9 @@ public final class PackageExample {
   }
 
   private static void check(boolean valid, String message) {
-    if (!valid) throw new AssertionError(message);
+    if (!valid) {
+      throw new AssertionError(message);
+    }
   }
 
   private static void expectLanguage(String category, Runnable action) {

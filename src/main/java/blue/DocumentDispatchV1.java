@@ -60,10 +60,14 @@ final class DocumentDispatchV1 {
       ExactNode call,
       Map<String, Map<String, Object>> declarations) {
     if (declarations.values().stream()
-        .noneMatch(d -> "extension_dispatch_policy".equals(d.get("_role")))) return true;
+        .noneMatch(d -> "extension_dispatch_policy".equals(d.get("_role")))) {
+      return true;
+    }
     boolean allowed = true;
     for (var row : run.ordered(declarations)) {
-      if (!"extension_dispatch_policy".equals(row.getValue().get("_role"))) continue;
+      if (!"extension_dispatch_policy".equals(row.getValue().get("_role"))) {
+        continue;
+      }
       var policy = run.reg.declaration(row.getValue().get("_recipe"));
       var extension = (ContractNative.Installed) policy.get("_extension");
       var gas = new ContractNative.RuntimeMeter(run.meter, extension.binding, member);
@@ -73,9 +77,12 @@ final class DocumentDispatchV1 {
       var program = ContractRun.program(policy);
       var overlay = new LinkedHashMap<>(program);
       var functions = new LinkedHashMap<String, Object>();
-      if (definition != null && definition.program().get("functions") instanceof Map<?, ?> f)
+      if (definition != null && definition.program().get("functions") instanceof Map<?, ?> f) {
         functions.putAll(obj(f));
-      if (policy.get("functions") instanceof Map<?, ?> f) functions.putAll(obj(f));
+      }
+      if (policy.get("functions") instanceof Map<?, ?> f) {
+        functions.putAll(obj(f));
+      }
       overlay.put("functions", functions);
       var context = run.context(member, payload, policy, Map.of(), call, overlay);
       context.bindings.put("dispatch", m("kind", kind, "channel", channel, "operation", operation));
@@ -107,8 +114,9 @@ final class DocumentDispatchV1 {
               accept,
               "reason",
               decision.getOrDefault("reason", accept ? "" : "DISPATCH_REJECTED"));
-      if (run.engine.bindings.contractsEdition().deterministic())
+      if (run.engine.bindings.contractsEdition().deterministic()) {
         evidence.put("delivery", obj(run.work.getLast()).get("identity"));
+      }
       run.frame.dispatchDecisions.add(evidence);
     }
     return allowed;

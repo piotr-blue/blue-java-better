@@ -29,10 +29,12 @@ class BexNumbersTest {
 
     @Test
     void canonicalTextAndOtherNumericRepresentationsKeepTheirRules() {
-      for (Object value : List.of("0", "-7", new BigDecimal("42.000"), 42.0, -0.0, 42.0f))
+      for (Object value : List.of("0", "-7", new BigDecimal("42.000"), 42.0, -0.0, 42.0f)) {
         assertEquals(BexValues.number(value).toBigIntegerExact(), BexValues.integer(value));
-      for (Object invalid : List.of("01", "+1", "1.0", " 1", "1e2", "-0"))
+      }
+      for (Object invalid : List.of("01", "+1", "1.0", " 1", "1e2", "-0")) {
         assertThrows(BexFailure.class, () -> BexValues.integer(invalid), invalid.toString());
+      }
       for (Object invalid :
           List.of(
               new BigDecimal("1.2"),
@@ -41,8 +43,9 @@ class BexNumbersTest {
               List.of(),
               Map.of(),
               Double.NaN,
-              Double.POSITIVE_INFINITY))
+              Double.POSITIVE_INFINITY)) {
         assertThrows(BexFailure.class, () -> BexValues.integer(invalid), invalid.toString());
+      }
     }
   }
 
@@ -52,7 +55,7 @@ class BexNumbersTest {
     void mixedRepresentationsKeepTheirOrderAndMetering() {
       var values = new java.util.ArrayList<Object>(integers().toList());
       values.addAll(List.of(new BigDecimal("1.25"), new BigDecimal("42.000"), -0.0, 1.5, "2"));
-      for (Object left : values)
+      for (Object left : values) {
         for (Object right : values) {
           ContractModel.Meter expected = new ContractModel.Meter(100_000);
           ContractModel.Meter actual = new ContractModel.Meter(100_000);
@@ -63,6 +66,7 @@ class BexNumbersTest {
           assertEquals(expected.trace, actual.trace);
           assertEquals(expected.used, actual.used);
         }
+      }
     }
 
     @Test
@@ -75,8 +79,8 @@ class BexNumbersTest {
           new TreeSet<>(
               List.of(
                   0L, scalar - 1, scalar, Math.max(0, full.used - 1), full.used, full.used + 1));
-      for (long limit : limits)
-        for (boolean local : List.of(false, true))
+      for (long limit : limits) {
+        for (boolean local : List.of(false, true)) {
           for (boolean trace : List.of(false, true)) {
             ContractModel.Meter expected = meter(limit, local, trace),
                 actual = meter(limit, local, trace);
@@ -88,6 +92,8 @@ class BexNumbersTest {
             assertEquals(expected.trace, actual.trace);
             assertEquals(expected.rejected, actual.rejected);
           }
+        }
+      }
     }
   }
 

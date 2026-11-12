@@ -22,15 +22,20 @@ public final class CanonicalComparison {
 
   private static Object call(Object owner, String name, Object... args) throws Exception {
     for (Method method : owner.getClass().getMethods()) {
-      if (!method.getName().equals(name) || method.getParameterCount() != args.length) continue;
+      if (!method.getName().equals(name) || method.getParameterCount() != args.length) {
+        continue;
+      }
       boolean matches = true;
       for (int i = 0; i < args.length; i++) {
         Class<?> type = method.getParameterTypes()[i];
         if (args[i] != null
-            && !(type.isInstance(args[i]) || type == long.class && args[i] instanceof Long))
+            && !(type.isInstance(args[i]) || type == long.class && args[i] instanceof Long)) {
           matches = false;
+        }
       }
-      if (!matches) continue;
+      if (!matches) {
+        continue;
+      }
       method.setAccessible(true);
       try {
         return method.invoke(owner, args);
@@ -63,8 +68,9 @@ public final class CanonicalComparison {
   private static Object process(Object processor, Object document, Object event, long timestamp)
       throws Exception {
     Object result = call(processor, "process", document, event, timestamp);
-    if (!call(result, "status").equals("APPLIED"))
+    if (!call(result, "status").equals("APPLIED")) {
       throw new IllegalStateException(call(result, "observations").toString());
+    }
     call(result, "receipt"); // Include the canonical receipt, not only the business writes.
     return result;
   }
@@ -81,8 +87,9 @@ public final class CanonicalComparison {
 
     start = System.nanoTime();
     Object initial = call(processor, "initialize", root);
-    if (!call(initial, "status").equals("APPLIED"))
+    if (!call(initial, "status").equals("APPLIED")) {
       throw new IllegalStateException(call(initial, "observations").toString());
+    }
     String initReceipt = (String) call(initial, "receipt");
     double initializationMs = (System.nanoTime() - start) / 1e6;
     Object base = call(initial, "document");
@@ -110,10 +117,12 @@ public final class CanonicalComparison {
     Object afterSubmit = call(submitted, "document");
     Object paid = process(processor, afterSubmit, payEvent, 1002L);
     Object afterPay = call(paid, "document");
-    if (!call(processor, "read", afterPay, "/paidTotal").toString().equals("42"))
+    if (!call(processor, "read", afterPay, "/paidTotal").toString().equals("42")) {
       throw new AssertionError("payment not propagated");
-    if (!call(processor, "read", afterPay, "/activityCount").toString().equals("" + (count + 3)))
+    }
+    if (!call(processor, "read", afterPay, "/activityCount").toString().equals("" + (count + 3))) {
       throw new AssertionError("activity mismatch");
+    }
     jdk.jfr.Recording recording = null;
     if (System.getProperty("blue.bench.jfr") != null) {
       recording = new jdk.jfr.Recording(jdk.jfr.Configuration.getConfiguration("profile"));
@@ -124,8 +133,9 @@ public final class CanonicalComparison {
     Object[] events = {addEvent, submitEvent, payEvent};
     String[] names = {"add", "submit", "settle"};
     for (int step = 0; step < 3; step++) {
-      for (int warm = 0; warm < 4; warm++)
+      for (int warm = 0; warm < 4; warm++) {
         process(processor, documents[step], events[step], 1000L + step);
+      }
       double[] ms = new double[SAMPLES];
       Object result = null;
       for (int sample = 0; sample < SAMPLES; sample++) {

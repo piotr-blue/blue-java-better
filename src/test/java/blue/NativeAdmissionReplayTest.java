@@ -27,8 +27,9 @@ class NativeAdmissionReplayTest {
                   if (!context
                       .eventId()
                       .value()
-                      .equals(((Map<?, ?>) context.evidence()).get("event")))
+                      .equals(((Map<?, ?>) context.evidence()).get("event"))) {
                     context.reject("Wrong payload commitment");
+                  }
                   return Map.of("verified", true);
                 })
             .accept(context -> Boolean.TRUE.equals(context.admission().get("verified")))

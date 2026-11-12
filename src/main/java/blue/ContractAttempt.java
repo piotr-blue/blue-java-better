@@ -89,14 +89,20 @@ final class ContractAttempt {
   /** Returns null only after all units have sealed or the attempt has failed atomically. */
   public ChunkToken nextChunk() {
     require(!finished, "ATTEMPT_FINISHED");
-    if (outcome != null) return null;
-    if (token != null) return token;
+    if (outcome != null) {
+      return null;
+    }
+    if (token != null) {
+      return token;
+    }
     Object ready = run.guard(run::ready);
     if (ready instanceof Outcome o) {
       outcome = o;
       return null;
     }
-    if (ready == null) return null;
+    if (ready == null) {
+      return null;
+    }
     @SuppressWarnings("unchecked")
     var members = (Set<String>) ready;
     var p = run.phase;
@@ -126,7 +132,9 @@ final class ContractAttempt {
                           "roundSeal",
                           b.roundSeal))
               .toList());
-      if (p.initialization.containsKey(k)) lifecycle.put(k, p.initialization.get(k));
+      if (p.initialization.containsKey(k)) {
+        lifecycle.put(k, p.initialization.get(k));
+      }
       seeds.put(
           k, p.seeds.getOrDefault(k, List.of()).stream().map(ContractChannels.Seed::wire).toList());
       routes.put(k, run.initialRoutes(p, k).stream().map(Ticket::wire).toList());
@@ -212,7 +220,9 @@ final class ContractAttempt {
             candidate.units,
             "logicalPrefix",
             candidate.logicalCommitment());
-    if (candidate.meter.finalGas()) body.remove("gasTrace");
+    if (candidate.meter.finalGas()) {
+      body.remove("gasTrace");
+    }
     var wire = committed("chunk-result", body);
     candidates.put(str(wire.get("identity")), new Candidate(data(wire), candidate, failed));
     return new ChunkResult(wire);
@@ -258,7 +268,9 @@ final class ContractAttempt {
                 "rounds",
                 "units",
                 "logicalPrefix"));
-    if (run.meter.finalGas()) fields.remove("gasTrace");
+    if (run.meter.finalGas()) {
+      fields.remove("gasTrace");
+    }
     var wire = data(closed(result, fields, Set.of()));
     require(token.identity().equals(wire.get("token")), "CHUNK_INPUT_MISMATCH");
     var body = new TreeMap<>(wire);
@@ -294,7 +306,9 @@ final class ContractAttempt {
   private Outcome finishOutcome() {
     require(!finished, "ATTEMPT_FINISHED");
     require(outcome != null || nextChunk() == null, "UNFINISHED_ATTEMPT");
-    if (outcome == null) outcome = (Outcome) run.guard(run::finishWork);
+    if (outcome == null) {
+      outcome = (Outcome) run.guard(run::finishWork);
+    }
     finished = true;
     return outcome;
   }
@@ -311,7 +325,9 @@ final class ContractAttempt {
         token == null && history.isEmpty() && candidates.isEmpty(),
         "CHUNKED_ATTEMPT_ALREADY_STARTED");
     while (advanceLocal()) {}
-    if (outcome == null) outcome = (Outcome) run.guard(run::finishWork);
+    if (outcome == null) {
+      outcome = (Outcome) run.guard(run::finishWork);
+    }
     finished = true;
     return outcome;
   }
@@ -322,7 +338,9 @@ final class ContractAttempt {
     require(
         token == null && history.isEmpty() && candidates.isEmpty(),
         "CHUNKED_ATTEMPT_ALREADY_STARTED");
-    if (outcome != null) return false;
+    if (outcome != null) {
+      return false;
+    }
     // Portable chunk descriptors retain their existing unit sequence. Only in-process
     // execution may omit the physical queue visits for zero-work branches.
     run.sparseScheduling = true;
@@ -331,7 +349,9 @@ final class ContractAttempt {
       outcome = failure;
       return false;
     }
-    if (ready == null) return false;
+    if (ready == null) {
+      return false;
+    }
     @SuppressWarnings("unchecked")
     var unit = (Set<String>) ready;
     outcome =
@@ -348,8 +368,9 @@ final class ContractAttempt {
     require(run.receiving.isEmpty(), "RECEIVING_PORTABLE_EXPORT_UNSUPPORTED");
     if (origin == null) {
       var views = new ArrayList<Object>();
-      for (String sid : run.views.values())
+      for (String sid : run.views.values()) {
         views.add(ContractStorage.export(run.engine, run.engine.archive.versions.get(sid)));
+      }
       origin =
           committed(
               "chunk-origin",

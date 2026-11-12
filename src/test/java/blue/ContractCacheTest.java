@@ -15,7 +15,9 @@ class ContractCacheTest {
     var cache = new ContractCache<String, Boolean>("test", 10, 2, 10);
     cache.put("first", Boolean.TRUE, 4);
     cache.put("second", Boolean.TRUE, 4);
-    for (int i = 0; i < 100; i++) cache.put("first", Boolean.TRUE, 4);
+    for (int i = 0; i < 100; i++) {
+      cache.put("first", Boolean.TRUE, 4);
+    }
     assertEquals(2, cache.size());
     assertEquals(8, cache.bytes());
     cache.put("third", Boolean.TRUE, 4);

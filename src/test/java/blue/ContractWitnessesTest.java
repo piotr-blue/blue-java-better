@@ -24,7 +24,9 @@ class ContractWitnessesTest {
     bridge.open(parent);
     assertTrue(bridge.witnesses.childrenKnown(parent));
     assertTrue(bridge.evidence(child));
-    for (int i = 0; i < 100; i++) assertSame(parent, bridge.open(parent));
+    for (int i = 0; i < 100; i++) {
+      assertSame(parent, bridge.open(parent));
+    }
     ContractLanguage.Witnesses invocation = new ContractLanguage.Witnesses();
     bridge.witnessScope.set(invocation);
     try {

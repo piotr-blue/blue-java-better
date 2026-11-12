@@ -236,8 +236,9 @@ class TimeBindingsTest {
               var proof = (Map<?, ?>) request.evidence();
               if (!request.snapshotIdentity().equals(proof.get("snapshot"))
                   || !request.eventId().value().equals(proof.get("event"))
-                  || request.timestamp() != 100)
+                  || request.timestamp() != 100) {
                 request.reject("Fixture permit does not match the invocation");
+              }
               return new TimeBindings.Firing(request.receivers().getFirst(), TIME.blueId());
             });
     try (var session = runtime.openYaml(SOURCE)) {

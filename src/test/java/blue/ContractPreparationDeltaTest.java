@@ -23,7 +23,7 @@ class ContractPreparationDeltaTest {
     Contracts configuration =
         Contracts.newBuilder().language(language).gasSchedule(GasSchedule.STANDARD).build();
     Map<String, Object> children = new LinkedHashMap<>();
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) {
       children.put(
           "child-" + i,
           Map.of(
@@ -47,6 +47,7 @@ class ContractPreparationDeltaTest {
                                   "changeset",
                                   List.of(
                                       Map.of("op", "replace", "path", "/count", "val", 1))))))));
+    }
     var authored =
         language.readJson(
             ContractWire.write(

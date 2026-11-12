@@ -32,7 +32,9 @@ class RetainedClosureExpansionTest {
 
   private static Value rows(int count) {
     var fields = new TreeMap<String, Object>();
-    for (int i = 0; i < count; i++) fields.put("row-" + i, scalar("Text", "value-" + i));
+    for (int i = 0; i < count; i++) {
+      fields.put("row-" + i, scalar("Text", "value-" + i));
+    }
     return value(fields);
   }
 
@@ -46,7 +48,9 @@ class RetainedClosureExpansionTest {
     evidence.add(identity(body));
     context.durableClosures.add(identity(body));
     evidence.additions = 0;
-    for (int i = 0; i < 100; i++) assertSame(body, context.retainedBody(body));
+    for (int i = 0; i < 100; i++) {
+      assertSame(body, context.retainedBody(body));
+    }
     assertEquals(count, evidence.additions, "Only the first read may expand child evidence");
     for (Object field : body.fields().values()) {
       String child = identity((ExactNode) field);

@@ -40,8 +40,9 @@ public final class NativeAdmission {
       Objects.requireNonNull(declarationId);
       Objects.requireNonNull(checkpoint);
       header = (Map<String, Object>) BexValues.freeze(Objects.requireNonNull(header));
-      if (generation < 1)
+      if (generation < 1) {
         throw new IllegalArgumentException("Positive channel generation required");
+      }
     }
   }
 
@@ -196,8 +197,9 @@ public final class NativeAdmission {
   }
 
   private ContractNative.AdmissionContext input() {
-    if (input == null || thread != Thread.currentThread().threadId())
+    if (input == null || thread != Thread.currentThread().threadId()) {
       throw new IllegalStateException("Native admission is outside its invocation");
+    }
     return input;
   }
 

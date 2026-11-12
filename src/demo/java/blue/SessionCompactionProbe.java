@@ -17,7 +17,9 @@ public final class SessionCompactionProbe {
     var results = new ArrayList<Object>();
     for (int children : List.of(16, 256, 1024)) {
       var members = new TreeMap<String, Object>();
-      for (int i = 0; i < children; i++) members.put("child-" + i, Map.of("count", i));
+      for (int i = 0; i < children; i++) {
+        members.put("child-" + i, Map.of("count", i));
+      }
       var source =
           Map.of(
               "count",
@@ -60,7 +62,9 @@ public final class SessionCompactionProbe {
       String identity;
       try (var initial = contracts.openJson(LanguageCodec.write(source))) {
         initial.initialize().requireApplied();
-        for (int i = 0; i < 4; i++) initial.process(Map.of("sequence", i), i).requireApplied();
+        for (int i = 0; i < 4; i++) {
+          initial.process(Map.of("sequence", i), i).requireApplied();
+        }
         snapshot = initial.snapshot();
         identity = initial.identity();
       }
@@ -74,25 +78,30 @@ public final class SessionCompactionProbe {
               pair % 2 == 0 ? List.of("portable", "direct") : List.of("direct", "portable")) {
             long allocated = bean.getThreadAllocatedBytes(Thread.currentThread().threadId());
             long started = System.nanoTime();
-            if (mode.equals("direct")) direct.compact();
-            else {
+            if (mode.equals("direct")) {
+              direct.compact();
+            } else {
               try (var restored = contracts.restore(portable.snapshot(), identity)) {
-                if (!restored.identity().equals(identity))
+                if (!restored.identity().equals(identity)) {
                   throw new AssertionError("Identity mismatch");
+                }
               }
             }
             double millis = (System.nanoTime() - started) / 1e6;
             allocated = bean.getThreadAllocatedBytes(Thread.currentThread().threadId()) - allocated;
             measured.put(mode, Map.of("millis", millis, "allocatedBytes", allocated));
           }
-          if (!snapshot.equals(direct.snapshot())) throw new AssertionError("Snapshot mismatch");
+          if (!snapshot.equals(direct.snapshot())) {
+            throw new AssertionError("Snapshot mismatch");
+          }
           var event = Map.of("sequence", 10);
           var a = portable.process(event, 10).requireApplied();
           var b = direct.process(event, 10).requireApplied();
           if (!a.receipt().equals(b.receipt())
               || a.gas() != b.gas()
-              || !portable.identity().equals(direct.identity()))
+              || !portable.identity().equals(direct.identity())) {
             throw new AssertionError("Execution mismatch");
+          }
           measured.put("pair", pair);
           measured.put("warmup", pair < 2);
           samples.add(measured);

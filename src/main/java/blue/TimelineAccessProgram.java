@@ -168,7 +168,9 @@ public final class TimelineAccessProgram {
      */
     public Contracts.Transition initialize() {
       checkOpen();
-      if (state != null) throw new IllegalStateException("Access session already initialized");
+      if (state != null) {
+        throw new IllegalStateException("Access session already initialized");
+      }
       return Contracts.boundary(() -> apply(processor.initialize(definition.initial.semantic)));
     }
 
@@ -262,7 +264,9 @@ public final class TimelineAccessProgram {
                       try {
                         Contracts.Transition result =
                             apply(processor.process(state, node, time, Map.of()));
-                        if (result.applied()) checkpoint = prepared;
+                        if (result.applied()) {
+                          checkpoint = prepared;
+                        }
                         return result;
                       } finally {
                         selected = null;
@@ -367,12 +371,16 @@ public final class TimelineAccessProgram {
     }
 
     private void checkOpen() {
-      if (processor == null) throw new IllegalStateException("Access session is closed");
+      if (processor == null) {
+        throw new IllegalStateException("Access session is closed");
+      }
     }
 
     private void checkInitialized() {
       checkOpen();
-      if (state == null) throw new IllegalStateException("Access session is not initialized");
+      if (state == null) {
+        throw new IllegalStateException("Access session is not initialized");
+      }
     }
 
     /**

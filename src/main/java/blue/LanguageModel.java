@@ -79,7 +79,9 @@ final class LanguageModel {
 
     ContractLanguage.Constraints constraints() {
       ContractLanguage.Constraints result = nativeConstraints;
-      if (result == null) nativeConstraints = result = ContractLanguage.Constraints.of(constraints);
+      if (result == null) {
+        nativeConstraints = result = ContractLanguage.Constraints.of(constraints);
+      }
       return result;
     }
 

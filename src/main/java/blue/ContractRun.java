@@ -125,7 +125,9 @@ final class ContractRun {
     this.event = event;
     this.timestamp = timestamp;
     eventId = eventRecord == null ? null : identity(eventRecord);
-    if (eventRecord != null && eventRecord != event) blue.remember(eventRecord);
+    if (eventRecord != null && eventRecord != event) {
+      blue.remember(eventRecord);
+    }
     this.admission = admission;
     meter =
         new Meter(
@@ -157,14 +159,18 @@ final class ContractRun {
       graph.logical.carriedRoots.add(eventId);
       // Admission binds the original identity before this invocation opens its scope.
       // Preserve that witness for an inline event exactly as opening its Ref would.
-      if (event instanceof Value) invocationWitnesses.put(event, eventId);
+      if (event instanceof Value) {
+        invocationWitnesses.put(event, eventId);
+      }
     }
     // Unchanged members have activation zero; store only actual lifetime changes.
     graph.changes = changes;
   }
 
   void sealInvocation() {
-    if (!engine.bindings.contractsEdition().deterministic()) return;
+    if (!engine.bindings.contractsEdition().deterministic()) {
+      return;
+    }
     if (receiving.isEmpty()) {
       invocation =
           digest(
@@ -206,12 +212,16 @@ final class ContractRun {
   }
 
   ExactNode runtimeNode(Object value, boolean certify) {
-    if (frame != null) meter.owner = frame.key;
+    if (frame != null) {
+      meter.owner = frame.key;
+    }
     return blue.node(value, "value", certify, graph.logical);
   }
 
   boolean runtimeMatches(Object value, Object pattern) {
-    if (frame != null) meter.owner = frame.key;
+    if (frame != null) {
+      meter.owner = frame.key;
+    }
     SemanticGas.unit(meter, "MATCH");
     return blue.matches(value, pattern, graph.logical);
   }
@@ -234,7 +244,9 @@ final class ContractRun {
   boolean sparseScheduling;
 
   void begin() {
-    if (begun) return;
+    if (begun) {
+      return;
+    }
     begun = true;
     meter.contracts("processInvocation");
     meter.contracts("closureInvocation");
@@ -248,7 +260,9 @@ final class ContractRun {
       call = c.event();
       callRecord = c.record();
       seeds = ContractChannels.select(this);
-    } else sealInvocation();
+    } else {
+      sealInvocation();
+    }
     meter.owner = "";
   }
 
@@ -269,8 +283,11 @@ final class ContractRun {
       var pendingAncestors = new ArrayDeque<>(covered);
       while (!pendingAncestors.isEmpty()) {
         String member = pendingAncestors.pop();
-        for (Edge edge : graph.topology().incomingEdges(member))
-          if (ancestors.add(edge.source())) pendingAncestors.push(edge.source());
+        for (Edge edge : graph.topology().incomingEdges(member)) {
+          if (ancestors.add(edge.source())) {
+            pendingAncestors.push(edge.source());
+          }
+        }
       }
       boolean interleaved = seeds.stream().anyMatch(seed -> !ancestors.contains(seed.document()));
       if (total > meter.remaining() || interleaved) {
@@ -282,17 +299,23 @@ final class ContractRun {
     }
     // Historical receiving is seedless structural adoption. Terminated handlers
     // stay silent; ordinary PROCESS and LIVE still reject terminal roots.
-    if (graph.terminated(state.root) && (receiving.isEmpty() || liveReceiving))
+    if (graph.terminated(state.root) && (receiving.isEmpty() || liveReceiving)) {
       return fail("TERMINATED", null);
-    if (receiving.isEmpty()) phase = newPhase("INITIALIZE", null, false);
-    else ContractCompletions.install(this, receiving, liveReceiving);
+    }
+    if (receiving.isEmpty()) {
+      phase = newPhase("INITIALIZE", null, false);
+    } else {
+      ContractCompletions.install(this, receiving, liveReceiving);
+    }
     return null;
   }
 
   Set<String> ready() {
     while (phase != null) {
       var unit = nextUnit(phase);
-      if (unit != null) return unit;
+      if (unit != null) {
+        return unit;
+      }
       phase =
           phase.name.equals("INITIALIZE") && !admission && receiving.isEmpty()
               ? newPhase("PROCESS", null, false)
@@ -305,14 +328,17 @@ final class ContractRun {
     graph.finalizeGraph();
 
     state.revision = integer(input.revision + 1);
-    if (topologyChanged) state.generation = integer(input.generation + 1);
+    if (topologyChanged) {
+      state.generation = integer(input.generation + 1);
+    }
     engine.validate(state, true);
-    for (Object e : events)
+    for (Object e : events) {
       if (obj(e).get("document").equals(state.root)) {
         meter.owner = state.root;
         meter.contracts("rootEventRecorded");
         publicEvents.add(e);
       }
+    }
     var out = new Outcome("APPLIED", state, input.identity(), invocation);
     out.publicEvents = publicEvents;
     out.events = events;
@@ -333,17 +359,22 @@ final class ContractRun {
 
   Object guard(java.util.function.Supplier<?> action) {
     var previous = blue.witnessScope.get();
-    if (meter.deterministic) blue.witnessScope.set(invocationWitnesses);
+    if (meter.deterministic) {
+      blue.witnessScope.set(invocationWitnesses);
+    }
     try {
       return action.get();
     } catch (BexFailure e) {
-      if (e.code().equals("HOST_INCOMPLETE"))
+      if (e.code().equals("HOST_INCOMPLETE")) {
         throw new ContractModel.Error("HOST_INCOMPLETE", "resource", e.getMessage());
+      }
       return fail(
           e.code().equals("GAS_LIMIT_EXCEEDED") ? "GAS_LIMIT_EXCEEDED" : "FAILED",
           m("code", e.code().equals("GAS_LIMIT_EXCEEDED") ? e.code() : "BEX_" + e.code()));
     } catch (ContractModel.Error e) {
-      if (e.code.equals("HOST_INCOMPLETE")) throw e;
+      if (e.code.equals("HOST_INCOMPLETE")) {
+        throw e;
+      }
       var diagnostic = m("code", e.code);
       diagnostic.putAll(e.context);
       if (e.code.equals("NEEDS_RESOURCES")) {
@@ -354,7 +385,9 @@ final class ContractRun {
       return fail("FAILED", diagnostic);
     } catch (LanguageFailure e) {
       var translated = blue.translate(e);
-      if (translated.code.equals("HOST_INCOMPLETE")) throw translated;
+      if (translated.code.equals("HOST_INCOMPLETE")) {
+        throw translated;
+      }
       if (translated.code.equals("NEEDS_RESOURCES")) {
         var out = new Outcome("NEEDS_RESOURCES", input.copy(), input.identity(), invocation);
         out.diagnostic = m("code", translated.code);
@@ -365,8 +398,11 @@ final class ContractRun {
       diagnostic.putAll(translated.context);
       return fail("FAILED", diagnostic);
     } finally {
-      if (previous == null) blue.witnessScope.remove();
-      else blue.witnessScope.set(previous);
+      if (previous == null) {
+        blue.witnessScope.remove();
+      } else {
+        blue.witnessScope.set(previous);
+      }
     }
   }
 
@@ -376,15 +412,20 @@ final class ContractRun {
 
   static Map<String, Object> program(Map<String, Object> step) {
     var out = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-    for (String k : List.of("expr", "do", "constants", "functions"))
-      if (step.containsKey(k)) out.put(k, step.get(k));
+    for (String k : List.of("expr", "do", "constants", "functions")) {
+      if (step.containsKey(k)) {
+        out.put(k, step.get(k));
+      }
+    }
     return out;
   }
 
   record Definition(String identity, Map<String, Object> program) {}
 
   Definition computeDefinition(String key, Map<String, Object> step) {
-    if (!step.containsKey("definition")) return null;
+    if (!step.containsKey("definition")) {
+      return null;
+    }
     Object operand = step.get("definition");
     var h = blue.head(operand);
     if (h.value != ABSENT) {
@@ -395,7 +436,9 @@ final class ContractRun {
       String path = name.startsWith("/") ? name : "/contracts/" + BexValues.escape(name);
       Recipe selected = recipe(state.documents.get(key).body);
       for (String part : segments(path)) {
-        for (ExactNode node : selected.parts()) graph.logical.open(node);
+        for (ExactNode node : selected.parts()) {
+          graph.logical.open(node);
+        }
         meter.contracts("objectMemberRead");
         selected = blue.child(selected, part);
         require(selected != null, "MISSING_COMPUTE_DEFINITION", "path", path);
@@ -424,7 +467,9 @@ final class ContractRun {
   }
 
   boolean overlays(Object v) {
-    if (v instanceof List<?> a) return a.stream().anyMatch(this::overlays);
+    if (v instanceof List<?> a) {
+      return a.stream().anyMatch(this::overlays);
+    }
     if (v instanceof Map<?, ?>) {
       var m = obj(v);
       return m.containsKey("$resultValue")
@@ -461,8 +506,9 @@ final class ContractRun {
     var current = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
     contract.forEach(
         (k, v) -> {
-          if (!k.startsWith("_"))
+          if (!k.startsWith("_")) {
             current.put(k, k.equals("definition") ? blue.view(v, graph.logical) : v);
+          }
         });
     c.currentContract = current;
     c.steps = steps;
@@ -481,24 +527,33 @@ final class ContractRun {
   }
 
   private Object readerValue(Object value, ProjectionBudget budget, int depth) {
-    if (value instanceof ContractBridge.ExactView view)
+    if (value instanceof ContractBridge.ExactView view) {
       return view.bridge.project(view.recipe, budget, depth);
-    if (budget != null) budget.value(depth);
+    }
+    if (budget != null) {
+      budget.value(depth);
+    }
     if (value instanceof Map<?, ?> map) {
       var result = new LinkedHashMap<String, Object>();
       map.forEach(
           (key, child) -> {
-            if (budget != null) budget.entry(key.toString());
+            if (budget != null) {
+              budget.entry(key.toString());
+            }
             result.put(key.toString(), readerValue(child, budget, depth + 1));
           });
       return result;
     }
     if (value instanceof List<?> list) {
       var result = new ArrayList<Object>();
-      for (Object child : list) result.add(readerValue(child, budget, depth + 1));
+      for (Object child : list) {
+        result.add(readerValue(child, budget, depth + 1));
+      }
       return result;
     }
-    if (budget != null) budget.text(value);
+    if (budget != null) {
+      budget.text(value);
+    }
     return value;
   }
 
@@ -536,9 +591,13 @@ final class ContractRun {
       Object programKey) {
     java.util.function.Supplier<BexEngine.Result> evaluate =
         () -> engine.bex.execute(compiled, context, meter, BexEngine.TraceMode.METER_ONLY);
-    if (engine.calculations == null) return evaluate.get();
+    if (engine.calculations == null) {
+      return evaluate.get();
+    }
     Object declaration = contract.get("_recipe");
-    if (declaration == null) return evaluate.get();
+    if (declaration == null) {
+      return evaluate.get();
+    }
     Object binding =
         Arrays.asList(
             key,
@@ -580,7 +639,9 @@ final class ContractRun {
           case "INITIALIZATION", "TERMINATION" -> "lifecycleDelivered";
           default -> null;
         };
-    if (counter != null) meter.contracts(counter);
+    if (counter != null) {
+      meter.contracts(counter);
+    }
   }
 
   void dispatch(String key, String channel, ExactNode payload, String kind) {
@@ -597,7 +658,9 @@ final class ContractRun {
       ExactNode call) {
     Ticket ticket = frame.ticket;
     var writer = frame.writer;
-    if (!kind.equals("EMBEDDED")) frame.ticket = null;
+    if (!kind.equals("EMBEDDED")) {
+      frame.ticket = null;
+    }
     try {
       dispatchLocal(key, channel, payload, kind, operation, allowTerminating, call);
     } finally {
@@ -614,27 +677,38 @@ final class ContractRun {
       String operation,
       boolean allowTerminating,
       ExactNode call) {
-    if (!live(key) && !(allowTerminating && terminating.contains(key))) return;
+    if (!live(key) && !(allowTerminating && terminating.contains(key))) {
+      return;
+    }
     workRecord(key, channel, payload, kind);
     var cs = reg.contracts(state.documents.get(key));
     require(cs.containsKey(channel), "MISSING_HANDLER_CHANNEL");
-    if (!DocumentDispatchV1.admit(this, key, channel, payload, kind, operation, call, cs)) return;
+    if (!DocumentDispatchV1.admit(this, key, channel, payload, kind, operation, call, cs)) {
+      return;
+    }
     var frozen = new ArrayList<Map.Entry<String, Map<String, Object>>>();
     for (var row : ordered(cs)) {
       var h = row.getValue();
-      if (!EXECUTABLE.contains(h.get("_role")) || !h.get("channel").equals(channel)) continue;
-      if (h.get("_role").equals("operation")
-          && (!kind.equals("EXTERNAL") || operation == null || !row.getKey().equals(operation)))
+      if (!EXECUTABLE.contains(h.get("_role")) || !h.get("channel").equals(channel)) {
         continue;
+      }
+      if (h.get("_role").equals("operation")
+          && (!kind.equals("EXTERNAL") || operation == null || !row.getKey().equals(operation))) {
+        continue;
+      }
       frozen.add(row);
     }
     int generation = activation.getOrDefault(key, 0);
     for (var row : frozen) {
-      if (!continuationLive(key, generation, allowTerminating)) break;
+      if (!continuationLive(key, generation, allowTerminating)) {
+        break;
+      }
       var h = row.getValue();
       meter.owner = key;
       meter.contracts("handlerCandidateTested");
-      if (h.containsKey("event") && !runtimeMatches(payload, h.get("event"))) continue;
+      if (h.containsKey("event") && !runtimeMatches(payload, h.get("event"))) {
+        continue;
+      }
       ExactNode declaration = blue.exact(h.get("_recipe"));
       blue.remember(declaration);
       frame.writer =
@@ -659,7 +733,9 @@ final class ContractRun {
       }
       int i = 0;
       for (Recipe recipe : reg.steps(h)) {
-        if (!continuationLive(key, generation, allowTerminating)) break;
+        if (!continuationLive(key, generation, allowTerminating)) {
+          break;
+        }
         meter.owner = key;
         var step = reg.declaration(recipe);
         String name = str(step.getOrDefault("name", "" + i++)), role = str(step.get("_role"));
@@ -672,8 +748,9 @@ final class ContractRun {
             var program = program(step);
             var overlay = new TreeMap<>(program);
             var functions = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-            if (definition != null)
+            if (definition != null) {
               functions.putAll(obj(definition.program().getOrDefault("functions", Map.of())));
+            }
             functions.putAll(obj(step.getOrDefault("functions", Map.of())));
             overlay.put("functions", functions);
             var executionContext =
@@ -704,11 +781,15 @@ final class ContractRun {
             SemanticGas.unit(meter, "NEW_SLOT");
             steps.put(name, BexValues.freeze(value));
             for (Object p : arr(changes)) {
-              if (!continuationLive(key, generation, allowTerminating)) break;
+              if (!continuationLive(key, generation, allowTerminating)) {
+                break;
+              }
               patch(key, obj(p));
             }
             for (Object e : arr(events)) {
-              if (!continuationLive(key, generation, allowTerminating)) break;
+              if (!continuationLive(key, generation, allowTerminating)) {
+                break;
+              }
               emit(key, runtimeNode(e));
             }
           }
@@ -723,7 +804,9 @@ final class ContractRun {
             }
             steps.put(name, BexValues.freeze(m("changeset", changes)));
             for (Object p : arr(changes)) {
-              if (!continuationLive(key, generation, allowTerminating)) break;
+              if (!continuationLive(key, generation, allowTerminating)) {
+                break;
+              }
               patch(key, obj(p));
             }
           }
@@ -744,13 +827,17 @@ final class ContractRun {
           }
           default -> throw new ContractModel.Error("UNSUPPORTED_STEP");
         }
-        if (role.equals("terminate_step")) break;
+        if (role.equals("terminate_step")) {
+          break;
+        }
       }
     }
   }
 
   private static Object selectedEffect(Object value, String field, Object fallback) {
-    if (value instanceof Map<?, ?> map) return map.containsKey(field) ? map.get(field) : fallback;
+    if (value instanceof Map<?, ?> map) {
+      return map.containsKey(field) ? map.get(field) : fallback;
+    }
     if (value instanceof BexValues.HostValue host && host.kind().equals("object")) {
       Object selected = host.get(field);
       return selected == BexValues.UNDEFINED ? fallback : selected;
@@ -764,7 +851,9 @@ final class ContractRun {
     if (!lazy
         && (!(value instanceof List<?> list)
             || !patches
-            || list.stream().noneMatch(item -> item instanceof BexValues.HostValue))) return value;
+            || list.stream().noneMatch(item -> item instanceof BexValues.HostValue))) {
+      return value;
+    }
     require(BexValues.kind(value).equals("list"), "INVALID_EFFECT_RESULT");
     var result = new ArrayList<Object>();
     for (int i = 0; i < BexValues.size(value); i++) {
@@ -772,7 +861,9 @@ final class ContractRun {
       if (patches && item instanceof BexValues.HostValue) {
         require(BexValues.kind(item).equals("object"), "INVALID_PATCH");
         var fields = new LinkedHashMap<String, Object>();
-        for (String name : BexValues.keys(item)) fields.put(name, BexValues.get(item, name));
+        for (String name : BexValues.keys(item)) {
+          fields.put(name, BexValues.get(item, name));
+        }
         item = fields;
       }
       result.add(item);
@@ -789,7 +880,9 @@ final class ContractRun {
       boolean remove = p.get("op").equals("remove");
       closed(p, remove ? Set.of("op", "path") : Set.of("op", "path", "val"), Set.of());
       require(!segments(str(p.get("path"))).isEmpty(), "INVALID_PATCH_PATH");
-      if (!remove) runtimeNode(p.get("val"), false);
+      if (!remove) {
+        runtimeNode(p.get("val"), false);
+      }
     }
     for (Object e : arr(events)) {
       SemanticGas.output(meter, e);
@@ -831,9 +924,10 @@ final class ContractRun {
             && blue.select(doc.body, path) == null
             && graph.collectionAppend(doc, doc, path);
     boolean initializingChild = graph.append != null && key.equals(graph.append.child());
-    if (state.ownerLocal && !localWrite && !localAppend && !initializingChild)
+    if (state.ownerLocal && !localWrite && !localAppend && !initializingChild) {
       throw new ContractModel.Error(
           "LOCAL_EXECUTION_UNAVAILABLE", "reason", "PATCH_REQUIRES_GRAPH", "path", path);
+    }
     chargePatchBoundary(parts, op.equals("remove"));
     checkManagedAncestors(key, path, parts);
     var beforeR = listParent && op.equals("add") ? null : blue.select(doc.body, path);
@@ -861,9 +955,10 @@ final class ContractRun {
     if (!repaired.writes().isEmpty()) {
       graph.logical.establish(next, requested);
       localWrite = false;
-      if (state.ownerLocal && !initializingChild)
+      if (state.ownerLocal && !initializingChild) {
         throw new ContractModel.Error(
             "LOCAL_EXECUTION_UNAVAILABLE", "reason", "GENERALIZATION_REPAIR", "path", path);
+      }
     }
     blue.remember(doc.body);
     blue.remember(next);
@@ -898,8 +993,14 @@ final class ContractRun {
       state.documents.put(key, changed);
       graph.reconcile(eventId, key, List.of(path), append);
       var delta = new HashSet<>(reachable);
-      for (String k : graph.reachable()) if (!delta.add(k)) delta.remove(k);
-      for (String k : delta) activation.merge(k, 1, Integer::sum);
+      for (String k : graph.reachable()) {
+        if (!delta.add(k)) {
+          delta.remove(k);
+        }
+      }
+      for (String k : delta) {
+        activation.merge(k, 1, Integer::sum);
+      }
       allocation = Math.max(allocation, graph.allocation);
       var members = ContractCanonical.keys(graph.added);
       members.add(key);
@@ -914,7 +1015,9 @@ final class ContractRun {
 
   private void chargePatchBoundary(List<String> parts, boolean remove) {
     meter.contracts("patchBoundaryChecked");
-    for (String ignored : parts) meter.contracts("pointerSegmentTraversed");
+    for (String ignored : parts) {
+      meter.contracts("pointerSegmentTraversed");
+    }
     meter.contracts(remove ? "patchRemove" : "patchAddOrReplace");
   }
 
@@ -936,9 +1039,15 @@ final class ContractRun {
     ExactNode after = afterR == null ? null : blue.exact(afterR);
     String beforeId = before == null ? null : identity(before),
         afterId = after == null ? null : identity(after);
-    if (Objects.equals(beforeId, afterId)) return;
-    if (before != null) blue.remember(before);
-    if (after != null) blue.remember(after);
+    if (Objects.equals(beforeId, afterId)) {
+      return;
+    }
+    if (before != null) {
+      blue.remember(before);
+    }
+    if (after != null) {
+      blue.remember(after);
+    }
     var payload =
         m(
             "op",
@@ -949,9 +1058,13 @@ final class ContractRun {
             before != null,
             "afterPresent",
             after != null);
-    if (before != null) payload.put("before", m("blueId", beforeId));
-    if (after != null) payload.put("after", m("blueId", afterId));
-    for (var write : repairs)
+    if (before != null) {
+      payload.put("before", m("blueId", beforeId));
+    }
+    if (after != null) {
+      payload.put("after", m("blueId", afterId));
+    }
+    for (var write : repairs) {
       update(
           key,
           m(
@@ -967,11 +1080,14 @@ final class ContractRun {
               m("blueId", identity((ExactNode) write.get("before"))),
               "after",
               m("blueId", identity((ExactNode) write.get("after")))));
+    }
     update(key, payload);
   }
 
   void update(String key, Map<String, Object> payload) {
-    if (!live(key)) return;
+    if (!live(key)) {
+      return;
+    }
     int generation = activation.getOrDefault(key, 0);
     var raw = reg.typed("Document Update");
     raw.putAll(payload);
@@ -983,30 +1099,40 @@ final class ContractRun {
       var c = row.getValue();
       if (c.get("_role").equals("update")
           && prefix(str(c.getOrDefault("path", "")), str(payload.get("path")))
-          && (!c.containsKey("event") || runtimeMatches(n, c.get("event"))))
+          && (!c.containsKey("event") || runtimeMatches(n, c.get("event")))) {
         channels.add(row.getKey());
+      }
     }
     for (String k : channels) {
-      if (activation.getOrDefault(key, 0) != generation) break;
+      if (activation.getOrDefault(key, 0) != generation) {
+        break;
+      }
       dispatch(key, k, n, "UPDATE");
     }
-    if (activation.getOrDefault(key, 0) == generation) customInternal(key, "UPDATE", n, cs, false);
+    if (activation.getOrDefault(key, 0) == generation) {
+      customInternal(key, "UPDATE", n, cs, false);
+    }
   }
 
   void terminate(String key, String cause, String reason) {
-    if (terminating.contains(key) || graph.terminated(key)) return;
+    if (terminating.contains(key) || graph.terminated(key)) {
+      return;
+    }
     meter.owner = key;
     meter.contracts("terminationRequested");
     terminating.add(key);
     termination.put(key, Arrays.asList(cause, reason));
     var raw = reg.typed("Document Processing Terminated", "cause", cause);
-    if (reason != null) raw.put("reason", reason);
+    if (reason != null) {
+      raw.put("reason", reason);
+    }
     ExactNode n = runtimeNode(raw);
     for (var row : ordered(reg.contracts(state.documents.get(key)))) {
       var c = row.getValue();
       if (c.get("_role").equals("lifecycle")
-          && (!c.containsKey("event") || runtimeMatches(n, c.get("event"))))
+          && (!c.containsKey("event") || runtimeMatches(n, c.get("event")))) {
         dispatch(key, row.getKey(), n, "TERMINATION", null, true, null);
+      }
     }
     customInternal(key, "TERMINATION", n, reg.contracts(state.documents.get(key)), true);
   }
@@ -1019,8 +1145,11 @@ final class ContractRun {
             ? blue.open((ExactNode) root.get("contracts"))
             : ExactNode.value(Map.of());
     var fields = new TreeMap<>(cs.fields());
-    if (value == null) fields.remove(name);
-    else fields.put(name, runtimeNode(value, false));
+    if (value == null) {
+      fields.remove(name);
+    } else {
+      fields.put(name, runtimeNode(value, false));
+    }
     ExactNode candidate = root.with("contracts", ExactNode.value(fields));
     graph.logical.establish(candidate, doc.body);
     state.documents.put(key, doc.withBody(candidate));
@@ -1124,7 +1253,9 @@ final class ContractRun {
     boolean barrier;
 
     void completed(List<String> id, boolean value) {
-      if (value ? done.add(id) : done.remove(id)) doneChanges.add(Map.entry(id, value));
+      if (value ? done.add(id) : done.remove(id)) {
+        doneChanges.add(Map.entry(id, value));
+      }
     }
   }
 
@@ -1173,7 +1304,7 @@ final class ContractRun {
     ContractMetrics.count("graph.captureRoutes.calls");
     var routes = ContractTopology.of(state).incomingEdges(source);
     ContractMetrics.add("graph.captureRoutes.edgeVisits", routes.size());
-    for (Edge e : routes)
+    for (Edge e : routes) {
       out.add(
           new Ticket(
               e.source(),
@@ -1182,6 +1313,7 @@ final class ContractRun {
               source,
               activation.getOrDefault(source, 0),
               e.generation()));
+    }
     return out;
   }
 
@@ -1199,13 +1331,16 @@ final class ContractRun {
   }
 
   boolean continuationLive(String key, int generation, boolean allowTerminating) {
-    if (frame != null && frame.ticket != null && !ticketLive(frame.ticket, true)) return false;
+    if (frame != null && frame.ticket != null && !ticketLive(frame.ticket, true)) {
+      return false;
+    }
     return allowTerminating || live(key) && activation.getOrDefault(key, 0) == generation;
   }
 
   boolean live(String key) {
-    if (frame != null && key.equals(frame.key))
+    if (frame != null && key.equals(frame.key)) {
       return !terminating.contains(key) && !graph.terminated(key);
+    }
     return graph.reachable(true, terminating).contains(key);
   }
 
@@ -1220,14 +1355,18 @@ final class ContractRun {
       if (name.equals("INITIALIZE")
           && reg.marker(state.documents.get(k), "initialized") == null
           && !initializing.contains(k)
-          && (barrier || active.contains(k)))
+          && (barrier || active.contains(k))) {
         p.initialization.put(k, state.documents.get(k).blueId);
+      }
       p.initialRoutes.put(k, captureRoutes(k, state));
-      if (name.equals("PROCESS"))
+      if (name.equals("PROCESS")) {
         p.seeds.put(k, seeds.stream().filter(s -> s.document().equals(k)).toList());
+      }
     }
     initialized.putAll(p.initialization);
-    for (var g : graph.topology().components(p.allowed)) p.groups.add(ContractCanonical.keys(g));
+    for (var g : graph.topology().components(p.allowed)) {
+      p.groups.add(ContractCanonical.keys(g));
+    }
     return p;
   }
 
@@ -1236,7 +1375,9 @@ final class ContractRun {
     phase = p;
     try {
       Set<String> unit;
-      while ((unit = nextUnit(p)) != null) runUnit(p, unit);
+      while ((unit = nextUnit(p)) != null) {
+        runUnit(p, unit);
+      }
       return p.outside;
     } finally {
       phase = previous;
@@ -1250,12 +1391,13 @@ final class ContractRun {
 
   ContractSchedule schedule(Phase p) {
     var topology = graph.topology();
-    if (p.schedule == null || p.schedule.topology != topology)
+    if (p.schedule == null || p.schedule.topology != topology) {
       p.schedule =
           new ContractSchedule(
               p,
               topology,
               sparseScheduling && !Boolean.getBoolean("blue.physical.sparseScheduleDisabled"));
+    }
     return p.schedule;
   }
 
@@ -1295,7 +1437,9 @@ final class ContractRun {
               .sorted(ContractCanonical.CODE_POINTS)
               .filter(k -> hasInputs(p, k))
               .toList();
-      if (inputs.isEmpty()) break;
+      if (inputs.isEmpty()) {
+        break;
+      }
       boolean cyclic =
           members.size() > 1 || members.stream().anyMatch(graph.topology()::selfLinked);
       if (cyclic) {
@@ -1307,10 +1451,14 @@ final class ContractRun {
       var results = new ArrayList<LocalResult>();
       for (String key : inputs) {
         var incoming = p.pending.remove(key);
-        if (incoming == null) incoming = List.of();
+        if (incoming == null) {
+          incoming = List.of();
+        }
         String lifecycle = p.initialization.remove(key);
         var selectedSeeds = p.seeds.remove(key);
-        if (selectedSeeds == null) selectedSeeds = List.of();
+        if (selectedSeeds == null) {
+          selectedSeeds = List.of();
+        }
         boolean earlier =
             turns.stream()
                 .anyMatch(
@@ -1328,11 +1476,19 @@ final class ContractRun {
       var previousTopology = ContractTopology.of(preceding);
       if (!previousTopology.matches(state)) {
         var delta = new HashSet<>(previousTopology.live);
-        for (String k : graph.reachable()) if (!delta.add(k)) delta.remove(k);
-        for (String k : delta) activation.merge(k, 1, Integer::sum);
+        for (String k : graph.reachable()) {
+          if (!delta.add(k)) {
+            delta.remove(k);
+          }
+        }
+        for (String k : delta) {
+          activation.merge(k, 1, Integer::sum);
+        }
       }
       members = promote(p, members);
-      for (var r : results) graph.dirty.add(r.key);
+      for (var r : results) {
+        graph.dirty.add(r.key);
+      }
       graph.finalizeGraph(true, members);
 
       Map<String, Object> roundSeal = null;
@@ -1340,7 +1496,9 @@ final class ContractRun {
         var existing = new HashSet<>(members);
         existing.retainAll(preceding.documents.keySet());
         var bindings = new ArrayList<Object>();
-        for (Edge e : graph.topology().groupEdges(members)) bindings.add(e.wire());
+        for (Edge e : graph.topology().groupEdges(members)) {
+          bindings.add(e.wire());
+        }
         roundSeal =
             committed(
                 "round-result",
@@ -1371,18 +1529,23 @@ final class ContractRun {
                 vector(state, List.of(r.key)),
                 roundSeal == null ? null : str(roundSeal.get("identity"))));
       }
-      for (Batch b : new ArrayList<>(p.held)) routeBatch(p, b, members, true);
-      if (!p.done.containsAll(dependencies(p, members))) return;
+      for (Batch b : new ArrayList<>(p.held)) {
+        routeBatch(p, b, members, true);
+      }
+      if (!p.done.containsAll(dependencies(p, members))) {
+        return;
+      }
     }
     var id = List.copyOf(ContractCanonical.keys(members));
     p.completed(id, true);
     var output = new ArrayList<Object>();
-    for (Batch b : new ArrayList<>(p.held))
+    for (Batch b : new ArrayList<>(p.held)) {
       if (members.contains(b.source)) {
         b.after = vector(state, List.of(b.source));
         routeBatch(p, b, members, false);
         output.add(m("source", b.source, "completion", b.completion, "output", b.output));
       }
+    }
     var after = vector(state, members);
     if (members.size() == 1
         && turnStart == turns.size()
@@ -1414,9 +1577,13 @@ final class ContractRun {
   void routeBatch(Phase p, Batch b, Set<String> members, boolean internal) {
     var grouped = new TreeMap<String, List<Ticket>>(ContractCanonical.CODE_POINTS);
     for (Ticket t : b.tickets) {
-      if (members.contains(t.parent) != internal || internal && b.output.isEmpty()) continue;
+      if (members.contains(t.parent) != internal || internal && b.output.isEmpty()) {
+        continue;
+      }
       String id = b.completion + digest("ticket", t.wire());
-      if (!routed.add(id)) continue;
+      if (!routed.add(id)) {
+        continue;
+      }
       grouped.computeIfAbsent(t.parent, k -> new ArrayList<>()).add(t);
     }
     grouped.forEach(
@@ -1434,11 +1601,19 @@ final class ContractRun {
             p.pending.computeIfAbsent(parent, k -> new ArrayList<>()).add(selected);
             if (p.schedule != null) {
               var id = p.schedule.owner.get(parent);
-              if (id != null) p.completed(id, false);
-            } else
-              for (var g : p.groups)
-                if (g.contains(parent)) p.completed(List.copyOf(ContractCanonical.keys(g)), false);
-          } else p.outside.add(selected);
+              if (id != null) {
+                p.completed(id, false);
+              }
+            } else {
+              for (var g : p.groups) {
+                if (g.contains(parent)) {
+                  p.completed(List.copyOf(ContractCanonical.keys(g)), false);
+                }
+              }
+            }
+          } else {
+            p.outside.add(selected);
+          }
         });
   }
 
@@ -1460,25 +1635,35 @@ final class ContractRun {
         && links != null
         && links.body() == previous
         && links.blueId().equals(document.blueId)) {
-      for (int i = 0; i < links.edges().size(); i++)
+      for (int i = 0; i < links.edges().size(); i++) {
         established.put(links.edges().get(i), links.targets().get(i));
+      }
     }
     var replacements = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
     Collection<Edge> selectedEdges;
     if (indexed) {
       var affected = new TreeMap<EdgeKey, Edge>();
-      for (Batch batch : incoming)
+      for (Batch batch : incoming) {
         for (Ticket ticket : batch.tickets) {
-          if (!ticket.parent.equals(key) || !ticketLive(ticket, true)) continue;
+          if (!ticket.parent.equals(key) || !ticketLive(ticket, true)) {
+            continue;
+          }
           Edge edge = state.edges.get(new EdgeKey(key, ticket.path));
-          if (edge != null) affected.put(edge.key(), edge);
+          if (edge != null) {
+            affected.put(edge.key(), edge);
+          }
         }
+      }
       selectedEdges = affected.values();
-    } else selectedEdges = graph.topology().orderedOutgoingEdges(key);
+    } else {
+      selectedEdges = graph.topology().orderedOutgoingEdges(key);
+    }
     for (Edge e : selectedEdges) {
       ContractMetrics.count("contracts.inputEdgesVisited");
       String target = state.documents.get(e.target()).blueId;
-      if (target.equals(established.get(e))) continue;
+      if (target.equals(established.get(e))) {
+        continue;
+      }
       ExactNode node = blue.exact(blue.select(previous, e.path()));
       if (!identity(node).equals(target)) {
         meter.owner = key;
@@ -1504,16 +1689,18 @@ final class ContractRun {
                   })
               .filter(t -> ticketLive(t, true))
               .toList();
-      for (Object e : b.output)
+      for (Object e : b.output) {
         for (Ticket t : tickets) {
           var occurrence = obj(e);
           String observation =
               digest(
                   "contracts.embedded-observation/completion-1",
                   m("source", occurrence.get("identity"), "ticket", t.wire()));
-          if (!consumedObservations.contains(observation))
+          if (!consumedObservations.contains(observation)) {
             frame.queue.add(new Pending("EMBEDDED", occurrence, t, observation));
+          }
         }
+      }
     }
   }
 
@@ -1539,12 +1726,16 @@ final class ContractRun {
     int changesStart = changes.size(), serial = serials.getOrDefault(key, 0);
     serials.put(key, serial + 1);
     var dep = new TreeSet<String>(ContractCanonical.CODE_POINTS);
-    for (Edge e : ContractTopology.of(sealed).outgoingEdges(key)) dep.add(e.target());
+    for (Edge e : ContractTopology.of(sealed).outgoingEdges(key)) {
+      dep.add(e.target());
+    }
     var inputBatches = new ArrayList<Object>();
     var semanticBatches = new ArrayList<Object>();
     for (Batch b : sortedBatches(incoming)) {
       var row = m("kind", b.roundSeal != null ? "CYCLIC" : "DAG", "sourceCompletion", b.completion);
-      if (b.roundSeal != null) row.put("roundSeal", b.roundSeal);
+      if (b.roundSeal != null) {
+        row.put("roundSeal", b.roundSeal);
+      }
       row.put("tickets", b.tickets.stream().map(Ticket::wire).toList());
       inputBatches.add(row);
       semanticBatches.add(
@@ -1592,15 +1783,18 @@ final class ContractRun {
                 : m("kind", "INITIALIZE", "document", m("blueId", lifecycle)));
     String sourceTurn =
         ContractLocal.sourceTurn(sealed, key, phaseName, serial, descriptor, incoming);
-    if (completionRequired) descriptor.put("logicalContext", logicalCommitment());
+    if (completionRequired) {
+      descriptor.put("logicalContext", logicalCommitment());
+    }
     frame = new Frame(key, sealed.documents.get(key).copy(), descriptor, sourceTurn);
     suspended.add(frame);
     try {
       turnCount++;
       meter.owner = key;
       meter.contracts("localTurnOpened");
-      if (reg.preparations != null && reg.preparations.get(state.documents.get(key)) != null)
+      if (reg.preparations != null && reg.preparations.get(state.documents.get(key)) != null) {
         blue.context.openRetainedMember(state.documents.get(key).body);
+      }
       installInputs(key, incoming);
       if (lifecycle != null && live(key)) {
         initializing.add(key);
@@ -1615,8 +1809,9 @@ final class ContractRun {
         for (var row : ordered(declarations)) {
           var d = row.getValue();
           if (d.get("_role").equals("lifecycle")
-              && (!d.containsKey("event") || runtimeMatches(n, d.get("event"))))
+              && (!d.containsKey("event") || runtimeMatches(n, d.get("event")))) {
             dispatch(key, row.getKey(), n, "INITIALIZATION");
+          }
         }
         customInternal(key, "INITIALIZATION", n, declarations, false);
       }
@@ -1643,8 +1838,13 @@ final class ContractRun {
       meter.owner = key;
       meter.contracts("localTurnSealed");
       var retired = new ArrayList<Object>();
-      for (Batch b : incoming)
-        for (Ticket t : b.tickets) if (!ticketLive(t, false)) retired.add(t.wire());
+      for (Batch b : incoming) {
+        for (Ticket t : b.tickets) {
+          if (!ticketLive(t, false)) {
+            retired.add(t.wire());
+          }
+        }
+      }
       Map<String, Object> completion = Map.of();
       if (completionRequired) {
         completion =
@@ -1679,7 +1879,9 @@ final class ContractRun {
       var edges = new TreeMap<EdgeKey, Edge>();
       for (String k : owned) {
         docs.put(k, state.documents.get(k).copy());
-        for (Edge edge : state.outgoingEdges(k)) edges.put(edge.key(), edge);
+        for (Edge edge : state.outgoingEdges(k)) {
+          edges.put(edge.key(), edge);
+        }
       }
       return new LocalResult(key, docs, edges, completion, routes);
     } finally {
@@ -1695,8 +1897,9 @@ final class ContractRun {
   }
 
   Map<String, Object> dispatchEvidence(Map<String, Object> completion) {
-    if (!frame.dispatchDecisions.isEmpty())
+    if (!frame.dispatchDecisions.isEmpty()) {
       completion.put("dispatchDecisions", new ArrayList<>(frame.dispatchDecisions));
+    }
     return completion;
   }
 
@@ -1727,10 +1930,18 @@ final class ContractRun {
 
   void mergeOwned(LocalResult r) {
     state.documents.putAll(r.documents);
-    for (var d : r.documents.values()) if (d.body instanceof Value) blue.note(d.body, d.blueId);
-    for (String member : r.documents.keySet())
-      for (Edge edge : state.outgoingEdges(member))
-        if (!edge.equals(r.edges.get(edge.key()))) state.edges.remove(edge.key());
+    for (var d : r.documents.values()) {
+      if (d.body instanceof Value) {
+        blue.note(d.body, d.blueId);
+      }
+    }
+    for (String member : r.documents.keySet()) {
+      for (Edge edge : state.outgoingEdges(member)) {
+        if (!edge.equals(r.edges.get(edge.key()))) {
+          state.edges.remove(edge.key());
+        }
+      }
+    }
     state.edges.putAll(r.edges);
     graph.allocation = allocation;
     graph.refreshAliases();
@@ -1751,7 +1962,9 @@ final class ContractRun {
       meter.contracts("processorMarkerWritten");
       var end = termination.get(key);
       var raw = reg.typed("Processing Terminated Marker", "cause", end.getFirst());
-      if (end.get(1) != null) raw.put("reason", end.get(1));
+      if (end.get(1) != null) {
+        raw.put("reason", end.get(1));
+      }
       directMarker(key, "terminated", raw);
     }
     var doc = state.documents.get(key);
@@ -1768,23 +1981,26 @@ final class ContractRun {
             c -> !doc.channelLives.containsKey(c) || graph.resets.contains(new EdgeKey(key, c)));
     for (var seed : frame.consumed) {
       Life life = doc.channelLives.get(seed.channel());
-      if (life != null && life.generation() == seed.generation())
+      if (life != null && life.generation() == seed.generation()) {
         entries.put(seed.channel(), m("timestamp", timestamp, "event", m("blueId", eventId)));
+      }
     }
     var channels = ContractCanonical.keys(before.keySet());
     channels.addAll(entries.keySet());
-    for (String c : channels)
+    for (String c : channels) {
       if (!Objects.equals(before.get(c), entries.get(c))) {
         meter.owner = key;
         meter.contracts("checkpointWritten");
         writes.add(
             m("document", key, "channel", c, "before", before.get(c), "after", entries.get(c)));
       }
-    if (!before.equals(entries))
+    }
+    if (!before.equals(entries)) {
       directMarker(
           key,
           "checkpoint",
           entries.isEmpty() ? null : reg.typed("Channel Event Checkpoint", "entries", entries));
+    }
   }
 
   void emit(String key, ExactNode node) {
@@ -1824,23 +2040,31 @@ final class ContractRun {
     while (!frame.queue.isEmpty()) {
       Pending p = frame.queue.remove();
       meter.owner = key;
-      if (p.kind.equals("LOCAL")) meter.contracts("internalEventDequeued");
-      else {
+      if (p.kind.equals("LOCAL")) {
+        meter.contracts("internalEventDequeued");
+      } else {
         consumedObservations.add(p.observation);
-        if (!ticketLive(p.ticket, true)) continue;
+        if (!ticketLive(p.ticket, true)) {
+          continue;
+        }
       }
-      if (!live(key)) continue;
+      if (!live(key)) {
+        continue;
+      }
       ExactNode n = new Ref(str(p.occurrence.get("event")));
       var cs = reg.contracts(state.documents.get(key));
       frame.ticket = p.ticket;
       try {
         if (p.kind.equals("LOCAL")) {
           for (var row : ordered(cs)) {
-            if (!live(key)) break;
+            if (!live(key)) {
+              break;
+            }
             var d = row.getValue();
             if (d.get("_role").equals("triggered")
-                && (!d.containsKey("event") || runtimeMatches(n, d.get("event"))))
+                && (!d.containsKey("event") || runtimeMatches(n, d.get("event")))) {
               dispatch(key, row.getKey(), n, "TRIGGERED");
+            }
           }
           customInternal(key, "TRIGGERED", n, cs, false);
         } else {
@@ -1853,11 +2077,15 @@ final class ContractRun {
                       "event",
                       m("blueId", p.occurrence.get("event"))));
           for (var row : ordered(cs)) {
-            if (!ticketLive(p.ticket, false) || !live(key)) break;
+            if (!ticketLive(p.ticket, false) || !live(key)) {
+              break;
+            }
             var d = row.getValue();
             if (!d.get("_role").equals("embedded_event")
                 || d.containsKey("sourcePath") && !d.get("sourcePath").equals(p.ticket.path)
-                || d.containsKey("event") && !runtimeMatches(n, d.get("event"))) continue;
+                || d.containsKey("event") && !runtimeMatches(n, d.get("event"))) {
+              continue;
+            }
             dispatch(key, row.getKey(), payload, "EMBEDDED");
           }
           customInternal(key, "EMBEDDED", payload, cs, false);
@@ -1869,14 +2097,17 @@ final class ContractRun {
   }
 
   private Set<String> initializationCandidates() {
-    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled"))
+    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled")) {
       return graph.reachable();
+    }
     if (initializationCandidates == null) {
       initializationCandidates = new HashSet<>();
       // Input markers were validated by begin() and cannot be removed by a document patch.
-      for (var entry : input.documents.entrySet())
-        if (reg.marker(entry.getValue(), "initialized") == null)
+      for (var entry : input.documents.entrySet()) {
+        if (reg.marker(entry.getValue(), "initialized") == null) {
           initializationCandidates.add(entry.getKey());
+        }
+      }
     }
     initializationCandidates.addAll(graph.added);
     // Keep candidates throughout the attempt: private local frames may hide or initialize them
@@ -1886,20 +2117,29 @@ final class ContractRun {
 
   void creationBarrier() {
     Set<String> candidates = initializationCandidates();
-    if (candidates.isEmpty()) return;
+    if (candidates.isEmpty()) {
+      return;
+    }
     Frame creator = frame;
     var missing = new TreeSet<String>(ContractCanonical.CODE_POINTS);
     Set<String> reachable = graph.reachable();
-    for (String k : candidates)
+    for (String k : candidates) {
       if (reachable.contains(k)
           && reg.marker(state.documents.get(k), "initialized") == null
           && !initializing.contains(k)
-          && suspended.stream().noneMatch(f -> f.key.equals(k))) missing.add(k);
-    if (missing.isEmpty()) return;
+          && suspended.stream().noneMatch(f -> f.key.equals(k))) {
+        missing.add(k);
+      }
+    }
+    if (missing.isEmpty()) {
+      return;
+    }
     Snapshot privateState = state;
     ContractGraph privateGraph = graph;
     state = privateState.copy();
-    for (Frame f : suspended) state.documents.put(f.key, f.before.copy());
+    for (Frame f : suspended) {
+      state.documents.put(f.key, f.before.copy());
+    }
     graph = forkGraph(state);
     List<Batch> batches;
     try {
@@ -1907,11 +2147,15 @@ final class ContractRun {
       var owned = new HashSet<>(state.documents.keySet());
       owned.removeAll(privateState.documents.keySet());
       owned.addAll(missing);
-      for (String k : owned) privateState.documents.put(k, state.documents.get(k).copy());
+      for (String k : owned) {
+        privateState.documents.put(k, state.documents.get(k).copy());
+      }
       privateState.edges.entrySet().removeIf(e -> owned.contains(e.getValue().source()));
       state.edges.forEach(
           (k, e) -> {
-            if (owned.contains(e.source())) privateState.edges.put(k, e);
+            if (owned.contains(e.source())) {
+              privateState.edges.put(k, e);
+            }
           });
     } finally {
       state = privateState;
@@ -1924,11 +2168,15 @@ final class ContractRun {
         batches.stream()
             .filter(b -> b.tickets.stream().anyMatch(t -> t.parent.equals(creator.key)))
             .toList());
-    if (phase != null)
-      for (Batch b : batches)
-        for (String parent : b.tickets.stream().map(t -> t.parent).distinct().toList())
-          if (!parent.equals(creator.key))
+    if (phase != null) {
+      for (Batch b : batches) {
+        for (String parent : b.tickets.stream().map(t -> t.parent).distinct().toList()) {
+          if (!parent.equals(creator.key)) {
             phase.pending.computeIfAbsent(parent, k -> new ArrayList<>()).add(b);
+          }
+        }
+      }
+    }
     graph.refreshAliases();
   }
 
@@ -1939,9 +2187,13 @@ final class ContractRun {
       var doc = input.documents.get(member);
       for (var row : reg.contracts(doc).entrySet()) {
         var d = row.getValue();
-        if (!d.get("_role").equals("extension_external")) continue;
+        if (!d.get("_role").equals("extension_external")) {
+          continue;
+        }
         var extension = (ContractNative.Installed) d.get("_extension");
-        if (!extension.implementation.verifiesAdmission()) continue;
+        if (!extension.implementation.verifiesAdmission()) {
+          continue;
+        }
         String id = extension.binding.typeId();
         runtimes.put(id, extension);
         rows.computeIfAbsent(id, k -> new ArrayList<>())
@@ -1953,7 +2205,9 @@ final class ContractRun {
       var extension = row.getValue();
       var projection =
           obj(BexValues.freeze(extension.verifyAdmission(this, rows.get(row.getKey()))));
-      if (engine.bindings.contractsEdition().deterministic()) ContractCanonical.text(projection);
+      if (engine.bindings.contractsEdition().deterministic()) {
+        ContractCanonical.text(projection);
+      }
       externalAdmissions.put(row.getKey(), projection);
     }
     nativeAdmissionVerified = !externalAdmissions.isEmpty();
@@ -1967,10 +2221,16 @@ final class ContractRun {
       boolean allowTerminating) {
     for (var row : ordered(cs)) {
       var d = row.getValue();
-      if (!d.get("_role").equals("extension_channel")) continue;
-      if (!continuationLive(key, activation.getOrDefault(key, 0), allowTerminating)) return;
+      if (!d.get("_role").equals("extension_channel")) {
+        continue;
+      }
+      if (!continuationLive(key, activation.getOrDefault(key, 0), allowTerminating)) {
+        return;
+      }
       var extension = (ContractNative.Installed) d.get("_extension");
-      if (!extension.implementation.families().contains(kind)) continue;
+      if (!extension.implementation.families().contains(kind)) {
+        continue;
+      }
       meter.owner = key;
       meter.contracts("channelCandidateTested");
       var header = extension.header(d);
@@ -1998,8 +2258,11 @@ final class ContractRun {
     ExactNode body = state.documents.get(key).body;
     var gas = new ContractNative.RuntimeMeter(meter, binding, key);
     var fields = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-    for (String k : binding.bodyFields())
-      if (selected.containsKey(k)) fields.put(k, selected.get(k));
+    for (String k : binding.bodyFields()) {
+      if (selected.containsKey(k)) {
+        fields.put(k, selected.get(k));
+      }
+    }
     var context =
         new ContractNative.Context(
             ContractNative.frozen(blue.view(payload, null)),
@@ -2043,11 +2306,15 @@ final class ContractRun {
     var result = ContractNative.result(raw);
     validateEffects(result.get("patches"), result.get("events"));
     for (Object p : arr(result.get("patches"))) {
-      if (!continuationLive(key, generation, allowTerminating)) return;
+      if (!continuationLive(key, generation, allowTerminating)) {
+        return;
+      }
       patch(key, obj(p));
     }
     for (Object e : arr(result.get("events"))) {
-      if (!continuationLive(key, generation, allowTerminating)) return;
+      if (!continuationLive(key, generation, allowTerminating)) {
+        return;
+      }
       emit(key, runtimeNode(e));
     }
     if (result.containsKey("termination") && continuationLive(key, generation, allowTerminating)) {

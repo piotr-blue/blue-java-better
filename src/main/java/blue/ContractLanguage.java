@@ -95,13 +95,17 @@ final class ContractLanguage {
 
     private Object offered(String id) {
       Object response = provider == null ? null : provider.apply(id);
-      if (response != null) supplied.add(id);
+      if (response != null) {
+        supplied.add(id);
+      }
       return response;
     }
 
     @Override
     public void close() {
-      if (owner == null) return;
+      if (owner == null) {
+        return;
+      }
       provider = null;
       // Successfully verified bodies remain available. A rejected raw response must not poison
       // a later attempt using a different provider for the same identity.
@@ -119,7 +123,9 @@ final class ContractLanguage {
   }
 
   void rememberProtocolFacts() {
-    if (context.facts != null) context.facts.remember(context);
+    if (context.facts != null) {
+      context.facts.remember(context);
+    }
   }
 
   ProviderScope withProvider(LanguageProvider provider) {
@@ -140,8 +146,12 @@ final class ContractLanguage {
         context,
         id -> {
           Value body = offered.bodies.get(id);
-          if (body == null) return offered.lookup.apply(id);
-          if (!id.contains("#")) return body;
+          if (body == null) {
+            return offered.lookup.apply(id);
+          }
+          if (!id.contains("#")) {
+            return body;
+          }
           Object proof = offered.proofs.get(id);
           return proof == null ? null : Map.of("proof", proof, "body", exactText(body));
         },
@@ -169,12 +179,14 @@ final class ContractLanguage {
 
     void withTimelineEntry(TimelineVerifier.Entry entry) {
       if (occurrence != null) {
-        if (!occurrence.equals(entry.blueId()))
+        if (!occurrence.equals(entry.blueId())) {
           throw new IllegalStateException("An attempt may borrow only one original occurrence");
+        }
         return;
       }
-      if (!context.establishedValues.isEmpty())
+      if (!context.establishedValues.isEmpty()) {
         throw new IllegalStateException("A timeline prefix is already in scope");
+      }
       occurrence = entry.blueId();
       values.putAll(TimelineScope.entryValues(entry));
       context.establishedValues = values;
@@ -204,19 +216,23 @@ final class ContractLanguage {
     try {
       for (LanguageDocument value : completed) {
         Objects.requireNonNull(value);
-        if (value.goal() != Language.Goal.VALUE)
+        if (value.goal() != Language.Goal.VALUE) {
           throw new IllegalArgumentException("Completed Language value required");
+        }
         providers.add(withContent(value));
         String id = value.blueId().value();
-        if (id.equals(identity(value.semantic)))
+        if (id.equals(identity(value.semantic))) {
           headers.put(
               id,
               LanguageSemantics.head(
                   LanguageSemantics.recipe(value.semantic), value.owner.context(value)));
+        }
       }
       return new CompletedScope(providers, new TimelineScope(context, headers));
     } catch (RuntimeException | Error failure) {
-      for (int i = providers.size() - 1; i >= 0; i--) providers.get(i).close();
+      for (int i = providers.size() - 1; i >= 0; i--) {
+        providers.get(i).close();
+      }
       throw failure;
     }
   }
@@ -233,16 +249,22 @@ final class ContractLanguage {
     @Override
     public void close() {
       values.close();
-      for (int i = providers.size() - 1; i >= 0; i--) providers.get(i).close();
+      for (int i = providers.size() - 1; i >= 0; i--) {
+        providers.get(i).close();
+      }
     }
   }
 
   TimelineScope withPublisherHeads(TimelinePublisher.Prepared... checkpoints) {
     Map<String, Head> headers = new HashMap<>();
     for (TimelinePublisher.Prepared checkpoint : checkpoints) {
-      if (checkpoint == null) continue;
+      if (checkpoint == null) {
+        continue;
+      }
       LanguageContent entry = checkpoint.content();
-      if (entry != null) install(entry);
+      if (entry != null) {
+        install(entry);
+      }
       headers.putAll(checkpoint.headers());
     }
     TimelineScope scope = new TimelineScope(context, headers);
@@ -266,8 +288,9 @@ final class ContractLanguage {
     }
 
     private TimelineScope(LanguageContext owner, Map<String, Head> headers) {
-      if (!owner.establishedValues.isEmpty())
+      if (!owner.establishedValues.isEmpty()) {
         throw new IllegalStateException("A timeline prefix is already in scope");
+      }
       this.owner = owner;
       memos.attach(owner);
       values.putAll(headers);
@@ -276,7 +299,9 @@ final class ContractLanguage {
 
     @Override
     public void close() {
-      if (owner == null) return;
+      if (owner == null) {
+        return;
+      }
       // Captured resolver views share this revocable scope, never a permanent permission
       // to omit evidence. Ordinary exported Language documents contain no such facts.
       values.clear();
@@ -319,7 +344,9 @@ final class ContractLanguage {
 
   void restoreConcrete(String id, boolean concrete) {
     context.concreteFacts.put(id, concrete);
-    if (context.facts != null) context.facts.restoredConcrete(id, concrete);
+    if (context.facts != null) {
+      context.facts.restoredConcrete(id, concrete);
+    }
   }
 
   void inheritUnchangedValidation(ExactNode next, ExactNode previous) {
@@ -360,8 +387,9 @@ final class ContractLanguage {
     aliases.forEach(
         (name, id) -> {
           String previous = context.aliases.get(name);
-          if (previous != null && !previous.equals(id))
+          if (previous != null && !previous.equals(id)) {
             throw new LanguageFailure("AliasCollision", name);
+          }
         });
     context.aliases.putAll(aliases);
   }
@@ -376,7 +404,9 @@ final class ContractLanguage {
   /** Opens a retained member on demand, sharing only independently verified response bodies. */
   void openRetainedMember(ExactNode member) {
     String id = identity(member);
-    if (context.bodies.containsKey(id)) return;
+    if (context.bodies.containsKey(id)) {
+      return;
+    }
     Object response = context.provider.get(id);
     if (response == null) {
       try {
@@ -387,12 +417,17 @@ final class ContractLanguage {
         throw failure;
       }
     }
-    if (response == null) LanguageCore.open(member, context);
-    else addEvidence(Map.of(id, response));
+    if (response == null) {
+      LanguageCore.open(member, context);
+    } else {
+      addEvidence(Map.of(id, response));
+    }
   }
 
   void addEvidence(Map<String, Object> records) {
-    if (records.isEmpty()) return;
+    if (records.isEmpty()) {
+      return;
+    }
     LanguageContext verification = copied();
     verification.provider.putAll(records);
     Map<String, Long> limits = Map.copyOf(context.limits);
@@ -413,7 +448,7 @@ final class ContractLanguage {
       cold.bodies.remove(entry.getKey());
       cold.lookup = context.lookup;
       Map<String, Value> normalized = cacheKey == null ? null : new HashMap<>();
-      if (normalized != null)
+      if (normalized != null) {
         cold.onRemember =
             node -> {
               if (node instanceof Value value) {
@@ -424,6 +459,7 @@ final class ContractLanguage {
                 }
               }
             };
+      }
       Value body = LanguageCore.open(new Ref(entry.getKey()), cold);
       if (normalized != null) {
         normalized.put(entry.getKey(), body);
@@ -455,15 +491,19 @@ final class ContractLanguage {
   Map<String, Object> evidence() {
     Map<String, Object> records = new TreeMap<>(context.provider);
     for (var entry : context.bodies.entrySet()) {
-      if (CORE_NAME.containsKey(entry.getKey())) continue;
+      if (CORE_NAME.containsKey(entry.getKey())) {
+        continue;
+      }
       if (entry.getKey().contains("#")) {
         Object proof = context.proofs.get(entry.getKey());
-        if (proof != null)
+        if (proof != null) {
           records.put(
               entry.getKey(),
               Map.of("proof", LanguageCodec.wire(proof), "body", exactText(entry.getValue())));
-      } else
+        }
+      } else {
         records.put(entry.getKey(), Map.of("text", exactText(entry.getValue()), "mode", "exact"));
+      }
     }
     return records;
   }
@@ -516,25 +556,33 @@ final class ContractLanguage {
   List<String> semanticPreparation(ExactNode body) {
     String recipe = LanguageSemantics.recipe(body).key();
     List<String> result = new ArrayList<>();
-    if (context.verifiedClosures.contains(identity(body))) result.add("closure");
-    for (String goal : List.of("definition", "value"))
-      for (boolean root : new boolean[] {false, true})
-        if (context.validation.contains(new LanguageContext.ValidationKey(recipe, goal, root)))
+    if (context.verifiedClosures.contains(identity(body))) {
+      result.add("closure");
+    }
+    for (String goal : List.of("definition", "value")) {
+      for (boolean root : new boolean[] {false, true}) {
+        if (context.validation.contains(new LanguageContext.ValidationKey(recipe, goal, root))) {
           result.add(goal + "/" + root);
+        }
+      }
+    }
     return List.copyOf(result);
   }
 
   /** Protected native storage supplies these facts only inside a revocable owner attempt. */
   void restoreSemanticPreparation(ExactNode body, List<Object> facts) {
-    if (context.memoScope == null)
+    if (context.memoScope == null) {
       throw new IllegalStateException("Protected semantic preparation needs an attempt scope");
+    }
     String recipe = LanguageSemantics.recipe(body).key();
     for (Object fact : facts) {
       String selected = ContractModel.str(fact);
       if (selected.equals("closure")) {
         String id = identity(body);
         context.verifiedClosures.add(id);
-        if (context.facts != null) context.facts.restoredClosure(id);
+        if (context.facts != null) {
+          context.facts.restoredClosure(id);
+        }
         continue;
       }
       LanguageContext.ValidationKey key =
@@ -547,7 +595,9 @@ final class ContractLanguage {
             default -> throw new IllegalArgumentException("Unsupported protected semantic fact");
           };
       context.validation.add(key);
-      if (context.facts != null) context.facts.restored(key);
+      if (context.facts != null) {
+        context.facts.restored(key);
+      }
     }
   }
 
@@ -559,8 +609,9 @@ final class ContractLanguage {
     // Heads are immutable projections of this exact evidence snapshot. Share their persistent
     // root with a captured view; later memo entries and evidence still belong to each context.
     // Verification of newly supplied evidence deliberately uses copied(), with empty memos.
-    if (context.reuseWithinHostBudget && context.activeHeads.isEmpty())
+    if (context.reuseWithinHostBudget && context.activeHeads.isEmpty()) {
       context.snapshotHeadsTo(copy);
+    }
     if (context.memoScope != null) {
       context.memoScope.attach(copy);
       copy.facts = context.facts;
@@ -593,7 +644,9 @@ final class ContractLanguage {
   ExactNode admitLocal(ExactNode node, String goal) {
     LanguageSemantics.strict(node, context, goal);
     ExactNode admitted = LanguageOperations.omit(node, context).exact();
-    if (admitted != node) LanguageSemantics.strict(admitted, context, goal);
+    if (admitted != node) {
+      LanguageSemantics.strict(admitted, context, goal);
+    }
     return admitted;
   }
 
@@ -624,7 +677,9 @@ final class ContractLanguage {
 
   Map<String, Object> records(Collection<ExactNode> nodes, boolean nativeRecords) {
     Map<String, Object> result = new TreeMap<>();
-    for (ExactNode node : nodes) result.putAll(records(node));
+    for (ExactNode node : nodes) {
+      result.putAll(records(node));
+    }
     return result;
   }
 
@@ -636,7 +691,9 @@ final class ContractLanguage {
     while (!pending.isEmpty()) {
       ExactNode node = pending.pop();
       String id = identity(node);
-      if (!seen.add(id)) continue;
+      if (!seen.add(id)) {
+        continue;
+      }
       Value body = source.open(node);
       target.context.bodies.put(id, body);
       if (id.contains("#")) {
@@ -648,7 +705,9 @@ final class ContractLanguage {
           var items = LanguageCore.exactItems(field.getValue());
           target.context.remember(ExactNode.list(items));
           pending.addAll(items);
-        } else if (field.getValue() instanceof ExactNode child) pending.push(child);
+        } else if (field.getValue() instanceof ExactNode child) {
+          pending.push(child);
+        }
       }
     }
   }
@@ -668,26 +727,37 @@ final class ContractLanguage {
       String id = identity(node);
       // A protected publisher head is already retained in its durable source. Its current
       // body was installed by the invocation scope; retain new state without copying history.
-      if (retained.contains(id)) continue;
+      if (retained.contains(id)) {
+        continue;
+      }
       if (publisher.contains(id)
           || retainedWithPublisher.contains(id)
           || context.facts != null && context.facts.verified(id)) {
         usesPublisher = true;
         continue;
       }
-      if (!discovered.add(id)) continue;
+      if (!discovered.add(id)) {
+        continue;
+      }
       Value body = open(node);
       context.bodies.put(id, body);
       for (var field : body.fields().entrySet()) {
-        if (field.getValue() instanceof ExactNode child) pending.push(child);
-        else if (field.getKey().equals("items"))
-          for (Object child : (List<?>) field.getValue()) pending.push((ExactNode) child);
+        if (field.getValue() instanceof ExactNode child) {
+          pending.push(child);
+        } else if (field.getKey().equals("items")) {
+          for (Object child : (List<?>) field.getValue()) {
+            pending.push((ExactNode) child);
+          }
+        }
       }
     }
     // A cut at a protected publisher head does not establish permanent presence of its history.
     // Its ancestors remain reusable only in that live scope, and never propagate to a fork.
-    if (usesPublisher) retainedWithPublisher.addAll(discovered);
-    else retained.addAll(discovered);
+    if (usesPublisher) {
+      retainedWithPublisher.addAll(discovered);
+    } else {
+      retained.addAll(discovered);
+    }
   }
 
   Value open(ExactNode node) {
@@ -747,7 +817,9 @@ final class ContractLanguage {
 
     int trim(int maximum) {
       int removed = values.trim(maximum);
-      if (removed != 0) opened = new ContractIdentityMap<>();
+      if (removed != 0) {
+        opened = new ContractIdentityMap<>();
+      }
       return removed;
     }
 
@@ -933,7 +1005,9 @@ final class ContractLanguage {
     }
 
     public Map<String, Object> describe() {
-      if (schema == LanguageSchema.EMPTY) return Map.of();
+      if (schema == LanguageSchema.EMPTY) {
+        return Map.of();
+      }
       return LanguageCore.map(ContractData.freeze(schema.describe()));
     }
   }
@@ -947,7 +1021,9 @@ final class ContractLanguage {
       ExactNode node = pending.pop();
       if (node instanceof Ref ref) {
         charge.accept("textBlock", 8L * ((ref.id().length() + 63L) / 64));
-        if (CORE_NAME.containsKey(ref.id()) || !references.add(ref.id())) continue;
+        if (CORE_NAME.containsKey(ref.id()) || !references.add(ref.id())) {
+          continue;
+        }
       }
       Value body = open(node);
       int count = body.fields().size();
@@ -966,12 +1042,16 @@ final class ContractLanguage {
         } else if (part instanceof java.math.BigInteger integer) {
           long limbs = Math.max(1, (integer.abs().bitLength() + 31L) / 32);
           charge.accept("integerLimbSquare", 8L * limbs * limbs);
-        } else if (part instanceof NumberToken token)
+        } else if (part instanceof NumberToken token) {
           charge.accept("textBlock", 8L * ((6L * token.text().length() + 63) / 64));
-        else if (part instanceof List<?> items) {
+        } else if (part instanceof List<?> items) {
           charge.accept("member", 8L * items.size());
-          for (int i = items.size() - 1; i >= 0; i--) pending.push((ExactNode) items.get(i));
-        } else if (part instanceof ExactNode child) pending.push(child);
+          for (int i = items.size() - 1; i >= 0; i--) {
+            pending.push((ExactNode) items.get(i));
+          }
+        } else if (part instanceof ExactNode child) {
+          pending.push(child);
+        }
       }
     }
     return canonicalRootText(value);
@@ -984,8 +1064,12 @@ final class ContractLanguage {
       charge.accept("integerTypeEdge", 1L);
       if (type instanceof Ref ref) {
         charge.accept("textBlock", 8L * ((ref.id().length() + 63L) / 64));
-        if (CORE_NAME.containsKey(ref.id())) return CORE.get("Integer").equals(ref.id());
-        if (!seen.add(ref.id())) return false;
+        if (CORE_NAME.containsKey(ref.id())) {
+          return CORE.get("Integer").equals(ref.id());
+        }
+        if (!seen.add(ref.id())) {
+          return false;
+        }
       }
       charge.accept("manifest", 1L);
       Value parent = open(type);

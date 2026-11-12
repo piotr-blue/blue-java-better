@@ -22,7 +22,9 @@ class ContractPreparationTopologyTest {
     Language language = Language.newBuilder().mount("Contracts", Contracts.publication()).build();
     Contracts configuration = Contracts.newBuilder().language(language).build();
     Map<String, Object> children = new LinkedHashMap<>();
-    for (int i = 0; i < count; i++) children.put("child-" + i, Map.of("number", i, "count", 0));
+    for (int i = 0; i < count; i++) {
+      children.put("child-" + i, Map.of("number", i, "count", 0));
+    }
     var source =
         language.readYaml(
             """

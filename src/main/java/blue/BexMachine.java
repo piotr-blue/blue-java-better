@@ -46,11 +46,15 @@ final class BexMachine {
   }
 
   Object execute() {
-    if (call.entry == null) body(call.program, false);
-    else function(call.entry, Map.of(), false);
+    if (call.entry == null) {
+      body(call.program, false);
+    } else {
+      function(call.entry, Map.of(), false);
+    }
     while (!pending.isEmpty()) {
-      if (pending.size() > 100_000 || returns.size() > 16_384)
+      if (pending.size() > 100_000 || returns.size() > 16_384) {
         throw new BexFailure("HOST_INCOMPLETE", "BEX continuation capacity exceeded");
+      }
       pending.pop().run();
     }
     return value;
@@ -70,8 +74,12 @@ final class BexMachine {
     }
 
     public void run() {
-      if (!returned) value = call.defaults();
-      if (frame) call.frames.pop();
+      if (!returned) {
+        value = call.defaults();
+      }
+      if (frame) {
+        call.frames.pop();
+      }
       require(returns.pop() == this, "Invalid BEX return boundary");
     }
   }
@@ -83,33 +91,45 @@ final class BexMachine {
     if (source.containsKey("expr")) {
       boundary.returned = true;
       pending.push(() -> expression(source.get("expr")));
-    } else block(source.getOrDefault("do", List.of()));
+    } else {
+      block(source.getOrDefault("do", List.of()));
+    }
   }
 
   private void returnValue() {
     Boundary boundary = returns.peek();
-    while (pending.peek() != boundary) pending.pop();
+    while (pending.peek() != boundary) {
+      pending.pop();
+    }
     boundary.returned = true;
   }
 
   private void function(String name, Map<String, Object> args, boolean charged) {
-    if (charged) gas.charge("functionCall");
+    if (charged) {
+      gas.charge("functionCall");
+    }
     var definition = map(call.functions.get(name));
-    for (String key : keys(definition.getOrDefault("args", Map.of())))
+    for (String key : keys(definition.getOrDefault("args", Map.of()))) {
       require(
           call.matches(args.get(key), map(definition.get("args")).get(key)),
           "function argument pattern rejected: " + key);
+    }
     call.frames.push(new TreeMap<>(args));
     body(definition, true);
   }
 
   private void text(Object source, Consumer<String> next) {
-    if (source instanceof String s) next.accept(s);
-    else evaluate(source, () -> next.accept(requiredText(value)));
+    if (source instanceof String s) {
+      next.accept(s);
+    } else {
+      evaluate(source, () -> next.accept(requiredText(value)));
+    }
   }
 
   private String path(String p) {
-    if (p.isEmpty() || p.equals("/")) return call.context.scope;
+    if (p.isEmpty() || p.equals("/")) {
+      return call.context.scope;
+    }
     String selected = p.startsWith("/") ? p : call.context.scope.replaceAll("/$", "") + "/" + p;
     segments(selected);
     return selected;
@@ -142,24 +162,28 @@ final class BexMachine {
     String key = names.next();
     Runnable done =
         () -> {
-          if (!omitUndefined || value != UNDEFINED) result.put(key, value);
+          if (!omitUndefined || value != UNDEFINED) {
+            result.put(key, value);
+          }
           fields(source, names, result, staticPositions, omitUndefined, next);
         };
     if (staticPositions && BexPlanCompiler.STATIC.contains(key)) {
       value = get(source, key);
       pending.push(done);
-    } else evaluate(get(source, key), done);
+    } else {
+      evaluate(get(source, key), done);
+    }
   }
 
   private void expression(Object source) {
     gas.charge("expressionBase");
     String op = BexPlanCompiler.operator(source);
     if (op == null) {
-      if (source instanceof Map<?, ?>)
+      if (source instanceof Map<?, ?>) {
         fields(source, keys(source).iterator(), new TreeMap<>(), true, true, x -> value = x);
-      else if (source instanceof List<?> list)
+      } else if (source instanceof List<?> list) {
         values(list.iterator(), new ArrayList<>(), x -> value = x);
-      else {
+      } else {
         kind(source);
         value = source;
       }
@@ -178,12 +202,15 @@ final class BexMachine {
       }
       case "$and", "$or", "$coalesce", "$default" -> lazy(op, list(raw).iterator());
       default -> {
-        if (BexPlanCompiler.READS.contains(op)) read(op, raw);
-        else if (BexPlanCompiler.UNARY.contains(op))
+        if (BexPlanCompiler.READS.contains(op)) {
+          read(op, raw);
+        } else if (BexPlanCompiler.UNARY.contains(op)) {
           evaluate(raw, () -> value = call.unary(op, value));
-        else if (BexPlanCompiler.ARRAY.contains(op))
+        } else if (BexPlanCompiler.ARRAY.contains(op)) {
           values(list(raw).iterator(), new ArrayList<>(), args -> value = call.array(op, args));
-        else compound(op, map(raw));
+        } else {
+          compound(op, map(raw));
+        }
       }
     }
   }
@@ -197,15 +224,21 @@ final class BexMachine {
         inputs.next(),
         () -> {
           boolean truth = truthy(value);
-          if (op.equals("$and") && !truth) value = false;
-          else if (op.equals("$or") && truth) value = true;
-          else if (!(truth && (op.equals("$coalesce") || op.equals("$default")))) lazy(op, inputs);
+          if (op.equals("$and") && !truth) {
+            value = false;
+          } else if (op.equals("$or") && truth) {
+            value = true;
+          } else if (!(truth && (op.equals("$coalesce") || op.equals("$default")))) {
+            lazy(op, inputs);
+          }
         });
   }
 
   private void read(String op, Object raw) {
     if (Set.of("$var", "$const", "$binding", "$steps").contains(op)) {
-      if (!op.equals("$const")) gas.charge(op.equals("$steps") ? "stepsRead" : "varRead");
+      if (!op.equals("$const")) {
+        gas.charge(op.equals("$steps") ? "stepsRead" : "varRead");
+      }
       if (raw instanceof String s) {
         String key = s, pointer = "";
         if (op.equals("$binding") && s.contains("/")) {
@@ -255,7 +288,9 @@ final class BexMachine {
                           : call.context.document;
                   require(doc != UNDEFINED, "resolved document capability unavailable");
                   if (op.equals("$resultValue")) {
-                    if (call.context.inputObserver != null) call.context.inputObserver.opaque();
+                    if (call.context.inputObserver != null) {
+                      call.context.inputObserver.opaque();
+                    }
                     for (Object item : call.changes) {
                       var patch = map(item);
                       doc =
@@ -267,24 +302,26 @@ final class BexMachine {
                               gas);
                     }
                   }
-                  if (op.equals("$document") && call.context.inputObserver != null)
+                  if (op.equals("$document") && call.context.inputObserver != null) {
                     value = new BexEngine.InputRead(op, "", pointer, view).observed(call.context);
-                  else
+                  } else {
                     value =
                         call.context.readDocument == null
                             ? pointerGet(doc, pointer)
                             : call.context.readDocument.read(pointer, view, doc);
+                  }
                 }));
   }
 
   private void namedRead(String op, String key, String pointer) {
-    if (op.equals("$binding") || op.equals("$steps"))
+    if (op.equals("$binding") || op.equals("$steps")) {
       value = new BexEngine.InputRead(op, key, pointer, "").observed(call.context);
-    else
+    } else {
       value =
           pointerGet(
               (op.equals("$var") ? call.frame() : call.constants).getOrDefault(key, UNDEFINED),
               pointer);
+    }
   }
 
   private void arguments(Map<String, Object> body, Consumer<Map<String, Object>> next) {
@@ -299,9 +336,11 @@ final class BexMachine {
           () -> {
             Object source = value;
             var rows = call.collection(source).iterator();
-            if (op.equals("$reduce"))
+            if (op.equals("$reduce")) {
               evaluate(b.get("init"), () -> new Query(op, b, source, rows, value).next());
-            else new Query(op, b, source, rows, UNDEFINED).next();
+            } else {
+              new Query(op, b, source, rows, UNDEFINED).next();
+            }
           });
       return;
     }
@@ -311,8 +350,11 @@ final class BexMachine {
               b.get("cond"),
               () -> {
                 String branch = truthy(value) ? "then" : "else";
-                if (b.containsKey(branch)) pending.push(() -> expression(b.get(branch)));
-                else value = UNDEFINED;
+                if (b.containsKey(branch)) {
+                  pending.push(() -> expression(b.get(branch)));
+                } else {
+                  value = UNDEFINED;
+                }
               });
       case "$is" -> evaluate(b.get("node"), () -> value = call.matches(value, b.get("pattern")));
       case "$isKind" ->
@@ -328,7 +370,9 @@ final class BexMachine {
               });
       case "$call" -> arguments(b, args -> function((String) b.get("function"), args, true));
       case "$intrinsic" -> {
-        if (call.context.inputObserver != null) call.context.inputObserver.opaque();
+        if (call.context.inputObserver != null) {
+          call.context.inputObserver.opaque();
+        }
         String id = (String) map(b.get("type")).get("blueId");
         var processor = call.intrinsics.get(id);
         require(processor != null, "intrinsic exact type is not installed");
@@ -402,8 +446,11 @@ final class BexMachine {
                                           text.split(
                                               java.util.regex.Pattern.quote(separator), count)));
                             };
-                        if (b.containsKey("limit")) evaluate(b.get("limit"), done);
-                        else done.run();
+                        if (b.containsKey("limit")) {
+                          evaluate(b.get("limit"), done);
+                        } else {
+                          done.run();
+                        }
                       }));
       case "$listGet" ->
           evaluate(
@@ -417,9 +464,11 @@ final class BexMachine {
                       require(
                           kind(list).equals("list") && index.signum() >= 0,
                           "listGet requires a list and nonnegative index");
-                      if (index.compareTo(BigInteger.valueOf(size(list))) < 0)
+                      if (index.compareTo(BigInteger.valueOf(size(list))) < 0) {
                         value = get(list, index.intValue());
-                      else fallback(b);
+                      } else {
+                        fallback(b);
+                      }
                     });
               });
       case "$get", "$hasKey" ->
@@ -450,10 +499,14 @@ final class BexMachine {
                                   value == null || value == UNDEFINED ? Map.of() : value;
                               require(kind(object).equals("object"), "objectSet requires object");
                               var result = new TreeMap<String, Object>();
-                              for (String name : ordered(object, gas))
+                              for (String name : ordered(object, gas)) {
                                 result.put(name, get(object, name));
-                              if (selected == UNDEFINED) result.remove(key);
-                              else result.put(key, selected);
+                              }
+                              if (selected == UNDEFINED) {
+                                result.remove(key);
+                              } else {
+                                result.put(key, selected);
+                              }
                               value = result;
                             });
                       }));
@@ -469,7 +522,9 @@ final class BexMachine {
                           "pointerGetBase",
                           gas.tariff("pointerGetBase") + segments(pointer).size());
                       value = pointerGet(object, pointer);
-                      if (value == UNDEFINED) fallback(b);
+                      if (value == UNDEFINED) {
+                        fallback(b);
+                      }
                     });
               });
       case "$pointerSet" ->
@@ -499,9 +554,9 @@ final class BexMachine {
                                             gas);
                                   });
                             };
-                        if (!operation.equals("remove") && b.containsKey("val"))
+                        if (!operation.equals("remove") && b.containsKey("val")) {
                           evaluate(b.get("val"), selected);
-                        else {
+                        } else {
                           value = UNDEFINED;
                           selected.run();
                         }
@@ -532,8 +587,11 @@ final class BexMachine {
   }
 
   private void fallback(Map<String, Object> body) {
-    if (body.containsKey("default")) pending.push(() -> expression(body.get("default")));
-    else value = UNDEFINED;
+    if (body.containsKey("default")) {
+      pending.push(() -> expression(body.get("default")));
+    } else {
+      value = UNDEFINED;
+    }
   }
 
   private final class Query {
@@ -558,18 +616,24 @@ final class BexMachine {
           op.equals("$filter") && kind(source).equals("object")
               ? new TreeMap<String, Object>()
               : new ArrayList<>();
-      for (String key : List.of("item", "key", "index", "acc"))
+      for (String key : List.of("item", "key", "index", "acc")) {
         if (body.containsKey(key)) {
           String name = (String) body.get(key);
           old.put(name, call.frame().getOrDefault(name, UNDEFINED));
-          if (call.frame().containsKey(name)) present.add(name);
+          if (call.frame().containsKey(name)) {
+            present.add(name);
+          }
         }
+      }
     }
 
     void finish(Object result) {
       for (var entry : old.entrySet()) {
-        if (present.contains(entry.getKey())) call.frame().put(entry.getKey(), entry.getValue());
-        else call.frame().remove(entry.getKey());
+        if (present.contains(entry.getKey())) {
+          call.frame().put(entry.getKey(), entry.getValue());
+        } else {
+          call.frame().remove(entry.getKey());
+        }
       }
       value = result;
     }
@@ -587,18 +651,28 @@ final class BexMachine {
       var row = rows.next();
       gas.charge("forEachItem");
       call.frame().put((String) body.get("item"), row.value());
-      if (body.containsKey("key")) call.frame().put((String) body.get("key"), row.key());
-      if (body.containsKey("index")) call.frame().put((String) body.get("index"), row.index());
-      if (body.containsKey("acc")) call.frame().put((String) body.get("acc"), accumulator);
+      if (body.containsKey("key")) {
+        call.frame().put((String) body.get("key"), row.key());
+      }
+      if (body.containsKey("index")) {
+        call.frame().put((String) body.get("index"), row.index());
+      }
+      if (body.containsKey("acc")) {
+        call.frame().put((String) body.get("acc"), accumulator);
+      }
       evaluate(
           body.get(body.containsKey("where") ? "where" : "expr"),
           () -> {
-            if (op.equals("$reduce")) accumulator = value;
-            else if (op.equals("$map")) list(output).add(value);
-            else if (op.equals("$flatMap")) {
+            if (op.equals("$reduce")) {
+              accumulator = value;
+            } else if (op.equals("$map")) {
+              list(output).add(value);
+            } else if (op.equals("$flatMap")) {
               require(kind(value).equals("list"), "flatMap item is not a list");
               gas.charge("valueMember", size(value));
-              for (int i = 0; i < size(value); i++) list(output).add(get(value, i));
+              for (int i = 0; i < size(value); i++) {
+                list(output).add(get(value, i));
+              }
             } else if (truthy(value)) {
               if (op.equals("$some")) {
                 finish(true);
@@ -612,12 +686,17 @@ final class BexMachine {
                 var result = new TreeMap<String, Object>();
                 result.put("val", row.value());
                 result.put("index", row.index());
-                if (row.key() != UNDEFINED) result.put("key", row.key());
+                if (row.key() != UNDEFINED) {
+                  result.put("key", row.key());
+                }
                 finish(result);
                 return;
               }
-              if (output instanceof Map) map(output).put((String) row.key(), row.value());
-              else list(output).add(row.value());
+              if (output instanceof Map) {
+                map(output).put((String) row.key(), row.value());
+              } else {
+                list(output).add(row.value());
+              }
             }
             pending.push(this::next);
           });
@@ -629,7 +708,9 @@ final class BexMachine {
     pending.push(
         new Runnable() {
           public void run() {
-            if (!remaining.hasNext()) return;
+            if (!remaining.hasNext()) {
+              return;
+            }
             Object next = remaining.next();
             pending.push(this);
             statement(next);
@@ -651,7 +732,9 @@ final class BexMachine {
             pending.push(
                 new Runnable() {
                   public void run() {
-                    if (!names.hasNext()) return;
+                    if (!names.hasNext()) {
+                      return;
+                    }
                     String name = (String) names.next();
                     evaluate(
                         vars.get(name),
@@ -661,10 +744,13 @@ final class BexMachine {
                         });
                   }
                 });
-          } else
+          } else {
             fields(
                 vars, keys(vars).iterator(), new TreeMap<>(), false, false, call.frame()::putAll);
-        } else evaluate(body.get("expr"), () -> call.frame().put((String) body.get("name"), value));
+          }
+        } else {
+          evaluate(body.get("expr"), () -> call.frame().put((String) body.get("name"), value));
+        }
       }
       case "$if" -> {
         var body = map(raw);
@@ -682,7 +768,9 @@ final class BexMachine {
               pending.push(
                   new Runnable() {
                     public void run() {
-                      if (!rows.hasNext()) return;
+                      if (!rows.hasNext()) {
+                        return;
+                      }
                       var row = rows.next();
                       gas.charge("forEachItem");
                       Object item = row.value();
@@ -693,13 +781,15 @@ final class BexMachine {
                         item = pair;
                       }
                       call.frame().put((String) body.get("item"), item);
-                      if (body.containsKey("key"))
+                      if (body.containsKey("key")) {
                         call.frame().put((String) body.get("key"), row.key());
-                      if (body.containsKey("index"))
+                      }
+                      if (body.containsKey("index")) {
                         call.frame()
                             .put(
                                 (String) body.get("index"),
                                 kind(collection).equals("list") ? row.index() : UNDEFINED);
+                      }
                       pending.push(this);
                       block(body.get("do"));
                     }
@@ -712,7 +802,9 @@ final class BexMachine {
               raw,
               () -> {
                 require(kind(value).equals("list"), "appendChanges needs list");
-                for (int i = 0; i < size(value); i++) call.appendChange(get(value, i));
+                for (int i = 0; i < size(value); i++) {
+                  call.appendChange(get(value, i));
+                }
               });
       case "$appendEvent" -> evaluate(raw, () -> call.appendEvent(value));
       case "$appendEvents" ->
@@ -720,7 +812,9 @@ final class BexMachine {
               raw,
               () -> {
                 require(kind(value).equals("list"), "appendEvents needs list");
-                for (int i = 0; i < size(value); i++) call.appendEvent(get(value, i));
+                for (int i = 0; i < size(value); i++) {
+                  call.appendEvent(get(value, i));
+                }
               });
       case "$call" -> {
         var body = map(raw);
@@ -730,16 +824,21 @@ final class BexMachine {
         if (raw == null) {
           value = call.defaults();
           returnValue();
-        } else evaluate(raw, this::returnValue);
+        } else {
+          evaluate(raw, this::returnValue);
+        }
       }
       case "$returnIf" -> {
         var body = map(raw);
         evaluate(
             body.get("cond"),
             () -> {
-              if (!truthy(value)) return;
-              if (body.containsKey("expr")) evaluate(body.get("expr"), this::returnValue);
-              else {
+              if (!truthy(value)) {
+                return;
+              }
+              if (body.containsKey("expr")) {
+                evaluate(body.get("expr"), this::returnValue);
+              } else {
                 value = call.defaults();
                 returnValue();
               }
@@ -756,12 +855,13 @@ final class BexMachine {
         evaluate(
             body.get("cond"),
             () -> {
-              if (truthy(value))
+              if (truthy(value)) {
                 evaluate(
                     body.getOrDefault("message", "BEX failure"),
                     () -> {
                       throw new BexFailure("EXECUTION_REJECTED", call.toText(value));
                     });
+              }
             });
       }
       default -> throw new BexFailure("unknown statement " + op);
@@ -791,12 +891,14 @@ final class BexMachine {
                       var change = new TreeMap<String, Object>();
                       change.put("op", operation);
                       change.put("path", selected);
-                      if (!operation.equals("remove")) change.put("val", value);
+                      if (!operation.equals("remove")) {
+                        change.put("val", value);
+                      }
                       call.changes.add(change);
                     };
-                if (!operation.equals("remove") && names.contains("val"))
+                if (!operation.equals("remove") && names.contains("val")) {
                   evaluate(get(raw, "val"), done);
-                else {
+                } else {
                   value = UNDEFINED;
                   done.run();
                 }

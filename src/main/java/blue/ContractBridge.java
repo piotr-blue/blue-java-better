@@ -86,7 +86,9 @@ final class ContractBridge {
   }
 
   void note(ExactNode n, String id) {
-    if (n instanceof Value) activeWitnesses().put(n, id);
+    if (n instanceof Value) {
+      activeWitnesses().put(n, id);
+    }
   }
 
   boolean evidence(ExactNode n) {
@@ -94,8 +96,12 @@ final class ContractBridge {
   }
 
   String known(ExactNode n) {
-    if (n instanceof Ref r) return r.id();
-    if (!activeWitnesses().containsKey(n)) return null;
+    if (n instanceof Ref r) {
+      return r.id();
+    }
+    if (!activeWitnesses().containsKey(n)) {
+      return null;
+    }
     String id = activeWitnesses().get(n);
     if (id == null) {
       id = identity(n);
@@ -109,7 +115,9 @@ final class ContractBridge {
     // Verified identity witnesses survive resolver refresh. They are not cache
     // entries or validation proofs; each invocation still owns its reuse ledger.
     // Clearing this shared evidence would invalidate already captured views.
-    if (!sharedIdentityEvidence) witnesses.clear();
+    if (!sharedIdentityEvidence) {
+      witnesses.clear();
+    }
     certified.clear();
     certifiedContext = context;
   }
@@ -120,14 +128,19 @@ final class ContractBridge {
       var ids = new TreeSet<>(List.of(e.getMessage()));
       return new ContractModel.Error("NEEDS_RESOURCES", "required", List.copyOf(ids));
     }
-    if (e.category().equals("OperationLimitExceeded"))
+    if (e.category().equals("OperationLimitExceeded")) {
       return new ContractModel.Error("HOST_INCOMPLETE", "detail", e.getMessage());
+    }
     return new ContractModel.Error("LANGUAGE_" + e.category(), "detail", e.getMessage());
   }
 
   static Object compact(Object raw) {
-    if (raw instanceof List<?> a) return a.stream().map(ContractBridge::compact).toList();
-    if (!(raw instanceof Map<?, ?>)) return raw;
+    if (raw instanceof List<?> a) {
+      return a.stream().map(ContractBridge::compact).toList();
+    }
+    if (!(raw instanceof Map<?, ?>)) {
+      return raw;
+    }
     return compactFields(map(raw), ContractBridge::compact);
   }
 
@@ -136,14 +149,18 @@ final class ContractBridge {
     if (m.keySet().equals(Set.of("type", "value"))
         && m.get("type") instanceof Map<?, ?> t
         && CORE_NAME.containsKey(t.get("blueId"))
-        && Set.of("Text", "Integer", "Double", "Boolean").contains(CORE_NAME.get(t.get("blueId"))))
+        && Set.of("Text", "Integer", "Double", "Boolean")
+            .contains(CORE_NAME.get(t.get("blueId")))) {
       return CORE.get("Integer").equals(t.get("blueId")) && m.get("value") instanceof String s
           ? new BigInteger(s)
           : m.get("value");
+    }
     if ((m.keySet().equals(Set.of("items")) || m.keySet().equals(Set.of("items", "type")))
         && Objects.equals(
             m.getOrDefault("type", Map.of("blueId", CORE.get("List"))),
-            Map.of("blueId", CORE.get("List")))) return child.apply(m.get("items"));
+            Map.of("blueId", CORE.get("List")))) {
+      return child.apply(m.get("items"));
+    }
     var out = new TreeMap<String, Object>();
     m.forEach((k, v) -> out.put(k, child.apply(v)));
     return out;
@@ -151,27 +168,34 @@ final class ContractBridge {
 
   Object input(Object value, boolean aliases) {
     if (value instanceof BigInteger n
-        && n.abs().compareTo(BigInteger.valueOf(ContractModel.SAFE)) > 0)
+        && n.abs().compareTo(BigInteger.valueOf(ContractModel.SAFE)) > 0) {
       return Map.of("type", Map.of("blueId", CORE.get("Integer")), "value", n.toString());
-    if (value instanceof List<?> a) return a.stream().map(v -> input(v, aliases)).toList();
-    if (!(value instanceof Map<?, ?>)) return value;
+    }
+    if (value instanceof List<?> a) {
+      return a.stream().map(v -> input(v, aliases)).toList();
+    }
+    if (!(value instanceof Map<?, ?>)) {
+      return value;
+    }
     var out = new TreeMap<String, Object>();
     map(value)
         .forEach(
             (k, v) -> {
-              if (k.equals("value"))
+              if (k.equals("value")) {
                 out.put(
                     k,
                     v instanceof BigInteger n
                             && n.abs().compareTo(BigInteger.valueOf(ContractModel.SAFE)) > 0
                         ? n.toString()
                         : v);
-              else if (TYPES.contains(k) && v instanceof String s) {
+              } else if (TYPES.contains(k) && v instanceof String s) {
                 require(aliases, "UNRESOLVED_RUNTIME_TYPE", "alias", s);
                 String id = context.alias(s);
                 require(id != null, "UNKNOWN_ALIAS", "alias", s);
                 out.put(k, Map.of("blueId", id));
-              } else out.put(k, input(v, aliases));
+              } else {
+                out.put(k, input(v, aliases));
+              }
             });
     return out;
   }
@@ -212,14 +236,20 @@ final class ContractBridge {
   }
 
   ExactNode node(Object value, String goal, boolean certify, ContractWork logical) {
-    if (logical != null) return logical.node(value, goal, certify);
+    if (logical != null) {
+      return logical.node(value, goal, certify);
+    }
     try {
-      if (value instanceof ExactView v) value = v.bridge.exact(v.recipe);
+      if (value instanceof ExactView v) {
+        value = v.bridge.exact(v.recipe);
+      }
       ExactNode n =
           value instanceof ExactNode x
               ? x
               : normalize(input(BexValues.blueValue(value), false), context, "exact", false);
-      if (certify) certify(n, goal);
+      if (certify) {
+        certify(n, goal);
+      }
       remember(n);
       return n;
     } catch (LanguageFailure e) {
@@ -229,7 +259,9 @@ final class ContractBridge {
 
   void remember(ExactNode n) {
     context.remember(n);
-    if (n instanceof Value) note(n, identity(n));
+    if (n instanceof Value) {
+      note(n, identity(n));
+    }
   }
 
   void retain(Collection<ExactNode> nodes) {
@@ -237,8 +269,11 @@ final class ContractBridge {
     // invalidate cached owning-set proofs; it must not do so halfway through this export.
     boolean nativeRecords =
         context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
-    if (nativeRecords) context.retain(nodes);
-    else context.addEvidence(context.records(nodes, false));
+    if (nativeRecords) {
+      context.retain(nodes);
+    } else {
+      context.addEvidence(context.records(nodes, false));
+    }
     refresh();
   }
 
@@ -253,16 +288,24 @@ final class ContractBridge {
     }
     try {
       Value b = context.open(n);
-      if (n instanceof Ref r) note(b, r.id().contains("#") ? null : r.id());
+      if (n instanceof Ref r) {
+        note(b, r.id().contains("#") ? null : r.id());
+      }
       ContractLanguage.Witnesses active = activeWitnesses();
       if (known(b) != null && !active.childrenKnown(b)) {
-        for (var e : b.fields().entrySet())
+        for (var e : b.fields().entrySet()) {
           if (!LITERALS.contains(e.getKey()) && !e.getKey().equals("mergePolicy")) {
             if (e.getKey().equals("items")) {
-              for (ExactNode child : exactItems(e.getValue()))
-                if (child instanceof Value && !evidence(child)) note(child, null);
-            } else if (e.getValue() instanceof Value child && !evidence(child)) note(child, null);
+              for (ExactNode child : exactItems(e.getValue())) {
+                if (child instanceof Value && !evidence(child)) {
+                  note(child, null);
+                }
+              }
+            } else if (e.getValue() instanceof Value child && !evidence(child)) {
+              note(child, null);
+            }
           }
+        }
         // The immutable child inventory belongs to this same witness scope. Forks retain
         // both inventories; eviction and a new invocation discard this shortcut together.
         active.childrenOpened(b);
@@ -286,10 +329,14 @@ final class ContractBridge {
         certifiedContext = context;
       }
       String key = context.nativeReuse() ? identity(n) + ":" + goal : null;
-      if (key != null && certified.contains(key)) return;
+      if (key != null && certified.contains(key)) {
+        return;
+      }
       ContractMetrics.count("language.strictValidationCalls");
       ContractLanguage.strict(n, context, goal);
-      if (key != null) certified.add(key);
+      if (key != null) {
+        certified.add(key);
+      }
     } catch (LanguageFailure e) {
       throw translate(e);
     }
@@ -307,7 +354,9 @@ final class ContractBridge {
   }
 
   ExactNode exact(Object r) {
-    if (r instanceof ExactNode n) return n;
+    if (r instanceof ExactNode n) {
+      return n;
+    }
     try {
       return ContractLanguage.exact((Recipe) r, context);
     } catch (LanguageFailure e) {
@@ -316,8 +365,13 @@ final class ContractBridge {
   }
 
   Recipe selected(Recipe parent, Recipe child) {
-    if (child != null && parent.parts().stream().allMatch(this::evidence))
-      for (ExactNode n : child.parts()) if (n instanceof Value && !evidence(n)) note(n, null);
+    if (child != null && parent.parts().stream().allMatch(this::evidence)) {
+      for (ExactNode n : child.parts()) {
+        if (n instanceof Value && !evidence(n)) {
+          note(n, null);
+        }
+      }
+    }
     return child;
   }
 
@@ -332,24 +386,35 @@ final class ContractBridge {
     Recipe r = value instanceof Recipe q ? q : recipe(value);
     Head h = head(r);
     var names = new TreeSet<String>();
-    if (h.items == null) names.addAll(h.fields.keySet());
+    if (h.items == null) {
+      names.addAll(h.fields.keySet());
+    }
     names.addAll(TYPES);
     names.addAll(LITERALS);
     names.addAll(List.of("contracts", "schema", "mergePolicy"));
     var selectors = new ArrayList<String>();
     for (String name : names) {
       Recipe selected = child(r, h, name);
-      if (selected == null) continue;
-      if (name.equals("value") && identity(exact(selected)).equals(identity(exact(r)))) continue;
+      if (selected == null) {
+        continue;
+      }
+      if (name.equals("value") && identity(exact(selected)).equals(identity(exact(r)))) {
+        continue;
+      }
       selectors.add(name);
     }
-    if (h.items != null)
-      for (int i = 0; i < h.items.size(); i++) selectors.add(Integer.toString(i));
+    if (h.items != null) {
+      for (int i = 0; i < h.items.size(); i++) {
+        selectors.add(Integer.toString(i));
+      }
+    }
     return List.copyOf(selectors);
   }
 
   private Recipe child(Recipe r, Head h, Object key) {
-    if (key.equals("contracts")) return selected(r, h.contracts);
+    if (key.equals("contracts")) {
+      return selected(r, h.contracts);
+    }
     if (TYPES.contains(key)) {
       String id =
           switch (key.toString()) {
@@ -369,10 +434,13 @@ final class ContractBridge {
       return v == null ? null : recipe(key.equals("mergePolicy") ? scalar("Text", v) : v);
     }
     if (h.items != null) {
-      if (key.equals("-")) return null;
+      if (key.equals("-")) {
+        return null;
+      }
       int i;
-      if (key instanceof Integer z) i = z;
-      else {
+      if (key instanceof Integer z) {
+        i = z;
+      } else {
         require(LanguageSyntax.LIST_INDEX.matcher(key.toString()).matches(), "INVALID_LIST_INDEX");
         try {
           i = Integer.parseInt(key.toString());
@@ -389,7 +457,9 @@ final class ContractBridge {
     Recipe r = recipe(n);
     for (String key : ContractModel.segments(path)) {
       r = child(r, key);
-      if (r == null) return null;
+      if (r == null) {
+        return null;
+      }
     }
     return r;
   }
@@ -417,22 +487,31 @@ final class ContractBridge {
       boolean preserveCyclic,
       ProjectionBudget budget,
       int depth) {
-    if (budget != null) budget.value(depth);
-    if (value == null) return UNDEFINED;
+    if (budget != null) {
+      budget.value(depth);
+    }
+    if (value == null) {
+      return UNDEFINED;
+    }
     Recipe r = value instanceof Recipe q ? q : recipe(value);
-    if (preserveCyclic && exact(r) instanceof Ref ref && ref.id().contains("#"))
+    if (preserveCyclic && exact(r) instanceof Ref ref && ref.id().contains("#")) {
       return projectedReference(ref.id(), budget, depth);
+    }
     Head h = head(r);
     if (h.value != ABSENT) {
-      if (budget != null) budget.text(h.value);
+      if (budget != null) {
+        budget.text(h.value);
+      }
       return h.value;
     }
     String key = r.key();
-    if (!path.add(key)) return projectedReference(identity(exact(r)), budget, depth);
+    if (!path.add(key)) {
+      return projectedReference(identity(exact(r)), budget, depth);
+    }
     try {
       if (h.items != null) {
         var out = new ArrayList<Object>();
-        for (int i = 0; i < h.items.size(); i++)
+        for (int i = 0; i < h.items.size(); i++) {
           out.add(
               projectBranch(
                   ContractLanguage.child(h, i),
@@ -441,13 +520,16 @@ final class ContractBridge {
                   preserveCyclic,
                   budget,
                   depth + 1));
+        }
         return out;
       }
       var out = new TreeMap<String, Object>();
       for (String k : h.fields.keySet()) {
         Recipe ch = ContractLanguage.child(h, k);
         if (definitions || ContractLanguage.present(ch, context)) {
-          if (budget != null) budget.entry(k);
+          if (budget != null) {
+            budget.entry(k);
+          }
           out.put(k, projectBranch(ch, definitions, path, preserveCyclic, budget, depth + 1));
         }
       }
@@ -462,7 +544,9 @@ final class ContractBridge {
         }
       }
       if (h.contracts != null) {
-        if (budget != null) budget.entry("contracts");
+        if (budget != null) {
+          budget.entry("contracts");
+        }
         out.put(
             "contracts",
             budget == null
@@ -506,34 +590,41 @@ final class ContractBridge {
     budget.value(depth);
     if (inlineScalars && node instanceof Ref ref && !ref.id().contains("#")) {
       Value opened = open(node);
-      if (scalarLiteral(opened.fields())) node = opened;
+      if (scalarLiteral(opened.fields())) {
+        node = opened;
+      }
     }
-    if (node instanceof Ref ref) return projectedReference(ref.id(), budget, depth);
-    if (node instanceof Local local)
+    if (node instanceof Ref ref) {
+      return projectedReference(ref.id(), budget, depth);
+    }
+    if (node instanceof Local local) {
       return projectedReference("this#" + local.index(), budget, depth);
+    }
     Map<String, Object> fields = ((Value) node).fields();
     String type = fields.get("type") instanceof Ref ref ? ref.id() : null;
     if (scalarLiteral(fields)) {
       Object scalar = fields.get("value");
-      if (CORE.get("Integer").equals(type) && scalar instanceof String text)
+      if (CORE.get("Integer").equals(type) && scalar instanceof String text) {
         scalar = new BigInteger(text);
+      }
       budget.text(scalar);
       return scalar;
     }
     if (fields.keySet().equals(Set.of("items"))
-        || fields.keySet().equals(Set.of("items", "type")) && CORE.get("List").equals(type))
+        || fields.keySet().equals(Set.of("items", "type")) && CORE.get("List").equals(type)) {
       return projectedItems(exactItems(fields.get("items")), budget, depth, inlineScalars);
+    }
     Map<String, Object> result = new TreeMap<>();
     for (var entry : fields.entrySet()) {
       String key = entry.getKey();
       Object value = entry.getValue();
       budget.entry(key);
-      if (LITERALS.contains(key) || key.equals("mergePolicy"))
+      if (LITERALS.contains(key) || key.equals("mergePolicy")) {
         result.put(key, budget.scalar(value, depth + 1));
-      else if (key.equals("items")) {
+      } else if (key.equals("items")) {
         budget.value(depth + 1);
         result.put(key, projectedItems(exactItems(value), budget, depth + 1, inlineScalars));
-      } else
+      } else {
         result.put(
             key,
             projectedLiteral(
@@ -542,6 +633,7 @@ final class ContractBridge {
                 depth + 1,
                 inlineScalars && !TYPES.contains(key) && !referenceFields.contains(key),
                 Set.of()));
+      }
     }
     return result;
   }
@@ -556,23 +648,36 @@ final class ContractBridge {
   private List<Object> projectedItems(
       List<ExactNode> items, ProjectionBudget budget, int depth, boolean inlineScalars) {
     List<Object> result = new ArrayList<>();
-    for (ExactNode child : items)
+    for (ExactNode child : items) {
       result.add(projectedLiteral(child, budget, depth + 1, inlineScalars, Set.of()));
+    }
     return result;
   }
 
   Object view(Object value, ContractWork logical) {
-    if (value == null) return UNDEFINED;
+    if (value == null) {
+      return UNDEFINED;
+    }
     Recipe r = value instanceof Recipe q ? q : recipe(value);
-    if (logical != null) for (ExactNode p : r.parts()) logical.open(p, this);
+    if (logical != null) {
+      for (ExactNode p : r.parts()) {
+        logical.open(p, this);
+      }
+    }
     Head h = head(r);
-    if (h.value != ABSENT) return h.value;
-    if (h.items != null) return new ExactView(this, r, logical, true, h);
+    if (h.value != ABSENT) {
+      return h.value;
+    }
+    if (h.items != null) {
+      return new ExactView(this, r, logical, true, h);
+    }
     if (!(h.contracts != null
         || h.type != null && !CORE_NAME.containsKey(h.type)
         || h.labels.containsKey("name")
         || h.labels.containsKey("description")
-        || concrete(h, context))) return UNDEFINED;
+        || concrete(h, context))) {
+      return UNDEFINED;
+    }
     return new ExactView(this, r, logical, false, h);
   }
 
@@ -589,10 +694,13 @@ final class ContractBridge {
     Value selected = open(exact(value));
     for (String field : referenceFields) {
       Object child = selected.get(field);
-      if (child == null) continue;
-      if (!(child instanceof ExactNode node))
+      if (child == null) {
+        continue;
+      }
+      if (!(child instanceof ExactNode node)) {
         throw new IllegalArgumentException(
             "Only exact child fields can be projected as references");
+      }
       selected = selected.with(field, new Ref(identity(node)));
     }
     return projectedLiteral(
@@ -607,18 +715,24 @@ final class ContractBridge {
     ExactNode n = exact(r);
     var next = new HashSet<>(seen);
     if (n instanceof Ref ref) {
-      if (ref.id().contains("#") || !next.add(ref.id())) return export(ref);
+      if (ref.id().contains("#") || !next.add(ref.id())) {
+        return export(ref);
+      }
     }
     var out = new TreeMap<String, Object>();
     open(n)
         .fields()
         .forEach(
             (k, v) -> {
-              if (LITERALS.contains(k) || k.equals("mergePolicy")) out.put(k, v);
-              else if (TYPES.contains(k)) out.put(k, export((ExactNode) v));
-              else if (k.equals("items"))
+              if (LITERALS.contains(k) || k.equals("mergePolicy")) {
+                out.put(k, v);
+              } else if (TYPES.contains(k)) {
+                out.put(k, export((ExactNode) v));
+              } else if (k.equals("items")) {
                 out.put(k, exactItems(v).stream().map(x -> bexData(x, next)).toList());
-              else out.put(k, bexData(v, next));
+              } else {
+                out.put(k, bexData(v, next));
+              }
             });
     // Descendants have already been converted by bexData. Rewalking them here makes
     // conversion proportional to tree size times depth instead of the emitted structure.
@@ -626,20 +740,28 @@ final class ContractBridge {
   }
 
   Object readBex(Object value, String path) {
-    if (value instanceof BexValues.HostValue) return BexValues.pointerGet(value, path);
+    if (value instanceof BexValues.HostValue) {
+      return BexValues.pointerGet(value, path);
+    }
     Object at = value;
     for (String k : ContractModel.segments(path.equals("/") ? "" : path)) {
-      if (at instanceof Map<?, ?> m && m.keySet().equals(Set.of("blueId")))
+      if (at instanceof Map<?, ?> m && m.keySet().equals(Set.of("blueId"))) {
         at = view(new Ref((String) m.get("blueId")), null);
-      if (BexValues.kind(at).equals("object")) at = BexValues.get(at, k);
-      else if (BexValues.kind(at).equals("list")) {
-        if (!LanguageSyntax.LIST_INDEX.matcher(k).matches()) return UNDEFINED;
+      }
+      if (BexValues.kind(at).equals("object")) {
+        at = BexValues.get(at, k);
+      } else if (BexValues.kind(at).equals("list")) {
+        if (!LanguageSyntax.LIST_INDEX.matcher(k).matches()) {
+          return UNDEFINED;
+        }
         try {
           at = BexValues.get(at, Integer.parseInt(k));
         } catch (NumberFormatException e) {
           return UNDEFINED;
         }
-      } else return UNDEFINED;
+      } else {
+        return UNDEFINED;
+      }
     }
     return BexValues.copy(at);
   }
@@ -647,7 +769,9 @@ final class ContractBridge {
   boolean matches(Object value, Object pattern, ContractWork logical) {
     ExactNode n = node(value instanceof Recipe ? exact(value) : value, "value", true, logical),
         p = node(pattern instanceof Recipe ? exact(pattern) : pattern, "definition", true, logical);
-    if (!presentActual(recipe(n), recipe(p), new HashSet<>())) return false;
+    if (!presentActual(recipe(n), recipe(p), new HashSet<>())) {
+      return false;
+    }
     try {
       refine(p, n, context, false);
       return true;
@@ -659,32 +783,45 @@ final class ContractBridge {
               "CollectionCompatibilityViolation",
               "InvalidCollectionType",
               "IncompatibleTypes")
-          .contains(e.category())) return false;
+          .contains(e.category())) {
+        return false;
+      }
       throw translate(e);
     }
   }
 
   boolean presentActual(Recipe actual, Recipe wanted, Set<String> seen) {
     String pair = actual.key() + wanted.key();
-    if (!seen.add(pair)) return true;
+    if (!seen.add(pair)) {
+      return true;
+    }
     Head a = head(actual), p = head(wanted);
-    if (p.type != null && (a.type == null || !ancestry(a.type, context).contains(p.type)))
+    if (p.type != null && (a.type == null || !ancestry(a.type, context).contains(p.type))) {
       return false;
+    }
     Value authored = open(exact(wanted));
     if (p.items != null) {
-      if (a.items == null || a.items.size() < p.items.size()) return false;
-      for (int i = 0; i < p.items.size(); i++)
+      if (a.items == null || a.items.size() < p.items.size()) {
+        return false;
+      }
+      for (int i = 0; i < p.items.size(); i++) {
         if (!presentActual(
-            ContractLanguage.child(a, i), ContractLanguage.child(p, i), new HashSet<>(seen)))
+            ContractLanguage.child(a, i), ContractLanguage.child(p, i), new HashSet<>(seen))) {
           return false;
+        }
+      }
     }
     for (String k : p.fields.keySet()) {
       Recipe expected = ContractLanguage.child(p, k);
-      if (!authored.has(k) && !ContractLanguage.present(expected, context)) continue;
+      if (!authored.has(k) && !ContractLanguage.present(expected, context)) {
+        continue;
+      }
       Recipe ch = child(actual, k);
       if (ch == null
           || !ContractLanguage.present(ch, context)
-          || !presentActual(ch, expected, new HashSet<>(seen))) return false;
+          || !presentActual(ch, expected, new HashSet<>(seen))) {
+        return false;
+      }
     }
     return true;
   }
@@ -707,13 +844,14 @@ final class ContractBridge {
               || LanguageSyntax.LIST_INDEX.matcher(key).matches(),
           "INVALID_LIST_INDEX");
       var values = new ArrayList<ExactNode>();
-      for (int i = 0; i < h.items.size(); i++)
+      for (int i = 0; i < h.items.size(); i++) {
         values.add(exact(selected(r, ContractLanguage.child(h, i))));
+      }
       int i = key.equals("-") ? values.size() : Integer.parseInt(key);
       require(
           i >= 0 && (op.equals("add") && last ? i <= values.size() : i < values.size()),
           "INVALID_LIST_INDEX");
-      if (!last)
+      if (!last) {
         values.set(
             i,
             set(
@@ -722,9 +860,13 @@ final class ContractBridge {
                 parts.subList(1, parts.size()),
                 val,
                 op));
-      else if (op.equals("remove")) values.remove(i);
-      else if (op.equals("add")) values.add(i, val);
-      else values.set(i, val);
+      } else if (op.equals("remove")) {
+        values.remove(i);
+      } else if (op.equals("add")) {
+        values.add(i, val);
+      } else {
+        values.set(i, val);
+      }
       fields.put("items", List.copyOf(values));
     } else if (LITERALS.contains(key)) {
       require(last, "INVALID_PATCH_PATH");
@@ -747,7 +889,9 @@ final class ContractBridge {
       } else if (TYPES.contains(key)) {
         remember(val);
         fields.put(key, new Ref(identity(val)));
-      } else fields.put(key, val);
+      } else {
+        fields.put(key, val);
+      }
     }
     return ExactNode.value(fields);
   }
@@ -770,7 +914,9 @@ final class ContractBridge {
         });
     if (h.items != null) {
       var items = new ArrayList<ExactNode>();
-      for (int i = 0; i < h.items.size(); i++) items.add(exact(ContractLanguage.child(h, i)));
+      for (int i = 0; i < h.items.size(); i++) {
+        items.add(exact(ContractLanguage.child(h, i)));
+      }
       for (var e : grouped.entrySet()) {
         require(LanguageSyntax.LIST_INDEX.matcher(e.getKey()).matches(), "INVALID_LIST_INDEX");
         int i = Integer.parseInt(e.getKey());
@@ -778,7 +924,7 @@ final class ContractBridge {
         items.set(i, replacement(items.get(i), ContractLanguage.child(h, i), e.getValue()));
       }
       fields.put("items", List.copyOf(items));
-    } else
+    } else {
       for (var e : grouped.entrySet()) {
         Recipe ch = child(r, e.getKey());
         if (e.getValue().containsKey("")) {
@@ -789,6 +935,7 @@ final class ContractBridge {
           fields.put(e.getKey(), substituteAt(exact(ch), ch, e.getValue()));
         }
       }
+    }
     return ExactNode.value(fields);
   }
 
@@ -805,14 +952,18 @@ final class ContractBridge {
     var raw = new ArrayList<Object>();
     for (String k : keys) {
       var replacements = new TreeMap<String, ExactNode>();
-      for (var e : edges)
-        if (e.source().equals(k) && keys.contains(e.target()))
+      for (var e : edges) {
+        if (e.source().equals(k) && keys.contains(e.target())) {
           replacements.put(e.path(), new Local(keys.indexOf(e.target())));
+        }
+      }
       raw.add(export(substitute(bodies.get(k), replacements)));
     }
     var result = context.finalizeComponent(raw);
     var out = new TreeMap<String, ExactNode>();
-    for (int i = 0; i < keys.size(); i++) out.put(keys.get(i), result.get(i));
+    for (int i = 0; i < keys.size(); i++) {
+      out.put(keys.get(i), result.get(i));
+    }
     return out;
   }
 
@@ -832,13 +983,23 @@ final class ContractBridge {
       recipe = r;
       this.logical = logical;
       this.list = list;
-      if (bridge.context.nativeReuse()) cachedHead = head;
+      if (bridge.context.nativeReuse()) {
+        cachedHead = head;
+      }
     }
 
     Head head() {
-      if (logical != null) for (ExactNode p : recipe.parts()) logical.open(p, bridge);
-      if (!bridge.context.nativeReuse()) return bridge.head(recipe);
-      if (cachedHead == null) cachedHead = bridge.head(recipe);
+      if (logical != null) {
+        for (ExactNode p : recipe.parts()) {
+          logical.open(p, bridge);
+        }
+      }
+      if (!bridge.context.nativeReuse()) {
+        return bridge.head(recipe);
+      }
+      if (cachedHead == null) {
+        cachedHead = bridge.head(recipe);
+      }
       return cachedHead;
     }
 
@@ -851,36 +1012,61 @@ final class ContractBridge {
     }
 
     public List<String> keys() {
-      if (list) return List.of();
+      if (list) {
+        return List.of();
+      }
       Head h = head();
-      if (cachedKeys != null) return new ArrayList<>(cachedKeys);
+      if (cachedKeys != null) {
+        return new ArrayList<>(cachedKeys);
+      }
       var keys = new ArrayList<String>();
-      for (String k : h.fields.keySet())
-        if (ContractLanguage.present(ContractLanguage.child(h, k), bridge.context)) keys.add(k);
+      for (String k : h.fields.keySet()) {
+        if (ContractLanguage.present(ContractLanguage.child(h, k), bridge.context)) {
+          keys.add(k);
+        }
+      }
       Value n = ownBody();
-      for (String k : List.of("name", "description")) if (n != null && n.has(k)) keys.add(k);
-      if (h.contracts != null) keys.add("contracts");
-      if (h.type != null && !CORE_NAME.containsKey(h.type)) keys.add("type");
-      if (bridge.context.nativeReuse()) cachedKeys = List.copyOf(keys);
+      for (String k : List.of("name", "description")) {
+        if (n != null && n.has(k)) {
+          keys.add(k);
+        }
+      }
+      if (h.contracts != null) {
+        keys.add("contracts");
+      }
+      if (h.type != null && !CORE_NAME.containsKey(h.type)) {
+        keys.add("type");
+      }
+      if (bridge.context.nativeReuse()) {
+        cachedKeys = List.copyOf(keys);
+      }
       return keys;
     }
 
     public Object get(Object key) {
       Head h = head();
       if (list) {
-        if (!(key instanceof Integer i) || i < 0 || i >= h.items.size()) return UNDEFINED;
+        if (!(key instanceof Integer i) || i < 0 || i >= h.items.size()) {
+          return UNDEFINED;
+        }
       } else {
-        if (key.equals("type") && h.type != null && !CORE_NAME.containsKey(h.type))
+        if (key.equals("type") && h.type != null && !CORE_NAME.containsKey(h.type)) {
           return Map.of("blueId", h.type);
-        if (key.equals("contracts") && h.contracts != null)
+        }
+        if (key.equals("contracts") && h.contracts != null) {
           return bridge.view(child(h, key), logical);
+        }
         if (Set.of("name", "description").contains(key)) {
           Value n = ownBody();
           return n.has(key.toString()) ? n.get(key.toString()) : UNDEFINED;
         }
-        if (!h.fields.containsKey(key)) return UNDEFINED;
+        if (!h.fields.containsKey(key)) {
+          return UNDEFINED;
+        }
       }
-      if (logical != null) logical.meter.contracts(list ? "listItemRead" : "objectMemberRead");
+      if (logical != null) {
+        logical.meter.contracts(list ? "listItemRead" : "objectMemberRead");
+      }
       return bridge.view(child(h, key), logical);
     }
 
@@ -891,9 +1077,15 @@ final class ContractBridge {
     }
 
     private Value ownBody() {
-      if (recipe.parts().isEmpty()) return null;
-      if (!bridge.context.nativeReuse()) return bridge.open(bridge.exact(recipe));
-      if (cachedOwnBody == null) cachedOwnBody = bridge.open(bridge.exact(recipe));
+      if (recipe.parts().isEmpty()) {
+        return null;
+      }
+      if (!bridge.context.nativeReuse()) {
+        return bridge.open(bridge.exact(recipe));
+      }
+      if (cachedOwnBody == null) {
+        cachedOwnBody = bridge.open(bridge.exact(recipe));
+      }
       return cachedOwnBody;
     }
 
@@ -904,7 +1096,9 @@ final class ContractBridge {
     public Object accountingView() {
       ExactNode n = logical == null ? bridge.exact(recipe) : logical.exact(recipe, bridge);
       String id = bridge.known(n);
-      if (id == null && logical != null) id = logical.establishCaptured(n, bridge);
+      if (id == null && logical != null) {
+        id = logical.establishCaptured(n, bridge);
+      }
       return id == null ? export(n) : Map.of("blueId", id);
     }
   }

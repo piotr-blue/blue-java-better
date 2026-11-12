@@ -28,12 +28,16 @@ class ContractBulkInitializationTest {
           new LinkedHashMap<>(
               ContractModel.obj(ContractWire.json(CanonicalAgreement.source("agreement"))));
       var orders = new LinkedHashMap<String, Object>();
-      for (int i = 0; i < count; i++) orders.put("" + i, CanonicalAgreementTest.order("" + i));
+      for (int i = 0; i < count; i++) {
+        orders.put("" + i, CanonicalAgreementTest.order("" + i));
+      }
       source.put("orders", orders);
       try (var session = Contracts.create().openJson(ContractWire.write(source))) {
         var initialized = session.initialize().requireApplied();
         assertEquals(BigInteger.valueOf(count), session.read("/initializedOrders"));
-        for (int i = 0; i < count; i++) assertEquals(true, session.read("/orders/" + i + "/ready"));
+        for (int i = 0; i < count; i++) {
+          assertEquals(true, session.read("/orders/" + i + "/ready"));
+        }
         var submitted =
             session
                 .call(
@@ -52,8 +56,11 @@ class ContractBulkInitializationTest {
             session.snapshot());
       }
     } finally {
-      if (previous == null) System.clearProperty(property);
-      else System.setProperty(property, previous);
+      if (previous == null) {
+        System.clearProperty(property);
+      } else {
+        System.setProperty(property, previous);
+      }
     }
   }
 

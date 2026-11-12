@@ -35,7 +35,9 @@ final class ContractInventory extends AbstractSet<String> {
 
   @Override
   public boolean add(String identity) {
-    if (identities.contains(identity)) return false;
+    if (identities.contains(identity)) {
+      return false;
+    }
     Object value = record.apply(identity);
     var fragment = new ContractCanonical.Fragment(value);
     ordered.put(identityOrder ? identity : ContractWire.write(value), fragment);

@@ -30,7 +30,9 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
   private Edit<K> edits = new Edit<>(null, null, 0);
 
   private void edited(K key) {
-    if (edits.depth == 4096) edits = new Edit<>(null, null, 0);
+    if (edits.depth == 4096) {
+      edits = new Edit<>(null, null, 0);
+    }
     edits = new Edit<>(key, edits, edits.depth + 1);
   }
 
@@ -45,9 +47,12 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
   }
 
   private Set<K> changedKeys(TopologyMap<K, V> before, boolean physical) {
-    if (!values.comparator().equals(before.values.comparator()))
+    if (!values.comparator().equals(before.values.comparator())) {
       throw new IllegalArgumentException("Comparison requires the same ordering");
-    if (physical ? values == before.values : content == before.content) return Set.of();
+    }
+    if (physical ? values == before.values : content == before.content) {
+      return Set.of();
+    }
     var keys = new TreeSet<K>(values.comparator());
     Edit<K> left = edits, right = before.edits;
     while (left != right && (left.previous != null || right.previous != null)) {
@@ -107,7 +112,9 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
   List<V> valuesFrom(K first, java.util.function.Predicate<? super K> included) {
     List<V> result = new ArrayList<>();
     for (var entry : values.tailMap(first, true).entrySet()) {
-      if (!included.test(entry.getKey())) break;
+      if (!included.test(entry.getKey())) {
+        break;
+      }
       result.add(entry.getValue());
     }
     return result;
@@ -115,9 +122,12 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
 
   /** The values are immutable, so a snapshot copy does not visit or clone any entries. */
   void copyFrom(TopologyMap<K, V> source) {
-    if (!values.isEmpty()) throw new IllegalStateException("Topology copy requires an empty map");
-    if (!values.comparator().equals(source.values.comparator()))
+    if (!values.isEmpty()) {
+      throw new IllegalStateException("Topology copy requires an empty map");
+    }
+    if (!values.comparator().equals(source.values.comparator())) {
       throw new IllegalArgumentException("Topology copies require the same ordering");
+    }
     values = source.values;
     revision = source.revision;
     structuralChanges = source.structuralChanges;
@@ -150,19 +160,29 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
   public V put(K key, V value) {
     Objects.requireNonNull(value);
     V old = values.get(key);
-    if (old == value) return old;
+    if (old == value) {
+      return old;
+    }
     values = values.plus(key, value);
-    if (old == null) structuralChanges++;
+    if (old == null) {
+      structuralChanges++;
+    }
     edited(key);
-    if (old == null || !sameContent.test(old, value)) content = new Object();
-    if (old == null || !membershipOnly && !Objects.equals(old, value)) changed();
+    if (old == null || !sameContent.test(old, value)) {
+      content = new Object();
+    }
+    if (old == null || !membershipOnly && !Objects.equals(old, value)) {
+      changed();
+    }
     return old;
   }
 
   @Override
   public V remove(Object key) {
     V old = values.get(key);
-    if (old == null) return null;
+    if (old == null) {
+      return null;
+    }
     values = values.minus(key);
     @SuppressWarnings("unchecked")
     K removed = (K) key;
@@ -206,7 +226,9 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
           long expectedRevision = structuralChanges;
 
           private void check() {
-            if (expectedRevision != structuralChanges) throw new ConcurrentModificationException();
+            if (expectedRevision != structuralChanges) {
+              throw new ConcurrentModificationException();
+            }
           }
 
           @Override
@@ -235,7 +257,9 @@ final class TopologyMap<K extends Comparable<? super K>, V> extends AbstractMap<
           @Override
           public void remove() {
             check();
-            if (current == null) throw new IllegalStateException();
+            if (current == null) {
+              throw new IllegalStateException();
+            }
             TopologyMap.this.remove(current);
             expectedRevision = structuralChanges;
             current = null;

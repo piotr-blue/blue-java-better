@@ -43,22 +43,33 @@ final class LanguageFacts {
   static Map<String, Boolean> export(LanguageContext context, Predicate<String> retained) {
     var records = new LinkedHashMap<String, Boolean>();
     for (var item : context.validation) {
-      if (context.facts != null && context.facts.validated(item)) continue;
+      if (context.facts != null && context.facts.validated(item)) {
+        continue;
+      }
       // A recipe binds both its exact parts and requirement types. Validation alone does not
       // establish that transient intermediate content was included in a durable publication.
       List<?> recipe = (List<?>) LanguageCodec.parse(item.recipe(), "json");
       boolean available = true;
-      for (Object group : recipe)
-        for (Object id : (List<?>) group) available &= retained.test((String) id);
-      if (available) records.put(validationKey(item), true);
+      for (Object group : recipe) {
+        for (Object id : (List<?>) group) {
+          available &= retained.test((String) id);
+        }
+      }
+      if (available) {
+        records.put(validationKey(item), true);
+      }
     }
-    for (String id : context.verifiedClosures)
-      if ((context.facts == null || !context.facts.verified(id)) && retained.test(id))
+    for (String id : context.verifiedClosures) {
+      if ((context.facts == null || !context.facts.verified(id)) && retained.test(id)) {
         records.put(key("closure", id), true);
+      }
+    }
     context.concreteFacts.forEach(
         (id, value) -> {
           if ((context.facts == null || !Objects.equals(context.facts.concrete(id), value))
-              && retained.test(id)) records.put(key("concrete", id), value);
+              && retained.test(id)) {
+            records.put(key("concrete", id), value);
+          }
         });
     return Map.copyOf(records);
   }
@@ -75,14 +86,18 @@ final class LanguageFacts {
     Boolean value = concreteness.get(id);
     if (value == null) {
       value = retained(key("concrete", id));
-      if (value != null) concreteness.put(id, value, 96L + id.length() * 2L);
+      if (value != null) {
+        concreteness.put(id, value, 96L + id.length() * 2L);
+      }
     }
     return value;
   }
 
   boolean validated(LanguageContext.ValidationKey key) {
     Boolean cached = validation.get(key);
-    if (cached != null) return cached;
+    if (cached != null) {
+      return cached;
+    }
     boolean found = Boolean.TRUE.equals(retained(validationKey(key)));
     // A miss only selects ordinary validation. A later successful local check replaces it.
     validation.put(key, found, 128L + key.recipe().length() * 2L);
@@ -91,7 +106,9 @@ final class LanguageFacts {
 
   boolean verified(String id) {
     Boolean cached = closures.get(id);
-    if (cached != null) return cached;
+    if (cached != null) {
+      return cached;
+    }
     boolean found = Boolean.TRUE.equals(retained(key("closure", id)));
     closures.put(id, found, 96L + id.length() * 2L);
     return found;
@@ -112,10 +129,12 @@ final class LanguageFacts {
 
   /** Called only after successful protocol validation; failed attempts publish no new facts. */
   void remember(LanguageContext context) {
-    for (var key : context.validation)
+    for (var key : context.validation) {
       validation.put(key, Boolean.TRUE, 128L + key.recipe().length() * 2L);
-    for (String id : context.verifiedClosures)
+    }
+    for (String id : context.verifiedClosures) {
       closures.put(id, Boolean.TRUE, 96L + id.length() * 2L);
+    }
     context.concreteFacts.forEach(
         (id, concrete) -> concreteness.put(id, concrete, 96L + id.length() * 2L));
   }

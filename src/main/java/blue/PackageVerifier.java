@@ -138,8 +138,9 @@ final class PackageVerifier {
     assets.removeAll(
         Set.of("package.json", "package.blue.json", "package-records.json", "repository.json"));
     check(assets.equals(map(semantic.get("documentation")).keySet()), "unidentified package asset");
-    for (String k : List.of("name", "version"))
+    for (String k : List.of("name", "version")) {
       check(Objects.equals(manifest.get(k), semantic.get(k)), "package metadata mismatch: " + k);
+    }
     check(
         Objects.equals(manifest.get("language"), ref(semantic.get("language"))),
         "Language declaration mismatch");
@@ -238,7 +239,9 @@ final class PackageVerifier {
     check(protocols.containsKey(sid), "missing specification witness");
     var s = map(protocols.get(sid));
     check(Objects.equals(ref(s.get("language")), lang), "specification Language mismatch");
-    if (verifiedProtocols.contains(sid)) return;
+    if (verifiedProtocols.contains(sid)) {
+      return;
+    }
     check(
         s.keySet().containsAll(Set.of("type", "name", "language", "rules", "requires", "status"))
             && Set.of(
@@ -258,10 +261,15 @@ final class PackageVerifier {
         "Invalid protocol labels");
     verifyWitness(sid, s);
     requireText(ref(s.get("rules")));
-    for (String k : List.of("effectiveRules", "schedulingPolicy"))
-      if (s.containsKey(k)) requireText(ref(s.get(k)));
+    for (String k : List.of("effectiveRules", "schedulingPolicy")) {
+      if (s.containsKey(k)) {
+        requireText(ref(s.get(k)));
+      }
+    }
     activeProtocols.add(sid);
-    for (Object need : map(s.get("requires")).values()) verifyProtocol(ref(need), lang);
+    for (Object need : map(s.get("requires")).values()) {
+      verifyProtocol(ref(need), lang);
+    }
     activeProtocols.remove(sid);
     verifiedProtocols.add(sid);
   }
@@ -275,7 +283,9 @@ final class PackageVerifier {
     check(
         expectedLang == null || Objects.equals(bootstrap ? id : lang, expectedLang),
         "cross-Language package graph");
-    if (verifiedPackages.contains(id)) return;
+    if (verifiedPackages.contains(id)) {
+      return;
+    }
     check(
         p.keySet().equals(PACKAGE_FIELDS)
             && packageType.equals(ref(p.get("type")))
@@ -289,16 +299,17 @@ final class PackageVerifier {
     version(p.get("version"));
     check(p.get("bootstrapLanguage") instanceof Boolean, "invalid bootstrap flag");
     var imports = map(p.get("imports"));
-    if (bootstrap)
+    if (bootstrap) {
       check(
           lang == null && imports.isEmpty() && p.get("protocol") == null,
           "invalid Language bootstrap");
-    else
+    } else {
       check(
           lang != null
               && packages.containsKey(lang)
               && Boolean.TRUE.equals(map(packages.get(lang)).get("bootstrapLanguage")),
           "missing Language release");
+    }
     activePackages.add(id);
     var importIds = new HashSet<String>();
     for (var e : imports.entrySet()) {
@@ -307,10 +318,16 @@ final class PackageVerifier {
       importIds.add(target);
       verifyPackage(target, lang);
     }
-    if (lang != null) check(importIds.contains(lang), "Language must be explicit import");
+    if (lang != null) {
+      check(importIds.contains(lang), "Language must be explicit import");
+    }
     String protocol = ref(p.get("protocol"));
-    if (protocol != null) verifyProtocol(protocol, lang);
-    for (Object need : list(p.get("declaredRequirements"))) verifyProtocol(ref(need), lang);
+    if (protocol != null) {
+      verifyProtocol(protocol, lang);
+    }
+    for (Object need : list(p.get("declaredRequirements"))) {
+      verifyProtocol(ref(need), lang);
+    }
     var exports = map(p.get("exports"));
     var bindings = map(p.get("specBindings"));
     var ids = new HashSet<String>();
@@ -350,9 +367,10 @@ final class PackageVerifier {
           ("sha256:" + sha(raw)).equals(asset.get("sha256"))
               && equal(asset.get("size"), raw.length),
           "documentation bytes mismatch");
-      if (id.equals(packageId))
+      if (id.equals(packageId)) {
         check(
             Arrays.equals(raw, files.get(e.getKey())), "documentation file differs from identity");
+      }
     }
     activePackages.remove(id);
     verifiedPackages.add(id);

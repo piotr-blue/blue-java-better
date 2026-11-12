@@ -25,8 +25,11 @@ class LanguageSetTest {
     Random random = new Random(190);
     for (int i = 0; i < 2000; i++) {
       Key key = random.nextInt(10) == 0 ? null : new Key(random.nextInt(100));
-      if (random.nextBoolean()) assertEquals(expected.add(key), actual.add(key));
-      else assertEquals(expected.remove(key), actual.remove(key));
+      if (random.nextBoolean()) {
+        assertEquals(expected.add(key), actual.add(key));
+      } else {
+        assertEquals(expected.remove(key), actual.remove(key));
+      }
       assertEquals(expected, actual);
       if (i % 50 == 0) {
         LanguageSet<Key> snapshot = new LanguageSet<>(actual);

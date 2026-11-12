@@ -11,7 +11,9 @@ public final class CanonicalAgreement {
 
   public static String source(String name) {
     try (var input = CanonicalAgreement.class.getResourceAsStream("/canonical/" + name + ".json")) {
-      if (input == null) throw new IllegalArgumentException(name);
+      if (input == null) {
+        throw new IllegalArgumentException(name);
+      }
       return new String(input.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException error) {
       throw new IllegalStateException(error);

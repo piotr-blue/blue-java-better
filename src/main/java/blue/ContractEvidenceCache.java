@@ -18,14 +18,17 @@ final class ContractEvidenceCache {
   private ContractEvidenceCache() {}
 
   static Key key(String id, Object response, Map<String, Long> limits, boolean reuse) {
-    if (!reuse || Boolean.getBoolean("blue.physical.nativeDisabled") || id.contains("#"))
+    if (!reuse || Boolean.getBoolean("blue.physical.nativeDisabled") || id.contains("#")) {
       return null;
+    }
     if (!(response instanceof Map<?, ?> map)
         || !Set.of("text", "mode", "format").containsAll(map.keySet())
         || !(map.get("text") instanceof String text)
         || map.containsKey("mode") && !"exact".equals(map.get("mode"))
         || map.containsKey("format") && !"json".equals(map.get("format"))
-        || text.length() > MAX_ENTRY_BYTES / 2) return null;
+        || text.length() > MAX_ENTRY_BYTES / 2) {
+      return null;
+    }
     return new Key(id, text, limits);
   }
 
@@ -34,10 +37,14 @@ final class ContractEvidenceCache {
   }
 
   static void put(Key key, Map<String, ExactNode.Value> bodies) {
-    if (key == null) return;
+    if (key == null) {
+      return;
+    }
     long weight = 1024 + 2L * (key.text().length() + key.identity().length());
     long bodyWeight = ContractCache.weight(bodies, MAX_ENTRY_BYTES);
-    if (bodyWeight == Long.MAX_VALUE || bodyWeight > MAX_ENTRY_BYTES - weight) return;
+    if (bodyWeight == Long.MAX_VALUE || bodyWeight > MAX_ENTRY_BYTES - weight) {
+      return;
+    }
     VERIFIED.put(key, Map.copyOf(bodies), weight + bodyWeight);
   }
 }

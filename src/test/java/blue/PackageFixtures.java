@@ -82,7 +82,9 @@ public final class PackageFixtures {
     Language.Builder builder = Language.newBuilder();
     LanguageDocument packageType = Language.create().defineJson(standard("Package"));
     builder.content(packageType);
-    if (language != null) builder.content(language.document());
+    if (language != null) {
+      builder.content(language.document());
+    }
     Map<String, Object> packages = new TreeMap<>();
     Map<String, Object> specifications = new TreeMap<>(extraSpecifications);
     Map<String, Object> importRefs = new TreeMap<>(), importRows = new TreeMap<>();

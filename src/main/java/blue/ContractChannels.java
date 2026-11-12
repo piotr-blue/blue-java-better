@@ -56,7 +56,9 @@ final class ContractChannels {
         key);
     require(!active.contains(key), "CYCLIC_CHANNEL_COMPOSITION");
     String role = str(cs.get(key).get("_role"));
-    if (role.equals("external") || role.equals("extension_external")) return List.of(key);
+    if (role.equals("external") || role.equals("extension_external")) {
+      return List.of(key);
+    }
     List<Object> members =
         role.equals("all")
             ? new ArrayList<>(
@@ -74,7 +76,9 @@ final class ContractChannels {
     var next = new HashSet<>(active);
     next.add(key);
     var out = new TreeSet<String>(ContractCanonical.CODE_POINTS);
-    for (Object member : members) out.addAll(leaves(cs, (String) member, next));
+    for (Object member : members) {
+      out.addAll(leaves(cs, (String) member, next));
+    }
     return List.copyOf(out);
   }
 
@@ -83,14 +87,18 @@ final class ContractChannels {
     String role = str(d.get("_role"));
     var record = m("type", obj(d.get("type")).get("blueId"), "leaves", leaves(cs, key, Set.of()));
     if (role.equals("external")) {
-      if (d.containsKey("event")) record.put("event", d.get("event"));
+      if (d.containsKey("event")) {
+        record.put("event", d.get("event"));
+      }
     } else if (role.equals("extension_external")) {
       var extension = (ContractNative.Installed) d.get("_extension");
       record.put("runtime", extension.binding.wire());
       record.put("header", extension.header(d));
     } else {
       var members = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-      for (String k : leaves(cs, key, Set.of())) members.put(k, signature(cs, k));
+      for (String k : leaves(cs, key, Set.of())) {
+        members.put(k, signature(cs, k));
+      }
       record.put("members", members);
     }
     return digest("contracts.channel/completion-1", record);
@@ -107,15 +115,18 @@ final class ContractChannels {
       var headers = new TreeMap<String, String>(ContractCanonical.CODE_POINTS);
       cs.forEach(
           (k, c) -> {
-            if (EXTERNAL.contains(c.get("_role"))) headers.put(k, signature(cs, k));
+            if (EXTERNAL.contains(c.get("_role"))) {
+              headers.put(k, signature(cs, k));
+            }
           });
       var lives = doc.channelLives;
       var serials = doc.channelSerials;
-      for (String k : doc.channelLives.keySet())
+      for (String k : doc.channelLives.keySet()) {
         if (!headers.containsKey(k)) {
           lives = lives.minus(k);
           g.resets.add(new EdgeKey(member, k));
         }
+      }
       for (var row : headers.entrySet()) {
         String k = row.getKey(), sig = row.getValue();
         Life old = lives.get(k);
@@ -132,11 +143,15 @@ final class ContractChannels {
 
   static Map<String, Object> checkpoint(ContractRegistry reg, Document doc, String key) {
     ExactNode marker = reg.marker(doc, "checkpoint");
-    if (marker == null) return null;
+    if (marker == null) {
+      return null;
+    }
     var raw = reg.markerRecord(marker, "checkpoint");
     require(Set.of("type", "entries").containsAll(raw.keySet()), "INVALID_CHECKPOINT");
     var entries = obj(raw.getOrDefault("entries", Map.of()));
-    if (!entries.containsKey(key)) return null;
+    if (!entries.containsKey(key)) {
+      return null;
+    }
     var row = closed(entries.get(key), Set.of("timestamp", "event"), Set.of());
     integer(row.get("timestamp"));
     var event = closed(row.get("event"), Set.of("blueId"), Set.of());
@@ -147,13 +162,17 @@ final class ContractChannels {
   static boolean isNew(
       ContractRegistry reg, Document doc, String key, String event, long timestamp) {
     var previous = checkpoint(reg, doc, key);
-    if (previous == null || !obj(previous.get("event")).get("blueId").equals(event)) return true;
+    if (previous == null || !obj(previous.get("event")).get("blueId").equals(event)) {
+      return true;
+    }
     require(integer(previous.get("timestamp")) == timestamp, "EVENT_TIMESTAMP_CONFLICT");
     return false;
   }
 
   static Map<String, Object> operationRequest(ContractRegistry reg, Object node) {
-    if (!"request".equals(reg.role(node))) return null;
+    if (!"request".equals(reg.role(node))) {
+      return null;
+    }
     var blue = reg.blue;
     var head = blue.head(node);
     require(
@@ -172,7 +191,9 @@ final class ContractChannels {
     var out = m("type", m("blueId", head.type));
     for (String key : List.of("operation", "channel", "requireExactDocumentVersion")) {
       var ch = blue.child(node, key);
-      if (ContractLanguage.present(ch, blue.context)) out.put(key, blue.project(ch));
+      if (ContractLanguage.present(ch, blue.context)) {
+        out.put(key, blue.project(ch));
+      }
     }
     out.put("operation", requestToken(out.get("operation"), "operation"));
     out.put("channel", requestToken(out.get("channel"), "channel"));
@@ -196,13 +217,17 @@ final class ContractChannels {
     try {
       return token(value);
     } catch (ContractFault invalid) {
-      if (!invalid.code().equals("INVALID_TOKEN")) throw invalid;
+      if (!invalid.code().equals("INVALID_TOKEN")) {
+        throw invalid;
+      }
       throw new ContractModel.Error("INVALID_OPERATION_REQUEST", "field", field);
     }
   }
 
   static Call recognize(ContractRegistry reg, ExactNode event) {
-    if ("request".equals(reg.role(event))) return new Call(event, operationRequest(reg, event));
+    if ("request".equals(reg.role(event))) {
+      return new Call(event, operationRequest(reg, event));
+    }
     var candidate = reg.blue.child(event, "operation");
     if (candidate != null && "request".equals(reg.role(candidate))) {
       ExactNode n = reg.blue.exact(candidate);
@@ -213,10 +238,12 @@ final class ContractChannels {
 
   static List<Seed> select(ContractRun run) {
     var out = new ArrayList<Seed>();
-    for (var group : run.graph.topology().components(run.graph.reachable(true, Set.of())))
+    for (var group : run.graph.topology().components(run.graph.reachable(true, Set.of()))) {
       for (String member : group) {
         if (run.receiving.stream()
-            .anyMatch(record -> record.outcome().gasByMember.containsKey(member))) continue;
+            .anyMatch(record -> record.outcome().gasByMember.containsKey(member))) {
+          continue;
+        }
         Document doc = run.input.documents.get(member);
         var cs = run.reg.contracts(doc);
         var primitive = new HashSet<String>();
@@ -225,7 +252,9 @@ final class ContractChannels {
         for (var row : ordered) {
           String k = row.getKey();
           var channel = row.getValue();
-          if (!Set.of("external", "extension_external").contains(channel.get("_role"))) continue;
+          if (!Set.of("external", "extension_external").contains(channel.get("_role"))) {
+            continue;
+          }
           run.meter.contracts("channelCandidateTested");
           boolean accept =
               channel.get("_role").equals("external")
@@ -233,24 +262,32 @@ final class ContractChannels {
                       || run.runtimeMatches(run.event, channel.get("event")))
                   : ((ContractNative.Installed) channel.get("_extension"))
                       .accept(run, member, k, channel, cs);
-          if (accept) primitive.add(k);
+          if (accept) {
+            primitive.add(k);
+          }
         }
         var accepted = new HashSet<>(primitive);
-        for (var row : ordered)
+        for (var row : ordered) {
           if (Set.of("composite", "all").contains(row.getValue().get("_role"))) {
             run.meter.contracts("channelCandidateTested");
-            if (!Collections.disjoint(primitive, leaves(cs, row.getKey(), Set.of())))
+            if (!Collections.disjoint(primitive, leaves(cs, row.getKey(), Set.of()))) {
               accepted.add(row.getKey());
+            }
           }
+        }
         var fresh = new HashSet<String>();
-        for (var row : ordered)
+        for (var row : ordered) {
           if (accepted.contains(row.getKey())) {
             run.meter.contracts("channelAccepted");
             run.meter.contracts("checkpointCompared");
-            if (isNew(run.reg, doc, row.getKey(), run.eventId, run.timestamp))
+            if (isNew(run.reg, doc, row.getKey(), run.eventId, run.timestamp)) {
               fresh.add(row.getKey());
+            }
           }
-        if (fresh.isEmpty()) continue;
+        }
+        if (fresh.isEmpty()) {
+          continue;
+        }
         String target = null, operation = null;
         if (run.callRecord != null && !primitive.isEmpty()) {
           var request = run.callRecord;
@@ -263,9 +300,13 @@ final class ContractChannels {
           var audience = new ArrayList<Object>();
           for (var evidence : run.externalAdmissions.values()) {
             var inventory = obj(evidence.getOrDefault("operationAudience", Map.of()));
-            if (inventory.containsKey(member)) audience.add(inventory.get(member));
+            if (inventory.containsKey(member)) {
+              audience.add(inventory.get(member));
+            }
           }
-          if (!audience.isEmpty()) inAudience = audience.stream().allMatch(Boolean.TRUE::equals);
+          if (!audience.isEmpty()) {
+            inAudience = audience.stream().allMatch(Boolean.TRUE::equals);
+          }
           boolean candidate =
               inAudience
                   && (addressed
@@ -294,13 +335,14 @@ final class ContractChannels {
                 member,
                 "operation",
                 operation);
-            if (Boolean.TRUE.equals(request.get("requireExactDocumentVersion")))
+            if (Boolean.TRUE.equals(request.get("requireExactDocumentVersion"))) {
               require(
                   obj(request.get("document")).get("blueId").equals(doc.blueId),
                   "STALE_DOCUMENT_PRECONDITION",
                   "document",
                   member);
-            if (cs.get(operation).containsKey("request"))
+            }
+            if (cs.get(operation).containsKey("request")) {
               require(
                   request.containsKey("request")
                       && run.blue.matches(
@@ -310,9 +352,10 @@ final class ContractChannels {
                   member,
                   "operation",
                   operation);
+            }
           }
         }
-        for (var row : ordered)
+        for (var row : ordered) {
           if (fresh.contains(row.getKey())) {
             String k = row.getKey();
             out.add(
@@ -323,7 +366,9 @@ final class ContractChannels {
                     k.equals(target) ? operation : null));
             run.meter.contracts("deliverySnapshotEntry");
           }
+        }
       }
+    }
     run.meter.owner = "";
     return out;
   }

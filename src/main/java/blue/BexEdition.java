@@ -18,8 +18,9 @@ final class BexEdition {
   }
 
   public static BexEdition select(String language, String protocol) {
-    if (!LANGUAGE.equals(language) || !PROTOCOL.equals(protocol))
+    if (!LANGUAGE.equals(language) || !PROTOCOL.equals(protocol)) {
       throw new BexFailure("UNSUPPORTED_PROFILE", "Unsupported exact Language/BEX binding");
+    }
     return CURRENT;
   }
 

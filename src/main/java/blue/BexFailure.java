@@ -19,6 +19,8 @@ class BexFailure extends RuntimeException {
   }
 
   static void require(boolean test, String message) {
-    if (!test) throw new BexFailure(message);
+    if (!test) {
+      throw new BexFailure(message);
+    }
   }
 }

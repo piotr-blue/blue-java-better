@@ -50,8 +50,11 @@ class CollectionAppendTest {
       }
       assertEquals(cases.get(0), cases.get(1));
     } finally {
-      if (prior == null) System.clearProperty(property);
-      else System.setProperty(property, prior);
+      if (prior == null) {
+        System.clearProperty(property);
+      } else {
+        System.setProperty(property, prior);
+      }
     }
   }
 }

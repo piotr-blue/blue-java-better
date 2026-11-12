@@ -37,8 +37,9 @@ public class NativeValuesBenchmark {
     event = (ContractBridge.ExactView) bridge.view(document.exact, null);
     Object selected = new NativeValues().select(event, "/kind");
     Object complete = ((Map<?, ?>) new NativeValues().freeze(event)).get("kind");
-    if (!"Accepted".equals(selected) || !selected.equals(complete))
+    if (!"Accepted".equals(selected) || !selected.equals(complete)) {
       throw new IllegalStateException("Different selected values");
+    }
   }
 
   @Benchmark

@@ -25,7 +25,9 @@ public class MetadataProjectionBenchmark {
   @Setup
   public void prepare() {
     var edges = new TreeMap<String, Long>();
-    for (int i = 0; i < entries; i++) edges.put("/children/child-" + i, 1L);
+    for (int i = 0; i < entries; i++) {
+      edges.put("/children/child-" + i, 1L);
+    }
     source =
         new ContractModel.Document(
             "root",
@@ -36,8 +38,9 @@ public class MetadataProjectionBenchmark {
             Map.of("input", 1L),
             edges);
     source.metadata();
-    if (!previousDeepCopy().equals(sharedCollections()))
+    if (!previousDeepCopy().equals(sharedCollections())) {
       throw new AssertionError("Metadata differs");
+    }
   }
 
   @Benchmark

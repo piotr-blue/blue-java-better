@@ -34,7 +34,9 @@ class TopologyMapTest {
     right.put("c", 4);
     assertEquals(Set.of("b"), left.changedKeys(original));
     assertEquals(Set.of("b", "c"), left.changedKeys(right));
-    for (int i = 0; i < 4200; i++) left.put("counter", i);
+    for (int i = 0; i < 4200; i++) {
+      left.put("counter", i);
+    }
     assertEquals(Set.of("b", "counter"), left.changedKeys(original));
     left.clear();
     assertEquals(Set.of("a", "b"), left.changedKeys(original));
@@ -49,7 +51,9 @@ class TopologyMapTest {
           return a.compareTo(b);
         };
     var original = new TopologyMap<Integer, Integer>(true, comparator);
-    for (int i = 0; i < 10000; i++) original.put(i, i);
+    for (int i = 0; i < 10000; i++) {
+      original.put(i, i);
+    }
     var changed = new TopologyMap<Integer, Integer>(true, comparator);
     changed.copyFrom(original);
     changed.put(875, -1);

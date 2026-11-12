@@ -10,7 +10,9 @@ public final class ConfigurationReuseProbe {
   public static void main(String[] args) {
     for (String profile : new String[] {"base", "dispatch", "eight-native-steps"}) {
       Contracts.Builder builder = Contracts.newBuilder();
-      if (!profile.equals("base")) builder.enableDocumentDispatch();
+      if (!profile.equals("base")) {
+        builder.enableDocumentDispatch();
+      }
       if (profile.equals("eight-native-steps")) {
         Language language =
             Language.newBuilder().mount("Contracts", Contracts.publication()).build();
@@ -32,12 +34,15 @@ public final class ConfigurationReuseProbe {
         try (Contracts.Session session = configuration.openYaml("count: 0")) {
           Contracts.Transition result = session.initialize().requireApplied();
           session.process(Map.of("event", "no-op"), 1).requireApplied();
-          if (gas != -1 && (gas != result.gas() || !identity.equals(session.identity())))
+          if (gas != -1 && (gas != result.gas() || !identity.equals(session.identity()))) {
             throw new AssertionError("Configuration reuse changed semantics");
+          }
           gas = result.gas();
           identity = session.identity();
         }
-        if (i >= 0) timings[i] = System.nanoTime() - start;
+        if (i >= 0) {
+          timings[i] = System.nanoTime() - start;
+        }
       }
       Arrays.sort(timings);
       System.out.printf(

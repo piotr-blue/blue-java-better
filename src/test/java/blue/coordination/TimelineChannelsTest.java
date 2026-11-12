@@ -122,7 +122,7 @@ class TimelineChannelsTest {
               List<TimelineChannels.Assessment> rows = new ArrayList<>();
               for (NativeAdmission.Receiver receiver : request.receivers()) {
                 NativeAdmission.Receiver selected = receiver;
-                if (defect.equals("generation"))
+                if (defect.equals("generation")) {
                   selected =
                       new NativeAdmission.Receiver(
                           receiver.member(),
@@ -132,6 +132,7 @@ class TimelineChannelsTest {
                           receiver.declarationId(),
                           receiver.header(),
                           receiver.checkpoint());
+                }
                 rows.add(
                     new TimelineChannels.Assessment(
                         selected,
@@ -139,8 +140,12 @@ class TimelineChannelsTest {
                         !defect.equals("audience") || receiver.channel().equals("first"),
                         "Invalid test assessment"));
               }
-              if (defect.equals("missing")) rows.removeLast();
-              if (defect.equals("duplicate")) rows.set(1, rows.getFirst());
+              if (defect.equals("missing")) {
+                rows.removeLast();
+              }
+              if (defect.equals("duplicate")) {
+                rows.set(1, rows.getFirst());
+              }
               return rows;
             });
     Contracts runtime = Contracts.newBuilder().language(LANGUAGE).timelineChannels(profile).build();

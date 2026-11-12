@@ -67,7 +67,9 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
           final ArrayDeque<Tree<K, V>> pending = new ArrayDeque<>();
 
           {
-            if (root != null) pending.add(root);
+            if (root != null) {
+              pending.add(root);
+            }
           }
 
           public boolean hasNext() {
@@ -77,10 +79,14 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
           public Entry<K, V> next() {
             while (!pending.isEmpty()) {
               Tree<K, V> next = pending.removeLast();
-              if (next instanceof Leaf<K, V> leaf)
+              if (next instanceof Leaf<K, V> leaf) {
                 return new SimpleImmutableEntry<>(leaf.key, leaf.value);
-              if (next instanceof Collision<K, V> collision) pending.addAll(collision.leaves);
-              else Collections.addAll(pending, ((Branch<K, V>) next).children);
+              }
+              if (next instanceof Collision<K, V> collision) {
+                pending.addAll(collision.leaves);
+              } else {
+                Collections.addAll(pending, ((Branch<K, V>) next).children);
+              }
             }
             throw new NoSuchElementException();
           }
@@ -133,11 +139,21 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
   }
 
   private static <K, V> Leaf<K, V> find(Tree<K, V> tree, Object key, int hash, int shift) {
-    if (tree == null) return null;
-    if (tree instanceof Leaf<K, V> leaf) return Objects.equals(key, leaf.key) ? leaf : null;
+    if (tree == null) {
+      return null;
+    }
+    if (tree instanceof Leaf<K, V> leaf) {
+      return Objects.equals(key, leaf.key) ? leaf : null;
+    }
     if (tree instanceof Collision<K, V> collision) {
-      if (hash != collision.hash) return null;
-      for (Leaf<K, V> leaf : collision.leaves) if (Objects.equals(key, leaf.key)) return leaf;
+      if (hash != collision.hash) {
+        return null;
+      }
+      for (Leaf<K, V> leaf : collision.leaves) {
+        if (Objects.equals(key, leaf.key)) {
+          return leaf;
+        }
+      }
       return null;
     }
     Branch<K, V> branch = (Branch<K, V>) tree;
@@ -146,8 +162,12 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
 
   /** Right-hand values win, including distinct objects which happen to compare equal. */
   private static <K, V> Tree<K, V> union(Tree<K, V> left, Tree<K, V> right, int shift) {
-    if (left == right || right == null) return left;
-    if (left == null) return right;
+    if (left == right || right == null) {
+      return left;
+    }
+    if (left == null) {
+      return right;
+    }
     if (left instanceof Branch<K, V> a && right instanceof Branch<K, V> b) {
       int bitmap = a.bitmap | b.bitmap;
       Tree<K, V>[] children = array(Integer.bitCount(bitmap));
@@ -175,27 +195,37 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
     int a = hash(left), b = hash(right);
     if (a != b) {
       int x = bit(a, shift), y = bit(b, shift);
-      if (x == y) return branch(x, union(left, right, shift + 5));
+      if (x == y) {
+        return branch(x, union(left, right, shift + 5));
+      }
       return Integer.compareUnsigned(x, y) < 0
           ? branch(x | y, left, right)
           : branch(x | y, right, left);
     }
-    if (right instanceof Leaf<K, V> leaf) return insertCollision(left, leaf);
+    if (right instanceof Leaf<K, V> leaf) {
+      return insertCollision(left, leaf);
+    }
     Tree<K, V> result = left;
-    for (Leaf<K, V> leaf : ((Collision<K, V>) right).leaves) result = insertCollision(result, leaf);
+    for (Leaf<K, V> leaf : ((Collision<K, V>) right).leaves) {
+      result = insertCollision(result, leaf);
+    }
     return result;
   }
 
   private static <K, V> Tree<K, V> insertCollision(Tree<K, V> tree, Leaf<K, V> added) {
     if (tree instanceof Leaf<K, V> leaf) {
-      if (Objects.equals(leaf.key, added.key)) return leaf.value == added.value ? leaf : added;
+      if (Objects.equals(leaf.key, added.key)) {
+        return leaf.value == added.value ? leaf : added;
+      }
       return new Collision<>(leaf.hash, List.of(leaf, added));
     }
     Collision<K, V> collision = (Collision<K, V>) tree;
     for (int i = 0; i < collision.leaves.size(); i++) {
       Leaf<K, V> leaf = collision.leaves.get(i);
       if (Objects.equals(leaf.key, added.key)) {
-        if (leaf.value == added.value) return tree;
+        if (leaf.value == added.value) {
+          return tree;
+        }
         List<Leaf<K, V>> next = new ArrayList<>(collision.leaves);
         next.set(i, added);
         return new Collision<>(collision.hash, List.copyOf(next));
@@ -207,10 +237,16 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
   }
 
   private static <K, V> Tree<K, V> remove(Tree<K, V> tree, Object key, int hash, int shift) {
-    if (tree == null) return null;
-    if (tree instanceof Leaf<K, V> leaf) return Objects.equals(key, leaf.key) ? null : tree;
+    if (tree == null) {
+      return null;
+    }
+    if (tree instanceof Leaf<K, V> leaf) {
+      return Objects.equals(key, leaf.key) ? null : tree;
+    }
     if (tree instanceof Collision<K, V> collision) {
-      if (hash != collision.hash) return tree;
+      if (hash != collision.hash) {
+        return tree;
+      }
       for (int i = 0; i < collision.leaves.size(); i++) {
         if (Objects.equals(key, collision.leaves.get(i).key)) {
           List<Leaf<K, V>> next = new ArrayList<>(collision.leaves);
@@ -227,7 +263,9 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
 
   private static <K, V> Tree<K, V> replace(Branch<K, V> branch, int bit, Tree<K, V> child) {
     Tree<K, V> previous = branch.child(bit);
-    if (previous == child) return branch;
+    if (previous == child) {
+      return branch;
+    }
     int index = branch.offset(bit);
     Tree<K, V>[] children;
     int bitmap = branch.bitmap;
@@ -244,8 +282,12 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
       children = branch.children.clone();
       children[index] = child;
     }
-    if (children.length == 0) return null;
-    if (children.length == 1 && !(children[0] instanceof Branch<?, ?>)) return children[0];
+    if (children.length == 0) {
+      return null;
+    }
+    if (children.length == 1 && !(children[0] instanceof Branch<?, ?>)) {
+      return children[0];
+    }
     return new Branch<>(bitmap, children, branch.size - size(previous) + size(child));
   }
 
@@ -258,7 +300,9 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
   @SuppressWarnings("varargs")
   private static <K, V> Tree<K, V> branch(int bitmap, Tree<K, V>... children) {
     int size = 0;
-    for (Tree<K, V> child : children) size += child.size();
+    for (Tree<K, V> child : children) {
+      size += child.size();
+    }
     return new Branch<>(bitmap, children, size);
   }
 }

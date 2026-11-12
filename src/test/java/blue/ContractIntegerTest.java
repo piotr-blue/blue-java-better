@@ -35,8 +35,9 @@ class ContractIntegerTest {
     assertEquals(value, ContractModel.integer(value, minimum, maximum));
     assertEquals(value, ContractModel.integer((Object) value, minimum, maximum));
     assertEquals(value, ContractModel.integer(BigInteger.valueOf(value), minimum, maximum));
-    if (value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE)
+    if (value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE) {
       assertEquals(value, ContractModel.integer((Object) (int) value, minimum, maximum));
+    }
   }
 
   @ParameterizedTest

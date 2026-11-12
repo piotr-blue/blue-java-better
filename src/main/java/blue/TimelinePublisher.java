@@ -99,11 +99,14 @@ public final class TimelinePublisher {
    */
   public boolean retainValue(LanguageDocument value) {
     Objects.requireNonNull(value);
-    if (value.goal() != Language.Goal.VALUE)
+    if (value.goal() != Language.Goal.VALUE) {
       throw new IllegalArgumentException("Completed Language value required");
+    }
     // Expanded/source presentations may have a different semantic identity. Decline reuse
     // rather than attributing one admission to a different exact representation.
-    if (!value.blueId().value().equals(LanguageCore.identity(value.semantic))) return false;
+    if (!value.blueId().value().equals(LanguageCore.identity(value.semantic))) {
+      return false;
+    }
     return Language.run(
         () -> {
           LanguageContext context = value.owner.context(value);
@@ -124,7 +127,9 @@ public final class TimelinePublisher {
                 context.concreteFacts),
             maximum);
     for (Head head : context.heads.values()) {
-      if (weight > maximum) break;
+      if (weight > maximum) {
+        break;
+      }
       long extra =
           ContractCache.weight(
               Arrays.asList(
@@ -196,7 +201,9 @@ public final class TimelinePublisher {
               entry.owner.context(
                   entry, verifier.timeline, verifier.provider, verifier.publication.document());
           Map<String, Head> established = new HashMap<>(verifier.targetFacts());
-          if (previous.id != null) established.put(previous.id.value(), previous.header);
+          if (previous.id != null) {
+            established.put(previous.id.value(), previous.header);
+          }
           context.establishedValues = established;
           try {
             TimelineContent fields = new TimelineContent(context, verifier.publication);
@@ -252,7 +259,9 @@ public final class TimelinePublisher {
                   && verifier.timeline.blueId().value().equals(checkpoint.get("timeline")),
               "PUBLISHER_CHECKPOINT_SOURCE",
               "source");
-          if (checkpoint.get("entry") == null) return initial();
+          if (checkpoint.get("entry") == null) {
+            return initial();
+          }
           require(checkpoint.get("entry") instanceof String, "PUBLISHER_CHECKPOINT_SHAPE", "entry");
           Language language =
               Language.newBuilder()

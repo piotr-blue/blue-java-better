@@ -541,7 +541,9 @@ final class LanguageOperations {
       return records;
     }
     for (ExactNode n : roots) {
-      if (supplied.test(identity(n))) continue;
+      if (supplied.test(identity(n))) {
+        continue;
+      }
       Object compact = canonical(n, c, null, 0);
       var pending = new ArrayList<Object>();
       pending.add(compact);
@@ -570,7 +572,9 @@ final class LanguageOperations {
     var cache = context.recordTexts;
     if (cache == null
         || !(value instanceof Value body)
-        || Boolean.getBoolean("blue.canonical.recordTextDisabled")) return exactText(value);
+        || Boolean.getBoolean("blue.canonical.recordTextDisabled")) {
+      return exactText(value);
+    }
     if (!Boolean.getBoolean("blue.canonical.inlineRecords")) {
       // A record owns one node. Descendants have their own records in the same closure;
       // referencing them avoids serializing the same subtree once for each ancestor.
@@ -590,11 +594,15 @@ final class LanguageOperations {
       body = ExactNode.value(fields);
     }
     String known = cache.get(body);
-    if (known != null) return known;
+    if (known != null) {
+      return known;
+    }
     String text = exactText(body);
     if (text.length() <= 16_384) {
       long weight = ContractCache.weight(body, 64 * 1024);
-      if (weight != Long.MAX_VALUE) cache.put(body, text, weight + text.length() * 2L + 128);
+      if (weight != Long.MAX_VALUE) {
+        cache.put(body, text, weight + text.length() * 2L + 128);
+      }
     }
     return text;
   }

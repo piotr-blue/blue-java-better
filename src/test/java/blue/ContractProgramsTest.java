@@ -43,7 +43,7 @@ class ContractProgramsTest {
         UnsupportedOperationException.class,
         () -> ((java.util.List<Object>) snapshot.get("values")).set(0, 0));
     AtomicInteger invalid = new AtomicInteger();
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 2; i++) {
       assertEquals(
           "scalar",
           programs.definitionValue(
@@ -52,6 +52,7 @@ class ContractProgramsTest {
                 invalid.incrementAndGet();
                 return "scalar";
               }));
+    }
     assertEquals(2, invalid.get());
   }
 
@@ -104,7 +105,9 @@ class ContractProgramsTest {
         () -> new BexEngine().compile(Map.of("expr", 1));
     BexPlanCompiler.Program original = programs.compile("first", "", compiler);
     // One more distinct key than the configured 512-entry bound forces actual eviction.
-    for (int i = 0; i < 512; i++) programs.compile("step-" + i, "", compiler);
+    for (int i = 0; i < 512; i++) {
+      programs.compile("step-" + i, "", compiler);
+    }
     assertNotSame(original, programs.compile("first", "", compiler));
     assertEquals(BigInteger.ONE, original.source().get("expr"));
   }
@@ -180,8 +183,9 @@ class ContractProgramsTest {
                   }
                 }));
       }
-      for (int i = 0; i < futures.size(); i++)
+      for (int i = 0; i < futures.size(); i++) {
         assertEquals(BigInteger.valueOf(i + 7), futures.get(i).get());
+      }
     }
   }
 

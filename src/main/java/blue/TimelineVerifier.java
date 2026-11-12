@@ -46,12 +46,18 @@ public final class TimelineVerifier {
   private record CompletedRead(Prefix start, String evidence, Result result) {}
 
   synchronized void rememberRead(Prefix start, Prefix end, BlueId checkpoint, List<Entry> entries) {
-    if (entries.size() > 64) return;
+    if (entries.size() > 64) {
+      return;
+    }
     long fields = 0;
     for (Entry entry : entries) {
       fields += targetWeight(entry.header);
-      for (Head value : entry.values.values()) fields += targetWeight(value);
-      if (fields > 16384) return;
+      for (Head value : entry.values.values()) {
+        fields += targetWeight(value);
+      }
+      if (fields > 16384) {
+        return;
+      }
     }
     Map<String, Object> envelope = new LinkedHashMap<>();
     envelope.put("type", new ExactNode.Ref(publication.export("Timeline Range Evidence").value()));
@@ -62,7 +68,9 @@ public final class TimelineVerifier {
             entries.stream()
                 .map(entry -> (ExactNode) new ExactNode.Ref(entry.id.value()))
                 .toList()));
-    if (start.head != null) envelope.put("after", new ExactNode.Ref(start.head.entry.id.value()));
+    if (start.head != null) {
+      envelope.put("after", new ExactNode.Ref(start.head.entry.id.value()));
+    }
     completedRead =
         new CompletedRead(start, identity(new ExactNode.Value(envelope)), new Result(end, entries));
   }
@@ -82,9 +90,13 @@ public final class TimelineVerifier {
 
   synchronized Head rememberTarget(String id, Head head) {
     int weight = targetWeight(head);
-    if (weight > 8192) return null;
+    if (weight > 8192) {
+      return null;
+    }
     Head previous = targets.remove(id);
-    if (previous != null) targetFields -= targetWeight(previous);
+    if (previous != null) {
+      targetFields -= targetWeight(previous);
+    }
     while (!targets.isEmpty() && (targets.size() >= 256 || targetFields + weight > 8192)) {
       String oldest = targets.keySet().iterator().next();
       targetFields -= targetWeight(targets.remove(oldest));
@@ -99,11 +111,16 @@ public final class TimelineVerifier {
     // Avoid retaining arbitrary literal payloads or large schema/label data in a header cache.
     if (head.value != LanguageCore.ABSENT
         || head.items != null
-        || head.constraints != LanguageSchema.EMPTY) return 8193;
+        || head.constraints != LanguageSchema.EMPTY) {
+      return 8193;
+    }
     long weight = 1;
-    for (Object label : head.labels.values()) weight += 1L + label.toString().length();
-    for (var field : head.fields.entrySet())
+    for (Object label : head.labels.values()) {
+      weight += 1L + label.toString().length();
+    }
+    for (var field : head.fields.entrySet()) {
       weight += 1L + field.getKey().length() + field.getValue().parts.size() * 64L;
+    }
     return (int) Math.min(8193, weight);
   }
 
@@ -198,7 +215,9 @@ public final class TimelineVerifier {
           ExactNode node = original.semantic;
           sameTimeline(fields.required(node, "Timeline Entry", "timeline"));
           ExactNode marker = fields.supplied(node, "Timeline Entry", "operation");
-          if (marker == null) return false;
+          if (marker == null) {
+            return false;
+          }
           ExactNode message = fields.required(node, "Timeline Entry", "message");
           require(
               identity(marker).equals(identity(message)), "TIMELINE_OPERATION", "operation marker");
@@ -215,7 +234,9 @@ public final class TimelineVerifier {
    * @return its explicit target identity, when an operation marker and selector are present
    */
   public Optional<BlueId> protectedOperationTarget(LanguageContent original) {
-    if (!hasOperationMarker(original)) return Optional.empty();
+    if (!hasOperationMarker(original)) {
+      return Optional.empty();
+    }
     var target = original.at("/operation/document").observation("exactId");
     return target.isMissing() ? Optional.empty() : Optional.of(new BlueId(target.text()));
   }
@@ -324,7 +345,9 @@ public final class TimelineVerifier {
 
   private Fact recover(TimelineContent fields, Object identity) {
     require(identity instanceof String, "TIMELINE_CHECKPOINT_SHAPE", "entry");
-    if (((String) identity).isEmpty()) return null;
+    if (((String) identity).isEmpty()) {
+      return null;
+    }
     ExactNode node = new ExactNode.Ref(new BlueId((String) identity).value());
     Head header = fields.typed(node, "Timeline Entry");
     sameTimeline(fields.required(node, "Timeline Entry", "timeline"));
@@ -345,8 +368,9 @@ public final class TimelineVerifier {
     LanguageContext context =
         evidence.owner.context(evidence, timeline, provider, publication.document());
     context.establishedValues = targetFacts();
-    if (previous.head != null)
+    if (previous.head != null) {
       context.establishedValues.put(previous.head.entry.id.value(), previous.head.header);
+    }
     TimelineContent fields = new TimelineContent(context, publication);
     ExactNode source = evidence.semantic;
     Head root = head(recipe(source), context);
@@ -407,17 +431,19 @@ public final class TimelineVerifier {
               && (head == null || entry.entry.timestamp > head.entry.timestamp),
           "TIMELINE_TIME",
           "timestamp");
-      if (i == 0 && pending != null)
+      if (i == 0 && pending != null) {
         require(
             entry.entry.id.equals(pending.entry.id), "TIMELINE_EQUIVOCATION", "known successor");
+      }
       boolean lastSuccessor = successor && i == nodes.size() - 1;
       require(
           lastSuccessor ? entry.entry.timestamp == bound : entry.entry.timestamp < bound,
           "TIMELINE_BOUND",
           "entry.timestamp");
       context.establishedValues.put(entry.entry.id.value(), entry.header);
-      if (lastSuccessor) pending = entry;
-      else {
+      if (lastSuccessor) {
+        pending = entry;
+      } else {
         head = entry;
         pending = null;
         closed.add(entry.entry);
@@ -451,7 +477,9 @@ public final class TimelineVerifier {
     ExactNode message = fields.required(node, "Timeline Entry", "message");
     ExactNode operation = fields.supplied(node, "Timeline Entry", "operation");
     ExactNode provenance = fields.supplied(node, "Timeline Entry", "source");
-    if (provenance != null) fields.typed(provenance, "Source");
+    if (provenance != null) {
+      fields.typed(provenance, "Source");
+    }
     fields.validate(node);
     Map<String, Head> values = validateOperation(fields, message, operation);
     Head header = TimelineContent.detached(node, fields.typed(node, "Timeline Entry"));
@@ -476,7 +504,9 @@ public final class TimelineVerifier {
         "TIMELINE_OPERATION",
         "operation must identify the exact message");
     Map<String, Head> previous = fields.operationRequests.get(identity(message));
-    if (previous != null) return previous;
+    if (previous != null) {
+      return previous;
+    }
     var content =
         new LanguageContent(
             timeline.owner,
@@ -525,8 +555,9 @@ public final class TimelineVerifier {
               && !value.endsWith("/"),
           "TIMELINE_URL",
           "url");
-      for (String segment : uri.getPath().split("/", -1))
+      for (String segment : uri.getPath().split("/", -1)) {
         require(!segment.equals(".") && !segment.equals(".."), "TIMELINE_URL", "url");
+      }
     } catch (IllegalArgumentException invalid) {
       throw new BlueException("TIMELINE_URL", "url");
     }

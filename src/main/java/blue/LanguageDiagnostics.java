@@ -38,9 +38,13 @@ final class LanguageDiagnostics {
     @Override
     public String toString() {
       var parts = new ArrayDeque<Path>();
-      for (Path at = this; !at.isEmpty(); at = at.parent) parts.push(at);
+      for (Path at = this; !at.isEmpty(); at = at.parent) {
+        parts.push(at);
+      }
       var text = new StringBuilder();
-      while (!parts.isEmpty()) text.append('/').append(Pointer.escape(parts.pop().part.toString()));
+      while (!parts.isEmpty()) {
+        text.append('/').append(Pointer.escape(parts.pop().part.toString()));
+      }
       return text.toString();
     }
   }

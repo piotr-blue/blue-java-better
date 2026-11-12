@@ -18,7 +18,9 @@ class ContractIdentityMapTest {
     Random random = new Random(194);
     Object[] keys = new Object[256];
     keys[0] = null;
-    for (int i = 1; i < keys.length; i++) keys[i] = new String("equal");
+    for (int i = 1; i < keys.length; i++) {
+      keys[i] = new String("equal");
+    }
     List<ContractIdentityMap<Integer>> maps = new ArrayList<>();
     List<IdentityHashMap<Object, Integer>> expected = new ArrayList<>();
     maps.add(new ContractIdentityMap<>());
@@ -39,7 +41,9 @@ class ContractIdentityMapTest {
         map.put(key, value);
         model.put(key, value);
       }
-      if (step % 50 == 0) verify(maps, expected, keys);
+      if (step % 50 == 0) {
+        verify(maps, expected, keys);
+      }
     }
     verify(maps, expected, keys);
     for (int i = 0; i < maps.size(); i++) {
@@ -51,7 +55,9 @@ class ContractIdentityMapTest {
       for (Object key : keys) {
         assertEquals(expected.get(i).containsKey(key), snapshot.containsKey(key));
         assertEquals(expected.get(i).get(key), snapshot.get(key));
-        if (maps.get(i).containsKey(key)) assertTrue(snapshot.containsKey(key));
+        if (maps.get(i).containsKey(key)) {
+          assertTrue(snapshot.containsKey(key));
+        }
       }
       assertEquals(keep, maps.get(i).trim(0));
       assertEquals(0, maps.get(i).size());

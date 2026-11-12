@@ -110,8 +110,9 @@ class CanonicalPortableTest {
     a.accept(token, r);
     assertThrows(ContractFault.class, () -> a.accept(token, r));
     assertThrows(ContractFault.class, token::toData);
-    for (var next = a.nextChunk(); next != null; next = a.nextChunk())
+    for (var next = a.nextChunk(); next != null; next = a.nextChunk()) {
       a.accept(next, a.execute(next));
+    }
     assertEquals(
         ContractWire.write(p.process(state, m("tick", 1), 10).observations()),
         ContractWire.write(a.finish().observations()));

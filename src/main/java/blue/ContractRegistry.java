@@ -90,7 +90,9 @@ final class ContractRegistry {
       {"Type Generalization Rule", "generalization_rule"},
       {"Type Generalization Policy", "generalization"}
     };
-    for (var r : roles) ROLES.put(r[0], r[1]);
+    for (var r : roles) {
+      ROLES.put(r[0], r[1]);
+    }
     String[][] allowed = {
       {"external", "event"},
       {"composite", "channels"},
@@ -109,7 +111,9 @@ final class ContractRegistry {
       {"terminate_step", "cause reason"},
       {"generalization", "defaultMode rules"}
     };
-    for (var r : allowed) ALLOWED.put(r[0], words(r[1]));
+    for (var r : allowed) {
+      ALLOWED.put(r[0], words(r[1]));
+    }
     for (String role :
         List.of(
             "workflow",
@@ -118,12 +122,13 @@ final class ContractRegistry {
             "compute_definition",
             "patch_step",
             "emit_step",
-            "terminate_step"))
+            "terminate_step")) {
       BODY.put(
           role,
           role.equals("workflow") || role.equals("operation")
               ? Set.of("steps")
               : ALLOWED.get(role));
+    }
   }
 
   static Set<String> words(String s) {
@@ -178,7 +183,7 @@ final class ContractRegistry {
   }
 
   void install(ContractNative.Binding b, ContractNative.Implementation implementation) {
-    if (bindings.contractsEdition().deterministic())
+    if (bindings.contractsEdition().deterministic()) {
       b =
           new ContractNative.Binding(
               b.typeId(),
@@ -191,6 +196,7 @@ final class ContractRegistry {
               b.inheritsToSubtypes(),
               b.peerFields(),
               b.meterMode());
+    }
     blue.certify(new Ref(b.typeId()), "definition");
     blue.certify(new Ref(b.semanticsId()));
     require(!byId.containsKey(b.typeId()), "STANDARD_RUNTIME_REBIND");
@@ -221,11 +227,17 @@ final class ContractRegistry {
 
   Object binding(Object r) {
     Head h = blue.head(r);
-    if (h.type == null) return null;
+    if (h.type == null) {
+      return null;
+    }
     for (String ancestor : ancestry(h.type, blue.context)) {
       var ext = extensions.get(ancestor);
-      if (ext != null && (h.type.equals(ancestor) || ext.binding.inheritsToSubtypes())) return ext;
-      if (byId.containsKey(ancestor)) return byId.get(ancestor);
+      if (ext != null && (h.type.equals(ancestor) || ext.binding.inheritsToSubtypes())) {
+        return ext;
+      }
+      if (byId.containsKey(ancestor)) {
+        return byId.get(ancestor);
+      }
     }
     return null;
   }
@@ -242,7 +254,9 @@ final class ContractRegistry {
       ExactNode n = part;
       while (n != null && !byId.containsKey(identity(n)) && seen.add(identity(n))) {
         Value b = blue.open(n);
-        if (b.has(key)) return true;
+        if (b.has(key)) {
+          return true;
+        }
         n = b.get("type") instanceof Ref ref ? ref : null;
       }
     }
@@ -262,14 +276,17 @@ final class ContractRegistry {
     if (extension == null && !role.equals("abstract")) {
       // Only active executable declarations are checked; quoted data and unused exports are not.
       var nodes = new ArrayList<ExactNode>((r instanceof Recipe q ? q : recipe(r)).parts());
-      if (h.type != null) ancestry(h.type, blue.context).forEach(id -> nodes.add(new Ref(id)));
+      if (h.type != null) {
+        ancestry(h.type, blue.context).forEach(id -> nodes.add(new Ref(id)));
+      }
       for (ExactNode node : nodes) {
         Object spec = blue.open(node).get("specification");
         if (spec instanceof ExactNode exact
             && !identity(exact).equals(specification)
-            && !identity(exact).equals(interpretedTypes.get(identity(node))))
+            && !identity(exact).equals(interpretedTypes.get(identity(node)))) {
           throw new ContractBindings.Unsupported(
               identity(exact), List.of("Contracts/" + role, identity(node), "specification"));
+        }
       }
     }
     var bodies =
@@ -292,19 +309,32 @@ final class ContractRegistry {
     for (String k : h.fields.keySet()) {
       if (k.equals("specification")
           || k.equals("steps") && Set.of("workflow", "operation").contains(role)
-          || !demand && bodies.contains(k)) continue;
+          || !demand && bodies.contains(k)) {
+        continue;
+      }
       Recipe ch = ContractLanguage.child(h, k);
       if (k.equals("definition")) {
-        if (configured(r, k)) out.put(k, ch);
+        if (configured(r, k)) {
+          out.put(k, ch);
+        }
       } else if (LITERAL.contains(k) || bodies.contains(k)) {
-        if (configured(r, k)) out.put(k, blue.bexData(ch));
-      } else if (present(ch, blue.context)) out.put(k, blue.project(ch));
+        if (configured(r, k)) {
+          out.put(k, blue.bexData(ch));
+        }
+      } else if (present(ch, blue.context)) {
+        out.put(k, blue.project(ch));
+      }
     }
     Value n = blue.open(blue.exact(r));
-    for (String label : List.of("name", "description"))
-      if (n.has(label)) out.put(label, n.get(label));
-    if (out.containsKey("order")) integer(out.get("order"), -(1L << 31), (1L << 31) - 1);
-    if (role.equals("embedding"))
+    for (String label : List.of("name", "description")) {
+      if (n.has(label)) {
+        out.put(label, n.get(label));
+      }
+    }
+    if (out.containsKey("order")) {
+      integer(out.get("order"), -(1L << 31), (1L << 31) - 1);
+    }
+    if (role.equals("embedding")) {
       for (String k : List.of("paths", "collectionPaths")) {
         var paths = arr(out.getOrDefault(k, List.of()));
         require(paths.stream().allMatch(x -> x instanceof String), "INVALID_EMBEDDED_PATHS");
@@ -316,9 +346,12 @@ final class ContractRegistry {
               "INVALID_EMBEDDED_PATH");
         }
       }
+    }
     if (role.equals("embedded_event") || role.equals("update")) {
       String f = role.equals("embedded_event") ? "sourcePath" : "path";
-      if (out.containsKey(f)) segments(str(out.get(f)));
+      if (out.containsKey(f)) {
+        segments(str(out.get(f)));
+      }
     }
     if (role.equals("terminate_step") && demand) {
       require(out.get("cause") instanceof String, "INVALID_TERMINATION_CAUSE");
@@ -330,7 +363,9 @@ final class ContractRegistry {
       token(out.get("channel"));
       if (!role.equals("extension_handler")) {
         require(configured(r, "steps"), "MISSING_STEPS");
-        if (demand) out.put("steps", steps(out).stream().map(this::declaration).toList());
+        if (demand) {
+          out.put("steps", steps(out).stream().map(this::declaration).toList());
+        }
       }
     }
     return out;
@@ -341,7 +376,9 @@ final class ContractRegistry {
     Head sh = blue.head(ContractLanguage.child(h, "steps"));
     require(sh.items != null, "INVALID_STEPS");
     var out = new ArrayList<Recipe>();
-    for (int i = 0; i < sh.items.size(); i++) out.add(ContractLanguage.child(sh, i));
+    for (int i = 0; i < sh.items.size(); i++) {
+      out.add(ContractLanguage.child(sh, i));
+    }
     return out;
   }
 
@@ -392,7 +429,9 @@ final class ContractRegistry {
         blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
     String key = recipe.key();
     Map<String, Object> cached = reuse ? declarationHeaders.get(key) : null;
-    if (cached != null) return cached;
+    if (cached != null) {
+      return cached;
+    }
     Map<String, Object> header = declaration(recipe, false);
     if (reuse) {
       header = obj(ContractWire.immutable(header));
@@ -421,12 +460,16 @@ final class ContractRegistry {
     var prepared = preparations == null ? null : preparations.get(document);
     if (prepared != null && prepared.declarations() != null) {
       // Earlier preparation formats depend on inline records inside the member response.
-      if (prepared.headerRecords() == null) blue.context.openRetainedMember(document.body);
+      if (prepared.headerRecords() == null) {
+        blue.context.openRetainedMember(document.body);
+      }
       return prepared.declarations();
     }
     boolean reusable =
         blue.context.nativeReuse() && !Boolean.getBoolean("blue.physical.nativeDisabled");
-    if (!reusable) return contracts(document.body);
+    if (!reusable) {
+      return contracts(document.body);
+    }
     var scope = blue.context.evidenceScope();
     Recipe recipe = blue.head(document.body).contracts;
     String key = recipe == null ? "" : recipe.key();
@@ -439,8 +482,9 @@ final class ContractRegistry {
       return previous.values;
     }
     var values = contracts(document.body);
-    if (scope == blue.context.evidenceScope())
+    if (scope == blue.context.evidenceScope()) {
       document.declarations = new Declarations(declarationOwner, scope, key, values);
+    }
     return values;
   }
 
@@ -457,7 +501,9 @@ final class ContractRegistry {
     Recipe contracts = blue.head(body).contracts;
     String id = contracts == null ? "" : contracts.key();
     var retained = reusable ? declarations.get(id) : null;
-    if (retained != null) return retained;
+    if (retained != null) {
+      return retained;
+    }
     ContractMetrics.count("contracts.declarations.opened");
     var result = readContracts(body);
     if (reusable && scope == blue.context.evidenceScope()) {
@@ -474,7 +520,9 @@ final class ContractRegistry {
   private Map<String, Map<String, Object>> readContracts(ExactNode body) {
     Head h = blue.head(body);
     var out = new TreeMap<String, Map<String, Object>>(ContractCanonical.CODE_POINTS);
-    if (h.contracts == null) return out;
+    if (h.contracts == null) {
+      return out;
+    }
     Head ch = blue.head(h.contracts);
     require(Set.of("object", "none").contains(ch.kind), "INVALID_CONTRACT_MAP");
     for (String k : ch.fields.keySet()) {
@@ -501,7 +549,9 @@ final class ContractRegistry {
           "INVALID_CONTRACT_ROLE",
           "role",
           role);
-      if (role.equals("embedding")) require(k.equals("embedded"), "EMBEDDING_KEY");
+      if (role.equals("embedding")) {
+        require(k.equals("embedded"), "EMBEDDING_KEY");
+      }
       if (role.equals("generalization")) {
         require(k.equals("generalization"), "GENERALIZATION_KEY");
         policy(body);
@@ -528,9 +578,12 @@ final class ContractRegistry {
 
   ExactNode marker(Document document, String key) {
     var prepared = preparations == null ? null : preparations.get(document);
-    if (prepared != null) return prepared.markers().get(key).orElse(null);
-    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled"))
+    if (prepared != null) {
+      return prepared.markers().get(key).orElse(null);
+    }
+    if (!blue.context.nativeReuse() || Boolean.getBoolean("blue.physical.nativeDisabled")) {
       return marker(document.body, key);
+    }
     var scope = blue.context.evidenceScope();
     var previous = document.markers;
     boolean same =
@@ -538,7 +591,9 @@ final class ContractRegistry {
             && previous.registry == declarationOwner
             && previous.evidence == scope
             && previous.body == document.body;
-    if (same && previous.values.containsKey(key)) return previous.values.get(key).orElse(null);
+    if (same && previous.values.containsKey(key)) {
+      return previous.values.get(key).orElse(null);
+    }
     ExactNode value = marker(document.body, key);
     Map<String, Optional<ExactNode>> values =
         same ? new HashMap<>(previous.values) : new HashMap<>();
@@ -549,9 +604,13 @@ final class ContractRegistry {
 
   ExactNode marker(ExactNode body, String key) {
     Object cs = blue.open(body).get("contracts");
-    if (cs == null) return null;
+    if (cs == null) {
+      return null;
+    }
     Object value = blue.open((ExactNode) cs).get(key);
-    if (value == null) return null;
+    if (value == null) {
+      return null;
+    }
     require(key.equals(role(value)), "INVALID_PROCESSOR_STATE", "key", key);
     return (ExactNode) value;
   }
@@ -560,8 +619,9 @@ final class ContractRegistry {
     var raw = blue.open(marker);
     // These protected fields carry identities. Equivalent inline evidence must
     // not turn them into expanded maps when a warm runtime restores a snapshot.
-    if (key.equals("initialized")) raw = referenceField(raw, "document");
-    else if (key.equals("terminated")) {
+    if (key.equals("initialized")) {
+      raw = referenceField(raw, "document");
+    } else if (key.equals("terminated")) {
       raw = openField(raw, "cause");
       raw = openField(raw, "reason");
     } else if (key.equals("checkpoint") && raw.get("entries") instanceof ExactNode value) {
@@ -591,7 +651,9 @@ final class ContractRegistry {
   Generalization.Policy policy(ExactNode body) {
     Head h = blue.head(body);
     Recipe r = h.contracts == null ? null : blue.child(h.contracts, "generalization");
-    if (r == null) return new Generalization.Policy(List.of(), "reject", null);
+    if (r == null) {
+      return new Generalization.Policy(List.of(), "reject", null);
+    }
     require("generalization".equals(role(r)), "INVALID_GENERALIZATION_POLICY");
     var d = declaration(r);
     var rules = new ArrayList<Generalization.Rule>();
@@ -599,7 +661,7 @@ final class ContractRegistry {
     if (sequence != null) {
       Head sh = blue.head(sequence);
       require(sh.items != null || !configured(r, "rules"), "INVALID_GENERALIZATION_RULES");
-      if (sh.items != null)
+      if (sh.items != null) {
         for (int i = 0; i < sh.items.size(); i++) {
           Recipe item = ContractLanguage.child(sh, i);
           Head ih = blue.head(item);
@@ -609,13 +671,16 @@ final class ContractRegistry {
               "INVALID_GENERALIZATION_RULE");
           Recipe floor = blue.child(item, "mustRemainSubtypeOf");
           String tid = floor == null ? null : identity(blue.exact(floor));
-          if (tid != null) blue.certify(new Ref(tid), "definition");
+          if (tid != null) {
+            blue.certify(new Ref(tid), "definition");
+          }
           rules.add(
               new Generalization.Rule(
                   str(blue.project(blue.child(item, "path"))),
                   str(blue.project(blue.child(item, "mode"))),
                   tid));
         }
+      }
     }
     return new Generalization.Policy(
         rules, str(d.getOrDefault("defaultMode", "reject")), identity(blue.exact(r)));

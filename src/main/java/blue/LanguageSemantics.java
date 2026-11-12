@@ -46,14 +46,17 @@ final class LanguageSemantics {
   static Recipe recipeWith(List<String> requirements, Object... parts) {
     if (parts.length == 1) {
       if (parts[0] instanceof Recipe r) {
-        if (requirements.isEmpty()) return r;
+        if (requirements.isEmpty()) {
+          return r;
+        }
         List<String> merged = recipeRequirements(requirements, r.requirements);
         // A Recipe already owns normalized immutable parts. Adding requirements does not
         // require flattening, rehashing or copying those parts again.
         return merged.equals(r.requirements) ? r : new Recipe(r.parts, merged);
       }
-      if (parts[0] instanceof ExactNode n)
+      if (parts[0] instanceof ExactNode n) {
         return new Recipe(List.of(n), recipeRequirements(requirements, List.of()));
+      }
     }
     var flat = new ArrayList<ExactNode>();
     var req = new LinkedHashSet<>(requirements);
@@ -79,7 +82,9 @@ final class LanguageSemantics {
   }
 
   private static List<String> recipeRequirements(List<String> first, List<String> rest) {
-    if (rest.isEmpty() && first.size() < 2) return first;
+    if (rest.isEmpty() && first.size() < 2) {
+      return first;
+    }
     var merged = new LinkedHashSet<>(first);
     merged.addAll(rest);
     return List.copyOf(merged);
@@ -291,7 +296,9 @@ final class LanguageSemantics {
     c.step();
     if (!c.establishedValues.isEmpty()) {
       Head established = c.establishedValues.get(identity(exact));
-      if (established != null) return established;
+      if (established != null) {
+        return established;
+      }
     }
     Value n = open(exact, c);
     String tid = n.get("type") instanceof Ref r ? r.id() : null;
@@ -378,8 +385,9 @@ final class LanguageSemantics {
   }
 
   static boolean concreteNode(ExactNode root, LanguageContext c) {
-    if (!c.establishedValues.isEmpty() && c.establishedValues.containsKey(identity(root)))
+    if (!c.establishedValues.isEmpty() && c.establishedValues.containsKey(identity(root))) {
       return true;
+    }
     boolean reusable = c.cacheVerifiedClosures && (c.limits.isEmpty() || c.reuseWithinHostBudget);
     String key = null;
     if (reusable) {
@@ -392,13 +400,16 @@ final class LanguageSemantics {
     }
 
     boolean result = concreteNodeUncached(root, c, reusable);
-    if (reusable) rememberConcrete(c, key, result);
+    if (reusable) {
+      rememberConcrete(c, key, result);
+    }
     return result;
   }
 
   private static void rememberConcrete(LanguageContext c, String key, boolean value) {
-    if (c.concreteFacts.size() >= 8192 && !c.concreteFacts.containsKey(key))
+    if (c.concreteFacts.size() >= 8192 && !c.concreteFacts.containsKey(key)) {
       c.concreteFacts.clear();
+    }
     c.concreteFacts.put(key, value);
   }
 
@@ -407,7 +418,9 @@ final class LanguageSemantics {
     // state, preserving the same visit/open host work for inline values and references alike.
     c.step();
     Value first = open(root, c);
-    if (first.has("value") || first.has("items") || first.fields().isEmpty()) return true;
+    if (first.has("value") || first.has("items") || first.fields().isEmpty()) {
+      return true;
+    }
     var pending = new ArrayDeque<ExactNode>();
     pending.addLast(root);
     var seen = new HashSet<String>();
@@ -418,12 +431,18 @@ final class LanguageSemantics {
       if (!seen.add(id)) {
         continue;
       }
-      if (n != root) c.step();
+      if (n != root) {
+        c.step();
+      }
       if (reusable) {
         Boolean known = c.concreteFact(id);
-        if (Boolean.TRUE.equals(known)) return true;
+        if (Boolean.TRUE.equals(known)) {
+          return true;
+        }
         // A complete negative closure has no concrete descendant or ordinary cycle.
-        if (Boolean.FALSE.equals(known)) continue;
+        if (Boolean.FALSE.equals(known)) {
+          continue;
+        }
       }
       Value b = n == root ? first : open(n, c);
       if (b.has("value") || b.has("items") || b.fields().isEmpty()) {
@@ -462,7 +481,11 @@ final class LanguageSemantics {
     boolean cyclic = removed < seen.size();
     // Only a complete negative traversal establishes every visited node. A positive sibling
     // says nothing about another branch; failed or incomplete traversals establish nothing.
-    if (!cyclic && reusable) for (String id : seen) rememberConcrete(c, id, false);
+    if (!cyclic && reusable) {
+      for (String id : seen) {
+        rememberConcrete(c, id, false);
+      }
+    }
     return cyclic;
   }
 
@@ -835,7 +858,9 @@ final class LanguageSemantics {
     // An admitted object key is already Text. The exact builtin has no additional schema;
     // constructing and hashing a scalar for each key adds no validation. Public Language
     // operations retain their physical-budget path; derived key types still validate below.
-    if (c.reuseWithinHostBudget && tid.equals(CORE.get("Text"))) return;
+    if (c.reuseWithinHostBudget && tid.equals(CORE.get("Text"))) {
+      return;
+    }
     String core = domain(tid, c);
     require(
         core != null && Set.of("Text", "Integer", "Double", "Boolean").contains(core),
@@ -904,7 +929,9 @@ final class LanguageSemantics {
               return null;
             }
             Head h = head(task.recipe, c);
-            if (established(task.recipe, c)) return null;
+            if (established(task.recipe, c)) {
+              return null;
+            }
             boolean present = task.root || concrete(h, c);
             h.constraints.validate(h, present, goal, task.root, c);
             if (goal.equals("value") && !present) {
@@ -966,20 +993,31 @@ final class LanguageSemantics {
   }
 
   private static boolean established(Recipe recipe, LanguageContext c) {
-    if (c.establishedValues.isEmpty()) return false;
+    if (c.establishedValues.isEmpty()) {
+      return false;
+    }
     Head value = null;
     for (ExactNode part : recipe.parts) {
       Head known = c.establishedValues.get(identity(part));
       if (known != null) {
-        if (value != null) return false;
+        if (value != null) {
+          return false;
+        }
         value = known;
       } else if (!(part instanceof Value metadata)
           || metadata.fields().isEmpty()
-          || !LABELS.containsAll(metadata.fields().keySet())) return false;
+          || !LABELS.containsAll(metadata.fields().keySet())) {
+        return false;
+      }
     }
-    if (value == null) return false;
-    for (String type : recipe.requirements)
-      if (value.type == null || !ancestry(value.type, c).contains(type)) return false;
+    if (value == null) {
+      return false;
+    }
+    for (String type : recipe.requirements) {
+      if (value.type == null || !ancestry(value.type, c).contains(type)) {
+        return false;
+      }
+    }
     // head() has already checked metadata conflicts. No new schema or field refinement is
     // discharged by this certificate; those still follow ordinary contextual validation.
     return true;
@@ -991,12 +1029,16 @@ final class LanguageSemantics {
    * ancestors and new obligations still pass through the ordinary strict validator.
    */
   static void inheritUnchangedValidation(ExactNode next, ExactNode previous, LanguageContext c) {
-    if (previous == null || c.durableClosures.isEmpty()) return;
+    if (previous == null || c.durableClosures.isEmpty()) {
+      return;
+    }
     inheritChangedConcreteness(next, previous, c);
     Recipe oldRoot = recipe(previous), newRoot = recipe(next);
     record Pair(Recipe next, Recipe previous, boolean root) {}
     for (String goal : List.of("definition", "value")) {
-      if (!c.validated(new LanguageContext.ValidationKey(oldRoot.key(), goal, true))) continue;
+      if (!c.validated(new LanguageContext.ValidationKey(oldRoot.key(), goal, true))) {
+        continue;
+      }
       var work = new ArrayDeque<Pair>();
       work.push(new Pair(newRoot, oldRoot, true));
       var seen = new HashSet<String>();
@@ -1007,25 +1049,39 @@ final class LanguageSemantics {
         if (pair.next.key().equals(pair.previous.key())) {
           var inherited = new LanguageContext.ValidationKey(pair.next.key(), goal, pair.root);
           c.validation.add(inherited);
-          if (c.facts != null) c.facts.restored(inherited);
+          if (c.facts != null) {
+            c.facts.restored(inherited);
+          }
           continue;
         }
         // Stop at facts or scoped values before pairing different immutable entry heads.
         if (c.validated(new LanguageContext.ValidationKey(pair.next.key(), goal, pair.root))
-            || established(pair.next, c)) continue;
-        if (!seen.add(pair.next.key() + ":" + pair.previous.key() + ":" + pair.root)) continue;
+            || established(pair.next, c)) {
+          continue;
+        }
+        if (!seen.add(pair.next.key() + ":" + pair.previous.key() + ":" + pair.root)) {
+          continue;
+        }
         Head old = head(pair.previous, c), now = head(pair.next, c);
-        if (goal.equals("value") && !pair.root && !concrete(old, c)) continue;
+        if (goal.equals("value") && !pair.root && !concrete(old, c)) {
+          continue;
+        }
         for (String name : now.fields.keySet()) {
           Recipe before = child(old, name), after = child(now, name);
-          if (before != null && after != null) work.push(new Pair(after, before, false));
+          if (before != null && after != null) {
+            work.push(new Pair(after, before, false));
+          }
         }
-        if (now.contracts != null && old.contracts != null)
+        if (now.contracts != null && old.contracts != null) {
           work.push(new Pair(now.contracts, old.contracts, false));
-        if (now.items != null && old.items != null)
-          for (int i = 0; i < Math.min(now.items.size(), old.items.size()); i++)
-            if (!goal.equals("definition") || !isHole(old.items.get(i)))
+        }
+        if (now.items != null && old.items != null) {
+          for (int i = 0; i < Math.min(now.items.size(), old.items.size()); i++) {
+            if (!goal.equals("definition") || !isHole(old.items.get(i))) {
               work.push(new Pair(child(now, i), child(old, i), true));
+            }
+          }
+        }
       }
     }
   }
@@ -1034,9 +1090,15 @@ final class LanguageSemantics {
   private static boolean inheritChangedConcreteness(
       ExactNode next, ExactNode previous, LanguageContext c) {
     Boolean known = c.concreteFacts.get(identity(next));
-    if (known != null) return known;
-    if (identity(next).equals(identity(previous))) return false;
-    if (!(next instanceof Value value)) return false;
+    if (known != null) {
+      return known;
+    }
+    if (identity(next).equals(identity(previous))) {
+      return false;
+    }
+    if (!(next instanceof Value value)) {
+      return false;
+    }
     if (value.has("value") || value.has("items") || value.fields().isEmpty()) {
       rememberConcrete(c, identity(next), true);
       return true;

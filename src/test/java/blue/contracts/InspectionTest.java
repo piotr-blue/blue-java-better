@@ -92,8 +92,9 @@ class InspectionTest {
             .provider(
                 id -> {
                   requested.add(id);
-                  if (id.equals(unrelated.blueId()))
+                  if (id.equals(unrelated.blueId())) {
                     throw new AssertionError("Fetched unrelated content");
+                  }
                   return Optional.ofNullable(selectedRecords.get(id));
                 })
             .build();
@@ -149,8 +150,9 @@ class InspectionTest {
             .provider(
                 id -> {
                   requested.add(id);
-                  if (id.equals(handlers.blueId()))
+                  if (id.equals(handlers.blueId())) {
                     throw new AssertionError("Opened excluded contracts");
+                  }
                   return Optional.ofNullable(records.get(id));
                 })
             .build();

@@ -26,18 +26,24 @@ final class ContractCanonical {
   static final Comparator<String> CODE_POINTS = ContractCanonical::compare;
 
   static int compare(String a, String b) {
-    if (a == b) return 0;
+    if (a == b) {
+      return 0;
+    }
     int lexical = a.compareTo(b);
     // String comparison is intrinsified by the VM. Its order can differ from scalar
     // order only across a high surrogate and a BMP character above the surrogate
     // range: the smallest possible code-unit gap is 0xE000 - 0xDBFF = 1025.
     // Smaller differences (including all ASCII keys) need no second prefix scan.
-    if (lexical >= -1024 && lexical <= 1024) return lexical;
+    if (lexical >= -1024 && lexical <= 1024) {
+      return lexical;
+    }
     int length = Math.min(a.length(), b.length());
     for (int i = 0; i < length; i++) {
       // Equal UTF-16 prefixes need no decoding. At the first differing code unit,
       // decode supplementary characters so BMP/private-use ordering stays canonical.
-      if (a.charAt(i) != b.charAt(i)) return Integer.compare(a.codePointAt(i), b.codePointAt(i));
+      if (a.charAt(i) != b.charAt(i)) {
+        return Integer.compare(a.codePointAt(i), b.codePointAt(i));
+      }
     }
     return Integer.compare(a.length(), b.length());
   }
@@ -45,7 +51,9 @@ final class ContractCanonical {
   static int compareSegments(List<String> a, List<String> b) {
     for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
       int c = ContractCanonical.compare(a.get(i), b.get(i));
-      if (c != 0) return c;
+      if (c != 0) {
+        return c;
+      }
     }
     return Integer.compare(a.size(), b.size());
   }
@@ -163,7 +171,9 @@ final class ContractCanonical {
       out.append('{');
       boolean first = true;
       for (Field field : fields.fields()) {
-        if (!first) out.append(',');
+        if (!first) {
+          out.append(',');
+        }
         out.appendUtf8(field.bytes);
         first = false;
       }
@@ -174,7 +184,9 @@ final class ContractCanonical {
       out.append('[');
       boolean first = true;
       for (Fragment fragment : sequence.fragments()) {
-        if (!first) out.append(',');
+        if (!first) {
+          out.append(',');
+        }
         out.appendUtf8(fragment.bytes);
         first = false;
       }
@@ -205,7 +217,9 @@ final class ContractCanonical {
     if (value instanceof List<?> list) {
       out.append('[');
       for (int i = 0; i < list.size(); i++) {
-        if (i != 0) out.append(',');
+        if (i != 0) {
+          out.append(',');
+        }
         write(list.get(i), out);
       }
       out.append(']');
@@ -217,7 +231,9 @@ final class ContractCanonical {
     var keys = map.keySet().stream().map(k -> (String) k).sorted(CODE_POINTS).toList();
     out.append('{');
     for (int i = 0; i < keys.size(); i++) {
-      if (i != 0) out.append(',');
+      if (i != 0) {
+        out.append(',');
+      }
       String key = keys.get(i);
       write(key, out);
       out.append(':');

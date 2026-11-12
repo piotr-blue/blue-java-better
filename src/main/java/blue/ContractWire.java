@@ -55,7 +55,9 @@ final class ContractWire {
       var unique = new java.util.HashSet<String>();
       for (String key : keys) {
         LanguageCodec.unicode(java.util.Objects.requireNonNull(key));
-        if (!unique.add(key)) throw new IllegalArgumentException("Duplicate record key: " + key);
+        if (!unique.add(key)) {
+          throw new IllegalArgumentException("Duplicate record key: " + key);
+        }
       }
       layout = new ContractData.RecordLayout(keys);
     }

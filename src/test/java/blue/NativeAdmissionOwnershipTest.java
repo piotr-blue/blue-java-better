@@ -72,8 +72,9 @@ class NativeAdmissionOwnershipTest {
     ContractProcessor processor = new ContractProcessor();
     channel.install(processor);
     Map<String, Object> declarations = new LinkedHashMap<>();
-    for (int n = 0; n < count; n++)
+    for (int n = 0; n < count; n++) {
       declarations.put("input" + n, Map.of("type", Map.of("blueId", type.blueId().value())));
+    }
     var document = processor.create(Map.of("contracts", declarations));
     var first = processor.process(document, Map.of("sequence", 1), 1);
     assertEquals("APPLIED", first.status());

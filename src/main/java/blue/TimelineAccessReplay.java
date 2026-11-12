@@ -49,7 +49,7 @@ final class TimelineAccessReplay {
       // Verification already established the new bound. No contract input means no new
       // execution context, retained content or permission state is needed for this checkpoint.
       prefix = verified.prefix();
-      if (view != null)
+      if (view != null) {
         view =
             new TimelineAccess.View(
                 view.document(),
@@ -57,6 +57,7 @@ final class TimelineAccessReplay {
                 prefix.completeBefore(),
                 view.allowedTimelines(),
                 view.allowedKeys());
+      }
       return new TimelineAccess.Update(
           prefix.completeBefore(), Optional.ofNullable(view), List.of());
     }

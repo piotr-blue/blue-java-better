@@ -67,8 +67,9 @@ class ContractManagedBoundaryTest {
       String before = session.identity();
       var result = session.process(Map.of("target", "parent"), 1);
       assertEquals(allowed, result.applied(), result.observations().toString());
-      if (allowed) assertEquals("42", session.read(boundary ? path + "/count" : path).toString());
-      else {
+      if (allowed) {
+        assertEquals("42", session.read(boundary ? path + "/count" : path).toString());
+      } else {
         assertEquals(before, session.identity());
         assertTrue(
             result

@@ -36,7 +36,9 @@ class LocalOwnerExecutionTest {
     var forbidden = new HashSet<String>();
     fixture.initial.state.documents.forEach(
         (key, doc) -> {
-          if (key.startsWith("quiet")) forbidden.add(doc.blueId);
+          if (key.startsWith("quiet")) {
+            forbidden.add(doc.blueId);
+          }
         });
     Set<String> fetched = new HashSet<>();
     Language language =
@@ -82,8 +84,9 @@ class LocalOwnerExecutionTest {
               1L);
       var roots = new ArrayList<ExactNode>();
       roots.add(result.outcome().snapshot.documents.get("child").body);
-      for (Object raw : result.outcome().events)
+      for (Object raw : result.outcome().events) {
         roots.add(new ExactNode.Ref((String) ContractModel.obj(raw).get("event")));
+      }
       childEngine
           .blue
           .context
@@ -94,8 +97,9 @@ class LocalOwnerExecutionTest {
     try (var scope =
         parentEngine.blue.context.validationScope(
             key -> {
-              for (String id : forbidden)
+              for (String id : forbidden) {
                 assertFalse(key.endsWith("/" + id), "Queried sibling metadata: " + key);
+              }
               return Optional.ofNullable(facts.get(key));
             })) {
       var result =
@@ -295,7 +299,9 @@ class LocalOwnerExecutionTest {
       String operation, boolean inherited) {
     var creator = engine(Language.create());
     Map<String, Object> patch = new LinkedHashMap<>(Map.of("op", operation, "path", "/detail"));
-    if (!operation.equals("remove")) patch.put("val", Map.of("amount", 42, "reference", "bank"));
+    if (!operation.equals("remove")) {
+      patch.put("val", Map.of("amount", 42, "reference", "bank"));
+    }
     Map<String, Object> source =
         new LinkedHashMap<>(
             ContractsFixtures.yaml(
@@ -312,8 +318,12 @@ class LocalOwnerExecutionTest {
         .put(
             "steps",
             List.of(Map.of("type", "Contracts/Update Document", "changeset", List.of(patch))));
-    if (!operation.equals("add")) source.put("detail", Map.of("amount", 0));
-    if (inherited) source.put("type", Map.of("detail", Map.of()));
+    if (!operation.equals("add")) {
+      source.put("detail", Map.of("amount", 0));
+    }
+    if (inherited) {
+      source.put("type", Map.of("detail", Map.of()));
+    }
     var initial = creator.initialize(source);
     assertEquals("APPLIED", initial.status());
     var event = creator.blue.source(Map.of("kind", "tick"));

@@ -99,10 +99,16 @@ class ContractSnapshotExportTest {
       System.setProperty("blue.canonical.prefixWitnesses", "true");
       inline = processor.exportSnapshot(source);
     } finally {
-      if (previous == null) System.clearProperty("blue.canonical.inlineRecords");
-      else System.setProperty("blue.canonical.inlineRecords", previous);
-      if (previousPrefixes == null) System.clearProperty("blue.canonical.prefixWitnesses");
-      else System.setProperty("blue.canonical.prefixWitnesses", previousPrefixes);
+      if (previous == null) {
+        System.clearProperty("blue.canonical.inlineRecords");
+      } else {
+        System.setProperty("blue.canonical.inlineRecords", previous);
+      }
+      if (previousPrefixes == null) {
+        System.clearProperty("blue.canonical.prefixWitnesses");
+      } else {
+        System.setProperty("blue.canonical.prefixWitnesses", previousPrefixes);
+      }
     }
     assertEquals(inline.get("snapshot"), compact.get("snapshot"));
     assertEquals(inline.get("identity"), compact.get("identity"));
@@ -113,20 +119,24 @@ class ContractSnapshotExportTest {
       CanonicalTransactionTest.compare(a, b, m("target", "a"), 1, true);
       assertEquals(a.read(""), b.read(""));
     }
-    if (!cyclic)
+    if (!cyclic) {
       assertTrue(ContractWire.encode(compact).length() < ContractWire.encode(inline).length());
+    }
   }
 
   private static Map<String, Object> independentRecords(
       ContractProcessor processor, ContractProcessor.Document document, Set<String> supplied) {
     Map<String, Object> result = new TreeMap<>();
-    for (Document member : document.state.documents.values())
+    for (Document member : document.state.documents.values()) {
       result.putAll(processor.blue.context.records(member.body, supplied));
-    for (Object runtime : document.state.runtimes)
-      for (String field : List.of("type_id", "semantics_id"))
+    }
+    for (Object runtime : document.state.runtimes) {
+      for (String field : List.of("type_id", "semantics_id")) {
         result.putAll(
             processor.blue.context.records(
                 new ExactNode.Ref(str(obj(runtime).get(field))), supplied));
+      }
+    }
     return result;
   }
 }

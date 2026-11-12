@@ -107,8 +107,9 @@ public final class TimeBindings {
   private TimeBindings(BluePackage publication, Verifier verifier) {
     Objects.requireNonNull(publication);
     Objects.requireNonNull(verifier);
-    if (!supports(publication.blueId()))
+    if (!supports(publication.blueId())) {
       throw new IllegalArgumentException("Unsupported Time publication");
+    }
     LanguageDocument rules =
         Language.newBuilder()
             .content(publication.document())
@@ -130,7 +131,9 @@ public final class TimeBindings {
               public Map<String, Object> verifyAdmission(ContractNative.AdmissionContext context) {
                 // An ordinary Timeline payload, even a Timer Fired-shaped one, has no Time
                 // admission.
-                if (context.evidence() == null) return Map.of("allowed", false);
+                if (context.evidence() == null) {
+                  return Map.of("allowed", false);
+                }
                 var receivers =
                     context.members().stream()
                         .map(ContractModel::obj)
@@ -236,8 +239,9 @@ public final class TimeBindings {
                   new NativeValues()
                       .freeze(context.evaluate().apply(context.body().get("request")));
             } catch (ContractModel.Error failure) {
-              if (failure.code().equals("EFFECTFUL_EXPRESSION"))
+              if (failure.code().equals("EFFECTFUL_EXPRESSION")) {
                 throw new ContractModel.Error("TIME_EFFECTFUL_ARGUMENTS");
+              }
               throw failure;
             }
             require(evaluated instanceof Map<?, ?>, "TIME_REQUEST_NOT_OBJECT");
@@ -253,13 +257,17 @@ public final class TimeBindings {
   private static void validate(Map<String, Object> request, boolean cancel) {
     Set<String> required = cancel ? Set.of("channel", "key") : Set.of("channel", "timestamp");
     var allowed = new HashSet<>(required);
-    if (!cancel) allowed.addAll(Set.of("key", "context"));
+    if (!cancel) {
+      allowed.addAll(Set.of("key", "context"));
+    }
     require(
         request.keySet().containsAll(required) && allowed.containsAll(request.keySet()),
         "TIME_INVALID_REQUEST_FIELDS");
-    for (String name : List.of("channel", "key"))
-      if (request.containsKey(name))
+    for (String name : List.of("channel", "key")) {
+      if (request.containsKey(name)) {
         require(request.get(name) instanceof String text && !text.isEmpty(), "TIME_INVALID_NAME");
+      }
+    }
     if (!cancel) {
       try {
         integer(request.get("timestamp"));
@@ -280,12 +288,15 @@ public final class TimeBindings {
   void checkCompatible(
       Map<BlueId, NativeStep> registeredSteps, Map<BlueId, NativeChannel> channels) {
     if (registeredSteps.containsKey(channel.typeId())
-        || channels.containsKey(channel.typeId()) && channels.get(channel.typeId()) != channel)
+        || channels.containsKey(channel.typeId()) && channels.get(channel.typeId()) != channel) {
       throw new IllegalArgumentException("Conflicting Time channel registration");
-    for (NativeStep step : steps)
+    }
+    for (NativeStep step : steps) {
       if (channels.containsKey(step.typeId())
           || registeredSteps.containsKey(step.typeId())
-              && registeredSteps.get(step.typeId()) != step)
+              && registeredSteps.get(step.typeId()) != step) {
         throw new IllegalArgumentException("Conflicting Time step registration");
+      }
+    }
   }
 }

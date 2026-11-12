@@ -44,8 +44,9 @@ public final class NativeStep {
     this.binding = Objects.requireNonNull(binding);
     this.implementation = Objects.requireNonNull(implementation);
     if (!type.blueId().value().equals(binding.typeId())
-        || !semantics.blueId().value().equals(binding.semanticsId()))
+        || !semantics.blueId().value().equals(binding.semanticsId())) {
       throw new IllegalArgumentException("Registration content disagrees with its binding");
+    }
   }
 
   private NativeStep(Builder builder) {
@@ -170,8 +171,9 @@ public final class NativeStep {
      */
     public Builder counter(String name, long cost) {
       Objects.requireNonNull(name);
-      if (cost < 0 || name.equals("invocation") && cost == 0)
+      if (cost < 0 || name.equals("invocation") && cost == 0) {
         throw new IllegalArgumentException("Invalid native counter cost");
+      }
       tariff.put(name, cost);
       return this;
     }
@@ -378,7 +380,9 @@ public final class NativeStep {
      */
     public void terminate(String cause, String reason) {
       input();
-      if (termination != null) throw new IllegalStateException("Termination already requested");
+      if (termination != null) {
+        throw new IllegalStateException("Termination already requested");
+      }
       termination =
           reason == null ? Map.of("cause", cause) : Map.of("cause", cause, "reason", reason);
     }
@@ -398,18 +402,22 @@ public final class NativeStep {
     private void patch(String operation, String pointer, Object value) {
       input();
       Pointer path = Pointer.parse(pointer);
-      if (path.segments().isEmpty())
+      if (path.segments().isEmpty()) {
         throw new IllegalArgumentException("Root patch is not supported");
+      }
       Map<String, Object> patch = new LinkedHashMap<>();
       patch.put("op", operation);
       patch.put("path", pointer);
-      if (!operation.equals("remove")) patch.put("val", BexValues.freeze(value));
+      if (!operation.equals("remove")) {
+        patch.put("val", BexValues.freeze(value));
+      }
       patches.add(patch);
     }
 
     private ContractNative.Context input() {
-      if (input == null || thread != Thread.currentThread().threadId())
+      if (input == null || thread != Thread.currentThread().threadId()) {
         throw new IllegalStateException("Native context is outside its invocation");
+      }
       return input;
     }
 
@@ -417,7 +425,9 @@ public final class NativeStep {
       Map<String, Object> result = new LinkedHashMap<>();
       result.put("patches", patches);
       result.put("events", events);
-      if (termination != null) result.put("termination", termination);
+      if (termination != null) {
+        result.put("termination", termination);
+      }
       return result;
     }
 

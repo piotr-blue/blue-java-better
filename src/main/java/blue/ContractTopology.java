@@ -43,7 +43,9 @@ final class ContractTopology {
   /** Containing-reference updates use decoded pointer order, not encoded map-key order. */
   List<Edge> orderedOutgoingEdges(String member) {
     List<Edge> edges = outgoingEdges(member);
-    if (edges.size() < 2) return edges;
+    if (edges.size() < 2) {
+      return edges;
+    }
     return orderedOutgoing.computeIfAbsent(
         member,
         key ->
@@ -64,7 +66,9 @@ final class ContractTopology {
 
   List<Edge> groupEdges(Collection<String> members) {
     var result = new ArrayList<Edge>();
-    for (String member : ContractCanonical.keys(members)) result.addAll(outgoingEdges(member));
+    for (String member : ContractCanonical.keys(members)) {
+      result.addAll(outgoingEdges(member));
+    }
     return result;
   }
 
@@ -80,7 +84,9 @@ final class ContractTopology {
     for (Edge edge : state.edges.values()) {
       outgoingEdges.computeIfAbsent(edge.source(), k -> new ArrayList<>()).add(edge);
       incomingEdges.computeIfAbsent(edge.target(), k -> new ArrayList<>()).add(edge);
-      if (edge.source().equals(edge.target())) selfLinks.add(edge.source());
+      if (edge.source().equals(edge.target())) {
+        selfLinks.add(edge.source());
+      }
     }
     incomingEdges.replaceAll(
         (member, edges) -> {
@@ -88,8 +94,9 @@ final class ContractTopology {
           edges.sort(
               (a, b) -> {
                 int c = ContractCanonical.compare(a.source(), b.source());
-                if (c == 0)
+                if (c == 0) {
                   c = ContractCanonical.compareSegments(segments(a.path()), segments(b.path()));
+                }
                 return c == 0 ? Long.compare(a.generation(), b.generation()) : c;
               });
           return List.copyOf(edges);
@@ -118,7 +125,9 @@ final class ContractTopology {
     }
     ContractMetrics.count("schedule.sccBuilds");
     found = List.copyOf(ContractComponents.ordered(members, edges));
-    if (partitions.size() == 8) partitions.remove(partitions.keySet().iterator().next());
+    if (partitions.size() == 8) {
+      partitions.remove(partitions.keySet().iterator().next());
+    }
     partitions.put(key, found);
     return found;
   }

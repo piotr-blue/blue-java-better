@@ -125,7 +125,9 @@ class ContractExecutionTest {
                 steps: {blueId: STEPS}
             """
                 .replace("STEPS", steps.blueId().value()));
-    if (collapsedContracts) source = source.collapse("/contracts");
+    if (collapsedContracts) {
+      source = source.collapse("/contracts");
+    }
     Contracts.Execution creator =
         Contracts.Execution.using(Contracts.newBuilder().language(writer).build(), null);
     var initialized = creator.initialize(creator.prepare("root", source)).requireApplied().after();
@@ -145,7 +147,9 @@ class ContractExecutionTest {
           return Optional.ofNullable(records.get(id));
         };
     var readerBuilder = Language.newBuilder().mount("Contracts", Contracts.publication());
-    if (!attemptProvider) readerBuilder.provider(provider);
+    if (!attemptProvider) {
+      readerBuilder.provider(provider);
+    }
     Language reader = readerBuilder.build();
     var envelope = initialized.checkpoint();
     var stored =
@@ -163,7 +167,9 @@ class ContractExecutionTest {
             null,
             key -> Optional.ofNullable(facts.get(key)),
             snapshot -> prepared ? Optional.of(artifact) : Optional.empty())) {
-      if (attemptProvider) recovered.withContent(provider);
+      if (attemptProvider) {
+        recovered.withContent(provider);
+      }
       var before = recovered.restore(stored);
       assertEquals(0, before.member(before.root()).at("/count").integer());
       assertFalse(
@@ -176,7 +182,9 @@ class ContractExecutionTest {
           fetched.contains(steps.blueId()),
           "Unrelated work must not fetch an unused workflow's steps");
       try (Contracts.Execution portable = Contracts.Execution.using(configuration, null)) {
-        if (attemptProvider) portable.withContent(provider);
+        if (attemptProvider) {
+          portable.withContent(provider);
+        }
         var expected =
             portable
                 .process(portable.restore(stored), small, 1, AdmissionEvidence.empty())

@@ -25,7 +25,9 @@ sealed interface ExactNode permits ExactNode.Value, ExactNode.Ref, ExactNode.Loc
 
     Value(Map<String, Object> fields) {
       var copy = new TreeMap<String, Object>(fields);
-      for (var entry : copy.entrySet()) validate(entry.getKey(), entry.getValue());
+      for (var entry : copy.entrySet()) {
+        validate(entry.getKey(), entry.getValue());
+      }
       if (copy.get("items") instanceof List<?> items) {
         copy.put("items", List.copyOf(items));
       }
@@ -41,16 +43,18 @@ sealed interface ExactNode permits ExactNode.Value, ExactNode.Ref, ExactNode.Loc
 
     private static void validate(String key, Object value) {
       if (value instanceof List<?> values) {
-        if (!key.equals("items") || values.stream().anyMatch(x -> !(x instanceof ExactNode)))
+        if (!key.equals("items") || values.stream().anyMatch(x -> !(x instanceof ExactNode))) {
           throw new IllegalArgumentException("ExactNode items must contain exact handles");
+        }
       } else if (value != null
           && !(value instanceof ExactNode
               || value instanceof String
               || value instanceof Boolean
               || value instanceof java.math.BigInteger
               || value instanceof Double
-              || value instanceof NumberToken))
+              || value instanceof NumberToken)) {
         throw new IllegalArgumentException("Unsupported exact field: " + key);
+      }
     }
 
     public SortedMap<String, Object> fields() {
@@ -102,12 +106,17 @@ sealed interface ExactNode permits ExactNode.Value, ExactNode.Ref, ExactNode.Loc
       Object next = value instanceof List<?> items ? List.copyOf(items) : value;
       Object prior = fields.get(key);
       boolean existed = fields.containsKey(key);
-      if (next == null && !existed || next != null && existed && next.equals(prior)) return this;
+      if (next == null && !existed || next != null && existed && next.equals(prior)) {
+        return this;
+      }
       var copy = new TreeMap<>(fields);
       int hash = hashCode;
-      if (existed) hash -= key.hashCode() ^ Objects.hashCode(prior);
-      if (next == null) copy.remove(key);
-      else {
+      if (existed) {
+        hash -= key.hashCode() ^ Objects.hashCode(prior);
+      }
+      if (next == null) {
+        copy.remove(key);
+      } else {
         copy.put(key, next);
         hash += key.hashCode() ^ next.hashCode();
       }

@@ -115,11 +115,12 @@ final class TimelineReads {
         () -> {
           TimelineContent fields = context(request, progress);
           Query query = TimelineRequests.inspectRead(fields, verifier, maximumPageSize, request);
-          if (expectedCursor != null)
+          if (expectedCursor != null) {
             require(
                 expectedCursor.equals(query.cursor),
                 "TIMELINE_CURSOR",
                 "exact issued cursor required");
+          }
           require(
               progress.checkpoint == null || progress.checkpoint.id.equals(query.checkpoint),
               "TIMELINE_CHECKPOINT_CHANGED",
@@ -166,8 +167,9 @@ final class TimelineReads {
               completed =
                   verifier.completed(
                       prior.start, prior.head, prior.pending, checkpoint.before, checkpoint.head);
-              if (prior.checkpoint == null)
+              if (prior.checkpoint == null) {
                 verifier.rememberRead(prior.start, completed, checkpoint.id, List.of());
+              }
             }
             fields.rememberFacts();
             return new TimelineReader.Page(
@@ -194,13 +196,17 @@ final class TimelineReads {
               Objects.equals(predecessorId, knownHead),
               "TIMELINE_ANCHOR",
               "unestablished predecessor");
-          if (predecessor != null) wireEntry(fields, inline(predecessor, "predecessor"));
+          if (predecessor != null) {
+            wireEntry(fields, inline(predecessor, "predecessor"));
+          }
           long predecessorTime = prior.head == null ? -1 : prior.head.entry().timestamp();
-          if (query.anchor != null)
+          if (query.anchor != null) {
             require(query.anchor.equals(predecessorId), "TIMELINE_ANCHOR", "afterEntry");
-          else if (query.afterTime != null)
+          } else if (query.afterTime != null) {
             require(predecessorTime <= query.afterTime, "TIMELINE_SEEK", "predecessor timestamp");
-          else require(predecessor == null, "TIMELINE_ANCHOR", "genesis");
+          } else {
+            require(predecessor == null, "TIMELINE_ANCHOR", "genesis");
+          }
           List<ExactNode> entries = fields.entries(page, "Timeline Entries Page");
           require(
               BigInteger.valueOf(entries.size()).compareTo(query.limit) <= 0,
@@ -222,14 +228,16 @@ final class TimelineReads {
                     && entry.entry().timestamp() < checkpoint.before,
                 "TIMELINE_TIME",
                 "page timestamp");
-            if (query.afterTime != null)
+            if (query.afterTime != null) {
               require(
                   entry.entry().timestamp() > query.afterTime, "TIMELINE_SEEK", "entry timestamp");
-            if (pending != null)
+            }
+            if (pending != null) {
               require(
                   pending.entry().blueId().equals(entry.entry().blueId()),
                   "TIMELINE_EQUIVOCATION",
                   "known successor");
+            }
             pending = null;
             last = entry;
             fields.context.establishedValues.put(entry.entry().blueId().value(), entry.header());
@@ -266,8 +274,9 @@ final class TimelineReads {
             completed =
                 verifier.completed(prior.start, last, pending, checkpoint.before, checkpoint.head);
             fields.validate(response.semantic);
-            if (prior.checkpoint == null)
+            if (prior.checkpoint == null) {
               verifier.rememberRead(prior.start, completed, checkpoint.id, verified);
+            }
           }
           fields.rememberFacts();
           return new TimelineReader.Page(
@@ -287,11 +296,12 @@ final class TimelineReads {
           ExactNode node = request.semantic;
           fields.typed(node, "Fetch Timeline Entry Request");
           for (String forbidden :
-              List.of("requestId", "provider", "createdAt", "expiresAt", "nonce"))
+              List.of("requestId", "provider", "createdAt", "expiresAt", "nonce")) {
             require(
                 fields.supplied(node, "Provider Request", forbidden) == null,
                 "TIMELINE_REQUEST_FIELDS",
                 forbidden);
+          }
           verifier.sameTimeline(fields.required(node, "Fetch Timeline Entry Request", "timeline"));
           require(
               fields.required(node, "Fetch Timeline Entry Request", "entry") instanceof Ref,
@@ -478,12 +488,14 @@ final class TimelineReads {
     context.establishedValues = verifier.targetFacts();
     context.facts = verifier.facts;
     if (progress != null) {
-      if (progress.head != null)
+      if (progress.head != null) {
         context.establishedValues.put(
             progress.head.entry().blueId().value(), progress.head.header());
-      if (progress.start.head != null)
+      }
+      if (progress.start.head != null) {
         context.establishedValues.put(
             progress.start.head.entry().blueId().value(), progress.start.head.header());
+      }
     }
     return new TimelineContent(context, verifier.publication);
   }

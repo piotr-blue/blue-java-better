@@ -26,11 +26,13 @@ public final class LanguageCheckpoint {
 
   static LanguageCheckpoint capture(LanguageDocument value) {
     Objects.requireNonNull(value);
-    if (value.goal() != Language.Goal.VALUE)
+    if (value.goal() != Language.Goal.VALUE) {
       throw new IllegalArgumentException("Completed Language value required");
-    if (!value.blueId().value().equals(LanguageCore.identity(value.semantic)))
+    }
+    if (!value.blueId().value().equals(LanguageCore.identity(value.semantic))) {
       throw new IllegalArgumentException(
           "A presentation with a different semantic identity cannot be checkpointed");
+    }
     return new LanguageCheckpoint(value.blueId());
   }
 
@@ -61,10 +63,12 @@ public final class LanguageCheckpoint {
     if (!record.keySet().equals(Set.of("format", "language", "blueId"))
         || !FORMAT.equals(record.get("format"))
         || !Language.EDITION.equals(record.get("language"))
-        || !(record.get("blueId") instanceof String id))
+        || !(record.get("blueId") instanceof String id)) {
       throw new IllegalArgumentException("Unsupported Language admission checkpoint");
-    if (!ContractModel.digest(FORMAT, record).equals(expected))
+    }
+    if (!ContractModel.digest(FORMAT, record).equals(expected)) {
       throw new IllegalArgumentException("Untrusted Language admission checkpoint");
+    }
     return recover(language, id);
   }
 

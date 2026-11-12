@@ -254,7 +254,9 @@ final class LanguageCore {
     } else {
       byte[] canonical = helperBytes(v, token);
       id = hashBytes(canonical);
-      if (token == null) v.identityBytes = canonical.length;
+      if (token == null) {
+        v.identityBytes = canonical.length;
+      }
     }
     if (token == null) {
       v.identity = id;
@@ -268,7 +270,9 @@ final class LanguageCore {
     out.append('{');
     boolean first = true;
     for (var field : node.fields().entrySet()) {
-      if (!first) out.append(',');
+      if (!first) {
+        out.append(',');
+      }
       first = false;
       String key = field.getKey();
       Object value = field.getValue();

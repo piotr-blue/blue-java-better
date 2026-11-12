@@ -10,8 +10,9 @@ final class LanguageSet<E> extends AbstractSet<E> {
   private LanguageTrie<E, Boolean> values;
 
   LanguageSet(Set<E> source) {
-    if (source instanceof LanguageSet<E> local) values = local.values;
-    else {
+    if (source instanceof LanguageSet<E> local) {
+      values = local.values;
+    } else {
       values = LanguageTrie.empty();
       addAll(source);
     }

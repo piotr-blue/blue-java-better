@@ -33,12 +33,16 @@ final class ContractReception {
     var document = snapshot.documents.get(member);
     require(document != null, "UNKNOWN_MEMBER", "member", member);
     var registry = processor.registry;
-    if (registry.marker(document, "terminated") != null) return List.of();
+    if (registry.marker(document, "terminated") != null) {
+      return List.of();
+    }
     var contracts = registry.contracts(document);
     List<Contracts.Operation> result = new ArrayList<>();
     for (String name : ContractCanonical.keys(contracts.keySet())) {
       var declaration = contracts.get(name);
-      if (!"operation".equals(declaration.get("_role"))) continue;
+      if (!"operation".equals(declaration.get("_role"))) {
+        continue;
+      }
       result.add(
           new Contracts.Operation(
               name,
@@ -82,30 +86,40 @@ final class ContractReception {
     var document = snapshot.documents.get(member);
     require(document != null, "UNKNOWN_MEMBER", "member", member);
     var registry = processor.registry;
-    if (registry.marker(document, "terminated") != null)
+    if (registry.marker(document, "terminated") != null) {
       return new Contracts.Reception(identity, List.of());
+    }
     var declarations = registry.contracts(document);
     Map<String, List<String>> leaves = new HashMap<>();
     Map<String, Set<String>> selectors = new HashMap<>();
     Set<String> observed = new HashSet<>();
     for (var item : declarations.entrySet()) {
-      if (!ContractRegistry.EXTERNAL.contains(item.getValue().get("_role"))) continue;
+      if (!ContractRegistry.EXTERNAL.contains(item.getValue().get("_role"))) {
+        continue;
+      }
       List<String> selected = ContractChannels.leaves(declarations, item.getKey());
       leaves.put(item.getKey(), selected);
-      for (String leaf : selected)
+      for (String leaf : selected) {
         selectors
             .computeIfAbsent(leaf, ignored -> new TreeSet<>(ContractCanonical.CODE_POINTS))
             .add(item.getKey());
+      }
     }
-    for (var declaration : declarations.values())
-      if (Set.of("workflow", "extension_handler").contains(declaration.get("_role")))
+    for (var declaration : declarations.values()) {
+      if (Set.of("workflow", "extension_handler").contains(declaration.get("_role"))) {
         observed.addAll(leaves.getOrDefault(declaration.get("channel"), List.of()));
+      }
+    }
     List<Contracts.ReceivingChannel> channels = new ArrayList<>();
     for (String name : ContractCanonical.keys(declarations.keySet())) {
       var declaration = declarations.get(name);
-      if (!"extension_external".equals(declaration.get("_role"))) continue;
+      if (!"extension_external".equals(declaration.get("_role"))) {
+        continue;
+      }
       var extension = (ContractNative.Installed) declaration.get("_extension");
-      if (!extension.implementation.verifiesAdmission()) continue;
+      if (!extension.implementation.verifiesAdmission()) {
+        continue;
+      }
       Map<String, BlueId> fields = new LinkedHashMap<>();
       for (String field : extension.binding.headerFields()) {
         var value =
@@ -114,7 +128,9 @@ final class ContractReception {
                 registry.blue.exact(declaration.get("_recipe")),
                 extension.binding.typeId(),
                 field);
-        if (value != null) fields.put(field, new BlueId(ContractLanguage.identity(value)));
+        if (value != null) {
+          fields.put(field, new BlueId(ContractLanguage.identity(value)));
+        }
       }
       channels.add(
           new Contracts.ReceivingChannel(
@@ -137,10 +153,14 @@ final class ContractReception {
     while (cursor != null && !ContractLanguage.identity(cursor).equals(base)) {
       require(visited.add(ContractLanguage.identity(cursor)), "CYCLIC_TYPE_INHERITANCE");
       ExactNode.Value body = registry.blue.open(cursor);
-      if (body.get(field) instanceof ExactNode value) parts.add(value);
+      if (body.get(field) instanceof ExactNode value) {
+        parts.add(value);
+      }
       cursor = body.get("type") instanceof ExactNode.Ref parent ? parent : null;
     }
-    if (parts.isEmpty()) return null;
+    if (parts.isEmpty()) {
+      return null;
+    }
     Collections.reverse(parts);
     return registry.blue.exact(LanguageSemantics.recipe(parts.toArray()));
   }
@@ -169,9 +189,12 @@ final class ContractReception {
       ContractProcessor processor, TimelineVerifier.Entry entry, LanguageContent message) {
     Objects.requireNonNull(entry);
     Objects.requireNonNull(message);
-    if (!entry.messageId().equals(message.blueId()))
+    if (!entry.messageId().equals(message.blueId())) {
       throw new IllegalArgumentException("Message differs from the verified Timeline occurrence");
-    if (!entry.mayInvokeOperation()) return Optional.empty();
+    }
+    if (!entry.mayInvokeOperation()) {
+      return Optional.empty();
+    }
     ContractLanguage previous = processor.blue.context;
     processor.blue.context = previous.verificationSnapshot();
     try {
@@ -189,7 +212,9 @@ final class ContractReception {
   private static Optional<Contracts.OperationRequest> operation(
       ContractRegistry registry, ExactNode message) {
     Map<String, Object> request = ContractChannels.operationRequest(registry, message);
-    if (request == null) return Optional.empty();
+    if (request == null) {
+      return Optional.empty();
+    }
     BlueId target =
         request.containsKey("document")
             ? new BlueId(str(obj(request.get("document")).get("blueId")))

@@ -58,7 +58,9 @@ class ContractViewTest {
   @org.junit.jupiter.params.provider.ValueSource(ints = {1, 16, 64})
   void bexDataPreservesNestedObjectAndListStructure(int depth) {
     Object expected = BigInteger.TEN;
-    for (int i = 0; i < depth; i++) expected = Map.of("next", List.of(expected));
+    for (int i = 0; i < depth; i++) {
+      expected = Map.of("next", List.of(expected));
+    }
     Language language = Language.create();
     LanguageDocument value = language.readJson(ContractCanonical.text(expected));
     ContractBridge bridge = new ContractBridge(language);

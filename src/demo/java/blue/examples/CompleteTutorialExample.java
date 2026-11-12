@@ -20,7 +20,9 @@ public final class CompleteTutorialExample {
   private CompleteTutorialExample() {}
 
   public static void main(String[] args) {
-    for (Lesson lesson : lessons()) lesson.run();
+    for (Lesson lesson : lessons()) {
+      lesson.run();
+    }
   }
 
   static List<Lesson> lessons() {

@@ -82,8 +82,11 @@ class ContractInitializationTest {
         return Map.of("snapshot", session.snapshot(), "transition", observation(result));
       }
     } finally {
-      if (previous == null) System.clearProperty(property);
-      else System.setProperty(property, previous);
+      if (previous == null) {
+        System.clearProperty(property);
+      } else {
+        System.setProperty(property, previous);
+      }
     }
   }
 
@@ -95,7 +98,9 @@ class ContractInitializationTest {
       Object event = event();
       Contracts.Transition discarded;
       try (Contracts.Transaction transaction = session.begin(event, 1)) {
-        while (transaction.advance()) assertEquals(before, session.identity());
+        while (transaction.advance()) {
+          assertEquals(before, session.identity());
+        }
         discarded = transaction.finish().requireApplied();
       }
       assertEquals(before, session.identity());

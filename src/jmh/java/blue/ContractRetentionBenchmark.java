@@ -35,7 +35,9 @@ public class ContractRetentionBenchmark {
   public void setup() {
     source = new ContractLanguage(Language.create());
     List<ExactNode> children = new ArrayList<>();
-    for (int i = 0; i < entries; i++) children.add(value(Map.of("value", "item-" + i)));
+    for (int i = 0; i < entries; i++) {
+      children.add(value(Map.of("value", "item-" + i)));
+    }
     ExactNode shared = list(children);
     source.retain(
         List.of(value(Map.of("data", shared, "revision", value(Map.of("value", "old"))))));

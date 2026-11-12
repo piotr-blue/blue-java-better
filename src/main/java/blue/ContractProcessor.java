@@ -148,7 +148,9 @@ final class ContractProcessor {
     this.bindings = Objects.requireNonNull(bindings);
     blue =
         new ContractBridge(language, bindings.contractsEdition() == ContractsEdition.DETERMINISTIC);
-    if (template != null) blue.context = template.blue.context.fork();
+    if (template != null) {
+      blue.context = template.blue.context.fork();
+    }
     bex =
         bindings.canonicalWireMeasurementV1()
             ? new BexEngine(
@@ -158,16 +160,20 @@ final class ContractProcessor {
             : bindings.engine();
     registry = new ContractRegistry(blue, bindings, programs);
     if (template == null) {
-      if (bindings.dispatchEnabled()) DocumentDispatchV1.installPublished(this);
-      if (bindings.canonicalWireMeasurementV1())
+      if (bindings.dispatchEnabled()) {
+        DocumentDispatchV1.installPublished(this);
+      }
+      if (bindings.canonicalWireMeasurementV1()) {
         CanonicalWireMeasurementV1.installMarker(this, blue);
+      }
     } else {
       registry.extensions.putAll(template.registry.extensions);
       registry.interpretedTypes.putAll(template.registry.interpretedTypes);
       registry.inherit(template.registry);
     }
-    if (!bindings.contractsEdition().specificationBlueId().equals(registry.specification))
+    if (!bindings.contractsEdition().specificationBlueId().equals(registry.specification)) {
       throw new IllegalStateException("Installed Contracts code and selected native rules differ");
+    }
     integer(gasLimit, 0, bindings.contractsEdition().maximumGas());
     this.gasLimit = gasLimit;
     this.localLimits = Map.copyOf(localLimits);
@@ -245,8 +251,9 @@ final class ContractProcessor {
       Map<String, Object> evidence) {
     integer(timestamp);
     Snapshot state;
-    if (document instanceof Document d) state = d.state;
-    else {
+    if (document instanceof Document d) {
+      state = d.state;
+    } else {
       state = ContractGraph.prepare(registry, Map.of("root", document), "root", Map.of(), archive);
       ContractChannels.refresh(new ContractGraph(state, registry, archive));
     }
@@ -329,10 +336,11 @@ final class ContractProcessor {
   void requireComputeDefinition(Object operand) {
     var specification = blue.open(blue.exact(operand)).get("specification");
     if (specification != null
-        && !identity((ExactNode) specification).equals(registry.specification))
+        && !identity((ExactNode) specification).equals(registry.specification)) {
       throw new ContractBindings.Unsupported(
           identity((ExactNode) specification),
           List.of("Compute/definition", identity(blue.exact(operand)), "specification"));
+    }
   }
 
   public Map<String, String> types() {
@@ -459,8 +467,9 @@ final class ContractProcessor {
   }
 
   public Result initialize(Object source) {
-    if (source instanceof Document d)
+    if (source instanceof Document d) {
       return new Result(new ContractRun(this, d.state, null, null, true).attempt());
+    }
     return admit(Map.of("root", source), "root");
   }
 
@@ -550,7 +559,9 @@ final class ContractProcessor {
   }
 
   public Result process(Object source, Object event, long timestamp) {
-    if (source instanceof Document d) return process(d, event, timestamp);
+    if (source instanceof Document d) {
+      return process(d, event, timestamp);
+    }
     Snapshot s = ContractGraph.prepare(registry, Map.of("root", source), "root", Map.of(), archive);
     ContractChannels.refresh(new ContractGraph(s, registry, archive));
     ExactNode original = event instanceof ExactNode n ? blue.node(n) : blue.source(event);
@@ -603,7 +614,9 @@ final class ContractProcessor {
       String key = entry.getKey();
       var d = entry.getValue();
       var fact = registry.facts.check("markers", key, d, List.of());
-      if (fact.known()) continue;
+      if (fact.known()) {
+        continue;
+      }
       ContractMetrics.count("contracts.validation.bodyChecks");
       var h = blue.head(d.body);
       require(
@@ -611,7 +624,9 @@ final class ContractProcessor {
           "PROCESSING_DOCUMENT_NOT_OBJECT");
       for (String reserved : ContractRegistry.MARKERS) {
         ExactNode marker = registry.marker(d, reserved);
-        if (marker == null) continue;
+        if (marker == null) {
+          continue;
+        }
         var value = registry.markerRecord(marker, reserved);
         if (reserved.equals("initialized")) {
           closed(value, Set.of("type", "document"), Set.of());
@@ -620,7 +635,9 @@ final class ContractProcessor {
           // Protected preparation already checked this exact marker's historical target.
           // A business-state update does not invalidate that independent existence check.
           if (registry.preparations == null
-              || !registry.preparations.verifiedInitialization(marker)) blue.open(new Ref(initial));
+              || !registry.preparations.verifiedInitialization(marker)) {
+            blue.open(new Ref(initial));
+          }
         } else if (reserved.equals("terminated")) {
           closed(value, Set.of("type", "cause"), Set.of("reason"));
           require(
@@ -643,13 +660,16 @@ final class ContractProcessor {
     for (String key : g.reachable(true, Set.of())) {
       var d = s.documents.get(key);
       var fact = registry.facts.check("lifetimes", key, d, initialized);
-      if (fact.known()) continue;
+      if (fact.known()) {
+        continue;
+      }
       var cs = registry.contracts(d);
       var actual = new TreeMap<String, String>();
       cs.forEach(
           (k, c) -> {
-            if (ContractRegistry.EXTERNAL.contains(c.get("_role")))
+            if (ContractRegistry.EXTERNAL.contains(c.get("_role"))) {
               actual.put(k, ContractChannels.signature(cs, k));
+            }
           });
       require(actual.keySet().equals(d.channelLives.keySet()), "INVALID_CHANNEL_LIFETIMES");
       actual.forEach(
@@ -660,7 +680,9 @@ final class ContractProcessor {
                 "INVALID_CHANNEL_LIFETIME");
             ContractChannels.checkpoint(registry, d, k);
           });
-      if (initialized) require(registry.marker(d, "initialized") != null, "UNINITIALIZED_SNAPSHOT");
+      if (initialized) {
+        require(registry.marker(d, "initialized") != null, "UNINITIALIZED_SNAPSHOT");
+      }
       registry.facts.established(fact);
     }
   }

@@ -26,7 +26,9 @@ public class EmbeddingReconciliationBenchmark {
   @Setup
   public void setup() {
     var members = new LinkedHashMap<String, Object>();
-    for (int i = 0; i < children; i++) members.put("child-" + i, Map.of("count", i));
+    for (int i = 0; i < children; i++) {
+      members.put("child-" + i, Map.of("count", i));
+    }
     var source =
         Map.of(
             "children",
