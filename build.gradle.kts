@@ -69,6 +69,8 @@ for ((taskName, tag) in mapOf(
     "languageTest" to "language",
     "packageTest" to "packages",
     "bexTest" to "bex",
+    "canonicalBexTest" to "canonical-bex",
+    "contractsTest" to "contracts",
     "coordinationTest" to "coordination",
     "conformanceTest" to "conformance",
     "scenarioTest" to "scenario",
@@ -148,12 +150,31 @@ tasks.register<JavaExec>("benchmark") {
 }
 tasks.named("check") { dependsOn(benchmark.classesTaskName) }
 
-tasks.register<JavaExec>("example") {
-    group = "application"
-    description = "Run the canonical agreement clause-rich agreement and export its states/events."
-    classpath = demo.runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.examples.CanonicalAgreement")
+// Runnable examples. They live in the demo source set, outside the published JAR, and always run
+// on the Java 25 toolchain. Some programs have two task names because the guides refer to both.
+for ((taskName, program) in mapOf(
+    "example" to ("blue.examples.CanonicalAgreement" to
+        "Run the canonical clause-rich agreement and export its states and events."),
+    "canonicalDemo" to ("blue.examples.CanonicalAgreement" to
+        "Run the canonical agreement, embedded order and payment workflows."),
+    "canonicalClausesDemo" to ("blue.examples.CanonicalClauses" to
+        "Initialize and run the published Agreements and Connections clauses."),
+    "languageExample" to ("blue.examples.CompleteTutorialExample" to
+        "Run canonical Language examples: inheritance, list versions, providers and cyclic proofs."),
+    "completeTutorialExample" to ("blue.examples.CompleteTutorialExample" to
+        "Run the canonical Language mappings from the archived tutorial."),
+    "tutorialExample" to ("blue.examples.TutorialExample" to
+        "Run canonical Language examples and a canonical Contracts counter."),
+    "packageExample" to ("blue.examples.PackageExample" to
+        "Run 18 canonical package examples with pinned, self-contained publications.")
+)) {
+    tasks.register<JavaExec>(taskName) {
+        group = "application"
+        description = program.second
+        classpath = demo.runtimeClasspath
+        javaLauncher.set(java25)
+        mainClass.set(program.first)
+    }
 }
 
 tasks.register<JavaExec>("normalizationSharingProbe") {
@@ -165,6 +186,24 @@ tasks.register<JavaExec>("normalizationSharingProbe") {
     maxHeapSize = "512m"
 }
 
+// Maintainer-only fixture generation. Normal builds consume the checked-in, pinned artifacts.
+tasks.register<JavaExec>("preparePackageExamples") {
+    group = "verification"
+    description = "Rebuild the small canonical package fixtures from their authored Java definitions."
+    classpath = sourceSets.test.get().runtimeClasspath
+    javaLauncher.set(java25)
+    mainClass.set("blue.PackageFixtureGenerator")
+    args(layout.buildDirectory.dir("generated-package-fixtures").get().asFile.absolutePath)
+}
+
+tasks.register("canonicalClasspath") {
+    group = "build setup"
+    description = "Write the demo runtime classpath to build/canonical-classpath.txt for external tools."
+    dependsOn(tasks.classes, tasks.named("demoClasses"))
+    val output = layout.buildDirectory.file("canonical-classpath.txt")
+    val cp = demo.runtimeClasspath
+    doLast { output.get().asFile.writeText(cp.asPath) }
+}
 
 tasks.register("resolveDependencies") {
     notCompatibleWithConfigurationCache("Explicit dependency resolution for lockfile maintenance")
@@ -179,80 +218,4 @@ publishing {
     }
     // Publication is local until release coordinates and a license are decided.
     repositories { maven { name = "localBuild"; url = uri(layout.buildDirectory.dir("repository")) } }
-}
-
-tasks.register<JavaExec>("languageExample") {
-    group = "application"
-    description = "Run canonical Language examples: inheritance, list versions, providers and cyclic proofs."
-    classpath = demo.runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.examples.CompleteTutorialExample")
-}
-
-tasks.register<JavaExec>("tutorialExample") {
-    group = "application"
-    description = "Run canonical Language examples and a canonical Contracts counter."
-    classpath = demo.runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.examples.TutorialExample")
-}
-
-tasks.register<JavaExec>("completeTutorialExample") {
-    group = "application"
-    description = "Run the canonical Language mappings from the archived tutorial."
-    classpath = demo.runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.examples.CompleteTutorialExample")
-}
-
-// Maintainer-only fixture generation. Normal builds consume the checked-in, pinned artifacts.
-tasks.register<JavaExec>("preparePackageExamples") {
-    group = "verification"
-    description = "Rebuild the small canonical package fixtures from their authored Java definitions."
-    classpath = sourceSets.test.get().runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.PackageFixtureGenerator")
-    args(layout.buildDirectory.dir("generated-package-fixtures").get().asFile.absolutePath)
-}
-
-tasks.register<JavaExec>("packageExample") {
-    group = "application"
-    description = "Run 18 canonical package examples with pinned, self-contained publications."
-    classpath = demo.runtimeClasspath
-    javaLauncher.set(java25)
-    mainClass.set("blue.examples.PackageExample")
-}
-
- tasks.register<JavaExec>("canonicalDemo") {
-    group = "application"
-    description = "Run the canonical agreement, embedded order and payment workflows."
-    classpath = demo.runtimeClasspath
-    mainClass.set("blue.examples.CanonicalAgreement")
-}
-
-tasks.register("canonicalClasspath") {
-    dependsOn(tasks.classes, tasks.named("demoClasses"))
-    val output = layout.buildDirectory.file("canonical-classpath.txt")
-    val cp = demo.runtimeClasspath
-    doLast { output.get().asFile.writeText(cp.asPath) }
-}
-
-tasks.register<JavaExec>("canonicalClausesDemo") {
-    group = "application"
-    description = "Initialize and run the published Agreements and Connections clauses."
-    classpath = demo.runtimeClasspath
-    mainClass.set("blue.examples.CanonicalClauses")
-}
-
-tasks.register<Test>("canonicalBexTest") {
-    group = "verification"
-    testClassesDirs = sourceSets.test.get().output.classesDirs
-    classpath = sourceSets.test.get().runtimeClasspath
-    useJUnitPlatform { includeTags("canonical-bex") }
-}
-tasks.register<Test>("contractsTest") {
-    group = "verification"
-    testClassesDirs = sourceSets.test.get().output.classesDirs
-    classpath = sourceSets.test.get().runtimeClasspath
-    useJUnitPlatform { includeTags("contracts", "document-local") }
 }
