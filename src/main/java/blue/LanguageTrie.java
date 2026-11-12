@@ -58,10 +58,12 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
   @Override
   public Set<Entry<K, V>> entrySet() {
     return new AbstractSet<>() {
+      @Override
       public int size() {
         return LanguageTrie.this.size();
       }
 
+      @Override
       public Iterator<Entry<K, V>> iterator() {
         return new Iterator<>() {
           final ArrayDeque<Tree<K, V>> pending = new ArrayDeque<>();
@@ -72,10 +74,12 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
             }
           }
 
+          @Override
           public boolean hasNext() {
             return !pending.isEmpty();
           }
 
+          @Override
           public Entry<K, V> next() {
             while (!pending.isEmpty()) {
               Tree<K, V> next = pending.removeLast();
@@ -100,12 +104,14 @@ final class LanguageTrie<K, V> extends AbstractMap<K, V> {
   }
 
   private record Leaf<K, V>(K key, V value, int hash) implements Tree<K, V> {
+    @Override
     public int size() {
       return 1;
     }
   }
 
   private record Collision<K, V>(int hash, List<Leaf<K, V>> leaves) implements Tree<K, V> {
+    @Override
     public int size() {
       return leaves.size();
     }

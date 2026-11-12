@@ -73,6 +73,7 @@ final class BexMachine {
       this.frame = frame;
     }
 
+    @Override
     public void run() {
       if (!returned) {
         value = call.defaults();
@@ -707,6 +708,7 @@ final class BexMachine {
     Iterator<Object> remaining = list(statements).iterator();
     pending.push(
         new Runnable() {
+          @Override
           public void run() {
             if (!remaining.hasNext()) {
               return;
@@ -731,6 +733,7 @@ final class BexMachine {
             var names = list(body.get("order")).iterator();
             pending.push(
                 new Runnable() {
+                  @Override
                   public void run() {
                     if (!names.hasNext()) {
                       return;
@@ -767,6 +770,7 @@ final class BexMachine {
               var rows = call.collection(collection).iterator();
               pending.push(
                   new Runnable() {
+                    @Override
                     public void run() {
                       if (!rows.hasNext()) {
                         return;

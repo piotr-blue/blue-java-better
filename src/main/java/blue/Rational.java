@@ -43,6 +43,7 @@ record Rational(BigInteger numerator, BigInteger denominator) implements Compara
     return denominator.equals(BigInteger.ONE);
   }
 
+  @Override
   public int compareTo(Rational other) {
     return numerator.multiply(other.denominator).compareTo(other.numerator.multiply(denominator));
   }

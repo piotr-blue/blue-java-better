@@ -223,10 +223,12 @@ final class ContractData {
           return new Iterator<>() {
             int next;
 
+            @Override
             public boolean hasNext() {
               return next < keys.length;
             }
 
+            @Override
             public Entry<String, Object> next() {
               if (!hasNext()) {
                 throw new NoSuchElementException();

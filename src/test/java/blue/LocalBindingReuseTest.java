@@ -107,6 +107,7 @@ class LocalBindingReuseTest {
   private static final class Fixture implements AutoCloseable {
     final ContractLanguage.ValidationScope scope;
 
+    @Override
     public void close() {
       scope.close();
     }

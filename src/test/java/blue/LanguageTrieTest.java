@@ -19,6 +19,7 @@ class LanguageTrieTest {
   void randomizedBranchesAgreeWithOrdinaryMapUnionIncludingCollisionsAndRemovals() {
     Random random = new Random(0x173cafe);
     record Key(int number) {
+      @Override
       public int hashCode() {
         return number % 3 == 0 ? 7 : Integer.rotateLeft(number, 27);
       }
@@ -74,10 +75,12 @@ class LanguageTrieTest {
         this.number = number;
       }
 
+      @Override
       public int hashCode() {
         return number;
       }
 
+      @Override
       public boolean equals(Object other) {
         comparisons++;
         return other instanceof Key k && k.number == number;

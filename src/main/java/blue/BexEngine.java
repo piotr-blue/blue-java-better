@@ -539,10 +539,12 @@ final class BexEngine {
           new Iterator<Row>() {
             int index;
 
+            @Override
             public boolean hasNext() {
               return index < count;
             }
 
+            @Override
             public Row next() {
               if (!hasNext()) {
                 throw new NoSuchElementException();

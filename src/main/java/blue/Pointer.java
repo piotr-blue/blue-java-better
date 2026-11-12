@@ -71,6 +71,7 @@ public record Pointer(List<String> segments) {
         && other.segments.subList(0, segments.size()).equals(segments);
   }
 
+  @Override
   public String toString() {
     var out = new StringBuilder();
     for (String part : segments) {

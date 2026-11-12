@@ -1003,14 +1003,17 @@ final class ContractBridge {
       return cachedHead;
     }
 
+    @Override
     public String kind() {
       return list ? "list" : "object";
     }
 
+    @Override
     public int size() {
       return list ? head().items.size() : keys().size();
     }
 
+    @Override
     public List<String> keys() {
       if (list) {
         return List.of();
@@ -1043,6 +1046,7 @@ final class ContractBridge {
       return keys;
     }
 
+    @Override
     public Object get(Object key) {
       Head h = head();
       if (list) {
@@ -1089,10 +1093,12 @@ final class ContractBridge {
       return cachedOwnBody;
     }
 
+    @Override
     public Object blueOutput() {
       return export(bridge.exact(recipe));
     }
 
+    @Override
     public Object accountingView() {
       ExactNode n = logical == null ? bridge.exact(recipe) : logical.exact(recipe, bridge);
       String id = bridge.known(n);

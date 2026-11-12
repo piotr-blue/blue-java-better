@@ -38,6 +38,7 @@ final class ContractMetrics {
       }
     }
 
+    @Override
     public void close() {
       if (!ENABLED) {
         return;
@@ -75,6 +76,7 @@ final class ContractMetrics {
       }
     }
 
+    @Override
     public void close() {
       if (!ENABLED || closed) {
         return;

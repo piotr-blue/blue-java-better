@@ -186,6 +186,7 @@ final class ContractModel {
   }
 
   record EdgeKey(String source, String path) implements Comparable<EdgeKey> {
+    @Override
     public int compareTo(EdgeKey b) {
       int c = ContractCanonical.compare(source, b.source);
       return c == 0 ? ContractCanonical.compare(path, b.path) : c;

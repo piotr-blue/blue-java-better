@@ -96,10 +96,12 @@ final class ContractIdentityMap<V> {
   }
 
   private record Leaf<V>(Object key, V value, int hash) implements Trie<V> {
+    @Override
     public Leaf<V> find(Object k, int h, int shift) {
       return key == k ? this : null;
     }
 
+    @Override
     public Trie<V> put(Leaf<V> added, int shift, Object owner) {
       if (key == added.key) {
         return added;
@@ -110,12 +112,14 @@ final class ContractIdentityMap<V> {
       return merge(this, hash, added, added.hash, shift, owner);
     }
 
+    @Override
     public Trie<V> remove(Object k, int h, int shift, Object owner) {
       return key == k ? null : this;
     }
   }
 
   private record Collision<V>(int hash, List<Leaf<V>> leaves) implements Trie<V> {
+    @Override
     public Leaf<V> find(Object key, int h, int shift) {
       if (hash != h) {
         return null;
@@ -128,6 +132,7 @@ final class ContractIdentityMap<V> {
       return null;
     }
 
+    @Override
     public Trie<V> put(Leaf<V> added, int shift, Object owner) {
       if (hash != added.hash) {
         return merge(this, hash, added, added.hash, shift, owner);
@@ -143,6 +148,7 @@ final class ContractIdentityMap<V> {
       return new Collision<>(hash, List.copyOf(next));
     }
 
+    @Override
     public Trie<V> remove(Object key, int h, int shift, Object owner) {
       if (hash != h) {
         return this;
@@ -174,11 +180,13 @@ final class ContractIdentityMap<V> {
       return owner == editor ? this : new Branch<>(editor, bitmap, children.clone());
     }
 
+    @Override
     public Leaf<V> find(Object key, int hash, int shift) {
       int bit = 1 << ((hash >>> shift) & 31);
       return (bitmap & bit) == 0 ? null : children[offset(bit)].find(key, hash, shift + 5);
     }
 
+    @Override
     public Trie<V> put(Leaf<V> added, int shift, Object editor) {
       int bit = 1 << ((added.hash >>> shift) & 31), index = offset(bit);
       Branch<V> next;
@@ -199,6 +207,7 @@ final class ContractIdentityMap<V> {
       return next;
     }
 
+    @Override
     public Trie<V> remove(Object key, int hash, int shift, Object editor) {
       int bit = 1 << ((hash >>> shift) & 31);
       if ((bitmap & bit) == 0) {

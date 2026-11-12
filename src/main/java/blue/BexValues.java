@@ -29,6 +29,7 @@ final class BexValues {
 
   public static final Object UNDEFINED =
       new Object() {
+        @Override
         public String toString() {
           return "UNDEFINED";
         }
@@ -450,10 +451,12 @@ final class BexValues {
                 new Iterator<Integer>() {
                   int index;
 
+                  @Override
                   public boolean hasNext() {
                     return index < length;
                   }
 
+                  @Override
                   public Integer next() {
                     return index++;
                   }

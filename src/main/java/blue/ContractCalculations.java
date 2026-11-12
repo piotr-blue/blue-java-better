@@ -199,28 +199,34 @@ final class ContractCalculations {
       return recording.read(read, () -> viewRead(value, read));
     }
 
+    @Override
     public String kind() {
       return value.kind();
     }
 
+    @Override
     public int size() {
       return ((Number) select("size", "")).intValue();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<String> keys() {
       return (List<String>) select("keys", "");
     }
 
+    @Override
     public Object get(Object key) {
       return select("get", (key instanceof Integer ? "i:" : "s:") + key);
     }
 
+    @Override
     public Object blueOutput() {
       recording.opaque();
       return value.blueOutput();
     }
 
+    @Override
     public Object accountingView() {
       recording.opaque();
       return value.accountingView();

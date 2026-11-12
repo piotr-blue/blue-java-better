@@ -119,10 +119,12 @@ final class ContractCanonical {
       bytes = ContractCanonical.bytes(values);
     }
 
+    @Override
     public Set<Entry<String, Object>> entrySet() {
       return values.entrySet();
     }
 
+    @Override
     public Object get(Object key) {
       return values.get(key);
     }
@@ -132,6 +134,7 @@ final class ContractCanonical {
       return values.containsKey(key);
     }
 
+    @Override
     public int size() {
       return values.size();
     }

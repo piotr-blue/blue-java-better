@@ -539,6 +539,7 @@ final class BexPlanCompiler {
       Object raw, Set<String> slots, String current, Deque<Runnable> pending) {
     Iterator<?> statements = list(raw).iterator();
     class Next implements Runnable {
+      @Override
       public void run() {
         if (!statements.hasNext()) {
           return;

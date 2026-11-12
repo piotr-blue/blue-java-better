@@ -43,10 +43,12 @@ class NativeAdmissionOwnershipTest {
             semantics,
             binding,
             new ContractNative.Implementation() {
+              @Override
               public boolean verifiesAdmission() {
                 return true;
               }
 
+              @Override
               public Map<String, Object> verifyAdmission(ContractNative.AdmissionContext context) {
                 verified[0]++;
                 supplied.clear();
@@ -54,6 +56,7 @@ class NativeAdmissionOwnershipTest {
                 return Map.of("nested", Map.of("rows", supplied));
               }
 
+              @Override
               @SuppressWarnings("unchecked")
               public boolean accept(ContractNative.ExternalContext context) {
                 context.gas().charge("accept");
