@@ -45,3 +45,7 @@ A change to caching or persistence should preserve the result after a cold resto
 `ContractExpressions` binds a compiled BEX program to the current invocation. It selects compute definitions through the invocation’s logical graph, charges logical reads and prepares the event, document and step bindings. A continuation may replace the run's snapshot and graph. The expression boundary reads those from the current run at evaluation time. A compiled program can be shared because it retains neither the current document nor its authorization.
 
 `ContractRun.guard` brackets a unit of execution with a scoped witness set. Typed work can select its own result type while the rejection path still uses the contract outcome. It restores the previous witness scope even when a host failure escapes.
+
+## Physical weight of a shared graph
+
+The preparation caches bound entries by an estimate of their retained key and payload. A document may refer to the same immutable subtree twice. The estimator counts both paths so an entry cannot get cheaper simply because a decoder shared those objects in memory. It memoizes a subtree only after finishing its children. Each addition is checked against the remaining allowance before it changes the total. This also bounds a compact graph with an exponentially large expanded tree. The estimate is local to the process and contributes no semantic gas. [Estimator](../src/main/java/blue/ContractCache.java) · [Shared-graph regression](../src/test/java/blue/ContractCacheTest.java)

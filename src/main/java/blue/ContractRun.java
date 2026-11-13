@@ -73,7 +73,10 @@ final class ContractRun {
   Set<String> initializing = new HashSet<>(), terminating = new HashSet<>();
   Map<String, String> initialized = new HashMap<>();
   Set<String> initializationCandidates;
-  Map<String, List<String>> termination = new HashMap<>();
+
+  record Termination(String cause, String reason) {}
+
+  Map<String, Termination> termination = new HashMap<>();
   Map<String, Integer> activation = new TreeMap<>();
   int effectCount;
 
@@ -957,7 +960,7 @@ final class ContractRun {
     meter.owner = key;
     meter.contracts("terminationRequested");
     terminating.add(key);
-    termination.put(key, Arrays.asList(cause, reason));
+    termination.put(key, new Termination(cause, reason));
     var raw = reg.typed("Document Processing Terminated", "cause", cause);
     if (reason != null) {
       raw.put("reason", reason);
@@ -1027,11 +1030,12 @@ final class ContractRun {
     }
   }
 
-  static class Batch {
-    String source, completion, roundSeal;
-    int serial;
-    List<Object> output;
-    List<Ticket> tickets;
+  /** Held output and routing evidence of one completed turn. Only the unit's final view changes. */
+  static final class Batch {
+    final String source, completion, roundSeal;
+    final int serial;
+    final List<Object> output;
+    final List<Ticket> tickets;
     Map<String, Object> after;
 
     Batch(
@@ -1790,14 +1794,13 @@ final class ContractRun {
           "initialized",
           reg.typed("Processing Initialized Marker", "document", m("blueId", lifecycle)));
     }
-    if (termination.containsKey(key)
-        && reg.marker(state.documents.get(key), "terminated") == null) {
+    var end = termination.get(key);
+    if (end != null && reg.marker(state.documents.get(key), "terminated") == null) {
       meter.owner = key;
       meter.contracts("processorMarkerWritten");
-      var end = termination.get(key);
-      var raw = reg.typed("Processing Terminated Marker", "cause", end.getFirst());
-      if (end.get(1) != null) {
-        raw.put("reason", end.get(1));
+      var raw = reg.typed("Processing Terminated Marker", "cause", end.cause());
+      if (end.reason() != null) {
+        raw.put("reason", end.reason());
       }
       directMarker(key, "terminated", raw);
     }

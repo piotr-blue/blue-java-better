@@ -106,20 +106,22 @@ final class ContractCache<K, V> {
       }
       long start = bytes;
       if (value instanceof ExactNode.Value v && v.physicalWeight != 0) {
-        bytes += v.physicalWeight;
-        if (bytes > maximumBytes) {
+        // A shared DAG can have exponentially many paths. Check the remaining budget before
+        // adding a memoized subtree, even when the caller allows Long.MAX_VALUE bytes.
+        if (v.physicalWeight > maximumBytes - bytes) {
           return Long.MAX_VALUE;
         }
+        bytes += v.physicalWeight;
         continue;
       }
-      bytes += 64;
+      long shallow = 64;
       if (value instanceof String s) {
-        bytes += 2L * s.length();
+        shallow += 2L * s.length();
       } else if (value instanceof Recipe r) {
         pending.push(r.parts());
         pending.push(r.requirements());
       } else if (value instanceof ExactNode.Value v) {
-        bytes += 128;
+        shallow += 128;
         // Memoize only completed subtrees. The explicit stack also supports deep exact values.
         pending.push(new Weighed(v, start));
         pending.push(v.fields());
@@ -130,12 +132,12 @@ final class ContractCache<K, V> {
         }
       } else if (value instanceof Map<?, ?> m) {
         if (value instanceof ContractCanonical.EncodedRecord encoded) {
-          bytes += encoded.encodedSize();
+          shallow += encoded.encodedSize();
         }
         if (value instanceof ContractData.ScalarRecord row) {
-          bytes += row.layout.encodingWeight;
+          shallow += row.layout.encodingWeight;
         }
-        bytes += 64L * m.size();
+        shallow += 64L * m.size();
         for (var e : m.entrySet()) {
           pending.push(e.getKey());
           if (e.getValue() != null) {
@@ -143,7 +145,7 @@ final class ContractCache<K, V> {
           }
         }
       } else if (value instanceof Collection<?> a) {
-        bytes += 16L * a.size();
+        shallow += 16L * a.size();
         for (Object x : a) {
           if (x != null) {
             pending.push(x);
@@ -151,9 +153,10 @@ final class ContractCache<K, V> {
         }
       }
       // Oversize candidates cannot enter any of our small caches. Bound estimation work too.
-      if (bytes > maximumBytes) {
+      if (shallow > maximumBytes - bytes) {
         return Long.MAX_VALUE;
       }
+      bytes += shallow;
     }
     return bytes;
   }

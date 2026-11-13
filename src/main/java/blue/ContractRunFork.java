@@ -65,8 +65,7 @@ final class ContractRunFork {
     n.initialized = new HashMap<>(r.initialized);
     n.initializationCandidates =
         r.initializationCandidates == null ? null : new HashSet<>(r.initializationCandidates);
-    n.termination = new HashMap<>();
-    r.termination.forEach((key, reasons) -> n.termination.put(key, new ArrayList<>(reasons)));
+    n.termination = new HashMap<>(r.termination);
     n.activation = new TreeMap<>(r.activation);
     n.effectCount = r.effectCount;
     n.receiving = r.receiving;
