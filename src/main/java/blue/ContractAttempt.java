@@ -8,7 +8,8 @@ import static blue.ContractModel.require;
 import static blue.ContractModel.str;
 import static blue.ContractRun.committed;
 import static blue.ContractRun.vector;
-import static blue.ContractRunFork.data;
+import static blue.ContractRunFork.copyRecord;
+import static blue.ContractRunFork.copyValues;
 
 import blue.ContractModel.Outcome;
 import blue.ContractRun.Ticket;
@@ -45,7 +46,7 @@ final class ContractAttempt {
 
     private ChunkToken(ContractAttempt issuer, Map<String, Object> descriptor) {
       this.issuer = issuer;
-      this.descriptor = data(descriptor);
+      this.descriptor = copyRecord(descriptor);
     }
 
     public String identity() {
@@ -53,7 +54,7 @@ final class ContractAttempt {
     }
 
     public Map<String, Object> descriptor() {
-      return data(descriptor);
+      return copyRecord(descriptor);
     }
 
     public Map<String, Object> toData() {
@@ -66,7 +67,7 @@ final class ContractAttempt {
           "input",
           issuer.inputData(),
           "history",
-          data(issuer.history));
+          copyValues(issuer.history));
     }
   }
 
@@ -74,7 +75,7 @@ final class ContractAttempt {
     private final Map<String, Object> wire;
 
     private ChunkResult(Map<String, Object> wire) {
-      this.wire = data(wire);
+      this.wire = copyRecord(wire);
     }
 
     public String identity() {
@@ -82,7 +83,7 @@ final class ContractAttempt {
     }
 
     public Map<String, Object> toData() {
-      return data(wire);
+      return copyRecord(wire);
     }
   }
 
@@ -217,7 +218,7 @@ final class ContractAttempt {
       body.remove("gasTrace");
     }
     var wire = committed("chunk-result", body);
-    candidates.put(str(wire.get("identity")), new Candidate(data(wire), candidate, failed));
+    candidates.put(str(wire.get("identity")), new Candidate(copyRecord(wire), candidate, failed));
     return new ChunkResult(wire);
   }
 
@@ -253,7 +254,7 @@ final class ContractAttempt {
     if (run.meter.finalGas()) {
       fields.remove("gasTrace");
     }
-    var wire = data(closed(result, fields, Set.of()));
+    var wire = copyRecord(closed(result, fields, Set.of()));
     require(token.identity().equals(wire.get("token")), "CHUNK_INPUT_MISMATCH");
     var body = new TreeMap<>(wire);
     body.remove("identity");
@@ -377,7 +378,7 @@ final class ContractAttempt {
                   "externalEvidence",
                   run.admissionEvidence));
     }
-    return data(origin);
+    return copyRecord(origin);
   }
 
   static ChunkResult execute(ContractProcessor engine, ChunkToken token) {

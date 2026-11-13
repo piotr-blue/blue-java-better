@@ -1,5 +1,7 @@
 package blue;
 
+import static blue.ContractModel.arr;
+import static blue.ContractModel.obj;
 import static blue.ContractModel.require;
 
 import blue.ContractRun.Batch;
@@ -8,15 +10,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
  * Copy only mutable continuation state. Exact Language nodes and installed capabilities are shared.
  */
 final class ContractRunFork {
-  @SuppressWarnings("unchecked")
-  static <T> T data(T value) {
-    return (T) BexValues.copy(value);
+  // Wire copies retain BEX integer normalization, nested aliases and host values.
+  static Map<String, Object> copyRecord(Map<String, Object> record) {
+    return record == null ? null : obj(BexValues.copy(record));
+  }
+
+  static List<Object> copyValues(List<Object> values) {
+    return arr(BexValues.copy(values));
   }
 
   static ContractRun copy(ContractRun r) {
@@ -35,29 +42,31 @@ final class ContractRunFork {
     n.state = r.state.copy();
     n.invocation = r.invocation;
     n.call = r.call;
-    n.callRecord = data(r.callRecord);
+    n.callRecord = copyRecord(r.callRecord);
     n.seeds = List.copyOf(r.seeds);
-    n.admissionEvidence = data(r.admissionEvidence);
+    n.admissionEvidence = copyRecord(r.admissionEvidence);
     n.nativeAdmissionVerified = r.nativeAdmissionVerified;
     n.externalAdmissions = new TreeMap<>(r.externalAdmissions);
     n.views = new TreeMap<>(r.views);
     n.meter.owner = r.meter.owner;
     n.meter.used = r.meter.used;
     n.meter.hostUsed = r.meter.hostUsed;
-    n.meter.trace = data(r.meter.trace);
-    n.meter.rejected = data(r.meter.rejected);
+    n.meter.trace = new ArrayList<>(r.meter.trace.size());
+    r.meter.trace.forEach(row -> n.meter.trace.add(copyRecord(row)));
+    n.meter.rejected = copyRecord(r.meter.rejected);
     n.meter.copyLocalUsed(r.meter);
-    n.events = data(r.events);
+    n.events = copyValues(r.events);
     n.work = new ArrayList<>(r.work);
-    n.publicEvents = data(r.publicEvents);
-    n.writes = data(r.writes);
-    n.changes = data(r.changes);
+    n.publicEvents = copyValues(r.publicEvents);
+    n.writes = copyValues(r.writes);
+    n.changes = copyValues(r.changes);
     n.initializing = new HashSet<>(r.initializing);
     n.terminating = new HashSet<>(r.terminating);
     n.initialized = new HashMap<>(r.initialized);
     n.initializationCandidates =
         r.initializationCandidates == null ? null : new HashSet<>(r.initializationCandidates);
-    n.termination = data(r.termination);
+    n.termination = new HashMap<>();
+    r.termination.forEach((key, reasons) -> n.termination.put(key, new ArrayList<>(reasons)));
     n.activation = new TreeMap<>(r.activation);
     n.effectCount = r.effectCount;
     n.receiving = r.receiving;
@@ -65,9 +74,9 @@ final class ContractRunFork {
     n.begun = r.begun;
     n.sparseScheduling = r.sparseScheduling;
     n.serials = new TreeMap<>(r.serials);
-    n.turns = data(r.turns);
-    n.rounds = data(r.rounds);
-    n.units = data(r.units);
+    n.turns = copyValues(r.turns);
+    n.rounds = copyValues(r.rounds);
+    n.units = copyValues(r.units);
     n.routed = new HashSet<>(r.routed);
     n.consumedObservations = new HashSet<>(r.consumedObservations);
     n.turnCount = r.turnCount;
@@ -84,7 +93,8 @@ final class ContractRunFork {
     g.allocation = r.graph.allocation;
     g.dirty = new HashSet<>(r.graph.dirty);
     g.finalized = r.graph.finalized.copy();
-    g.partition = data(r.graph.partition);
+    // Topology components contain immutable member keys. The fork replaces the partition as a unit.
+    g.partition = r.graph.partition;
     g.pathHeaders = new HashSet<>(r.graph.pathHeaders);
     g.verifiedBindings = new HashSet<>(r.graph.verifiedBindings);
     var l = new ContractWork(r.blue, n.meter);
@@ -107,9 +117,9 @@ final class ContractRunFork {
         b.source,
         b.serial,
         b.completion,
-        data(b.output),
+        copyValues(b.output),
         new ArrayList<>(b.tickets),
-        data(b.after),
+        copyRecord(b.after),
         b.roundSeal);
   }
 

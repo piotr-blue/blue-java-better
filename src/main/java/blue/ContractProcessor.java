@@ -236,7 +236,7 @@ final class ContractProcessor {
     var run =
         new ContractRun(
             this, state, original, timestamp, false, policy.sharedLimit(), policy.localLimits());
-    run.admissionEvidence = ContractRunFork.data(evidence);
+    run.admissionEvidence = ContractRunFork.copyRecord(evidence);
     return new ContractAttempt(run);
   }
 

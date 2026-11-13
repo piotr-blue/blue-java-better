@@ -164,7 +164,7 @@ final class ContractPortable {
     }
     run.graph.changes = run.changes;
     run.admissionEvidence =
-        ContractRunFork.data(obj(data.getOrDefault("externalEvidence", Map.of())));
+        ContractRunFork.copyRecord(obj(data.getOrDefault("externalEvidence", Map.of())));
     return new ContractAttempt(run);
   }
 }
