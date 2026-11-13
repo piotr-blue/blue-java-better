@@ -119,6 +119,72 @@ class ContentExportTest {
   }
 
   @Test
+  void finalizingLocallyKnownCyclesNeedsNoProviderFetchAndStillRejectsInvalidMembers() {
+    var language =
+        Language.newBuilder()
+            .limits(new Language.Limits(100_000, 256, 100_000, 0, 1_000_000, 1000, 1000))
+            .build();
+    var cycle =
+        List.of(
+            Language.Input.exactJson("{\"name\":\"Quay\",\"peer\":{\"blueId\":\"this#1\"}}"),
+            Language.Input.exactJson("{\"name\":\"Cove\",\"peer\":{\"blueId\":\"this#0\"}}"));
+    var finalized = language.finalizeSet(cycle, Language.Goal.VALUE);
+    assertEquals(
+        Language.create().finalizeSet(cycle, Language.Goal.VALUE).master(), finalized.master());
+    for (var member : finalized.members()) {
+      var remote = Language.newBuilder();
+      for (var entry : member.records().entrySet()) {
+        remote.record(entry.getKey(), entry.getValue());
+      }
+      assertEquals(member.blueId(), remote.build().read(member.blueId()).blueId());
+    }
+    String external = Language.create().readJson("42").blueId().toString();
+    var incomplete =
+        List.of(
+            Language.Input.exactJson(
+                "{\"name\":\"Open\",\"self\":{\"blueId\":\"this#0\"},\"quantity\":{\"blueId\":\""
+                    + external
+                    + "\"}}"));
+    var missing =
+        assertThrows(
+            LanguageException.class, () -> language.finalizeSet(incomplete, Language.Goal.VALUE));
+    assertEquals("OperationLimitExceeded", missing.category());
+  }
+
+  @Test
+  void localProofReusePreservesStrictAdmissionAndWholeProofSizeLimits() {
+    var language = Language.create();
+    var definition =
+        Language.Input.exactJson(
+            """
+            {"name":"Seat","self":{"blueId":"this#0"},"seats":{
+              "type":{"blueId":"E2LM6qgzWG9ttagq2xTmiZkgYEAgkYedFCmU9v7NnVEq"},
+              "schema":{"required":true}}}
+            """);
+    var members = List.of(definition);
+    assertEquals(1, language.finalizeSet(members, Language.Goal.DEFINITION).members().size());
+    assertEquals(
+        "SchemaViolation",
+        assertThrows(
+                LanguageException.class, () -> language.finalizeSet(members, Language.Goal.VALUE))
+            .category());
+
+    var first = Language.Input.exactJson("{\"name\":\"First\",\"next\":{\"blueId\":\"this#1\"}}");
+    var last = Language.Input.exactJson("{\"name\":\"Last\",\"next\":{\"blueId\":\"this#0\"}}");
+    int budget = Math.max(first.text().length(), last.text().length());
+    var limited =
+        Language.newBuilder()
+            .limits(new Language.Limits(100_000, 256, 100_000, 0, budget, 1000, 1000))
+            .build();
+    assertEquals(
+        "OperationLimitExceeded",
+        assertThrows(
+                LanguageException.class,
+                () -> limited.finalizeSet(List.of(first, last), Language.Goal.VALUE))
+            .category());
+  }
+
+  @Test
   void serializationNeverTurnsAnUnverifiedRecordIntoAuthority() {
     BlueId expected = Language.create().readJson("1").blueId();
     LanguageRecord wrong = LanguageRecord.fromJson(LanguageRecord.json("2").toJson());

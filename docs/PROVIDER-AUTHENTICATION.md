@@ -66,3 +66,7 @@ cannot select the Timeline Provider role. Importing either component still insta
 paginated reads. Network and exact-content acquisition, current reader authorization, historical access
 execution, required-source closure, feeder ordering, durable prefix storage and native channel
 integration remain work.
+
+## Locally formed cyclic references
+
+When a caller supplies a complete symbolic owning set, `Language.finalizeSet` derives its ordered proof and the body of each named member together. It installs those immutable results under canonical member indices. It admits members in the caller's original order and applies the caller's validation goal to each. The proof as a whole remains subject to the wire-size and structure limits. A separate provider is necessary for an external reference whose body is missing. A receiver that imports a proof authenticates it against the requested master and member index before accepting it. [Public regression tests](../src/test/java/blue/language/ContentExportTest.java)

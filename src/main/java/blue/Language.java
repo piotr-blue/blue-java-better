@@ -1033,11 +1033,18 @@ public final class Language {
             raw.add(LanguageOperations.parse(item.text(), item.format().wire(), c));
           }
           var set = LanguageOwningSet.finalizeSet(raw, c);
-          String proof =
-              LanguageCodec.wire(
+          Object proof =
+              LanguageValues.freeze(
                   Map.of("members", set.canonical().stream().map(LanguageCore::export).toList()));
-          for (String id : set.ids()) {
-            c.provider.put(id, Map.of("proof", proof));
+          String wire = LanguageCodec.wire(proof);
+          c.bound("text_bytes", wire.getBytes(java.nio.charset.StandardCharsets.UTF_8).length);
+          LanguageOperations.checkInput(proof, c);
+          // Finalization already derived and authenticated every body in canonical proof order.
+          // Each caller-ordered member still goes through ordinary strict admission below.
+          for (int i = 0; i < set.bodies().size(); i++) {
+            String memberId = set.master() + "#" + i;
+            c.bodies.put(memberId, (ExactNode.Value) set.bodies().get(i));
+            c.proofs.put(memberId, proof);
           }
           var result = new ArrayList<LanguageDocument>();
           for (String id : set.ids()) {
@@ -1047,7 +1054,7 @@ public final class Language {
                     c,
                     goal));
           }
-          return new CyclicSet(new BlueId(set.master()), result, proof);
+          return new CyclicSet(new BlueId(set.master()), result, wire);
         });
   }
 
