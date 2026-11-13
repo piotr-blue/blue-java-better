@@ -1375,8 +1375,10 @@ public final class Contracts {
 
   /**
    * Host integration for canonical independently persisted owners. This is an adapter to Contracts
-   * retained receiving, not a different execution edition. One instance is confined to one attempt.
-   * A cyclic component remains an inseparable native unit. Snapshot roots never rename members.
+   * retained receiving. One instance is confined to one attempt. Closing it revokes borrowed
+   * providers and admission evidence. Starting new work afterwards throws {@link
+   * IllegalStateException}. Previously captured document identities remain readable. A cyclic
+   * component remains an inseparable native unit. Snapshot roots never rename members.
    */
   public static final class Execution implements AutoCloseable {
     private final ContractProcessor processor;
@@ -1576,9 +1578,7 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withTimelineEntry(TimelineVerifier.Entry entry) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       Objects.requireNonNull(entry);
       if (validationScope == null) {
         validationScope = processor.blue.context.validationScope(key -> Optional.empty());
@@ -1594,9 +1594,7 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withContent(LanguageContent content) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       contentScopes.add(processor.blue.context.withContent(Objects.requireNonNull(content)));
       return this;
     }
@@ -1610,9 +1608,7 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution withContent(LanguageProvider provider) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       contentScopes.add(processor.blue.context.withProvider(Objects.requireNonNull(provider)));
       return this;
     }
@@ -1638,6 +1634,7 @@ public final class Contracts {
      * @return this attempt-local adapter
      */
     public Execution reuseCalculations(CalculationReader reader) {
+      requireOpen();
       if (processor.calculations != null) {
         throw new IllegalStateException("Calculations already enabled");
       }
@@ -1704,6 +1701,7 @@ public final class Contracts {
      * @return whether a workflow or native handler observes the selected primitive channel
      */
     public boolean observes(NativeAdmission.Receiver receiver) {
+      requireOpen();
       Objects.requireNonNull(receiver);
       return Contracts.boundary(
           () -> {
@@ -1743,6 +1741,7 @@ public final class Contracts {
      * @return prepared, uninitialized state
      */
     public State prepare(String member, LanguageDocument document) {
+      requireOpen();
       return Contracts.boundary(
           () -> {
             processor.blue.context.install(document);
@@ -1758,6 +1757,7 @@ public final class Contracts {
      * @return prepared, uninitialized graph
      */
     public State prepare(Map<String, Object> members, String root) {
+      requireOpen();
       return Contracts.boundary(() -> new State(processor.prepare(members, root)));
     }
 
@@ -1778,6 +1778,7 @@ public final class Contracts {
      * @return restored native state bound to this attempt
      */
     public State restore(Map<String, Object> checkpoint) {
+      requireOpen();
       return Contracts.boundary(
           () ->
               new State(processor.importSnapshot(checkpoint, (String) checkpoint.get("identity"))));
@@ -1892,9 +1893,7 @@ public final class Contracts {
      */
     public State restoreLocalGraph(
         Map<String, Object> root, List<Map<String, Object>> members, List<Embedding> edges) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       if (validationScope == null) {
         throw new IllegalStateException("Protected graph recovery requires a validation scope");
       }
@@ -1915,9 +1914,7 @@ public final class Contracts {
      * @return own-member state, without descendant restoration
      */
     public State restoreLocal(Map<String, Object> checkpoint) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       return Contracts.boundary(
           () ->
               new State(
@@ -2003,9 +2000,7 @@ public final class Contracts {
         long timestamp,
         AdmissionEvidence evidence,
         java.util.function.Function<BlueId, Map<String, Object>> liveMember) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       return Contracts.boundary(
           () -> {
             contentScopes.add(processor.blue.context.withContent(entry));
@@ -2074,9 +2069,7 @@ public final class Contracts {
      * @return missing native records keyed by BlueId
      */
     public Map<String, Object> missingContent(List<String> roots, Predicate<String> retained) {
-      if (closed) {
-        throw new IllegalStateException("Owner attempt is closed");
-      }
+      requireOpen();
       List<ExactNode> nodes =
           roots.stream()
               .distinct()
@@ -2095,10 +2088,14 @@ public final class Contracts {
           time);
     }
 
-    private void check(State state) {
+    private void requireOpen() {
       if (closed) {
         throw new IllegalStateException("Owner attempt is closed");
       }
+    }
+
+    private void check(State state) {
+      requireOpen();
       if (state.owner() != this) {
         throw new IllegalArgumentException("State belongs to another attempt");
       }
