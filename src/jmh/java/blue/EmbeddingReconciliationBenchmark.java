@@ -57,6 +57,8 @@ public class EmbeddingReconciliationBenchmark {
 
   @Benchmark
   public Object reconcile() {
+    // Each sample represents a new bounded host operation. Keep verified state across samples.
+    graph.blue.context.refreshed();
     graph.reconcile("unchanged", graph.state.root, List.of("/count"));
     return graph.state;
   }

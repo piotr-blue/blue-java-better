@@ -58,6 +58,8 @@ public class CreationBarrierBenchmark {
   }
 
   private ContractRun invocation() {
+    // Warmup and measured invocations each have their own physical Language work allowance.
+    processor.blue.context.refreshed();
     var run = new ContractRun(processor, document.state, event, 1L, false);
     run.begin();
     return run;

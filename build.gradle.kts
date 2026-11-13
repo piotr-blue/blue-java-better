@@ -2,6 +2,7 @@ import java.io.File
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
 
 plugins {
+    jacoco
     `java-library`
     `maven-publish`
 }
@@ -51,6 +52,45 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     add(benchmark.implementationConfigurationName, "org.openjdk.jmh:jmh-core:1.37")
     add(benchmark.annotationProcessorConfigurationName, "org.openjdk.jmh:jmh-generator-annprocess:1.37")
+}
+
+// Instrument a separate test task so ordinary tests and timing probes use the plain runtime.
+jacoco { toolVersion = "0.8.16" }
+tasks.withType<Test>().configureEach {
+    extensions.configure<JacocoTaskExtension> { isEnabled = false }
+}
+val coverageTest = tasks.register<Test>("coverageTest") {
+    group = "verification"
+    description = "Run the ordinary JUnit suite with JaCoCo instrumentation."
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    useJUnitPlatform()
+    extensions.configure<JacocoTaskExtension> { isEnabled = true }
+}
+val suiteCoverage = coverageTest.map { it.extensions.getByType<JacocoTaskExtension>().destinationFile }
+tasks.jacocoTestReport {
+    dependsOn(coverageTest)
+    executionData.setFrom(suiteCoverage)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.jacocoTestReport)
+    executionData.setFrom(suiteCoverage)
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                minimum = "0.90".toBigDecimal()
+            }
+            limit {
+                counter = "BRANCH"
+                minimum = "0.76".toBigDecimal()
+            }
+        }
+    }
 }
 
 dependencyLocking { lockAllConfigurations() }
@@ -228,3 +268,5 @@ publishing {
     // Publication is local until release coordinates and a license are decided.
     repositories { maven { name = "localBuild"; url = uri(layout.buildDirectory.dir("repository")) } }
 }
+
+apply(from = "gradle/mutation.gradle.kts")

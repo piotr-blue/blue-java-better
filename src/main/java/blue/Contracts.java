@@ -1906,7 +1906,10 @@ public final class Contracts {
     }
 
     /**
-     * Restores one protected owner for source admission before local processing.
+     * Restores one protected owner for source admission before local processing. When the
+     * checkpoint includes native semantic preparation, open the attempt with a {@link
+     * ValidationReader}. An empty reader is sufficient when the host has no additional validation
+     * facts.
      *
      * @param checkpoint host-owned checkpoint from localCheckpoint
      * @return own-member state, without descendant restoration
@@ -1938,8 +1941,9 @@ public final class Contracts {
 
     /**
      * Processes one already admitted acyclic owner using protected local storage. The host must
-     * supply every source occurrence selected by its durable ordered frontier. This method accepts
-     * no foreign checkpoints or completions. Unsupported decomposition throws
+     * supply every source occurrence selected by its durable ordered frontier. Open the attempt
+     * with a {@link ValidationReader} to consume checkpoints carrying semantic preparation. This
+     * method accepts no foreign checkpoints or completions. Unsupported decomposition throws
      * LOCAL_EXECUTION_UNAVAILABLE so the host can replay the whole rooted invocation.
      *
      * @param checkpoint protected owner checkpoint issued by localCheckpoint
@@ -1958,7 +1962,8 @@ public final class Contracts {
 
     /**
      * Processes one protected owner with invocation-scoped native admission evidence. The installed
-     * verifier must establish that evidence for this exact owner and original input.
+     * verifier must establish that evidence for this exact owner and original input. Checkpoints
+     * carrying semantic preparation require an attempt opened with a {@link ValidationReader}.
      *
      * @param checkpoint protected owner checkpoint
      * @param attachments selected protected child completions
@@ -1980,6 +1985,8 @@ public final class Contracts {
      * Processes an owner with an optional protected lookup of live members in its pinned graph. The
      * lookup must return the unique member's local checkpoint, null for absence, or refuse
      * ambiguous or unavailable history. It is consulted only for a fresh collection insertion.
+     * Checkpoints carrying semantic preparation require an attempt opened with a {@link
+     * ValidationReader}.
      *
      * @param checkpoint protected checkpoint for the owner at the selected predecessor
      * @param attachments paths, generations and child completions selected by the ordered frontier
