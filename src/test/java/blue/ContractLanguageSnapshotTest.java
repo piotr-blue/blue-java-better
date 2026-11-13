@@ -178,6 +178,71 @@ class ContractLanguageSnapshotTest {
   }
 
   @Test
+  void cataloguesPrecedeAmbientLookupAndLazyProvidersKeepRegistrationOrder() {
+    var language = Language.create();
+    var available = language.readYaml("leaf: 17");
+    var ref = new ExactNode.Ref(available.blueId().value());
+    var consulted = new ArrayList<String>();
+    var source =
+        new ContractLanguage(
+            Language.newBuilder()
+                .provider(
+                    id -> {
+                      consulted.add("ambient");
+                      return Optional.empty();
+                    })
+                .build());
+    try (var first =
+            source.withProvider(
+                id -> {
+                  consulted.add("first");
+                  return Optional.empty();
+                });
+        var second =
+            source.withProvider(
+                id -> {
+                  consulted.add("second");
+                  return Optional.of(LanguageRecord.json(available.canonicalJson()));
+                });
+        var third =
+            source.withProvider(
+                id -> {
+                  throw new AssertionError("A later provider must not override the first match");
+                })) {
+      try (var offered = source.withContent(available)) {
+        assertEquals(available.blueId().value(), identity(source.readSnapshot().open(ref)));
+        assertTrue(consulted.isEmpty());
+      }
+      assertEquals(available.blueId().value(), identity(source.open(ref)));
+      assertEquals(List.of("ambient", "first", "second"), consulted);
+    }
+  }
+
+  @Test
+  void closingAnOuterProviderKeepsInnerEvidenceAvailableToItsOwnerAndCapturedViews() {
+    var writer = Language.create();
+    var first = writer.readYaml("first: 1");
+    var second = writer.readYaml("second: 2");
+    var source = new ContractLanguage(Language.create());
+    var outer = source.withProvider(id -> Optional.empty());
+    try (var inner =
+        source.withProvider(
+            id ->
+                Optional.of(
+                    LanguageRecord.json(
+                        id.equals(first.blueId())
+                            ? first.canonicalJson()
+                            : second.canonicalJson())))) {
+      var view = source.readSnapshot();
+      outer.close();
+      assertEquals(
+          first.blueId().value(), identity(source.open(new ExactNode.Ref(first.blueId().value()))));
+      assertEquals(
+          second.blueId().value(), identity(view.open(new ExactNode.Ref(second.blueId().value()))));
+    }
+  }
+
+  @Test
   void viewsShareOldHeadsButKeepLaterEvidenceAndMemoEntriesConfined() {
     ContractLanguage source = new ContractLanguage(Language.create());
     ExactNode original = source.prepare(Map.of("count", 1));

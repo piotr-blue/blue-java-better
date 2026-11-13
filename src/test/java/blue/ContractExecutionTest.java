@@ -21,6 +21,23 @@ import org.junit.jupiter.params.provider.CsvSource;
 @Tag("contracts")
 class ContractExecutionTest {
   @Test
+  void manyTemporaryProvidersCannotExhaustTheCallStack() {
+    var language = Language.create();
+    var document = language.defineYaml("amount: 17");
+    var exact = LanguageRecord.json(document.canonicalJson());
+    try (var execution = Contracts.Execution.using(Contracts.create(), null)) {
+      execution.withContent(
+          id -> id.equals(document.blueId()) ? Optional.of(exact) : Optional.empty());
+      for (int i = 0; i < 16_384; i++) {
+        execution.withContent(id -> Optional.empty());
+      }
+      var state =
+          execution.prepare(Map.of("root", Map.of("blueId", document.blueId().value())), "root");
+      assertEquals(17, state.member("root").at("/amount").integer());
+    }
+  }
+
+  @Test
   void frozenStateComponentsAreImmutableAndReuseTheExistingTopology() {
     Map<String, Object> members = new LinkedHashMap<>();
     for (String member : List.of("a", "b", "c", "d")) {

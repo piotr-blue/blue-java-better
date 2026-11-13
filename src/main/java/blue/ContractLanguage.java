@@ -82,12 +82,32 @@ final class ContractLanguage {
 
     @Override
     public Object apply(String id) {
-      if (suppliedFirst) {
-        Object offered = offered(id);
-        return offered != null ? offered : fallback.apply(id);
+      // Borrowed catalogues precede ambient lookup in newest-first order. Lazy fallback
+      // providers follow it in registration order. Traverse the chain without growing the
+      // Java call stack, including when a captured resolver outlives its attempt.
+      Function<String, Object> lookup = this;
+      ArrayDeque<ProviderScope> deferred = null;
+      while (lookup instanceof ProviderScope scope) {
+        if (scope.provider != null) {
+          if (scope.suppliedFirst) {
+            Object response = scope.offered(id);
+            if (response != null) {
+              return response;
+            }
+          } else {
+            if (deferred == null) {
+              deferred = new ArrayDeque<>();
+            }
+            deferred.push(scope);
+          }
+        }
+        lookup = scope.fallback;
       }
-      Object existing = fallback.apply(id);
-      return existing != null ? existing : offered(id);
+      Object response = lookup.apply(id);
+      while (response == null && deferred != null && !deferred.isEmpty()) {
+        response = deferred.pop().offered(id);
+      }
+      return response;
     }
 
     private Object offered(String id) {
@@ -108,7 +128,13 @@ final class ContractLanguage {
       // a later attempt using a different provider for the same identity.
       supplied.forEach(owner.provider::remove);
       supplied.clear();
-      owner.lookup = fallback;
+      if (owner.lookup == this) {
+        Function<String, Object> next = fallback;
+        while (next instanceof ProviderScope scope && scope.provider == null) {
+          next = scope.fallback;
+        }
+        owner.lookup = next;
+      }
       owner = null;
     }
   }
