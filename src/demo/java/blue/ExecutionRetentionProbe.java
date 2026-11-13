@@ -40,18 +40,46 @@ public final class ExecutionRetentionProbe {
     }
   }
 
+  private record Released(
+      Contracts.Transaction transaction,
+      WeakReference<Contracts.Session> session,
+      WeakReference<Contracts.Transition> transition) {}
+
+  private static Released closeTransaction(boolean commit) {
+    try (var session = Contracts.create().openYaml("rooms: 32")) {
+      session.initialize().requireApplied();
+      var transaction = session.begin(Map.of("kind", "Review"), 1);
+      var result = commit ? transaction.commit() : transaction.finish();
+      transaction.close();
+      return new Released(transaction, new WeakReference<>(session), new WeakReference<>(result));
+    }
+  }
+
+  private static void requireCollected(WeakReference<?> reference, String description)
+      throws InterruptedException {
+    for (int attempt = 0; attempt < 50 && reference.get() != null; attempt++) {
+      System.gc();
+      Thread.sleep(50);
+    }
+    if (reference.get() != null) {
+      throw new AssertionError("Closed handle retained " + description);
+    }
+  }
+
   public static void main(String[] args) throws InterruptedException {
     for (Reader reader : Reader.values()) {
       var held = closeWith(reader);
-      for (int attempt = 0; attempt < 50 && held.host().get() != null; attempt++) {
-        System.gc();
-        Thread.sleep(50);
-      }
-      if (held.host().get() != null) {
-        throw new AssertionError("Host survived closed execution: " + reader);
-      }
+      requireCollected(held.host(), reader + " reader");
       System.out.println(reader + " released; retained document " + held.state().blueId());
       Reference.reachabilityFence(held.state());
+    }
+    for (boolean commit : new boolean[] {false, true}) {
+      var held = closeTransaction(commit);
+      requireCollected(held.session(), "transaction owner");
+      requireCollected(held.transition(), "transaction result");
+      System.out.println(
+          (commit ? "Committed" : "Discarded") + " transaction released its owner and result");
+      Reference.reachabilityFence(held.transaction());
     }
   }
 }

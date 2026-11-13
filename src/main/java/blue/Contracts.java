@@ -938,8 +938,8 @@ public final class Contracts {
    * transaction; other sessions remain independent.
    */
   public static final class Transaction implements AutoCloseable {
-    private final Session owner;
-    private final ContractProcessor.Document before;
+    private Session owner;
+    private ContractProcessor.Document before;
     private ContractProcessor processor;
     private ContractAttempt attempt;
     private ContractProcessor.Result result;
@@ -1135,6 +1135,9 @@ public final class Contracts {
         contentScope.close();
         contentScope = null;
       }
+      owner = null;
+      before = null;
+      transition = null;
       processor = null;
       attempt = null;
       result = null;
