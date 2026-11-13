@@ -43,7 +43,6 @@ final class ContractRegistry {
       new ContractCache<>(
           "contracts.restoredMetadata", 2L * 1024 * 1024, 512, RESTORED_METADATA_ENTRY_BYTES);
 
-  java.util.function.Consumer<Map<String, String>> observeAttachment;
   static final Map<String, String> ROLES = new LinkedHashMap<>();
   static final Set<String> EXTERNAL = Set.of("external", "composite", "all", "extension_external"),
       INTERNAL = Set.of("triggered", "embedded_event", "update", "lifecycle", "extension_channel"),

@@ -469,11 +469,6 @@ final class ContractGraph {
             "IMPORTED_GRAPH_CONFLICT");
         state.edges.put(mapped.key(), mapped);
       }
-      if (registry.observeAttachment != null) {
-        var predecessors = new TreeMap<String, String>(ContractCanonical.CODE_POINTS);
-        imported.documents.forEach((k, d) -> predecessors.put(mapping.get(k), d.blueId));
-        registry.observeAttachment.accept(predecessors);
-      }
       refreshAliases();
       return mapping.get(imported.root);
     }
