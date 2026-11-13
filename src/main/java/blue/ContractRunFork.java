@@ -7,7 +7,6 @@ import static blue.ContractModel.require;
 import blue.ContractRun.Batch;
 import blue.ContractRun.Phase;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -54,14 +53,7 @@ final class ContractRunFork {
     candidate.publicEvents = copyValues(accepted.publicEvents);
     candidate.writes = copyValues(accepted.writes);
     candidate.changes = copyValues(accepted.changes);
-    candidate.initializing = new HashSet<>(accepted.initializing);
-    candidate.terminating = new HashSet<>(accepted.terminating);
-    candidate.initialized = new HashMap<>(accepted.initialized);
-    candidate.initializationCandidates =
-        accepted.initializationCandidates == null
-            ? null
-            : new HashSet<>(accepted.initializationCandidates);
-    candidate.termination = new HashMap<>(accepted.termination);
+    candidate.lifecycle = accepted.lifecycle.fork();
     candidate.activation = new TreeMap<>(accepted.activation);
     candidate.effectCount = accepted.effectCount;
     candidate.receiving = accepted.receiving;

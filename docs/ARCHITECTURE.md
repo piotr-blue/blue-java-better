@@ -58,7 +58,6 @@ An effect can trigger a workflow that terminates its own member. The executor ch
 
 While opening a processing phase, the invocation groups admitted external channels by their owning member in encounter order. A completed turn records its member and phase in a transient set. Subsequent turns use this set to decide when routes need recapturing. A continuation fork owns its own set. Neither index enters receipts or gas, and both are discarded with the invocation.
 
-
 A generalization repair returns the changed exact document and an ordered list of type-reference replacements. Each item records its pointer and both references. Contract execution charges each replacement, verifies that protected markers and the retention policy still identify the same values, then emits the individual update events in order. The public receipt remains a wire representation. [Type repairs](../src/main/java/blue/Generalization.java) · [Patch and reaction ordering](../src/main/java/blue/ContractPatches.java)
 
 ## When a channel runs a handler
@@ -67,5 +66,8 @@ Dispatch fixes the ordered candidate list and checks each candidate’s event an
 
 A speculative Contracts chunk begins at a closed local frame. `ContractRunFork` copies invocation state. The gas meter copies the accepted debits, and `ContractGraph.fork` gives the candidate independent mutable topology and logical history. Immutable partition rows and exact archive records can be shared. Only acceptance of the checked chunk installs its candidate, so computation on a speculative branch cannot warm the issuer’s logical evidence or change its receipt.
 
-
 A workflow validates the complete changeset before applying the first patch. Each patch then examines the current document, checks managed ancestors and protected markers, repairs permitted type changes and records its writer. Data-only changes can finalize the owner directly. A structural change reconciles references and initializes newly reachable members before delivering update reactions. Reactions can execute nested changes, so the next patch reads the current graph again. [Effect validation](../src/main/java/blue/ContractEffects.java) · [Patch application](../src/main/java/blue/ContractPatches.java) · [List and rollback tests](../src/test/java/blue/ContractListPatchTest.java)
+
+Initialization and termination belong to an invocation. A private turn can discover a new child before its enclosing snapshot commits. Its creation barrier and the enclosing turn share the initialization candidates and termination decisions. A speculative continuation gets a separate copy. An activation generation has a shorter lifetime and is restored when a private turn ends. [Lifecycle state](../src/main/java/blue/ContractLifecycle.java) · [Continuation copying](../src/main/java/blue/ContractRunFork.java)
+
+Closing an execution releases its completion and calculation callbacks. A previously returned state may still expose the immutable document and its identity. Keeping that state must allow its host storage adapter to be collected. [Reader lifetime qualification](TESTING.md#closed-execution-retention)

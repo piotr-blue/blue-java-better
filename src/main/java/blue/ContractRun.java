@@ -63,13 +63,7 @@ final class ContractRun {
       work = new ArrayList<>(),
       publicEvents = new ArrayList<>(),
       writes = new ArrayList<>();
-  Set<String> initializing = new HashSet<>(), terminating = new HashSet<>();
-  Map<String, String> initialized = new HashMap<>();
-  Set<String> initializationCandidates;
-
-  record Termination(String cause, String reason) {}
-
-  Map<String, Termination> termination = new HashMap<>();
+  ContractLifecycle lifecycle = new ContractLifecycle();
   Map<String, Integer> activation = new TreeMap<>();
   int effectCount;
 
@@ -506,7 +500,7 @@ final class ContractRun {
       String operation,
       boolean allowTerminating,
       ExactNode call) {
-    if (!live(key) && !(allowTerminating && terminating.contains(key))) {
+    if (!live(key) && !(allowTerminating && lifecycle.isTerminating(key))) {
       return;
     }
     workRecord(key, channel, payload, kind);
@@ -605,13 +599,12 @@ final class ContractRun {
   }
 
   void terminate(String key, String cause, String reason) {
-    if (terminating.contains(key) || graph.terminated(key)) {
+    if (lifecycle.isTerminating(key) || graph.terminated(key)) {
       return;
     }
     meter.owner = key;
     meter.contracts("terminationRequested");
-    terminating.add(key);
-    termination.put(key, new Termination(cause, reason));
+    lifecycle.terminate(key, cause, reason);
     var raw = reg.typed("Document Processing Terminated", "cause", cause);
     if (reason != null) {
       raw.put("reason", reason);
@@ -835,9 +828,9 @@ final class ContractRun {
 
   boolean live(String key) {
     if (frame != null && key.equals(frame.key)) {
-      return !terminating.contains(key) && !graph.terminated(key);
+      return !lifecycle.isTerminating(key) && !graph.terminated(key);
     }
-    return graph.reachable(true, terminating).contains(key);
+    return lifecycle.reachable(graph).contains(key);
   }
 
   Phase newPhase(String name, Collection<String> allowed, boolean barrier) {
@@ -850,7 +843,7 @@ final class ContractRun {
     for (String k : p.allowed) {
       if (name.equals("INITIALIZE")
           && reg.marker(state.documents.get(k), "initialized") == null
-          && !initializing.contains(k)
+          && !lifecycle.isInitializing(k)
           && (barrier || active.contains(k))) {
         p.initialization.put(k, state.documents.get(k).blueId);
       }
@@ -863,7 +856,6 @@ final class ContractRun {
         }
       }
     }
-    initialized.putAll(p.initialization);
     for (var g : graph.topology().components(p.allowed)) {
       p.groups.add(ContractCanonical.keys(g));
     }
@@ -1274,7 +1266,7 @@ final class ContractRun {
       }
       installInputs(key, incoming);
       if (lifecycle != null && live(key)) {
-        initializing.add(key);
+        this.lifecycle.beginInitialization(key);
         meter.owner = key;
         meter.contracts("scopeInitialization");
         SemanticGas.construction(meter, 2);
@@ -1434,7 +1426,7 @@ final class ContractRun {
           "initialized",
           reg.typed("Processing Initialized Marker", "document", m("blueId", lifecycle)));
     }
-    var end = termination.get(key);
+    var end = this.lifecycle.termination(key);
     if (end != null && reg.marker(state.documents.get(key), "terminated") == null) {
       meter.owner = key;
       meter.contracts("processorMarkerWritten");
@@ -1573,27 +1565,11 @@ final class ContractRun {
     }
   }
 
-  private Set<String> initializationCandidates() {
-    if (!blue.context.nativeReuse() || DiagnosticSwitches.nativeReuseDisabled()) {
-      return graph.reachable();
-    }
-    if (initializationCandidates == null) {
-      initializationCandidates = new HashSet<>();
-      // Input markers were validated by begin() and cannot be removed by a document patch.
-      for (var entry : input.documents.entrySet()) {
-        if (reg.marker(entry.getValue(), "initialized") == null) {
-          initializationCandidates.add(entry.getKey());
-        }
-      }
-    }
-    initializationCandidates.addAll(graph.added);
-    // Keep candidates throughout the attempt: private local frames may hide or initialize them
-    // before their results are merged into the enclosing snapshot.
-    return initializationCandidates;
-  }
-
   void creationBarrier() {
-    Set<String> candidates = initializationCandidates();
+    Set<String> candidates =
+        blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled()
+            ? lifecycle.candidates(input, reg, graph)
+            : graph.reachable();
     if (candidates.isEmpty()) {
       return;
     }
@@ -1603,7 +1579,7 @@ final class ContractRun {
     for (String k : candidates) {
       if (reachable.contains(k)
           && reg.marker(state.documents.get(k), "initialized") == null
-          && !initializing.contains(k)
+          && !lifecycle.isInitializing(k)
           && suspended.stream().noneMatch(f -> f.key.equals(k))) {
         missing.add(k);
       }
