@@ -3,7 +3,6 @@ package blue;
 import static blue.ContractLanguage.LITERALS;
 import static blue.ContractLanguage.TYPES;
 import static blue.ContractLanguage.identity;
-import static blue.ContractModel.m;
 import static blue.ContractModel.pointer;
 import static blue.ContractModel.prefix;
 import static blue.ContractModel.require;
@@ -16,7 +15,6 @@ import blue.ExactNode.Value;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Consumer;
@@ -54,7 +52,13 @@ final class Generalization {
     }
   }
 
-  record Repair(ExactNode body, List<Map<String, Object>> writes) {}
+  record TypeChange(String path, Ref previous, Ref replacement) {}
+
+  record Repair(ExactNode body, List<TypeChange> writes) {
+    Repair {
+      writes = List.copyOf(writes);
+    }
+  }
 
   static ExactNode direct(ContractBridge blue, ExactNode n, List<String> parts) {
     for (String k : parts) {
@@ -153,7 +157,7 @@ final class Generalization {
     }
     var parts = segments(path);
     var paths = new ArrayList<List<String>>();
-    var writes = new ArrayList<Map<String, Object>>();
+    var writes = new ArrayList<TypeChange>();
     affected(blue, direct(blue, changed, parts), direct(blue, before, parts), parts, paths);
     for (int size = parts.size() - 1; size >= 0; size--) {
       paths.add(parts.subList(0, size));
@@ -214,7 +218,7 @@ final class Generalization {
         changed = valid;
         var p = new ArrayList<>(at);
         p.add("type");
-        writes.add(m("path", pointer(p), "before", typ, "after", new Ref(chosen)));
+        writes.add(new TypeChange(pointer(p), typ, new Ref(chosen)));
       }
     }
     if (writes.isEmpty()) {

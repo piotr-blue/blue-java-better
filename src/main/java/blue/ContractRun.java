@@ -27,7 +27,6 @@ import blue.ExactNode.Value;
 import blue.LanguageModel.Recipe;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -665,13 +664,15 @@ final class ContractRun {
     }
   }
 
-  Object protectedState(ExactNode body) {
-    var markers = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
+  private record ProtectedState(String policy, Map<String, String> markers) {}
+
+  private ProtectedState protectedState(ExactNode body) {
+    var markers = new TreeMap<String, String>(ContractCanonical.CODE_POINTS);
     for (String k : MARKERS) {
       ExactNode v = reg.marker(body, k);
       markers.put(k, v == null ? null : identity(v));
     }
-    return Arrays.asList(reg.policy(body).identity(), markers);
+    return new ProtectedState(reg.policy(body).identity(), markers);
   }
 
   private void patch(String key, ContractEffects.Patch patch) {
@@ -708,7 +709,7 @@ final class ContractRun {
     checkManagedAncestors(key, path, parts);
     var beforeR = listParent && op.equals("add") ? null : blue.select(doc.body, path);
     ExactNode before = beforeR == null ? null : blue.exact(beforeR);
-    Object protection = protectedState(doc.body);
+    ProtectedState protection = protectedState(doc.body);
     ExactNode value = op.equals("remove") ? null : runtimeNode(patch.value(), false);
     ExactNode next = blue.setAt(doc.body, path, value, op);
     graph.logical.establish(next, doc.body);
@@ -726,7 +727,7 @@ final class ContractRun {
     next = repaired.body();
     require(protectedState(next).equals(protection), "PROTECTED_STATE_MUTATION", "path", path);
     for (var write : repaired.writes()) {
-      chargePatchBoundary(segments(str(write.get("path"))), false);
+      chargePatchBoundary(segments(write.path()), false);
     }
     if (!repaired.writes().isEmpty()) {
       graph.logical.establish(next, requested);
@@ -810,7 +811,11 @@ final class ContractRun {
 
   /** Repairs emit in their recorded order before the requested update. A no-op emits neither. */
   private void emitPatchUpdates(
-      String key, String path, String op, ExactNode before, List<Map<String, Object>> repairs) {
+      String key,
+      String path,
+      String op,
+      ExactNode before,
+      List<Generalization.TypeChange> repairs) {
     var afterR = op.equals("remove") ? null : blue.select(state.documents.get(key).body, path);
     ExactNode after = afterR == null ? null : blue.exact(afterR);
     String beforeId = before == null ? null : identity(before),
@@ -847,15 +852,15 @@ final class ContractRun {
               "op",
               "replace",
               "path",
-              write.get("path"),
+              write.path(),
               "beforePresent",
               true,
               "afterPresent",
               true,
               "before",
-              m("blueId", identity((ExactNode) write.get("before"))),
+              m("blueId", identity(write.previous())),
               "after",
-              m("blueId", identity((ExactNode) write.get("after")))));
+              m("blueId", identity(write.replacement()))));
     }
     update(key, payload);
   }
