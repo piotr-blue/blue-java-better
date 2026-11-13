@@ -70,7 +70,7 @@ final class ContractLocal {
       run.graph.append = new ContractBirth(engine, owner, liveMember);
     }
     run.admissionEvidence.putAll(evidence);
-    Outcome outcome = (Outcome) run.guard(() -> processOwner(run, before, checkpoint, attachments));
+    Outcome outcome = run.guard(() -> processOwner(run, before, checkpoint, attachments));
     // Failure/rollback across independently advanced sources needs the ordinary whole invocation.
     require(
         outcome.status.equals("APPLIED"),

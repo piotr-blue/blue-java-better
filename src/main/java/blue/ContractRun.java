@@ -1,6 +1,5 @@
 package blue;
 
-import static blue.ContractLanguage.ABSENT;
 import static blue.ContractLanguage.identity;
 import static blue.ContractLanguage.recipe;
 import static blue.ContractModel.arr;
@@ -45,6 +44,7 @@ import java.util.TreeSet;
 final class ContractRun {
   final ContractProcessor engine;
   final ContractBridge blue;
+  final ContractExpressions expressions;
   // Survives continuation boundaries, but never crosses an invocation boundary.
   ContractLanguage.Witnesses invocationWitnesses = new ContractLanguage.Witnesses();
   final ContractRegistry reg;
@@ -118,6 +118,7 @@ final class ContractRun {
       ExactNode eventRecord) {
     integer(gasLimit, 0, engine.maximumGas());
     this.engine = engine;
+    expressions = new ContractExpressions(this);
     blue = engine.blue;
     reg = engine.registry;
     input = state;
@@ -357,7 +358,12 @@ final class ContractRun {
     return out;
   }
 
-  Object guard(java.util.function.Supplier<?> action) {
+  /**
+   * Execute within this invocation's witness scope. A caller that schedules units receives either
+   * its ready set or a terminal outcome through separate typed paths.
+   */
+  <T> T guard(
+      java.util.function.Supplier<T> action, java.util.function.Function<Outcome, T> onFailure) {
     var previous = blue.witnessScope.get();
     if (meter.deterministic) {
       blue.witnessScope.set(invocationWitnesses);
@@ -368,35 +374,15 @@ final class ContractRun {
       if (e.code().equals("HOST_INCOMPLETE")) {
         throw new ContractModel.Error("HOST_INCOMPLETE", "resource", e.getMessage());
       }
-      return fail(
-          e.code().equals("GAS_LIMIT_EXCEEDED") ? "GAS_LIMIT_EXCEEDED" : "FAILED",
-          m("code", e.code().equals("GAS_LIMIT_EXCEEDED") ? e.code() : "BEX_" + e.code()));
+      boolean exhausted = e.code().equals("GAS_LIMIT_EXCEEDED");
+      return onFailure.apply(
+          fail(
+              exhausted ? "GAS_LIMIT_EXCEEDED" : "FAILED",
+              m("code", exhausted ? e.code() : "BEX_" + e.code())));
     } catch (ContractModel.Error e) {
-      if (e.code.equals("HOST_INCOMPLETE")) {
-        throw e;
-      }
-      var diagnostic = m("code", e.code);
-      diagnostic.putAll(e.context);
-      if (e.code.equals("NEEDS_RESOURCES")) {
-        var out = new Outcome("NEEDS_RESOURCES", input.copy(), input.identity(), invocation);
-        out.diagnostic = diagnostic;
-        return out;
-      }
-      return fail("FAILED", diagnostic);
+      return onFailure.apply(rejected(e));
     } catch (LanguageFailure e) {
-      var translated = blue.translate(e);
-      if (translated.code.equals("HOST_INCOMPLETE")) {
-        throw translated;
-      }
-      if (translated.code.equals("NEEDS_RESOURCES")) {
-        var out = new Outcome("NEEDS_RESOURCES", input.copy(), input.identity(), invocation);
-        out.diagnostic = m("code", translated.code);
-        obj(out.diagnostic).putAll(translated.context);
-        return out;
-      }
-      var diagnostic = m("code", translated.code);
-      diagnostic.putAll(translated.context);
-      return fail("FAILED", diagnostic);
+      return onFailure.apply(rejected(blue.translate(e)));
     } finally {
       if (previous == null) {
         blue.witnessScope.remove();
@@ -406,124 +392,26 @@ final class ContractRun {
     }
   }
 
+  Outcome guard(java.util.function.Supplier<Outcome> action) {
+    return guard(action, java.util.function.Function.identity());
+  }
+
+  private Outcome rejected(ContractModel.Error error) {
+    if (error.code.equals("HOST_INCOMPLETE")) {
+      throw error;
+    }
+    var diagnostic = m("code", error.code);
+    diagnostic.putAll(error.context);
+    if (error.code.equals("NEEDS_RESOURCES")) {
+      var outcome = new Outcome("NEEDS_RESOURCES", input.copy(), input.identity(), invocation);
+      outcome.diagnostic = diagnostic;
+      return outcome;
+    }
+    return fail("FAILED", diagnostic);
+  }
+
   List<Map.Entry<String, Map<String, Object>>> ordered(Map<String, Map<String, Object>> cs) {
     return graph.logical.ordered(cs);
-  }
-
-  static Map<String, Object> program(Map<String, Object> step) {
-    var out = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-    for (String k : List.of("expr", "do", "constants", "functions")) {
-      if (step.containsKey(k)) {
-        out.put(k, step.get(k));
-      }
-    }
-    return out;
-  }
-
-  record Definition(String identity, Map<String, Object> program) {}
-
-  Definition computeDefinition(String key, Map<String, Object> step) {
-    if (!step.containsKey("definition")) {
-      return null;
-    }
-    Object operand = step.get("definition");
-    var h = blue.head(operand);
-    if (h.value != ABSENT) {
-      require(
-          h.value instanceof String && !((String) h.value).isEmpty(), "INVALID_COMPUTE_DEFINITION");
-      String name = str(h.value);
-      require(!name.isEmpty(), "INVALID_COMPUTE_DEFINITION");
-      String path = name.startsWith("/") ? name : "/contracts/" + BexValues.escape(name);
-      Recipe selected = recipe(state.documents.get(key).body);
-      for (String part : segments(path)) {
-        for (ExactNode node : selected.parts()) {
-          graph.logical.open(node);
-        }
-        meter.contracts("objectMemberRead");
-        selected = blue.child(selected, part);
-        require(selected != null, "MISSING_COMPUTE_DEFINITION", "path", path);
-      }
-      operand = selected;
-    }
-    engine.requireComputeDefinition(operand);
-    h = blue.head(operand);
-    require(
-        h.value == ABSENT
-            && h.items == null
-            && Set.of("constants", "functions", "specification", "order")
-                .containsAll(h.fields.keySet()),
-        "INVALID_COMPUTE_DEFINITION");
-    var out = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-    for (String field : List.of("constants", "functions")) {
-      var ch = blue.child(operand, field);
-      if (ch != null) {
-        // Resolving a function definition is representation work; executed BEX is metered.
-        Object v = reg.definitionValue(ch);
-        require(v instanceof Map, "INVALID_COMPUTE_DEFINITION", "field", field);
-        out.put(field, v);
-      }
-    }
-    return new Definition(identity(blue.exact(operand)), out);
-  }
-
-  boolean overlays(Object v) {
-    if (v instanceof List<?> a) {
-      return a.stream().anyMatch(this::overlays);
-    }
-    if (v instanceof Map<?, ?>) {
-      var m = obj(v);
-      return m.containsKey("$resultValue")
-          || m.entrySet().stream()
-              .anyMatch(e -> !e.getKey().equals("$literal") && overlays(e.getValue()));
-    }
-    return false;
-  }
-
-  BexEngine.Context context(
-      String key,
-      ExactNode payload,
-      Map<String, Object> contract,
-      Map<String, Object> steps,
-      ExactNode call,
-      Object overlayProgram) {
-    ExactNode body = state.documents.get(key).body;
-    Object view =
-        overlays(overlayProgram == null ? program(contract) : overlayProgram)
-            ? blue.view(body, graph.logical)
-            : body;
-    var c = new BexEngine.Context();
-    c.document = view;
-    c.resolvedDocument = view;
-    c.event = blue.view(payload, graph.logical);
-    c.bindings =
-        m(
-            "processingEvent",
-            event == null ? BexValues.UNDEFINED : blue.view(event, graph.logical),
-            "timestamp",
-            timestamp == null ? BexValues.UNDEFINED : java.math.BigInteger.valueOf(timestamp),
-            "call",
-            call == null ? BexValues.UNDEFINED : blue.view(call, graph.logical));
-    var current = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-    contract.forEach(
-        (k, v) -> {
-          if (!k.startsWith("_")) {
-            current.put(k, k.equals("definition") ? blue.view(v, graph.logical) : v);
-          }
-        });
-    c.currentContract = current;
-    c.steps = steps;
-    c.scope = "/";
-    c.readDocument =
-        (p, v, d) -> {
-          Object value =
-              d instanceof ExactNode n
-                  ? graph.logical.read(n, p.equals("/") ? "" : p)
-                  : blue.readBex(d, p);
-          return value;
-        };
-    c.matcher = this::runtimeMatches;
-    c.nodeBlueId = graph.logical::nodeBlueId;
-    return c;
   }
 
   private Object readerValue(Object value, ProjectionBudget budget, int depth) {
@@ -555,60 +443,6 @@ final class ContractRun {
       budget.text(value);
     }
     return value;
-  }
-
-  Object evaluate(
-      String key,
-      ExactNode payload,
-      Map<String, Object> contract,
-      Map<String, Object> steps,
-      Object expression,
-      ExactNode call) {
-    meter.owner = key;
-    var compiled = engine.bex.compile(m("expr", expression));
-    var result =
-        calculate(
-            key,
-            payload,
-            contract,
-            steps,
-            call,
-            compiled,
-            context(key, payload, contract, steps, call, null),
-            m("expr", expression));
-    require(result.changeset().isEmpty() && result.events().isEmpty(), "EFFECTFUL_EXPRESSION");
-    return result.value();
-  }
-
-  private BexEngine.Result calculate(
-      String key,
-      ExactNode payload,
-      Map<String, Object> contract,
-      Map<String, Object> steps,
-      ExactNode call,
-      BexPlanCompiler.Program compiled,
-      BexEngine.Context context,
-      Object programKey) {
-    java.util.function.Supplier<BexEngine.Result> evaluate =
-        () -> engine.bex.execute(compiled, context, meter, BexEngine.TraceMode.METER_ONLY);
-    if (engine.calculations == null) {
-      return evaluate.get();
-    }
-    Object declaration = contract.get("_recipe");
-    if (declaration == null) {
-      return evaluate.get();
-    }
-    Object binding =
-        Arrays.asList(
-            key,
-            identity(state.documents.get(key).body),
-            identity(payload),
-            eventId,
-            timestamp,
-            identity(blue.exact(declaration)),
-            call == null ? null : identity(call),
-            programKey);
-    return engine.calculations.execute(this, context, binding, evaluate);
   }
 
   void workRecord(String key, String channel, ExactNode payload, String kind) {
@@ -744,8 +578,9 @@ final class ContractRun {
         switch (role) {
           case "compute" -> {
             var definition =
-                ContractMetrics.measured("compute.definition", () -> computeDefinition(key, step));
-            var program = program(step);
+                ContractMetrics.measured(
+                    "compute.definition", () -> expressions.computeDefinition(key, step));
+            var program = ContractExpressions.program(step);
             var overlay = new TreeMap<>(program);
             var functions = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
             if (definition != null) {
@@ -755,7 +590,8 @@ final class ContractRun {
             overlay.put("functions", functions);
             var executionContext =
                 ContractMetrics.measured(
-                    "compute.context", () -> context(key, payload, step, steps, call, overlay));
+                    "compute.context",
+                    () -> expressions.context(key, payload, step, steps, call, overlay));
             var compiled =
                 ContractMetrics.measured(
                     "compute.compile", () -> reg.compiled(engine.bex, step, program, definition));
@@ -763,11 +599,10 @@ final class ContractRun {
                 ContractMetrics.measured(
                     "compute.execute",
                     () ->
-                        calculate(
+                        expressions.calculate(
                             key,
                             payload,
                             step,
-                            steps,
                             call,
                             compiled,
                             executionContext,
@@ -795,7 +630,8 @@ final class ContractRun {
           }
           case "patch_step" -> {
             require(step.containsKey("changeset"), "MISSING_CHANGESET");
-            Object changes = evaluate(key, payload, step, steps, step.get("changeset"), call);
+            Object changes =
+                expressions.evaluate(key, payload, step, steps, step.get("changeset"), call);
             changes = effectList(changes, true);
             validateEffects(changes, List.of());
             {
@@ -812,7 +648,7 @@ final class ContractRun {
           }
           case "emit_step" -> {
             require(step.containsKey("event"), "MISSING_EVENT");
-            Object e = evaluate(key, payload, step, steps, step.get("event"), call);
+            Object e = expressions.evaluate(key, payload, step, steps, step.get("event"), call);
             SemanticGas.output(meter, e);
             emit(key, runtimeNode(e));
             SemanticGas.unit(meter, "NEW_SLOT");
@@ -2282,7 +2118,7 @@ final class ContractRun {
               return ContractNative.access(
                   () ->
                       ContractNative.frozen(
-                          evaluate(key, payload, selected, steps, expression, call)));
+                          expressions.evaluate(key, payload, selected, steps, expression, call)));
             });
     Object raw;
     try {

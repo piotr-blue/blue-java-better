@@ -39,3 +39,9 @@ The same child value can occupy two paths. Removing and reattaching a child at t
 ## Which invariant to verify
 
 A change to caching or persistence should preserve the result after a cold restore. A scheduling change should preserve document identity, status, gas by member and ordered observations when the same input is replayed in the ordinary engine. Receipt identities also include the execution boundary, so compare like boundaries for exact receipt equality. An optimization to physical reads must still charge whatever the selected gas schedule requires. The number of visited channels and the bytes required to encode a growing parent map measure different work. [Gas composition tests](../src/test/java/blue/GasCompositionTest.java) · [Validation and binding reuse](../src/test/java/blue/LocalBindingReuseTest.java) · [Test ownership](TESTING.md)
+
+## Where a contract expression gets its inputs
+
+`ContractExpressions` binds a compiled BEX program to the current invocation. It selects compute definitions through the invocation’s logical graph, charges logical reads and prepares the event, document and step bindings. A continuation may replace the run's snapshot and graph. The expression boundary reads those from the current run at evaluation time. A compiled program can be shared because it retains neither the current document nor its authorization.
+
+`ContractRun.guard` brackets a unit of execution with a scoped witness set. Typed work can select its own result type while the rejection path still uses the contract outcome. It restores the previous witness scope even when a host failure escapes.

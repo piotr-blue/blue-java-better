@@ -1,20 +1,13 @@
 # Executable examples
 
-Run `./gradlew example`. Sources are ordinary Blue/BEX data interpreted by the experimental
-Local-1 engine. They are not canonical Agreements package publications.
+Run these commands from the repository root with JDK 25. The Java source for each example lives in [src/demo/java/blue/examples](../src/demo/java/blue/examples). The examples throw on a failed expectation and Gradle reports a failed task.
 
-- `order.blue`: initialization, submit operation and distinct lifecycle/business events.
-- `agreement.blue`: keyed embedded orders, parent reactions, add/remove operations.
-- `packages/commerce/ledger.blue`: a reusable parent listener with a field pointer parameter.
-- `packages/commerce/audit.blue`: a reusable local listener accepting an entire workflow parameter.
-- `packages/commerce/guarded.blue`: an amendment veto based on the current document's locked flag.
+| Gradle task | What to inspect |
+| --- | --- |
+| `./gradlew tutorialExample` | Create and expand language values, edit lists, then run a two-step counter and inspect its emitted events. |
+| `./gradlew completeTutorialExample` | Compare authoring forms, exact references, projections, lists and checkpoints. Includes invalid inputs and missing evidence. |
+| `./gradlew packageExample` | Verify an archive against its pinned BlueId, mount its exports, extend a type and use multiple package versions together. |
+| `./gradlew canonicalDemo` | Initialize a published Agreement and inspect the processing result. |
+| `./gradlew canonicalClausesDemo` | Run the canonical clauses example and inspect its activity and emitted events. |
 
-Samples.java composes twelve ledgers, three audit clauses per order and two nested fulfillment
-documents per order. Its Java code only authors data; all business updates/events are BEX.
-
-The `exhaust` operation in agreement.blue is an intentional budget-failure diagnostic. It emits
-an event loop; the gas limit rejects and rolls back the transaction. It is not called by the demo.
-
-Clause amendment behavior is exercised in `blue.runtime.ClauseAmendmentTest`: add a clause, initialize its field, remove
-it when unlocked and reject removal when locked. Replacement changes future behavior without
-rerunning initialization; state migration/cleanup must be authored explicitly.
+The loose `.blue` files in this directory describe the historical Local-1 example format. Use the Java demos and their package archives for current executable contracts.

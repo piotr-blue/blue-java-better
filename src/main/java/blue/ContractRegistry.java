@@ -386,7 +386,7 @@ final class ContractRegistry {
       BexEngine engine,
       Map<String, Object> step,
       Map<String, Object> program,
-      ContractRun.Definition definition) {
+      ContractExpressions.Definition definition) {
     // Definition selection, validation and its logical reads have already happened.
     // Only unmetered static compilation is reused. Exact identities bind every dependency.
     return programs.compile(

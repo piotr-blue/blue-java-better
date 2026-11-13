@@ -35,7 +35,7 @@ final class ContractAttempt {
 
   ContractAttempt(ContractRun run) {
     this.run = run;
-    outcome = (Outcome) run.guard(run::beginWork);
+    outcome = run.guard(run::beginWork);
   }
 
   /** Issuer-bound, one-use native capability; explicitly export to cross a process boundary. */
@@ -95,16 +95,10 @@ final class ContractAttempt {
     if (token != null) {
       return token;
     }
-    Object ready = run.guard(run::ready);
-    if (ready instanceof Outcome o) {
-      outcome = o;
+    Set<String> members = readyUnit();
+    if (members == null) {
       return null;
     }
-    if (ready == null) {
-      return null;
-    }
-    @SuppressWarnings("unchecked")
-    var members = (Set<String>) ready;
     var p = run.phase;
     var pending = new TreeMap<String, Object>();
     var lifecycle = new TreeMap<String, Object>();
@@ -184,12 +178,11 @@ final class ContractAttempt {
     var unit = new TreeSet<String>(ContractCanonical.CODE_POINTS);
     arr(selected.descriptor.get("unit")).forEach(k -> unit.add(str(k)));
     var failed =
-        (Outcome)
-            candidate.guard(
-                () -> {
-                  candidate.runUnit(candidate.phase, unit);
-                  return null;
-                });
+        candidate.guard(
+            () -> {
+              candidate.runUnit(candidate.phase, unit);
+              return null;
+            });
     var body =
         m(
             "token",
@@ -296,7 +289,7 @@ final class ContractAttempt {
     require(!finished, "ATTEMPT_FINISHED");
     require(outcome != null || nextChunk() == null, "UNFINISHED_ATTEMPT");
     if (outcome == null) {
-      outcome = (Outcome) run.guard(run::finishWork);
+      outcome = run.guard(run::finishWork);
     }
     finished = true;
     return outcome;
@@ -315,7 +308,7 @@ final class ContractAttempt {
         "CHUNKED_ATTEMPT_ALREADY_STARTED");
     while (advanceLocal()) {}
     if (outcome == null) {
-      outcome = (Outcome) run.guard(run::finishWork);
+      outcome = run.guard(run::finishWork);
     }
     finished = true;
     return outcome;
@@ -333,24 +326,27 @@ final class ContractAttempt {
     // Portable chunk descriptors retain their existing unit sequence. Only in-process
     // execution may omit the physical queue visits for zero-work branches.
     run.sparseScheduling = true;
-    Object ready = run.guard(run::ready);
-    if (ready instanceof Outcome failure) {
-      outcome = failure;
+    Set<String> unit = readyUnit();
+    if (unit == null) {
       return false;
     }
-    if (ready == null) {
-      return false;
-    }
-    @SuppressWarnings("unchecked")
-    var unit = (Set<String>) ready;
     outcome =
-        (Outcome)
-            run.guard(
-                () -> {
-                  run.runUnit(run.phase, unit);
-                  return null;
-                });
+        run.guard(
+            () -> {
+              run.runUnit(run.phase, unit);
+              return null;
+            });
     return outcome == null;
+  }
+
+  /** A failed scheduler step closes the same attempt as a failed handler. */
+  private Set<String> readyUnit() {
+    return run.guard(
+        run::ready,
+        failure -> {
+          outcome = failure;
+          return null;
+        });
   }
 
   private Map<String, Object> inputData() {

@@ -68,8 +68,8 @@ final class DocumentDispatchV1 {
       var gas = new ContractNative.RuntimeMeter(run.meter, extension.binding, member);
       gas.charge("dispatchPolicyCheck");
       gas.merge(null, false);
-      var definition = run.computeDefinition(member, policy);
-      var program = ContractRun.program(policy);
+      var definition = run.expressions.computeDefinition(member, policy);
+      var program = ContractExpressions.program(policy);
       var overlay = new LinkedHashMap<>(program);
       var functions = new LinkedHashMap<String, Object>();
       if (definition != null && definition.program().get("functions") instanceof Map<?, ?> f) {
@@ -79,7 +79,7 @@ final class DocumentDispatchV1 {
         functions.putAll(obj(f));
       }
       overlay.put("functions", functions);
-      var context = run.context(member, payload, policy, Map.of(), call, overlay);
+      var context = run.expressions.context(member, payload, policy, Map.of(), call, overlay);
       context.bindings.put("dispatch", m("kind", kind, "channel", channel, "operation", operation));
       var compiled = run.reg.compiled(run.engine.bex, policy, program, definition);
       var result =
