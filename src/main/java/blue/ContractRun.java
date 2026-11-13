@@ -938,6 +938,11 @@ final class ContractRun {
       rounds = new ArrayList<>(),
       units = new ArrayList<>(),
       changes = new ArrayList<>();
+
+  // A member may enter the same phase again after a reaction or creation barrier.
+  record MemberPhase(String member, String phase) {}
+
+  Set<MemberPhase> completedTurns = new HashSet<>();
   Set<String> routed = new HashSet<>(), consumedObservations = new HashSet<>();
   int turnCount, roundCount, allocation;
   boolean topologyChanged;
@@ -1136,8 +1141,12 @@ final class ContractRun {
         p.initialization.put(k, state.documents.get(k).blueId);
       }
       p.initialRoutes.put(k, captureRoutes(k, state));
-      if (name.equals("PROCESS")) {
-        p.seeds.put(k, seeds.stream().filter(s -> s.document().equals(k)).toList());
+    }
+    if (name.equals("PROCESS")) {
+      for (var seed : seeds) {
+        if (p.allowed.contains(seed.document())) {
+          p.seeds.computeIfAbsent(seed.document(), ignored -> new ArrayList<>()).add(seed);
+        }
       }
     }
     initialized.putAll(p.initialization);
@@ -1234,13 +1243,7 @@ final class ContractRun {
         if (selectedSeeds == null) {
           selectedSeeds = List.of();
         }
-        boolean earlier =
-            turns.stream()
-                .anyMatch(
-                    t -> {
-                      var in = obj(obj(t).get("turnInput"));
-                      return in.get("member").equals(key) && in.get("phase").equals(p.name);
-                    });
+        boolean earlier = completedTurns.contains(new MemberPhase(key, p.name));
         var routes = earlier ? captureRoutes(key, preceding) : initialRoutes(p, key);
         results.add(
             runLocal(preceding, key, incoming, lifecycle, selectedSeeds, p.name, routes, true));
@@ -1646,6 +1649,7 @@ final class ContractRun {
                         meter.segmentField(),
                         meter.segment(start))));
         turns.add(completion);
+        completedTurns.add(new MemberPhase(key, phaseName));
       }
       var owned = new HashSet<>(state.documents.changedValueKeys(sealed.documents));
       owned.removeIf(sealed.documents::containsKey);

@@ -74,6 +74,7 @@ final class ContractRunFork {
     n.sparseScheduling = r.sparseScheduling;
     n.serials = new TreeMap<>(r.serials);
     n.turns = copyValues(r.turns);
+    n.completedTurns = new HashSet<>(r.completedTurns);
     n.rounds = copyValues(r.rounds);
     n.units = copyValues(r.units);
     n.routed = new HashSet<>(r.routed);
