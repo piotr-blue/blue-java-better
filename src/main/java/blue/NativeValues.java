@@ -2,9 +2,9 @@ package blue;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Materializes bounded public callback values on demand; no internal view escapes its invocation.
@@ -48,21 +48,21 @@ final class NativeValues {
     }
     budget.value(depth);
     if (value instanceof Map<?, ?> map) {
-      Map<String, Object> copy = new LinkedHashMap<>();
+      var copy = new TreeMap<String, Object>();
       map.forEach(
           (key, item) -> {
             BexFailure.require(key instanceof String, "BEX object keys must be Text");
             budget.entry((String) key);
             copy.put((String) key, snapshot(item, budget, depth + 1));
           });
-      return BexValues.freeze(copy);
+      return BexValues.ownFrozenFields(copy);
     }
     if (value instanceof List<?> list) {
-      List<Object> copy = new ArrayList<>();
+      var copy = new ArrayList<Object>();
       for (Object item : list) {
         copy.add(snapshot(item, budget, depth + 1));
       }
-      return BexValues.freeze(copy);
+      return BexValues.ownFrozenItems(copy);
     }
     budget.text(value);
     return BexValues.freeze(value);

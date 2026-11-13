@@ -51,7 +51,7 @@ final class BexValues {
     }
   }
 
-  // Only freeze() can construct these containers. Their descendants are already checked,
+  // These containers own checked, frozen descendants,
   // so reusing a program, input, or result never copies its immutable tree again.
   private static final class FrozenMap extends AbstractMap<String, Object> {
     private final Map<String, Object> values;
@@ -99,6 +99,18 @@ final class BexValues {
     }
   }
 
+  /**
+   * Take a newly allocated, sorted snapshot whose children have already been validated and frozen.
+   */
+  static Object ownFrozenFields(TreeMap<String, Object> fields) {
+    return new FrozenMap(fields);
+  }
+
+  /** Take a newly allocated snapshot whose elements have already been validated and frozen. */
+  static Object ownFrozenItems(ArrayList<Object> items) {
+    return new FrozenList(items);
+  }
+
   /** Immutable host-input snapshot. Rejects cycles, non-text keys and non-BEX host objects. */
   public static Object freeze(Object value) {
     if (value instanceof FrozenMap || value instanceof FrozenList) {
@@ -138,11 +150,11 @@ final class BexValues {
         if (v instanceof Map<?, ?> m) {
           var target = new TreeMap<String, Object>();
           m.forEach((k, x) -> target.put((String) k, frozen.getOrDefault(x, scalar(x))));
-          result = new FrozenMap(target);
+          result = ownFrozenFields(target);
         } else {
           var target = new ArrayList<Object>();
           ((List<?>) v).forEach(x -> target.add(frozen.getOrDefault(x, scalar(x))));
-          result = new FrozenList(target);
+          result = ownFrozenItems(target);
         }
         active.remove(v);
         frozen.put(v, result);

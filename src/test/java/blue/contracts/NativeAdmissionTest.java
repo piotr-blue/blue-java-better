@@ -93,6 +93,24 @@ class NativeAdmissionTest {
     assertThrows(NullPointerException.class, () -> AdmissionEvidence.copyOf(invalid));
   }
 
+  @Test
+  void nativeProofSnapshotsRetainSortedFieldsNormalizedIntegersAndNestedNulls() {
+    var source = new LinkedHashMap<String, Object>();
+    var nested = new ArrayList<Object>();
+    nested.add(9L);
+    nested.add(null);
+    source.put("z", nested);
+    source.put("a", 3);
+    var result = (Map<?, ?>) AdmissionEvidence.of(TYPE.blueId(), source).asMap().get(TYPE.blueId());
+    source.clear();
+    nested.clear();
+    assertEquals(List.of("a", "z"), List.copyOf(result.keySet()));
+    assertEquals(java.math.BigInteger.valueOf(3), result.get("a"));
+    assertEquals(java.util.Arrays.asList(java.math.BigInteger.valueOf(9), null), result.get("z"));
+    assertThrows(UnsupportedOperationException.class, result::clear);
+    assertThrows(UnsupportedOperationException.class, ((List<?>) result.get("z"))::clear);
+  }
+
   private static Map<String, Object> verify(NativeAdmission context) {
     assertEquals(TYPE.blueId(), context.channelTypeId());
     assertEquals(SEMANTICS.blueId(), context.semanticsId());
