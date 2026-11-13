@@ -2,12 +2,15 @@ package blue;
 
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Bounded reuse of independently verified exact JSON responses. A cache key binds the complete
  * response text, claimed identity and host limits; an identity alone never authenticates a
  * response. Source environments and cyclic proofs deliberately use the ordinary verifier.
  */
+@NullMarked
 final class ContractEvidenceCache {
   record Key(String identity, String text, Map<String, Long> limits) {}
 
@@ -17,7 +20,8 @@ final class ContractEvidenceCache {
 
   private ContractEvidenceCache() {}
 
-  static Key key(String id, Object response, Map<String, Long> limits, boolean reuse) {
+  static @Nullable Key key(
+      String id, @Nullable Object response, Map<String, Long> limits, boolean reuse) {
     if (!reuse || DiagnosticSwitches.nativeReuseDisabled() || id.contains("#")) {
       return null;
     }
@@ -32,11 +36,11 @@ final class ContractEvidenceCache {
     return new Key(id, text, limits);
   }
 
-  static Map<String, ExactNode.Value> get(Key key) {
+  static @Nullable Map<String, ExactNode.Value> get(@Nullable Key key) {
     return key == null ? null : VERIFIED.get(key);
   }
 
-  static void put(Key key, Map<String, ExactNode.Value> bodies) {
+  static void put(@Nullable Key key, Map<String, ExactNode.Value> bodies) {
     if (key == null) {
       return;
     }

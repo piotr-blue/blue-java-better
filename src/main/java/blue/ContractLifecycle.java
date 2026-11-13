@@ -5,16 +5,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Initialization and termination in one invocation. Private turns share these lifecycle decisions.
  */
+@NullMarked
 final class ContractLifecycle {
-  record Termination(String cause, String reason) {}
+  record Termination(String cause, @Nullable String reason) {}
 
   private final Set<String> initializing = new HashSet<>();
   private final Map<String, Termination> terminations = new HashMap<>();
-  private Set<String> candidates;
+  private @Nullable Set<String> candidates;
 
   ContractLifecycle fork() {
     var result = new ContractLifecycle();
@@ -38,11 +41,11 @@ final class ContractLifecycle {
     return terminations.containsKey(member);
   }
 
-  Termination termination(String member) {
+  @Nullable Termination termination(String member) {
     return terminations.get(member);
   }
 
-  void terminate(String member, String cause, String reason) {
+  void terminate(String member, String cause, @Nullable String reason) {
     terminations.put(member, new Termination(cause, reason));
   }
 

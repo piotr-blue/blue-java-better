@@ -11,13 +11,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Copy only mutable continuation state. Exact Language nodes and installed capabilities are shared.
  */
+@NullMarked
 final class ContractRunFork {
   // Wire copies retain BEX integer normalization, nested aliases and host values.
-  static Map<String, Object> copyRecord(Map<String, Object> record) {
+  static @Nullable Map<String, Object> copyRecord(@Nullable Map<String, Object> record) {
     return record == null ? null : obj(BexValues.copy(record));
   }
 
@@ -87,7 +90,7 @@ final class ContractRunFork {
         b.roundSeal);
   }
 
-  static Phase phase(Phase p) {
+  static @Nullable Phase phase(@Nullable Phase p) {
     if (p == null) {
       return null;
     }

@@ -5,10 +5,13 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Instance-owned bounded LRU. Weight includes keys and reachable payload; zero means no retention.
  */
+@NullMarked
 final class ContractCache<K, V> {
   private record Item<V>(V value, long weight) {}
 
@@ -31,7 +34,7 @@ final class ContractCache<K, V> {
     this.maximumEntryBytes = maximumEntryBytes;
   }
 
-  public synchronized V get(K key) {
+  public synchronized @Nullable V get(K key) {
     var found = items.get(key);
     if (ContractMetrics.enabled()) {
       ContractMetrics.count(counter + (found == null ? ".misses" : ".hits"));
@@ -84,12 +87,12 @@ final class ContractCache<K, V> {
   }
 
   /** Conservative graph-size estimate, deliberately counting shared subtrees repeatedly. */
-  public static long weight(Object root) {
+  public static long weight(@Nullable Object root) {
     return weight(root, 16L * 1024 * 1024);
   }
 
   /** Same estimate, bounded by the actual consumer's capacity. */
-  static long weight(Object root, long maximumBytes) {
+  static long weight(@Nullable Object root, long maximumBytes) {
     if (maximumBytes < 0) {
       throw new IllegalArgumentException("Negative weight limit");
     }
