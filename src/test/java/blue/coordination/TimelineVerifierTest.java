@@ -230,6 +230,84 @@ class TimelineVerifierTest {
     }
 
     @Test
+    void anAuthenticSuccessorMustBeTheExactLastProvidedEntry() {
+      Fixture f = new Fixture();
+      var first = f.entry(null, 1, "{amount: 20}");
+      var second = f.entry(first.blueId(), 3, "{amount: 50}");
+      f.keep(second);
+      var prefix = f.verifier.initial();
+      rejected("TIMELINE_FINAL_HEAD", () -> f.successor(prefix, null, List.of(first), second));
+      var corrected = f.successor(prefix, null, List.of(first, second), second);
+      assertEquals(
+          List.of(first.blueId()),
+          corrected.entries().stream().map(TimelineVerifier.Entry::blueId).toList());
+    }
+
+    @Test
+    void aSuccessorCannotBorrowAGuaranteeSignatureForTheExactSameObject() {
+      Fixture f = new Fixture();
+      var first = f.entry(null, 1, "{amount: 20}");
+      f.keep(first);
+      String wire =
+          """
+          type: Coordination/Timeline Successor Evidence
+          entries: [{blueId: '%s'}]
+          successor:
+            type: Coordination/Provider Attestation
+            provider: {blueId: '%s'}
+            object: {blueId: '%s'}
+            signature: '%s'
+          """
+              .formatted(
+                  first.blueId(),
+                  f.provider.blueId(),
+                  first.blueId(),
+                  sign("blue.coordination.guarantee\n" + first.blueId()));
+      var evidence = f.language.prepare(Language.Input.yaml(wire));
+      var prefix = f.verifier.initial();
+      rejected("INVALID_PROVIDER_SIGNATURE", () -> f.verifier.advance(prefix, evidence));
+      assertTrue(prefix.headId().isEmpty());
+      assertEquals(1L, f.successor(prefix, null, List.of(first), first).prefix().completeBefore());
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void aValidSignatureCannotMixTwoTimelinesInTheSameAttestation(boolean wrongEnvelope) {
+      Fixture f = new Fixture();
+      var other =
+          f.timeline.edit(e -> e.set("/url/value", Node.text("https://provider.example/second")));
+      var scope = f.language.toBuilder().content(other).build();
+      var guarantee =
+          scope.prepare(
+              Language.Input.yaml(
+                  """
+                  type: Coordination/Timeline Completeness Guarantee
+                  timeline: {blueId: '%s'}
+                  completeBefore: 2
+                  """
+                      .formatted((wrongEnvelope ? f.timeline : other).blueId())));
+      var range =
+          scope.prepare(
+              Language.Input.yaml(
+                  """
+                  type: Coordination/Timeline Range Evidence
+                  entries: []
+                  checkpoint:
+                    type: Coordination/Timeline Attestation
+                    timeline: {blueId: '%s'}
+                    guarantee: %s
+                    signature: '%s'
+                  """
+                      .formatted(
+                          (wrongEnvelope ? other : f.timeline).blueId(),
+                          guarantee.toJson(),
+                          sign("blue.coordination.guarantee\n" + guarantee.blueId()))));
+      var prefix = f.verifier.initial();
+      rejected("TIMELINE_SOURCE_MISMATCH", () -> f.verifier.advance(prefix, range));
+      assertEquals(2L, f.verify(prefix, 2, null, null, List.of()).prefix().completeBefore());
+    }
+
+    @Test
     void scopedPrefixFactsCannotLeakIntoOrdinaryLanguageAdmission() {
       Fixture f = new Fixture();
       LanguageContent first = f.entry(null, 1, "{}");
