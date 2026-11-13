@@ -74,6 +74,16 @@ final class ContractProcessor {
     return this;
   }
 
+  /**
+   * Captured State and Outcome objects may outlive the host attempt that supplied these readers.
+   */
+  void releaseHostReaders() {
+    completionReader = null;
+    if (calculations != null) {
+      calculations.releaseReader();
+    }
+  }
+
   public SourceCompletion loadSourceCompletion(String reference, Collection<String> ownedMembers) {
     require(completionReader != null, "NO_LOCAL_COMPLETION_READER");
     var record = Objects.requireNonNull(completionReader.readCompleted(this, reference));

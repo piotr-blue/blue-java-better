@@ -65,3 +65,7 @@ Run `./gradlew jacocoTestCoverageVerification` to instrument the ordinary JUnit 
 Run `./gradlew mutationTest` to run the focused PIT suite. Open `build/reports/mutation/index.html` and inspect each surviving mutation in context. A surviving change can expose a missing assertion or behaviorally equivalent code. Investigate the affected invariant before changing a test.
 
 Select another production boundary with `-PmutationClasses=CLASS_GLOB` and its tests with `-PmutationTests=TEST_GLOB`. Quote wildcard arguments in the shell. PIT reports the selected classes only. It runs in forked JVMs and stays outside the release artifact. [PIT command-line options](https://pitest.org/quickstart/commandline/)
+
+### Closed execution retention
+
+Run `./gradlew executionRetentionProbe` to check the host lifetime boundary in a dedicated 128 MiB JVM. The program keeps the returned document state reachable, closes its execution and verifies collection of the host behind each reader. An unregistered host is the control. The exported state must keep its BlueId while releasing completion storage and calculation storage. This collector-dependent check is separate from the deterministic unit suite.

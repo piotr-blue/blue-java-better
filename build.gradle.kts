@@ -217,6 +217,16 @@ for ((taskName, program) in mapOf(
     }
 }
 
+tasks.register<JavaExec>("executionRetentionProbe") {
+    group = "verification"
+    description = "Check retired execution readers with an exported state still reachable."
+    classpath = demo.runtimeClasspath
+    javaLauncher.set(java25)
+    mainClass.set("blue.ExecutionRetentionProbe")
+    maxHeapSize = "128m"
+    jvmArgs("-XX:+UseSerialGC")
+}
+
 tasks.register<JavaExec>("normalizationSharingProbe") {
     group = "benchmark"
     description = "Measure bounded repeated-normalization retention without AWS or execution."

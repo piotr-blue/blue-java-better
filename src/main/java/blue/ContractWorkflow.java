@@ -40,7 +40,9 @@ final class ContractWorkflow {
     }
     int ordinal = 0;
     for (var recipe : run.reg.steps(handler)) {
-      if (!run.continuationLive(key, generation, allowTerminating)) return;
+      if (!run.continuationLive(key, generation, allowTerminating)) {
+        return;
+      }
       run.meter.owner = key;
       var step = run.reg.declaration(recipe);
       String name = str(step.getOrDefault("name", Integer.toString(ordinal)));

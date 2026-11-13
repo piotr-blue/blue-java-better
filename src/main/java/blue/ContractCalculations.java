@@ -31,13 +31,18 @@ final class ContractCalculations {
   private static final String VERSION = "blue-java-better/calculation-3";
   private static final int MAX_READS = 256, MAX_VALUES = 4096, MAX_BYTES = 64 * 1024;
   private static final int MAX_ATTEMPT_BYTES = 1024 * 1024;
-  private final Contracts.Execution.CalculationReader reader;
+  private Contracts.Execution.CalculationReader reader;
   private final Map<String, Map<String, Object>> completed = new LinkedHashMap<>();
   private int bytes;
   long reused, executed, budgetFallback;
 
   ContractCalculations(Contracts.Execution.CalculationReader reader) {
     this.reader = reader;
+  }
+
+  void releaseReader() {
+    // The immutable exported artifacts and statistics remain inspectable after the attempt closes.
+    reader = ignored -> java.util.Optional.empty();
   }
 
   Map<String, Map<String, Object>> completed() {

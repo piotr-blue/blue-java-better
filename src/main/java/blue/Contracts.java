@@ -1673,13 +1673,17 @@ public final class Contracts {
           : new CalculationStatistics(cache.executed, cache.reused, cache.budgetFallback);
     }
 
-    /** Revokes borrowed facts across every resolver branch created by this attempt. */
+    /**
+     * Releases borrowed host readers and revokes facts across the attempt’s resolver branches.
+     * Previously exported calculation artifacts and scalar diagnostics remain readable.
+     */
     @Override
     public void close() {
       if (closed) {
         return;
       }
       closed = true;
+      processor.releaseHostReaders();
       processor.blue.context.clearLocalRetention();
       if (validationScope != null) {
         validationScope.close();
