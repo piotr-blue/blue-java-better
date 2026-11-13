@@ -1,17 +1,10 @@
 # Optional comparison with blue-java
 
-`CanonicalCompatibility.java` runs identical initialization, Order creation, submission and
-nested Payment settlement against the original Java implementation and this library. It compares
-complete observations and receipts for 1, 10 and 20 Orders (40 transitions). The ordinary Gradle
-build uses the small checked-in receipt fixture and never reads another repository or Python.
+`CanonicalCompatibility.java` runs matching Agreement, Order and Payment inputs against the original Java implementation and this library. By default it compares the complete root projection and BlueId, ordered event contents, emitting members and ordinals after each of 40 transitions at 1, 10 and 20 Orders.
 
-To run the optional independent check, first build both Java projects and obtain their runtime
-classpath files. Run `canonicalClasspath` in this project. Compile this tool with `javac -cp`
-containing both runtime classpaths, then run `CanonicalCompatibility` with the same classpath plus
-the compiled tool directory. This tool does not alter either project or update test expectations.
+The original processor uses `contracts-deterministic-gas-6`. Better uses `contracts-semantic-gas`. The edition enters the input, turn, occurrence and receipt commitments, so two runs can agree on every business field and still produce different receipts. The tool prints each engine’s gas and the agreed document identity. When comparing engines that implement the same accounting edition, pass `--exact-receipts` to additionally require equal receipts and complete canonical observations. Preserve this check when investigating determinism across two builds of the same edition.
 
-The 2026-11-08 run exposed and corrected invocation-relative child allocation. That is why the
-fixture checks exact receipts, rather than only final totals or gas.
+Build both Java projects and obtain their runtime classpaths. Run `canonicalClasspath` in Better for its library and demo classes. Compile this file with JDK 25 and both classpaths, then run `CanonicalCompatibility` with the compiled directory and both classpaths. The optional tool only reads the projects. The ordinary Gradle tests use checked-in fixtures.
 
 ## Compare the public Java surface of two Better builds
 
