@@ -227,6 +227,16 @@ tasks.register<JavaExec>("executionRetentionProbe") {
     jvmArgs("-XX:+UseSerialGC")
 }
 
+tasks.register<JavaExec>("nativeReadBudgetProbe") {
+    group = "verification"
+    description = "Check native projection limits on a shared document in a bounded JVM."
+    classpath = demo.runtimeClasspath
+    javaLauncher.set(java25)
+    mainClass.set("blue.NativeReadBudgetProbe")
+    maxHeapSize = "192m"
+    jvmArgs("-XX:+UseSerialGC")
+}
+
 tasks.register<JavaExec>("normalizationSharingProbe") {
     group = "benchmark"
     description = "Measure bounded repeated-normalization retention without AWS or execution."

@@ -301,6 +301,7 @@ public final class NativeStep {
      * @return immutable selected value, or Bex.undefined() when absent
      */
     public Object read(String pointer) {
+      // Project the selected exact view once, while the output budget can still stop expansion.
       return values.freeze(input().read().apply(pointer));
     }
 

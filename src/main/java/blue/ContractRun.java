@@ -403,37 +403,6 @@ final class ContractRun {
     return graph.logical.ordered(cs);
   }
 
-  private Object readerValue(Object value, ProjectionBudget budget, int depth) {
-    if (value instanceof ContractBridge.ExactView view) {
-      return view.bridge.project(view.recipe, budget, depth);
-    }
-    if (budget != null) {
-      budget.value(depth);
-    }
-    if (value instanceof Map<?, ?> map) {
-      var result = new LinkedHashMap<String, Object>();
-      map.forEach(
-          (key, child) -> {
-            if (budget != null) {
-              budget.entry(key.toString());
-            }
-            result.put(key.toString(), readerValue(child, budget, depth + 1));
-          });
-      return result;
-    }
-    if (value instanceof List<?> list) {
-      var result = new ArrayList<Object>();
-      for (Object child : list) {
-        result.add(readerValue(child, budget, depth + 1));
-      }
-      return result;
-    }
-    if (budget != null) {
-      budget.text(value);
-    }
-    return value;
-  }
-
   void workRecord(String key, String channel, ExactNode payload, String kind) {
     meter.owner = key;
     meter.contracts("closureWorkOccurrenceEnqueued");
@@ -1725,11 +1694,7 @@ final class ContractRun {
             eventId,
             timestamp,
             path ->
-                ContractNative.access(
-                    () ->
-                        ContractNative.frozen(
-                            readerValue(
-                                graph.logical.read(body, path.equals("/") ? "" : path), null, 0))),
+                ContractNative.access(() -> graph.logical.read(body, path.equals("/") ? "" : path)),
             gas,
             call == null ? null : ContractNative.frozen(blue.view(call, null)),
             expression -> {
