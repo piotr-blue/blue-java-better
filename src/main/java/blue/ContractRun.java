@@ -6,13 +6,11 @@ import static blue.ContractModel.digest;
 import static blue.ContractModel.integer;
 import static blue.ContractModel.m;
 import static blue.ContractModel.obj;
-import static blue.ContractModel.pointer;
 import static blue.ContractModel.prefix;
 import static blue.ContractModel.require;
 import static blue.ContractModel.segments;
 import static blue.ContractModel.str;
 import static blue.ContractRegistry.EXECUTABLE;
-import static blue.ContractRegistry.MARKERS;
 
 import blue.ContractModel.Document;
 import blue.ContractModel.Edge;
@@ -566,7 +564,7 @@ final class ContractRun {
       if (!continuationLive(key, generation, allowTerminating)) {
         return;
       }
-      patch(key, patch);
+      ContractPatches.apply(this, key, patch);
     }
     for (Object event : effects.events()) {
       if (!continuationLive(key, generation, allowTerminating)) {
@@ -574,207 +572,6 @@ final class ContractRun {
       }
       emit(key, runtimeNode(event));
     }
-  }
-
-  private record ProtectedState(String policy, Map<String, String> markers) {}
-
-  private ProtectedState protectedState(ExactNode body) {
-    var markers = new TreeMap<String, String>(ContractCanonical.CODE_POINTS);
-    for (String k : MARKERS) {
-      ExactNode v = reg.marker(body, k);
-      markers.put(k, v == null ? null : identity(v));
-    }
-    return new ProtectedState(reg.policy(body).identity(), markers);
-  }
-
-  private void patch(String key, ContractEffects.Patch patch) {
-    effectCount++;
-    meter.owner = key;
-    String path = patch.path(), op = patch.operation();
-    Document doc = state.documents.get(key);
-    var parts = patch.segments();
-
-    var parent = blue.select(doc.body, pointer(parts.subList(0, parts.size() - 1)));
-    boolean listParent = parent != null && blue.head(parent).items != null;
-    if (listParent && parts.getLast().equals("-") && op.equals("add")) {
-      parts = new ArrayList<>(parts);
-      parts.set(parts.size() - 1, "" + blue.head(parent).items.size());
-      path = pointer(parts);
-    }
-    boolean localWrite = SemanticGas.localWrite(this, path, op, patch.value());
-    boolean localAppend =
-        state.ownerLocal
-            && !localWrite
-            && graph.append != null
-            && graph.append.child() == null
-            && key.equals(state.root)
-            && !listParent
-            && op.equals("add")
-            && blue.select(doc.body, path) == null
-            && graph.collectionAppend(doc, doc, path);
-    boolean initializingChild = graph.append != null && key.equals(graph.append.child());
-    if (state.ownerLocal && !localWrite && !localAppend && !initializingChild) {
-      throw new ContractModel.Error(
-          "LOCAL_EXECUTION_UNAVAILABLE", "reason", "PATCH_REQUIRES_GRAPH", "path", path);
-    }
-    chargePatchBoundary(parts, op.equals("remove"));
-    checkManagedAncestors(key, path, parts);
-    var beforeR = listParent && op.equals("add") ? null : blue.select(doc.body, path);
-    ExactNode before = beforeR == null ? null : blue.exact(beforeR);
-    ProtectedState protection = protectedState(doc.body);
-    ExactNode value = op.equals("remove") ? null : runtimeNode(patch.value(), false);
-    ExactNode next = blue.setAt(doc.body, path, value, op);
-    graph.logical.establish(next, doc.body);
-    ExactNode requested = next;
-    var repaired =
-        Generalization.repair(
-            blue,
-            doc.body,
-            next,
-            path,
-            reg.policy(doc.body),
-            meter,
-            n -> graph.logical.validate(n, doc.body),
-            n -> graph.logical.establish(n, doc.body));
-    next = repaired.body();
-    require(protectedState(next).equals(protection), "PROTECTED_STATE_MUTATION", "path", path);
-    for (var write : repaired.writes()) {
-      chargePatchBoundary(segments(write.path()), false);
-    }
-    if (!repaired.writes().isEmpty()) {
-      graph.logical.establish(next, requested);
-      localWrite = false;
-      if (state.ownerLocal && !initializingChild) {
-        throw new ContractModel.Error(
-            "LOCAL_EXECUTION_UNAVAILABLE", "reason", "GENERALIZATION_REPAIR", "path", path);
-      }
-    }
-    blue.remember(doc.body);
-    blue.remember(next);
-    frame.writes.add(
-        m(
-            "writer",
-            frame.writer,
-            "op",
-            op,
-            "path",
-            path,
-            "before",
-            identity(doc.body),
-            "after",
-            identity(next)));
-    if (localWrite && !DiagnosticSwitches.fullPatch()) {
-      // The patch is disjoint from every declared embedding and cannot change declarations.
-      // Full Language validation and Document Update reactions still run.
-      state.documents.put(key, doc.withBody(next));
-      graph.finalizeLocal(key);
-      ContractMetrics.count("contracts.dataTopologyReconciliationSkipped");
-    } else {
-      var reachable = graph.reachable();
-      var changed = doc.withBody(next);
-      boolean append =
-          before == null
-              && !listParent
-              && op.equals("add")
-              && repaired.writes().isEmpty()
-              && graph.collectionAppend(doc, changed, path);
-      require(!localAppend || append, "LOCAL_EXECUTION_UNAVAILABLE");
-      state.documents.put(key, changed);
-      graph.reconcile(eventId, key, List.of(path), append);
-      var delta = new HashSet<>(reachable);
-      for (String k : graph.reachable()) {
-        if (!delta.add(k)) {
-          delta.remove(k);
-        }
-      }
-      for (String k : delta) {
-        activation.merge(k, 1, Integer::sum);
-      }
-      allocation = Math.max(allocation, graph.allocation);
-      var members = ContractCanonical.keys(graph.added);
-      members.add(key);
-      ContractChannels.refresh(graph, members);
-      graph.finalizeLocal(key);
-
-      creationBarrier();
-      graph.finalizeLocal(key);
-    }
-    emitPatchUpdates(key, path, op, before, repaired.writes());
-  }
-
-  private void chargePatchBoundary(List<String> parts, boolean remove) {
-    meter.contracts("patchBoundaryChecked");
-    for (String ignored : parts) {
-      meter.contracts("pointerSegmentTraversed");
-    }
-    meter.contracts(remove ? "patchRemove" : "patchAddOrReplace");
-  }
-
-  /** Only strict ancestors can be managed boundaries. Work follows the pointer's depth. */
-  private void checkManagedAncestors(String key, String path, List<String> parts) {
-    for (int length = 0; length < parts.size(); length++) {
-      require(
-          !state.edges.containsKey(new EdgeKey(key, pointer(parts.subList(0, length)))),
-          "MANAGED_BOUNDARY_VIOLATION",
-          "path",
-          path);
-    }
-  }
-
-  /** Repairs emit in their recorded order before the requested update. A no-op emits neither. */
-  private void emitPatchUpdates(
-      String key,
-      String path,
-      String op,
-      ExactNode before,
-      List<Generalization.TypeChange> repairs) {
-    var afterR = op.equals("remove") ? null : blue.select(state.documents.get(key).body, path);
-    ExactNode after = afterR == null ? null : blue.exact(afterR);
-    String beforeId = before == null ? null : identity(before),
-        afterId = after == null ? null : identity(after);
-    if (Objects.equals(beforeId, afterId)) {
-      return;
-    }
-    if (before != null) {
-      blue.remember(before);
-    }
-    if (after != null) {
-      blue.remember(after);
-    }
-    var payload =
-        m(
-            "op",
-            before == null ? "add" : after == null ? "remove" : "replace",
-            "path",
-            path,
-            "beforePresent",
-            before != null,
-            "afterPresent",
-            after != null);
-    if (before != null) {
-      payload.put("before", m("blueId", beforeId));
-    }
-    if (after != null) {
-      payload.put("after", m("blueId", afterId));
-    }
-    for (var write : repairs) {
-      update(
-          key,
-          m(
-              "op",
-              "replace",
-              "path",
-              write.path(),
-              "beforePresent",
-              true,
-              "afterPresent",
-              true,
-              "before",
-              m("blueId", identity(write.previous())),
-              "after",
-              m("blueId", identity(write.replacement()))));
-    }
-    update(key, payload);
   }
 
   void update(String key, Map<String, Object> payload) {
