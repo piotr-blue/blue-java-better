@@ -777,7 +777,7 @@ final class ContractLanguage {
   }
 
   List<ExactNode> finalizeComponent(List<?> raw) {
-    var result = LanguageCore.finalizeSet(raw, context);
+    var result = LanguageOwningSet.finalizeSet(raw, context);
     Object proof =
         LanguageValues.freeze(
             Map.of("members", result.canonical().stream().map(LanguageCore::export).toList()));

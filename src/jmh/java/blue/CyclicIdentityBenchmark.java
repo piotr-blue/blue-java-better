@@ -47,12 +47,12 @@ public class CyclicIdentityBenchmark {
                   Map.of("blueId", "this#" + ((i + members / 2) % members))));
     }
     input = List.copyOf(rows);
-    expected = LanguageCore.finalizeSet(input, new LanguageContext()).master();
+    expected = LanguageOwningSet.finalizeSet(input, new LanguageContext()).master();
   }
 
   @Benchmark
   public String finalizeOwningProof() {
-    String actual = LanguageCore.finalizeSet(input, new LanguageContext()).master();
+    String actual = LanguageOwningSet.finalizeSet(input, new LanguageContext()).master();
     if (!expected.equals(actual)) {
       throw new IllegalStateException("The same owning proof gave a different master");
     }

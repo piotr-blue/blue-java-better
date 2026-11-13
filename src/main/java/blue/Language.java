@@ -1032,7 +1032,7 @@ public final class Language {
             }
             raw.add(LanguageOperations.parse(item.text(), item.format().wire(), c));
           }
-          var set = LanguageCore.finalizeSet(raw, c);
+          var set = LanguageOwningSet.finalizeSet(raw, c);
           String proof =
               LanguageCodec.wire(
                   Map.of("members", set.canonical().stream().map(LanguageCore::export).toList()));

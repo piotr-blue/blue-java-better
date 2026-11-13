@@ -43,13 +43,13 @@ class CyclicConnectivityTest {
       if (connected) {
         assertEquals(
             members,
-            LanguageCore.finalizeSet(raw, new LanguageContext()).ids().size(),
+            LanguageOwningSet.finalizeSet(raw, new LanguageContext()).ids().size(),
             "mask " + mask);
       } else {
         var failure =
             assertThrows(
                 LanguageFailure.class,
-                () -> LanguageCore.finalizeSet(raw, new LanguageContext()),
+                () -> LanguageOwningSet.finalizeSet(raw, new LanguageContext()),
                 "mask " + mask);
         assertEquals("CircularSetError", failure.category());
       }
@@ -68,8 +68,8 @@ class CyclicConnectivityTest {
             Map.of("name", "Oli", "peer", Map.of("blueId", "this#1")),
             Map.of("name", "Anna", "peer", Map.of("blueId", "this#2")),
             Map.of("name", "Mira", "peer", Map.of("blueId", "this#0")));
-    var first = LanguageCore.finalizeSet(base, new LanguageContext());
-    var second = LanguageCore.finalizeSet(permuted, new LanguageContext());
+    var first = LanguageOwningSet.finalizeSet(base, new LanguageContext());
+    var second = LanguageOwningSet.finalizeSet(permuted, new LanguageContext());
     assertEquals(first.master(), second.master());
     assertEquals(List.of(first.ids().get(2), first.ids().get(0), first.ids().get(1)), second.ids());
   }

@@ -12,7 +12,6 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +26,10 @@ import java.util.TreeSet;
 import java.util.function.IntFunction;
 import java.util.function.UnaryOperator;
 
-/** Exact identities, verified graph access and owning-set finalization (Language A01–A04, A10). */
+/**
+ * Exact identities, verified graph access and exact document transformations (Language A01–A04,
+ * A10).
+ */
 final class LanguageCore {
   private LanguageCore() {}
 
@@ -668,7 +670,8 @@ final class LanguageCore {
       require(
           rm.containsKey("proof") && Set.of("proof", "body").containsAll(rm.keySet()),
           "InvalidCyclicProof");
-      var result = verifyMember(r.id(), rm.get("proof"), rm.get("body"), c).body();
+      var result =
+          LanguageOwningSet.verifyMember(r.id(), rm.get("proof"), rm.get("body"), c).body();
       return result;
     }
     ExactNode body;
@@ -855,183 +858,5 @@ final class LanguageCore {
     }
     require(identity(out).equals(identity(exact)), "InternalError");
     return new LanguageFragments(identity(exact), exactText(out), fragments, proofs);
-  }
-
-  static Set<Integer> locals(ExactNode n) {
-    var out = new HashSet<Integer>();
-    if (n instanceof Local l) {
-      out.add(l.index());
-    }
-    if (n instanceof Value v) {
-      for (var e : v.fields().entrySet()) {
-        if (LITERALS.contains(e.getKey()) || e.getKey().equals("mergePolicy")) {
-          continue;
-        }
-        if (e.getKey().equals("items")) {
-          for (ExactNode a : exactItems(e.getValue())) {
-            out.addAll(locals(a));
-          }
-        } else {
-          out.addAll(locals((ExactNode) e.getValue()));
-        }
-      }
-    }
-    return out;
-  }
-
-  static ExactNode localMap(ExactNode n, IntFunction<ExactNode> fn) {
-    if (n instanceof Local l) {
-      return fn.apply(l.index());
-    }
-    if (n instanceof Ref) {
-      return n;
-    }
-    var m = new TreeMap<String, Object>();
-    ((Value) n)
-        .fields()
-        .forEach(
-            (k, v) ->
-                m.put(
-                    k,
-                    LITERALS.contains(k) || k.equals("mergePolicy")
-                        ? v
-                        : k.equals("items")
-                            ? (exactItems(v)).stream().map(a -> localMap(a, fn)).toList()
-                            : localMap((ExactNode) v, fn)));
-    return ExactNode.value(m);
-  }
-
-  record Cyclic(
-      String master, List<String> ids, List<ExactNode> canonical, List<ExactNode> bodies) {}
-
-  /** A single owning set must both reach, and be reachable from, its first member. */
-  private static boolean stronglyConnected(List<Set<Integer>> outgoing) {
-    if (!reachesEveryMember(outgoing)) {
-      return false;
-    }
-    var incoming = new ArrayList<List<Integer>>(outgoing.size());
-    for (int i = 0; i < outgoing.size(); i++) {
-      incoming.add(new ArrayList<>());
-    }
-    for (int i = 0; i < outgoing.size(); i++) {
-      for (int neighbor : outgoing.get(i)) {
-        incoming.get(neighbor).add(i);
-      }
-    }
-    return reachesEveryMember(incoming);
-  }
-
-  private static boolean reachesEveryMember(List<? extends Iterable<Integer>> adjacency) {
-    boolean[] visited = new boolean[adjacency.size()];
-    var pending = new ArrayDeque<Integer>();
-    pending.push(0);
-    visited[0] = true;
-    int seen = 1;
-    while (!pending.isEmpty()) {
-      for (int neighbor : adjacency.get(pending.pop())) {
-        if (!visited[neighbor]) {
-          visited[neighbor] = true;
-          seen++;
-          pending.push(neighbor);
-        }
-      }
-    }
-    return seen == adjacency.size();
-  }
-
-  static Cyclic finalizeSet(List<?> raw, LanguageContext c) {
-    require(!raw.isEmpty(), "CircularSetError");
-    var ns = raw.stream().map(x -> normalize(x, c, "exact", true)).toList();
-    require(ns.stream().allMatch(x -> x instanceof Value), "CircularSetError", "reference root");
-    int size = ns.size();
-    var edges = ns.stream().map(LanguageCore::locals).toList();
-    require(
-        edges.stream().anyMatch(es -> !es.isEmpty())
-            && edges.stream().flatMap(Set::stream).allMatch(i -> i >= 0 && i < size),
-        "CircularSetError",
-        "local target");
-    require(stronglyConnected(edges), "CircularSetError", "not strongly connected");
-    record Order(String id, String commitment, int index) {}
-    var records = new ArrayList<Order>();
-    IntFunction<String> zero = i -> "0".repeat(44);
-    for (int i = 0; i < size; i++) {
-      Value n = (Value) ns.get(i);
-      Object commitment =
-          n.fields().keySet().equals(Set.of("items"))
-              ? Map.of(
-                  "kind",
-                  "list",
-                  "elements",
-                  (exactItems(n.get("items"))).stream().map(a -> identity(a, zero)).toList())
-              : Map.of("kind", "map", "helper", helper(n, zero));
-      records.add(new Order(identity(n, zero), LanguageCodec.write(commitment), i));
-    }
-    records.sort(Comparator.comparing(Order::id).thenComparing(Order::commitment));
-    for (int i = 1; i < size; i++) {
-      require(
-          !records.get(i).id.equals(records.get(i - 1).id)
-              || !records.get(i).commitment.equals(records.get(i - 1).commitment),
-          "CircularSetError",
-          "ambiguous preliminary members");
-    }
-    int[] positions = new int[size];
-    for (int i = 0; i < size; i++) {
-      positions[records.get(i).index] = i;
-    }
-    List<ExactNode> canonical =
-        records.stream().map(r -> localMap(ns.get(r.index), i -> new Local(positions[i]))).toList();
-    String master = listId(canonical, i -> "this#" + i);
-    var ids = new ArrayList<String>();
-    for (int i = 0; i < size; i++) {
-      ids.add(master + "#" + positions[i]);
-    }
-    var bodies =
-        canonical.stream()
-            .map(
-                n ->
-                    normalize(
-                        export(localMap(n, i -> new Ref(master + "#" + i))), c, "exact", false))
-            .toList();
-    return new Cyclic(master, ids, canonical, bodies);
-  }
-
-  static Ref verifyMember(String expected, Object proof, Object body, LanguageContext c) {
-    finalId(expected);
-    require(expected.contains("#"), "InvalidCyclicProof");
-    String master = expected.substring(0, expected.indexOf('#'));
-    int j = index(expected.substring(expected.indexOf('#') + 1));
-    if (proof instanceof String s) {
-      proof = LanguageOperations.parse(s, "json", c);
-    }
-    Map<String, Object> pm = map(proof);
-    require(pm.keySet().equals(Set.of("members")), "InvalidCyclicProof");
-    Cyclic z = finalizeSet(list(pm.get("members")), c);
-    require(z.master.equals(master) && j < z.ids.size(), "InvalidCyclicProof");
-    for (int i = 0; i < z.ids.size(); i++) {
-      require(z.ids.get(i).equals(master + "#" + i), "InvalidCyclicProof", "canonical proof order");
-    }
-    ExactNode derived = z.bodies.get(j);
-    if (body != null) {
-      if (body instanceof String s) {
-        body = LanguageOperations.parse(s, "json", c);
-      }
-      if (body instanceof Map<?, ?> m && m.containsKey("text")) {
-        body =
-            LanguageOperations.parse(
-                string(m.get("text")),
-                string(m.containsKey("format") ? m.get("format") : "json"),
-                c);
-      }
-      ExactNode given = normalize(body, c, "exact", false);
-      require(
-          given instanceof Value && identity(given).equals(identity(derived)),
-          "InvalidCyclicProof",
-          "member body");
-      derived = given;
-    }
-    c.bodies.put(expected, (Value) derived);
-    // Retain owned immutable evidence so native responses can share it safely.
-    c.proofs.put(expected, LanguageValues.freeze(proof));
-    return new Ref(expected, (Value) derived);
   }
 }
