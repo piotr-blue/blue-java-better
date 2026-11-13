@@ -3,7 +3,6 @@ package blue;
 import static blue.ContractLanguage.identity;
 import static blue.ContractLanguage.recipe;
 import static blue.ContractModel.arr;
-import static blue.ContractModel.closed;
 import static blue.ContractModel.digest;
 import static blue.ContractModel.integer;
 import static blue.ContractModel.m;
@@ -611,43 +610,20 @@ final class ContractRun {
                             executionContext,
                             definition == null ? "" : definition.identity()));
             Object value = result.value();
-            Object changes = selectedEffect(value, "changeset", result.changeset());
-            Object events = selectedEffect(value, "events", result.events());
-            changes = effectList(changes, true);
-            events = effectList(events, false);
-            validateEffects(changes, events);
+            var effects = ContractEffects.compute(this, result);
             SemanticGas.unit(meter, "NEW_SLOT");
             steps.put(name, BexValues.freeze(value));
-            for (Object p : arr(changes)) {
-              if (!continuationLive(key, generation, allowTerminating)) {
-                break;
-              }
-              patch(key, obj(p));
-            }
-            for (Object e : arr(events)) {
-              if (!continuationLive(key, generation, allowTerminating)) {
-                break;
-              }
-              emit(key, runtimeNode(e));
-            }
+            applyEffects(key, generation, allowTerminating, effects);
           }
           case "patch_step" -> {
             require(step.containsKey("changeset"), "MISSING_CHANGESET");
             Object changes =
                 expressions.evaluate(key, payload, step, steps, step.get("changeset"), call);
-            changes = effectList(changes, true);
-            validateEffects(changes, List.of());
-            {
-              SemanticGas.construction(meter, 1);
-              SemanticGas.unit(meter, "NEW_SLOT");
-            }
-            steps.put(name, BexValues.freeze(m("changeset", changes)));
-            for (Object p : arr(changes)) {
-              if (!continuationLive(key, generation, allowTerminating)) {
-                break;
-              }
-              patch(key, obj(p));
-            }
+            var effects = ContractEffects.update(this, changes);
+            SemanticGas.construction(meter, 1);
+            SemanticGas.unit(meter, "NEW_SLOT");
+            steps.put(name, BexValues.freeze(m("changeset", effects.changeset())));
+            applyEffects(key, generation, allowTerminating, effects);
           }
           case "emit_step" -> {
             require(step.containsKey("event"), "MISSING_EVENT");
@@ -673,59 +649,19 @@ final class ContractRun {
     }
   }
 
-  private static Object selectedEffect(Object value, String field, Object fallback) {
-    if (value instanceof Map<?, ?> map) {
-      return map.containsKey(field) ? map.get(field) : fallback;
-    }
-    if (value instanceof BexValues.HostValue host && host.kind().equals("object")) {
-      Object selected = host.get(field);
-      return selected == BexValues.UNDEFINED ? fallback : selected;
-    }
-    return fallback;
-  }
-
-  /** Read only effect-container structure; keep exact payload views for the Language boundary. */
-  private Object effectList(Object value, boolean patches) {
-    boolean lazy = value instanceof BexValues.HostValue;
-    if (!lazy
-        && (!(value instanceof List<?> list)
-            || !patches
-            || list.stream().noneMatch(item -> item instanceof BexValues.HostValue))) {
-      return value;
-    }
-    require(BexValues.kind(value).equals("list"), "INVALID_EFFECT_RESULT");
-    var result = new ArrayList<Object>();
-    for (int i = 0; i < BexValues.size(value); i++) {
-      Object item = BexValues.get(value, i);
-      if (patches && item instanceof BexValues.HostValue) {
-        require(BexValues.kind(item).equals("object"), "INVALID_PATCH");
-        var fields = new LinkedHashMap<String, Object>();
-        for (String name : BexValues.keys(item)) {
-          fields.put(name, BexValues.get(item, name));
-        }
-        item = fields;
+  private void applyEffects(
+      String key, int generation, boolean allowTerminating, ContractEffects effects) {
+    for (var patch : effects.patches()) {
+      if (!continuationLive(key, generation, allowTerminating)) {
+        return;
       }
-      result.add(item);
+      patch(key, patch);
     }
-    return result;
-  }
-
-  void validateEffects(Object patches, Object events) {
-    require(patches instanceof List && events instanceof List, "INVALID_EFFECT_RESULT");
-    for (Object raw : arr(patches)) {
-      var p = obj(raw);
-      require(
-          Set.of("add", "replace", "remove").contains(p.getOrDefault("op", "")), "INVALID_PATCH");
-      boolean remove = p.get("op").equals("remove");
-      closed(p, remove ? Set.of("op", "path") : Set.of("op", "path", "val"), Set.of());
-      require(!segments(str(p.get("path"))).isEmpty(), "INVALID_PATCH_PATH");
-      if (!remove) {
-        runtimeNode(p.get("val"), false);
+    for (Object event : effects.events()) {
+      if (!continuationLive(key, generation, allowTerminating)) {
+        return;
       }
-    }
-    for (Object e : arr(events)) {
-      SemanticGas.output(meter, e);
-      runtimeNode(e);
+      emit(key, runtimeNode(event));
     }
   }
 
@@ -738,20 +674,21 @@ final class ContractRun {
     return Arrays.asList(reg.policy(body).identity(), markers);
   }
 
-  void patch(String key, Map<String, Object> patch) {
+  private void patch(String key, ContractEffects.Patch patch) {
     effectCount++;
     meter.owner = key;
-    String path = str(patch.get("path")), op = str(patch.get("op"));
+    String path = patch.path(), op = patch.operation();
     Document doc = state.documents.get(key);
-    var parts = segments(path);
+    var parts = patch.segments();
 
     var parent = blue.select(doc.body, pointer(parts.subList(0, parts.size() - 1)));
     boolean listParent = parent != null && blue.head(parent).items != null;
     if (listParent && parts.getLast().equals("-") && op.equals("add")) {
+      parts = new ArrayList<>(parts);
       parts.set(parts.size() - 1, "" + blue.head(parent).items.size());
       path = pointer(parts);
     }
-    boolean localWrite = SemanticGas.localWrite(this, path, op, patch.get("val"));
+    boolean localWrite = SemanticGas.localWrite(this, path, op, patch.value());
     boolean localAppend =
         state.ownerLocal
             && !localWrite
@@ -772,7 +709,7 @@ final class ContractRun {
     var beforeR = listParent && op.equals("add") ? null : blue.select(doc.body, path);
     ExactNode before = beforeR == null ? null : blue.exact(beforeR);
     Object protection = protectedState(doc.body);
-    ExactNode value = op.equals("remove") ? null : runtimeNode(patch.get("val"), false);
+    ExactNode value = op.equals("remove") ? null : runtimeNode(patch.value(), false);
     ExactNode next = blue.setAt(doc.body, path, value, op);
     graph.logical.establish(next, doc.body);
     ExactNode requested = next;
@@ -2141,19 +2078,8 @@ final class ContractRun {
     }
     gas.merge(raw instanceof Map ? obj(raw).get("runtimeLedger") : null, false);
     var result = ContractNative.result(raw);
-    validateEffects(result.get("patches"), result.get("events"));
-    for (Object p : arr(result.get("patches"))) {
-      if (!continuationLive(key, generation, allowTerminating)) {
-        return;
-      }
-      patch(key, obj(p));
-    }
-    for (Object e : arr(result.get("events"))) {
-      if (!continuationLive(key, generation, allowTerminating)) {
-        return;
-      }
-      emit(key, runtimeNode(e));
-    }
+    var effects = ContractEffects.validate(this, result.get("patches"), result.get("events"));
+    applyEffects(key, generation, allowTerminating, effects);
     if (result.containsKey("termination") && continuationLive(key, generation, allowTerminating)) {
       var end = obj(result.get("termination"));
       terminate(key, str(end.get("cause")), (String) end.get("reason"));

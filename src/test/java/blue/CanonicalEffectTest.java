@@ -77,6 +77,38 @@ class CanonicalEffectTest {
   }
 
   @Test
+  void aMalformedSecondPatchRejectsTheEntireEffectBeforeAnyWriteOrEvent() {
+    try (var session =
+        Contracts.create()
+            .openYaml(
+                """
+                count: 0
+                contracts:
+                  input: {type: Contracts/External Channel}
+                  edit:
+                    type: Contracts/Sequential Workflow Operation
+                    channel: input
+                    steps:
+                      - type: Contracts/Compute
+                        expr: {$event: /request/effect}
+                """)) {
+      session.initialize().requireApplied();
+      var first = Map.of("op", "replace", "path", "/count", "val", 1);
+      var invalid = Map.of("op", "remove", "path", "");
+      var effect =
+          Map.of(
+              "changeset", List.of(first, invalid), "events", List.of(Map.of("kind", "Changed")));
+      var rejected = session.call("input", "edit", Map.of("effect", effect), 1);
+      assertEquals("FAILED", rejected.status());
+      assertEquals(
+          "INVALID_PATCH_PATH",
+          ((Map<?, ?>) rejected.observations().get("diagnostic")).get("code"));
+      assertEquals(BigInteger.ZERO, session.read("/count"));
+      assertTrue(rejected.events().isEmpty());
+    }
+  }
+
+  @Test
   void constructedListsCanContainLazyPatchRecordsWithoutWeakeningValidation() {
     try (Contracts.Session session =
         Contracts.create()
