@@ -695,6 +695,64 @@ class TimelineVerifierTest {
     }
 
     @Test
+    void protectedMigrationRequiresClosedHeadsAndExactSuccessorAnchors() {
+      Fixture f = new Fixture();
+      var first = f.entry(null, 1, "{}");
+      var next = f.entry(first.blueId(), 2, "{}");
+      var fork = f.entry(null, 2, "{}");
+      List.of(first, next, fork).forEach(f::keep);
+      blue.LanguageProvider retained = id -> Optional.ofNullable(f.records.get(id));
+
+      var recovered = f.verifier.restoreTrusted(2, first.blueId(), next.blueId(), retained);
+      assertEquals(first.blueId(), recovered.headId().orElseThrow());
+      assertEquals(next.blueId(), recovered.successorId().orElseThrow());
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND",
+          () -> f.verifier.restoreTrusted(1, first.blueId(), null, retained));
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND",
+          () -> f.verifier.restoreTrusted(3, first.blueId(), next.blueId(), retained));
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND",
+          () -> f.verifier.restoreTrusted(2, first.blueId(), fork.blueId(), retained));
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND",
+          () -> f.verifier.restoreTrusted(2, null, next.blueId(), retained));
+
+      LanguageDocument different =
+          f.timeline.edit(editor -> editor.set("/url/value", "https://provider.example/different"));
+      var wrong = TimelineVerifier.adopt(Published.PACKAGE, f.provider, different);
+      rejected(
+          "TIMELINE_SOURCE_MISMATCH",
+          () -> wrong.restoreTrusted(2, first.blueId(), null, retained));
+    }
+
+    @Test
+    void finalTimeBoundCanCloseAPrefixButCannotOccurAsAnEntryTimestamp() {
+      Fixture f = new Fixture();
+      long end = 9_007_199_254_740_991L;
+      blue.LanguageProvider retained = id -> Optional.ofNullable(f.records.get(id));
+      assertEquals(0, f.verifier.restoreTrusted(0, null, null, retained).completeBefore());
+      assertEquals(end, f.verifier.restoreTrusted(end, null, null, retained).completeBefore());
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND", () -> f.verifier.restoreTrusted(-1, null, null, retained));
+      rejected(
+          "TIMELINE_CHECKPOINT_BOUND",
+          () -> f.verifier.restoreTrusted(end + 1, null, null, retained));
+      var last = f.entry(null, end - 1, "{}");
+      var outside = f.entry(null, end, "{}");
+      var negative = f.entry(null, -1, "{}");
+      List.of(last, outside, negative).forEach(f::keep);
+      assertEquals(
+          last.blueId(),
+          f.verifier.restoreTrusted(end, last.blueId(), null, retained).headId().orElseThrow());
+      rejected(
+          "TIMELINE_TIME", () -> f.verifier.restoreTrusted(end, outside.blueId(), null, retained));
+      rejected(
+          "TIMELINE_TIME", () -> f.verifier.restoreTrusted(0, negative.blueId(), null, retained));
+    }
+
+    @Test
     void changedMetadataWrongCommitmentsAndSourcesAreRejected() {
       Fixture f = new Fixture();
       TimelineVerifier.Prefix prefix =
