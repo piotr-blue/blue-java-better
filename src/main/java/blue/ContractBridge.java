@@ -825,6 +825,15 @@ final class ContractBridge {
     return true;
   }
 
+  private static int patchIndex(String key) {
+    require(LanguageSyntax.LIST_INDEX.matcher(key).matches(), "INVALID_LIST_INDEX");
+    try {
+      return Integer.parseInt(key);
+    } catch (NumberFormatException overflow) {
+      throw new ContractModel.Error("INVALID_LIST_INDEX");
+    }
+  }
+
   ExactNode setAt(ExactNode root, String path, ExactNode value, String operation) {
     var parts = ContractModel.segments(path);
     require(!parts.isEmpty() && !parts.contains(""), "INVALID_PATCH_PATH", "path", path);
@@ -838,18 +847,15 @@ final class ContractBridge {
     boolean last = parts.size() == 1;
     var fields = new TreeMap<>(n.fields());
     if (h.items != null) {
+      boolean append = key.equals("-") && last && op.equals("add");
+      int i = append ? h.items.size() : patchIndex(key);
       require(
-          key.equals("-") && op.equals("add") && last
-              || LanguageSyntax.LIST_INDEX.matcher(key).matches(),
+          op.equals("add") && last ? i <= h.items.size() : i < h.items.size(),
           "INVALID_LIST_INDEX");
-      var values = new ArrayList<ExactNode>();
-      for (int i = 0; i < h.items.size(); i++) {
-        values.add(exact(selected(r, ContractLanguage.child(h, i))));
+      var values = new ArrayList<ExactNode>(h.items.size());
+      for (int index = 0; index < h.items.size(); index++) {
+        values.add(exact(ContractLanguage.child(h, index)));
       }
-      int i = key.equals("-") ? values.size() : Integer.parseInt(key);
-      require(
-          i >= 0 && (op.equals("add") && last ? i <= values.size() : i < values.size()),
-          "INVALID_LIST_INDEX");
       if (!last) {
         values.set(
             i,
@@ -917,8 +923,7 @@ final class ContractBridge {
         items.add(exact(ContractLanguage.child(h, i)));
       }
       for (var e : grouped.entrySet()) {
-        require(LanguageSyntax.LIST_INDEX.matcher(e.getKey()).matches(), "INVALID_LIST_INDEX");
-        int i = Integer.parseInt(e.getKey());
+        int i = patchIndex(e.getKey());
         require(i < items.size(), "INVALID_LIST_INDEX");
         items.set(i, replacement(items.get(i), ContractLanguage.child(h, i), e.getValue()));
       }

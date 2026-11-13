@@ -129,6 +129,33 @@ class CanonicalEffectTest {
   }
 
   @Test
+  void oversizedListIndexIsARejectedDocumentPatch() {
+    try (var session =
+        Contracts.create()
+            .openYaml(
+                """
+                amounts: [42]
+                contracts:
+                  input: {type: Contracts/External Channel}
+                  edit:
+                    type: Contracts/Sequential Workflow Operation
+                    channel: input
+                    steps:
+                      - type: Contracts/Update Document
+                        changeset: [{op: add, path: /amounts/2147483648, val: 99}]
+                """)) {
+      session.initialize().requireApplied();
+      var before = session.document().blueId();
+      var rejected = session.call("input", "edit", Map.of(), 1);
+      assertEquals("FAILED", rejected.status());
+      assertEquals(
+          "INVALID_LIST_INDEX",
+          ((Map<?, ?>) rejected.observations().get("diagnostic")).get("code"));
+      assertEquals(before, session.document().blueId());
+    }
+  }
+
+  @Test
   void aMalformedSecondPatchRejectsTheEntireEffectBeforeAnyWriteOrEvent() {
     try (var session =
         Contracts.create()
