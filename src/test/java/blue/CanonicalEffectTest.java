@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /** Effects are an API boundary: lazy event/document views must behave like constructed values. */
 @Tag("contracts")
@@ -73,6 +75,56 @@ class CanonicalEffectTest {
               .requireApplied();
       assertEquals(BigInteger.valueOf(42), session.read("/count"));
       assertEquals(List.of(Map.of("kind", "Changed")), result.events());
+    }
+  }
+
+  @Test
+  void nativeAndWorkflowWireResultsRejectANullPatchOperationWithTheSameDiagnostic() {
+    Map<String, Object> patch = new java.util.LinkedHashMap<>();
+    patch.put("op", null);
+    patch.put("path", "/count");
+    var patches = List.of(patch);
+    assertEquals(
+        "INVALID_PATCH",
+        org.junit.jupiter.api.Assertions.assertThrows(
+                ContractFault.class, () -> ContractNative.result(Map.of("patches", patches)))
+            .code());
+    assertEquals(
+        "INVALID_PATCH",
+        org.junit.jupiter.api.Assertions.assertThrows(
+                ContractFault.class, () -> ContractEffects.validate(null, patches, List.of()))
+            .code());
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"null", "unknown", "missing"})
+  void malformedOpProducesAPatchDiagnosticAndPreservesThePredecessor(String variant) {
+    var invalid = new java.util.LinkedHashMap<String, Object>();
+    if (!variant.equals("missing")) {
+      invalid.put("op", variant.equals("null") ? null : variant);
+    }
+    invalid.put("path", "/count");
+    try (var session =
+        Contracts.create()
+            .openYaml(
+                """
+                count: 0
+                contracts:
+                  editChannel: {type: Contracts/External Channel}
+                  edit:
+                    type: Contracts/Sequential Workflow Operation
+                    channel: editChannel
+                    steps:
+                      - type: Contracts/Update Document
+                        changeset: {$event: /request/changes}
+                """)) {
+      session.initialize().requireApplied();
+      var before = session.document().blueId();
+      var rejected = session.call("editChannel", "edit", Map.of("changes", List.of(invalid)), 1);
+      assertEquals("FAILED", rejected.status());
+      assertEquals(
+          "INVALID_PATCH", ((Map<?, ?>) rejected.observations().get("diagnostic")).get("code"));
+      assertEquals(before, session.document().blueId());
     }
   }
 

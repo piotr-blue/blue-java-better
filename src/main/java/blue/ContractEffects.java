@@ -26,6 +26,14 @@ record ContractEffects(List<Object> changeset, List<Patch> patches, List<Object>
     return validate(run, effectList(changes, true), effectList(events, false));
   }
 
+  static String patchOperation(Map<String, Object> fields) {
+    Object operation = fields.get("op");
+    require(
+        operation instanceof String && Set.of("add", "replace", "remove").contains(operation),
+        "INVALID_PATCH");
+    return (String) operation;
+  }
+
   static ContractEffects update(ContractRun run, Object changes) {
     return validate(run, effectList(changes, true), List.of());
   }
@@ -37,10 +45,7 @@ record ContractEffects(List<Object> changeset, List<Patch> patches, List<Object>
     List<Patch> patches = changeset.isEmpty() ? List.of() : new ArrayList<>(changeset.size());
     for (Object raw : changeset) {
       var fields = obj(raw);
-      require(
-          Set.of("add", "replace", "remove").contains(fields.getOrDefault("op", "")),
-          "INVALID_PATCH");
-      String operation = str(fields.get("op"));
+      String operation = patchOperation(fields);
       boolean remove = operation.equals("remove");
       closed(fields, remove ? Set.of("op", "path") : Set.of("op", "path", "val"), Set.of());
       String path = str(fields.get("path"));

@@ -467,11 +467,10 @@ final class ContractNative {
     require(patches instanceof List && events instanceof List, "INVALID_EXECUTION_RESULT");
     for (Object patch : arr(patches)) {
       var p = obj(patch);
-      require(
-          Set.of("add", "replace", "remove").contains(p.getOrDefault("op", "")), "INVALID_PATCH");
+      String operation = ContractEffects.patchOperation(p);
       closed(
           p,
-          p.get("op").equals("remove") ? Set.of("op", "path") : Set.of("op", "path", "val"),
+          operation.equals("remove") ? Set.of("op", "path") : Set.of("op", "path", "val"),
           Set.of());
       var parts = segments(str(p.get("path")));
       require(!parts.isEmpty() && !parts.contains(""), "INVALID_PATCH_PATH");
