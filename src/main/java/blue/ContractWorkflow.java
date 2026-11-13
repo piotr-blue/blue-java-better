@@ -35,7 +35,7 @@ final class ContractWorkflow {
 
   void execute(Map<String, Object> handler) {
     if ("extension_handler".equals(handler.get("_role"))) {
-      run.executeExtension(key, payload, handler, steps, generation, allowTerminating, call);
+      executeExtension(handler);
       return;
     }
     int ordinal = 0;
@@ -59,7 +59,7 @@ final class ContractWorkflow {
           return;
         }
         case "extension_step" -> {
-          run.executeExtension(key, payload, step, steps, generation, allowTerminating, call);
+          executeExtension(step);
           steps.put(name, Map.of());
         }
         default -> throw new ContractModel.Error("UNSUPPORTED_STEP");
@@ -123,5 +123,72 @@ final class ContractWorkflow {
     run.emit(key, run.runtimeNode(e));
     SemanticGas.unit(run.meter, "NEW_SLOT");
     steps.put(name, BexValues.freeze(e));
+  }
+
+  private void executeExtension(Map<String, Object> declaration) {
+    var extension = (ContractNative.Installed) declaration.get("_extension");
+    var binding = extension.binding;
+    var selected = run.reg.declaration(declaration.get("_recipe"));
+    ExactNode body = run.state.documents.get(key).body;
+    var gas = new ContractNative.RuntimeMeter(run.meter, binding, key);
+    var fields = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
+    for (String k : binding.bodyFields()) {
+      if (selected.containsKey(k)) {
+        fields.put(k, selected.get(k));
+      }
+    }
+    var context =
+        new ContractNative.Context(
+            ContractNative.frozen(run.blue.view(payload, null)),
+            extension.header(selected),
+            obj(ContractNative.frozen(fields)),
+            obj(ContractNative.frozen(steps)),
+            run.eventId,
+            run.timestamp,
+            path ->
+                ContractNative.access(
+                    () -> run.graph.logical.read(body, path.equals("/") ? "" : path)),
+            gas,
+            call == null ? null : ContractNative.frozen(run.blue.view(call, null)),
+            expression -> {
+              require(binding.meterMode().equals("live"), "EXPRESSION_REQUIRES_LIVE_METER");
+              return ContractNative.access(
+                  () ->
+                      ContractNative.frozen(
+                          run.expressions.evaluate(
+                              key, payload, selected, steps, expression, call)));
+            });
+    Object raw = invoke(extension, context, gas);
+    gas.merge(raw instanceof Map ? obj(raw).get("runtimeLedger") : null, false);
+    var result = ContractNative.result(raw);
+    var effects = ContractEffects.validate(run, result.get("patches"), result.get("events"));
+    run.applyEffects(key, generation, allowTerminating, effects);
+    if (result.containsKey("termination")
+        && run.continuationLive(key, generation, allowTerminating)) {
+      var end = obj(result.get("termination"));
+      run.terminate(key, str(end.get("cause")), (String) end.get("reason"));
+    }
+  }
+
+  /** Account for failed callback work before restoring the native or host diagnostic. */
+  private static Object invoke(
+      ContractNative.Installed extension,
+      ContractNative.Context context,
+      ContractNative.RuntimeMeter gas) {
+    try {
+      return extension.implementation.execute(context);
+    } catch (ContractNative.AccessFailure e) {
+      gas.merge(null, true);
+      throw e.failure;
+    } catch (BexFailure | ContractModel.Error e) {
+      gas.merge(null, true);
+      throw e;
+    } catch (ContractFault e) {
+      gas.merge(null, true);
+      throw new ContractModel.Error(e.code(), "detail", e.context());
+    } catch (RuntimeException e) {
+      gas.merge(null, true);
+      throw new ContractModel.Error("RUNTIME_FAILURE", "exception", e.getClass().getSimpleName());
+    }
   }
 }
