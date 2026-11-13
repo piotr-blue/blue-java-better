@@ -60,3 +60,7 @@ While opening a processing phase, the invocation groups admitted external channe
 
 
 A generalization repair returns the changed exact document and an ordered list of type-reference replacements. Each item records its pointer and both references. Contract execution charges each replacement, verifies that protected markers and the retention policy still identify the same values, then emits the individual update events in order. The public receipt remains a wire representation. [Type repairs](../src/main/java/blue/Generalization.java) · [Patch and reaction ordering](../src/main/java/blue/ContractRun.java)
+
+## When a channel runs a handler
+
+Dispatch fixes the ordered candidate list and checks each candidate’s event and channel lifetime. Each admitted handler owns a fresh step table. A step can read results of earlier named steps, apply document changes or emit events. A terminated or replaced channel lifetime stops the remaining steps. Nested dispatch receives a separate table and restores its enclosing writer afterward. [Channel dispatch](../src/main/java/blue/ContractRun.java) · [Sequential workflow execution](../src/main/java/blue/ContractWorkflow.java) · [Atomic effect and step snapshot tests](../src/test/java/blue/CanonicalEffectTest.java)

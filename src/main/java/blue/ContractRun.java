@@ -1,7 +1,6 @@
 package blue;
 
 import static blue.ContractLanguage.identity;
-import static blue.ContractLanguage.recipe;
 import static blue.ContractModel.arr;
 import static blue.ContractModel.digest;
 import static blue.ContractModel.integer;
@@ -24,7 +23,6 @@ import blue.ContractModel.Outcome;
 import blue.ContractModel.Snapshot;
 import blue.ExactNode.Ref;
 import blue.ExactNode.Value;
-import blue.LanguageModel.Recipe;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -561,95 +559,11 @@ final class ContractRun {
               "call",
               call == null ? null : identity(call));
       meter.contracts("handlerCall");
-      var steps = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-      if (h.get("_role").equals("extension_handler")) {
-        executeExtension(key, payload, h, steps, generation, allowTerminating, call);
-        continue;
-      }
-      int i = 0;
-      for (Recipe recipe : reg.steps(h)) {
-        if (!continuationLive(key, generation, allowTerminating)) {
-          break;
-        }
-        meter.owner = key;
-        var step = reg.declaration(recipe);
-        String name = str(step.getOrDefault("name", "" + i++)), role = str(step.get("_role"));
-        require(!steps.containsKey(name), "DUPLICATE_STEP_NAME");
-        SemanticGas.unit(meter, "EVAL");
-        switch (role) {
-          case "compute" -> {
-            var definition =
-                ContractMetrics.measured(
-                    "compute.definition", () -> expressions.computeDefinition(key, step));
-            var program = ContractExpressions.program(step);
-            var overlay = new TreeMap<>(program);
-            var functions = new TreeMap<String, Object>(ContractCanonical.CODE_POINTS);
-            if (definition != null) {
-              functions.putAll(obj(definition.program().getOrDefault("functions", Map.of())));
-            }
-            functions.putAll(obj(step.getOrDefault("functions", Map.of())));
-            overlay.put("functions", functions);
-            var executionContext =
-                ContractMetrics.measured(
-                    "compute.context",
-                    () -> expressions.context(key, payload, step, steps, call, overlay));
-            var compiled =
-                ContractMetrics.measured(
-                    "compute.compile", () -> reg.compiled(engine.bex, step, program, definition));
-            var result =
-                ContractMetrics.measured(
-                    "compute.execute",
-                    () ->
-                        expressions.calculate(
-                            key,
-                            payload,
-                            step,
-                            call,
-                            compiled,
-                            executionContext,
-                            definition == null ? "" : definition.identity()));
-            Object value = result.value();
-            var effects = ContractEffects.compute(this, result);
-            SemanticGas.unit(meter, "NEW_SLOT");
-            steps.put(name, BexValues.freeze(value));
-            applyEffects(key, generation, allowTerminating, effects);
-          }
-          case "patch_step" -> {
-            require(step.containsKey("changeset"), "MISSING_CHANGESET");
-            Object changes =
-                expressions.evaluate(key, payload, step, steps, step.get("changeset"), call);
-            var effects = ContractEffects.update(this, changes);
-            SemanticGas.construction(meter, 1);
-            SemanticGas.unit(meter, "NEW_SLOT");
-            steps.put(name, BexValues.freeze(m("changeset", effects.changeset())));
-            applyEffects(key, generation, allowTerminating, effects);
-          }
-          case "emit_step" -> {
-            require(step.containsKey("event"), "MISSING_EVENT");
-            Object e = expressions.evaluate(key, payload, step, steps, step.get("event"), call);
-            SemanticGas.output(meter, e);
-            emit(key, runtimeNode(e));
-            SemanticGas.unit(meter, "NEW_SLOT");
-            steps.put(name, BexValues.freeze(e));
-          }
-          case "terminate_step" -> {
-            terminate(key, str(step.get("cause")), (String) step.get("reason"));
-          }
-          case "extension_step" -> {
-            executeExtension(key, payload, step, steps, generation, allowTerminating, call);
-            steps.put(name, Map.of());
-          }
-          default -> throw new ContractModel.Error("UNSUPPORTED_STEP");
-        }
-        if (role.equals("terminate_step")) {
-          break;
-        }
-      }
+      new ContractWorkflow(this, key, payload, call, generation, allowTerminating).execute(h);
     }
   }
 
-  private void applyEffects(
-      String key, int generation, boolean allowTerminating, ContractEffects effects) {
+  void applyEffects(String key, int generation, boolean allowTerminating, ContractEffects effects) {
     for (var patch : effects.patches()) {
       if (!continuationLive(key, generation, allowTerminating)) {
         return;
