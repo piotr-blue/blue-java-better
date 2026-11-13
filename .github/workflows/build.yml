@@ -28,6 +28,8 @@ jobs:
         run: ./gradlew build
       - name: Check production code with Error Prone
         run: ./gradlew errorProne
+      - name: Verify native read limits and closed execution lifetimes
+        run: ./gradlew nativeReadBudgetProbe executionRetentionProbe
       - name: Verify line and branch coverage
         run: ./gradlew jacocoTestCoverageVerification
       - name: Upload test report
