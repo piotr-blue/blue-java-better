@@ -27,7 +27,7 @@ class ContractListPatchTest {
       """;
 
   @ParameterizedTest
-  @ValueSource(longs = {17, 592, 871223})
+  @ValueSource(longs = {17, 592, 871223, 882000, 882001, 882002, 882003, 882004, 882005})
   void liveAndRestoredSessionsMatchAnIndependentListModel(long seed) {
     run(seed, 32);
   }
@@ -51,7 +51,8 @@ class ContractListPatchTest {
               List.of("01", "-1", "2147483648", "99999999999999999999", "x").get((step / 4) % 5);
           changes.add(Map.of("op", "replace", "path", "/amounts/" + index, "val", 0));
         }
-        var request = Map.of("changes", changes);
+        // Identical edits may be separate signed intentions. Keep their event identities distinct.
+        var request = Map.of("sequence", step, "changes", changes);
         try (var restored = engine.restore(session.snapshot(), session.identity())) {
           var result = session.call("input", "edit", request, step);
           var replay = restored.call("input", "edit", request, step);
