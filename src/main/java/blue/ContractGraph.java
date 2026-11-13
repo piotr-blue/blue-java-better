@@ -144,6 +144,26 @@ final class ContractGraph {
   Set<List<Object>> verifiedBindings = new HashSet<>();
   ContractWork logical;
 
+  /**
+   * Fork after a closed local frame. Exact archive records and the immutable partition are shared.
+   */
+  ContractGraph fork(Snapshot candidateState, Meter candidateMeter, List<Object> candidateChanges) {
+    var candidate = new ContractGraph(candidateState, registry, archive, candidateMeter, cause);
+    candidate.aliases = aliases.copy();
+    candidate.resets = new HashSet<>(resets);
+    candidate.added = new ArrayList<>(added);
+    candidate.changes = candidateChanges;
+    candidate.topologyChanged = topologyChanged;
+    candidate.allocation = allocation;
+    candidate.dirty = new HashSet<>(dirty);
+    candidate.finalized = finalized.copy();
+    candidate.partition = partition;
+    candidate.pathHeaders = new HashSet<>(pathHeaders);
+    candidate.verifiedBindings = new HashSet<>(verifiedBindings);
+    candidate.logical = logical.fork(candidateMeter);
+    return candidate;
+  }
+
   ContractGraph(Snapshot s, ContractRegistry r, Archive a) {
     this(s, r, a, null, null);
   }

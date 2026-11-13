@@ -681,9 +681,16 @@ final class ContractModel {
       changedLocalOwners.add(owner);
     }
 
-    void copyLocalUsed(Meter source) {
-      localUsed.putAll(source.localUsed);
-      changedLocalOwners.addAll(source.localUsed.keySet());
+    /** Copy the accepted debits into a newly constructed meter for the next speculative chunk. */
+    void inheritAcceptedPrefix(Meter accepted) {
+      owner = accepted.owner;
+      used = accepted.used;
+      hostUsed = accepted.hostUsed;
+      trace = new ArrayList<>(accepted.trace.size());
+      accepted.trace.forEach(row -> trace.add(ContractRunFork.copyRecord(row)));
+      rejected = ContractRunFork.copyRecord(accepted.rejected);
+      localUsed.putAll(accepted.localUsed);
+      changedLocalOwners.addAll(accepted.localUsed.keySet());
     }
 
     private ContractCanonical.Fields localUsedEncoding() {

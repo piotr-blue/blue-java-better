@@ -50,9 +50,19 @@ final class ContractWork {
     return new ContractCanonical.Sequence(exactRows.values());
   }
 
-  void copyExactValues(ContractWork source) {
-    exactValues.putAll(source.exactValues);
-    exactRows.putAll(source.exactRows);
+  /** Continue the same logical history with its own mutable collections and physical root cache. */
+  ContractWork fork(Meter candidateMeter) {
+    var candidate = new ContractWork(blue, candidateMeter);
+    candidate.manifests.addAll(manifests);
+    candidate.established.addAll(established);
+    candidate.cyclicEstablished.addAll(cyclicEstablished);
+    candidate.proofs.addAll(proofs);
+    candidate.carriedRoots.addAll(carriedRoots);
+    candidate.boundIdentities.addAll(boundIdentities);
+    candidate.exactValues.putAll(exactValues);
+    candidate.exactRows.putAll(exactRows);
+    candidate.partition(partition());
+    return candidate;
   }
 
   private ContractLanguage.Witnesses rootWitnessScope;

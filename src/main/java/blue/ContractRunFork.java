@@ -26,90 +26,62 @@ final class ContractRunFork {
     return arr(BexValues.copy(values));
   }
 
-  static ContractRun copy(ContractRun r) {
-    require(r.frame == null && r.suspended.isEmpty(), "OPEN_LOCAL_FRAME");
-    var n =
+  static ContractRun copy(ContractRun accepted) {
+    require(accepted.frame == null && accepted.suspended.isEmpty(), "OPEN_LOCAL_FRAME");
+    var candidate =
         new ContractRun(
-            r.engine,
-            r.input,
-            r.event,
-            r.timestamp,
-            r.admission,
-            r.meter.limit,
-            r.meter.localLimits);
+            accepted.engine,
+            accepted.input,
+            accepted.event,
+            accepted.timestamp,
+            accepted.admission,
+            accepted.meter.limit,
+            accepted.meter.localLimits);
     // A speculative chunk inherits the accepted prefix without warming its issuer.
-    n.invocationWitnesses = r.invocationWitnesses.fork();
-    n.state = r.state.copy();
-    n.invocation = r.invocation;
-    n.call = r.call;
-    n.callRecord = copyRecord(r.callRecord);
-    n.seeds = List.copyOf(r.seeds);
-    n.admissionEvidence = copyRecord(r.admissionEvidence);
-    n.nativeAdmissionVerified = r.nativeAdmissionVerified;
-    n.externalAdmissions = new TreeMap<>(r.externalAdmissions);
-    n.views = new TreeMap<>(r.views);
-    n.meter.owner = r.meter.owner;
-    n.meter.used = r.meter.used;
-    n.meter.hostUsed = r.meter.hostUsed;
-    n.meter.trace = new ArrayList<>(r.meter.trace.size());
-    r.meter.trace.forEach(row -> n.meter.trace.add(copyRecord(row)));
-    n.meter.rejected = copyRecord(r.meter.rejected);
-    n.meter.copyLocalUsed(r.meter);
-    n.events = copyValues(r.events);
-    n.work = new ArrayList<>(r.work);
-    n.publicEvents = copyValues(r.publicEvents);
-    n.writes = copyValues(r.writes);
-    n.changes = copyValues(r.changes);
-    n.initializing = new HashSet<>(r.initializing);
-    n.terminating = new HashSet<>(r.terminating);
-    n.initialized = new HashMap<>(r.initialized);
-    n.initializationCandidates =
-        r.initializationCandidates == null ? null : new HashSet<>(r.initializationCandidates);
-    n.termination = new HashMap<>(r.termination);
-    n.activation = new TreeMap<>(r.activation);
-    n.effectCount = r.effectCount;
-    n.receiving = r.receiving;
-    n.liveReceiving = r.liveReceiving;
-    n.begun = r.begun;
-    n.sparseScheduling = r.sparseScheduling;
-    n.serials = new TreeMap<>(r.serials);
-    n.turns = copyValues(r.turns);
-    n.completedTurns = new HashSet<>(r.completedTurns);
-    n.rounds = copyValues(r.rounds);
-    n.units = copyValues(r.units);
-    n.routed = new HashSet<>(r.routed);
-    n.consumedObservations = new HashSet<>(r.consumedObservations);
-    n.turnCount = r.turnCount;
-    n.roundCount = r.roundCount;
-    n.allocation = r.allocation;
-    n.topologyChanged = r.topologyChanged;
-    n.phase = phase(r.phase);
-    var g = new ContractGraph(n.state, r.reg, r.graph.archive, n.meter, r.graph.cause);
-    g.aliases = r.graph.aliases.copy();
-    g.resets = new HashSet<>(r.graph.resets);
-    g.added = new ArrayList<>(r.graph.added);
-    g.changes = n.changes;
-    g.topologyChanged = r.graph.topologyChanged;
-    g.allocation = r.graph.allocation;
-    g.dirty = new HashSet<>(r.graph.dirty);
-    g.finalized = r.graph.finalized.copy();
-    // Topology components contain immutable member keys. The fork replaces the partition as a unit.
-    g.partition = r.graph.partition;
-    g.pathHeaders = new HashSet<>(r.graph.pathHeaders);
-    g.verifiedBindings = new HashSet<>(r.graph.verifiedBindings);
-    var l = new ContractWork(r.blue, n.meter);
-    var old = r.graph.logical;
-    l.manifests.addAll(old.manifests);
-    l.established.addAll(old.established);
-    l.cyclicEstablished.addAll(old.cyclicEstablished);
-    l.proofs.addAll(old.proofs);
-    l.carriedRoots.addAll(old.carriedRoots);
-    l.boundIdentities.addAll(old.boundIdentities);
-    l.copyExactValues(old);
-    l.partition(old.partition());
-    g.logical = l;
-    n.graph = g;
-    return n;
+    candidate.invocationWitnesses = accepted.invocationWitnesses.fork();
+    candidate.state = accepted.state.copy();
+    candidate.invocation = accepted.invocation;
+    candidate.call = accepted.call;
+    candidate.callRecord = copyRecord(accepted.callRecord);
+    candidate.seeds = List.copyOf(accepted.seeds);
+    candidate.admissionEvidence = copyRecord(accepted.admissionEvidence);
+    candidate.nativeAdmissionVerified = accepted.nativeAdmissionVerified;
+    candidate.externalAdmissions = new TreeMap<>(accepted.externalAdmissions);
+    candidate.views = new TreeMap<>(accepted.views);
+    candidate.meter.inheritAcceptedPrefix(accepted.meter);
+    candidate.events = copyValues(accepted.events);
+    candidate.work = new ArrayList<>(accepted.work);
+    candidate.publicEvents = copyValues(accepted.publicEvents);
+    candidate.writes = copyValues(accepted.writes);
+    candidate.changes = copyValues(accepted.changes);
+    candidate.initializing = new HashSet<>(accepted.initializing);
+    candidate.terminating = new HashSet<>(accepted.terminating);
+    candidate.initialized = new HashMap<>(accepted.initialized);
+    candidate.initializationCandidates =
+        accepted.initializationCandidates == null
+            ? null
+            : new HashSet<>(accepted.initializationCandidates);
+    candidate.termination = new HashMap<>(accepted.termination);
+    candidate.activation = new TreeMap<>(accepted.activation);
+    candidate.effectCount = accepted.effectCount;
+    candidate.receiving = accepted.receiving;
+    candidate.liveReceiving = accepted.liveReceiving;
+    candidate.begun = accepted.begun;
+    candidate.sparseScheduling = accepted.sparseScheduling;
+    candidate.serials = new TreeMap<>(accepted.serials);
+    candidate.turns = copyValues(accepted.turns);
+    candidate.completedTurns = new HashSet<>(accepted.completedTurns);
+    candidate.rounds = copyValues(accepted.rounds);
+    candidate.units = copyValues(accepted.units);
+    candidate.routed = new HashSet<>(accepted.routed);
+    candidate.consumedObservations = new HashSet<>(accepted.consumedObservations);
+    candidate.turnCount = accepted.turnCount;
+    candidate.roundCount = accepted.roundCount;
+    candidate.allocation = accepted.allocation;
+    candidate.topologyChanged = accepted.topologyChanged;
+    candidate.phase = phase(accepted.phase);
+    candidate.graph = accepted.graph.fork(candidate.state, candidate.meter, candidate.changes);
+    return candidate;
   }
 
   static Batch batch(Batch b) {
