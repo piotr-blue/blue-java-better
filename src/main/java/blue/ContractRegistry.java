@@ -418,7 +418,7 @@ final class ContractRegistry {
   }
 
   private Map<String, Object> header(Recipe recipe) {
-    boolean reuse = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
+    boolean reuse = !DiagnosticSwitches.nativeReuseDisabled();
     String key = recipe.key();
     Map<String, Object> cached = reuse ? declarationHeaders.get(key) : null;
     if (cached != null) {
@@ -457,7 +457,7 @@ final class ContractRegistry {
       }
       return prepared.declarations();
     }
-    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
+    boolean reusable = !DiagnosticSwitches.nativeReuseDisabled();
     if (!reusable) {
       return contracts(document.body);
     }
@@ -485,7 +485,7 @@ final class ContractRegistry {
       clearDeclarations();
       declarationScope = scope;
     }
-    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
+    boolean reusable = !DiagnosticSwitches.nativeReuseDisabled();
     // State-only writes leave the effective contract recipe unchanged. Declarations depend
     // on this recipe and its evidence scope, not on unrelated document fields.
     Recipe contracts = blue.head(body).contracts;
@@ -571,7 +571,7 @@ final class ContractRegistry {
     if (prepared != null) {
       return prepared.markers().get(key).orElse(null);
     }
-    if (!blue.context.nativeReuse() || DiagnosticSwitches.nativeReuseDisabled()) {
+    if (DiagnosticSwitches.nativeReuseDisabled()) {
       return marker(document.body, key);
     }
     var scope = blue.context.evidenceScope();

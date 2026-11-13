@@ -335,11 +335,6 @@ final class ContractLanguage {
     }
   }
 
-  // Immutable verified evidence is reusable. The context still enforces host bounds on new work.
-  boolean nativeReuse() {
-    return true;
-  }
-
   String alias(String name) {
     return context.aliases.get(name);
   }

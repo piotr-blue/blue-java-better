@@ -1536,7 +1536,7 @@ final class ContractRun {
 
   void creationBarrier() {
     Set<String> candidates =
-        blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled()
+        !DiagnosticSwitches.nativeReuseDisabled()
             ? lifecycle.candidates(input, reg, graph)
             : graph.reachable();
     if (candidates.isEmpty()) {

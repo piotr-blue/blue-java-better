@@ -46,7 +46,7 @@ final class ContractFacts {
       scope = current;
     }
     Object fact = List.of(kind, key, identity(document.body), document.metadata(), extra);
-    boolean reusable = blue.context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
+    boolean reusable = !DiagnosticSwitches.nativeReuseDisabled();
     // The initialized and pre-initialization lifetime checks are distinct facts. Keeping both
     // avoids alternately evicting one while installing protected preparation.
     String slot = kind.equals("lifetimes") ? kind + ":" + extra : kind;
@@ -65,8 +65,7 @@ final class ContractFacts {
   }
 
   void established(Check check) {
-    if (blue.context.nativeReuse()
-        && !DiagnosticSwitches.nativeReuseDisabled()
+    if (!DiagnosticSwitches.nativeReuseDisabled()
         && check.scope() == blue.context.evidenceScope()) {
       var updated = new HashMap<>(check.document.validation);
       updated.put(check.kind, new Established(configuration, check.scope, check.key));

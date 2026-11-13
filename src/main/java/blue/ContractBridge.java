@@ -213,7 +213,7 @@ final class ContractBridge {
               ? exact
               : context.prepare(input(BexValues.copy(value), true));
       ExactNode admitted =
-          context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled()
+          !DiagnosticSwitches.nativeReuseDisabled()
               ? context.admitLocal(n, goal)
               : wireAdmission(n, goal);
       String admittedId = identity(admitted);
@@ -267,7 +267,7 @@ final class ContractBridge {
   void retain(Collection<ExactNode> nodes) {
     // Collect the complete closure before merging alternate encodings. A replacement can
     // invalidate cached owning-set proofs; it must not do so halfway through this export.
-    boolean nativeRecords = context.nativeReuse() && !DiagnosticSwitches.nativeReuseDisabled();
+    boolean nativeRecords = !DiagnosticSwitches.nativeReuseDisabled();
     if (nativeRecords) {
       context.retain(nodes);
     } else {
@@ -327,15 +327,13 @@ final class ContractBridge {
         certified.clear();
         certifiedContext = context;
       }
-      String key = context.nativeReuse() ? identity(n) + ":" + goal : null;
-      if (key != null && certified.contains(key)) {
+      String key = identity(n) + ":" + goal;
+      if (certified.contains(key)) {
         return;
       }
       ContractMetrics.count("language.strictValidationCalls");
       ContractLanguage.strict(n, context, goal);
-      if (key != null) {
-        certified.add(key);
-      }
+      certified.add(key);
     } catch (LanguageFailure e) {
       throw translate(e);
     }
@@ -957,7 +955,7 @@ final class ContractBridge {
     final ContractWork logical;
     final boolean list;
     final boolean establishedValue;
-    private Head cachedHead;
+    private final Head selectedHead;
     private List<String> cachedKeys;
     private Value cachedOwnBody;
 
@@ -967,9 +965,7 @@ final class ContractBridge {
       recipe = r;
       this.logical = logical;
       this.list = list;
-      if (bridge.context.nativeReuse()) {
-        cachedHead = head;
-      }
+      selectedHead = head;
     }
 
     Head head() {
@@ -978,13 +974,7 @@ final class ContractBridge {
           logical.open(p, bridge);
         }
       }
-      if (!bridge.context.nativeReuse()) {
-        return bridge.head(recipe);
-      }
-      if (cachedHead == null) {
-        cachedHead = bridge.head(recipe);
-      }
-      return cachedHead;
+      return selectedHead;
     }
 
     @Override
@@ -1024,9 +1014,7 @@ final class ContractBridge {
       if (h.type != null && !CORE_NAME.containsKey(h.type)) {
         keys.add("type");
       }
-      if (bridge.context.nativeReuse()) {
-        cachedKeys = List.copyOf(keys);
-      }
+      cachedKeys = List.copyOf(keys);
       return keys;
     }
 
@@ -1059,17 +1047,12 @@ final class ContractBridge {
     }
 
     private Recipe child(Head head, Object key) {
-      return bridge.context.nativeReuse()
-          ? bridge.child(recipe, head, key)
-          : bridge.child(recipe, key);
+      return bridge.child(recipe, head, key);
     }
 
     private Value ownBody() {
       if (recipe.parts().isEmpty()) {
         return null;
-      }
-      if (!bridge.context.nativeReuse()) {
-        return bridge.open(bridge.exact(recipe));
       }
       if (cachedOwnBody == null) {
         cachedOwnBody = bridge.open(bridge.exact(recipe));

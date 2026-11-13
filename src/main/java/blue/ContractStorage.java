@@ -143,10 +143,7 @@ final class ContractStorage {
           engine.registry.facts.established(fact);
         }
       }
-      boolean reuse =
-          !prepared
-              && engine.blue.context.nativeReuse()
-              && !DiagnosticSwitches.nativeReuseDisabled();
+      boolean reuse = !prepared && !DiagnosticSwitches.nativeReuseDisabled();
       var cached = reuse ? engine.registry.restoredDocuments.get(row) : null;
       if (cached != null) {
         s.documents.put(k, cached.copy());
