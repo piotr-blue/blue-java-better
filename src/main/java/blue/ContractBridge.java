@@ -218,7 +218,7 @@ final class ContractBridge {
               : wireAdmission(n, goal);
       String admittedId = identity(admitted);
       refresh();
-      Value body = open(new Ref(admittedId));
+      open(new Ref(admittedId));
       return context.admittedHandle(admittedId);
     } catch (LanguageFailure e) {
       throw translate(e);

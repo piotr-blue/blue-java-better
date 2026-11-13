@@ -1508,7 +1508,6 @@ final class ContractRun {
       dep.add(e.target());
     }
     var inputBatches = new ArrayList<Object>();
-    var semanticBatches = new ArrayList<Object>();
     for (Batch b : sortedBatches(incoming)) {
       var row = m("kind", b.roundSeal != null ? "CYCLIC" : "DAG", "sourceCompletion", b.completion);
       if (b.roundSeal != null) {
@@ -1516,20 +1515,6 @@ final class ContractRun {
       }
       row.put("tickets", b.tickets.stream().map(Ticket::wire).toList());
       inputBatches.add(row);
-      semanticBatches.add(
-          m(
-              "kind",
-              b.roundSeal != null ? "CYCLIC" : "DAG",
-              "source",
-              b.source,
-              "serial",
-              b.serial,
-              "after",
-              b.after,
-              "output",
-              b.output,
-              "tickets",
-              b.tickets.stream().map(Ticket::wire).toList()));
     }
     var descriptor =
         m(

@@ -447,20 +447,7 @@ final class BexValues {
             if (length != size(b)) {
               return false;
             }
-            current.children =
-                new Iterator<Integer>() {
-                  int index;
-
-                  @Override
-                  public boolean hasNext() {
-                    return index < length;
-                  }
-
-                  @Override
-                  public Integer next() {
-                    return index++;
-                  }
-                };
+            current.children = java.util.stream.IntStream.range(0, length).iterator();
           } else {
             List<String> left = ordered(a, gas), right = ordered(b, gas);
             if (!left.equals(right)) {
