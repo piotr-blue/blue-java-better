@@ -185,6 +185,32 @@ class ContentExportTest {
   }
 
   @Test
+  void importedMemberChecksItsCanonicalIndexAndEveryClaimedBody() {
+    // Master from the published Language CYCLE-LOOP vector, independently pinned by the corpus.
+    String master = "7Ydx3cm8uySLmzNyTcbpM5fufGaLSKnEs9cUcMMxRkeC";
+    BlueId first = new BlueId(master + "#0");
+    String proof = "{\"members\":[{\"name\":\"Loop\",\"self\":{\"blueId\":\"this#0\"}}]}";
+    String body = "{\"name\":\"Loop\",\"self\":{\"blueId\":\"" + first + "\"}}";
+    var reader = Language.newBuilder().record(first, LanguageRecord.cyclic(proof, body)).build();
+    assertEquals(first, reader.read(first).blueId());
+    Map<BlueId, LanguageRecord> corrupt =
+        Map.of(
+            new BlueId(master + "#1"),
+            LanguageRecord.cyclic(proof),
+            first,
+            LanguageRecord.cyclic(proof, body.replace("Loop", "Changed")),
+            new BlueId(Language.create().readJson("19").blueId().value() + "#0"),
+            LanguageRecord.cyclic(proof));
+    corrupt.forEach(
+        (id, record) -> {
+          var untrusted = Language.newBuilder().record(id, record).build();
+          assertEquals(
+              "InvalidCyclicProof",
+              assertThrows(LanguageException.class, () -> untrusted.read(id)).category());
+        });
+  }
+
+  @Test
   void serializationNeverTurnsAnUnverifiedRecordIntoAuthority() {
     BlueId expected = Language.create().readJson("1").blueId();
     LanguageRecord wrong = LanguageRecord.fromJson(LanguageRecord.json("2").toJson());
