@@ -23,6 +23,8 @@ final class ContractMetrics {
           && DiagnosticSwitches.cpuTime()
           && CPU.isCurrentThreadCpuTimeSupported()
           && CPU.isThreadCpuTimeEnabled();
+  // Shared only on the disabled path. Its close method returns before touching any state.
+  private static final Span DISABLED_SPAN = ENABLED ? null : new Span("");
 
   /** Diagnostic ownership only; never used by gas, scheduling or validity. */
   public static final class Scope implements AutoCloseable {
@@ -102,11 +104,14 @@ final class ContractMetrics {
   }
 
   public static Span span(String name) {
-    return new Span(name);
+    return ENABLED ? new Span(name) : DISABLED_SPAN;
   }
 
   @SuppressWarnings("try") // The span only brackets the measured region.
   public static <T> T measured(String name, java.util.function.Supplier<T> work) {
+    if (!ENABLED) {
+      return work.get();
+    }
     try (var ignored = span(name)) {
       return work.get();
     }

@@ -186,6 +186,15 @@ tasks.register<JavaExec>("normalizationSharingProbe") {
     maxHeapSize = "512m"
 }
 
+tasks.register<JavaExec>("contractCounterProbe") {
+    group = "benchmark"
+    description = "Print physical counters for a verified Agreement, Order and Payment execution."
+    classpath = demo.runtimeClasspath
+    javaLauncher.set(java25)
+    mainClass.set("blue.ContractCounterProbe")
+    systemProperty("blue.physical.counters", "true")
+}
+
 // Maintainer-only fixture generation. Normal builds consume the checked-in, pinned artifacts.
 tasks.register<JavaExec>("preparePackageExamples") {
     group = "verification"

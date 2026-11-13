@@ -51,3 +51,7 @@ incomplete attachments. That API reuses completed admission within a revocable a
 actual attachment edges, and never advertises a missing full-graph preparation as a delta base.
 `ContractCacheTest` owns physical retention bounds, replacement identity, LRU recency and overflow;
 these choices have no effect on gas or authorization.
+
+## Inspect physical counters for one payment
+
+Run `./gradlew contractCounterProbe` to initialize a sample Agreement, attach one Order and Payment, and settle the Payment. The probe uses a fresh JVM and prints the native receipt and gas, followed by immutable physical-counter snapshots per phase and for the process. Compare fixed-size phases across branches. Wall-clock spans include work on the executing thread. Counters and timing observations never participate in the receipt or semantic gas schedule.
