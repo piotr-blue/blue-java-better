@@ -18,6 +18,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @Tag("contracts")
 class CanonicalEncodingTest {
+  @Test
+  void deeplyNestedContractPathsUseTheSameEscapingAsPublicPointers() {
+    var segments = new java.util.ArrayList<String>();
+    for (int i = 0; i < 2048; i++) {
+      segments.add(i % 5 == 0 ? "" : "订单/" + i + "~1");
+    }
+    String pointer = ContractModel.pointer(segments);
+    assertEquals(new Pointer(segments).toString(), pointer);
+    assertEquals(segments, Pointer.parse(pointer).segments());
+    assertEquals(segments, ContractModel.segments(pointer));
+  }
+
   @ParameterizedTest
   @ValueSource(ints = {0, 1, 511, 512, 513, 16383, 16384, 16385, 65536})
   void growingBuffersPreserveUtf8FragmentsNumbersAndExplicitFlushes(int length) throws Exception {

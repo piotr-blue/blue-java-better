@@ -73,6 +73,10 @@ public record Pointer(List<String> segments) {
 
   @Override
   public String toString() {
+    return encode(segments);
+  }
+
+  static String encode(List<String> segments) {
     var out = new StringBuilder();
     for (String part : segments) {
       out.append('/').append(escape(part));

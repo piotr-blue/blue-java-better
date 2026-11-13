@@ -155,10 +155,8 @@ final class ContractModel {
     return out;
   }
 
-  static String pointer(List<String> p) {
-    return p.stream()
-        .map(k -> "/" + k.replace("~", "~0").replace("/", "~1"))
-        .reduce("", String::concat);
+  static String pointer(List<String> segments) {
+    return Pointer.encode(segments);
   }
 
   static boolean prefix(String a, String b) {
