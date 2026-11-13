@@ -269,33 +269,21 @@ final class ContractWork {
     return blue.view(r, this);
   }
 
-  String establish(ExactNode n) {
-    return establish(n, null, null, null);
+  String establish(ExactNode node) {
+    return establishCaptured(node, blue);
   }
 
-  String establish(ExactNode n, ExactNode previous) {
-    return establish(n, previous, null, null);
-  }
-
-  String establishCaptured(ExactNode n, ContractBridge source) {
-    return establish(n, null, null, null, source);
-  }
-
-  String establish(ExactNode n, ExactNode previous, IntFunction<String> token, Object scope) {
-    return establish(n, previous, token, scope, blue);
-  }
-
-  String establish(
-      ExactNode n,
-      ExactNode previous,
-      IntFunction<String> token,
-      Object scope,
-      ContractBridge source) {
-    String id = token == null ? identity(n) : identity(n, token);
-    if (n instanceof Value && token == null) {
-      source.note(n, id);
+  String establishCaptured(ExactNode node, ContractBridge source) {
+    String id = identity(node);
+    if (node instanceof Value) {
+      source.note(node, id);
     }
     return id;
+  }
+
+  /** A symbolic commitment is only meaningful within this owning set. */
+  String establishSymbolic(ExactNode node, IntFunction<String> token) {
+    return identity(node, token);
   }
 
   String nodeBlueId(Object v, BexGas gas) {

@@ -694,7 +694,6 @@ final class ContractGraph {
         continue;
       }
       var edges = index.groupEdges(group);
-      var groupSet = new HashSet<>(group);
       var positions = new HashMap<String, Integer>();
       for (int i = 0; i < group.size(); i++) {
         positions.put(group.get(i), i);
@@ -707,7 +706,7 @@ final class ContractGraph {
       for (String k : group) {
         var replacements = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
         for (Edge e : index.outgoingEdges(k)) {
-          if (!groupSet.contains(e.target())
+          if (!positions.containsKey(e.target())
               && !identity(blue.exact(blue.select(bodies.get(k), e.path())))
                   .equals(state.documents.get(e.target()).blueId)) {
             if (meter != null) {
@@ -720,7 +719,7 @@ final class ContractGraph {
         if (!replacements.isEmpty()) {
           ExactNode n = blue.substitute(bodies.get(k), replacements);
           if (logical != null) {
-            logical.establish(n, bodies.get(k));
+            logical.establish(n);
           }
           bodies.put(k, n);
         }
@@ -738,51 +737,16 @@ final class ContractGraph {
       boolean cyclic =
           group.size() > 1 || edges.stream().anyMatch(e -> e.source().equals(e.target()));
       if (cyclic) {
-        if (meter != null) {
-          meter.owner = "";
-        }
-        charge("tentativeComponentFinalization");
-      }
-      for (String k : group) {
-        if (meter != null) {
-          meter.owner = k;
-        }
-        ExactNode n = bodies.get(k);
-        if (cyclic) {
-          var replacement = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
-          for (Edge e : index.outgoingEdges(k)) {
-            if (groupSet.contains(e.target())) {
-              replacement.put(e.path(), new Local(positions.get(e.target())));
-            }
-          }
-          n = blue.substitute(n, replacement);
-        }
-        if (logical != null) {
-          logical.establish(
-              n,
-              cyclic ? null : finalized.get(k),
-              cyclic ? i -> "this#" + i : null,
-              cyclic
-                  ? group.stream()
-                      .map(member -> List.of(member, state.documents.get(member).blueId))
-                      .toList()
-                  : null);
-        }
-      }
-      if (cyclic) {
-        for (String k : group) {
-          if (meter != null) {
-            meter.owner = k;
-          }
-          charge("cyclicMemberFinalized");
-        }
-        for (var e : blue.finalizeComponent(group, bodies, edges).entrySet()) {
-          Document d = state.documents.get(e.getKey());
-          state.documents.put(e.getKey(), d.finalized(e.getValue()));
-        }
+        finalizeCycle(group, index, positions, bodies);
       } else {
         String k = group.getFirst();
         ExactNode body = bodies.get(k);
+        if (meter != null) {
+          meter.owner = k;
+        }
+        if (logical != null) {
+          logical.establish(body);
+        }
         blue.remember(body);
         state.documents.put(k, state.documents.get(k).finalized(body));
       }
@@ -803,6 +767,47 @@ final class ContractGraph {
     }
     dirty.removeAll(selected);
     refreshAliases();
+  }
+
+  /** Calculate the complete owning proof from the same symbolic bodies used for identity work. */
+  private void finalizeCycle(
+      List<String> group,
+      ContractTopology index,
+      Map<String, Integer> positions,
+      Map<String, ExactNode> bodies) {
+    if (meter != null) {
+      meter.owner = "";
+    }
+    charge("tentativeComponentFinalization");
+    var symbolicBodies = new ArrayList<>(group.size());
+    for (String key : group) {
+      if (meter != null) {
+        meter.owner = key;
+      }
+      var replacements = new TreeMap<String, ExactNode>(ContractCanonical.CODE_POINTS);
+      for (Edge edge : index.outgoingEdges(key)) {
+        Integer target = positions.get(edge.target());
+        if (target != null) {
+          replacements.put(edge.path(), new Local(target));
+        }
+      }
+      ExactNode body = blue.substitute(bodies.get(key), replacements);
+      if (logical != null) {
+        logical.establishSymbolic(body, i -> "this#" + i);
+      }
+      symbolicBodies.add(ContractLanguage.export(body));
+    }
+    for (String key : group) {
+      if (meter != null) {
+        meter.owner = key;
+      }
+      charge("cyclicMemberFinalized");
+    }
+    var members = blue.context.finalizeComponent(symbolicBodies);
+    for (int i = 0; i < group.size(); i++) {
+      String key = group.get(i);
+      state.documents.put(key, state.documents.get(key).finalized(members.get(i)));
+    }
   }
 
   private boolean referencesUnchanged(String key, ContractTopology index) {

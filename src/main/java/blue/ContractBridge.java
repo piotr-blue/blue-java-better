@@ -951,26 +951,6 @@ final class ContractBridge {
     return substituteAt(n, r, rows);
   }
 
-  Map<String, ExactNode> finalizeComponent(
-      List<String> keys, Map<String, ExactNode> bodies, List<ContractModel.Edge> edges) {
-    var raw = new ArrayList<Object>();
-    for (String k : keys) {
-      var replacements = new TreeMap<String, ExactNode>();
-      for (var e : edges) {
-        if (e.source().equals(k) && keys.contains(e.target())) {
-          replacements.put(e.path(), new Local(keys.indexOf(e.target())));
-        }
-      }
-      raw.add(export(substitute(bodies.get(k), replacements)));
-    }
-    var result = context.finalizeComponent(raw);
-    var out = new TreeMap<String, ExactNode>();
-    for (int i = 0; i < keys.size(); i++) {
-      out.put(keys.get(i), result.get(i));
-    }
-    return out;
-  }
-
   static final class ExactView implements BexValues.HostValue {
     final ContractBridge bridge;
     final Recipe recipe;

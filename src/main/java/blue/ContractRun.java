@@ -603,7 +603,7 @@ final class ContractRun {
       fields.put(name, runtimeNode(value, false));
     }
     ExactNode candidate = root.with("contracts", ExactNode.value(fields));
-    graph.logical.establish(candidate, doc.body);
+    graph.logical.establish(candidate);
     state.documents.put(key, doc.withBody(candidate));
   }
 
@@ -1126,7 +1126,7 @@ final class ContractRun {
     }
     if (!replacements.isEmpty()) {
       ExactNode candidate = blue.substitute(previous, replacements);
-      graph.logical.establish(candidate, previous);
+      graph.logical.establish(candidate);
       state.documents.put(key, document.withBody(candidate));
     }
     graph.finalizeLocal(key);

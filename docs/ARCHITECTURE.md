@@ -75,3 +75,9 @@ Initialization and termination belong to an invocation. A private turn can disco
 Closing an execution releases its completion and calculation callbacks. A previously returned state may still expose the immutable document and its identity. Keeping that state must allow its host storage adapter to be collected. [Reader lifetime qualification](TESTING.md#closed-execution-retention)
 
 An admitted workflow owns its step slots and the channel generation that authorized them. A native step receives the same event, selected declaration and logical document view as an interpreted step. A host callback’s failure still settles its runtime meter. Only a validated effect set can change the document. Public native reads project the requested branch under the callback’s output budget. [Workflow execution](../src/main/java/blue/ContractWorkflow.java) · [Native value materialization](../src/main/java/blue/NativeValues.java) · [Bounded-heap check](TESTING.md#native-read-projection-budget)
+
+## Verifying an owning cycle
+
+An owning-set proof must contain one strongly connected component. Choose any member. A forward walk proves it can reach every member. A second walk over reversed links proves that each member can reach the chosen one. Together those two facts establish reachability between every pair. This validation costs linear time in members and links. The remaining canonical ordering and hashing have their own costs.
+
+Contracts substitutes each member’s outgoing local links once. The symbolic body feeds both the identity calculation and the owning proof. The canonicalizer returns the identities in the input member order, so the host can install the correct identity on each occurrence. [Language proof](../src/main/java/blue/LanguageCore.java) · [All 512 three-member graphs](../src/test/java/blue/CyclicConnectivityTest.java) · [Ring and chord benchmark](../src/jmh/java/blue/CyclicIdentityBenchmark.java)

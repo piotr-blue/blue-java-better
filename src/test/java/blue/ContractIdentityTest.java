@@ -93,8 +93,7 @@ class ContractIdentityTest {
       for (String token : List.of("this#", "that#")) {
         ContractBridge bridge = new ContractBridge(Language.create());
         ContractModel.Meter meter = new ContractModel.Meter(10_000_000);
-        String actual =
-            new ContractWork(bridge, meter).establish(body, null, i -> token + i, List.of(token));
+        String actual = new ContractWork(bridge, meter).establishSymbolic(body, i -> token + i);
         assertEquals(token.equals("this#") ? first : second, actual);
         assertNull(body.identity);
         assertEquals(0, body.identityBytes);

@@ -74,8 +74,7 @@ final class ContractPatches {
     ProtectedState protection = protectedState(run.reg, doc.body);
     ExactNode value = op.equals("remove") ? null : run.runtimeNode(patch.value(), false);
     ExactNode next = blue.setAt(doc.body, path, value, op);
-    graph.logical.establish(next, doc.body);
-    ExactNode requested = next;
+    graph.logical.establish(next);
     var repaired =
         Generalization.repair(
             blue,
@@ -85,7 +84,7 @@ final class ContractPatches {
             run.reg.policy(doc.body),
             meter,
             n -> graph.logical.validate(n, doc.body),
-            n -> graph.logical.establish(n, doc.body));
+            graph.logical::establish);
     next = repaired.body();
     require(
         protectedState(run.reg, next).equals(protection), "PROTECTED_STATE_MUTATION", "path", path);
@@ -93,7 +92,7 @@ final class ContractPatches {
       chargePatchBoundary(meter, segments(write.path()), false);
     }
     if (!repaired.writes().isEmpty()) {
-      graph.logical.establish(next, requested);
+      graph.logical.establish(next);
       localWrite = false;
       if (state.ownerLocal && !initializingChild) {
         throw new ContractModel.Error(

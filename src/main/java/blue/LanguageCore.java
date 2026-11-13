@@ -896,6 +896,41 @@ final class LanguageCore {
   record Cyclic(
       String master, List<String> ids, List<ExactNode> canonical, List<ExactNode> bodies) {}
 
+  /** A single owning set must both reach, and be reachable from, its first member. */
+  private static boolean stronglyConnected(List<Set<Integer>> outgoing) {
+    if (!reachesEveryMember(outgoing)) {
+      return false;
+    }
+    var incoming = new ArrayList<List<Integer>>(outgoing.size());
+    for (int i = 0; i < outgoing.size(); i++) {
+      incoming.add(new ArrayList<>());
+    }
+    for (int i = 0; i < outgoing.size(); i++) {
+      for (int neighbor : outgoing.get(i)) {
+        incoming.get(neighbor).add(i);
+      }
+    }
+    return reachesEveryMember(incoming);
+  }
+
+  private static boolean reachesEveryMember(List<? extends Iterable<Integer>> adjacency) {
+    boolean[] visited = new boolean[adjacency.size()];
+    var pending = new ArrayDeque<Integer>();
+    pending.push(0);
+    visited[0] = true;
+    int seen = 1;
+    while (!pending.isEmpty()) {
+      for (int neighbor : adjacency.get(pending.pop())) {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          seen++;
+          pending.push(neighbor);
+        }
+      }
+    }
+    return seen == adjacency.size();
+  }
+
   static Cyclic finalizeSet(List<?> raw, LanguageContext c) {
     require(!raw.isEmpty(), "CircularSetError");
     var ns = raw.stream().map(x -> normalize(x, c, "exact", true)).toList();
@@ -907,18 +942,7 @@ final class LanguageCore {
             && edges.stream().flatMap(Set::stream).allMatch(i -> i >= 0 && i < size),
         "CircularSetError",
         "local target");
-    for (int start = 0; start < size; start++) {
-      var seen = new HashSet<Integer>();
-      var todo = new ArrayDeque<Integer>();
-      todo.push(start);
-      while (!todo.isEmpty()) {
-        int i = todo.pop();
-        if (seen.add(i)) {
-          todo.addAll(edges.get(i));
-        }
-      }
-      require(seen.size() == size, "CircularSetError", "not strongly connected");
-    }
+    require(stronglyConnected(edges), "CircularSetError", "not strongly connected");
     record Order(String id, String commitment, int index) {}
     var records = new ArrayList<Order>();
     IntFunction<String> zero = i -> "0".repeat(44);
