@@ -41,7 +41,8 @@ final class ContractAttempt {
 
   /** Issuer-bound, one-use native capability; explicitly export to cross a process boundary. */
   public static final class ChunkToken {
-    private final ContractAttempt issuer;
+    // A consumed capability keeps its inspectable descriptor only.
+    private ContractAttempt issuer;
     private final Map<String, Object> descriptor;
 
     private ChunkToken(ContractAttempt issuer, Map<String, Object> descriptor) {
@@ -58,16 +59,21 @@ final class ContractAttempt {
     }
 
     public Map<String, Object> toData() {
-      require(issuer.token == this && !issuer.finished, "STALE_CHUNK_TOKEN");
+      ContractAttempt attempt = currentIssuer();
       return m(
           "format",
           "contracts.chunk-input/completion-1",
           "token",
           descriptor(),
           "input",
-          issuer.inputData(),
+          attempt.inputData(),
           "history",
-          copyValues(issuer.history));
+          copyValues(attempt.history));
+    }
+
+    private ContractAttempt currentIssuer() {
+      require(issuer != null && issuer.token == this && !issuer.finished, "STALE_CHUNK_TOKEN");
+      return issuer;
     }
   }
 
@@ -275,6 +281,7 @@ final class ContractAttempt {
     history.add(m("token", token.identity(), "result", wire.get("identity")));
     run = candidate.run;
     outcome = candidate.outcome;
+    token.issuer = null;
     token = null;
     candidates.clear();
     return this;
@@ -382,8 +389,9 @@ final class ContractAttempt {
   }
 
   static ChunkResult execute(ContractProcessor engine, ChunkToken token) {
-    require(token.issuer.run.engine == engine, "WRONG_CHUNK_EXECUTOR");
-    return token.issuer.execute(token);
+    var issuer = token.currentIssuer();
+    require(issuer.run.engine == engine, "WRONG_CHUNK_EXECUTOR");
+    return issuer.execute(token);
   }
 
   static ChunkResult execute(ContractProcessor engine, Map<String, Object> token) {

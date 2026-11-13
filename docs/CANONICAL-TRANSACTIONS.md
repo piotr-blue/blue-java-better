@@ -93,3 +93,5 @@ provider for the private transaction lifetime. It does not copy an entire source
 into the session or treat content possession as admission authority. Closing the
 transaction releases that provider; successfully resolved immutable evidence remains
 available under the ordinary retention rules.
+
+A portable scheduling token can export its issuing attempt while its unit is pending. Successful acceptance revokes the token and releases its references to the attempt and processor. The descriptor and identity remain available for inspection. Later execution or export reports `STALE_CHUNK_TOKEN`. A rejected candidate leaves the pending unit available for a valid retry. [Capability tests](../src/test/java/blue/CanonicalPortableTest.java) · [Small-heap retention probe](../src/demo/java/blue/ExecutionRetentionProbe.java)

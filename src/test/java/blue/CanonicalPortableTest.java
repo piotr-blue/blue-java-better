@@ -109,7 +109,10 @@ class CanonicalPortableTest {
     assertNotEquals(returned, r.toData());
     a.accept(token, r);
     assertThrows(ContractFault.class, () -> a.accept(token, r));
-    assertThrows(ContractFault.class, token::toData);
+    assertEquals("STALE_CHUNK_TOKEN", assertThrows(ContractFault.class, token::toData).code());
+    assertEquals(
+        "STALE_CHUNK_TOKEN", assertThrows(ContractFault.class, () -> p.executeChunk(token)).code());
+    assertEquals(token.identity(), token.descriptor().get("identity"));
     for (var next = a.nextChunk(); next != null; next = a.nextChunk()) {
       a.accept(next, a.execute(next));
     }

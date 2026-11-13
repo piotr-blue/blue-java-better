@@ -55,6 +55,27 @@ public final class ExecutionRetentionProbe {
     }
   }
 
+  private record AcceptedChunk(
+      ContractAttempt.ChunkToken token,
+      WeakReference<ContractAttempt> attempt,
+      WeakReference<ContractProcessor> processor) {}
+
+  private static AcceptedChunk acceptChunk() {
+    var processor = new ContractProcessor(ContractBindings.current());
+    var source =
+        Map.of(
+            "rooms",
+            32,
+            "contracts",
+            Map.of("input", Map.of("type", "Contracts/External Channel")));
+    var state = processor.create(source);
+    var attempt = processor.begin(state, Map.of("kind", "Review"), 1);
+    var token = attempt.nextChunk();
+    java.util.Objects.requireNonNull(token);
+    attempt.accept(token, attempt.execute(token));
+    return new AcceptedChunk(token, new WeakReference<>(attempt), new WeakReference<>(processor));
+  }
+
   private static void requireCollected(WeakReference<?> reference, String description)
       throws InterruptedException {
     for (int attempt = 0; attempt < 50 && reference.get() != null; attempt++) {
@@ -81,5 +102,12 @@ public final class ExecutionRetentionProbe {
           (commit ? "Committed" : "Discarded") + " transaction released its owner and result");
       Reference.reachabilityFence(held.transaction());
     }
+    var chunk = acceptChunk();
+    requireCollected(chunk.attempt(), "accepted chunk's issuing attempt");
+    requireCollected(chunk.processor(), "accepted chunk's processor");
+    if (!chunk.token().identity().equals(chunk.token().descriptor().get("identity"))) {
+      throw new AssertionError("Accepted chunk descriptor changed");
+    }
+    Reference.reachabilityFence(chunk.token());
   }
 }
