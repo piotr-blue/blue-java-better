@@ -138,6 +138,9 @@ final class ContractCache<K, V> {
           shallow += row.layout.encodingWeight;
         }
         shallow += 64L * m.size();
+        if (shallow > maximumBytes - bytes) {
+          return Long.MAX_VALUE;
+        }
         for (var e : m.entrySet()) {
           pending.push(e.getKey());
           if (e.getValue() != null) {
@@ -146,6 +149,9 @@ final class ContractCache<K, V> {
         }
       } else if (value instanceof Collection<?> a) {
         shallow += 16L * a.size();
+        if (shallow > maximumBytes - bytes) {
+          return Long.MAX_VALUE;
+        }
         for (Object x : a) {
           if (x != null) {
             pending.push(x);

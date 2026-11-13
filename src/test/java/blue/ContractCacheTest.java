@@ -15,6 +15,36 @@ import org.junit.jupiter.api.Test;
 @Tag("contracts")
 class ContractCacheTest {
   @Test
+  void oversizedContainersAreRejectedBeforeTheirEntriesAreEnumerated() {
+    var largeMap =
+        new java.util.AbstractMap<String, Object>() {
+          @Override
+          public int size() {
+            return 100_000;
+          }
+
+          @Override
+          public java.util.Set<Entry<String, Object>> entrySet() {
+            throw new AssertionError("The map's shallow weight already exceeds the limit");
+          }
+        };
+    var largeList =
+        new java.util.AbstractList<Object>() {
+          @Override
+          public int size() {
+            return 100_000;
+          }
+
+          @Override
+          public Object get(int index) {
+            throw new AssertionError("The list's shallow weight already exceeds the limit");
+          }
+        };
+    assertEquals(Long.MAX_VALUE, ContractCache.weight(largeMap, 64 * 1024));
+    assertEquals(Long.MAX_VALUE, ContractCache.weight(largeList, 64 * 1024));
+  }
+
+  @Test
   void cachedSubtreeWeightsRemainConservativeAtAndAroundTheLimit() {
     var leaf = ExactNode.value(Map.of("value", "harbor"));
     var pair = List.of(leaf, leaf);

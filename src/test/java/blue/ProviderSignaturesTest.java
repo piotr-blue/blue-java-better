@@ -62,6 +62,18 @@ class ProviderSignaturesTest {
         signature);
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = {"ed", "ee", "ff"})
+  void aCoordinateAtOrBeyondTheFieldPrimeIsRejectedBeforeJcaNormalization(String firstByte) {
+    // The compressed coordinate is little-endian. The field prime is 2^255 - 19.
+    for (String signAndHighBits : List.of("7f", "ff")) {
+      String key = firstByte + "ff".repeat(30) + signAndHighBits;
+      assertEquals(
+          "INVALID_PROVIDER_KEY",
+          assertThrows(BlueException.class, () -> ProviderSignatures.key(key)).code());
+    }
+  }
+
   @Test
   void exactProviderObjectGuaranteeAndReaderDomainsCannotBeSubstituted() throws Exception {
     LanguageDocument provider = provider("https://provider.example/api");

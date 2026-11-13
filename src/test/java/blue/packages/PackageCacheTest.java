@@ -46,6 +46,31 @@ class PackageCacheTest {
   }
 
   @Test
+  void exactByteAllowanceFitsTwoPackagesAndOneByteLessEvictsOnlyTheOlderOne() throws Exception {
+    long geometrySize =
+        PackageTestSupport.files("geometry").values().stream().mapToLong(b -> b.length).sum();
+    long drawingSize =
+        PackageTestSupport.files("drawing").values().stream().mapToLong(b -> b.length).sum();
+    Path geometry = copy(directory, "geometry");
+    Path drawing = copy(directory, "drawing");
+    PackageLoader exact = PackageLoader.newBuilder().cache(2, geometrySize + drawingSize).build();
+    BluePackage first = exact.open(geometry);
+    BluePackage second = exact.open(drawing);
+    assertSame(first, exact.open(geometry));
+    assertSame(second, exact.open(drawing));
+    PackageLoader tight =
+        PackageLoader.newBuilder().cache(2, geometrySize + drawingSize - 1).build();
+    first = tight.open(geometry);
+    second = tight.open(drawing);
+    assertSame(second, tight.open(drawing));
+    assertNotSame(first, tight.open(geometry));
+    assertNotSame(second, tight.open(drawing));
+
+    PackageLoader small = PackageLoader.newBuilder().cache(2, geometrySize - 1).build();
+    assertNotSame(small.open(geometry), small.open(geometry));
+  }
+
+  @Test
   void cacheEvictionAndDisabledRetentionCannotInvalidateReturnedPackages() throws Exception {
     PackageLoader loader = PackageLoader.newBuilder().cache(1, 1 << 20).build();
     Path geometry = copy(directory, "geometry"), drawing = copy(directory, "drawing");

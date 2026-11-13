@@ -179,8 +179,14 @@ final class ContractStorage {
       s.documents.put(k, d);
       if (reuse) {
         d.metadata();
-        var owned = obj(ContractWire.immutable(row));
-        engine.registry.restoredDocuments.put(owned, d.copy(), ContractCache.weight(owned) * 2);
+        // The cache counts one copy for the immutable key and one for the decoded metadata.
+        // Bound the estimate before copying a candidate that cannot fit in the cache.
+        long rowWeight =
+            ContractCache.weight(row, ContractRegistry.RESTORED_METADATA_ENTRY_BYTES / 2);
+        if (rowWeight != Long.MAX_VALUE) {
+          var owned = obj(ContractWire.immutable(row));
+          engine.registry.restoredDocuments.put(owned, d.copy(), rowWeight * 2);
+        }
       }
     }
     for (Object raw : arr(wire.get("edges"))) {

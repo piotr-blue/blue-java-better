@@ -36,9 +36,12 @@ final class ContractRegistry {
   // Trust is granted to the exact definition/rules pair, never to arbitrary subtypes.
   final Map<String, String> interpretedTypes = new HashMap<>();
 
+  static final long RESTORED_METADATA_ENTRY_BYTES = 64 * 1024;
+
   // Parsed immutable metadata only: body verification is performed separately on every restore.
   final ContractCache<Map<String, Object>, Document> restoredDocuments =
-      new ContractCache<>("contracts.restoredMetadata", 2L * 1024 * 1024, 512, 64 * 1024);
+      new ContractCache<>(
+          "contracts.restoredMetadata", 2L * 1024 * 1024, 512, RESTORED_METADATA_ENTRY_BYTES);
 
   java.util.function.Consumer<Map<String, String>> observeAttachment;
   static final Map<String, String> ROLES = new LinkedHashMap<>();
