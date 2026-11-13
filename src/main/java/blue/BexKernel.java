@@ -3,22 +3,15 @@ package blue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Small native, thread-safe BEX entry point. No I/O, dependency acquisition or implicit matcher.
  */
 final class BexKernel {
-  private final BexEdition profile;
   private final BexEngine engine;
   private final Map<String, BexEngine.Intrinsic> intrinsics;
 
-  public BexKernel(BexEdition profile) {
-    this(profile, Map.of());
-  }
-
-  public BexKernel(BexEdition profile, Map<String, BexEngine.Intrinsic> intrinsics) {
-    this.profile = Objects.requireNonNull(profile);
+  BexKernel(Map<String, BexEngine.Intrinsic> intrinsics) {
     this.intrinsics = Map.copyOf(intrinsics);
     engine = new BexEngine(this.intrinsics);
   }

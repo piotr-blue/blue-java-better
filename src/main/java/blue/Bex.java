@@ -18,7 +18,7 @@ public final class Bex {
   private Bex(Builder builder) {
     language = builder.language;
     gasLimit = builder.gasLimit;
-    kernel = new BexKernel(BexEdition.current(), builder.intrinsics);
+    kernel = new BexKernel(builder.intrinsics);
   }
 
   /**

@@ -57,7 +57,6 @@ final class ContractRun {
   Map<String, Object> admissionEvidence = new TreeMap<>();
   // Each verified projection is deeply immutable and belongs only to this invocation.
   Map<String, Map<String, Object>> externalAdmissions = new TreeMap<>();
-  boolean requireNativeAdmission;
   boolean nativeAdmissionVerified;
   final Meter meter;
   Map<String, String> views;
@@ -254,7 +253,6 @@ final class ContractRun {
     engine.validate(input, false);
     if (!admission && (receiving.isEmpty() || liveReceiving)) {
       prepareAdmissions();
-      require(!requireNativeAdmission || nativeAdmissionVerified, "MISSING_ADMISSION_VERIFIER");
       sealInvocation();
       var c = ContractChannels.recognize(reg, event);
       call = c.event();
