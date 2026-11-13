@@ -614,7 +614,8 @@ final class LanguageCore {
     }
     c.bound("fetches", c.demands.size() + 1);
     c.demands.add(r.id());
-    if (!c.provider.containsKey(r.id())) {
+    boolean fetched = !c.provider.containsKey(r.id());
+    if (fetched) {
       Object supplied;
       try {
         supplied = c.lookup.apply(r.id());
@@ -629,6 +630,13 @@ final class LanguageCore {
     c.providerDepth++;
     try {
       return c.retainedBody(providerBody(r, c));
+    } catch (RuntimeException failure) {
+      // A captured view owns its raw response map. A failed lookup in that view must
+      // leave room for fresh evidence from a later provider.
+      if (fetched) {
+        c.provider.remove(r.id());
+      }
+      throw failure;
     } finally {
       c.providerDepth--;
     }

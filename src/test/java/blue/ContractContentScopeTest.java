@@ -70,6 +70,28 @@ class ContractContentScopeTest {
   }
 
   @Test
+  void aCapturedViewCanRecoverFromRejectedRawEvidenceAfterItsProviderIsReplaced() {
+    var language = Language.create();
+    var correct = language.readYaml("answer: 42");
+    var counterfeit = language.readYaml("answer: 41");
+    var query = new ExactNode.Ref(correct.blueId().value());
+    var receiver = new ContractLanguage(language);
+    ContractLanguage view;
+    try (var scope =
+        receiver.withProvider(
+            id -> Optional.of(LanguageRecord.json(counterfeit.canonicalJson())))) {
+      view = receiver.readSnapshot();
+      assertEquals(
+          "ProviderBlueIdMismatch",
+          assertThrows(LanguageFailure.class, () -> view.open(query)).category());
+    }
+    try (var scope =
+        view.withProvider(id -> Optional.of(LanguageRecord.json(correct.canonicalJson())))) {
+      assertEquals(correct.blueId().value(), ContractLanguage.identity(view.open(query)));
+    }
+  }
+
+  @Test
   void cyclicContentKeepsItsProofAndCanBeExportedAfterTheScopeCloses() {
     Language base = Language.create();
     LanguageDocument member =
