@@ -84,28 +84,6 @@ final class ContractRun {
       boolean admission,
       long gasLimit,
       Map<String, Long> localLimits) {
-    this(engine, state, event, timestamp, admission, gasLimit, localLimits, event);
-  }
-
-  ContractRun(
-      ContractProcessor engine,
-      Snapshot state,
-      ExactNode event,
-      Long timestamp,
-      ExactNode commandRecord) {
-    this(
-        engine, state, event, timestamp, false, engine.gasLimit, engine.localLimits, commandRecord);
-  }
-
-  private ContractRun(
-      ContractProcessor engine,
-      Snapshot state,
-      ExactNode event,
-      Long timestamp,
-      boolean admission,
-      long gasLimit,
-      Map<String, Long> localLimits,
-      ExactNode eventRecord) {
     integer(gasLimit, 0, engine.maximumGas());
     this.engine = engine;
     expressions = new ContractExpressions(this);
@@ -115,10 +93,7 @@ final class ContractRun {
     this.state = state.copy();
     this.event = event;
     this.timestamp = timestamp;
-    eventId = eventRecord == null ? null : identity(eventRecord);
-    if (eventRecord != null && eventRecord != event) {
-      blue.remember(eventRecord);
-    }
+    eventId = event == null ? null : identity(event);
     this.admission = admission;
     meter =
         new Meter(
@@ -620,7 +595,7 @@ final class ContractRun {
 
   Set<MemberPhase> completedTurns = new HashSet<>();
   Set<String> routed = new HashSet<>(), consumedObservations = new HashSet<>();
-  int turnCount, roundCount, allocation;
+  int allocation;
   boolean topologyChanged;
   List<Frame> suspended = new ArrayList<>();
 
@@ -676,15 +651,16 @@ final class ContractRun {
 
   record Pending(String kind, Map<String, Object> occurrence, Ticket ticket, String observation) {}
 
-  static class Frame {
-    String key, sourceTurn;
-    Document before;
-    Map<String, Object> input, writer;
-    ArrayDeque<Pending> queue = new ArrayDeque<>();
-    List<Object> output = new ArrayList<>(), writes = new ArrayList<>();
+  static final class Frame {
+    final String key, sourceTurn;
+    final Document before;
+    final Map<String, Object> input;
+    Map<String, Object> writer;
+    final ArrayDeque<Pending> queue = new ArrayDeque<>();
+    final List<Object> output = new ArrayList<>(), writes = new ArrayList<>();
     Ticket ticket;
-    List<ContractChannels.Seed> consumed = new ArrayList<>();
-    List<Object> dispatchDecisions = new ArrayList<>();
+    final List<ContractChannels.Seed> consumed = new ArrayList<>();
+    final List<Object> dispatchDecisions = new ArrayList<>();
 
     Frame(String key, Document before, Map<String, Object> input, String sourceTurn) {
       this.key = key;
@@ -694,7 +670,7 @@ final class ContractRun {
     }
   }
 
-  static class Phase {
+  static final class Phase {
     String name;
     Set<String> allowed;
     List<Set<String>> groups = new ArrayList<>();
@@ -902,7 +878,6 @@ final class ContractRun {
       boolean cyclic =
           members.size() > 1 || members.stream().anyMatch(graph.topology()::selfLinked);
       if (cyclic) {
-        roundCount++;
         meter.owner = "";
         meter.contracts("componentRoundOpened");
       }
@@ -920,8 +895,7 @@ final class ContractRun {
         }
         boolean earlier = completedTurns.contains(new MemberPhase(key, p.name));
         var routes = earlier ? captureRoutes(key, preceding) : initialRoutes(p, key);
-        results.add(
-            runLocal(preceding, key, incoming, lifecycle, selectedSeeds, p.name, routes, true));
+        results.add(runLocal(preceding, key, incoming, lifecycle, selectedSeeds, p.name, routes));
       }
       results.forEach(this::mergeOwned);
       // Value writes cannot change reachability. Reuse the immutable topology instead of
@@ -1164,8 +1138,7 @@ final class ContractRun {
       String lifecycle,
       List<ContractChannels.Seed> selectedSeeds,
       String phaseName,
-      List<Ticket> routes,
-      boolean completionRequired) {
+      List<Ticket> routes) {
     Snapshot savedState = state;
     ContractGraph savedGraph = graph;
     Frame savedFrame = frame;
@@ -1221,13 +1194,10 @@ final class ContractRun {
                 : m("kind", "INITIALIZE", "document", m("blueId", lifecycle)));
     String sourceTurn =
         ContractLocal.sourceTurn(sealed, key, phaseName, serial, descriptor, incoming);
-    if (completionRequired) {
-      descriptor.put("logicalContext", logicalCommitment());
-    }
+    descriptor.put("logicalContext", logicalCommitment());
     frame = new Frame(key, sealed.documents.get(key).copy(), descriptor, sourceTurn);
     suspended.add(frame);
     try {
-      turnCount++;
       meter.owner = key;
       meter.contracts("localTurnOpened");
       if (reg.preparations != null && reg.preparations.get(state.documents.get(key)) != null) {
@@ -1283,34 +1253,31 @@ final class ContractRun {
           }
         }
       }
-      Map<String, Object> completion = Map.of();
-      if (completionRequired) {
-        completion =
-            committed(
-                "turn-result",
-                dispatchEvidence(
-                    m(
-                        "turnInput",
-                        descriptor,
-                        "afterView",
-                        vector(state, List.of(key)),
-                        "output",
-                        new ArrayList<>(frame.output),
-                        "memberMetadata",
-                        state.documents.get(key).metadata(),
-                        "edgeChanges",
-                        new ArrayList<>(changes.subList(changesStart, changes.size())),
-                        "consumedSeeds",
-                        frame.consumed.stream().map(ContractChannels.Seed::wire).toList(),
-                        "writes",
-                        new ArrayList<>(frame.writes),
-                        "retiredTickets",
-                        retired,
-                        meter.segmentField(),
-                        meter.segment(start))));
-        turns.add(completion);
-        completedTurns.add(new MemberPhase(key, phaseName));
-      }
+      var completion =
+          committed(
+              "turn-result",
+              dispatchEvidence(
+                  m(
+                      "turnInput",
+                      descriptor,
+                      "afterView",
+                      vector(state, List.of(key)),
+                      "output",
+                      new ArrayList<>(frame.output),
+                      "memberMetadata",
+                      state.documents.get(key).metadata(),
+                      "edgeChanges",
+                      new ArrayList<>(changes.subList(changesStart, changes.size())),
+                      "consumedSeeds",
+                      frame.consumed.stream().map(ContractChannels.Seed::wire).toList(),
+                      "writes",
+                      new ArrayList<>(frame.writes),
+                      "retiredTickets",
+                      retired,
+                      meter.segmentField(),
+                      meter.segment(start))));
+      turns.add(completion);
+      completedTurns.add(new MemberPhase(key, phaseName));
       var owned = new HashSet<>(state.documents.changedValueKeys(sealed.documents));
       owned.removeIf(sealed.documents::containsKey);
       owned.add(key);

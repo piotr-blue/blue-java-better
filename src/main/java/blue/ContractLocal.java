@@ -100,8 +100,7 @@ final class ContractLocal {
     run.graph = run.forkGraph(run.state);
     var after = before.copy();
     if (!incoming.isEmpty() || !run.seeds.isEmpty()) {
-      var local =
-          run.runLocal(run.state, owner, incoming, null, run.seeds, "PROCESS", List.of(), true);
+      var local = run.runLocal(run.state, owner, incoming, null, run.seeds, "PROCESS", List.of());
       after.documents.put(owner, local.documents().get(owner));
       if (run.graph.append != null && run.graph.append.child() != null) {
         run.graph.append.finish(local, after);

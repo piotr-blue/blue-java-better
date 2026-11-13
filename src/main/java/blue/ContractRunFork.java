@@ -70,8 +70,6 @@ final class ContractRunFork {
     candidate.units = copyValues(accepted.units);
     candidate.routed = new HashSet<>(accepted.routed);
     candidate.consumedObservations = new HashSet<>(accepted.consumedObservations);
-    candidate.turnCount = accepted.turnCount;
-    candidate.roundCount = accepted.roundCount;
     candidate.allocation = accepted.allocation;
     candidate.topologyChanged = accepted.topologyChanged;
     candidate.phase = phase(accepted.phase);
