@@ -46,3 +46,7 @@ Keep optional comparison code and benchmarks outside the published JAR. Refresh 
 with `./gradlew resolveDependencies --write-locks --no-configuration-cache` after dependency
 changes. The library is experimental; completing the semantic and protocol gaps in [the capability map](docs/CAPABILITY-GAPS.md)
 is separate from making its code pleasant to read.
+
+## Check production sources with Error Prone
+
+Run `./gradlew errorProne` with JDK 25. CI uses the pinned compiler plug-in’s default error-level checks. To review its lower-severity suggestions as well, run `./gradlew errorProne -PerrorProneWarnings=true`. Both modes compile into a separate analysis directory. Ordinary builds and shipped artifacts use the normal Java compiler inputs. Review the responsible API or invariant before adding a suppression. [Compiler checks and severities](https://errorprone.info/docs/flags)

@@ -26,6 +26,8 @@ jobs:
       # Formatting, -Xlint:all -Werror, every test, strict Javadoc and benchmark compilation.
       - name: Build
         run: ./gradlew build
+      - name: Check production code with Error Prone
+        run: ./gradlew errorProne
       - name: Verify line and branch coverage
         run: ./gradlew jacocoTestCoverageVerification
       - name: Upload test report
