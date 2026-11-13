@@ -75,7 +75,6 @@ final class LanguageCore {
           "properties",
           "constraints");
   static final Set<String> CONTROLS = Set.of("$pos", "$replace", "$previous", "$previousItems");
-  static final String ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
   static final Value HOLE = ExactNode.value(Map.of("$empty", scalar("Boolean", true)));
   static final String HOLE_ID = identity(HOLE);
   static final Object ABSENT = new Object();
@@ -110,79 +109,6 @@ final class LanguageCore {
     return (String) x;
   }
 
-  static String base58(byte[] bytes) {
-    if (bytes.length == 32) {
-      return digestBase58(bytes);
-    }
-    // Divide an unsigned base-256 buffer in place; no BigInteger per output digit.
-    byte[] work = bytes.clone();
-    char[] out = new char[Math.multiplyExact(bytes.length, 2)];
-    int zeros = 0;
-    while (zeros < work.length && work[zeros] == 0) {
-      zeros++;
-    }
-    int start = zeros, position = out.length;
-    while (start < work.length) {
-      int remainder = 0;
-      for (int i = start; i < work.length; i++) {
-        int value = (remainder << 8) + (work[i] & 255);
-        work[i] = (byte) (value / 58);
-        remainder = value % 58;
-      }
-      out[--position] = ALPHABET.charAt(remainder);
-      while (start < work.length && work[start] == 0) {
-        start++;
-      }
-    }
-    while (zeros-- > 0) {
-      out[--position] = '1';
-    }
-    return new String(out, position, out.length - position);
-  }
-
-  private static String digestBase58(byte[] bytes) {
-    // Eight unsigned words divided by 58^5 emit five digits per pass. The largest
-    // intermediate is (58^5 - 1) * 2^32 + (2^32 - 1), safely below Long.MAX_VALUE.
-    final long radix = 656356768L;
-    int[] words = new int[8];
-    for (int i = 0; i < words.length; i++) {
-      int p = i * 4;
-      words[i] =
-          (bytes[p] & 255) << 24
-              | (bytes[p + 1] & 255) << 16
-              | (bytes[p + 2] & 255) << 8
-              | bytes[p + 3] & 255;
-    }
-    int zeros = 0;
-    while (zeros < bytes.length && bytes[zeros] == 0) {
-      zeros++;
-    }
-    char[] out = new char[64];
-    int position = out.length, start = 0;
-    while (start < words.length && words[start] == 0) {
-      start++;
-    }
-    while (start < words.length) {
-      long remainder = 0;
-      for (int i = start; i < words.length; i++) {
-        long value = (remainder << 32) | Integer.toUnsignedLong(words[i]);
-        words[i] = (int) (value / radix);
-        remainder = value % radix;
-      }
-      while (start < words.length && words[start] == 0) {
-        start++;
-      }
-      for (int digit = 0; digit < 5 && (start < words.length || remainder != 0); digit++) {
-        out[--position] = ALPHABET.charAt((int) (remainder % 58));
-        remainder /= 58;
-      }
-    }
-    while (zeros-- > 0) {
-      out[--position] = '1';
-    }
-    return new String(out, position, out.length - position);
-  }
-
   static String plainId(Object raw) {
     require(raw instanceof String, "InvalidBlueId");
     String value = (String) raw;
@@ -210,7 +136,7 @@ final class LanguageCore {
     ContractMetrics.add("language.identity.hashedBytes", canonical.length);
     ContractMetrics.count("language.identity.hashCalls");
     try {
-      return base58(MessageDigest.getInstance("SHA-256").digest(canonical));
+      return BlueIdSyntax.encode(MessageDigest.getInstance("SHA-256").digest(canonical));
     } catch (NoSuchAlgorithmException e) {
       throw new AssertionError(e);
     }

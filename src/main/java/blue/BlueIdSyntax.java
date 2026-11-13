@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
-/** Bounded syntax checks, independent of content availability, permissions and execution gas. */
+/** Base58 representation and syntax of a Blue digest, independent of content and execution gas. */
 final class BlueIdSyntax {
   private static final String ALPHABET =
       "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -26,6 +26,53 @@ final class BlueIdSyntax {
   private static final ThreadLocal<Set<String>> VALID = ThreadLocal.withInitial(HashSet::new);
 
   private BlueIdSyntax() {}
+
+  /** Encode exactly one SHA-256 digest, preserving its leading zero bytes. */
+  static String encode(byte[] bytes) {
+    if (bytes.length != 32) {
+      throw new IllegalArgumentException("A BlueId digest requires 32 bytes");
+    }
+    // Eight unsigned words divided by 58^5 emit five digits per pass. The largest
+    // intermediate is (58^5 - 1) * 2^32 + (2^32 - 1), safely below Long.MAX_VALUE.
+    final long radix = 656356768L;
+    int[] words = new int[8];
+    for (int i = 0; i < words.length; i++) {
+      int p = i * 4;
+      words[i] =
+          (bytes[p] & 255) << 24
+              | (bytes[p + 1] & 255) << 16
+              | (bytes[p + 2] & 255) << 8
+              | bytes[p + 3] & 255;
+    }
+    int zeros = 0;
+    while (zeros < bytes.length && bytes[zeros] == 0) {
+      zeros++;
+    }
+    char[] out = new char[64];
+    int position = out.length, start = 0;
+    while (start < words.length && words[start] == 0) {
+      start++;
+    }
+    while (start < words.length) {
+      long remainder = 0;
+      for (int i = start; i < words.length; i++) {
+        long value = (remainder << 32) | Integer.toUnsignedLong(words[i]);
+        words[i] = (int) (value / radix);
+        remainder = value % radix;
+      }
+      while (start < words.length && words[start] == 0) {
+        start++;
+      }
+      for (int digit = 0; digit < 5 && (start < words.length || remainder != 0); digit++) {
+        out[--position] = ALPHABET.charAt((int) (remainder % 58));
+        remainder /= 58;
+      }
+    }
+    while (zeros-- > 0) {
+      out[--position] = '1';
+    }
+    return new String(out, position, out.length - position);
+  }
 
   static boolean digest(String value) {
     if (value.length() < 32 || value.length() > 44) {

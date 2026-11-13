@@ -24,9 +24,23 @@ class BlueIdTest {
           bytes[zeros] = (byte) (1 << (sample % 8));
         }
         String value = encode(bytes);
+        assertEquals(value, BlueIdSyntax.encode(bytes));
         assertEquals(value, new BlueId(value).value());
         assertEquals(value, LanguageCore.plainId(value));
       }
+    }
+  }
+
+  @Test
+  void encodeOnlyAcceptsDigestWidthAndAgreesWithIndependentIntegerArithmetic() {
+    var random = new Random(0x58b10eL);
+    for (int i = 0; i < 4096; i++) {
+      var raw = new byte[32];
+      random.nextBytes(raw);
+      assertEquals(encode(raw), BlueIdSyntax.encode(raw));
+    }
+    for (int length : new int[] {0, 1, 31, 33, 64}) {
+      assertThrows(IllegalArgumentException.class, () -> BlueIdSyntax.encode(new byte[length]));
     }
   }
 
