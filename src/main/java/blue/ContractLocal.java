@@ -90,12 +90,7 @@ final class ContractLocal {
       List<Map<String, Object>> attachments) {
     String owner = before.root;
     // The host establishes ordering. Native channels still authorize the original entry.
-    run.prepareAdmissions();
-    run.sealInvocation();
-    var call = ContractChannels.recognize(run.engine.registry, run.event);
-    run.call = call.event();
-    run.callRecord = call.record();
-    run.seeds = ContractChannels.select(run);
+    run.prepareExternalEvent();
     List<Batch> incoming = sourceBatches(run, before, attachments);
     run.graph = run.forkGraph(run.state);
     var after = before.copy();

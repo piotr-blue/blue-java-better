@@ -514,11 +514,11 @@ public final class TimelineVerifier {
             new Language.Snapshot(fields.context.bodies, fields.context.proofs));
     ContractRegistry registry = fields.operations(content);
     try {
-      Map<String, Object> request = ContractChannels.operationRequest(registry, message);
+      var request = ContractChannels.operationRequest(registry, message);
       require(request != null, "TIMELINE_OPERATION", "unrecognized request");
       Map<String, Head> values = Map.of();
-      if (request.get("document") instanceof Map<?, ?> document) {
-        String target = (String) document.get("blueId");
+      String target = request.document();
+      if (target != null) {
         Head verified = head(recipe(new ExactNode.Ref(target)), fields.context);
         Head detached = rememberTarget(target, verified);
         if (detached != null) {

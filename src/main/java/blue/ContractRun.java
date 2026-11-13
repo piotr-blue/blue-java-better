@@ -48,8 +48,7 @@ final class ContractRun {
   final Long timestamp;
   final String eventId;
   String invocation;
-  ExactNode call;
-  Map<String, Object> callRecord;
+  ContractChannels.Call call = ContractChannels.Call.NONE;
   List<ContractChannels.Seed> seeds = List.of();
   final boolean admission;
   Map<String, Object> admissionEvidence = new TreeMap<>();
@@ -219,16 +218,18 @@ final class ContractRun {
 
     engine.validate(input, false);
     if (!admission && (receiving.isEmpty() || liveReceiving)) {
-      prepareAdmissions();
-      sealInvocation();
-      var c = ContractChannels.recognize(reg, event);
-      call = c.event();
-      callRecord = c.record();
-      seeds = ContractChannels.select(this);
+      prepareExternalEvent();
     } else {
       sealInvocation();
     }
     meter.owner = "";
+  }
+
+  void prepareExternalEvent() {
+    prepareAdmissions();
+    sealInvocation();
+    call = ContractChannels.recognize(reg, event);
+    seeds = ContractChannels.select(this);
   }
 
   Outcome attempt() {
@@ -1232,7 +1233,7 @@ final class ContractRun {
             && activation.getOrDefault(key, 0) == 0
             && life != null
             && life.generation() == seed.generation()) {
-          dispatch(key, seed.channel(), event, "EXTERNAL", seed.operation(), false, call);
+          dispatch(key, seed.channel(), event, "EXTERNAL", seed.operation(), false, call.event());
           drain();
           frame.consumed.add(seed);
         }

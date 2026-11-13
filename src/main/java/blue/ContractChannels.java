@@ -42,7 +42,19 @@ final class ContractChannels {
     }
   }
 
-  record Call(ExactNode event, Map<String, Object> record) {}
+  record Call(ExactNode event, ParsedOperation request) {
+    static final Call NONE = new Call(null, null);
+  }
+
+  /**
+   * Validated operation fields. Payloads remain identity references in the current evidence scope.
+   */
+  record ParsedOperation(
+      String operation,
+      String channel,
+      String document,
+      boolean requireExactVersion,
+      Ref payload) {}
 
   static List<String> leaves(Map<String, Map<String, Object>> declarations, String name) {
     return leaves(declarations, name, new HashSet<>());
@@ -169,7 +181,7 @@ final class ContractChannels {
     return false;
   }
 
-  static Map<String, Object> operationRequest(ContractRegistry reg, Object node) {
+  static ParsedOperation operationRequest(ContractRegistry reg, Object node) {
     if (!"request".equals(reg.role(node))) {
       return null;
     }
@@ -188,29 +200,38 @@ final class ContractChannels {
                     "specification")
                 .containsAll(head.fields.keySet()),
         "INVALID_OPERATION_REQUEST");
-    var out = m("type", m("blueId", head.type));
-    for (String key : List.of("operation", "channel", "requireExactDocumentVersion")) {
-      var ch = blue.child(node, key);
-      if (ContractLanguage.present(ch, blue.context)) {
-        out.put(key, blue.project(ch));
-      }
+    Object operation = projectedField(blue, node, "operation");
+    Object channel = projectedField(blue, node, "channel");
+    Object exact = projectedField(blue, node, "requireExactDocumentVersion");
+    String operationName = requestToken(operation, "operation");
+    String channelName = requestToken(channel, "channel");
+    require(exact == ABSENT || exact instanceof Boolean, "INVALID_OPERATION_REQUEST");
+    Ref document = requestReference(blue, node, "document");
+    Ref payload = requestReference(blue, node, "request");
+    boolean requiresVersion = Boolean.TRUE.equals(exact);
+    require(!requiresVersion || document != null, "INVALID_OPERATION_REQUEST");
+    return new ParsedOperation(
+        operationName,
+        channelName,
+        document == null ? null : document.id(),
+        requiresVersion,
+        payload);
+  }
+
+  private static Object projectedField(ContractBridge blue, Object node, String name) {
+    var child = blue.child(node, name);
+    return ContractLanguage.present(child, blue.context) ? blue.project(child) : ABSENT;
+  }
+
+  private static Ref requestReference(ContractBridge blue, Object node, String name) {
+    var child = blue.child(node, name);
+    if (!ContractLanguage.present(child, blue.context)) {
+      return null;
     }
-    out.put("operation", requestToken(out.get("operation"), "operation"));
-    out.put("channel", requestToken(out.get("channel"), "channel"));
-    Object exact = out.getOrDefault("requireExactDocumentVersion", false);
-    require(exact instanceof Boolean, "INVALID_OPERATION_REQUEST");
-    for (String name : List.of("document", "request")) {
-      var ch = blue.child(node, name);
-      if (ContractLanguage.present(ch, blue.context)) {
-        ExactNode value = blue.exact(ch);
-        blue.certify(value);
-        blue.remember(value);
-        out.put(name, m("blueId", identity(value)));
-      }
-    }
-    require(
-        !Boolean.TRUE.equals(exact) || out.containsKey("document"), "INVALID_OPERATION_REQUEST");
-    return out;
+    ExactNode value = blue.exact(child);
+    blue.certify(value);
+    blue.remember(value);
+    return new Ref(identity(value));
   }
 
   private static String requestToken(Object value, String field) {
@@ -233,7 +254,7 @@ final class ContractChannels {
       ExactNode n = reg.blue.exact(candidate);
       return new Call(n, operationRequest(reg, n));
     }
-    return new Call(null, null);
+    return Call.NONE;
   }
 
   static List<Seed> select(ContractRun run) {
@@ -289,13 +310,13 @@ final class ContractChannels {
           continue;
         }
         String target = null, operation = null;
-        if (run.callRecord != null && !primitive.isEmpty()) {
-          var request = run.callRecord;
-          String selected = str(request.get("channel"));
-          boolean addressed = request.containsKey("document"),
+        if (run.call.request() != null && !primitive.isEmpty()) {
+          var request = run.call.request();
+          String selected = request.channel();
+          boolean addressed = request.document() != null,
               inAudience =
                   !addressed
-                      || obj(request.get("document")).get("blueId").equals(doc.blueId)
+                      || request.document().equals(doc.blueId)
                       || run.input.documents.size() == 1;
           var audience = new ArrayList<Object>();
           for (var evidence : run.externalAdmissions.values()) {
@@ -314,7 +335,7 @@ final class ContractChannels {
                           && EXTERNAL.contains(cs.get(selected).get("_role")));
           if (candidate) {
             target = selected;
-            operation = str(request.get("operation"));
+            operation = request.operation();
             require(
                 cs.containsKey(target)
                     && accepted.contains(target)
@@ -335,18 +356,18 @@ final class ContractChannels {
                 member,
                 "operation",
                 operation);
-            if (Boolean.TRUE.equals(request.get("requireExactDocumentVersion"))) {
+            if (request.requireExactVersion()) {
               require(
-                  obj(request.get("document")).get("blueId").equals(doc.blueId),
+                  request.document().equals(doc.blueId),
                   "STALE_DOCUMENT_PRECONDITION",
                   "document",
                   member);
             }
             if (cs.get(operation).containsKey("request")) {
               require(
-                  request.containsKey("request")
+                  request.payload() != null
                       && run.blue.matches(
-                          request.get("request"), cs.get(operation).get("request"), null),
+                          request.payload(), cs.get(operation).get("request"), null),
                   "INVALID_REQUEST",
                   "document",
                   member,

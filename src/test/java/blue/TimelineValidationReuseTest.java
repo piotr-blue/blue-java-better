@@ -50,7 +50,7 @@ class TimelineValidationReuseTest {
     assertFalse(demanded.contains(type.blueId()), "Preparing references must stay lazy");
     TimelineContent fields = new TimelineContent(reader.context(request), Contracts.publication());
     var inspected = ContractChannels.operationRequest(fields.operations(request), request.semantic);
-    assertEquals(Map.of("blueId", target.blueId().value()), inspected.get("document"));
+    assertEquals(target.blueId().value(), inspected.document());
     assertTrue(demanded.contains(type.blueId()), "The scoped provider supplies the deferred type");
 
     Language detached = Language.newBuilder().mount("Contracts", Contracts.publication()).build();

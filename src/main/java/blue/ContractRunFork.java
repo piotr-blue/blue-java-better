@@ -44,7 +44,6 @@ final class ContractRunFork {
     candidate.state = accepted.state.copy();
     candidate.invocation = accepted.invocation;
     candidate.call = accepted.call;
-    candidate.callRecord = copyRecord(accepted.callRecord);
     candidate.seeds = List.copyOf(accepted.seeds);
     candidate.admissionEvidence = copyRecord(accepted.admissionEvidence);
     candidate.nativeAdmissionVerified = accepted.nativeAdmissionVerified;

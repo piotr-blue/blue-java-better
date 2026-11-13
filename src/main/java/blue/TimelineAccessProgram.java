@@ -250,14 +250,13 @@ public final class TimelineAccessProgram {
                     try (var checkpointScope =
                         processor.blue.context.withPublisherHeads(checkpoint, prepared)) {
                       processor.blue.context.install(entry);
-                      Map<String, Object> operation =
+                      var operation =
                           ContractChannels.operationRequest(processor.registry, message);
                       require(
                           operation != null
-                              && "provider".equals(operation.get("channel"))
-                              && "update".equals(operation.get("operation"))
-                              && Map.of("blueId", definition.initial.blueId().value())
-                                  .equals(operation.get("document")),
+                              && "provider".equals(operation.channel())
+                              && "update".equals(operation.operation())
+                              && definition.initial.blueId().value().equals(operation.document()),
                           "ACCESS_UPDATE_TARGET_REQUIRED",
                           "original document and update operation");
                       selected = new Selection(state.identity(), entry.blueId(), time);

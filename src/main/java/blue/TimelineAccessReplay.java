@@ -112,17 +112,12 @@ final class TimelineAccessReplay {
           outcome = processor.initialize(initial.semantic);
           kind = TimelineAccess.Kind.PUBLISHED;
         } else {
-          Map<String, Object> request =
-              ContractChannels.operationRequest(processor.registry, message);
+          var request = ContractChannels.operationRequest(processor.registry, message);
           if (request != null
-              && "provider".equals(request.get("channel"))
-              && "update".equals(request.get("operation"))) {
-            require(
-                request.get("document") instanceof Map<?, ?>,
-                "ACCESS_UPDATE_TARGET_REQUIRED",
-                "document");
-            String target =
-                ContractModel.str(ContractModel.obj(request.get("document")).get("blueId"));
+              && "provider".equals(request.channel())
+              && "update".equals(request.operation())) {
+            require(request.document() != null, "ACCESS_UPDATE_TARGET_REQUIRED", "document");
+            String target = request.document();
             if (initial.blueId().value().equals(target)) {
               require(next != null, "ACCESS_UPDATE_BEFORE_PUBLICATION", "initial");
               agent(fields, entry);

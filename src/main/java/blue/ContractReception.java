@@ -1,7 +1,6 @@
 package blue;
 
 import static blue.ContractModel.m;
-import static blue.ContractModel.obj;
 import static blue.ContractModel.require;
 import static blue.ContractModel.str;
 
@@ -211,19 +210,15 @@ final class ContractReception {
 
   private static Optional<Contracts.OperationRequest> operation(
       ContractRegistry registry, ExactNode message) {
-    Map<String, Object> request = ContractChannels.operationRequest(registry, message);
+    var request = ContractChannels.operationRequest(registry, message);
     if (request == null) {
       return Optional.empty();
     }
-    BlueId target =
-        request.containsKey("document")
-            ? new BlueId(str(obj(request.get("document")).get("blueId")))
-            : null;
     return Optional.of(
         new Contracts.OperationRequest(
-            str(request.get("operation")),
-            str(request.get("channel")),
-            Optional.ofNullable(target),
-            Boolean.TRUE.equals(request.get("requireExactDocumentVersion"))));
+            request.operation(),
+            request.channel(),
+            Optional.ofNullable(request.document()).map(BlueId::new),
+            request.requireExactVersion()));
   }
 }
