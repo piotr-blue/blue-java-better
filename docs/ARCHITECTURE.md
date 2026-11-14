@@ -40,6 +40,11 @@ entry point remains available for hosts that do not need a separate admission re
 run the same native owner processor and selected-completion checks; neither changes gas, receipts
 or checkpoint encoding. [API boundary tests](../src/test/java/blue/RestoredLocalExecutionTest.java)
 
+Both ordinary and protected restoration take ownership of nested runtime-binding records,
+including their tariff rows. Copying only the outer runtime list would allow a caller to change
+a restored state's checkpoint identity afterward. The runtime keeps the validated immutable
+binding values; a later change to the caller's transport map cannot revise them.
+
 
 1. The host opens a thread-confined `Contracts.Execution` for a pinned predecessor and supplies the admitted original entry. The ordinary native channel rules select the receiving declarations.
 2. When advancing the Order, `ContractLocal` checks that each selected Payment path names the same cause and timestamp, generation and previous child BlueId. Multiple paths may carry the same completion. Distinct child completions require whole-graph execution to resolve their relative work.
@@ -67,6 +72,18 @@ text. Decimal estimates also allow for the rendering that `BigDecimal` can retai
 bit lengths rather than formatting numbers. Oversized values still execute normally but do not
 enter preparation caches. These are conservative retention estimates, not exact JVM object sizes.
 [JDK decimal representation](https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/java/math/BigDecimal.java)
+
+`ContractCache` deliberately serializes its small metadata updates. It checks the entry weight,
+evicts enough prior entries, then inserts within the configured accounting budget. It owns no
+maintenance executor or loader callback. This is a simple retention policy, not a throughput claim:
+contended hits still acquire the same monitor. Caffeine's buffered maintenance is a useful reference
+for a future contention-driven change, but copying that machinery without workload evidence would
+add a second concurrency problem to these caches. Accounting bounds retained entries; it does not
+bound live executions or promise exact JVM heap usage. [Caffeine design](https://github.com/ben-manes/caffeine/wiki/Design)
+
+Weights describe the retained key and value when admitted. An apparently immutable Java value can
+later retain an internal rendering, which is why decimal estimates reserve that space up front.
+Replacement policy and weight estimation are distinct decisions. [Caffeine weight contract](https://github.com/ben-manes/caffeine/wiki/Eviction)
 
 Verified-response reuse binds the claimed identity, complete response text and host limits.
 Environment proofs, cyclic references and unsupported encodings use ordinary verification.

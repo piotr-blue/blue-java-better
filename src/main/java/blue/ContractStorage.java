@@ -122,7 +122,8 @@ final class ContractStorage {
     require(s.gasSchedule.id().equals(wire.get("gasSchedule")), "INCOMPATIBLE_GAS_SCHEDULE");
     s.generation = integer(wire.get("generation"));
     s.revision = integer(wire.get("revision"));
-    s.runtimes = arr(wire.get("runtimes"));
+    // Snapshot.copy owns the outer list; restoration must also detach nested binding records.
+    s.runtimes = arr(ContractWire.immutable(wire.get("runtimes")));
     for (Object raw : arr(wire.get("documents"))) {
       var row =
           closed(
