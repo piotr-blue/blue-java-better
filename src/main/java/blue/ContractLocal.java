@@ -63,6 +63,29 @@ final class ContractLocal {
         engine.gasLimit == HOST_LIMIT && engine.localLimits.isEmpty(),
         "LOCAL_EXECUTION_UNAVAILABLE");
     Snapshot before = ContractLocalCheckpoint.restore(engine, checkpoint);
+    return processRestored(
+        engine,
+        before,
+        str(checkpoint.get("identity")),
+        attachments,
+        event,
+        timestamp,
+        evidence,
+        liveMember);
+  }
+
+  static Result processRestored(
+      ContractProcessor engine,
+      Snapshot before,
+      String checkpointIdentity,
+      List<Map<String, Object>> attachments,
+      ExactNode event,
+      long timestamp,
+      Map<String, Object> evidence,
+      java.util.function.Function<BlueId, Map<String, Object>> liveMember) {
+    require(
+        engine.gasLimit == HOST_LIMIT && engine.localLimits.isEmpty(),
+        "LOCAL_EXECUTION_UNAVAILABLE");
     engine.blue.context.retainLocalClosure(identity(event));
     String owner = before.root;
     var run = new ContractRun(engine, before, event, timestamp, false);
@@ -70,7 +93,7 @@ final class ContractLocal {
       run.graph.append = new ContractBirth(engine, owner, liveMember);
     }
     run.admissionEvidence.putAll(evidence);
-    Outcome outcome = run.guard(() -> processOwner(run, before, checkpoint, attachments));
+    Outcome outcome = run.guard(() -> processOwner(run, before, checkpointIdentity, attachments));
     // Failure/rollback across independently advanced sources needs the ordinary whole invocation.
     require(
         outcome.status.equals("APPLIED"),
@@ -86,7 +109,7 @@ final class ContractLocal {
   private static Outcome processOwner(
       ContractRun run,
       Snapshot before,
-      Map<String, Object> checkpoint,
+      String checkpointIdentity,
       List<Map<String, Object>> attachments) {
     String owner = before.root;
     // The host establishes ordering. Native channels still authorize the original entry.
@@ -102,7 +125,7 @@ final class ContractLocal {
       }
     }
     after.revision++;
-    var result = new Outcome("APPLIED", after, str(checkpoint.get("identity")), run.invocation);
+    var result = new Outcome("APPLIED", after, checkpointIdentity, run.invocation);
     result.gas = run.meter.used;
     result.gasByMember = Map.copyOf(run.meter.localUsed);
     result.events = run.events;

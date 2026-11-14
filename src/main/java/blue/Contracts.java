@@ -1,6 +1,7 @@
 package blue;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -1923,10 +1924,13 @@ public final class Contracts {
     public State restoreLocal(Map<String, Object> checkpoint) {
       requireOpen();
       return Contracts.boundary(
-          () ->
-              new State(
-                  new ContractProcessor.Document(
-                      ContractLocalCheckpoint.restore(processor, checkpoint))));
+          () -> {
+            var selected = new LinkedHashMap<>(checkpoint);
+            return new State(
+                new ContractProcessor.Document(
+                    ContractLocalCheckpoint.restore(processor, selected)),
+                ContractModel.str(selected.get("identity")));
+          });
     }
 
     /**
@@ -2029,6 +2033,58 @@ public final class Contracts {
     }
 
     /**
+     * Processes an owner already restored by {@link #restoreLocal(Map)} in this execution attempt.
+     * Source admission may inspect that state before this call. Reusing it avoids a second
+     * checkpoint decode and validation; it does not bypass native authorization or selected child
+     * completion checks. The state and its checkpoint identity are fixed at restoration, even if
+     * the caller later modifies its checkpoint map. Ordinary graph states and states from another
+     * or closed attempt are rejected. The original state remains unchanged after processing.
+     *
+     * <p>As with {@link #processLocal(Map, List, LanguageContent, long, AdmissionEvidence,
+     * java.util.function.Function)}, all checkpoints and selected completions must come from
+     * protected local storage. Unsupported decomposition throws LOCAL_EXECUTION_UNAVAILABLE.
+     *
+     * @param before owner state returned by this attempt's restoreLocal
+     * @param attachments selected protected child completions and their paths and generations
+     * @param entry original admitted event
+     * @param timestamp timestamp of that event
+     * @param evidence native authorization evidence for this owner and entry
+     * @param liveMember pinned graph lookup, or null to disable local creation
+     * @return tentative native result to publish against the restored predecessor
+     */
+    public Outcome processRestoredLocal(
+        State before,
+        List<Map<String, Object>> attachments,
+        LanguageContent entry,
+        long timestamp,
+        AdmissionEvidence evidence,
+        java.util.function.Function<BlueId, Map<String, Object>> liveMember) {
+      check(before);
+      if (before.localCheckpointIdentity == null) {
+        throw new IllegalArgumentException("State was not restored from a local checkpoint");
+      }
+      return Contracts.boundary(
+          () -> {
+            contentScopes.add(processor.blue.context.withContent(entry));
+            var result =
+                ContractLocal.processRestored(
+                    processor,
+                    before.value.state,
+                    before.localCheckpointIdentity,
+                    attachments,
+                    entry.semantic,
+                    timestamp,
+                    evidence.values(),
+                    liveMember);
+            return outcome(
+                before,
+                new ContractProcessor.Result(result.outcome()),
+                entry.blueId().value(),
+                timestamp);
+          });
+    }
+
+    /**
      * Exports new content of a local result, cutting at protected retained closures without
      * checking every unchanged child against storage again.
      *
@@ -2111,9 +2167,15 @@ public final class Contracts {
     /** Immutable snapshot handle; all business changes are produced by the native processor. */
     public final class State {
       private final ContractProcessor.Document value;
+      private final String localCheckpointIdentity;
 
       private State(ContractProcessor.Document value) {
+        this(value, null);
+      }
+
+      private State(ContractProcessor.Document value, String localCheckpointIdentity) {
         this.value = value;
+        this.localCheckpointIdentity = localCheckpointIdentity;
       }
 
       private Execution owner() {

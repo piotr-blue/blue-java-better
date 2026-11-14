@@ -53,6 +53,19 @@ class ContractBirthTest {
       assertEquals(whole.after().blueId(), local.after().blueId());
       assertEquals(whole.transition().gas(), local.transition().gas());
       assertEquals(whole.after().embeddings(), local.after().embeddings());
+      var restored =
+          execution
+              .processRestoredLocal(
+                  execution.restoreLocal(before.localCheckpoint()),
+                  List.of(),
+                  entry,
+                  10,
+                  AdmissionEvidence.empty(),
+                  id -> null)
+              .requireApplied();
+      assertEquals(local.after().blueId(), restored.after().blueId());
+      assertEquals(local.transition().receipt(), restored.transition().receipt());
+      assertEquals(local.after().embeddings(), restored.after().embeddings());
       var child = whole.after().embeddings().getFirst().target();
       assertEquals(whole.after().rooted(child).blueId(), local.after().rooted(child).blueId());
       var proof = execution.singleBirthCompletion(whole);

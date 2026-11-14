@@ -31,6 +31,16 @@ The same child value can occupy two paths. Removing and reattaching a child at t
 
 ## Following one Payment acknowledgement
 
+The host restores a protected predecessor once with `Execution.restoreLocal(checkpoint)`, inspects
+that state's channels for admission, then calls `processRestoredLocal(state, ...)`. The state is
+bound to the same open execution and carries only the identity that was validated during restore.
+The caller cannot substitute another checkpoint after admission. Ordinary graph states and an
+unpublished result cannot be passed as restored predecessors. The original `processLocal(Map, ...)`
+entry point remains available for hosts that do not need a separate admission read. Both paths
+run the same native owner processor and selected-completion checks; neither changes gas, receipts
+or checkpoint encoding. [API boundary tests](../src/test/java/blue/RestoredLocalExecutionTest.java)
+
+
 1. The host opens a thread-confined `Contracts.Execution` for a pinned predecessor and supplies the admitted original entry. The ordinary native channel rules select the receiving declarations.
 2. When advancing the Order, `ContractLocal` checks that each selected Payment path names the same cause and timestamp, generation and previous child BlueId. Multiple paths may carry the same completion. Distinct child completions require whole-graph execution to resolve their relative work.
 3. The runtime checks the child's entire gas allocation before charging it, imports its ordered events once and passes its output batches to the Order's native turn. The Order's clause determines the business effect. The Agreement can consume the Order's completion under the same rules.
