@@ -22,8 +22,8 @@ shipping a safe incremental improvement.
   and trust boundaries in [SECURITY.md](../SECURITY.md).
 
 The API guard is conservative about changed existing declarations, but it is not a complete
-behavioral or Java source-compatibility proof. In particular, newly added abstract methods,
-overload ambiguity and annotations require review. Changes to the baseline need an explicit
+behavioral or Java source-compatibility proof. It rejects newly added abstract methods on existing
+types; overload ambiguity, annotations and inherited-member changes still require review. Changes to the baseline need an explicit
 versioning decision; never regenerate it simply to make a failed build green. See
 [the baseline provenance](../api/README.md).
 
