@@ -554,9 +554,7 @@ final class BexValues {
     require(path.startsWith("/"), "absolute value pointer required");
     var out = new ArrayList<String>();
     for (String part : path.substring(1).split("/", -1)) {
-      require(
-          !LanguageSyntax.INVALID_POINTER_ESCAPE.matcher(part).matches(),
-          "invalid JSON pointer escape");
+      require(Pointer.validEscapes(part), "invalid JSON pointer escape");
       out.add(part.replace("~1", "/").replace("~0", "~"));
     }
     return out;

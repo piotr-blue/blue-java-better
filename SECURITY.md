@@ -15,6 +15,11 @@ values; their Jackson settings are not a separate public admission policy. Repla
 settings with arbitrary fixed limits would change valid operations without changing the
 configured Language limits.
 
+Pointer escape validation is shared by the public pointer, Language, Contracts and BEX parsers.
+Every literal tilde must use `~0` or `~1`, including next to line terminators, as required by
+[RFC 6901 section 3](https://www.rfc-editor.org/rfc/rfc6901#section-3). Valid field names may
+contain line terminators. Contracts' normalization policy and BEX's root alias remain separate.
+
 `PackageLoader` checks archive bytes, entry count, individual and aggregate expanded bytes,
 safe paths, duplicate/case-folded names, UTF-8, ZIP metadata and package identities. Directory
 loading is an operator facility: do not load directories another operating-system principal

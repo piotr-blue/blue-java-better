@@ -30,22 +30,23 @@ public record Pointer(List<String> segments) {
     }
     var parts = new ArrayList<String>();
     for (String part : value.substring(1).split("/", -1)) {
-      int escape = part.indexOf('~');
-      if (escape < 0) {
-        parts.add(part);
-        continue;
-      }
-      for (int i = escape; i < part.length(); i++) {
-        if (part.charAt(i) != '~') {
-          continue;
-        }
-        if (++i >= part.length() || (part.charAt(i) != '0' && part.charAt(i) != '1')) {
-          throw new BlueException("INVALID_POINTER", value);
-        }
+      if (!validEscapes(part)) {
+        throw new BlueException("INVALID_POINTER", value);
       }
       parts.add(part.replace("~1", "/").replace("~0", "~"));
     }
     return new Pointer(parts);
+  }
+
+  /** Shared escape grammar only; each caller retains its own root and normalization rules. */
+  static boolean validEscapes(String segment) {
+    for (int at = segment.indexOf('~'); at >= 0; at = segment.indexOf('~', at + 2)) {
+      if (at + 1 == segment.length()
+          || (segment.charAt(at + 1) != '0' && segment.charAt(at + 1) != '1')) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

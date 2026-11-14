@@ -655,7 +655,7 @@ final class LanguageCore {
     }
     var parts = new ArrayList<String>();
     for (String s : p.substring(1).split("/", -1)) {
-      require(!LanguageSyntax.INVALID_POINTER_ESCAPE.matcher(s).matches(), "InvalidPath");
+      require(Pointer.validEscapes(s), "InvalidPath");
       parts.add(s.replace("~1", "/").replace("~0", "~"));
     }
     return parts;

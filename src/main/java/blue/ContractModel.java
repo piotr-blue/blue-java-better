@@ -149,7 +149,7 @@ final class ContractModel {
       return out;
     }
     for (String s : p.substring(1).split("/", -1)) {
-      require(!LanguageSyntax.INVALID_POINTER_ESCAPE.matcher(s).matches(), "INVALID_POINTER");
+      require(Pointer.validEscapes(s), "INVALID_POINTER");
       out.add(s.replace("~1", "/").replace("~0", "~"));
     }
     return out;
