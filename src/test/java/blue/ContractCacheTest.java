@@ -8,12 +8,58 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /** Retention bounds and replacement semantics for immutable physical preparation. */
 @Tag("contracts")
 class ContractCacheTest {
+  @Test
+  void arbitraryPrecisionNumbersAndRawNumericTextContributeTheirRetainedPayload() {
+    var integer = java.math.BigInteger.ONE.shiftLeft(240_000);
+    for (Object number :
+        List.of(
+            integer,
+            integer.negate(),
+            new java.math.BigDecimal(integer, 4000),
+            new ExactNode.NumberToken("1".repeat(30_000)))) {
+      long weight = ContractCache.weight(number);
+      assertTrue(weight >= 30_000, "The numeric payload must contribute to its weight");
+      assertEquals(Long.MAX_VALUE, ContractCache.weight(number, 10_000));
+      assertEquals(weight, ContractCache.weight(number, weight));
+    }
+    var exact = ExactNode.value(Map.of("value", integer));
+    assertTrue(ContractCache.weight(exact) >= 30_000);
+    assertEquals(Long.MAX_VALUE, ContractCache.weight(exact, 10_000));
+  }
+
+  @Test
+  void oversizedNumericDefinitionIsUsableWithoutRemainingInTheProgramCache() {
+    var programs = new ContractPrograms();
+    var number = java.math.BigInteger.ONE.shiftLeft(3 * 1024 * 1024 * 8);
+    Map<String, Object> definition = Map.of("large", number);
+    var projections = new AtomicInteger();
+    java.util.function.Supplier<Object> projection =
+        () -> {
+          projections.incrementAndGet();
+          return definition;
+        };
+    assertEquals(definition, programs.definitionValue("numeric-budget", projection));
+    assertEquals(definition, programs.definitionValue("numeric-budget", projection));
+    assertEquals(2, projections.get(), "An oversized immutable value cannot remain cached");
+  }
+
+  @Test
+  void decimalWeightAllowsForTheRenderingItCanRetainLater() {
+    var decimal = new java.math.BigDecimal("1." + "2".repeat(20_000));
+    long before = ContractCache.weight(decimal);
+    String rendering = decimal.toString();
+    long payload = (decimal.unscaledValue().bitLength() + 7L) / 8L + 2L * rendering.length();
+    assertTrue(before >= payload, "The cached rendering and integer magnitude both remain live");
+    assertEquals(before, ContractCache.weight(decimal));
+  }
+
   @Test
   void oversizedContainersAreRejectedBeforeTheirEntriesAreEnumerated() {
     var largeMap =

@@ -120,6 +120,14 @@ final class ContractCache<K, V> {
       long shallow = 64;
       if (value instanceof String s) {
         shallow += 2L * s.length();
+      } else if (value instanceof java.math.BigInteger integer) {
+        shallow += integerBytes(integer);
+      } else if (value instanceof java.math.BigDecimal decimal) {
+        // BigDecimal may also retain its decimal rendering. Allow for that without formatting
+        // the value during weighing; the magnitude's bit length bounds its significant digits.
+        shallow += 64 + 8 * integerBytes(decimal.unscaledValue());
+      } else if (value instanceof ExactNode.NumberToken token) {
+        pending.push(token.text());
       } else if (value instanceof Recipe r) {
         pending.push(r.parts());
         pending.push(r.requirements());
@@ -168,5 +176,10 @@ final class ContractCache<K, V> {
       bytes += shallow;
     }
     return bytes;
+  }
+
+  /** Round up the magnitude's int array, including a spare word for negative powers of two. */
+  private static long integerBytes(java.math.BigInteger value) {
+    return ((value.bitLength() + 32L) / 32L) * Integer.BYTES;
   }
 }

@@ -235,6 +235,15 @@ tasks.register<JavaExec>("languageInputAllocationProbe") {
     maxHeapSize = "128m"
 }
 
+tasks.register<JavaExec>("numericCacheRetentionProbe") {
+    group = "verification"
+    description = "Keep oversized numeric definitions usable without retaining them in caches."
+    classpath = demo.runtimeClasspath
+    mainClass.set("blue.NumericCacheRetentionProbe")
+    maxHeapSize = "96m"
+    jvmArgs("-XX:+UseSerialGC")
+}
+
 tasks.register<JavaExec>("nativeReadBudgetProbe") {
     group = "verification"
     description = "Check native projection limits on a shared document in a bounded JVM."

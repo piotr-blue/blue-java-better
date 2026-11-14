@@ -71,6 +71,11 @@ Run `./gradlew jacocoTestCoverageVerification` to instrument the ordinary JUnit 
 
 Run `./gradlew mutationTest` to run the focused PIT suite. Open `build/reports/mutation/index.html` and inspect each surviving mutation in context. A surviving change can expose a missing assertion or behaviorally equivalent code. Investigate the affected invariant before changing a test.
 
+`./gradlew numericCacheRetentionProbe` projects 64 distinct definitions, each containing a 3 MiB
+integer, through the actual program-definition cache in a fresh 96 MiB JVM. Every value must remain
+exact. Keeping those oversized constants would exceed the heap; declining retention must permit
+the workload to complete. This gate checks one cache boundary, not all application memory use.
+
 Select another production boundary with `-PmutationClasses=CLASS_GLOB` and its tests with `-PmutationTests=TEST_GLOB`. Quote wildcard arguments in the shell. PIT reports the selected classes only. It runs in forked JVMs and stays outside the release artifact. [PIT command-line options](https://pitest.org/quickstart/commandline/)
 
 ### Closed execution retention

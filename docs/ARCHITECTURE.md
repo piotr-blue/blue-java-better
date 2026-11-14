@@ -52,6 +52,18 @@ A change to caching or persistence should preserve the result after a cold resto
 
 The preparation caches bound entries by an estimate of their retained key and payload. A document may refer to the same immutable subtree twice. The estimator counts both paths so an entry cannot get cheaper simply because a decoder shared those objects in memory. It memoizes a subtree only after finishing its children. Each addition is checked against the remaining allowance before it changes the total. This also bounds a compact graph with an exponentially large expanded tree. The estimate is local to the process and contributes no semantic gas. [Estimator](../src/main/java/blue/ContractCache.java) · [Shared-graph regression](../src/test/java/blue/ContractCacheTest.java)
 
+Arbitrary-precision integers contribute their magnitude, and raw numeric tokens contribute their
+text. Decimal estimates also allow for the rendering that `BigDecimal` can retain. Weighing uses
+bit lengths rather than formatting numbers. Oversized values still execute normally but do not
+enter preparation caches. These are conservative retention estimates, not exact JVM object sizes.
+[JDK decimal representation](https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/share/classes/java/math/BigDecimal.java)
+
+Verified-response reuse binds the claimed identity, complete response text and host limits.
+Environment proofs, cyclic references and unsupported encodings use ordinary verification.
+The cache receives only verified immutable bodies and copies their map before retaining it.
+[Reuse boundary](../src/main/java/blue/ContractEvidenceCache.java) ·
+[Identity, limits and entry-budget checks](../src/test/java/blue/ContractEvidenceCacheTest.java)
+
 ## When a step applies its output
 
 A Compute may return an object containing a changeset and events, or accumulate them while evaluating. An Update Document step supplies a changeset directly. Both can contain lazy Blue values read from another document. The runtime reads the effect container and patch headers, validates every patch and event in order, and preserves the original values for the next step. Its internal patch record carries the decoded operation, pointer segments and value through execution. An append to a list resolves the final index against the list as it exists when the patch runs.
