@@ -12,11 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import blue.BlueId;
 import blue.BluePackage;
 import blue.PackageException;
+import blue.PackageFixtures;
 import blue.PackageLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -43,6 +46,61 @@ class PackageCacheTest {
     Files.delete(path);
     assertTrue(assertThrows(PackageException.class, () -> loader.open(path)).incomplete());
     assertEquals(3, original.definition("Point").specializeYaml("x: 3\ny: 4").at("/x").integer());
+  }
+
+  @Test
+  void overlappingVerifiedClosuresShareEqualRecordsAndSurviveCacheRelease() throws Exception {
+    PackageLoader loader = PackageLoader.create();
+    BluePackage geometry = loader.open(copy(directory, "geometry"));
+    BluePackage drawing = loader.open(copy(directory, "drawing"));
+    int shared = 0;
+    for (var entry : geometry.records().entrySet()) {
+      var record = drawing.records().get(entry.getKey());
+      if (record != null && entry.getValue().toJson().equals(record.toJson())) {
+        assertSame(
+            entry.getValue(), record, "Equal immutable evidence should have one retained body");
+        shared++;
+      }
+    }
+    assertTrue(shared > 10);
+    loader.clearCache();
+    assertEquals(
+        3, drawing.definition("Coordinate").specializeYaml("x: 3\ny: 4").at("/x").integer());
+    assertEquals(geometry.blueId(), drawing.imported("geometry").blueId());
+  }
+
+  @Test
+  void knownDependencyCannotAuthenticateAForgedRecordInAnotherArchive() throws Exception {
+    PackageLoader loader = PackageLoader.create();
+    BluePackage geometry = loader.open(copy(directory, "geometry"));
+    var files = PackageTestSupport.files("drawing");
+    var records = PackageFixtures.json(files, "package-records.json");
+    records.put(geometry.export("Point").value(), Map.of("mode", "exact", "text", "99"));
+    PackageFixtures.putJson(files, "package-records.json", records);
+    Path forged = PackageTestSupport.altered(directory, files);
+    assertEquals(
+        "ProviderBlueIdMismatch",
+        assertThrows(PackageException.class, () -> loader.open(forged)).category());
+    assertEquals(IDS.get("drawing"), loader.open(copy(directory, "drawing")).blueId());
+  }
+
+  @Test
+  void equalIdentitiesDoNotReplaceDifferentValidRecordSpellings() throws Exception {
+    PackageLoader loader = PackageLoader.create();
+    BluePackage geometry = loader.open(copy(directory, "geometry"));
+    var files = PackageTestSupport.files("drawing");
+    var records = PackageFixtures.json(files, "package-records.json");
+    BlueId point = geometry.export("Point");
+    var response = new LinkedHashMap<>(PackageTestSupport.map(records.get(point.value())));
+    response.put("text", " \n" + response.get("text") + "\n ");
+    records.put(point.value(), response);
+    PackageFixtures.putJson(files, "package-records.json", records);
+    BluePackage drawing = loader.open(PackageTestSupport.altered(directory, files));
+    assertEquals(IDS.get("drawing"), drawing.blueId());
+    assertNotSame(geometry.records().get(point), drawing.records().get(point));
+    assertTrue(drawing.records().get(point).toJson().contains(" \\n"));
+    assertEquals(
+        5, drawing.definition("Coordinate").specializeYaml("x: 5\ny: 6").at("/x").integer());
   }
 
   @Test

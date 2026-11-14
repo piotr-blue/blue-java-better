@@ -73,6 +73,56 @@ public final class BluePackage implements LanguageProvider {
             Collections.unmodifiableMap(records)));
   }
 
+  // Reuse only structurally equal immutable evidence after this archive passed cold verification.
+  // The candidates are already retained by the loader's bounded cache; no new interner survives.
+  BluePackage shareEvidence(List<BluePackage> candidates) {
+    if (candidates.isEmpty()) {
+      return this;
+    }
+    var priorBodies = new java.util.HashMap<String, ExactNode.Value>();
+    var priorProofs = new java.util.HashMap<String, Object>();
+    var priorPackages = new java.util.HashMap<String, Object>();
+    var priorSpecifications = new java.util.HashMap<String, Object>();
+    var priorRecords = new java.util.HashMap<BlueId, LanguageRecord>();
+    for (var candidate : candidates) {
+      candidate.evidence.snapshot.bodies().forEach(priorBodies::putIfAbsent);
+      candidate.evidence.snapshot.proofs().forEach(priorProofs::putIfAbsent);
+      candidate.evidence.packages.forEach(priorPackages::putIfAbsent);
+      candidate.evidence.specifications.forEach(priorSpecifications::putIfAbsent);
+      candidate.evidence.records.forEach(priorRecords::putIfAbsent);
+    }
+    var records = new LinkedHashMap<BlueId, LanguageRecord>();
+    evidence.records.forEach(
+        (key, value) -> {
+          var previous = priorRecords.get(key);
+          records.put(
+              key,
+              previous != null && previous.response().equals(value.response()) ? previous : value);
+        });
+    var snapshot =
+        new Language.Snapshot(
+            shareEqual(evidence.snapshot.bodies(), priorBodies),
+            shareEqual(evidence.snapshot.proofs(), priorProofs));
+    return new BluePackage(
+        id,
+        new Evidence(
+            Language.withVerifiedEvidence(snapshot),
+            snapshot,
+            shareEqual(evidence.packages, priorPackages),
+            shareEqual(evidence.specifications, priorSpecifications),
+            Collections.unmodifiableMap(records)));
+  }
+
+  private static <K, V> Map<K, V> shareEqual(Map<K, V> source, Map<K, V> prior) {
+    var result = new LinkedHashMap<K, V>();
+    source.forEach(
+        (key, value) -> {
+          V previous = prior.get(key);
+          result.put(key, previous != null && previous.equals(value) ? previous : value);
+        });
+    return Collections.unmodifiableMap(result);
+  }
+
   /**
    * Verifies a local archive or prepared directory using bounded defaults.
    *

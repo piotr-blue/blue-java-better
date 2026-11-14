@@ -32,8 +32,10 @@ import java.util.zip.ZipException;
  *
  * <p>Every call reads and validates the supplied archive structure. Only identical member names and
  * bytes reuse a verified result; file names, timestamps and claimed BlueIds are never cache keys.
- * Identity pins are checked on every call. Concurrent misses may repeat verification, and I/O or
- * verification never holds the cache lock. No network acquisition occurs.
+ * Identity pins are checked on every call. After cold verification, equal immutable evidence may
+ * share storage with packages already retained by this loader. Claimed identities alone never
+ * select a replacement record. Concurrent misses may repeat verification, and I/O, verification and
+ * evidence comparison never hold the cache lock. No network acquisition occurs.
  */
 public final class PackageLoader {
   private final PackageLimits limits;
@@ -221,6 +223,11 @@ public final class PackageLoader {
       }
     }
     BluePackage verified = new PackageVerifier(files, limits.operations()).verify();
+    java.util.List<BluePackage> candidates;
+    synchronized (cache) {
+      candidates = cache.values().stream().map(Cached::value).toList();
+    }
+    verified = verified.shareEvidence(candidates);
     retain(fingerprint, verified, files.values().stream().mapToLong(bytes -> bytes.length).sum());
     return verified;
   }

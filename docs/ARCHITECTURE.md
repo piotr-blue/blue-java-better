@@ -120,3 +120,24 @@ An admitted workflow owns its step slots and the channel generation that authori
 An owning-set proof must contain one strongly connected component. Choose any member. A forward walk proves it can reach every member. A second walk over reversed links proves that each member can reach the chosen one. Together those two facts establish reachability between every pair. This validation costs linear time in members and links. The remaining canonical ordering and hashing have their own costs.
 
 Contracts substitutes each member’s outgoing local links once. The symbolic body feeds both the identity calculation and the owning proof. The canonicalizer returns the identities in the input member order, so the host can install the correct identity on each occurrence. [Language proof](../src/main/java/blue/LanguageOwningSet.java) · [All 512 three-member graphs](../src/test/java/blue/CyclicConnectivityTest.java) · [Ring and chord benchmark](../src/jmh/java/blue/CyclicIdentityBenchmark.java)
+
+## Sharing verified package evidence
+
+Self-contained archives include their dependency closure. A server mounting many packages can
+otherwise retain the same dependency bodies, proofs and provider records once per archive.
+`PackageLoader` still verifies every changed archive independently, including each supplied record
+on a cold context. Only afterward does `BluePackage` compare its immutable evidence with a snapshot
+of the loader's existing bounded cache. Equal bodies/proofs/witnesses share storage. Provider records
+share only when their complete response envelopes are equal; equal BlueIds alone are insufficient,
+and different valid source spellings remain intact.
+
+The comparison runs outside the cache monitor. There is no global interner or second long-lived
+index: the temporary lookup maps disappear when the load finishes. Clearing or evicting the cache
+does not invalidate returned packages, and an in-flight load may still retain/populate its result,
+as documented by `clearCache`. The cache budget counts source bytes, not a guaranteed JVM heap size.
+The host's explicit catalogue-retention probe loads the full deployed archive set under a bounded
+heap; this measures startup evidence retention separately from document execution.
+
+Regression coverage warms an overlapping dependency before rejecting a forged record, preserves
+different valid provider spellings, exercises cache release and concurrent loading, and checks
+physical sharing of equal evidence. Existing package-identity, archive and protocol checks remain.
