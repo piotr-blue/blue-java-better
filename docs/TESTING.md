@@ -70,6 +70,11 @@ Select another production boundary with `-PmutationClasses=CLASS_GLOB` and its t
 
 Run `./gradlew executionRetentionProbe` to check the host lifetime boundary in a dedicated 128 MiB JVM. The program keeps the returned document state reachable, closes its execution and verifies collection of the host behind each reader. An unregistered host is the control. The exported state must keep its BlueId while releasing completion storage and calculation storage. The second half retains discarded and committed transaction handles and checks that their original sessions and previously returned transitions can be collected independently. This collector-dependent check is separate from the deterministic unit suite.
 
+The same probe retains escaped authoring editors after successful and failed callbacks. Neither
+the original root nor its provider closure may remain reachable through the editor. A successful
+edit's returned immutable value remains usable. `NodeTest` separately checks that both mutation
+methods reject use after the callback; those ordinary tests do not depend on garbage collection.
+
 ## Native read projection budget
 
 Run `./gradlew nativeReadBudgetProbe` to exercise a native step on a 192 MiB heap. Nineteen binary references give the same leaf over half a million paths. Reading the entire subtree must return `PROJECTION_LIMIT_EXCEEDED` and preserve the checkpoint. Selecting one leaf must still succeed. This checks that expansion stops while the output is being built. [Bounded-heap probe](../src/demo/java/blue/NativeReadBudgetProbe.java)

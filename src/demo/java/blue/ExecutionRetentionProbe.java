@@ -4,6 +4,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 /** Verifies in a dedicated small JVM that an exported state cannot keep host readers alive. */
 public final class ExecutionRetentionProbe {
@@ -23,9 +24,41 @@ public final class ExecutionRetentionProbe {
     Optional<Map<String, Object>> calculation(String key) {
       return Optional.empty();
     }
+
+    Node open(Node node) {
+      return node;
+    }
   }
 
   private record Held(Contracts.Execution.State state, WeakReference<Host> host) {}
+
+  private record Edited(
+      Node.Editor editor, Node result, WeakReference<Node> source, WeakReference<Host> host) {}
+
+  private static Edited finishEditing(boolean fail) {
+    var host = new Host();
+    var source = Node.object(Map.of("count", Node.integer(1)));
+    var editor = new AtomicReference<Node.Editor>();
+    var expected = new IllegalArgumentException("Editing callback failed");
+    Node result = null;
+    try {
+      result =
+          source.edit(
+              cursor -> {
+                editor.set(cursor);
+                cursor.set("/count", 2);
+                if (fail) {
+                  throw expected;
+                }
+              },
+              host::open);
+    } catch (IllegalArgumentException failure) {
+      if (failure != expected) {
+        throw failure;
+      }
+    }
+    return new Edited(editor.get(), result, new WeakReference<>(source), new WeakReference<>(host));
+  }
 
   private static Held closeWith(Reader reader) {
     var host = new Host();
@@ -88,6 +121,17 @@ public final class ExecutionRetentionProbe {
   }
 
   public static void main(String[] args) throws InterruptedException {
+    for (boolean fail : new boolean[] {false, true}) {
+      var edited = finishEditing(fail);
+      requireCollected(edited.source(), "editor source");
+      requireCollected(edited.host(), "editor provider");
+      if (!fail && edited.result().get("count").integer() != 2) {
+        throw new AssertionError("Released editor changed its result");
+      }
+      System.out.println(
+          (fail ? "Failed" : "Completed") + " editor released its source and provider");
+      Reference.reachabilityFence(edited);
+    }
     for (Reader reader : Reader.values()) {
       var held = closeWith(reader);
       requireCollected(held.host(), reader + " reader");

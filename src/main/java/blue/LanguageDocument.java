@@ -123,6 +123,7 @@ public final class LanguageDocument extends LanguageContent {
    * <p>Paths address exact content: scalar payloads use /value and list elements /items/index.
    * Missing ancestors are not created. Cyclic members require a new complete symbolic owning set.
    * This is an authoring operation, not a managed-document transition or an authorization check.
+   * The editor is valid only during the callback and releases its retained content afterward.
    *
    * @param changes synchronous editing callback
    * @return a newly admitted immutable document; no result is published if validation fails

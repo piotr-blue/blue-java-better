@@ -452,7 +452,9 @@ public final class Node {
   /**
    * Applies a batch of authoring edits to a private cursor.
    *
-   * <p>The source remains unchanged even if the callback throws. The editor is not thread-safe.
+   * <p>The source remains unchanged even if the callback throws. The editor is confined to this
+   * callback: subsequent edits through a retained editor throw {@link IllegalStateException}. The
+   * editor is not thread-safe.
    *
    * @param changes the synchronous editing callback
    * @return the value after the callback completes
@@ -462,9 +464,16 @@ public final class Node {
   }
 
   Node edit(Consumer<Editor> changes, UnaryOperator<Node> open) {
+    Objects.requireNonNull(changes);
     var editor = new Editor(this, open);
-    changes.accept(editor);
-    return editor.node;
+    try {
+      changes.accept(editor);
+      return editor.node;
+    } finally {
+      // An escaped cursor must not retain the authored graph or its provider/context closure.
+      editor.node = null;
+      editor.open = null;
+    }
   }
 
   Node patch(Pointer pointer, Node child, String operation) {
@@ -569,15 +578,24 @@ public final class Node {
     return kind + ":" + value;
   }
 
-  /** An invocation-scoped authoring cursor. Never modifies the source node; not thread-safe. */
+  /**
+   * An invocation-scoped authoring cursor. Never modifies the source node; not thread-safe. Every
+   * mutation rejects use after its editing callback has returned or thrown.
+   */
   public static final class Editor {
     private Node node;
 
-    private final UnaryOperator<Node> open;
+    private UnaryOperator<Node> open;
 
     private Editor(Node node, UnaryOperator<Node> open) {
       this.node = node;
       this.open = open;
+    }
+
+    private void checkActive() {
+      if (node == null) {
+        throw new IllegalStateException("Node editor is no longer active");
+      }
     }
 
     private Node ancestors(Node value, List<String> path, int offset) {
@@ -610,8 +628,10 @@ public final class Node {
      * @param value the replacement value
      * @return this editor
      * @throws BlueException if the pointer is invalid or an ancestor is absent
+     * @throws IllegalStateException if the editing callback has ended
      */
     public Editor set(String path, Node value) {
+      checkActive();
       Pointer pointer = Pointer.parse(path);
       if (open != null) {
         node = ancestors(node, pointer.segments(), 0);
@@ -671,8 +691,10 @@ public final class Node {
      * @param path the JSON pointer
      * @return this editor
      * @throws BlueException if the pointer is invalid or absent
+     * @throws IllegalStateException if the editing callback has ended
      */
     public Editor remove(String path) {
+      checkActive();
       Pointer pointer = Pointer.parse(path);
       if (open != null) {
         node = ancestors(node, pointer.segments(), 0);

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,38 @@ class NodeTest {
     assertEquals(
         List.of(Node.integer(1), Node.integer(9)),
         array.patch(Pointer.parse("/1"), Node.integer(9), "replace").items());
+  }
+
+  @Test
+  void editorExpiresAfterTheCallbackReturnsOrThrows() {
+    var captured = new AtomicReference<Node.Editor>();
+    Node original = Node.object(Map.of("count", Node.integer(1)));
+    Node changed =
+        original.edit(
+            editor -> {
+              captured.set(editor);
+              editor.set("/count", 2);
+            });
+    assertThrows(IllegalStateException.class, () -> captured.get().set("/count", 3));
+    assertThrows(IllegalStateException.class, () -> captured.get().remove("/count"));
+    assertEquals(1, original.get("count").integer());
+    assertEquals(2, changed.get("count").integer());
+
+    var failure = new IllegalArgumentException("editing failed");
+    assertSame(
+        failure,
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                original.edit(
+                    editor -> {
+                      captured.set(editor);
+                      editor.set("/count", 4);
+                      throw failure;
+                    })));
+    assertThrows(IllegalStateException.class, () -> captured.get().set("/count", 5));
+    assertThrows(IllegalStateException.class, () -> captured.get().remove("/count"));
+    assertEquals(1, original.get("count").integer());
   }
 
   @Test
