@@ -70,6 +70,26 @@ class PackageCacheTest {
   }
 
   @Test
+  void independentlyVerifiedCarriersShareCyclicEvidenceWithoutLosingTheOwningSet()
+      throws Exception {
+    PackageLoader loader = PackageLoader.create();
+    BluePackage original = loader.open(copy(directory, "content"));
+    var files = PackageTestSupport.files("content");
+    var manifest = PackageFixtures.json(files, "package.json");
+    PackageTestSupport.map(manifest.get("toolchain")).put("qualification", "alternate-carrier");
+    PackageFixtures.putJson(files, "package.json", manifest);
+    BluePackage alternate = loader.open(PackageTestSupport.altered(directory, files));
+    assertNotSame(original, alternate, "Different carrier bytes must be independently verified");
+    BlueId loop = original.export("Loop");
+    assertSame(original.records().get(loop), alternate.records().get(loop));
+    loader.clearCache();
+    assertTrue(alternate.definition("Loop").at("/self/self").exists());
+    assertEquals(original.definition("Loop").blueId(), alternate.definition("Loop").blueId());
+    var language = blue.Language.newBuilder().provider(alternate).build();
+    assertTrue(language.define(loop).at("/self/self/self").exists());
+  }
+
+  @Test
   void knownDependencyCannotAuthenticateAForgedRecordInAnotherArchive() throws Exception {
     PackageLoader loader = PackageLoader.create();
     BluePackage geometry = loader.open(copy(directory, "geometry"));
