@@ -259,7 +259,7 @@ convenience method rejects it instead of silently changing the kind of identity.
 
 The tutorial includes MyOS timelines, actors and protocol checkpoints. Those are not implemented
 by this experimental runtime. The separate
-[local-counter.yaml](../src/demo/resources/tutorial/local-counter.yaml) adapts the increment
+`local-counter.yaml` (retired source, no longer bundled) adapts the increment
 workflow to the local operation channel and bindings:
 
 ```java
@@ -277,7 +277,7 @@ The runnable example performs +3 and -1, verifies 0 → 3 → 2, checks emitted 
 before/after YAML. Keep the returned `ContractState` for subsequent calls. Loading a canonical
 `LanguageDocument` is not the same as compiling it into this experimental execution runtime.
 
-The existing [agreement/order example](../src/demo/java/blue/examples/Example.java) demonstrates
+The existing `agreement/order example` (retired source, no longer bundled) demonstrates
 related ideas from lessons 10, 13 and 14: keyed embedded orders, child initialization events,
 parent reactions and operations on a selected child. Run `./gradlew example` for that Local-1
 adaptation. The archive's shared managed cycles, durable history/recovery, MyOS authorization,

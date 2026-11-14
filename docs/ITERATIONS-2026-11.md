@@ -1857,9 +1857,9 @@ Timing definitions: `localPaymentMillis` starts after session acquisition and ex
 including reads and execution, not just a DynamoDB transaction. `endToEndMillis` includes parent
 propagation and verification of the root total. None of these is interchangeable with pure CPU time.
 
-Evidence: [release81 manifest](../reports/overnight-2026-11-05/manifest-81.json),
-[Hello assertions](../reports/overnight-2026-11-05/hello-summary-81.json), and
-[isolated payment comparison](../reports/overnight-2026-11-05/admission-leaf-summary-81.json).
+Evidence: release81 manifest (`../reports/overnight-2026-11-05/manifest-81.json`, historical external artifact; not bundled),
+Hello assertions (`../reports/overnight-2026-11-05/hello-summary-81.json`, historical external artifact; not bundled), and
+isolated payment comparison (`../reports/overnight-2026-11-05/admission-leaf-summary-81.json`, historical external artifact; not bundled).
 
 
 ## 82. Scoped durable native ingress and command ownership — keep locally

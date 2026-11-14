@@ -1,3 +1,7 @@
+> Historical 10 November experiment with `myos-simplified`. Its timing, gas and storage results
+> apply to those recorded source revisions and fixtures, not the current hosted service.
+> See the maintained [architecture](../ARCHITECTURE.md) for the supported API and trust boundaries.
+
 # Owner-local processing — implementation and qualification
 
 10 November 2026. **The supported update path no longer restores sibling document bodies or
@@ -214,7 +218,7 @@ into `blue-java-better` and `myos-simplified`; Python and shared packages are un
 
 ## Reproduce and inspect
 
-[Local commands and storage guide](../../../myos-simplified/docs/owner-local-2026-11-10.md).
+Local commands and storage guide (`../../../myos-simplified/docs/owner-local-2026-11-10.md`, historical external artifact; not bundled).
 Evidence: [run A](measurements-a.json), [run B](measurements-b.json),
 [test suite totals](verification.json), [changed source hashes](source-manifest.json).
 Measurement JSON retains samples, phases and counters, without database copies or gas-trace dumps.
