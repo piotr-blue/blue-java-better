@@ -629,9 +629,12 @@ public final class Node {
      * @return this editor
      * @throws BlueException if the pointer is invalid or an ancestor is absent
      * @throws IllegalStateException if the editing callback has ended
+     * @throws NullPointerException if the replacement is null; use {@link Node#nil()} for a null
+     *     value
      */
     public Editor set(String path, Node value) {
       checkActive();
+      Objects.requireNonNull(value);
       Pointer pointer = Pointer.parse(path);
       if (open != null) {
         node = ancestors(node, pointer.segments(), 0);

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,41 @@ class NodeTest {
     assertThrows(IllegalStateException.class, () -> captured.get().set("/count", 5));
     assertThrows(IllegalStateException.class, () -> captured.get().remove("/count"));
     assertEquals(1, original.get("count").integer());
+  }
+
+  @Test
+  void nullRootReplacementIsRejectedWithoutInvalidatingTheEditor() {
+    Node source = Node.object(Map.of("count", Node.integer(1)));
+    assertThrows(NullPointerException.class, () -> source.edit(e -> e.set("", (Node) null)));
+    Node changed =
+        source.edit(
+            e -> {
+              assertThrows(NullPointerException.class, () -> e.set("", (Node) null));
+              e.set("/count", 2);
+            });
+    assertEquals(1, source.get("count").integer());
+    assertEquals(2, changed.get("count").integer());
+  }
+
+  @Test
+  void fluentEditsKeepTheCursorAcrossEveryValueKindAndRemoval() {
+    Node source = Node.object(Map.of("old", Node.integer(1)));
+    Node changed =
+        source.edit(
+            e ->
+                e.set("/label", "updated")
+                    .remove("/old")
+                    .set("/count", 2)
+                    .set("/fraction", 0.5)
+                    .set("/enabled", true)
+                    .set("/nothing", Node.nil()));
+    assertTrue(changed.get("old").isMissing());
+    assertEquals("updated", changed.get("label").text());
+    assertEquals(2, changed.get("count").integer());
+    assertEquals(0.5, changed.get("fraction").number());
+    assertTrue(changed.get("enabled").bool());
+    assertEquals(Node.nil(), changed.get("nothing"));
+    assertEquals(1, source.get("old").integer());
   }
 
   @Test

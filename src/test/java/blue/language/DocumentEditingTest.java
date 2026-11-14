@@ -66,6 +66,40 @@ class DocumentEditingTest {
   }
 
   @Test
+  void editingCollapsedListMembersOpensOnlyTheSelectedAncestors() {
+    LanguageDocument source =
+        language.readYaml("rows: [{price: 1, label: A}, {price: 2, label: B}]");
+    LanguageDocument collapsed = source.collapse("/rows/items/0", "/rows/items/1");
+    LanguageDocument changed = collapsed.edit(e -> e.set("/rows/items/0/price/value", 3));
+    assertEquals(3, changed.at("/rows/items/0/price").integer());
+    assertEquals(1, source.at("/rows/items/0/price").integer());
+    assertEquals(
+        collapsed.node().at("/rows/items/1/blueId"), changed.node().at("/rows/items/1/blueId"));
+
+    LanguageDocument removed =
+        collapsed
+            .collapse("")
+            .edit(e -> e.remove("/rows/items/0/label").set("/rows/items/0/price/value", 4));
+    assertTrue(removed.node().at("/rows/items/0/label").isMissing());
+    assertEquals(4, removed.at("/rows/items/0/price").integer());
+    assertEquals("A", source.at("/rows/items/0/label").text());
+    assertEquals(2, removed.at("/rows/items/1/price").integer());
+    assertThrows(
+        BlueException.class,
+        () -> collapsed.edit(e -> e.set("/rows/items/0/price/value/invalid/field", 5)));
+  }
+
+  @Test
+  void appendingThroughCollapsedListAncestorsUsesTheFinalDashAsAnInsertion() {
+    LanguageDocument source = language.readYaml("rows: [1, 2]").collapse("");
+    LanguageDocument changed = source.edit(e -> e.set("/rows/items/-", 3));
+    assertEquals(2, source.at("/rows").size());
+    assertEquals(3, changed.at("/rows").size());
+    assertEquals(3, changed.at("/rows/items/2").integer());
+    assertEquals(language.readYaml("rows: [1, 2, 3]").blueId(), changed.blueId());
+  }
+
+  @Test
   void nativeScalarEditsRetainNumberCategoriesAndLargeIntegers() {
     LanguageDocument original = language.readYaml("number: 1\nflag: false\nlabel: before");
     LanguageDocument edited =
