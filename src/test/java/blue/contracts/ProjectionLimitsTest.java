@@ -84,6 +84,34 @@ class ProjectionLimitsTest {
   }
 
   @Test
+  void boundedReadsPreserveLiteralClauseMetadataAndUseTheDocumentedDefaults() {
+    try (Contracts.Session session =
+        Contracts.create()
+            .openYaml(
+                """
+                count: 0
+                contracts:
+                  input:
+                    type: Contracts/External Channel
+                    name: Business events
+                    description: Public input 🌍
+                """)) {
+      var defaults = ProjectionLimits.defaults();
+      assertEquals(262_144, defaults.values());
+      assertEquals(4_194_304, defaults.characters());
+      assertEquals(256, defaults.depth());
+      Object expected = session.read("");
+      assertEquals(expected, session.read("", defaults));
+      var projected = (Map<?, ?>) session.read("", defaults);
+      var clauses = (Map<?, ?>) projected.get("contracts");
+      var input = (Map<?, ?>) clauses.get("input");
+      assertEquals("Business events", input.get("name"));
+      assertEquals("Public input 🌍", input.get("description"));
+      assertBounds(session);
+    }
+  }
+
+  @Test
   void negativeBoundsAreRejected() {
     assertThrows(IllegalArgumentException.class, () -> new ProjectionLimits(-1, 0, 0));
     assertThrows(IllegalArgumentException.class, () -> new ProjectionLimits(0, -1, 0));
