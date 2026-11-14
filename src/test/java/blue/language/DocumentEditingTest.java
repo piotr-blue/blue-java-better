@@ -90,6 +90,35 @@ class DocumentEditingTest {
   }
 
   @Test
+  void editingNestedReferencesInsideAListOpensEverySelectedAncestor() {
+    var details = language.readYaml("price: 1");
+    var product =
+        language.toBuilder()
+            .content(details)
+            .build()
+            .readYaml("details: {blueId: " + details.blueId() + "}");
+    var row =
+        language.toBuilder()
+            .content(product)
+            .build()
+            .readYaml("product: {blueId: " + product.blueId() + "}\nlabel: A");
+    LanguageDocument source =
+        language.toBuilder()
+            .content(row)
+            .build()
+            .readYaml("rows: [{blueId: " + row.blueId() + "}]");
+    LanguageDocument collapsed = source.collapse("");
+    LanguageDocument changed =
+        collapsed.edit(e -> e.set("/rows/items/0/product/details/price/value", 2));
+    assertEquals(2, changed.at("/rows/items/0/product/details/price").integer());
+    assertEquals(1, collapsed.at("/rows/items/0/product/details/price").integer());
+    assertEquals("A", changed.at("/rows/items/0/label").text());
+    assertEquals(
+        source.edit(e -> e.set("/rows/items/0/product/details/price/value", 2)).blueId(),
+        changed.blueId());
+  }
+
+  @Test
   void appendingThroughCollapsedListAncestorsUsesTheFinalDashAsAnInsertion() {
     LanguageDocument source = language.readYaml("rows: [1, 2]").collapse("");
     LanguageDocument changed = source.edit(e -> e.set("/rows/items/-", 3));
