@@ -28,6 +28,7 @@ are kept for their evidence; they are not maintained as current guidance.
 
 | Topic | Page |
 | --- | --- |
+| Review ownership, trust and failure contracts | [Invariant map](INVARIANTS.md) |
 | Build, conventions | [CONTRIBUTING.md](../CONTRIBUTING.md) |
 | Where a test belongs and what a failure means | [TESTING.md](TESTING.md) |
 | Design references | [INSPIRATION.md](INSPIRATION.md) |
