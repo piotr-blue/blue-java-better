@@ -90,3 +90,11 @@ methods reject use after the callback; those ordinary tests do not depend on gar
 ## Native read projection budget
 
 Run `./gradlew nativeReadBudgetProbe` to exercise a native step on a 192 MiB heap. Nineteen binary references give the same leaf over half a million paths. Reading the entire subtree must return `PROJECTION_LIMIT_EXCEEDED` and preserve the checkpoint. Selecting one leaf must still succeed. This checks that expansion stops while the output is being built. [Bounded-heap probe](../src/demo/java/blue/NativeReadBudgetProbe.java)
+
+## Optional static-analysis inventory
+
+`./gradlew errorProne -PerrorProneWarnings=true` reports the optional Error Prone checks across
+production sources. The diagnostic limit is 10,000 rather than javac's default 100, so an inventory
+is not silently truncated at the first hundred warnings. This review mode does not change the
+selected errors enforced by the normal gate. Investigate warnings against ownership and lifetime
+contracts; a warning count alone is neither a defect count nor a reason to suppress a check.
