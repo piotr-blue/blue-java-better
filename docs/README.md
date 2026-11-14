@@ -1,5 +1,7 @@
 # Documentation map
 
+[14 November quality and API notes](QUALITY-2026-11-14.md) summarize the latest maintenance changes and verification boundaries.
+
 Start with the [project README](../README.md) and [architecture](ARCHITECTURE.md). The pages below
 are grouped by what you are trying to do. Dated reports describe one campaign or measurement and
 are kept for their evidence; they are not maintained as current guidance.

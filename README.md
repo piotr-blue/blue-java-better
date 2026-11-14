@@ -1,6 +1,6 @@
 # Blue Java Better
 
-[Architecture and design decisions](docs/ARCHITECTURE.md) · [Documentation map](docs/README.md) · [10 November qualification report](docs/polish-2026-11-10/REPORT.md)
+[Architecture and design decisions](docs/ARCHITECTURE.md) · [Documentation map](docs/README.md) · [14 November quality and API notes](docs/QUALITY-2026-11-14.md)
 
 A Java 25 library for canonical Blue Language, package loading, BEX and Contracts. Immutable
 Language values retain their supporting evidence; execution sessions own their mutable state.
