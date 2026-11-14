@@ -292,3 +292,34 @@ publishing {
 apply(from = "gradle/mutation.gradle.kts")
 
 apply(from = "gradle/error-prone.gradle.kts")
+
+// Fail when a public/protected declaration, JVM descriptor or constant changes.
+val checkApi = tasks.register<JavaExec>("checkApi") {
+    group = "verification"
+    dependsOn(tasks.jar)
+    javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
+    mainClass.set(layout.projectDirectory.file("tools/CheckApi.java").asFile.absolutePath)
+    args(tasks.jar.flatMap { it.archiveFile }.get().asFile.absolutePath,
+         layout.projectDirectory.file("api/public-api.txt").asFile.absolutePath)
+    inputs.file("tools/CheckApi.java")
+    inputs.file("api/public-api.txt")
+}
+tasks.check { dependsOn(checkApi) }
+
+// Deterministic extended inputs; ordinary test includes a bounded version of each oracle.
+tasks.register<Test>("adversarialTest") {
+    group = "verification"
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching("blue.BlueIdTest")
+        includeTestsMatching("blue.packages.PackageArchiveTest")
+        includeTestsMatching("blue.LanguageTrieTest")
+        includeTestsMatching("blue.TopologyMapTest")
+        includeTestsMatching("blue.ContractIdentityMapTest")
+    }
+    systemProperty("blue.identity.samples", "1369440")
+    systemProperty("blue.fuzz.samples", "4096")
+    maxHeapSize = "512m"
+}

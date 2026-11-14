@@ -47,7 +47,7 @@ class BlueIdTest {
   @Test
   void mutationsMatchAnIndependentDecoderIncludingOverflowAndShortValues() {
     Random random = new Random(89211);
-    for (int sample = 0; sample < 6000; sample++) {
+    for (int sample = 0; sample < Integer.getInteger("blue.identity.samples", 6000); sample++) {
       StringBuilder value = new StringBuilder();
       int length = 24 + random.nextInt(25);
       for (int i = 0; i < length; i++) {

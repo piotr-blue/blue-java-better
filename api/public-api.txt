@@ -1,0 +1,1850 @@
+blue.AdmissionEvidence :: public blue.AdmissionEvidence with(blue.BlueId, java.lang.Object);
+blue.AdmissionEvidence :: public blue.AdmissionEvidence with(blue.BlueId, java.lang.Object); :: descriptor: (Lblue/BlueId;Ljava/lang/Object;)Lblue/AdmissionEvidence;
+blue.AdmissionEvidence :: public final class blue.AdmissionEvidence {
+blue.AdmissionEvidence :: public java.util.Map<blue.BlueId, java.lang.Object> asMap();
+blue.AdmissionEvidence :: public java.util.Map<blue.BlueId, java.lang.Object> asMap(); :: descriptor: ()Ljava/util/Map;
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence copyOf(java.util.Map<blue.BlueId, ?>);
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence copyOf(java.util.Map<blue.BlueId, ?>); :: descriptor: (Ljava/util/Map;)Lblue/AdmissionEvidence;
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence empty();
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence empty(); :: descriptor: ()Lblue/AdmissionEvidence;
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence of(blue.BlueId, java.lang.Object);
+blue.AdmissionEvidence :: public static blue.AdmissionEvidence of(blue.BlueId, java.lang.Object); :: descriptor: (Lblue/BlueId;Ljava/lang/Object;)Lblue/AdmissionEvidence;
+blue.Bex :: public blue.Bex$Program compile(java.util.Map<java.lang.String, java.lang.Object>);
+blue.Bex :: public blue.Bex$Program compile(java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;)Lblue/Bex$Program;
+blue.Bex :: public blue.Bex$Program compile(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+blue.Bex :: public blue.Bex$Program compile(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)Lblue/Bex$Program;
+blue.Bex :: public blue.Bex$Program compileJson(java.lang.String);
+blue.Bex :: public blue.Bex$Program compileJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Bex$Program;
+blue.Bex :: public blue.Bex$Program compileYaml(java.lang.String);
+blue.Bex :: public blue.Bex$Program compileYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Bex$Program;
+blue.Bex :: public blue.BlueId rulesId();
+blue.Bex :: public blue.BlueId rulesId(); :: descriptor: ()Lblue/BlueId;
+blue.Bex :: public final class blue.Bex {
+blue.Bex :: public static blue.Bex create();
+blue.Bex :: public static blue.Bex create(); :: descriptor: ()Lblue/Bex;
+blue.Bex :: public static blue.Bex$Builder newBuilder();
+blue.Bex :: public static blue.Bex$Builder newBuilder(); :: descriptor: ()Lblue/Bex$Builder;
+blue.Bex :: public static blue.Bex$Inputs inputs();
+blue.Bex :: public static blue.Bex$Inputs inputs(); :: descriptor: ()Lblue/Bex$Inputs;
+blue.Bex :: public static blue.BluePackage publication();
+blue.Bex :: public static blue.BluePackage publication(); :: descriptor: ()Lblue/BluePackage;
+blue.Bex :: public static java.lang.Object undefined();
+blue.Bex :: public static java.lang.Object undefined(); :: descriptor: ()Ljava/lang/Object;
+blue.Bex$Builder :: public blue.Bex build();
+blue.Bex$Builder :: public blue.Bex build(); :: descriptor: ()Lblue/Bex;
+blue.Bex$Builder :: public blue.Bex$Builder gasLimit(long);
+blue.Bex$Builder :: public blue.Bex$Builder gasLimit(long); :: descriptor: (J)Lblue/Bex$Builder;
+blue.Bex$Builder :: public blue.Bex$Builder intrinsic(blue.BlueId, blue.Bex$Intrinsic);
+blue.Bex$Builder :: public blue.Bex$Builder intrinsic(blue.BlueId, blue.Bex$Intrinsic); :: descriptor: (Lblue/BlueId;Lblue/Bex$Intrinsic;)Lblue/Bex$Builder;
+blue.Bex$Builder :: public blue.Bex$Builder language(blue.Language);
+blue.Bex$Builder :: public blue.Bex$Builder language(blue.Language); :: descriptor: (Lblue/Language;)Lblue/Bex$Builder;
+blue.Bex$Builder :: public final class blue.Bex$Builder {
+blue.Bex$Input :: public final class blue.Bex$Input {
+blue.Bex$Inputs :: public blue.Bex$Input build();
+blue.Bex$Inputs :: public blue.Bex$Input build(); :: descriptor: ()Lblue/Bex$Input;
+blue.Bex$Inputs :: public blue.Bex$Inputs bindings(java.util.Map<java.lang.String, java.lang.Object>);
+blue.Bex$Inputs :: public blue.Bex$Inputs bindings(java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs currentContract(java.lang.Object);
+blue.Bex$Inputs :: public blue.Bex$Inputs currentContract(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs document(java.lang.Object);
+blue.Bex$Inputs :: public blue.Bex$Inputs document(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs event(java.lang.Object);
+blue.Bex$Inputs :: public blue.Bex$Inputs event(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs resolvedDocument(java.lang.Object);
+blue.Bex$Inputs :: public blue.Bex$Inputs resolvedDocument(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs scope(java.lang.String);
+blue.Bex$Inputs :: public blue.Bex$Inputs scope(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public blue.Bex$Inputs steps(java.util.Map<java.lang.String, java.lang.Object>);
+blue.Bex$Inputs :: public blue.Bex$Inputs steps(java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;)Lblue/Bex$Inputs;
+blue.Bex$Inputs :: public final class blue.Bex$Inputs {
+blue.Bex$Intrinsic :: public abstract java.lang.Object evaluate(java.util.Map<java.lang.String, java.lang.Object>, blue.Bex$Meter);
+blue.Bex$Intrinsic :: public abstract java.lang.Object evaluate(java.util.Map<java.lang.String, java.lang.Object>, blue.Bex$Meter); :: descriptor: (Ljava/util/Map;Lblue/Bex$Meter;)Ljava/lang/Object;
+blue.Bex$Intrinsic :: public interface blue.Bex$Intrinsic {
+blue.Bex$Meter :: public abstract void charge(long);
+blue.Bex$Meter :: public abstract void charge(long); :: descriptor: (J)V
+blue.Bex$Meter :: public interface blue.Bex$Meter {
+blue.Bex$Program :: public blue.Bex$Result execute();
+blue.Bex$Program :: public blue.Bex$Result execute(); :: descriptor: ()Lblue/Bex$Result;
+blue.Bex$Program :: public blue.Bex$Result execute(blue.Bex$Input);
+blue.Bex$Program :: public blue.Bex$Result execute(blue.Bex$Input); :: descriptor: (Lblue/Bex$Input;)Lblue/Bex$Result;
+blue.Bex$Program :: public final class blue.Bex$Program {
+blue.Bex$Program :: public java.util.List<java.lang.String> operators();
+blue.Bex$Program :: public java.util.List<java.lang.String> operators(); :: descriptor: ()Ljava/util/List;
+blue.Bex$Program :: public java.util.List<java.lang.String> warnings();
+blue.Bex$Program :: public java.util.List<java.lang.String> warnings(); :: descriptor: ()Ljava/util/List;
+blue.Bex$Result :: public blue.Bex$Result requireSuccess();
+blue.Bex$Result :: public blue.Bex$Result requireSuccess(); :: descriptor: ()Lblue/Bex$Result;
+blue.Bex$Result :: public blue.Bex$Result(java.lang.Object, java.util.List<java.lang.Object>, java.util.List<java.lang.Object>, long, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>);
+blue.Bex$Result :: public blue.Bex$Result(java.lang.Object, java.util.List<java.lang.Object>, java.util.List<java.lang.Object>, long, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/lang/Object;Ljava/util/List;Ljava/util/List;JLjava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+blue.Bex$Result :: public boolean isUndefined();
+blue.Bex$Result :: public boolean isUndefined(); :: descriptor: ()Z
+blue.Bex$Result :: public boolean succeeded();
+blue.Bex$Result :: public boolean succeeded(); :: descriptor: ()Z
+blue.Bex$Result :: public final boolean equals(java.lang.Object);
+blue.Bex$Result :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Bex$Result :: public final class blue.Bex$Result extends java.lang.Record {
+blue.Bex$Result :: public final int hashCode();
+blue.Bex$Result :: public final int hashCode(); :: descriptor: ()I
+blue.Bex$Result :: public final java.lang.String toString();
+blue.Bex$Result :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Bex$Result :: public java.lang.Object value();
+blue.Bex$Result :: public java.lang.Object value(); :: descriptor: ()Ljava/lang/Object;
+blue.Bex$Result :: public java.lang.String failure();
+blue.Bex$Result :: public java.lang.String failure(); :: descriptor: ()Ljava/lang/String;
+blue.Bex$Result :: public java.lang.String message();
+blue.Bex$Result :: public java.lang.String message(); :: descriptor: ()Ljava/lang/String;
+blue.Bex$Result :: public java.util.List<java.lang.Object> changeset();
+blue.Bex$Result :: public java.util.List<java.lang.Object> changeset(); :: descriptor: ()Ljava/util/List;
+blue.Bex$Result :: public java.util.List<java.lang.Object> events();
+blue.Bex$Result :: public java.util.List<java.lang.Object> events(); :: descriptor: ()Ljava/util/List;
+blue.Bex$Result :: public java.util.Map<java.lang.String, java.lang.Object> rejected();
+blue.Bex$Result :: public java.util.Map<java.lang.String, java.lang.Object> rejected(); :: descriptor: ()Ljava/util/Map;
+blue.Bex$Result :: public long gas();
+blue.Bex$Result :: public long gas(); :: descriptor: ()J
+blue.BlueException :: public blue.BlueException(java.lang.String, java.lang.String);
+blue.BlueException :: public blue.BlueException(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)V
+blue.BlueException :: public final class blue.BlueException extends java.lang.RuntimeException {
+blue.BlueException :: public java.lang.String code();
+blue.BlueException :: public java.lang.String code(); :: descriptor: ()Ljava/lang/String;
+blue.BlueId :: public blue.BlueId(java.lang.String);
+blue.BlueId :: public blue.BlueId(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.BlueId :: public final boolean equals(java.lang.Object);
+blue.BlueId :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.BlueId :: public final class blue.BlueId extends java.lang.Record {
+blue.BlueId :: public final int hashCode();
+blue.BlueId :: public final int hashCode(); :: descriptor: ()I
+blue.BlueId :: public java.lang.String toString();
+blue.BlueId :: public java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.BlueId :: public java.lang.String value();
+blue.BlueId :: public java.lang.String value(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage :: public blue.BlueId blueId();
+blue.BluePackage :: public blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.BluePackage :: public blue.BlueId export(java.lang.String);
+blue.BluePackage :: public blue.BlueId export(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/BlueId;
+blue.BluePackage :: public blue.BlueId languageId();
+blue.BluePackage :: public blue.BlueId languageId(); :: descriptor: ()Lblue/BlueId;
+blue.BluePackage :: public blue.BluePackage imported(java.lang.String);
+blue.BluePackage :: public blue.BluePackage imported(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/BluePackage;
+blue.BluePackage :: public blue.BluePackage$Protocol protocol(blue.BlueId);
+blue.BluePackage :: public blue.BluePackage$Protocol protocol(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/BluePackage$Protocol;
+blue.BluePackage :: public blue.LanguageDocument definition(java.lang.String);
+blue.BluePackage :: public blue.LanguageDocument definition(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.BluePackage :: public blue.LanguageDocument document();
+blue.BluePackage :: public blue.LanguageDocument document(); :: descriptor: ()Lblue/LanguageDocument;
+blue.BluePackage :: public final class blue.BluePackage implements blue.LanguageProvider {
+blue.BluePackage :: public java.lang.String documentation(java.lang.String);
+blue.BluePackage :: public java.lang.String documentation(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/String;
+blue.BluePackage :: public java.lang.String name();
+blue.BluePackage :: public java.lang.String name(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage :: public java.lang.String version();
+blue.BluePackage :: public java.lang.String version(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage :: public java.util.Map<blue.BlueId, blue.LanguageRecord> records();
+blue.BluePackage :: public java.util.Map<blue.BlueId, blue.LanguageRecord> records(); :: descriptor: ()Ljava/util/Map;
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> documentation();
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> documentation(); :: descriptor: ()Ljava/util/Map;
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> exports();
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> exports(); :: descriptor: ()Ljava/util/Map;
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> imports();
+blue.BluePackage :: public java.util.Map<java.lang.String, blue.BlueId> imports(); :: descriptor: ()Ljava/util/Map;
+blue.BluePackage :: public java.util.Optional<blue.BluePackage$Protocol> protocol();
+blue.BluePackage :: public java.util.Optional<blue.BluePackage$Protocol> protocol(); :: descriptor: ()Ljava/util/Optional;
+blue.BluePackage :: public java.util.Optional<blue.LanguageRecord> find(blue.BlueId);
+blue.BluePackage :: public java.util.Optional<blue.LanguageRecord> find(blue.BlueId); :: descriptor: (Lblue/BlueId;)Ljava/util/Optional;
+blue.BluePackage :: public java.util.Set<blue.BlueId> declaredRequirements();
+blue.BluePackage :: public java.util.Set<blue.BlueId> declaredRequirements(); :: descriptor: ()Ljava/util/Set;
+blue.BluePackage :: public static blue.BluePackage open(java.nio.file.Path);
+blue.BluePackage :: public static blue.BluePackage open(java.nio.file.Path); :: descriptor: (Ljava/nio/file/Path;)Lblue/BluePackage;
+blue.BluePackage :: public static blue.BluePackage open(java.nio.file.Path, blue.BlueId);
+blue.BluePackage :: public static blue.BluePackage open(java.nio.file.Path, blue.BlueId); :: descriptor: (Ljava/nio/file/Path;Lblue/BlueId;)Lblue/BluePackage;
+blue.BluePackage :: public static final java.lang.String FORMAT = "blue-package/0.3-local";
+blue.BluePackage :: public static final java.lang.String FORMAT = "blue-package/0.3-local"; :: descriptor: Ljava/lang/String;
+blue.BluePackage :: public static final java.lang.String SEMANTIC_FORMAT = "blue-package-model/2-specification-metadata";
+blue.BluePackage :: public static final java.lang.String SEMANTIC_FORMAT = "blue-package-model/2-specification-metadata"; :: descriptor: Ljava/lang/String;
+blue.BluePackage$Protocol :: public blue.BlueId blueId();
+blue.BluePackage$Protocol :: public blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.BluePackage$Protocol :: public blue.BlueId language();
+blue.BluePackage$Protocol :: public blue.BlueId language(); :: descriptor: ()Lblue/BlueId;
+blue.BluePackage$Protocol :: public blue.BlueId rules();
+blue.BluePackage$Protocol :: public blue.BlueId rules(); :: descriptor: ()Lblue/BlueId;
+blue.BluePackage$Protocol :: public blue.BluePackage$Protocol(blue.BlueId, java.lang.String, blue.BlueId, blue.BlueId, java.util.Map<java.lang.String, blue.BlueId>, java.lang.String, java.util.Optional<blue.BlueId>, java.util.Optional<blue.BlueId>);
+blue.BluePackage$Protocol :: public blue.BluePackage$Protocol(blue.BlueId, java.lang.String, blue.BlueId, blue.BlueId, java.util.Map<java.lang.String, blue.BlueId>, java.lang.String, java.util.Optional<blue.BlueId>, java.util.Optional<blue.BlueId>); :: descriptor: (Lblue/BlueId;Ljava/lang/String;Lblue/BlueId;Lblue/BlueId;Ljava/util/Map;Ljava/lang/String;Ljava/util/Optional;Ljava/util/Optional;)V
+blue.BluePackage$Protocol :: public final boolean equals(java.lang.Object);
+blue.BluePackage$Protocol :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.BluePackage$Protocol :: public final class blue.BluePackage$Protocol extends java.lang.Record {
+blue.BluePackage$Protocol :: public final int hashCode();
+blue.BluePackage$Protocol :: public final int hashCode(); :: descriptor: ()I
+blue.BluePackage$Protocol :: public final java.lang.String toString();
+blue.BluePackage$Protocol :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage$Protocol :: public java.lang.String name();
+blue.BluePackage$Protocol :: public java.lang.String name(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage$Protocol :: public java.lang.String status();
+blue.BluePackage$Protocol :: public java.lang.String status(); :: descriptor: ()Ljava/lang/String;
+blue.BluePackage$Protocol :: public java.util.Map<java.lang.String, blue.BlueId> requires();
+blue.BluePackage$Protocol :: public java.util.Map<java.lang.String, blue.BlueId> requires(); :: descriptor: ()Ljava/util/Map;
+blue.BluePackage$Protocol :: public java.util.Optional<blue.BlueId> effectiveRules();
+blue.BluePackage$Protocol :: public java.util.Optional<blue.BlueId> effectiveRules(); :: descriptor: ()Ljava/util/Optional;
+blue.BluePackage$Protocol :: public java.util.Optional<blue.BlueId> schedulingPolicy();
+blue.BluePackage$Protocol :: public java.util.Optional<blue.BlueId> schedulingPolicy(); :: descriptor: ()Ljava/util/Optional;
+blue.ContractInspection :: public final class blue.ContractInspection {
+blue.ContractInspection :: public java.lang.Object literal();
+blue.ContractInspection :: public java.lang.Object literal(); :: descriptor: ()Ljava/lang/Object;
+blue.ContractInspection :: public java.lang.Object literal(java.util.Set<java.lang.String>, blue.ProjectionLimits);
+blue.ContractInspection :: public java.lang.Object literal(java.util.Set<java.lang.String>, blue.ProjectionLimits); :: descriptor: (Ljava/util/Set;Lblue/ProjectionLimits;)Ljava/lang/Object;
+blue.ContractInspection :: public java.lang.Object readableLiteral(java.util.Set<java.lang.String>, blue.ProjectionLimits);
+blue.ContractInspection :: public java.lang.Object readableLiteral(java.util.Set<java.lang.String>, blue.ProjectionLimits); :: descriptor: (Ljava/util/Set;Lblue/ProjectionLimits;)Ljava/lang/Object;
+blue.ContractInspection :: public java.lang.Object value();
+blue.ContractInspection :: public java.lang.Object value(); :: descriptor: ()Ljava/lang/Object;
+blue.ContractInspection :: public java.lang.Object value(blue.ProjectionLimits);
+blue.ContractInspection :: public java.lang.Object value(blue.ProjectionLimits); :: descriptor: (Lblue/ProjectionLimits;)Ljava/lang/Object;
+blue.ContractInspection :: public java.util.List<java.lang.String> children();
+blue.ContractInspection :: public java.util.List<java.lang.String> children(); :: descriptor: ()Ljava/util/List;
+blue.ContractInspection :: public java.util.Optional<blue.ContractInspection> at(java.lang.String);
+blue.ContractInspection :: public java.util.Optional<blue.ContractInspection> at(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/Optional;
+blue.Contracts :: public blue.BlueId rulesId();
+blue.Contracts :: public blue.BlueId rulesId(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts :: public blue.Contracts$Builder toBuilder();
+blue.Contracts :: public blue.Contracts$Builder toBuilder(); :: descriptor: ()Lblue/Contracts$Builder;
+blue.Contracts :: public blue.Contracts$Session open(blue.LanguageDocument);
+blue.Contracts :: public blue.Contracts$Session open(blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;)Lblue/Contracts$Session;
+blue.Contracts :: public blue.Contracts$Session openJson(java.lang.String);
+blue.Contracts :: public blue.Contracts$Session openJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Contracts$Session;
+blue.Contracts :: public blue.Contracts$Session openYaml(java.lang.String);
+blue.Contracts :: public blue.Contracts$Session openYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Contracts$Session;
+blue.Contracts :: public blue.Contracts$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+blue.Contracts :: public blue.Contracts$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/lang/String;)Lblue/Contracts$Session;
+blue.Contracts :: public blue.GasSchedule gasSchedule();
+blue.Contracts :: public blue.GasSchedule gasSchedule(); :: descriptor: ()Lblue/GasSchedule;
+blue.Contracts :: public blue.LanguageDocument recoverMember(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String);
+blue.Contracts :: public blue.LanguageDocument recoverMember(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Contracts :: public final class blue.Contracts {
+blue.Contracts :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent);
+blue.Contracts :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Ljava/util/Optional;
+blue.Contracts :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent, blue.LanguageDocument...);
+blue.Contracts :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent, blue.LanguageDocument...); :: descriptor: (Lblue/LanguageContent;[Lblue/LanguageDocument;)Ljava/util/Optional;
+blue.Contracts :: public static blue.BluePackage publication();
+blue.Contracts :: public static blue.BluePackage publication(); :: descriptor: ()Lblue/BluePackage;
+blue.Contracts :: public static blue.ContractInspection inspect(blue.LanguageContent);
+blue.Contracts :: public static blue.ContractInspection inspect(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/ContractInspection;
+blue.Contracts :: public static blue.Contracts create();
+blue.Contracts :: public static blue.Contracts create(); :: descriptor: ()Lblue/Contracts;
+blue.Contracts :: public static blue.Contracts$Builder newBuilder();
+blue.Contracts :: public static blue.Contracts$Builder newBuilder(); :: descriptor: ()Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts build();
+blue.Contracts$Builder :: public blue.Contracts build(); :: descriptor: ()Lblue/Contracts;
+blue.Contracts$Builder :: public blue.Contracts$Builder enableDocumentDispatch();
+blue.Contracts$Builder :: public blue.Contracts$Builder enableDocumentDispatch(); :: descriptor: ()Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder gasLimit(long);
+blue.Contracts$Builder :: public blue.Contracts$Builder gasLimit(long); :: descriptor: (J)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder gasSchedule(blue.GasSchedule);
+blue.Contracts$Builder :: public blue.Contracts$Builder gasSchedule(blue.GasSchedule); :: descriptor: (Lblue/GasSchedule;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder language(blue.Language);
+blue.Contracts$Builder :: public blue.Contracts$Builder language(blue.Language); :: descriptor: (Lblue/Language;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder nativeChannel(blue.NativeChannel);
+blue.Contracts$Builder :: public blue.Contracts$Builder nativeChannel(blue.NativeChannel); :: descriptor: (Lblue/NativeChannel;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder nativeStep(blue.NativeStep);
+blue.Contracts$Builder :: public blue.Contracts$Builder nativeStep(blue.NativeStep); :: descriptor: (Lblue/NativeStep;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder require(blue.BluePackage);
+blue.Contracts$Builder :: public blue.Contracts$Builder require(blue.BluePackage); :: descriptor: (Lblue/BluePackage;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder timeBindings(blue.TimeBindings);
+blue.Contracts$Builder :: public blue.Contracts$Builder timeBindings(blue.TimeBindings); :: descriptor: (Lblue/TimeBindings;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public blue.Contracts$Builder timelineChannels(blue.TimelineChannels);
+blue.Contracts$Builder :: public blue.Contracts$Builder timelineChannels(blue.TimelineChannels); :: descriptor: (Lblue/TimelineChannels;)Lblue/Contracts$Builder;
+blue.Contracts$Builder :: public final class blue.Contracts$Builder {
+blue.Contracts$Embedding :: public blue.Contracts$Embedding(java.lang.String, java.lang.String, java.lang.String, long);
+blue.Contracts$Embedding :: public blue.Contracts$Embedding(java.lang.String, java.lang.String, java.lang.String, long); :: descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V
+blue.Contracts$Embedding :: public final boolean equals(java.lang.Object);
+blue.Contracts$Embedding :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Embedding :: public final class blue.Contracts$Embedding extends java.lang.Record {
+blue.Contracts$Embedding :: public final int hashCode();
+blue.Contracts$Embedding :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Embedding :: public final java.lang.String toString();
+blue.Contracts$Embedding :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Embedding :: public java.lang.String path();
+blue.Contracts$Embedding :: public java.lang.String path(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Embedding :: public java.lang.String source();
+blue.Contracts$Embedding :: public java.lang.String source(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Embedding :: public java.lang.String target();
+blue.Contracts$Embedding :: public java.lang.String target(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Embedding :: public long generation();
+blue.Contracts$Embedding :: public long generation(); :: descriptor: ()J
+blue.Contracts$Emission :: public blue.Contracts$Emission(java.lang.String, blue.LanguageDocument);
+blue.Contracts$Emission :: public blue.Contracts$Emission(java.lang.String, blue.LanguageDocument); :: descriptor: (Ljava/lang/String;Lblue/LanguageDocument;)V
+blue.Contracts$Emission :: public blue.LanguageDocument event();
+blue.Contracts$Emission :: public blue.LanguageDocument event(); :: descriptor: ()Lblue/LanguageDocument;
+blue.Contracts$Emission :: public final boolean equals(java.lang.Object);
+blue.Contracts$Emission :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Emission :: public final class blue.Contracts$Emission extends java.lang.Record {
+blue.Contracts$Emission :: public final int hashCode();
+blue.Contracts$Emission :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Emission :: public final java.lang.String toString();
+blue.Contracts$Emission :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Emission :: public java.lang.Object value();
+blue.Contracts$Emission :: public java.lang.Object value(); :: descriptor: ()Ljava/lang/Object;
+blue.Contracts$Emission :: public java.lang.String member();
+blue.Contracts$Emission :: public java.lang.String member(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution :: public blue.Contracts$Execution reuseCalculations(blue.Contracts$Execution$CalculationReader);
+blue.Contracts$Execution :: public blue.Contracts$Execution reuseCalculations(blue.Contracts$Execution$CalculationReader); :: descriptor: (Lblue/Contracts$Execution$CalculationReader;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public blue.Contracts$Execution withContent(blue.LanguageContent);
+blue.Contracts$Execution :: public blue.Contracts$Execution withContent(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public blue.Contracts$Execution withContent(blue.LanguageProvider);
+blue.Contracts$Execution :: public blue.Contracts$Execution withContent(blue.LanguageProvider); :: descriptor: (Lblue/LanguageProvider;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public blue.Contracts$Execution withTimelineEntry(blue.TimelineVerifier$Entry);
+blue.Contracts$Execution :: public blue.Contracts$Execution withTimelineEntry(blue.TimelineVerifier$Entry); :: descriptor: (Lblue/TimelineVerifier$Entry;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public blue.Contracts$Execution$CalculationStatistics calculationStatistics();
+blue.Contracts$Execution :: public blue.Contracts$Execution$CalculationStatistics calculationStatistics(); :: descriptor: ()Lblue/Contracts$Execution$CalculationStatistics;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome initialize(blue.Contracts$Execution$State);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome initialize(blue.Contracts$Execution$State); :: descriptor: (Lblue/Contracts$Execution$State;)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome process(blue.Contracts$Execution$State, blue.LanguageContent, long, blue.AdmissionEvidence);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome process(blue.Contracts$Execution$State, blue.LanguageContent, long, blue.AdmissionEvidence); :: descriptor: (Lblue/Contracts$Execution$State;Lblue/LanguageContent;JLblue/AdmissionEvidence;)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long); :: descriptor: (Ljava/util/Map;Ljava/util/List;Lblue/LanguageContent;J)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long, blue.AdmissionEvidence);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long, blue.AdmissionEvidence); :: descriptor: (Ljava/util/Map;Ljava/util/List;Lblue/LanguageContent;JLblue/AdmissionEvidence;)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long, blue.AdmissionEvidence, java.util.function.Function<blue.BlueId, java.util.Map<java.lang.String, java.lang.Object>>);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome processLocal(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, blue.LanguageContent, long, blue.AdmissionEvidence, java.util.function.Function<blue.BlueId, java.util.Map<java.lang.String, java.lang.Object>>); :: descriptor: (Ljava/util/Map;Ljava/util/List;Lblue/LanguageContent;JLblue/AdmissionEvidence;Ljava/util/function/Function;)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome receive(blue.Contracts$Execution$State, java.util.List<blue.Contracts$Execution$Source>, boolean, blue.AdmissionEvidence);
+blue.Contracts$Execution :: public blue.Contracts$Execution$Outcome receive(blue.Contracts$Execution$State, java.util.List<blue.Contracts$Execution$Source>, boolean, blue.AdmissionEvidence); :: descriptor: (Lblue/Contracts$Execution$State;Ljava/util/List;ZLblue/AdmissionEvidence;)Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution :: public blue.Contracts$Execution$State prepare(java.lang.String, blue.LanguageDocument);
+blue.Contracts$Execution :: public blue.Contracts$Execution$State prepare(java.lang.String, blue.LanguageDocument); :: descriptor: (Ljava/lang/String;Lblue/LanguageDocument;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution :: public blue.Contracts$Execution$State prepare(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+blue.Contracts$Execution :: public blue.Contracts$Execution$State prepare(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/lang/String;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restore(java.util.Map<java.lang.String, java.lang.Object>);
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restore(java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restoreLocal(java.util.Map<java.lang.String, java.lang.Object>);
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restoreLocal(java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restoreLocalGraph(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<blue.Contracts$Embedding>);
+blue.Contracts$Execution :: public blue.Contracts$Execution$State restoreLocalGraph(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<blue.Contracts$Embedding>); :: descriptor: (Ljava/util/Map;Ljava/util/List;Ljava/util/List;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution :: public boolean observes(blue.NativeAdmission$Receiver);
+blue.Contracts$Execution :: public boolean observes(blue.NativeAdmission$Receiver); :: descriptor: (Lblue/NativeAdmission$Receiver;)Z
+blue.Contracts$Execution :: public final class blue.Contracts$Execution implements java.lang.AutoCloseable {
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> localContent(blue.Contracts$Execution$Outcome, java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> localContent(blue.Contracts$Execution$Outcome, java.util.function.Predicate<java.lang.String>); :: descriptor: (Lblue/Contracts$Execution$Outcome;Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> missingContent(java.util.List<java.lang.String>, java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> missingContent(java.util.List<java.lang.String>, java.util.function.Predicate<java.lang.String>); :: descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> singleBirthCompletion(blue.Contracts$Execution$Outcome);
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.lang.Object> singleBirthCompletion(blue.Contracts$Execution$Outcome); :: descriptor: (Lblue/Contracts$Execution$Outcome;)Ljava/util/Map;
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Object>> calculations();
+blue.Contracts$Execution :: public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Object>> calculations(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader);
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader); :: descriptor: (Lblue/Contracts;Lblue/Contracts$Execution$CompletionReader;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader, blue.Contracts$Execution$ValidationReader);
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader, blue.Contracts$Execution$ValidationReader); :: descriptor: (Lblue/Contracts;Lblue/Contracts$Execution$CompletionReader;Lblue/Contracts$Execution$ValidationReader;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader, blue.Contracts$Execution$ValidationReader, blue.Contracts$Execution$PreparationReader);
+blue.Contracts$Execution :: public static blue.Contracts$Execution using(blue.Contracts, blue.Contracts$Execution$CompletionReader, blue.Contracts$Execution$ValidationReader, blue.Contracts$Execution$PreparationReader); :: descriptor: (Lblue/Contracts;Lblue/Contracts$Execution$CompletionReader;Lblue/Contracts$Execution$ValidationReader;Lblue/Contracts$Execution$PreparationReader;)Lblue/Contracts$Execution;
+blue.Contracts$Execution :: public static java.lang.Object link(java.lang.String);
+blue.Contracts$Execution :: public static java.lang.Object link(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.Contracts$Execution :: public static java.util.Map<java.lang.String, java.lang.Object> materializeLocalCheckpoint(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<blue.Contracts$Embedding>);
+blue.Contracts$Execution :: public static java.util.Map<java.lang.String, java.lang.Object> materializeLocalCheckpoint(java.util.Map<java.lang.String, java.lang.Object>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<blue.Contracts$Embedding>); :: descriptor: (Ljava/util/Map;Ljava/util/List;Ljava/util/List;)Ljava/util/Map;
+blue.Contracts$Execution :: public static java.util.Map<java.lang.String, java.lang.Object> materializeLocalMetadata(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>);
+blue.Contracts$Execution :: public static java.util.Map<java.lang.String, java.lang.Object> materializeLocalMetadata(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Ljava/util/Map;Ljava/util/Map;)Ljava/util/Map;
+blue.Contracts$Execution :: public void close();
+blue.Contracts$Execution :: public void close(); :: descriptor: ()V
+blue.Contracts$Execution$CalculationReader :: public abstract java.util.Optional<java.util.Map<java.lang.String, java.lang.Object>> find(java.lang.String);
+blue.Contracts$Execution$CalculationReader :: public abstract java.util.Optional<java.util.Map<java.lang.String, java.lang.Object>> find(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/Optional;
+blue.Contracts$Execution$CalculationReader :: public interface blue.Contracts$Execution$CalculationReader {
+blue.Contracts$Execution$CalculationStatistics :: public blue.Contracts$Execution$CalculationStatistics(long, long, long);
+blue.Contracts$Execution$CalculationStatistics :: public blue.Contracts$Execution$CalculationStatistics(long, long, long); :: descriptor: (JJJ)V
+blue.Contracts$Execution$CalculationStatistics :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$CalculationStatistics :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$CalculationStatistics :: public final class blue.Contracts$Execution$CalculationStatistics extends java.lang.Record {
+blue.Contracts$Execution$CalculationStatistics :: public final int hashCode();
+blue.Contracts$Execution$CalculationStatistics :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$CalculationStatistics :: public final java.lang.String toString();
+blue.Contracts$Execution$CalculationStatistics :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$CalculationStatistics :: public long budgetFallback();
+blue.Contracts$Execution$CalculationStatistics :: public long budgetFallback(); :: descriptor: ()J
+blue.Contracts$Execution$CalculationStatistics :: public long executed();
+blue.Contracts$Execution$CalculationStatistics :: public long executed(); :: descriptor: ()J
+blue.Contracts$Execution$CalculationStatistics :: public long reused();
+blue.Contracts$Execution$CalculationStatistics :: public long reused(); :: descriptor: ()J
+blue.Contracts$Execution$Channel :: public blue.BlueId type();
+blue.Contracts$Execution$Channel :: public blue.BlueId type(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts$Execution$Channel :: public blue.Contracts$Execution$Channel(blue.BlueId, blue.NativeAdmission$Receiver, java.util.Map<java.lang.String, blue.BlueId>, java.util.Set<java.lang.String>, boolean);
+blue.Contracts$Execution$Channel :: public blue.Contracts$Execution$Channel(blue.BlueId, blue.NativeAdmission$Receiver, java.util.Map<java.lang.String, blue.BlueId>, java.util.Set<java.lang.String>, boolean); :: descriptor: (Lblue/BlueId;Lblue/NativeAdmission$Receiver;Ljava/util/Map;Ljava/util/Set;Z)V
+blue.Contracts$Execution$Channel :: public blue.NativeAdmission$Receiver receiver();
+blue.Contracts$Execution$Channel :: public blue.NativeAdmission$Receiver receiver(); :: descriptor: ()Lblue/NativeAdmission$Receiver;
+blue.Contracts$Execution$Channel :: public boolean observed();
+blue.Contracts$Execution$Channel :: public boolean observed(); :: descriptor: ()Z
+blue.Contracts$Execution$Channel :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$Channel :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$Channel :: public final class blue.Contracts$Execution$Channel extends java.lang.Record {
+blue.Contracts$Execution$Channel :: public final int hashCode();
+blue.Contracts$Execution$Channel :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$Channel :: public final java.lang.String toString();
+blue.Contracts$Execution$Channel :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Channel :: public java.util.Map<java.lang.String, blue.BlueId> fields();
+blue.Contracts$Execution$Channel :: public java.util.Map<java.lang.String, blue.BlueId> fields(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$Channel :: public java.util.Set<java.lang.String> selectors();
+blue.Contracts$Execution$Channel :: public java.util.Set<java.lang.String> selectors(); :: descriptor: ()Ljava/util/Set;
+blue.Contracts$Execution$CompletionReader :: public abstract blue.Contracts$Execution$Retained read(java.lang.String);
+blue.Contracts$Execution$CompletionReader :: public abstract blue.Contracts$Execution$Retained read(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Contracts$Execution$Retained;
+blue.Contracts$Execution$CompletionReader :: public interface blue.Contracts$Execution$CompletionReader {
+blue.Contracts$Execution$Operation :: public blue.Contracts$Execution$Operation(java.lang.String, java.lang.String);
+blue.Contracts$Execution$Operation :: public blue.Contracts$Execution$Operation(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)V
+blue.Contracts$Execution$Operation :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$Operation :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$Operation :: public final class blue.Contracts$Execution$Operation extends java.lang.Record {
+blue.Contracts$Execution$Operation :: public final int hashCode();
+blue.Contracts$Execution$Operation :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$Operation :: public final java.lang.String toString();
+blue.Contracts$Execution$Operation :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Operation :: public java.lang.String channel();
+blue.Contracts$Execution$Operation :: public java.lang.String channel(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Operation :: public java.lang.String name();
+blue.Contracts$Execution$Operation :: public java.lang.String name(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$Outcome requireApplied();
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$Outcome requireApplied(); :: descriptor: ()Lblue/Contracts$Execution$Outcome;
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$Outcome(blue.Contracts$Execution$State, blue.Contracts$Execution$State, blue.Contracts$Transition, java.lang.String, java.lang.Long);
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$Outcome(blue.Contracts$Execution$State, blue.Contracts$Execution$State, blue.Contracts$Transition, java.lang.String, java.lang.Long); :: descriptor: (Lblue/Contracts$Execution$State;Lblue/Contracts$Execution$State;Lblue/Contracts$Transition;Ljava/lang/String;Ljava/lang/Long;)V
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$State after();
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$State after(); :: descriptor: ()Lblue/Contracts$Execution$State;
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$State before();
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Execution$State before(); :: descriptor: ()Lblue/Contracts$Execution$State;
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Transition transition();
+blue.Contracts$Execution$Outcome :: public blue.Contracts$Transition transition(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.Contracts$Execution$Outcome :: public boolean applied();
+blue.Contracts$Execution$Outcome :: public boolean applied(); :: descriptor: ()Z
+blue.Contracts$Execution$Outcome :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$Outcome :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$Outcome :: public final class blue.Contracts$Execution$Outcome extends java.lang.Record {
+blue.Contracts$Execution$Outcome :: public final int hashCode();
+blue.Contracts$Execution$Outcome :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$Outcome :: public final java.lang.String toString();
+blue.Contracts$Execution$Outcome :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Outcome :: public java.lang.Long timestamp();
+blue.Contracts$Execution$Outcome :: public java.lang.Long timestamp(); :: descriptor: ()Ljava/lang/Long;
+blue.Contracts$Execution$Outcome :: public java.lang.String event();
+blue.Contracts$Execution$Outcome :: public java.lang.String event(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$PreparationReader :: public abstract java.util.Optional<java.util.Map<java.lang.String, java.lang.Object>> find(java.lang.String);
+blue.Contracts$Execution$PreparationReader :: public abstract java.util.Optional<java.util.Map<java.lang.String, java.lang.Object>> find(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/Optional;
+blue.Contracts$Execution$PreparationReader :: public interface blue.Contracts$Execution$PreparationReader {
+blue.Contracts$Execution$Retained :: public blue.Contracts$Execution$Retained(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.Long);
+blue.Contracts$Execution$Retained :: public blue.Contracts$Execution$Retained(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.String, java.lang.Long); :: descriptor: (Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;)V
+blue.Contracts$Execution$Retained :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$Retained :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$Retained :: public final class blue.Contracts$Execution$Retained extends java.lang.Record {
+blue.Contracts$Execution$Retained :: public final int hashCode();
+blue.Contracts$Execution$Retained :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$Retained :: public final java.lang.String toString();
+blue.Contracts$Execution$Retained :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Retained :: public java.lang.Long timestamp();
+blue.Contracts$Execution$Retained :: public java.lang.Long timestamp(); :: descriptor: ()Ljava/lang/Long;
+blue.Contracts$Execution$Retained :: public java.lang.String event();
+blue.Contracts$Execution$Retained :: public java.lang.String event(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Retained :: public java.lang.String receipt();
+blue.Contracts$Execution$Retained :: public java.lang.String receipt(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> after();
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> after(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> before();
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> before(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> observations();
+blue.Contracts$Execution$Retained :: public java.util.Map<java.lang.String, java.lang.Object> observations(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$Source :: public blue.Contracts$Execution$Source(java.lang.String, java.util.List<java.lang.String>);
+blue.Contracts$Execution$Source :: public blue.Contracts$Execution$Source(java.lang.String, java.util.List<java.lang.String>); :: descriptor: (Ljava/lang/String;Ljava/util/List;)V
+blue.Contracts$Execution$Source :: public final boolean equals(java.lang.Object);
+blue.Contracts$Execution$Source :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Execution$Source :: public final class blue.Contracts$Execution$Source extends java.lang.Record {
+blue.Contracts$Execution$Source :: public final int hashCode();
+blue.Contracts$Execution$Source :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Execution$Source :: public final java.lang.String toString();
+blue.Contracts$Execution$Source :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Source :: public java.lang.String receipt();
+blue.Contracts$Execution$Source :: public java.lang.String receipt(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$Source :: public java.util.List<java.lang.String> members();
+blue.Contracts$Execution$Source :: public java.util.List<java.lang.String> members(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public blue.Contracts$Execution$State rooted(java.lang.String);
+blue.Contracts$Execution$State :: public blue.Contracts$Execution$State rooted(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Contracts$Execution$State;
+blue.Contracts$Execution$State :: public blue.Contracts$Reception reception();
+blue.Contracts$Execution$State :: public blue.Contracts$Reception reception(); :: descriptor: ()Lblue/Contracts$Reception;
+blue.Contracts$Execution$State :: public blue.GasSchedule gasSchedule();
+blue.Contracts$Execution$State :: public blue.GasSchedule gasSchedule(); :: descriptor: ()Lblue/GasSchedule;
+blue.Contracts$Execution$State :: public blue.LanguageDocument document();
+blue.Contracts$Execution$State :: public blue.LanguageDocument document(); :: descriptor: ()Lblue/LanguageDocument;
+blue.Contracts$Execution$State :: public blue.LanguageDocument member(java.lang.String);
+blue.Contracts$Execution$State :: public blue.LanguageDocument member(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Contracts$Execution$State :: public boolean terminated();
+blue.Contracts$Execution$State :: public boolean terminated(); :: descriptor: ()Z
+blue.Contracts$Execution$State :: public final class blue.Contracts$Execution$State {
+blue.Contracts$Execution$State :: public java.lang.Object read(java.lang.String);
+blue.Contracts$Execution$State :: public java.lang.Object read(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.Contracts$Execution$State :: public java.lang.String blueId();
+blue.Contracts$Execution$State :: public java.lang.String blueId(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$State :: public java.lang.String identity();
+blue.Contracts$Execution$State :: public java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$State :: public java.lang.String root();
+blue.Contracts$Execution$State :: public java.lang.String root(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Embedding> embeddings();
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Embedding> embeddings(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Execution$Channel> channels();
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Execution$Channel> channels(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Execution$Operation> operations();
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Execution$Operation> operations(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Member> members();
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Member> members(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Operation> operations(java.lang.String);
+blue.Contracts$Execution$State :: public java.util.List<blue.Contracts$Operation> operations(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.List<java.util.List<java.lang.String>> components();
+blue.Contracts$Execution$State :: public java.util.List<java.util.List<java.lang.String>> components(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Boolean> validationFacts(java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Boolean> validationFacts(java.util.function.Predicate<java.lang.String>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> appendedCheckpoint(blue.Contracts$Execution$State, java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> appendedCheckpoint(blue.Contracts$Execution$State, java.util.function.Predicate<java.lang.String>); :: descriptor: (Lblue/Contracts$Execution$State;Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint();
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint(java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint(java.util.function.Predicate<java.lang.String>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> localCheckpoint();
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> localCheckpoint(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> preparation(java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> preparation(java.util.function.Predicate<java.lang.String>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> preparationDelta(blue.Contracts$Execution$State, java.util.function.Predicate<java.lang.String>);
+blue.Contracts$Execution$State :: public java.util.Map<java.lang.String, java.lang.Object> preparationDelta(blue.Contracts$Execution$State, java.util.function.Predicate<java.lang.String>); :: descriptor: (Lblue/Contracts$Execution$State;Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Execution$State :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent);
+blue.Contracts$Execution$State :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Ljava/util/Optional;
+blue.Contracts$Execution$State :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.TimelineVerifier$Entry, blue.LanguageContent);
+blue.Contracts$Execution$State :: public java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.TimelineVerifier$Entry, blue.LanguageContent); :: descriptor: (Lblue/TimelineVerifier$Entry;Lblue/LanguageContent;)Ljava/util/Optional;
+blue.Contracts$Execution$ValidationReader :: public abstract java.util.Optional<java.lang.Boolean> find(java.lang.String);
+blue.Contracts$Execution$ValidationReader :: public abstract java.util.Optional<java.lang.Boolean> find(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/Optional;
+blue.Contracts$Execution$ValidationReader :: public interface blue.Contracts$Execution$ValidationReader {
+blue.Contracts$Graph :: public blue.Contracts$Graph(java.lang.String, java.util.List<blue.Contracts$Member>, java.util.List<blue.Contracts$Embedding>);
+blue.Contracts$Graph :: public blue.Contracts$Graph(java.lang.String, java.util.List<blue.Contracts$Member>, java.util.List<blue.Contracts$Embedding>); :: descriptor: (Ljava/lang/String;Ljava/util/List;Ljava/util/List;)V
+blue.Contracts$Graph :: public final boolean equals(java.lang.Object);
+blue.Contracts$Graph :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Graph :: public final class blue.Contracts$Graph extends java.lang.Record {
+blue.Contracts$Graph :: public final int hashCode();
+blue.Contracts$Graph :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Graph :: public final java.lang.String toString();
+blue.Contracts$Graph :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Graph :: public java.lang.String root();
+blue.Contracts$Graph :: public java.lang.String root(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Graph :: public java.util.List<blue.Contracts$Embedding> embeddings();
+blue.Contracts$Graph :: public java.util.List<blue.Contracts$Embedding> embeddings(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Graph :: public java.util.List<blue.Contracts$Member> members();
+blue.Contracts$Graph :: public java.util.List<blue.Contracts$Member> members(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Member :: public blue.BlueId blueId();
+blue.Contracts$Member :: public blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts$Member :: public blue.Contracts$Member(java.lang.String, blue.BlueId);
+blue.Contracts$Member :: public blue.Contracts$Member(java.lang.String, blue.BlueId); :: descriptor: (Ljava/lang/String;Lblue/BlueId;)V
+blue.Contracts$Member :: public final boolean equals(java.lang.Object);
+blue.Contracts$Member :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Member :: public final class blue.Contracts$Member extends java.lang.Record {
+blue.Contracts$Member :: public final int hashCode();
+blue.Contracts$Member :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Member :: public final java.lang.String toString();
+blue.Contracts$Member :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Member :: public java.lang.String key();
+blue.Contracts$Member :: public java.lang.String key(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Operation :: public blue.Contracts$Operation(java.lang.String, java.lang.String, java.util.Optional<java.lang.Object>, java.util.Optional<java.lang.String>);
+blue.Contracts$Operation :: public blue.Contracts$Operation(java.lang.String, java.lang.String, java.util.Optional<java.lang.Object>, java.util.Optional<java.lang.String>); :: descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/util/Optional;Ljava/util/Optional;)V
+blue.Contracts$Operation :: public final boolean equals(java.lang.Object);
+blue.Contracts$Operation :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Operation :: public final class blue.Contracts$Operation extends java.lang.Record {
+blue.Contracts$Operation :: public final int hashCode();
+blue.Contracts$Operation :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Operation :: public final java.lang.String toString();
+blue.Contracts$Operation :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Operation :: public java.lang.String channel();
+blue.Contracts$Operation :: public java.lang.String channel(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Operation :: public java.lang.String name();
+blue.Contracts$Operation :: public java.lang.String name(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Operation :: public java.util.Optional<java.lang.Object> request();
+blue.Contracts$Operation :: public java.util.Optional<java.lang.Object> request(); :: descriptor: ()Ljava/util/Optional;
+blue.Contracts$Operation :: public java.util.Optional<java.lang.String> description();
+blue.Contracts$Operation :: public java.util.Optional<java.lang.String> description(); :: descriptor: ()Ljava/util/Optional;
+blue.Contracts$OperationRequest :: public blue.Contracts$OperationRequest(java.lang.String, java.lang.String, java.util.Optional<blue.BlueId>, boolean);
+blue.Contracts$OperationRequest :: public blue.Contracts$OperationRequest(java.lang.String, java.lang.String, java.util.Optional<blue.BlueId>, boolean); :: descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/util/Optional;Z)V
+blue.Contracts$OperationRequest :: public boolean requireExactDocumentVersion();
+blue.Contracts$OperationRequest :: public boolean requireExactDocumentVersion(); :: descriptor: ()Z
+blue.Contracts$OperationRequest :: public final boolean equals(java.lang.Object);
+blue.Contracts$OperationRequest :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$OperationRequest :: public final class blue.Contracts$OperationRequest extends java.lang.Record {
+blue.Contracts$OperationRequest :: public final int hashCode();
+blue.Contracts$OperationRequest :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$OperationRequest :: public final java.lang.String toString();
+blue.Contracts$OperationRequest :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$OperationRequest :: public java.lang.String channel();
+blue.Contracts$OperationRequest :: public java.lang.String channel(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$OperationRequest :: public java.lang.String operation();
+blue.Contracts$OperationRequest :: public java.lang.String operation(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$OperationRequest :: public java.util.Optional<blue.BlueId> document();
+blue.Contracts$OperationRequest :: public java.util.Optional<blue.BlueId> document(); :: descriptor: ()Ljava/util/Optional;
+blue.Contracts$ReceivingChannel :: public blue.BlueId typeId();
+blue.Contracts$ReceivingChannel :: public blue.BlueId typeId(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts$ReceivingChannel :: public blue.Contracts$ReceivingChannel(blue.BlueId, blue.NativeAdmission$Receiver, java.util.Map<java.lang.String, blue.BlueId>, java.util.Set<java.lang.String>, boolean);
+blue.Contracts$ReceivingChannel :: public blue.Contracts$ReceivingChannel(blue.BlueId, blue.NativeAdmission$Receiver, java.util.Map<java.lang.String, blue.BlueId>, java.util.Set<java.lang.String>, boolean); :: descriptor: (Lblue/BlueId;Lblue/NativeAdmission$Receiver;Ljava/util/Map;Ljava/util/Set;Z)V
+blue.Contracts$ReceivingChannel :: public blue.NativeAdmission$Receiver receiver();
+blue.Contracts$ReceivingChannel :: public blue.NativeAdmission$Receiver receiver(); :: descriptor: ()Lblue/NativeAdmission$Receiver;
+blue.Contracts$ReceivingChannel :: public boolean observed();
+blue.Contracts$ReceivingChannel :: public boolean observed(); :: descriptor: ()Z
+blue.Contracts$ReceivingChannel :: public final boolean equals(java.lang.Object);
+blue.Contracts$ReceivingChannel :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$ReceivingChannel :: public final class blue.Contracts$ReceivingChannel extends java.lang.Record {
+blue.Contracts$ReceivingChannel :: public final int hashCode();
+blue.Contracts$ReceivingChannel :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$ReceivingChannel :: public final java.lang.String toString();
+blue.Contracts$ReceivingChannel :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$ReceivingChannel :: public java.util.Map<java.lang.String, blue.BlueId> headerIdentities();
+blue.Contracts$ReceivingChannel :: public java.util.Map<java.lang.String, blue.BlueId> headerIdentities(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$ReceivingChannel :: public java.util.Set<java.lang.String> selectors();
+blue.Contracts$ReceivingChannel :: public java.util.Set<java.lang.String> selectors(); :: descriptor: ()Ljava/util/Set;
+blue.Contracts$Reception :: public blue.Contracts$Reception(java.lang.String, java.util.List<blue.Contracts$ReceivingChannel>);
+blue.Contracts$Reception :: public blue.Contracts$Reception(java.lang.String, java.util.List<blue.Contracts$ReceivingChannel>); :: descriptor: (Ljava/lang/String;Ljava/util/List;)V
+blue.Contracts$Reception :: public final boolean equals(java.lang.Object);
+blue.Contracts$Reception :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Contracts$Reception :: public final class blue.Contracts$Reception extends java.lang.Record {
+blue.Contracts$Reception :: public final int hashCode();
+blue.Contracts$Reception :: public final int hashCode(); :: descriptor: ()I
+blue.Contracts$Reception :: public final java.lang.String toString();
+blue.Contracts$Reception :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Reception :: public java.lang.String snapshotIdentity();
+blue.Contracts$Reception :: public java.lang.String snapshotIdentity(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Reception :: public java.util.List<blue.Contracts$ReceivingChannel> channels();
+blue.Contracts$Reception :: public java.util.List<blue.Contracts$ReceivingChannel> channels(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Session :: public final class blue.Contracts$Session implements java.lang.AutoCloseable {
+blue.Contracts$Session :: public synchronized blue.BlueId blueId();
+blue.Contracts$Session :: public synchronized blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts$Session :: public synchronized blue.Contracts$Graph graph();
+blue.Contracts$Session :: public synchronized blue.Contracts$Graph graph(); :: descriptor: ()Lblue/Contracts$Graph;
+blue.Contracts$Session :: public synchronized blue.Contracts$Reception reception();
+blue.Contracts$Session :: public synchronized blue.Contracts$Reception reception(); :: descriptor: ()Lblue/Contracts$Reception;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(blue.LanguageContent, long, blue.AdmissionEvidence);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(blue.LanguageContent, long, blue.AdmissionEvidence); :: descriptor: (Lblue/LanguageContent;JLblue/AdmissionEvidence;)Lblue/Contracts$Transaction;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(java.lang.Object, long);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(java.lang.Object, long); :: descriptor: (Ljava/lang/Object;J)Lblue/Contracts$Transaction;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(java.lang.Object, long, blue.AdmissionEvidence);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transaction begin(java.lang.Object, long, blue.AdmissionEvidence); :: descriptor: (Ljava/lang/Object;JLblue/AdmissionEvidence;)Lblue/Contracts$Transaction;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition call(java.lang.String, java.lang.String, java.lang.Object, long);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition call(java.lang.String, java.lang.String, java.lang.Object, long); :: descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;J)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition initialize();
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition initialize(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.LanguageContent, long);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.LanguageContent, long); :: descriptor: (Lblue/LanguageContent;J)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.LanguageContent, long, blue.AdmissionEvidence);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.LanguageContent, long, blue.AdmissionEvidence); :: descriptor: (Lblue/LanguageContent;JLblue/AdmissionEvidence;)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.TimelineVerifier$Entry, blue.AdmissionEvidence);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(blue.TimelineVerifier$Entry, blue.AdmissionEvidence); :: descriptor: (Lblue/TimelineVerifier$Entry;Lblue/AdmissionEvidence;)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(java.lang.Object, long);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(java.lang.Object, long); :: descriptor: (Ljava/lang/Object;J)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(java.lang.Object, long, blue.AdmissionEvidence);
+blue.Contracts$Session :: public synchronized blue.Contracts$Transition process(java.lang.Object, long, blue.AdmissionEvidence); :: descriptor: (Ljava/lang/Object;JLblue/AdmissionEvidence;)Lblue/Contracts$Transition;
+blue.Contracts$Session :: public synchronized blue.LanguageDocument document();
+blue.Contracts$Session :: public synchronized blue.LanguageDocument document(); :: descriptor: ()Lblue/LanguageDocument;
+blue.Contracts$Session :: public synchronized blue.LanguageDocument member(java.lang.String);
+blue.Contracts$Session :: public synchronized blue.LanguageDocument member(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Contracts$Session :: public synchronized java.lang.Object read(java.lang.String);
+blue.Contracts$Session :: public synchronized java.lang.Object read(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.Contracts$Session :: public synchronized java.lang.Object read(java.lang.String, blue.ProjectionLimits);
+blue.Contracts$Session :: public synchronized java.lang.Object read(java.lang.String, blue.ProjectionLimits); :: descriptor: (Ljava/lang/String;Lblue/ProjectionLimits;)Ljava/lang/Object;
+blue.Contracts$Session :: public synchronized java.lang.Object readMember(java.lang.String, java.lang.String);
+blue.Contracts$Session :: public synchronized java.lang.Object readMember(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
+blue.Contracts$Session :: public synchronized java.lang.String identity();
+blue.Contracts$Session :: public synchronized java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Session :: public synchronized java.lang.String rootMember();
+blue.Contracts$Session :: public synchronized java.lang.String rootMember(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Session :: public synchronized java.util.List<blue.Contracts$Operation> operations(java.lang.String);
+blue.Contracts$Session :: public synchronized java.util.List<blue.Contracts$Operation> operations(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/List;
+blue.Contracts$Session :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot();
+blue.Contracts$Session :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Session :: public synchronized java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent);
+blue.Contracts$Session :: public synchronized java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Ljava/util/Optional;
+blue.Contracts$Session :: public synchronized java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.TimelineVerifier$Entry, blue.LanguageContent);
+blue.Contracts$Session :: public synchronized java.util.Optional<blue.Contracts$OperationRequest> operationRequest(blue.TimelineVerifier$Entry, blue.LanguageContent); :: descriptor: (Lblue/TimelineVerifier$Entry;Lblue/LanguageContent;)Ljava/util/Optional;
+blue.Contracts$Session :: public synchronized void close();
+blue.Contracts$Session :: public synchronized void close(); :: descriptor: ()V
+blue.Contracts$Session :: public synchronized void compact();
+blue.Contracts$Session :: public synchronized void compact(); :: descriptor: ()V
+blue.Contracts$Transaction :: public final class blue.Contracts$Transaction implements java.lang.AutoCloseable {
+blue.Contracts$Transaction :: public synchronized blue.BlueId blueId();
+blue.Contracts$Transaction :: public synchronized blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Graph graph();
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Graph graph(); :: descriptor: ()Lblue/Contracts$Graph;
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Reception reception();
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Reception reception(); :: descriptor: ()Lblue/Contracts$Reception;
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Transition commit();
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Transition commit(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Transition finish();
+blue.Contracts$Transaction :: public synchronized blue.Contracts$Transition finish(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.Contracts$Transaction :: public synchronized blue.LanguageDocument member(java.lang.String);
+blue.Contracts$Transaction :: public synchronized blue.LanguageDocument member(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Contracts$Transaction :: public synchronized boolean advance();
+blue.Contracts$Transaction :: public synchronized boolean advance(); :: descriptor: ()Z
+blue.Contracts$Transaction :: public synchronized java.lang.String identity();
+blue.Contracts$Transaction :: public synchronized java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Transaction :: public synchronized java.util.List<blue.Contracts$Operation> operations(java.lang.String);
+blue.Contracts$Transaction :: public synchronized java.util.List<blue.Contracts$Operation> operations(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/util/List;
+blue.Contracts$Transaction :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot();
+blue.Contracts$Transaction :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Transaction :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot(java.util.function.Predicate<blue.BlueId>);
+blue.Contracts$Transaction :: public synchronized java.util.Map<java.lang.String, java.lang.Object> snapshot(java.util.function.Predicate<blue.BlueId>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.Contracts$Transaction :: public synchronized void close();
+blue.Contracts$Transaction :: public synchronized void close(); :: descriptor: ()V
+blue.Contracts$Transition :: public blue.Contracts$Transition requireApplied();
+blue.Contracts$Transition :: public blue.Contracts$Transition requireApplied(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.Contracts$Transition :: public boolean admissionVerified();
+blue.Contracts$Transition :: public boolean admissionVerified(); :: descriptor: ()Z
+blue.Contracts$Transition :: public boolean applied();
+blue.Contracts$Transition :: public boolean applied(); :: descriptor: ()Z
+blue.Contracts$Transition :: public final class blue.Contracts$Transition {
+blue.Contracts$Transition :: public java.lang.String receipt();
+blue.Contracts$Transition :: public java.lang.String receipt(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Transition :: public java.lang.String status();
+blue.Contracts$Transition :: public java.lang.String status(); :: descriptor: ()Ljava/lang/String;
+blue.Contracts$Transition :: public java.util.List<blue.Contracts$Emission> emissions();
+blue.Contracts$Transition :: public java.util.List<blue.Contracts$Emission> emissions(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Transition :: public java.util.List<java.lang.Object> events();
+blue.Contracts$Transition :: public java.util.List<java.lang.Object> events(); :: descriptor: ()Ljava/util/List;
+blue.Contracts$Transition :: public java.util.Map<java.lang.String, java.lang.Object> observations();
+blue.Contracts$Transition :: public java.util.Map<java.lang.String, java.lang.Object> observations(); :: descriptor: ()Ljava/util/Map;
+blue.Contracts$Transition :: public long gas();
+blue.Contracts$Transition :: public long gas(); :: descriptor: ()J
+blue.GasSchedule :: public final class blue.GasSchedule extends java.lang.Enum<blue.GasSchedule> {
+blue.GasSchedule :: public java.lang.String id();
+blue.GasSchedule :: public java.lang.String id(); :: descriptor: ()Ljava/lang/String;
+blue.GasSchedule :: public static blue.GasSchedule valueOf(java.lang.String);
+blue.GasSchedule :: public static blue.GasSchedule valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/GasSchedule;
+blue.GasSchedule :: public static blue.GasSchedule[] values();
+blue.GasSchedule :: public static blue.GasSchedule[] values(); :: descriptor: ()[Lblue/GasSchedule;
+blue.GasSchedule :: public static final blue.GasSchedule STANDARD;
+blue.GasSchedule :: public static final blue.GasSchedule STANDARD; :: descriptor: Lblue/GasSchedule;
+blue.Language :: public blue.BlueId blueId(blue.Language$Input);
+blue.Language :: public blue.BlueId blueId(blue.Language$Input); :: descriptor: (Lblue/Language$Input;)Lblue/BlueId;
+blue.Language :: public blue.BlueId foldList(blue.BlueId, java.util.List<? extends blue.LanguageContent>);
+blue.Language :: public blue.BlueId foldList(blue.BlueId, java.util.List<? extends blue.LanguageContent>); :: descriptor: (Lblue/BlueId;Ljava/util/List;)Lblue/BlueId;
+blue.Language :: public blue.Language$Builder toBuilder();
+blue.Language :: public blue.Language$Builder toBuilder(); :: descriptor: ()Lblue/Language$Builder;
+blue.Language :: public blue.Language$CyclicSet finalizeSet(java.util.List<blue.Language$Input>, blue.Language$Goal);
+blue.Language :: public blue.Language$CyclicSet finalizeSet(java.util.List<blue.Language$Input>, blue.Language$Goal); :: descriptor: (Ljava/util/List;Lblue/Language$Goal;)Lblue/Language$CyclicSet;
+blue.Language :: public blue.Language$Fragments split(blue.LanguageContent, java.lang.String...);
+blue.Language :: public blue.Language$Fragments split(blue.LanguageContent, java.lang.String...); :: descriptor: (Lblue/LanguageContent;[Ljava/lang/String;)Lblue/Language$Fragments;
+blue.Language :: public blue.LanguageContent collapse(blue.LanguageContent, java.lang.String...);
+blue.Language :: public blue.LanguageContent collapse(blue.LanguageContent, java.lang.String...); :: descriptor: (Lblue/LanguageContent;[Ljava/lang/String;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent expand(blue.LanguageContent, java.lang.String...);
+blue.Language :: public blue.LanguageContent expand(blue.LanguageContent, java.lang.String...); :: descriptor: (Lblue/LanguageContent;[Ljava/lang/String;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent prepare(blue.Language$Input);
+blue.Language :: public blue.LanguageContent prepare(blue.Language$Input); :: descriptor: (Lblue/Language$Input;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent prepare(blue.LanguageContent);
+blue.Language :: public blue.LanguageContent prepare(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent prepare(blue.Node);
+blue.Language :: public blue.LanguageContent prepare(blue.Node); :: descriptor: (Lblue/Node;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent reference(blue.BlueId);
+blue.Language :: public blue.LanguageContent reference(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageContent refineSchema(blue.LanguageContent, blue.LanguageContent);
+blue.Language :: public blue.LanguageContent refineSchema(blue.LanguageContent, blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;Lblue/LanguageContent;)Lblue/LanguageContent;
+blue.Language :: public blue.LanguageDocument admit(blue.LanguageContent, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument admit(blue.LanguageContent, blue.Language$Goal); :: descriptor: (Lblue/LanguageContent;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument collapse(blue.LanguageDocument, java.lang.String...);
+blue.Language :: public blue.LanguageDocument collapse(blue.LanguageDocument, java.lang.String...); :: descriptor: (Lblue/LanguageDocument;[Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument define(blue.BlueId);
+blue.Language :: public blue.LanguageDocument define(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument defineJson(java.lang.String);
+blue.Language :: public blue.LanguageDocument defineJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument defineJson(java.nio.file.Path) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument defineJson(java.nio.file.Path) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument defineYaml(java.lang.String);
+blue.Language :: public blue.LanguageDocument defineYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument defineYaml(java.nio.file.Path) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument defineYaml(java.nio.file.Path) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument expand(blue.LanguageDocument, java.lang.String...);
+blue.Language :: public blue.LanguageDocument expand(blue.LanguageDocument, java.lang.String...); :: descriptor: (Lblue/LanguageDocument;[Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument read(blue.BlueId);
+blue.Language :: public blue.LanguageDocument read(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument read(blue.Language$Input, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument read(blue.Language$Input, blue.Language$Goal); :: descriptor: (Lblue/Language$Input;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument read(blue.Language$Input, blue.Language$Goal, blue.LanguageDocument...);
+blue.Language :: public blue.LanguageDocument read(blue.Language$Input, blue.Language$Goal, blue.LanguageDocument...); :: descriptor: (Lblue/Language$Input;Lblue/Language$Goal;[Lblue/LanguageDocument;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument read(blue.Node, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument read(blue.Node, blue.Language$Goal); :: descriptor: (Lblue/Node;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument read(blue.Node, blue.Language$Goal, blue.LanguageDocument...);
+blue.Language :: public blue.LanguageDocument read(blue.Node, blue.Language$Goal, blue.LanguageDocument...); :: descriptor: (Lblue/Node;Lblue/Language$Goal;[Lblue/LanguageDocument;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readJson(java.lang.String);
+blue.Language :: public blue.LanguageDocument readJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readJson(java.lang.String, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument readJson(java.lang.String, blue.Language$Goal); :: descriptor: (Ljava/lang/String;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readJson(java.nio.file.Path) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument readJson(java.nio.file.Path) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readJson(java.nio.file.Path, blue.Language$Goal) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument readJson(java.nio.file.Path, blue.Language$Goal) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readYaml(java.lang.String);
+blue.Language :: public blue.LanguageDocument readYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readYaml(java.lang.String, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument readYaml(java.lang.String, blue.Language$Goal); :: descriptor: (Ljava/lang/String;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readYaml(java.nio.file.Path) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument readYaml(java.nio.file.Path) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument readYaml(java.nio.file.Path, blue.Language$Goal) throws java.io.IOException;
+blue.Language :: public blue.LanguageDocument readYaml(java.nio.file.Path, blue.Language$Goal) throws java.io.IOException; :: descriptor: (Ljava/nio/file/Path;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument refine(blue.LanguageContent, blue.LanguageContent, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument refine(blue.LanguageContent, blue.LanguageContent, blue.Language$Goal); :: descriptor: (Lblue/LanguageContent;Lblue/LanguageContent;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument restoreCheckpoint(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+blue.Language :: public blue.LanguageDocument restoreCheckpoint(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/lang/String;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument specialize(blue.LanguageDocument, blue.Language$Input, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument specialize(blue.LanguageDocument, blue.Language$Input, blue.Language$Goal); :: descriptor: (Lblue/LanguageDocument;Lblue/Language$Input;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.LanguageDocument specialize(blue.LanguageDocument, java.lang.String, blue.Language$Goal);
+blue.Language :: public blue.LanguageDocument specialize(blue.LanguageDocument, java.lang.String, blue.Language$Goal); :: descriptor: (Lblue/LanguageDocument;Ljava/lang/String;Lblue/Language$Goal;)Lblue/LanguageDocument;
+blue.Language :: public blue.Node conjoinSchemas(blue.LanguageContent, blue.LanguageContent);
+blue.Language :: public blue.Node conjoinSchemas(blue.LanguageContent, blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;Lblue/LanguageContent;)Lblue/Node;
+blue.Language :: public blue.Node inspect(blue.LanguageDocument);
+blue.Language :: public blue.Node inspect(blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;)Lblue/Node;
+blue.Language :: public blue.Node lookupExact(blue.LanguageContent, java.lang.String);
+blue.Language :: public blue.Node lookupExact(blue.LanguageContent, java.lang.String); :: descriptor: (Lblue/LanguageContent;Ljava/lang/String;)Lblue/Node;
+blue.Language :: public boolean isSubtype(blue.LanguageDocument, blue.LanguageDocument);
+blue.Language :: public boolean isSubtype(blue.LanguageDocument, blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;Lblue/LanguageDocument;)Z
+blue.Language :: public boolean preserves(blue.LanguageDocument, blue.LanguageDocument);
+blue.Language :: public boolean preserves(blue.LanguageDocument, blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;Lblue/LanguageDocument;)Z
+blue.Language :: public boolean sameView(blue.LanguageDocument, blue.LanguageDocument);
+blue.Language :: public boolean sameView(blue.LanguageDocument, blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;Lblue/LanguageDocument;)Z
+blue.Language :: public final class blue.Language {
+blue.Language :: public java.lang.String compactJson(blue.LanguageContent);
+blue.Language :: public java.lang.String compactJson(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Ljava/lang/String;
+blue.Language :: public java.lang.String minimize(blue.LanguageDocument);
+blue.Language :: public java.lang.String minimize(blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;)Ljava/lang/String;
+blue.Language :: public java.lang.String preprocess(blue.Language$Input);
+blue.Language :: public java.lang.String preprocess(blue.Language$Input); :: descriptor: (Lblue/Language$Input;)Ljava/lang/String;
+blue.Language :: public static blue.Language create();
+blue.Language :: public static blue.Language create(); :: descriptor: ()Lblue/Language;
+blue.Language :: public static blue.Language$Builder newBuilder();
+blue.Language :: public static blue.Language$Builder newBuilder(); :: descriptor: ()Lblue/Language$Builder;
+blue.Language :: public static final java.lang.String EDITION = "blue-language/2026-09-26-specification-metadata-1";
+blue.Language :: public static final java.lang.String EDITION = "blue-language/2026-09-26-specification-metadata-1"; :: descriptor: Ljava/lang/String;
+blue.Language$Builder :: public blue.Language build();
+blue.Language$Builder :: public blue.Language build(); :: descriptor: ()Lblue/Language;
+blue.Language$Builder :: public blue.Language$Builder alias(java.lang.String, blue.BlueId);
+blue.Language$Builder :: public blue.Language$Builder alias(java.lang.String, blue.BlueId); :: descriptor: (Ljava/lang/String;Lblue/BlueId;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder content(blue.LanguageContent);
+blue.Language$Builder :: public blue.Language$Builder content(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder directive(java.lang.String, blue.BlueId);
+blue.Language$Builder :: public blue.Language$Builder directive(java.lang.String, blue.BlueId); :: descriptor: (Ljava/lang/String;Lblue/BlueId;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder limits(blue.Language$Limits);
+blue.Language$Builder :: public blue.Language$Builder limits(blue.Language$Limits); :: descriptor: (Lblue/Language$Limits;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder mount(java.lang.String, blue.BluePackage);
+blue.Language$Builder :: public blue.Language$Builder mount(java.lang.String, blue.BluePackage); :: descriptor: (Ljava/lang/String;Lblue/BluePackage;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder mount(java.lang.String, blue.BluePackage, java.util.Collection<java.lang.String>);
+blue.Language$Builder :: public blue.Language$Builder mount(java.lang.String, blue.BluePackage, java.util.Collection<java.lang.String>); :: descriptor: (Ljava/lang/String;Lblue/BluePackage;Ljava/util/Collection;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder nodeProvider(blue.NodeProvider);
+blue.Language$Builder :: public blue.Language$Builder nodeProvider(blue.NodeProvider); :: descriptor: (Lblue/NodeProvider;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder provider(blue.LanguageProvider);
+blue.Language$Builder :: public blue.Language$Builder provider(blue.LanguageProvider); :: descriptor: (Lblue/LanguageProvider;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder record(blue.BlueId, blue.LanguageRecord);
+blue.Language$Builder :: public blue.Language$Builder record(blue.BlueId, blue.LanguageRecord); :: descriptor: (Lblue/BlueId;Lblue/LanguageRecord;)Lblue/Language$Builder;
+blue.Language$Builder :: public blue.Language$Builder type(java.lang.String, blue.LanguageDocument);
+blue.Language$Builder :: public blue.Language$Builder type(java.lang.String, blue.LanguageDocument); :: descriptor: (Ljava/lang/String;Lblue/LanguageDocument;)Lblue/Language$Builder;
+blue.Language$Builder :: public final class blue.Language$Builder {
+blue.Language$CyclicSet :: public blue.BlueId master();
+blue.Language$CyclicSet :: public blue.BlueId master(); :: descriptor: ()Lblue/BlueId;
+blue.Language$CyclicSet :: public blue.Language$CyclicSet(blue.BlueId, java.util.List<blue.LanguageDocument>, java.lang.String);
+blue.Language$CyclicSet :: public blue.Language$CyclicSet(blue.BlueId, java.util.List<blue.LanguageDocument>, java.lang.String); :: descriptor: (Lblue/BlueId;Ljava/util/List;Ljava/lang/String;)V
+blue.Language$CyclicSet :: public final boolean equals(java.lang.Object);
+blue.Language$CyclicSet :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Language$CyclicSet :: public final class blue.Language$CyclicSet extends java.lang.Record {
+blue.Language$CyclicSet :: public final int hashCode();
+blue.Language$CyclicSet :: public final int hashCode(); :: descriptor: ()I
+blue.Language$CyclicSet :: public final java.lang.String toString();
+blue.Language$CyclicSet :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Language$CyclicSet :: public java.lang.String proofJson();
+blue.Language$CyclicSet :: public java.lang.String proofJson(); :: descriptor: ()Ljava/lang/String;
+blue.Language$CyclicSet :: public java.util.List<blue.LanguageDocument> members();
+blue.Language$CyclicSet :: public java.util.List<blue.LanguageDocument> members(); :: descriptor: ()Ljava/util/List;
+blue.Language$Format :: public final class blue.Language$Format extends java.lang.Enum<blue.Language$Format> {
+blue.Language$Format :: public static blue.Language$Format valueOf(java.lang.String);
+blue.Language$Format :: public static blue.Language$Format valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Format;
+blue.Language$Format :: public static blue.Language$Format[] values();
+blue.Language$Format :: public static blue.Language$Format[] values(); :: descriptor: ()[Lblue/Language$Format;
+blue.Language$Format :: public static final blue.Language$Format JSON;
+blue.Language$Format :: public static final blue.Language$Format JSON; :: descriptor: Lblue/Language$Format;
+blue.Language$Format :: public static final blue.Language$Format YAML;
+blue.Language$Format :: public static final blue.Language$Format YAML; :: descriptor: Lblue/Language$Format;
+blue.Language$Fragments :: public blue.BlueId blueId();
+blue.Language$Fragments :: public blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.Language$Fragments :: public blue.Language$Fragments(blue.BlueId, java.lang.String, java.util.Map<blue.BlueId, blue.LanguageRecord>);
+blue.Language$Fragments :: public blue.Language$Fragments(blue.BlueId, java.lang.String, java.util.Map<blue.BlueId, blue.LanguageRecord>); :: descriptor: (Lblue/BlueId;Ljava/lang/String;Ljava/util/Map;)V
+blue.Language$Fragments :: public final boolean equals(java.lang.Object);
+blue.Language$Fragments :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Language$Fragments :: public final class blue.Language$Fragments extends java.lang.Record {
+blue.Language$Fragments :: public final int hashCode();
+blue.Language$Fragments :: public final int hashCode(); :: descriptor: ()I
+blue.Language$Fragments :: public final java.lang.String toString();
+blue.Language$Fragments :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Language$Fragments :: public java.lang.String rootJson();
+blue.Language$Fragments :: public java.lang.String rootJson(); :: descriptor: ()Ljava/lang/String;
+blue.Language$Fragments :: public java.util.Map<blue.BlueId, blue.LanguageRecord> records();
+blue.Language$Fragments :: public java.util.Map<blue.BlueId, blue.LanguageRecord> records(); :: descriptor: ()Ljava/util/Map;
+blue.Language$Goal :: public final class blue.Language$Goal extends java.lang.Enum<blue.Language$Goal> {
+blue.Language$Goal :: public static blue.Language$Goal valueOf(java.lang.String);
+blue.Language$Goal :: public static blue.Language$Goal valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Goal;
+blue.Language$Goal :: public static blue.Language$Goal[] values();
+blue.Language$Goal :: public static blue.Language$Goal[] values(); :: descriptor: ()[Lblue/Language$Goal;
+blue.Language$Goal :: public static final blue.Language$Goal DEFINITION;
+blue.Language$Goal :: public static final blue.Language$Goal DEFINITION; :: descriptor: Lblue/Language$Goal;
+blue.Language$Goal :: public static final blue.Language$Goal VALUE;
+blue.Language$Goal :: public static final blue.Language$Goal VALUE; :: descriptor: Lblue/Language$Goal;
+blue.Language$Input :: public blue.Language$Format format();
+blue.Language$Input :: public blue.Language$Format format(); :: descriptor: ()Lblue/Language$Format;
+blue.Language$Input :: public blue.Language$Input(java.lang.String, blue.Language$Format, blue.Language$Role);
+blue.Language$Input :: public blue.Language$Input(java.lang.String, blue.Language$Format, blue.Language$Role); :: descriptor: (Ljava/lang/String;Lblue/Language$Format;Lblue/Language$Role;)V
+blue.Language$Input :: public blue.Language$Role role();
+blue.Language$Input :: public blue.Language$Role role(); :: descriptor: ()Lblue/Language$Role;
+blue.Language$Input :: public final boolean equals(java.lang.Object);
+blue.Language$Input :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Language$Input :: public final class blue.Language$Input extends java.lang.Record {
+blue.Language$Input :: public final int hashCode();
+blue.Language$Input :: public final int hashCode(); :: descriptor: ()I
+blue.Language$Input :: public final java.lang.String toString();
+blue.Language$Input :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Language$Input :: public java.lang.String text();
+blue.Language$Input :: public java.lang.String text(); :: descriptor: ()Ljava/lang/String;
+blue.Language$Input :: public static blue.Language$Input compactJson(java.lang.String);
+blue.Language$Input :: public static blue.Language$Input compactJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Input;
+blue.Language$Input :: public static blue.Language$Input exactJson(java.lang.String);
+blue.Language$Input :: public static blue.Language$Input exactJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Input;
+blue.Language$Input :: public static blue.Language$Input exactYaml(java.lang.String);
+blue.Language$Input :: public static blue.Language$Input exactYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Input;
+blue.Language$Input :: public static blue.Language$Input json(java.lang.String);
+blue.Language$Input :: public static blue.Language$Input json(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Input;
+blue.Language$Input :: public static blue.Language$Input yaml(java.lang.String);
+blue.Language$Input :: public static blue.Language$Input yaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Input;
+blue.Language$Limits :: public blue.Language$Limits(long, int, long, int, long, int, int);
+blue.Language$Limits :: public blue.Language$Limits(long, int, long, int, long, int, int); :: descriptor: (JIJIJII)V
+blue.Language$Limits :: public final boolean equals(java.lang.Object);
+blue.Language$Limits :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Language$Limits :: public final class blue.Language$Limits extends java.lang.Record {
+blue.Language$Limits :: public final int hashCode();
+blue.Language$Limits :: public final int hashCode(); :: descriptor: ()I
+blue.Language$Limits :: public final java.lang.String toString();
+blue.Language$Limits :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Language$Limits :: public int decimalScale();
+blue.Language$Limits :: public int decimalScale(); :: descriptor: ()I
+blue.Language$Limits :: public int depth();
+blue.Language$Limits :: public int depth(); :: descriptor: ()I
+blue.Language$Limits :: public int fetches();
+blue.Language$Limits :: public int fetches(); :: descriptor: ()I
+blue.Language$Limits :: public int numericCharacters();
+blue.Language$Limits :: public int numericCharacters(); :: descriptor: ()I
+blue.Language$Limits :: public long steps();
+blue.Language$Limits :: public long steps(); :: descriptor: ()J
+blue.Language$Limits :: public long textBytes();
+blue.Language$Limits :: public long textBytes(); :: descriptor: ()J
+blue.Language$Limits :: public long values();
+blue.Language$Limits :: public long values(); :: descriptor: ()J
+blue.Language$Limits :: public static blue.Language$Limits defaults();
+blue.Language$Limits :: public static blue.Language$Limits defaults(); :: descriptor: ()Lblue/Language$Limits;
+blue.Language$Role :: public final class blue.Language$Role extends java.lang.Enum<blue.Language$Role> {
+blue.Language$Role :: public static blue.Language$Role valueOf(java.lang.String);
+blue.Language$Role :: public static blue.Language$Role valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Language$Role;
+blue.Language$Role :: public static blue.Language$Role[] values();
+blue.Language$Role :: public static blue.Language$Role[] values(); :: descriptor: ()[Lblue/Language$Role;
+blue.Language$Role :: public static final blue.Language$Role COMPACT;
+blue.Language$Role :: public static final blue.Language$Role COMPACT; :: descriptor: Lblue/Language$Role;
+blue.Language$Role :: public static final blue.Language$Role DIRECT;
+blue.Language$Role :: public static final blue.Language$Role DIRECT; :: descriptor: Lblue/Language$Role;
+blue.Language$Role :: public static final blue.Language$Role EXACT;
+blue.Language$Role :: public static final blue.Language$Role EXACT; :: descriptor: Lblue/Language$Role;
+blue.Language$Role :: public static final blue.Language$Role SOURCE;
+blue.Language$Role :: public static final blue.Language$Role SOURCE; :: descriptor: Lblue/Language$Role;
+blue.LanguageCheckpoint :: public final class blue.LanguageCheckpoint {
+blue.LanguageCheckpoint :: public java.lang.String identity();
+blue.LanguageCheckpoint :: public java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageCheckpoint :: public java.util.Map<java.lang.String, java.lang.Object> record();
+blue.LanguageCheckpoint :: public java.util.Map<java.lang.String, java.lang.Object> record(); :: descriptor: ()Ljava/util/Map;
+blue.LanguageContent :: public class blue.LanguageContent {
+blue.LanguageContent :: public final blue.BlueId blueId();
+blue.LanguageContent :: public final blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.LanguageContent :: public final blue.LanguageView at(java.lang.String);
+blue.LanguageContent :: public final blue.LanguageView at(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageView;
+blue.LanguageContent :: public final blue.LanguageView resolve();
+blue.LanguageContent :: public final blue.LanguageView resolve(); :: descriptor: ()Lblue/LanguageView;
+blue.LanguageContent :: public final blue.Node node();
+blue.LanguageContent :: public final blue.Node node(); :: descriptor: ()Lblue/Node;
+blue.LanguageContent :: public final java.lang.String canonicalJson();
+blue.LanguageContent :: public final java.lang.String canonicalJson(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageContent :: public final java.lang.String edition();
+blue.LanguageContent :: public final java.lang.String edition(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageContent :: public final java.lang.String toJson();
+blue.LanguageContent :: public final java.lang.String toJson(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageContent :: public final java.lang.String toYaml();
+blue.LanguageContent :: public final java.lang.String toYaml(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageContent :: public final java.util.Map<blue.BlueId, blue.LanguageRecord> records();
+blue.LanguageContent :: public final java.util.Map<blue.BlueId, blue.LanguageRecord> records(); :: descriptor: ()Ljava/util/Map;
+blue.LanguageContent :: public final java.util.Map<blue.BlueId, blue.LanguageRecord> records(java.util.function.Predicate<blue.BlueId>);
+blue.LanguageContent :: public final java.util.Map<blue.BlueId, blue.LanguageRecord> records(java.util.function.Predicate<blue.BlueId>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.LanguageDocument :: public blue.BlueId originalBlueId();
+blue.LanguageDocument :: public blue.BlueId originalBlueId(); :: descriptor: ()Lblue/BlueId;
+blue.LanguageDocument :: public blue.Language$Goal goal();
+blue.LanguageDocument :: public blue.Language$Goal goal(); :: descriptor: ()Lblue/Language$Goal;
+blue.LanguageDocument :: public blue.LanguageCheckpoint checkpoint();
+blue.LanguageDocument :: public blue.LanguageCheckpoint checkpoint(); :: descriptor: ()Lblue/LanguageCheckpoint;
+blue.LanguageDocument :: public blue.LanguageDocument collapse(java.lang.String...);
+blue.LanguageDocument :: public blue.LanguageDocument collapse(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument edit(java.util.function.Consumer<blue.Node$Editor>);
+blue.LanguageDocument :: public blue.LanguageDocument edit(java.util.function.Consumer<blue.Node$Editor>); :: descriptor: (Ljava/util/function/Consumer;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument expand(java.lang.String...);
+blue.LanguageDocument :: public blue.LanguageDocument expand(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument extendJson(java.lang.String);
+blue.LanguageDocument :: public blue.LanguageDocument extendJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument extendYaml(java.lang.String);
+blue.LanguageDocument :: public blue.LanguageDocument extendYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument specializeJson(java.lang.String);
+blue.LanguageDocument :: public blue.LanguageDocument specializeJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public blue.LanguageDocument specializeYaml(java.lang.String);
+blue.LanguageDocument :: public blue.LanguageDocument specializeYaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageDocument;
+blue.LanguageDocument :: public final class blue.LanguageDocument extends blue.LanguageContent {
+blue.LanguageDocument :: public java.util.List<java.lang.String> removedFields();
+blue.LanguageDocument :: public java.util.List<java.lang.String> removedFields(); :: descriptor: ()Ljava/util/List;
+blue.LanguageException :: public blue.Node diagnostic();
+blue.LanguageException :: public blue.Node diagnostic(); :: descriptor: ()Lblue/Node;
+blue.LanguageException :: public boolean incomplete();
+blue.LanguageException :: public boolean incomplete(); :: descriptor: ()Z
+blue.LanguageException :: public final class blue.LanguageException extends java.lang.RuntimeException {
+blue.LanguageException :: public java.lang.String category();
+blue.LanguageException :: public java.lang.String category(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageProvider :: public abstract java.util.Optional<blue.LanguageRecord> find(blue.BlueId);
+blue.LanguageProvider :: public abstract java.util.Optional<blue.LanguageRecord> find(blue.BlueId); :: descriptor: (Lblue/BlueId;)Ljava/util/Optional;
+blue.LanguageProvider :: public interface blue.LanguageProvider {
+blue.LanguageRecord :: public final class blue.LanguageRecord {
+blue.LanguageRecord :: public java.lang.String toJson();
+blue.LanguageRecord :: public java.lang.String toJson(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageRecord :: public static blue.LanguageRecord cyclic(java.lang.String);
+blue.LanguageRecord :: public static blue.LanguageRecord cyclic(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageRecord;
+blue.LanguageRecord :: public static blue.LanguageRecord cyclic(java.lang.String, java.lang.String);
+blue.LanguageRecord :: public static blue.LanguageRecord cyclic(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)Lblue/LanguageRecord;
+blue.LanguageRecord :: public static blue.LanguageRecord fromJson(java.lang.String);
+blue.LanguageRecord :: public static blue.LanguageRecord fromJson(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageRecord;
+blue.LanguageRecord :: public static blue.LanguageRecord json(java.lang.String);
+blue.LanguageRecord :: public static blue.LanguageRecord json(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageRecord;
+blue.LanguageRecord :: public static blue.LanguageRecord yaml(java.lang.String);
+blue.LanguageRecord :: public static blue.LanguageRecord yaml(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageRecord;
+blue.LanguageView :: public blue.LanguageView at(java.lang.String);
+blue.LanguageView :: public blue.LanguageView at(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/LanguageView;
+blue.LanguageView :: public blue.Node constraints();
+blue.LanguageView :: public blue.Node constraints(); :: descriptor: ()Lblue/Node;
+blue.LanguageView :: public blue.Node observation(java.lang.String);
+blue.LanguageView :: public blue.Node observation(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node;
+blue.LanguageView :: public boolean bool();
+blue.LanguageView :: public boolean bool(); :: descriptor: ()Z
+blue.LanguageView :: public boolean exists();
+blue.LanguageView :: public boolean exists(); :: descriptor: ()Z
+blue.LanguageView :: public boolean isConcrete();
+blue.LanguageView :: public boolean isConcrete(); :: descriptor: ()Z
+blue.LanguageView :: public double number();
+blue.LanguageView :: public double number(); :: descriptor: ()D
+blue.LanguageView :: public final class blue.LanguageView {
+blue.LanguageView :: public int size();
+blue.LanguageView :: public int size(); :: descriptor: ()I
+blue.LanguageView :: public java.lang.String kind();
+blue.LanguageView :: public java.lang.String kind(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageView :: public java.lang.String text();
+blue.LanguageView :: public java.lang.String text(); :: descriptor: ()Ljava/lang/String;
+blue.LanguageView :: public java.math.BigInteger bigInteger();
+blue.LanguageView :: public java.math.BigInteger bigInteger(); :: descriptor: ()Ljava/math/BigInteger;
+blue.LanguageView :: public java.util.List<java.lang.String> declaredFields();
+blue.LanguageView :: public java.util.List<java.lang.String> declaredFields(); :: descriptor: ()Ljava/util/List;
+blue.LanguageView :: public java.util.List<java.lang.String> keys();
+blue.LanguageView :: public java.util.List<java.lang.String> keys(); :: descriptor: ()Ljava/util/List;
+blue.LanguageView :: public java.util.Optional<blue.BlueId> specification();
+blue.LanguageView :: public java.util.Optional<blue.BlueId> specification(); :: descriptor: ()Ljava/util/Optional;
+blue.LanguageView :: public java.util.Optional<blue.BlueId> type();
+blue.LanguageView :: public java.util.Optional<blue.BlueId> type(); :: descriptor: ()Ljava/util/Optional;
+blue.LanguageView :: public java.util.Optional<blue.LanguageContent> content();
+blue.LanguageView :: public java.util.Optional<blue.LanguageContent> content(); :: descriptor: ()Ljava/util/Optional;
+blue.LanguageView :: public java.util.Optional<java.lang.String> description();
+blue.LanguageView :: public java.util.Optional<java.lang.String> description(); :: descriptor: ()Ljava/util/Optional;
+blue.LanguageView :: public java.util.Optional<java.lang.String> name();
+blue.LanguageView :: public java.util.Optional<java.lang.String> name(); :: descriptor: ()Ljava/util/Optional;
+blue.LanguageView :: public long integer();
+blue.LanguageView :: public long integer(); :: descriptor: ()J
+blue.NativeAdmission :: public blue.BlueId channelTypeId();
+blue.NativeAdmission :: public blue.BlueId channelTypeId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission :: public blue.BlueId eventId();
+blue.NativeAdmission :: public blue.BlueId eventId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission :: public blue.BlueId inputId();
+blue.NativeAdmission :: public blue.BlueId inputId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission :: public blue.BlueId semanticsId();
+blue.NativeAdmission :: public blue.BlueId semanticsId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission :: public final class blue.NativeAdmission {
+blue.NativeAdmission :: public java.lang.Object evidence();
+blue.NativeAdmission :: public java.lang.Object evidence(); :: descriptor: ()Ljava/lang/Object;
+blue.NativeAdmission :: public java.lang.String snapshotIdentity();
+blue.NativeAdmission :: public java.lang.String snapshotIdentity(); :: descriptor: ()Ljava/lang/String;
+blue.NativeAdmission :: public java.util.List<blue.NativeAdmission$Receiver> receivers();
+blue.NativeAdmission :: public java.util.List<blue.NativeAdmission$Receiver> receivers(); :: descriptor: ()Ljava/util/List;
+blue.NativeAdmission :: public long remainingGas();
+blue.NativeAdmission :: public long remainingGas(); :: descriptor: ()J
+blue.NativeAdmission :: public long timestamp();
+blue.NativeAdmission :: public long timestamp(); :: descriptor: ()J
+blue.NativeAdmission :: public void charge(java.lang.String, long);
+blue.NativeAdmission :: public void charge(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)V
+blue.NativeAdmission :: public void reject(java.lang.String);
+blue.NativeAdmission :: public void reject(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.NativeAdmission$Receiver :: public blue.BlueId declarationId();
+blue.NativeAdmission$Receiver :: public blue.BlueId declarationId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission$Receiver :: public blue.BlueId documentId();
+blue.NativeAdmission$Receiver :: public blue.BlueId documentId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeAdmission$Receiver :: public blue.NativeAdmission$Receiver(java.lang.String, blue.BlueId, java.lang.String, long, blue.BlueId, java.util.Map<java.lang.String, java.lang.Object>, java.util.Optional<blue.NativeChannel$Checkpoint>);
+blue.NativeAdmission$Receiver :: public blue.NativeAdmission$Receiver(java.lang.String, blue.BlueId, java.lang.String, long, blue.BlueId, java.util.Map<java.lang.String, java.lang.Object>, java.util.Optional<blue.NativeChannel$Checkpoint>); :: descriptor: (Ljava/lang/String;Lblue/BlueId;Ljava/lang/String;JLblue/BlueId;Ljava/util/Map;Ljava/util/Optional;)V
+blue.NativeAdmission$Receiver :: public final boolean equals(java.lang.Object);
+blue.NativeAdmission$Receiver :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.NativeAdmission$Receiver :: public final class blue.NativeAdmission$Receiver extends java.lang.Record {
+blue.NativeAdmission$Receiver :: public final int hashCode();
+blue.NativeAdmission$Receiver :: public final int hashCode(); :: descriptor: ()I
+blue.NativeAdmission$Receiver :: public final java.lang.String toString();
+blue.NativeAdmission$Receiver :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.NativeAdmission$Receiver :: public java.lang.String channel();
+blue.NativeAdmission$Receiver :: public java.lang.String channel(); :: descriptor: ()Ljava/lang/String;
+blue.NativeAdmission$Receiver :: public java.lang.String member();
+blue.NativeAdmission$Receiver :: public java.lang.String member(); :: descriptor: ()Ljava/lang/String;
+blue.NativeAdmission$Receiver :: public java.util.Map<java.lang.String, java.lang.Object> header();
+blue.NativeAdmission$Receiver :: public java.util.Map<java.lang.String, java.lang.Object> header(); :: descriptor: ()Ljava/util/Map;
+blue.NativeAdmission$Receiver :: public java.util.Optional<blue.NativeChannel$Checkpoint> checkpoint();
+blue.NativeAdmission$Receiver :: public java.util.Optional<blue.NativeChannel$Checkpoint> checkpoint(); :: descriptor: ()Ljava/util/Optional;
+blue.NativeAdmission$Receiver :: public long generation();
+blue.NativeAdmission$Receiver :: public long generation(); :: descriptor: ()J
+blue.NativeChannel :: public blue.BlueId semanticsId();
+blue.NativeChannel :: public blue.BlueId semanticsId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeChannel :: public blue.BlueId typeId();
+blue.NativeChannel :: public blue.BlueId typeId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeChannel :: public final class blue.NativeChannel {
+blue.NativeChannel :: public static blue.NativeChannel$Builder newBuilder(blue.LanguageDocument, blue.LanguageDocument, java.lang.String);
+blue.NativeChannel :: public static blue.NativeChannel$Builder newBuilder(blue.LanguageDocument, blue.LanguageDocument, java.lang.String); :: descriptor: (Lblue/LanguageDocument;Lblue/LanguageDocument;Ljava/lang/String;)Lblue/NativeChannel$Builder;
+blue.NativeChannel$AdmissionVerifier :: public abstract java.util.Map<java.lang.String, java.lang.Object> verify(blue.NativeAdmission);
+blue.NativeChannel$AdmissionVerifier :: public abstract java.util.Map<java.lang.String, java.lang.Object> verify(blue.NativeAdmission); :: descriptor: (Lblue/NativeAdmission;)Ljava/util/Map;
+blue.NativeChannel$AdmissionVerifier :: public interface blue.NativeChannel$AdmissionVerifier {
+blue.NativeChannel$Builder :: public blue.NativeChannel build();
+blue.NativeChannel$Builder :: public blue.NativeChannel build(); :: descriptor: ()Lblue/NativeChannel;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder accept(blue.NativeChannel$Handler);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder accept(blue.NativeChannel$Handler); :: descriptor: (Lblue/NativeChannel$Handler;)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder counter(java.lang.String, long);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder counter(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder headerFields(java.lang.String...);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder headerFields(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder inherited(boolean);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder inherited(boolean); :: descriptor: (Z)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder peerFields(java.lang.String...);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder peerFields(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder verifyAdmission(blue.NativeChannel$AdmissionVerifier);
+blue.NativeChannel$Builder :: public blue.NativeChannel$Builder verifyAdmission(blue.NativeChannel$AdmissionVerifier); :: descriptor: (Lblue/NativeChannel$AdmissionVerifier;)Lblue/NativeChannel$Builder;
+blue.NativeChannel$Builder :: public final class blue.NativeChannel$Builder {
+blue.NativeChannel$Checkpoint :: public blue.BlueId eventId();
+blue.NativeChannel$Checkpoint :: public blue.BlueId eventId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeChannel$Checkpoint :: public blue.NativeChannel$Checkpoint(blue.BlueId, long);
+blue.NativeChannel$Checkpoint :: public blue.NativeChannel$Checkpoint(blue.BlueId, long); :: descriptor: (Lblue/BlueId;J)V
+blue.NativeChannel$Checkpoint :: public final boolean equals(java.lang.Object);
+blue.NativeChannel$Checkpoint :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.NativeChannel$Checkpoint :: public final class blue.NativeChannel$Checkpoint extends java.lang.Record {
+blue.NativeChannel$Checkpoint :: public final int hashCode();
+blue.NativeChannel$Checkpoint :: public final int hashCode(); :: descriptor: ()I
+blue.NativeChannel$Checkpoint :: public final java.lang.String toString();
+blue.NativeChannel$Checkpoint :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.NativeChannel$Checkpoint :: public long timestamp();
+blue.NativeChannel$Checkpoint :: public long timestamp(); :: descriptor: ()J
+blue.NativeChannel$Context :: public blue.BlueId documentId();
+blue.NativeChannel$Context :: public blue.BlueId documentId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeChannel$Context :: public blue.NativeChannel$Peer peer(java.lang.String);
+blue.NativeChannel$Context :: public blue.NativeChannel$Peer peer(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/NativeChannel$Peer;
+blue.NativeChannel$Context :: public final class blue.NativeChannel$Context {
+blue.NativeChannel$Context :: public java.lang.Object event();
+blue.NativeChannel$Context :: public java.lang.Object event(); :: descriptor: ()Ljava/lang/Object;
+blue.NativeChannel$Context :: public java.lang.Object event(java.lang.String);
+blue.NativeChannel$Context :: public java.lang.Object event(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.NativeChannel$Context :: public java.lang.String channel();
+blue.NativeChannel$Context :: public java.lang.String channel(); :: descriptor: ()Ljava/lang/String;
+blue.NativeChannel$Context :: public java.util.Map<java.lang.String, java.lang.Object> admission();
+blue.NativeChannel$Context :: public java.util.Map<java.lang.String, java.lang.Object> admission(); :: descriptor: ()Ljava/util/Map;
+blue.NativeChannel$Context :: public java.util.Map<java.lang.String, java.lang.Object> header();
+blue.NativeChannel$Context :: public java.util.Map<java.lang.String, java.lang.Object> header(); :: descriptor: ()Ljava/util/Map;
+blue.NativeChannel$Context :: public java.util.Optional<blue.NativeChannel$Checkpoint> checkpoint();
+blue.NativeChannel$Context :: public java.util.Optional<blue.NativeChannel$Checkpoint> checkpoint(); :: descriptor: ()Ljava/util/Optional;
+blue.NativeChannel$Context :: public long generation();
+blue.NativeChannel$Context :: public long generation(); :: descriptor: ()J
+blue.NativeChannel$Context :: public long remainingGas();
+blue.NativeChannel$Context :: public long remainingGas(); :: descriptor: ()J
+blue.NativeChannel$Context :: public long timestamp();
+blue.NativeChannel$Context :: public long timestamp(); :: descriptor: ()J
+blue.NativeChannel$Context :: public void charge(java.lang.String, long);
+blue.NativeChannel$Context :: public void charge(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)V
+blue.NativeChannel$Handler :: public abstract boolean accept(blue.NativeChannel$Context);
+blue.NativeChannel$Handler :: public abstract boolean accept(blue.NativeChannel$Context); :: descriptor: (Lblue/NativeChannel$Context;)Z
+blue.NativeChannel$Handler :: public interface blue.NativeChannel$Handler {
+blue.NativeChannel$Peer :: public blue.NativeChannel$Peer(blue.NativeChannel$PeerStatus, java.util.Map<java.lang.String, java.lang.Object>);
+blue.NativeChannel$Peer :: public blue.NativeChannel$Peer(blue.NativeChannel$PeerStatus, java.util.Map<java.lang.String, java.lang.Object>); :: descriptor: (Lblue/NativeChannel$PeerStatus;Ljava/util/Map;)V
+blue.NativeChannel$Peer :: public blue.NativeChannel$PeerStatus status();
+blue.NativeChannel$Peer :: public blue.NativeChannel$PeerStatus status(); :: descriptor: ()Lblue/NativeChannel$PeerStatus;
+blue.NativeChannel$Peer :: public final boolean equals(java.lang.Object);
+blue.NativeChannel$Peer :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.NativeChannel$Peer :: public final class blue.NativeChannel$Peer extends java.lang.Record {
+blue.NativeChannel$Peer :: public final int hashCode();
+blue.NativeChannel$Peer :: public final int hashCode(); :: descriptor: ()I
+blue.NativeChannel$Peer :: public final java.lang.String toString();
+blue.NativeChannel$Peer :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.NativeChannel$Peer :: public java.util.Map<java.lang.String, java.lang.Object> header();
+blue.NativeChannel$Peer :: public java.util.Map<java.lang.String, java.lang.Object> header(); :: descriptor: ()Ljava/util/Map;
+blue.NativeChannel$PeerStatus :: public final class blue.NativeChannel$PeerStatus extends java.lang.Enum<blue.NativeChannel$PeerStatus> {
+blue.NativeChannel$PeerStatus :: public static blue.NativeChannel$PeerStatus valueOf(java.lang.String);
+blue.NativeChannel$PeerStatus :: public static blue.NativeChannel$PeerStatus valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/NativeChannel$PeerStatus;
+blue.NativeChannel$PeerStatus :: public static blue.NativeChannel$PeerStatus[] values();
+blue.NativeChannel$PeerStatus :: public static blue.NativeChannel$PeerStatus[] values(); :: descriptor: ()[Lblue/NativeChannel$PeerStatus;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus ABSENT;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus ABSENT; :: descriptor: Lblue/NativeChannel$PeerStatus;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus NON_CHANNEL;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus NON_CHANNEL; :: descriptor: Lblue/NativeChannel$PeerStatus;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus PRESENT;
+blue.NativeChannel$PeerStatus :: public static final blue.NativeChannel$PeerStatus PRESENT; :: descriptor: Lblue/NativeChannel$PeerStatus;
+blue.NativeStep :: public blue.BlueId semanticsId();
+blue.NativeStep :: public blue.BlueId semanticsId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeStep :: public blue.BlueId typeId();
+blue.NativeStep :: public blue.BlueId typeId(); :: descriptor: ()Lblue/BlueId;
+blue.NativeStep :: public final class blue.NativeStep {
+blue.NativeStep :: public static blue.NativeStep$Builder newBuilder(blue.LanguageDocument, blue.LanguageDocument, java.lang.String);
+blue.NativeStep :: public static blue.NativeStep$Builder newBuilder(blue.LanguageDocument, blue.LanguageDocument, java.lang.String); :: descriptor: (Lblue/LanguageDocument;Lblue/LanguageDocument;Ljava/lang/String;)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public blue.NativeStep build();
+blue.NativeStep$Builder :: public blue.NativeStep build(); :: descriptor: ()Lblue/NativeStep;
+blue.NativeStep$Builder :: public blue.NativeStep$Builder bodyFields(java.lang.String...);
+blue.NativeStep$Builder :: public blue.NativeStep$Builder bodyFields(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public blue.NativeStep$Builder counter(java.lang.String, long);
+blue.NativeStep$Builder :: public blue.NativeStep$Builder counter(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public blue.NativeStep$Builder execute(blue.NativeStep$Handler);
+blue.NativeStep$Builder :: public blue.NativeStep$Builder execute(blue.NativeStep$Handler); :: descriptor: (Lblue/NativeStep$Handler;)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public blue.NativeStep$Builder headerFields(java.lang.String...);
+blue.NativeStep$Builder :: public blue.NativeStep$Builder headerFields(java.lang.String...); :: descriptor: ([Ljava/lang/String;)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public blue.NativeStep$Builder inherited(boolean);
+blue.NativeStep$Builder :: public blue.NativeStep$Builder inherited(boolean); :: descriptor: (Z)Lblue/NativeStep$Builder;
+blue.NativeStep$Builder :: public final class blue.NativeStep$Builder {
+blue.NativeStep$Context :: public final class blue.NativeStep$Context {
+blue.NativeStep$Context :: public java.lang.Long timestamp();
+blue.NativeStep$Context :: public java.lang.Long timestamp(); :: descriptor: ()Ljava/lang/Long;
+blue.NativeStep$Context :: public java.lang.Object call();
+blue.NativeStep$Context :: public java.lang.Object call(); :: descriptor: ()Ljava/lang/Object;
+blue.NativeStep$Context :: public java.lang.Object evaluate(java.lang.Object);
+blue.NativeStep$Context :: public java.lang.Object evaluate(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+blue.NativeStep$Context :: public java.lang.Object event();
+blue.NativeStep$Context :: public java.lang.Object event(); :: descriptor: ()Ljava/lang/Object;
+blue.NativeStep$Context :: public java.lang.Object event(java.lang.String);
+blue.NativeStep$Context :: public java.lang.Object event(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.NativeStep$Context :: public java.lang.Object read(java.lang.String);
+blue.NativeStep$Context :: public java.lang.Object read(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> body();
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> body(); :: descriptor: ()Ljava/util/Map;
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> header();
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> header(); :: descriptor: ()Ljava/util/Map;
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> steps();
+blue.NativeStep$Context :: public java.util.Map<java.lang.String, java.lang.Object> steps(); :: descriptor: ()Ljava/util/Map;
+blue.NativeStep$Context :: public long remainingGas();
+blue.NativeStep$Context :: public long remainingGas(); :: descriptor: ()J
+blue.NativeStep$Context :: public void add(java.lang.String, java.lang.Object);
+blue.NativeStep$Context :: public void add(java.lang.String, java.lang.Object); :: descriptor: (Ljava/lang/String;Ljava/lang/Object;)V
+blue.NativeStep$Context :: public void charge(java.lang.String, long);
+blue.NativeStep$Context :: public void charge(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)V
+blue.NativeStep$Context :: public void emit(java.lang.Object);
+blue.NativeStep$Context :: public void emit(java.lang.Object); :: descriptor: (Ljava/lang/Object;)V
+blue.NativeStep$Context :: public void reject(java.lang.String);
+blue.NativeStep$Context :: public void reject(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.NativeStep$Context :: public void remove(java.lang.String);
+blue.NativeStep$Context :: public void remove(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.NativeStep$Context :: public void replace(java.lang.String, java.lang.Object);
+blue.NativeStep$Context :: public void replace(java.lang.String, java.lang.Object); :: descriptor: (Ljava/lang/String;Ljava/lang/Object;)V
+blue.NativeStep$Context :: public void terminate(java.lang.String, java.lang.String);
+blue.NativeStep$Context :: public void terminate(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)V
+blue.NativeStep$Handler :: public abstract void execute(blue.NativeStep$Context);
+blue.NativeStep$Handler :: public abstract void execute(blue.NativeStep$Context); :: descriptor: (Lblue/NativeStep$Context;)V
+blue.NativeStep$Handler :: public interface blue.NativeStep$Handler {
+blue.Node :: public blue.Node append(blue.Node);
+blue.Node :: public blue.Node append(blue.Node); :: descriptor: (Lblue/Node;)Lblue/Node;
+blue.Node :: public blue.Node at(blue.Pointer);
+blue.Node :: public blue.Node at(blue.Pointer); :: descriptor: (Lblue/Pointer;)Lblue/Node;
+blue.Node :: public blue.Node at(java.lang.String);
+blue.Node :: public blue.Node at(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node;
+blue.Node :: public blue.Node edit(java.util.function.Consumer<blue.Node$Editor>);
+blue.Node :: public blue.Node edit(java.util.function.Consumer<blue.Node$Editor>); :: descriptor: (Ljava/util/function/Consumer;)Lblue/Node;
+blue.Node :: public blue.Node get(int);
+blue.Node :: public blue.Node get(int); :: descriptor: (I)Lblue/Node;
+blue.Node :: public blue.Node get(java.lang.String);
+blue.Node :: public blue.Node get(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node;
+blue.Node :: public blue.Node with(int, blue.Node);
+blue.Node :: public blue.Node with(int, blue.Node); :: descriptor: (ILblue/Node;)Lblue/Node;
+blue.Node :: public blue.Node with(java.lang.String, blue.Node);
+blue.Node :: public blue.Node with(java.lang.String, blue.Node); :: descriptor: (Ljava/lang/String;Lblue/Node;)Lblue/Node;
+blue.Node :: public blue.Node without(java.lang.String);
+blue.Node :: public blue.Node without(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node;
+blue.Node :: public blue.Node$Kind kind();
+blue.Node :: public blue.Node$Kind kind(); :: descriptor: ()Lblue/Node$Kind;
+blue.Node :: public boolean bool();
+blue.Node :: public boolean bool(); :: descriptor: ()Z
+blue.Node :: public boolean equals(java.lang.Object);
+blue.Node :: public boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Node :: public boolean isMissing();
+blue.Node :: public boolean isMissing(); :: descriptor: ()Z
+blue.Node :: public double number();
+blue.Node :: public double number(); :: descriptor: ()D
+blue.Node :: public final class blue.Node {
+blue.Node :: public int hashCode();
+blue.Node :: public int hashCode(); :: descriptor: ()I
+blue.Node :: public int size();
+blue.Node :: public int size(); :: descriptor: ()I
+blue.Node :: public java.lang.String text();
+blue.Node :: public java.lang.String text(); :: descriptor: ()Ljava/lang/String;
+blue.Node :: public java.lang.String toString();
+blue.Node :: public java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Node :: public java.math.BigInteger bigInteger();
+blue.Node :: public java.math.BigInteger bigInteger(); :: descriptor: ()Ljava/math/BigInteger;
+blue.Node :: public java.util.List<blue.Node> items();
+blue.Node :: public java.util.List<blue.Node> items(); :: descriptor: ()Ljava/util/List;
+blue.Node :: public java.util.Map<java.lang.String, blue.Node> fields();
+blue.Node :: public java.util.Map<java.lang.String, blue.Node> fields(); :: descriptor: ()Ljava/util/Map;
+blue.Node :: public long integer();
+blue.Node :: public long integer(); :: descriptor: ()J
+blue.Node :: public long logicalSize();
+blue.Node :: public long logicalSize(); :: descriptor: ()J
+blue.Node :: public static blue.Node bool(boolean);
+blue.Node :: public static blue.Node bool(boolean); :: descriptor: (Z)Lblue/Node;
+blue.Node :: public static blue.Node integer(java.math.BigInteger);
+blue.Node :: public static blue.Node integer(java.math.BigInteger); :: descriptor: (Ljava/math/BigInteger;)Lblue/Node;
+blue.Node :: public static blue.Node integer(long);
+blue.Node :: public static blue.Node integer(long); :: descriptor: (J)Lblue/Node;
+blue.Node :: public static blue.Node list(java.util.List<blue.Node>);
+blue.Node :: public static blue.Node list(java.util.List<blue.Node>); :: descriptor: (Ljava/util/List;)Lblue/Node;
+blue.Node :: public static blue.Node missing();
+blue.Node :: public static blue.Node missing(); :: descriptor: ()Lblue/Node;
+blue.Node :: public static blue.Node nil();
+blue.Node :: public static blue.Node nil(); :: descriptor: ()Lblue/Node;
+blue.Node :: public static blue.Node number(double);
+blue.Node :: public static blue.Node number(double); :: descriptor: (D)Lblue/Node;
+blue.Node :: public static blue.Node object();
+blue.Node :: public static blue.Node object(); :: descriptor: ()Lblue/Node;
+blue.Node :: public static blue.Node object(java.util.Map<java.lang.String, blue.Node>);
+blue.Node :: public static blue.Node object(java.util.Map<java.lang.String, blue.Node>); :: descriptor: (Ljava/util/Map;)Lblue/Node;
+blue.Node :: public static blue.Node reference(blue.BlueId);
+blue.Node :: public static blue.Node reference(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/Node;
+blue.Node :: public static blue.Node text(java.lang.String);
+blue.Node :: public static blue.Node text(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node;
+blue.Node$Editor :: public blue.Node$Editor remove(java.lang.String);
+blue.Node$Editor :: public blue.Node$Editor remove(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node$Editor;
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, blue.Node);
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, blue.Node); :: descriptor: (Ljava/lang/String;Lblue/Node;)Lblue/Node$Editor;
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, boolean);
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, boolean); :: descriptor: (Ljava/lang/String;Z)Lblue/Node$Editor;
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, double);
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, double); :: descriptor: (Ljava/lang/String;D)Lblue/Node$Editor;
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, java.lang.String);
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, java.lang.String); :: descriptor: (Ljava/lang/String;Ljava/lang/String;)Lblue/Node$Editor;
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, long);
+blue.Node$Editor :: public blue.Node$Editor set(java.lang.String, long); :: descriptor: (Ljava/lang/String;J)Lblue/Node$Editor;
+blue.Node$Editor :: public final class blue.Node$Editor {
+blue.Node$Kind :: public final class blue.Node$Kind extends java.lang.Enum<blue.Node$Kind> {
+blue.Node$Kind :: public static blue.Node$Kind valueOf(java.lang.String);
+blue.Node$Kind :: public static blue.Node$Kind valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Node$Kind;
+blue.Node$Kind :: public static blue.Node$Kind[] values();
+blue.Node$Kind :: public static blue.Node$Kind[] values(); :: descriptor: ()[Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind BOOLEAN;
+blue.Node$Kind :: public static final blue.Node$Kind BOOLEAN; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind DOUBLE;
+blue.Node$Kind :: public static final blue.Node$Kind DOUBLE; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind INTEGER;
+blue.Node$Kind :: public static final blue.Node$Kind INTEGER; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind LIST;
+blue.Node$Kind :: public static final blue.Node$Kind LIST; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind MISSING;
+blue.Node$Kind :: public static final blue.Node$Kind MISSING; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind NULL;
+blue.Node$Kind :: public static final blue.Node$Kind NULL; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind OBJECT;
+blue.Node$Kind :: public static final blue.Node$Kind OBJECT; :: descriptor: Lblue/Node$Kind;
+blue.Node$Kind :: public static final blue.Node$Kind TEXT;
+blue.Node$Kind :: public static final blue.Node$Kind TEXT; :: descriptor: Lblue/Node$Kind;
+blue.NodeProvider :: public abstract java.util.Optional<blue.Node> find(blue.BlueId);
+blue.NodeProvider :: public abstract java.util.Optional<blue.Node> find(blue.BlueId); :: descriptor: (Lblue/BlueId;)Ljava/util/Optional;
+blue.NodeProvider :: public interface blue.NodeProvider {
+blue.PackageException :: public boolean incomplete();
+blue.PackageException :: public boolean incomplete(); :: descriptor: ()Z
+blue.PackageException :: public final class blue.PackageException extends java.lang.RuntimeException {
+blue.PackageException :: public java.lang.String category();
+blue.PackageException :: public java.lang.String category(); :: descriptor: ()Ljava/lang/String;
+blue.PackageLimits :: public blue.Language$Limits operations();
+blue.PackageLimits :: public blue.Language$Limits operations(); :: descriptor: ()Lblue/Language$Limits;
+blue.PackageLimits :: public blue.PackageLimits(int, long, long, long, blue.Language$Limits);
+blue.PackageLimits :: public blue.PackageLimits(int, long, long, long, blue.Language$Limits); :: descriptor: (IJJJLblue/Language$Limits;)V
+blue.PackageLimits :: public final boolean equals(java.lang.Object);
+blue.PackageLimits :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.PackageLimits :: public final class blue.PackageLimits extends java.lang.Record {
+blue.PackageLimits :: public final int hashCode();
+blue.PackageLimits :: public final int hashCode(); :: descriptor: ()I
+blue.PackageLimits :: public final java.lang.String toString();
+blue.PackageLimits :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.PackageLimits :: public int entries();
+blue.PackageLimits :: public int entries(); :: descriptor: ()I
+blue.PackageLimits :: public long archiveBytes();
+blue.PackageLimits :: public long archiveBytes(); :: descriptor: ()J
+blue.PackageLimits :: public long entryBytes();
+blue.PackageLimits :: public long entryBytes(); :: descriptor: ()J
+blue.PackageLimits :: public long expandedBytes();
+blue.PackageLimits :: public long expandedBytes(); :: descriptor: ()J
+blue.PackageLimits :: public static blue.PackageLimits defaults();
+blue.PackageLimits :: public static blue.PackageLimits defaults(); :: descriptor: ()Lblue/PackageLimits;
+blue.PackageLoader :: public blue.BluePackage open(java.nio.file.Path);
+blue.PackageLoader :: public blue.BluePackage open(java.nio.file.Path); :: descriptor: (Ljava/nio/file/Path;)Lblue/BluePackage;
+blue.PackageLoader :: public blue.BluePackage open(java.nio.file.Path, blue.BlueId);
+blue.PackageLoader :: public blue.BluePackage open(java.nio.file.Path, blue.BlueId); :: descriptor: (Ljava/nio/file/Path;Lblue/BlueId;)Lblue/BluePackage;
+blue.PackageLoader :: public blue.BluePackage read(java.io.InputStream);
+blue.PackageLoader :: public blue.BluePackage read(java.io.InputStream); :: descriptor: (Ljava/io/InputStream;)Lblue/BluePackage;
+blue.PackageLoader :: public blue.BluePackage read(java.io.InputStream, blue.BlueId);
+blue.PackageLoader :: public blue.BluePackage read(java.io.InputStream, blue.BlueId); :: descriptor: (Ljava/io/InputStream;Lblue/BlueId;)Lblue/BluePackage;
+blue.PackageLoader :: public blue.BluePackage resource(java.lang.ClassLoader, java.lang.String, blue.BlueId);
+blue.PackageLoader :: public blue.BluePackage resource(java.lang.ClassLoader, java.lang.String, blue.BlueId); :: descriptor: (Ljava/lang/ClassLoader;Ljava/lang/String;Lblue/BlueId;)Lblue/BluePackage;
+blue.PackageLoader :: public final class blue.PackageLoader {
+blue.PackageLoader :: public static blue.PackageLoader create();
+blue.PackageLoader :: public static blue.PackageLoader create(); :: descriptor: ()Lblue/PackageLoader;
+blue.PackageLoader :: public static blue.PackageLoader$Builder newBuilder();
+blue.PackageLoader :: public static blue.PackageLoader$Builder newBuilder(); :: descriptor: ()Lblue/PackageLoader$Builder;
+blue.PackageLoader :: public void clearCache();
+blue.PackageLoader :: public void clearCache(); :: descriptor: ()V
+blue.PackageLoader$Builder :: public blue.PackageLoader build();
+blue.PackageLoader$Builder :: public blue.PackageLoader build(); :: descriptor: ()Lblue/PackageLoader;
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder cache(int, long);
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder cache(int, long); :: descriptor: (IJ)Lblue/PackageLoader$Builder;
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder language(blue.BlueId);
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder language(blue.BlueId); :: descriptor: (Lblue/BlueId;)Lblue/PackageLoader$Builder;
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder limits(blue.PackageLimits);
+blue.PackageLoader$Builder :: public blue.PackageLoader$Builder limits(blue.PackageLimits); :: descriptor: (Lblue/PackageLimits;)Lblue/PackageLoader$Builder;
+blue.PackageLoader$Builder :: public final class blue.PackageLoader$Builder {
+blue.Pointer :: public blue.Pointer child(java.lang.String);
+blue.Pointer :: public blue.Pointer child(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Pointer;
+blue.Pointer :: public blue.Pointer(java.util.List<java.lang.String>);
+blue.Pointer :: public blue.Pointer(java.util.List<java.lang.String>); :: descriptor: (Ljava/util/List;)V
+blue.Pointer :: public boolean contains(blue.Pointer);
+blue.Pointer :: public boolean contains(blue.Pointer); :: descriptor: (Lblue/Pointer;)Z
+blue.Pointer :: public final boolean equals(java.lang.Object);
+blue.Pointer :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.Pointer :: public final class blue.Pointer extends java.lang.Record {
+blue.Pointer :: public final int hashCode();
+blue.Pointer :: public final int hashCode(); :: descriptor: ()I
+blue.Pointer :: public java.lang.String toString();
+blue.Pointer :: public java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.Pointer :: public java.util.List<java.lang.String> segments();
+blue.Pointer :: public java.util.List<java.lang.String> segments(); :: descriptor: ()Ljava/util/List;
+blue.Pointer :: public static blue.Pointer parse(java.lang.String);
+blue.Pointer :: public static blue.Pointer parse(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/Pointer;
+blue.Pointer :: public static java.lang.String escape(java.lang.String);
+blue.Pointer :: public static java.lang.String escape(java.lang.String); :: descriptor: (Ljava/lang/String;)Ljava/lang/String;
+blue.ProjectionLimits :: public blue.ProjectionLimits(long, long, int);
+blue.ProjectionLimits :: public blue.ProjectionLimits(long, long, int); :: descriptor: (JJI)V
+blue.ProjectionLimits :: public final boolean equals(java.lang.Object);
+blue.ProjectionLimits :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.ProjectionLimits :: public final class blue.ProjectionLimits extends java.lang.Record {
+blue.ProjectionLimits :: public final int hashCode();
+blue.ProjectionLimits :: public final int hashCode(); :: descriptor: ()I
+blue.ProjectionLimits :: public final java.lang.String toString();
+blue.ProjectionLimits :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.ProjectionLimits :: public int depth();
+blue.ProjectionLimits :: public int depth(); :: descriptor: ()I
+blue.ProjectionLimits :: public long characters();
+blue.ProjectionLimits :: public long characters(); :: descriptor: ()J
+blue.ProjectionLimits :: public long values();
+blue.ProjectionLimits :: public long values(); :: descriptor: ()J
+blue.ProjectionLimits :: public static blue.ProjectionLimits defaults();
+blue.ProjectionLimits :: public static blue.ProjectionLimits defaults(); :: descriptor: ()Lblue/ProjectionLimits;
+blue.ProviderSignatures :: public blue.BlueId providerId();
+blue.ProviderSignatures :: public blue.BlueId providerId(); :: descriptor: ()Lblue/BlueId;
+blue.ProviderSignatures :: public final class blue.ProviderSignatures {
+blue.ProviderSignatures :: public static blue.ProviderSignatures adopt(blue.BluePackage, blue.LanguageDocument);
+blue.ProviderSignatures :: public static blue.ProviderSignatures adopt(blue.BluePackage, blue.LanguageDocument); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;)Lblue/ProviderSignatures;
+blue.ProviderSignatures :: public static final blue.BlueId COORDINATION_PACKAGE;
+blue.ProviderSignatures :: public static final blue.BlueId COORDINATION_PACKAGE; :: descriptor: Lblue/BlueId;
+blue.ProviderSignatures :: public static void verifyReaderRequest(blue.BlueId, java.lang.String, java.lang.String);
+blue.ProviderSignatures :: public static void verifyReaderRequest(blue.BlueId, java.lang.String, java.lang.String); :: descriptor: (Lblue/BlueId;Ljava/lang/String;Ljava/lang/String;)V
+blue.ProviderSignatures :: public void verifyGuarantee(blue.BlueId, java.lang.String);
+blue.ProviderSignatures :: public void verifyGuarantee(blue.BlueId, java.lang.String); :: descriptor: (Lblue/BlueId;Ljava/lang/String;)V
+blue.ProviderSignatures :: public void verifyObject(blue.BlueId, java.lang.String);
+blue.ProviderSignatures :: public void verifyObject(blue.BlueId, java.lang.String); :: descriptor: (Lblue/BlueId;Ljava/lang/String;)V
+blue.TimeBindings :: public final class blue.TimeBindings {
+blue.TimeBindings :: public static blue.TimeBindings verifiedBy(blue.BluePackage, blue.TimeBindings$Verifier);
+blue.TimeBindings :: public static blue.TimeBindings verifiedBy(blue.BluePackage, blue.TimeBindings$Verifier); :: descriptor: (Lblue/BluePackage;Lblue/TimeBindings$Verifier;)Lblue/TimeBindings;
+blue.TimeBindings :: public static boolean supports(blue.BlueId);
+blue.TimeBindings :: public static boolean supports(blue.BlueId); :: descriptor: (Lblue/BlueId;)Z
+blue.TimeBindings :: public static final blue.BlueId CONTEXT_PUBLICATION;
+blue.TimeBindings :: public static final blue.BlueId CONTEXT_PUBLICATION; :: descriptor: Lblue/BlueId;
+blue.TimeBindings :: public static final blue.BlueId PUBLICATION;
+blue.TimeBindings :: public static final blue.BlueId PUBLICATION; :: descriptor: Lblue/BlueId;
+blue.TimeBindings$Firing :: public blue.BlueId registrationId();
+blue.TimeBindings$Firing :: public blue.BlueId registrationId(); :: descriptor: ()Lblue/BlueId;
+blue.TimeBindings$Firing :: public blue.NativeAdmission$Receiver receiver();
+blue.TimeBindings$Firing :: public blue.NativeAdmission$Receiver receiver(); :: descriptor: ()Lblue/NativeAdmission$Receiver;
+blue.TimeBindings$Firing :: public blue.TimeBindings$Firing(blue.NativeAdmission$Receiver, blue.BlueId);
+blue.TimeBindings$Firing :: public blue.TimeBindings$Firing(blue.NativeAdmission$Receiver, blue.BlueId); :: descriptor: (Lblue/NativeAdmission$Receiver;Lblue/BlueId;)V
+blue.TimeBindings$Firing :: public final boolean equals(java.lang.Object);
+blue.TimeBindings$Firing :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimeBindings$Firing :: public final class blue.TimeBindings$Firing extends java.lang.Record {
+blue.TimeBindings$Firing :: public final int hashCode();
+blue.TimeBindings$Firing :: public final int hashCode(); :: descriptor: ()I
+blue.TimeBindings$Firing :: public final java.lang.String toString();
+blue.TimeBindings$Firing :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimeBindings$Request :: public blue.BlueId eventId();
+blue.TimeBindings$Request :: public blue.BlueId eventId(); :: descriptor: ()Lblue/BlueId;
+blue.TimeBindings$Request :: public blue.BlueId inputId();
+blue.TimeBindings$Request :: public blue.BlueId inputId(); :: descriptor: ()Lblue/BlueId;
+blue.TimeBindings$Request :: public blue.TimeBindings$Request(java.lang.String, blue.BlueId, blue.BlueId, long, java.util.List<blue.NativeAdmission$Receiver>, java.lang.Object);
+blue.TimeBindings$Request :: public blue.TimeBindings$Request(java.lang.String, blue.BlueId, blue.BlueId, long, java.util.List<blue.NativeAdmission$Receiver>, java.lang.Object); :: descriptor: (Ljava/lang/String;Lblue/BlueId;Lblue/BlueId;JLjava/util/List;Ljava/lang/Object;)V
+blue.TimeBindings$Request :: public final boolean equals(java.lang.Object);
+blue.TimeBindings$Request :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimeBindings$Request :: public final class blue.TimeBindings$Request extends java.lang.Record {
+blue.TimeBindings$Request :: public final int hashCode();
+blue.TimeBindings$Request :: public final int hashCode(); :: descriptor: ()I
+blue.TimeBindings$Request :: public final java.lang.String toString();
+blue.TimeBindings$Request :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimeBindings$Request :: public java.lang.Object evidence();
+blue.TimeBindings$Request :: public java.lang.Object evidence(); :: descriptor: ()Ljava/lang/Object;
+blue.TimeBindings$Request :: public java.lang.String snapshotIdentity();
+blue.TimeBindings$Request :: public java.lang.String snapshotIdentity(); :: descriptor: ()Ljava/lang/String;
+blue.TimeBindings$Request :: public java.util.List<blue.NativeAdmission$Receiver> receivers();
+blue.TimeBindings$Request :: public java.util.List<blue.NativeAdmission$Receiver> receivers(); :: descriptor: ()Ljava/util/List;
+blue.TimeBindings$Request :: public long timestamp();
+blue.TimeBindings$Request :: public long timestamp(); :: descriptor: ()J
+blue.TimeBindings$Request :: public void reject(java.lang.String);
+blue.TimeBindings$Request :: public void reject(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.TimeBindings$Verifier :: public abstract blue.TimeBindings$Firing verify(blue.TimeBindings$Request);
+blue.TimeBindings$Verifier :: public abstract blue.TimeBindings$Firing verify(blue.TimeBindings$Request); :: descriptor: (Lblue/TimeBindings$Request;)Lblue/TimeBindings$Firing;
+blue.TimeBindings$Verifier :: public interface blue.TimeBindings$Verifier {
+blue.TimelineAccess :: public final class blue.TimelineAccess implements java.lang.AutoCloseable {
+blue.TimelineAccess :: public static blue.TimelineAccess track(blue.BluePackage, blue.LanguageDocument, blue.LanguageContent, blue.LanguageDocument);
+blue.TimelineAccess :: public static blue.TimelineAccess track(blue.BluePackage, blue.LanguageDocument, blue.LanguageContent, blue.LanguageDocument); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageContent;Lblue/LanguageDocument;)Lblue/TimelineAccess;
+blue.TimelineAccess :: public synchronized blue.TimelineAccess$Update advance(blue.LanguageContent);
+blue.TimelineAccess :: public synchronized blue.TimelineAccess$Update advance(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineAccess$Update;
+blue.TimelineAccess :: public synchronized java.util.Optional<blue.TimelineAccess$View> view();
+blue.TimelineAccess :: public synchronized java.util.Optional<blue.TimelineAccess$View> view(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineAccess :: public synchronized void close();
+blue.TimelineAccess :: public synchronized void close(); :: descriptor: ()V
+blue.TimelineAccess$Disposition :: public blue.BlueId entry();
+blue.TimelineAccess$Disposition :: public blue.BlueId entry(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineAccess$Disposition :: public blue.TimelineAccess$Disposition(blue.BlueId, long, blue.TimelineAccess$Kind, java.util.Optional<blue.Contracts$Transition>, java.util.Optional<blue.LanguageDocument>);
+blue.TimelineAccess$Disposition :: public blue.TimelineAccess$Disposition(blue.BlueId, long, blue.TimelineAccess$Kind, java.util.Optional<blue.Contracts$Transition>, java.util.Optional<blue.LanguageDocument>); :: descriptor: (Lblue/BlueId;JLblue/TimelineAccess$Kind;Ljava/util/Optional;Ljava/util/Optional;)V
+blue.TimelineAccess$Disposition :: public blue.TimelineAccess$Kind kind();
+blue.TimelineAccess$Disposition :: public blue.TimelineAccess$Kind kind(); :: descriptor: ()Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Disposition :: public final boolean equals(java.lang.Object);
+blue.TimelineAccess$Disposition :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimelineAccess$Disposition :: public final class blue.TimelineAccess$Disposition extends java.lang.Record {
+blue.TimelineAccess$Disposition :: public final int hashCode();
+blue.TimelineAccess$Disposition :: public final int hashCode(); :: descriptor: ()I
+blue.TimelineAccess$Disposition :: public final java.lang.String toString();
+blue.TimelineAccess$Disposition :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineAccess$Disposition :: public java.util.Optional<blue.Contracts$Transition> transition();
+blue.TimelineAccess$Disposition :: public java.util.Optional<blue.Contracts$Transition> transition(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineAccess$Disposition :: public java.util.Optional<blue.LanguageDocument> document();
+blue.TimelineAccess$Disposition :: public java.util.Optional<blue.LanguageDocument> document(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineAccess$Disposition :: public long timestamp();
+blue.TimelineAccess$Disposition :: public long timestamp(); :: descriptor: ()J
+blue.TimelineAccess$Kind :: public final class blue.TimelineAccess$Kind extends java.lang.Enum<blue.TimelineAccess$Kind> {
+blue.TimelineAccess$Kind :: public static blue.TimelineAccess$Kind valueOf(java.lang.String);
+blue.TimelineAccess$Kind :: public static blue.TimelineAccess$Kind valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Kind :: public static blue.TimelineAccess$Kind[] values();
+blue.TimelineAccess$Kind :: public static blue.TimelineAccess$Kind[] values(); :: descriptor: ()[Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind INAPPLICABLE;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind INAPPLICABLE; :: descriptor: Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind PUBLISHED;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind PUBLISHED; :: descriptor: Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind UPDATED;
+blue.TimelineAccess$Kind :: public static final blue.TimelineAccess$Kind UPDATED; :: descriptor: Lblue/TimelineAccess$Kind;
+blue.TimelineAccess$Update :: public blue.TimelineAccess$Update(long, java.util.Optional<blue.TimelineAccess$View>, java.util.List<blue.TimelineAccess$Disposition>);
+blue.TimelineAccess$Update :: public blue.TimelineAccess$Update(long, java.util.Optional<blue.TimelineAccess$View>, java.util.List<blue.TimelineAccess$Disposition>); :: descriptor: (JLjava/util/Optional;Ljava/util/List;)V
+blue.TimelineAccess$Update :: public final boolean equals(java.lang.Object);
+blue.TimelineAccess$Update :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimelineAccess$Update :: public final class blue.TimelineAccess$Update extends java.lang.Record {
+blue.TimelineAccess$Update :: public final int hashCode();
+blue.TimelineAccess$Update :: public final int hashCode(); :: descriptor: ()I
+blue.TimelineAccess$Update :: public final java.lang.String toString();
+blue.TimelineAccess$Update :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineAccess$Update :: public java.util.List<blue.TimelineAccess$Disposition> dispositions();
+blue.TimelineAccess$Update :: public java.util.List<blue.TimelineAccess$Disposition> dispositions(); :: descriptor: ()Ljava/util/List;
+blue.TimelineAccess$Update :: public java.util.Optional<blue.TimelineAccess$View> view();
+blue.TimelineAccess$Update :: public java.util.Optional<blue.TimelineAccess$View> view(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineAccess$Update :: public long completeBefore();
+blue.TimelineAccess$Update :: public long completeBefore(); :: descriptor: ()J
+blue.TimelineAccess$View :: public blue.LanguageDocument document();
+blue.TimelineAccess$View :: public blue.LanguageDocument document(); :: descriptor: ()Lblue/LanguageDocument;
+blue.TimelineAccess$View :: public final class blue.TimelineAccess$View {
+blue.TimelineAccess$View :: public java.util.Set<blue.BlueId> allowedTimelines();
+blue.TimelineAccess$View :: public java.util.Set<blue.BlueId> allowedTimelines(); :: descriptor: ()Ljava/util/Set;
+blue.TimelineAccess$View :: public java.util.Set<java.lang.String> allowedKeys();
+blue.TimelineAccess$View :: public java.util.Set<java.lang.String> allowedKeys(); :: descriptor: ()Ljava/util/Set;
+blue.TimelineAccess$View :: public long changedAt();
+blue.TimelineAccess$View :: public long changedAt(); :: descriptor: ()J
+blue.TimelineAccess$View :: public long completeBefore();
+blue.TimelineAccess$View :: public long completeBefore(); :: descriptor: ()J
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session open();
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session open(); :: descriptor: ()Lblue/TimelineAccessProgram$Session;
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String); :: descriptor: (Ljava/util/Map;Ljava/lang/String;)Lblue/TimelineAccessProgram$Session;
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider);
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider); :: descriptor: (Ljava/util/Map;Ljava/lang/String;Lblue/LanguageProvider;)Lblue/TimelineAccessProgram$Session;
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider, blue.TimelinePublisher$Prepared);
+blue.TimelineAccessProgram :: public blue.TimelineAccessProgram$Session restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider, blue.TimelinePublisher$Prepared); :: descriptor: (Ljava/util/Map;Ljava/lang/String;Lblue/LanguageProvider;Lblue/TimelinePublisher$Prepared;)Lblue/TimelineAccessProgram$Session;
+blue.TimelineAccessProgram :: public final class blue.TimelineAccessProgram {
+blue.TimelineAccessProgram :: public static blue.TimelineAccessProgram create(blue.BluePackage, blue.LanguageDocument, blue.LanguageContent, blue.LanguageDocument);
+blue.TimelineAccessProgram :: public static blue.TimelineAccessProgram create(blue.BluePackage, blue.LanguageDocument, blue.LanguageContent, blue.LanguageDocument); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageContent;Lblue/LanguageDocument;)Lblue/TimelineAccessProgram;
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition initialize();
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition initialize(); :: descriptor: ()Lblue/Contracts$Transition;
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition process(blue.LanguageContent);
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition process(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/Contracts$Transition;
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition process(blue.LanguageContent, blue.TimelinePublisher$Prepared);
+blue.TimelineAccessProgram$Session :: public blue.Contracts$Transition process(blue.LanguageContent, blue.TimelinePublisher$Prepared); :: descriptor: (Lblue/LanguageContent;Lblue/TimelinePublisher$Prepared;)Lblue/Contracts$Transition;
+blue.TimelineAccessProgram$Session :: public blue.LanguageDocument document();
+blue.TimelineAccessProgram$Session :: public blue.LanguageDocument document(); :: descriptor: ()Lblue/LanguageDocument;
+blue.TimelineAccessProgram$Session :: public final class blue.TimelineAccessProgram$Session implements java.lang.AutoCloseable {
+blue.TimelineAccessProgram$Session :: public java.lang.String identity();
+blue.TimelineAccessProgram$Session :: public java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineAccessProgram$Session :: public java.util.Map<java.lang.String, java.lang.Object> snapshot();
+blue.TimelineAccessProgram$Session :: public java.util.Map<java.lang.String, java.lang.Object> snapshot(); :: descriptor: ()Ljava/util/Map;
+blue.TimelineAccessProgram$Session :: public java.util.Map<java.lang.String, java.lang.Object> snapshot(java.util.function.Predicate<blue.BlueId>);
+blue.TimelineAccessProgram$Session :: public java.util.Map<java.lang.String, java.lang.Object> snapshot(java.util.function.Predicate<blue.BlueId>); :: descriptor: (Ljava/util/function/Predicate;)Ljava/util/Map;
+blue.TimelineAccessProgram$Session :: public void close();
+blue.TimelineAccessProgram$Session :: public void close(); :: descriptor: ()V
+blue.TimelineChannels :: public final class blue.TimelineChannels {
+blue.TimelineChannels :: public static blue.TimelineChannels verifiedBy(blue.BluePackage, blue.TimelineChannels$HistoryVerifier);
+blue.TimelineChannels :: public static blue.TimelineChannels verifiedBy(blue.BluePackage, blue.TimelineChannels$HistoryVerifier); :: descriptor: (Lblue/BluePackage;Lblue/TimelineChannels$HistoryVerifier;)Lblue/TimelineChannels;
+blue.TimelineChannels$Assessment :: public blue.NativeAdmission$Receiver receiver();
+blue.TimelineChannels$Assessment :: public blue.NativeAdmission$Receiver receiver(); :: descriptor: ()Lblue/NativeAdmission$Receiver;
+blue.TimelineChannels$Assessment :: public blue.TimelineChannels$Assessment(blue.NativeAdmission$Receiver, blue.TimelineChannels$Disposition, boolean, java.lang.String);
+blue.TimelineChannels$Assessment :: public blue.TimelineChannels$Assessment(blue.NativeAdmission$Receiver, blue.TimelineChannels$Disposition, boolean, java.lang.String); :: descriptor: (Lblue/NativeAdmission$Receiver;Lblue/TimelineChannels$Disposition;ZLjava/lang/String;)V
+blue.TimelineChannels$Assessment :: public blue.TimelineChannels$Disposition disposition();
+blue.TimelineChannels$Assessment :: public blue.TimelineChannels$Disposition disposition(); :: descriptor: ()Lblue/TimelineChannels$Disposition;
+blue.TimelineChannels$Assessment :: public boolean addressed();
+blue.TimelineChannels$Assessment :: public boolean addressed(); :: descriptor: ()Z
+blue.TimelineChannels$Assessment :: public final boolean equals(java.lang.Object);
+blue.TimelineChannels$Assessment :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimelineChannels$Assessment :: public final class blue.TimelineChannels$Assessment extends java.lang.Record {
+blue.TimelineChannels$Assessment :: public final int hashCode();
+blue.TimelineChannels$Assessment :: public final int hashCode(); :: descriptor: ()I
+blue.TimelineChannels$Assessment :: public final java.lang.String toString();
+blue.TimelineChannels$Assessment :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineChannels$Assessment :: public java.lang.String reason();
+blue.TimelineChannels$Assessment :: public java.lang.String reason(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineChannels$Disposition :: public final class blue.TimelineChannels$Disposition extends java.lang.Enum<blue.TimelineChannels$Disposition> {
+blue.TimelineChannels$Disposition :: public static blue.TimelineChannels$Disposition valueOf(java.lang.String);
+blue.TimelineChannels$Disposition :: public static blue.TimelineChannels$Disposition valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/TimelineChannels$Disposition;
+blue.TimelineChannels$Disposition :: public static blue.TimelineChannels$Disposition[] values();
+blue.TimelineChannels$Disposition :: public static blue.TimelineChannels$Disposition[] values(); :: descriptor: ()[Lblue/TimelineChannels$Disposition;
+blue.TimelineChannels$Disposition :: public static final blue.TimelineChannels$Disposition ELIGIBLE;
+blue.TimelineChannels$Disposition :: public static final blue.TimelineChannels$Disposition ELIGIBLE; :: descriptor: Lblue/TimelineChannels$Disposition;
+blue.TimelineChannels$Disposition :: public static final blue.TimelineChannels$Disposition INAPPLICABLE;
+blue.TimelineChannels$Disposition :: public static final blue.TimelineChannels$Disposition INAPPLICABLE; :: descriptor: Lblue/TimelineChannels$Disposition;
+blue.TimelineChannels$HistoryVerifier :: public abstract java.util.List<blue.TimelineChannels$Assessment> verify(blue.TimelineChannels$Request);
+blue.TimelineChannels$HistoryVerifier :: public abstract java.util.List<blue.TimelineChannels$Assessment> verify(blue.TimelineChannels$Request); :: descriptor: (Lblue/TimelineChannels$Request;)Ljava/util/List;
+blue.TimelineChannels$HistoryVerifier :: public interface blue.TimelineChannels$HistoryVerifier {
+blue.TimelineChannels$Request :: public blue.BlueId channelTypeId();
+blue.TimelineChannels$Request :: public blue.BlueId channelTypeId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineChannels$Request :: public blue.BlueId entryId();
+blue.TimelineChannels$Request :: public blue.BlueId entryId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineChannels$Request :: public blue.BlueId inputId();
+blue.TimelineChannels$Request :: public blue.BlueId inputId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineChannels$Request :: public blue.TimelineChannels$Request(java.lang.String, blue.BlueId, blue.BlueId, long, blue.BlueId, java.util.List<blue.NativeAdmission$Receiver>, java.lang.Object);
+blue.TimelineChannels$Request :: public blue.TimelineChannels$Request(java.lang.String, blue.BlueId, blue.BlueId, long, blue.BlueId, java.util.List<blue.NativeAdmission$Receiver>, java.lang.Object); :: descriptor: (Ljava/lang/String;Lblue/BlueId;Lblue/BlueId;JLblue/BlueId;Ljava/util/List;Ljava/lang/Object;)V
+blue.TimelineChannels$Request :: public final boolean equals(java.lang.Object);
+blue.TimelineChannels$Request :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimelineChannels$Request :: public final class blue.TimelineChannels$Request extends java.lang.Record {
+blue.TimelineChannels$Request :: public final int hashCode();
+blue.TimelineChannels$Request :: public final int hashCode(); :: descriptor: ()I
+blue.TimelineChannels$Request :: public final java.lang.String toString();
+blue.TimelineChannels$Request :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineChannels$Request :: public java.lang.Object evidence();
+blue.TimelineChannels$Request :: public java.lang.Object evidence(); :: descriptor: ()Ljava/lang/Object;
+blue.TimelineChannels$Request :: public java.lang.String snapshotIdentity();
+blue.TimelineChannels$Request :: public java.lang.String snapshotIdentity(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineChannels$Request :: public java.util.List<blue.NativeAdmission$Receiver> receivers();
+blue.TimelineChannels$Request :: public java.util.List<blue.NativeAdmission$Receiver> receivers(); :: descriptor: ()Ljava/util/List;
+blue.TimelineChannels$Request :: public long timestamp();
+blue.TimelineChannels$Request :: public long timestamp(); :: descriptor: ()J
+blue.TimelineChannels$Request :: public void reject(java.lang.String);
+blue.TimelineChannels$Request :: public void reject(java.lang.String); :: descriptor: (Ljava/lang/String;)V
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared initial();
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared initial(); :: descriptor: ()Lblue/TimelinePublisher$Prepared;
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared prepare(blue.TimelinePublisher$Prepared, blue.LanguageContent);
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared prepare(blue.TimelinePublisher$Prepared, blue.LanguageContent); :: descriptor: (Lblue/TimelinePublisher$Prepared;Lblue/LanguageContent;)Lblue/TimelinePublisher$Prepared;
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider);
+blue.TimelinePublisher :: public blue.TimelinePublisher$Prepared restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider); :: descriptor: (Ljava/util/Map;Ljava/lang/String;Lblue/LanguageProvider;)Lblue/TimelinePublisher$Prepared;
+blue.TimelinePublisher :: public boolean retainValue(blue.LanguageDocument);
+blue.TimelinePublisher :: public boolean retainValue(blue.LanguageDocument); :: descriptor: (Lblue/LanguageDocument;)Z
+blue.TimelinePublisher :: public final class blue.TimelinePublisher {
+blue.TimelinePublisher :: public static blue.TimelinePublisher forTimeline(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument);
+blue.TimelinePublisher :: public static blue.TimelinePublisher forTimeline(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageDocument;)Lblue/TimelinePublisher;
+blue.TimelinePublisher :: public synchronized boolean validateMessage(blue.LanguageContent);
+blue.TimelinePublisher :: public synchronized boolean validateMessage(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Z
+blue.TimelinePublisher :: public void shareValidationWith(blue.TimelineVerifier);
+blue.TimelinePublisher :: public void shareValidationWith(blue.TimelineVerifier); :: descriptor: (Lblue/TimelineVerifier;)V
+blue.TimelinePublisher$Prepared :: public final class blue.TimelinePublisher$Prepared {
+blue.TimelinePublisher$Prepared :: public java.lang.String identity();
+blue.TimelinePublisher$Prepared :: public java.lang.String identity(); :: descriptor: ()Ljava/lang/String;
+blue.TimelinePublisher$Prepared :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint();
+blue.TimelinePublisher$Prepared :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint(); :: descriptor: ()Ljava/util/Map;
+blue.TimelinePublisher$Prepared :: public java.util.Optional<blue.BlueId> entryId();
+blue.TimelinePublisher$Prepared :: public java.util.Optional<blue.BlueId> entryId(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineReader :: public blue.BlueId controlTimelineId();
+blue.TimelineReader :: public blue.BlueId controlTimelineId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineReader :: public blue.TimelineReader$AccessRead access(blue.LanguageContent);
+blue.TimelineReader :: public blue.TimelineReader$AccessRead access(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$AccessRead;
+blue.TimelineReader :: public blue.TimelineReader$ContentRead content(blue.LanguageContent);
+blue.TimelineReader :: public blue.TimelineReader$ContentRead content(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$ContentRead;
+blue.TimelineReader :: public blue.TimelineReader$Read begin(blue.TimelineVerifier$Prefix, blue.LanguageContent);
+blue.TimelineReader :: public blue.TimelineReader$Read begin(blue.TimelineVerifier$Prefix, blue.LanguageContent); :: descriptor: (Lblue/TimelineVerifier$Prefix;Lblue/LanguageContent;)Lblue/TimelineReader$Read;
+blue.TimelineReader :: public blue.TimelineVerifier$Prefix initial();
+blue.TimelineReader :: public blue.TimelineVerifier$Prefix initial(); :: descriptor: ()Lblue/TimelineVerifier$Prefix;
+blue.TimelineReader :: public final class blue.TimelineReader {
+blue.TimelineReader :: public java.math.BigInteger maximumPageSize();
+blue.TimelineReader :: public java.math.BigInteger maximumPageSize(); :: descriptor: ()Ljava/math/BigInteger;
+blue.TimelineReader :: public static blue.TimelineReader adopt(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument, blue.LanguageContent);
+blue.TimelineReader :: public static blue.TimelineReader adopt(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument, blue.LanguageContent); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageDocument;Lblue/LanguageContent;)Lblue/TimelineReader;
+blue.TimelineReader :: public static blue.TimelineReader adopt(blue.TimelineVerifier, blue.LanguageContent);
+blue.TimelineReader :: public static blue.TimelineReader adopt(blue.TimelineVerifier, blue.LanguageContent); :: descriptor: (Lblue/TimelineVerifier;Lblue/LanguageContent;)Lblue/TimelineReader;
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent claimedCurrent();
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent claimedCurrent(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent initial();
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent initial(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent lastEntry();
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent lastEntry(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent publication();
+blue.TimelineReader$AccessDescription :: public blue.LanguageContent publication(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$AccessDescription :: public blue.TimelineReader$AccessDescription(blue.LanguageContent, blue.LanguageContent, blue.LanguageContent, blue.LanguageContent);
+blue.TimelineReader$AccessDescription :: public blue.TimelineReader$AccessDescription(blue.LanguageContent, blue.LanguageContent, blue.LanguageContent, blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;Lblue/LanguageContent;Lblue/LanguageContent;Lblue/LanguageContent;)V
+blue.TimelineReader$AccessDescription :: public final boolean equals(java.lang.Object);
+blue.TimelineReader$AccessDescription :: public final boolean equals(java.lang.Object); :: descriptor: (Ljava/lang/Object;)Z
+blue.TimelineReader$AccessDescription :: public final class blue.TimelineReader$AccessDescription extends java.lang.Record {
+blue.TimelineReader$AccessDescription :: public final int hashCode();
+blue.TimelineReader$AccessDescription :: public final int hashCode(); :: descriptor: ()I
+blue.TimelineReader$AccessDescription :: public final java.lang.String toString();
+blue.TimelineReader$AccessDescription :: public final java.lang.String toString(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineReader$AccessRead :: public blue.LanguageContent request();
+blue.TimelineReader$AccessRead :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$AccessRead :: public blue.TimelineReader$AccessDescription accept(blue.LanguageContent);
+blue.TimelineReader$AccessRead :: public blue.TimelineReader$AccessDescription accept(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$AccessDescription;
+blue.TimelineReader$AccessRead :: public final class blue.TimelineReader$AccessRead {
+blue.TimelineReader$ContentRead :: public blue.LanguageContent accept(blue.LanguageContent);
+blue.TimelineReader$ContentRead :: public blue.LanguageContent accept(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/LanguageContent;
+blue.TimelineReader$ContentRead :: public blue.LanguageContent request();
+blue.TimelineReader$ContentRead :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$ContentRead :: public final class blue.TimelineReader$ContentRead {
+blue.TimelineReader$EntryRead :: public blue.LanguageContent accept(blue.LanguageContent);
+blue.TimelineReader$EntryRead :: public blue.LanguageContent accept(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/LanguageContent;
+blue.TimelineReader$EntryRead :: public blue.LanguageContent request();
+blue.TimelineReader$EntryRead :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$EntryRead :: public final class blue.TimelineReader$EntryRead {
+blue.TimelineReader$Failure :: public blue.BlueId responseId();
+blue.TimelineReader$Failure :: public blue.BlueId responseId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineReader$Failure :: public boolean retryable();
+blue.TimelineReader$Failure :: public boolean retryable(); :: descriptor: ()Z
+blue.TimelineReader$Failure :: public final class blue.TimelineReader$Failure extends java.lang.RuntimeException {
+blue.TimelineReader$Failure :: public java.lang.String code();
+blue.TimelineReader$Failure :: public java.lang.String code(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineReader$Page :: public blue.BlueId checkpointId();
+blue.TimelineReader$Page :: public blue.BlueId checkpointId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineReader$Page :: public blue.TimelineReader$EntryRead fetchLastEntry(blue.LanguageContent);
+blue.TimelineReader$Page :: public blue.TimelineReader$EntryRead fetchLastEntry(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$EntryRead;
+blue.TimelineReader$Page :: public blue.TimelineReader$Read continueWith(blue.LanguageContent);
+blue.TimelineReader$Page :: public blue.TimelineReader$Read continueWith(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$Read;
+blue.TimelineReader$Page :: public boolean includesEntries();
+blue.TimelineReader$Page :: public boolean includesEntries(); :: descriptor: ()Z
+blue.TimelineReader$Page :: public final class blue.TimelineReader$Page {
+blue.TimelineReader$Page :: public java.util.List<blue.TimelineVerifier$Entry> entries();
+blue.TimelineReader$Page :: public java.util.List<blue.TimelineVerifier$Entry> entries(); :: descriptor: ()Ljava/util/List;
+blue.TimelineReader$Page :: public java.util.Optional<blue.BlueId> claimedHeadId();
+blue.TimelineReader$Page :: public java.util.Optional<blue.BlueId> claimedHeadId(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineReader$Page :: public java.util.Optional<blue.LanguageContent> nextCursor();
+blue.TimelineReader$Page :: public java.util.Optional<blue.LanguageContent> nextCursor(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineReader$Page :: public java.util.Optional<blue.TimelineVerifier$Prefix> completedPrefix();
+blue.TimelineReader$Page :: public java.util.Optional<blue.TimelineVerifier$Prefix> completedPrefix(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineReader$Page :: public long claimedCompleteBefore();
+blue.TimelineReader$Page :: public long claimedCompleteBefore(); :: descriptor: ()J
+blue.TimelineReader$Read :: public blue.LanguageContent request();
+blue.TimelineReader$Read :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineReader$Read :: public blue.TimelineReader$Page accept(blue.LanguageContent);
+blue.TimelineReader$Read :: public blue.TimelineReader$Page accept(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineReader$Page;
+blue.TimelineReader$Read :: public final class blue.TimelineReader$Read {
+blue.TimelineRequests :: public blue.BlueId content(blue.LanguageContent);
+blue.TimelineRequests :: public blue.BlueId content(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/BlueId;
+blue.TimelineRequests :: public blue.BlueId entry(blue.LanguageContent);
+blue.TimelineRequests :: public blue.BlueId entry(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/BlueId;
+blue.TimelineRequests :: public blue.TimelineRequests$Access access(blue.LanguageContent);
+blue.TimelineRequests :: public blue.TimelineRequests$Access access(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineRequests$Access;
+blue.TimelineRequests :: public blue.TimelineRequests$Read read(blue.LanguageContent);
+blue.TimelineRequests :: public blue.TimelineRequests$Read read(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineRequests$Read;
+blue.TimelineRequests :: public blue.TimelineRequests$Reader reader(blue.LanguageContent);
+blue.TimelineRequests :: public blue.TimelineRequests$Reader reader(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Lblue/TimelineRequests$Reader;
+blue.TimelineRequests :: public final class blue.TimelineRequests {
+blue.TimelineRequests :: public static blue.TimelineRequests forTimeline(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument, int);
+blue.TimelineRequests :: public static blue.TimelineRequests forTimeline(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument, int); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageDocument;I)Lblue/TimelineRequests;
+blue.TimelineRequests$Access :: public blue.BlueId id();
+blue.TimelineRequests$Access :: public blue.BlueId id(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineRequests$Access :: public blue.LanguageContent request();
+blue.TimelineRequests$Access :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineRequests$Access :: public final class blue.TimelineRequests$Access {
+blue.TimelineRequests$Operation :: public final class blue.TimelineRequests$Operation extends java.lang.Enum<blue.TimelineRequests$Operation> {
+blue.TimelineRequests$Operation :: public static blue.TimelineRequests$Operation valueOf(java.lang.String);
+blue.TimelineRequests$Operation :: public static blue.TimelineRequests$Operation valueOf(java.lang.String); :: descriptor: (Ljava/lang/String;)Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Operation :: public static blue.TimelineRequests$Operation[] values();
+blue.TimelineRequests$Operation :: public static blue.TimelineRequests$Operation[] values(); :: descriptor: ()[Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation CONTENT;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation CONTENT; :: descriptor: Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation ENTRY;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation ENTRY; :: descriptor: Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation READ;
+blue.TimelineRequests$Operation :: public static final blue.TimelineRequests$Operation READ; :: descriptor: Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Read :: public blue.LanguageContent request();
+blue.TimelineRequests$Read :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineRequests$Read :: public final class blue.TimelineRequests$Read {
+blue.TimelineRequests$Read :: public int limit();
+blue.TimelineRequests$Read :: public int limit(); :: descriptor: ()I
+blue.TimelineRequests$Read :: public java.util.Optional<blue.BlueId> afterEntry();
+blue.TimelineRequests$Read :: public java.util.Optional<blue.BlueId> afterEntry(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineRequests$Read :: public java.util.Optional<blue.BlueId> checkpoint();
+blue.TimelineRequests$Read :: public java.util.Optional<blue.BlueId> checkpoint(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineRequests$Read :: public java.util.OptionalLong afterTimestamp();
+blue.TimelineRequests$Read :: public java.util.OptionalLong afterTimestamp(); :: descriptor: ()Ljava/util/OptionalLong;
+blue.TimelineRequests$Read :: public long minimumCompleteBefore();
+blue.TimelineRequests$Read :: public long minimumCompleteBefore(); :: descriptor: ()J
+blue.TimelineRequests$Reader :: public blue.LanguageContent request();
+blue.TimelineRequests$Reader :: public blue.LanguageContent request(); :: descriptor: ()Lblue/LanguageContent;
+blue.TimelineRequests$Reader :: public blue.TimelineRequests$Operation operation();
+blue.TimelineRequests$Reader :: public blue.TimelineRequests$Operation operation(); :: descriptor: ()Lblue/TimelineRequests$Operation;
+blue.TimelineRequests$Reader :: public final class blue.TimelineRequests$Reader {
+blue.TimelineRequests$Reader :: public java.util.Optional<java.lang.String> publicKey();
+blue.TimelineRequests$Reader :: public java.util.Optional<java.lang.String> publicKey(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix initial();
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix initial(); :: descriptor: ()Lblue/TimelineVerifier$Prefix;
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider);
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix restore(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, blue.LanguageProvider); :: descriptor: (Ljava/util/Map;Ljava/lang/String;Lblue/LanguageProvider;)Lblue/TimelineVerifier$Prefix;
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix restoreTrusted(long, blue.BlueId, blue.BlueId, blue.LanguageProvider);
+blue.TimelineVerifier :: public blue.TimelineVerifier$Prefix restoreTrusted(long, blue.BlueId, blue.BlueId, blue.LanguageProvider); :: descriptor: (JLblue/BlueId;Lblue/BlueId;Lblue/LanguageProvider;)Lblue/TimelineVerifier$Prefix;
+blue.TimelineVerifier :: public blue.TimelineVerifier$Result advance(blue.TimelineVerifier$Prefix, blue.LanguageContent);
+blue.TimelineVerifier :: public blue.TimelineVerifier$Result advance(blue.TimelineVerifier$Prefix, blue.LanguageContent); :: descriptor: (Lblue/TimelineVerifier$Prefix;Lblue/LanguageContent;)Lblue/TimelineVerifier$Result;
+blue.TimelineVerifier :: public boolean hasOperationMarker(blue.LanguageContent);
+blue.TimelineVerifier :: public boolean hasOperationMarker(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Z
+blue.TimelineVerifier :: public final class blue.TimelineVerifier {
+blue.TimelineVerifier :: public java.util.Optional<blue.BlueId> protectedOperationTarget(blue.LanguageContent);
+blue.TimelineVerifier :: public java.util.Optional<blue.BlueId> protectedOperationTarget(blue.LanguageContent); :: descriptor: (Lblue/LanguageContent;)Ljava/util/Optional;
+blue.TimelineVerifier :: public static blue.TimelineVerifier adopt(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument);
+blue.TimelineVerifier :: public static blue.TimelineVerifier adopt(blue.BluePackage, blue.LanguageDocument, blue.LanguageDocument); :: descriptor: (Lblue/BluePackage;Lblue/LanguageDocument;Lblue/LanguageDocument;)Lblue/TimelineVerifier;
+blue.TimelineVerifier$Entry :: public blue.BlueId actorId();
+blue.TimelineVerifier$Entry :: public blue.BlueId actorId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineVerifier$Entry :: public blue.BlueId blueId();
+blue.TimelineVerifier$Entry :: public blue.BlueId blueId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineVerifier$Entry :: public blue.BlueId messageId();
+blue.TimelineVerifier$Entry :: public blue.BlueId messageId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineVerifier$Entry :: public boolean mayInvokeOperation();
+blue.TimelineVerifier$Entry :: public boolean mayInvokeOperation(); :: descriptor: ()Z
+blue.TimelineVerifier$Entry :: public final class blue.TimelineVerifier$Entry {
+blue.TimelineVerifier$Entry :: public java.util.Optional<blue.BlueId> operationTarget();
+blue.TimelineVerifier$Entry :: public java.util.Optional<blue.BlueId> operationTarget(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineVerifier$Entry :: public long timestamp();
+blue.TimelineVerifier$Entry :: public long timestamp(); :: descriptor: ()J
+blue.TimelineVerifier$Prefix :: public blue.BlueId timelineId();
+blue.TimelineVerifier$Prefix :: public blue.BlueId timelineId(); :: descriptor: ()Lblue/BlueId;
+blue.TimelineVerifier$Prefix :: public final class blue.TimelineVerifier$Prefix {
+blue.TimelineVerifier$Prefix :: public java.lang.String checkpointIdentity();
+blue.TimelineVerifier$Prefix :: public java.lang.String checkpointIdentity(); :: descriptor: ()Ljava/lang/String;
+blue.TimelineVerifier$Prefix :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint();
+blue.TimelineVerifier$Prefix :: public java.util.Map<java.lang.String, java.lang.Object> checkpoint(); :: descriptor: ()Ljava/util/Map;
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.BlueId> headId();
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.BlueId> headId(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.BlueId> successorId();
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.BlueId> successorId(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.TimelineVerifier$Entry> headEntry();
+blue.TimelineVerifier$Prefix :: public java.util.Optional<blue.TimelineVerifier$Entry> headEntry(); :: descriptor: ()Ljava/util/Optional;
+blue.TimelineVerifier$Prefix :: public long completeBefore();
+blue.TimelineVerifier$Prefix :: public long completeBefore(); :: descriptor: ()J
+blue.TimelineVerifier$Result :: public blue.TimelineVerifier$Prefix prefix();
+blue.TimelineVerifier$Result :: public blue.TimelineVerifier$Prefix prefix(); :: descriptor: ()Lblue/TimelineVerifier$Prefix;
+blue.TimelineVerifier$Result :: public final class blue.TimelineVerifier$Result {
+blue.TimelineVerifier$Result :: public java.util.List<blue.TimelineVerifier$Entry> entries();
+blue.TimelineVerifier$Result :: public java.util.List<blue.TimelineVerifier$Entry> entries(); :: descriptor: ()Ljava/util/List;

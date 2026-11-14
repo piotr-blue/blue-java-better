@@ -101,7 +101,7 @@ The example runs these steps:
 | Payment `settle` | Validate pending state; mark paid; emit `Payment Settled` | Order marks itself paid and emits `Order Paid`; agreement adds 42 to its paid total and emits `Agreement Payment Received` |
 
 The final order and payment states are `paid`, agreement paid total is 42, and activity count is 3.
-The example's 626 / 5,308 / 4,796 / 4,789 gas totals are semantic charges, not milliseconds.
+The example's 5 / 219 / 215 / 180 gas totals are semantic charges, not milliseconds.
 Tests repeat the story with unrelated sibling orders, reject duplicate additions atomically,
 and compare cold restoration with warm execution.
 

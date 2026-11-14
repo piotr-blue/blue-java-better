@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -102,6 +103,36 @@ class PackageArchiveTest {
     }
     Files.write(archive, bytes);
     assertThrows(PackageException.class, () -> BluePackage.open(archive));
+  }
+
+  @Test
+  void seededArchiveMutationsEitherPreserveIdentityOrFailWithAPackageDiagnostic() throws Exception {
+    Path original = copy(directory, "geometry");
+    byte[] known = Files.readAllBytes(original);
+    var identity = BluePackage.open(original).blueId();
+    var random = new java.util.Random(0x20261114L);
+    int samples = Integer.getInteger("blue.fuzz.samples", 256);
+    Path candidate = directory.resolve("mutated.bluepkg");
+    for (int sample = 0; sample < samples; sample++) {
+      byte[] bytes = known.clone();
+      if (sample % 4 == 0) {
+        bytes = Arrays.copyOf(bytes, random.nextInt(bytes.length));
+      } else {
+        for (int changed = 0; changed <= sample % 7; changed++) {
+          bytes[random.nextInt(bytes.length)] ^= (byte) (1 << random.nextInt(8));
+        }
+      }
+      Files.write(candidate, bytes);
+      try {
+        // ZIP timestamps and compression metadata may change without changing the package.
+        assertEquals(
+            identity, BluePackage.open(candidate).blueId(), "seed 0x20261114, sample " + sample);
+      } catch (PackageException expected) {
+        assertTrue(
+            Set.of("InvalidPackage", "OperationLimitExceeded").contains(expected.category()),
+            expected.category());
+      }
+    }
   }
 
   @Test
