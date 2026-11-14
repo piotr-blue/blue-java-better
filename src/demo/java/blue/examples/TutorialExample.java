@@ -132,6 +132,8 @@ public final class TutorialExample {
     check(list.blueId().equals(listExplicit.blueId()), "list shorthand identity");
     check(!list.blueId().equals(reordered.blueId()), "list order matters");
     check(!empty.blueId().equals(typeOnly.blueId()), "empty list is not a type-only list");
+    check(
+        list.resolve().field("values").item(0).integer() == 1, "literal field and item selection");
     LanguageDocument removed = list.edit(editor -> editor.remove("/values/items/1"));
     LanguageDocument replaced =
         list.edit(

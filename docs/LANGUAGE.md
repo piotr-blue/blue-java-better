@@ -36,6 +36,20 @@ See the [tutorial](TUTORIAL.md) for the small everyday API. `prepare(Input)` onl
 `admit(content, goal)` subsequently checks its complete dependency closure and constraints.
 A selected read can succeed while strict admission rejects an unrelated invalid child.
 
+Use literal field and item selection when constructing a pointer by hand would be error-prone:
+
+```java
+LanguageDocument invoice = language.readYaml("lines: [{description: Hosting, amount: 42}]");
+long amount = invoice.resolve().field("lines").item(0).field("amount").integer();
+// Equivalent logical path: /lines/items/0/amount
+```
+
+`field("a/b")` selects the literal field `a/b` and handles pointer escaping. `item(0)` selects
+`/items/0`; it never invents array-shorthand paths. Both return lazy, immutable views. Selection
+performs no provider I/O; observing an unavailable reference still throws an incomplete failure,
+while an established missing field or out-of-range item has `exists() == false`. Negative indices
+are rejected immediately. Existing `at(...)` paths remain supported.
+
 ## Inheritance and specialization
 
 ```java

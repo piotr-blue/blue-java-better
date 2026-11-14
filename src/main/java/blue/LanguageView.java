@@ -28,6 +28,34 @@ public final class LanguageView {
   }
 
   /**
+   * Selects a literal field name without interpreting slash or tilde characters as pointer syntax.
+   * Selection is lazy and preserves the same contextual rules as {@link #at(String)}.
+   *
+   * @param name the literal field name; an empty name selects an empty key, not this view
+   * @return the lazy child view; observing it still distinguishes absence from unavailable evidence
+   * @throws NullPointerException if the name is null
+   */
+  public LanguageView field(String name) {
+    return at("/" + Pointer.escape(name));
+  }
+
+  /**
+   * Selects a list element using Blue's logical {@code /items/index} path. Selection performs no
+   * provider lookup or length check. An out-of-range element is absent once evidence establishes
+   * the list's length; unavailable evidence is never treated as an empty list.
+   *
+   * @param index the nonnegative, zero-based element index
+   * @return the lazy element view
+   * @throws IllegalArgumentException if the index is negative
+   */
+  public LanguageView item(int index) {
+    if (index < 0) {
+      throw new IllegalArgumentException("Negative list index");
+    }
+    return at("/items/" + index);
+  }
+
+  /**
    * Determines concrete-value presence without treating unavailable evidence as absence. Non-root
    * unfilled declarations and metadata-only nodes are not concrete values.
    *
