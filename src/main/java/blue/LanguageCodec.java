@@ -35,6 +35,8 @@ final class LanguageCodec {
       new ObjectMapper(
               JsonFactory.builder()
                   .disable(JsonFactory.Feature.INTERN_FIELD_NAMES)
+                  // Inputs are Java strings; do not retain unrelated documents' field vocabulary.
+                  .disable(JsonFactory.Feature.CANONICALIZE_FIELD_NAMES)
                   .streamReadConstraints(
                       StreamReadConstraints.builder()
                           .maxNestingDepth(Integer.MAX_VALUE)

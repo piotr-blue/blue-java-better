@@ -18,6 +18,7 @@ final class NodeCodec {
       new ObjectMapper(
               com.fasterxml.jackson.core.JsonFactory.builder()
                   .disable(com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES)
+                  .disable(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES)
                   .build())
           .enable(DeserializationFeature.USE_BIG_INTEGER_FOR_INTS)
           .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)

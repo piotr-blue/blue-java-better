@@ -39,6 +39,13 @@ Performance probes report physical time separately from gas. Use identical input
 snapshots, state whether user-document state is resident, separate initialization from processing,
 and measure restoration/publication/end-to-end latency when making claims about a durable host.
 
+`./gradlew languageInputAllocationProbe` runs helper, strict Language and generic node JSON readers
+in a dedicated 128 MiB JVM. After 4,000 unrelated field names, each set of 64 small reads must stay
+within 32 KiB per read. The parser consumes Java strings; field-name canonicalization is disabled
+so a request does not inherit a vocabulary grown by unrelated documents. Deserializer and buffer
+reuse remain enabled. This checks allocated bytes for a fixed input, not latency or total process
+heap. Ordinary language/conformance tests retain responsibility for syntax, identity and gas.
+
 Protected recovery has two independent gates: `blue.language.CheckpointTest` verifies lazy provider
 retention across builders and processors, and strict ordinary reads; `ContractPreparationTopologyTest`
 compares birth/detachment deltas with a complete export and cold native replay. Neither cache nor

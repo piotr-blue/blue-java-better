@@ -227,6 +227,14 @@ tasks.register<JavaExec>("executionRetentionProbe") {
     jvmArgs("-XX:+UseSerialGC")
 }
 
+tasks.register<JavaExec>("languageInputAllocationProbe") {
+    group = "verification"
+    description = "Bound small Language JSON reads after unrelated field-name vocabulary."
+    classpath = demo.runtimeClasspath
+    mainClass.set("blue.LanguageInputAllocationProbe")
+    maxHeapSize = "128m"
+}
+
 tasks.register<JavaExec>("nativeReadBudgetProbe") {
     group = "verification"
     description = "Check native projection limits on a shared document in a bounded JVM."
